@@ -19,6 +19,21 @@
 		567E0B8E1EF93A1C00C4C527 /* FSLocalVideoController.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0B8C1EF93A1C00C4C527 /* FSLocalVideoController.h */; };
 		567E0B8F1EF93A1C00C4C527 /* FSLocalVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B8D1EF93A1C00C4C527 /* FSLocalVideoController.m */; };
 		567E0B901EF93A1C00C4C527 /* FSLocalVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B8D1EF93A1C00C4C527 /* FSLocalVideoController.m */; };
+		9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060371EF93F130049B58E /* FSShortVideoRecorderController.m */; };
+		9840603D1EF93F130049B58E /* FSShortVideoRecorderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060391EF93F130049B58E /* FSShortVideoRecorderManager.m */; };
+		9840603E1EF93F130049B58E /* FSShortVideoRecorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840603B1EF93F130049B58E /* FSShortVideoRecorderView.m */; };
+		984060421EF9401F0049B58E /* libNvStreamingSdkCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060401EF9401F0049B58E /* libNvStreamingSdkCore.a */; };
+		984060431EF9401F0049B58E /* libNvStreamingSdkDeps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060411EF9401F0049B58E /* libNvStreamingSdkDeps.a */; };
+		984060451EF940350049B58E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060441EF940350049B58E /* AVFoundation.framework */; };
+		984060471EF9403F0049B58E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060461EF9403F0049B58E /* CoreMedia.framework */; };
+		984060491EF940490049B58E /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060481EF940490049B58E /* Photos.framework */; };
+		9840604B1EF940500049B58E /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9840604A1EF940500049B58E /* VideoToolbox.framework */; };
+		9840604D1EF940580049B58E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9840604C1EF940580049B58E /* AudioToolbox.framework */; };
+		9840604F1EF940620049B58E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9840604E1EF940620049B58E /* MobileCoreServices.framework */; };
+		984060511EF9406A0049B58E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060501EF9406A0049B58E /* AssetsLibrary.framework */; };
+		984060531EF940730049B58E /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060521EF940730049B58E /* libiconv.tbd */; };
+		984060551EF9407B0049B58E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060541EF9407B0049B58E /* libz.tbd */; };
+		984060571EF940810049B58E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060561EF940810049B58E /* libc++.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +78,24 @@
 		567E0B821EF939CC00C4C527 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		567E0B8C1EF93A1C00C4C527 /* FSLocalVideoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLocalVideoController.h; sourceTree = "<group>"; };
 		567E0B8D1EF93A1C00C4C527 /* FSLocalVideoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLocalVideoController.m; sourceTree = "<group>"; };
+		984060361EF93F130049B58E /* FSShortVideoRecorderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSShortVideoRecorderController.h; sourceTree = "<group>"; };
+		984060371EF93F130049B58E /* FSShortVideoRecorderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSShortVideoRecorderController.m; sourceTree = "<group>"; };
+		984060381EF93F130049B58E /* FSShortVideoRecorderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSShortVideoRecorderManager.h; sourceTree = "<group>"; };
+		984060391EF93F130049B58E /* FSShortVideoRecorderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSShortVideoRecorderManager.m; sourceTree = "<group>"; };
+		9840603A1EF93F130049B58E /* FSShortVideoRecorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSShortVideoRecorderView.h; sourceTree = "<group>"; };
+		9840603B1EF93F130049B58E /* FSShortVideoRecorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSShortVideoRecorderView.m; sourceTree = "<group>"; };
+		984060401EF9401F0049B58E /* libNvStreamingSdkCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvStreamingSdkCore.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios/libNvStreamingSdkCore.a; sourceTree = "<group>"; };
+		984060411EF9401F0049B58E /* libNvStreamingSdkDeps.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvStreamingSdkDeps.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios/libNvStreamingSdkDeps.a; sourceTree = "<group>"; };
+		984060441EF940350049B58E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		984060461EF9403F0049B58E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		984060481EF940490049B58E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		9840604A1EF940500049B58E /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		9840604C1EF940580049B58E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9840604E1EF940620049B58E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		984060501EF9406A0049B58E /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		984060521EF940730049B58E /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		984060541EF9407B0049B58E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		984060561EF940810049B58E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +103,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				984060571EF940810049B58E /* libc++.tbd in Frameworks */,
+				984060551EF9407B0049B58E /* libz.tbd in Frameworks */,
+				984060531EF940730049B58E /* libiconv.tbd in Frameworks */,
+				984060511EF9406A0049B58E /* AssetsLibrary.framework in Frameworks */,
+				9840604F1EF940620049B58E /* MobileCoreServices.framework in Frameworks */,
+				9840604D1EF940580049B58E /* AudioToolbox.framework in Frameworks */,
+				9840604B1EF940500049B58E /* VideoToolbox.framework in Frameworks */,
+				984060491EF940490049B58E /* Photos.framework in Frameworks */,
+				984060471EF9403F0049B58E /* CoreMedia.framework in Frameworks */,
+				984060451EF940350049B58E /* AVFoundation.framework in Frameworks */,
+				984060421EF9401F0049B58E /* libNvStreamingSdkCore.a in Frameworks */,
+				984060431EF9401F0049B58E /* libNvStreamingSdkDeps.a in Frameworks */,
 				567E0B861EF939CC00C4C527 /* FSVideoEditorKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +136,7 @@
 				567E0B6E1EF939A700C4C527 /* VideoEditor */,
 				567E0B801EF939CC00C4C527 /* FSVideoEditorKit */,
 				567E0B4F1EF930D100C4C527 /* Products */,
+				9840603F1EF9401E0049B58E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +152,7 @@
 		567E0B501EF930D100C4C527 /* FSVideoEditor */ = {
 			isa = PBXGroup;
 			children = (
+				984060351EF93F130049B58E /* FSShortVideoRecorder */,
 				567E0B8B1EF939F000C4C527 /* FSVideoEditors */,
 				567E0B541EF930D100C4C527 /* AppDelegate.h */,
 				567E0B551EF930D100C4C527 /* AppDelegate.m */,
@@ -153,6 +200,38 @@
 				567E0B8D1EF93A1C00C4C527 /* FSLocalVideoController.m */,
 			);
 			path = FSVideoEditors;
+			sourceTree = "<group>";
+		};
+		984060351EF93F130049B58E /* FSShortVideoRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				984060361EF93F130049B58E /* FSShortVideoRecorderController.h */,
+				984060371EF93F130049B58E /* FSShortVideoRecorderController.m */,
+				984060381EF93F130049B58E /* FSShortVideoRecorderManager.h */,
+				984060391EF93F130049B58E /* FSShortVideoRecorderManager.m */,
+				9840603A1EF93F130049B58E /* FSShortVideoRecorderView.h */,
+				9840603B1EF93F130049B58E /* FSShortVideoRecorderView.m */,
+			);
+			path = FSShortVideoRecorder;
+			sourceTree = "<group>";
+		};
+		9840603F1EF9401E0049B58E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				984060561EF940810049B58E /* libc++.tbd */,
+				984060541EF9407B0049B58E /* libz.tbd */,
+				984060521EF940730049B58E /* libiconv.tbd */,
+				984060501EF9406A0049B58E /* AssetsLibrary.framework */,
+				9840604E1EF940620049B58E /* MobileCoreServices.framework */,
+				9840604C1EF940580049B58E /* AudioToolbox.framework */,
+				9840604A1EF940500049B58E /* VideoToolbox.framework */,
+				984060481EF940490049B58E /* Photos.framework */,
+				984060461EF9403F0049B58E /* CoreMedia.framework */,
+				984060441EF940350049B58E /* AVFoundation.framework */,
+				984060401EF9401F0049B58E /* libNvStreamingSdkCore.a */,
+				984060411EF9401F0049B58E /* libNvStreamingSdkDeps.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,10 +351,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */,
 				567E0B591EF930D100C4C527 /* ViewController.m in Sources */,
 				567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */,
+				9840603D1EF93F130049B58E /* FSShortVideoRecorderManager.m in Sources */,
 				567E0B8F1EF93A1C00C4C527 /* FSLocalVideoController.m in Sources */,
 				567E0B531EF930D100C4C527 /* main.m in Sources */,
+				9840603E1EF93F130049B58E /* FSShortVideoRecorderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,8 +494,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3PSN5E79R7;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/sdkcore/ios";
 				INFOPLIST_FILE = FSVideoEditor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -424,8 +513,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3PSN5E79R7;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/sdkcore/ios";
 				INFOPLIST_FILE = FSVideoEditor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -503,6 +599,7 @@
 				567E0B8A1EF939CC00C4C527 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

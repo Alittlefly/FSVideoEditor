@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "FSShortVideoRecorderController.h"
 
 @interface ViewController ()
 
@@ -17,8 +18,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    UIButton *videoRecorderButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    videoRecorderButton.frame = CGRectMake(100, 100, 60, 30);
+    videoRecorderButton.backgroundColor = [UIColor redColor];
+    [videoRecorderButton setTitle:@"录制" forState:UIControlStateNormal];
+    [videoRecorderButton addTarget:self action:@selector(videoRecorder) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:videoRecorderButton];
 }
 
+- (void)videoRecorder {
+    FSShortVideoRecorderController *svc = [[FSShortVideoRecorderController alloc] init];
+    [self.navigationController pushViewController:svc animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
