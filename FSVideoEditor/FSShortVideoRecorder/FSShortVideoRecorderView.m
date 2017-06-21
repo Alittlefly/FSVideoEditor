@@ -86,7 +86,12 @@
     [_flashButton addTarget:self action:@selector(flashClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_flashButton];
 
-
+    _cutMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _cutMusicButton.frame = IsArabic ? CGRectMake(CGRectGetMaxX(_recoverCamera.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetWidth(self.frame) - 15 -40, CGRectGetMaxY(_finishButton.frame)+30, 40, 40);
+    [_cutMusicButton setTitle:@"cutMusic" forState:UIControlStateNormal];
+    [_cutMusicButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [_cutMusicButton addTarget:self action:@selector(cutMusicClik) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_cutMusicButton];
 }
 
 
@@ -107,6 +112,10 @@
 - (void)flashClik {
     _isFlashOpened = !_isFlashOpened;
     [_recorderManager switchFlash:_isFlashOpened];
+}
+
+- (void)cutMusicClik {
+
 }
 
 
