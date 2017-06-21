@@ -35,4 +35,19 @@
  */
 - (void)switchFlash:(BOOL)on;
 
+/**
+ 美颜开关
+
+ @param on <#on description#>
+ */
+- (void)switchBeauty:(BOOL)on;
+
+- (void)startAutoFocus:(CGPoint)point;
+
+- (void)startAutiExposure:(CGPoint)point;
+
+- (BOOL)isSupportAutoFocus;
+
+- (BOOL)isSupportAutoExposure;
+
 @end
