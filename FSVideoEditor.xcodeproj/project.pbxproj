@@ -96,6 +96,32 @@
 		984060521EF940730049B58E /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		984060541EF9407B0049B58E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		984060561EF940810049B58E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		98E3C9BB1EFA1B9B00A2FDD6 /* NvsAssetPackageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAssetPackageManager.h; sourceTree = "<group>"; };
+		98E3C9BC1EFA1B9B00A2FDD6 /* NvsAudioClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioClip.h; sourceTree = "<group>"; };
+		98E3C9BD1EFA1B9B00A2FDD6 /* NvsAudioFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioFx.h; sourceTree = "<group>"; };
+		98E3C9BE1EFA1B9B00A2FDD6 /* NvsAudioTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioTrack.h; sourceTree = "<group>"; };
+		98E3C9BF1EFA1B9B00A2FDD6 /* NvsAudioTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioTransition.h; sourceTree = "<group>"; };
+		98E3C9C01EFA1B9B00A2FDD6 /* NvsAVFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAVFileInfo.h; sourceTree = "<group>"; };
+		98E3C9C11EFA1B9B00A2FDD6 /* NvsCaptureVideoFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsCaptureVideoFx.h; sourceTree = "<group>"; };
+		98E3C9C21EFA1B9B00A2FDD6 /* NvsClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsClip.h; sourceTree = "<group>"; };
+		98E3C9C31EFA1B9B00A2FDD6 /* NvsCommonDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsCommonDef.h; sourceTree = "<group>"; };
+		98E3C9C41EFA1B9B00A2FDD6 /* NvsFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsFx.h; sourceTree = "<group>"; };
+		98E3C9C51EFA1B9B00A2FDD6 /* NvsFxDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsFxDescription.h; sourceTree = "<group>"; };
+		98E3C9C61EFA1B9B00A2FDD6 /* NvsLiveWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsLiveWindow.h; sourceTree = "<group>"; };
+		98E3C9C71EFA1B9B00A2FDD6 /* NvsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsObject.h; sourceTree = "<group>"; };
+		98E3C9C81EFA1B9B00A2FDD6 /* NvsStreamingContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsStreamingContext.h; sourceTree = "<group>"; };
+		98E3C9C91EFA1B9B00A2FDD6 /* NvsThumbnailSequenceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsThumbnailSequenceView.h; sourceTree = "<group>"; };
+		98E3C9CA1EFA1B9B00A2FDD6 /* NvsTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsTimeline.h; sourceTree = "<group>"; };
+		98E3C9CB1EFA1B9B00A2FDD6 /* NvsTimelineAnimatedSticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsTimelineAnimatedSticker.h; sourceTree = "<group>"; };
+		98E3C9CC1EFA1B9B00A2FDD6 /* NvsTimelineCaption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsTimelineCaption.h; sourceTree = "<group>"; };
+		98E3C9CD1EFA1B9B00A2FDD6 /* NvsTimelineVideoFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsTimelineVideoFx.h; sourceTree = "<group>"; };
+		98E3C9CE1EFA1B9B00A2FDD6 /* NvsTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsTrack.h; sourceTree = "<group>"; };
+		98E3C9CF1EFA1B9B00A2FDD6 /* NvsVideoClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoClip.h; sourceTree = "<group>"; };
+		98E3C9D01EFA1B9B00A2FDD6 /* NvsVideoFrameReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoFrameReceiver.h; sourceTree = "<group>"; };
+		98E3C9D11EFA1B9B00A2FDD6 /* NvsVideoFrameRetriever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoFrameRetriever.h; sourceTree = "<group>"; };
+		98E3C9D21EFA1B9B00A2FDD6 /* NvsVideoFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoFx.h; sourceTree = "<group>"; };
+		98E3C9D31EFA1B9B00A2FDD6 /* NvsVideoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoTrack.h; sourceTree = "<group>"; };
+		98E3C9D41EFA1B9B00A2FDD6 /* NvsVideoTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoTransition.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +244,7 @@
 		9840603F1EF9401E0049B58E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				98E3C9B81EFA1B9B00A2FDD6 /* include */,
 				984060561EF940810049B58E /* libc++.tbd */,
 				984060541EF9407B0049B58E /* libz.tbd */,
 				984060521EF940730049B58E /* libiconv.tbd */,
@@ -232,6 +259,56 @@
 				984060411EF9401F0049B58E /* libNvStreamingSdkDeps.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		98E3C9B81EFA1B9B00A2FDD6 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				98E3C9B91EFA1B9B00A2FDD6 /* sdkcore */,
+			);
+			name = include;
+			path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/include;
+			sourceTree = "<group>";
+		};
+		98E3C9B91EFA1B9B00A2FDD6 /* sdkcore */ = {
+			isa = PBXGroup;
+			children = (
+				98E3C9BA1EFA1B9B00A2FDD6 /* ios */,
+			);
+			path = sdkcore;
+			sourceTree = "<group>";
+		};
+		98E3C9BA1EFA1B9B00A2FDD6 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				98E3C9BB1EFA1B9B00A2FDD6 /* NvsAssetPackageManager.h */,
+				98E3C9BC1EFA1B9B00A2FDD6 /* NvsAudioClip.h */,
+				98E3C9BD1EFA1B9B00A2FDD6 /* NvsAudioFx.h */,
+				98E3C9BE1EFA1B9B00A2FDD6 /* NvsAudioTrack.h */,
+				98E3C9BF1EFA1B9B00A2FDD6 /* NvsAudioTransition.h */,
+				98E3C9C01EFA1B9B00A2FDD6 /* NvsAVFileInfo.h */,
+				98E3C9C11EFA1B9B00A2FDD6 /* NvsCaptureVideoFx.h */,
+				98E3C9C21EFA1B9B00A2FDD6 /* NvsClip.h */,
+				98E3C9C31EFA1B9B00A2FDD6 /* NvsCommonDef.h */,
+				98E3C9C41EFA1B9B00A2FDD6 /* NvsFx.h */,
+				98E3C9C51EFA1B9B00A2FDD6 /* NvsFxDescription.h */,
+				98E3C9C61EFA1B9B00A2FDD6 /* NvsLiveWindow.h */,
+				98E3C9C71EFA1B9B00A2FDD6 /* NvsObject.h */,
+				98E3C9C81EFA1B9B00A2FDD6 /* NvsStreamingContext.h */,
+				98E3C9C91EFA1B9B00A2FDD6 /* NvsThumbnailSequenceView.h */,
+				98E3C9CA1EFA1B9B00A2FDD6 /* NvsTimeline.h */,
+				98E3C9CB1EFA1B9B00A2FDD6 /* NvsTimelineAnimatedSticker.h */,
+				98E3C9CC1EFA1B9B00A2FDD6 /* NvsTimelineCaption.h */,
+				98E3C9CD1EFA1B9B00A2FDD6 /* NvsTimelineVideoFx.h */,
+				98E3C9CE1EFA1B9B00A2FDD6 /* NvsTrack.h */,
+				98E3C9CF1EFA1B9B00A2FDD6 /* NvsVideoClip.h */,
+				98E3C9D01EFA1B9B00A2FDD6 /* NvsVideoFrameReceiver.h */,
+				98E3C9D11EFA1B9B00A2FDD6 /* NvsVideoFrameRetriever.h */,
+				98E3C9D21EFA1B9B00A2FDD6 /* NvsVideoFx.h */,
+				98E3C9D31EFA1B9B00A2FDD6 /* NvsVideoTrack.h */,
+				98E3C9D41EFA1B9B00A2FDD6 /* NvsVideoTransition.h */,
+			);
+			path = ios;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
