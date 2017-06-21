@@ -7,9 +7,14 @@
 //
 
 #import "FSLocalVideoController.h"
+#import "FSLocalPhotoManager.h"
+#import "FSVideoListView.h"
 
-@interface FSLocalVideoController ()
-
+@interface FSLocalVideoController ()<FSVideoListViewDelegate>
+{
+    FSLocalPhotoManager *_manager;
+}
+@property(nonatomic,strong)FSVideoListView *videoListView;
 @end
 
 @implementation FSLocalVideoController
@@ -17,6 +22,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+     _manager = [FSLocalPhotoManager new];
+    
+    NSArray *assets = [_manager photosWithType:(PHAssetSourceTypeUserLibrary)];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+     _videoListView = [[FSVideoListView alloc] initWithFrame:self.view.bounds];
+    [_videoListView setDelegate:self];
+    [_videoListView setVideos:assets];
+    [self.view addSubview:_videoListView];
 }
 
 - (void)didReceiveMemoryWarning {

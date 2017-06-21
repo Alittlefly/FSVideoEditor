@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "FSShortVideoRecorderController.h"
+#import "FSLocalVideoController.h"
 
 @interface ViewController ()
 
@@ -25,10 +26,24 @@
     [videoRecorderButton setTitle:@"录制" forState:UIControlStateNormal];
     [videoRecorderButton addTarget:self action:@selector(videoRecorder) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:videoRecorderButton];
+    
+    
+    
+    UIButton *videoListButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    videoListButton.frame = CGRectMake(250, 100, 60, 30);
+    videoListButton.backgroundColor = [UIColor redColor];
+    [videoListButton setTitle:@"视频" forState:UIControlStateNormal];
+    [videoListButton addTarget:self action:@selector(videoList) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:videoListButton];
 }
 
 - (void)videoRecorder {
     FSShortVideoRecorderController *svc = [[FSShortVideoRecorderController alloc] init];
+    [self.navigationController pushViewController:svc animated:YES];
+}
+
+- (void)videoList {
+    FSLocalVideoController *svc = [[FSLocalVideoController alloc] init];
     [self.navigationController pushViewController:svc animated:YES];
 }
 
