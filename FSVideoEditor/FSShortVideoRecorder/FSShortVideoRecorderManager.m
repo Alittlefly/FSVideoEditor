@@ -21,6 +21,9 @@ static FSShortVideoRecorderManager *recorderManager;
     NvsStreamingContext *_context;
     
     unsigned int _currentDeviceIndex;
+    
+    bool _supportAutoFocus;
+    bool _supportAutoExposure;
 }
 
 
@@ -43,6 +46,8 @@ static FSShortVideoRecorderManager *recorderManager;
 - (instancetype)init {
     if (self = [super init]) {
         _currentDeviceIndex = 0;
+        _supportAutoFocus = false;
+        _supportAutoExposure = false;
         
         // 初始化NvsStreamingContext
         _context = [NvsStreamingContext sharedInstance];
@@ -81,6 +86,10 @@ static FSShortVideoRecorderManager *recorderManager;
     if (!capability) {
         return;
     }
+    
+    _supportAutoFocus = capability.supportAutoFocus;    // 是否支持自动聚焦
+    _supportAutoExposure = capability.supportAutoExposure;  // 是否支持自动曝光
+
 }
 
 - (BOOL)switchCamera {
@@ -103,6 +112,31 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (void)switchFlash:(BOOL)on {
     [_context toggleFlash:on];
+}
+
+- (void)switchBeauty:(BOOL)on {
+    if (on) {
+        [_context appendBeautyCaptureVideoFx];
+    }
+    else {
+        [_context removeAllCaptureVideoFx];
+    }
+}
+
+- (BOOL)isSupportAutoFocus {
+    return _supportAutoFocus;
+}
+
+- (BOOL)isSupportAutoExposure {
+    return _supportAutoExposure;
+}
+
+- (void)startAutoFocus:(CGPoint)point {
+    [_context startAutoFocus:point];
+}
+
+- (void)startAutiExposure:(CGPoint)point {
+    [_context startAutoExposure:point];
 }
 
 #pragma mark - NvsStreamingContextDelegate

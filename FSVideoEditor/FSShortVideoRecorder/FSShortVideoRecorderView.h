@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum{
+    FSShortVideoPlaySpeed_Hyperslow = 0,
+    FSShortVideoPlaySpeed_Slow,
+    FSShortVideoPlaySpeed_Normal,
+    FSShortVideoPlaySpeed_Quick,
+    FSShortVideoPlaySpeed_VeryFast
+}FSShortVideoPlaySpeed;
+
 @protocol FSShortVideoRecorderViewDelegate <NSObject>
 
 - (void)FSShortVideoRecorderViewQuitRecorderView;
