@@ -22,6 +22,7 @@
 		567E0B9D1EFA20BC00C4C527 /* FSLocalPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B9B1EFA20BC00C4C527 /* FSLocalPhotoManager.m */; };
 		567E0BA21EFA49F500C4C527 /* FSVideoListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA11EFA49F500C4C527 /* FSVideoListView.m */; };
 		567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA41EFA4DB400C4C527 /* FSAlbumVideoCell.m */; };
+		981F6F751EFBB41D00FDF542 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 981F6F741EFBB41D00FDF542 /* PDColoredProgressView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060371EF93F130049B58E /* FSShortVideoRecorderController.m */; };
 		9840603D1EF93F130049B58E /* FSShortVideoRecorderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060391EF93F130049B58E /* FSShortVideoRecorderManager.m */; };
 		9840603E1EF93F130049B58E /* FSShortVideoRecorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840603B1EF93F130049B58E /* FSShortVideoRecorderView.m */; };
@@ -87,6 +88,8 @@
 		567E0BA11EFA49F500C4C527 /* FSVideoListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVideoListView.m; sourceTree = "<group>"; };
 		567E0BA31EFA4DB400C4C527 /* FSAlbumVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAlbumVideoCell.h; sourceTree = "<group>"; };
 		567E0BA41EFA4DB400C4C527 /* FSAlbumVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAlbumVideoCell.m; sourceTree = "<group>"; };
+		981F6F731EFBB41D00FDF542 /* PDColoredProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDColoredProgressView.h; path = "../../../Downloads/pascalw-PDColoredProgressview-bedc596/PDColoredProgressView.h"; sourceTree = "<group>"; };
+		981F6F741EFBB41D00FDF542 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = "../../../Downloads/pascalw-PDColoredProgressview-bedc596/PDColoredProgressView.m"; sourceTree = "<group>"; };
 		984060361EF93F130049B58E /* FSShortVideoRecorderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSShortVideoRecorderController.h; sourceTree = "<group>"; };
 		984060371EF93F130049B58E /* FSShortVideoRecorderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSShortVideoRecorderController.m; sourceTree = "<group>"; };
 		984060381EF93F130049B58E /* FSShortVideoRecorderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSShortVideoRecorderManager.h; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 		567E0B501EF930D100C4C527 /* FSVideoEditor */ = {
 			isa = PBXGroup;
 			children = (
+				981F6F731EFBB41D00FDF542 /* PDColoredProgressView.h */,
+				981F6F741EFBB41D00FDF542 /* PDColoredProgressView.m */,
 				984060351EF93F130049B58E /* FSVideoRecorder */,
 				567E0B8B1EF939F000C4C527 /* FSVideoEditors */,
 				567E0B541EF930D100C4C527 /* AppDelegate.h */,
@@ -456,6 +461,7 @@
 				9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */,
 				567E0B9D1EFA20BC00C4C527 /* FSLocalPhotoManager.m in Sources */,
 				567E0B591EF930D100C4C527 /* ViewController.m in Sources */,
+				981F6F751EFBB41D00FDF542 /* PDColoredProgressView.m in Sources */,
 				567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */,
 				567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */,
 				9840603D1EF93F130049B58E /* FSShortVideoRecorderManager.m in Sources */,

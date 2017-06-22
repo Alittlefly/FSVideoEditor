@@ -50,4 +50,11 @@
 
 - (BOOL)isSupportAutoExposure;
 
+- (void)startRecording:(NSString *)filePath;
+
+- (void)stopRecording;
+- (BOOL)finishRecorder;
+- (BOOL)deleteVideoFile;
+- (void)resumeCapturePreview;
+
 @end

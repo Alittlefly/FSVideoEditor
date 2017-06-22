@@ -7,11 +7,21 @@
 //
 
 #import "FSShortVideoRecorderManager.h"
+#import "NvsVideoTrack.h"
+
+#define MaxVideoTime 30
 
 @interface FSShortVideoRecorderManager ()<NvsStreamingContextDelegate>
 
 @property (nonatomic, strong) NvsLiveWindow *liveWindow;
-
+@property (nonatomic, strong) NvsTimeline *timeLine;
+@property (nonatomic, strong) NvsVideoTrack *videoTrack;
+@property (nonatomic, strong) NSString *outputFilePath;
+@property (nonatomic, assign) NSInteger videoIndex;
+@property (nonatomic, assign) NSInteger videoTime;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSMutableArray *timeArray;
+@property (nonatomic, assign) NSInteger perTime;
 
 @end
 
@@ -24,6 +34,7 @@ static FSShortVideoRecorderManager *recorderManager;
     
     bool _supportAutoFocus;
     bool _supportAutoExposure;
+    bool _fxRecord;
 }
 
 
@@ -43,11 +54,33 @@ static FSShortVideoRecorderManager *recorderManager;
     return _liveWindow;
 }
 
+// 恢复采集预览状态
+- (void)resumeCapturePreview {
+    if (!_context) {
+        return;
+    }
+    
+    // 判断当前引擎状态是否为采集预览状态，避免重复启动采集预览引起引擎停止再启动，造成启动慢或者其他不良影响
+    if ([self getCurrentEngineState] == NvsStreamingEngineState_CapturePreview) {
+        return;
+    }
+    
+    // 开启采集预览
+    if (![_context startCapturePreview:_currentDeviceIndex videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
+        NSLog(@"启动预览失败");
+    }
+}
+
 - (instancetype)init {
     if (self = [super init]) {
         _currentDeviceIndex = 0;
         _supportAutoFocus = false;
         _supportAutoExposure = false;
+        _fxRecord = true;
+        _videoIndex = 0;
+        _outputFilePath = nil;
+        _videoTime = 0;
+        _timeArray = [NSMutableArray arrayWithCapacity:0];
         
         // 初始化NvsStreamingContext
         _context = [NvsStreamingContext sharedInstance];
@@ -72,6 +105,22 @@ static FSShortVideoRecorderManager *recorderManager;
         }
         
         _context.delegate = self;
+        
+        NvsVideoResolution videoEditRes;
+        videoEditRes.imageWidth = 1280;
+        videoEditRes.imageHeight = 720;
+        videoEditRes.imagePAR = (NvsRational){1,1};
+        NvsRational videoFps = {25,1};
+        
+        NvsAudioResolution audioEditRes;
+        audioEditRes.sampleRate = 48000;
+        audioEditRes.channelCount =2;
+        audioEditRes.sampleFormat = NvsAudSmpFmt_S16;
+        
+        _timeLine = [_context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
+        _videoTrack = [_timeLine appendVideoTrack];
+        
+        [self resumeCapturePreview];
     }
     return self;
 }
@@ -139,6 +188,124 @@ static FSShortVideoRecorderManager *recorderManager;
     [_context startAutoExposure:point];
 }
 
+// 获取当前引擎状态
+- (NvsStreamingEngineState)getCurrentEngineState {
+    return [_context getStreamingEngineState];
+}
+
+- (void)startRecording:(NSString *)filePath {
+    if (_videoTime >= MaxVideoTime) {
+        return;
+    }
+    if ([self getCurrentEngineState] != NvsStreamingEngineState_CaptureRecording) {
+        // 获取输出文件路径
+        NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *outputFilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"capture%ld.mov",_videoIndex]];
+        _outputFilePath = outputFilePath;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:outputFilePath]) {
+            NSError *error;
+            if ([[NSFileManager defaultManager] removeItemAtPath:outputFilePath error:&error] == NO) {
+                NSLog(@"removeItemAtPath failed, error: %@", error);
+                return;
+            }
+        }
+        
+        if (!_timer) {
+            _timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                      target:self
+                                                    selector:@selector(updateVideoTime)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        }
+        else {
+            [_timer setFireDate:[NSDate date]];
+        }
+        
+        _perTime = 0;
+        
+        //开始录制
+        if (_fxRecord) {
+            // 使用带有特效的录制方式，此方式可以录制预览所见的所有效果，包括特效和宽高比
+            if (![_context startRecordingWithFx:outputFilePath]) {
+                [self resumeCapturePreview];
+                [_context startRecordingWithFx:outputFilePath];
+            }
+        }
+        else {
+            // 使用不带有特效的录制方式，此方式只能录制相机采集到的原始图像，不带有任何特效，宽高比也由相机设备自身决定
+            if (![_context startRecordingWithFx:outputFilePath]) {
+                [self resumeCapturePreview];
+                [_context startRecording:outputFilePath];
+            }
+        }
+    }
+}
+
+- (void)updateVideoTime {
+    _videoTime++;
+    _perTime++;
+    NSLog(@"%ld",_videoTime);
+}
+
+- (void)stopRecording {
+    if ([_timer isValid]) {
+        [_timer setFireDate:[NSDate distantFuture]];
+    }
+    [_context stopRecording];
+    [_videoTrack appendClip:_outputFilePath];
+    _videoIndex++;
+    
+    NSData * fileData = [NSData dataWithContentsOfFile:_outputFilePath];
+    NSLog(@"data:  %ld",fileData.length);
+    
+    
+    // 保存视频
+    
+    UISaveVideoAtPathToSavedPhotosAlbum(_outputFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    
+    [_timeArray addObject:[NSNumber numberWithInteger:_perTime]];
+}
+
+// 视频保存回调
+
+- (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo: (void *)contextInfo {
+    
+    NSLog(@"%@",videoPath);
+    
+    NSLog(@"%@",error);
+    
+}
+
+- (BOOL)finishRecorder {
+    if ([self getCurrentEngineState] == NvsStreamingEngineState_CaptureRecording) {
+        [self stopRecording];
+    }
+    if ([_timer isValid]) {
+        [_timer invalidate];
+        _timer = nil;
+    }
+    
+    BOOL isSuccess = [_context compileTimeline:_timeLine startTime:0 endTime:_timeLine.duration outputFilePath:@"outputFilePath" videoResolutionGrade:NvsCompileVideoResolutionGrade720 videoBitrateGrade:NvsCompileBitrateGradeHigh flags:0];
+    if (isSuccess) {
+        _videoIndex = 0;
+        _outputFilePath = nil;
+    }
+    return isSuccess;
+    
+}
+
+- (BOOL)deleteVideoFile {
+    BOOL success = [_videoTrack removeClip:(unsigned int)_videoIndex keepSpace:false];
+    if (success) {
+        NSInteger time = [[_timeArray objectAtIndex:_videoIndex] integerValue];
+        _videoTime = _videoTime - time;
+        [_timeArray removeLastObject];
+
+        _videoIndex--;
+    }
+    return success;
+}
+
 #pragma mark - NvsStreamingContextDelegate
 - (void)didCaptureDeviceCapsReady:(unsigned int)captureDeviceIndex {
     if (captureDeviceIndex != _currentDeviceIndex) {
@@ -146,6 +313,20 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     
     [self updateSettingWithCapability:captureDeviceIndex];
+}
+
+- (void)didCompileProgress:(NvsTimeline *)timeline progress:(int)progress {
+    NSLog(@"didCompileProgress  %d",progress);
+}
+
+- (void)didCompileFinished:(NvsTimeline *)timeline {
+    NSLog(@"didCompileFinished");
+
+}
+
+- (void)didCompileFailed:(NvsTimeline *)timeline {
+    NSLog(@"didCompileFailed");
+
 }
 
 @end
