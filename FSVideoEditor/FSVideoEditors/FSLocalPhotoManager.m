@@ -9,25 +9,37 @@
 #import "FSLocalPhotoManager.h"
 
 @implementation FSLocalPhotoManager
--(NSArray *)photosWithType:(PHAssetSourceType)type{
 
-    NSMutableArray *assetArray = [NSMutableArray array];
+-(NSArray *)photosWithType:(PHAssetMediaType)type{
     
-    PHFetchOptions *option = [PHFetchOptions new];
-    option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
-    PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:(PHAssetMediaTypeVideo) options:option];
     
-    for (PHAsset *asset in fetchResult) {
-        NSLog(@"asset %@",asset);
-        [assetArray addObject:asset];
+    __block NSMutableArray *assetArray = [NSMutableArray array];
+    __weak typeof(self) weakSelf = self;
+    void (^AuthorizedHandler)(PHAuthorizationStatus status) = ^(PHAuthorizationStatus status){
+        if (status != PHAuthorizationStatusAuthorized) {
+            if ([weakSelf.delegate respondsToSelector:@selector(localPhotoManager:authorizedStatus:)]) {
+                [weakSelf.delegate localPhotoManager:weakSelf authorizedStatus:status];
+            }
+            return ;
+        }
+        PHFetchOptions *option = [PHFetchOptions new];
+        option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
+        PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:type options:option];
+        
+        for (PHAsset *asset in fetchResult) {
+            NSLog(@"asset %@",asset);
+            [assetArray addObject:asset];
+        }
+    };
+    
+
+    if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
+         AuthorizedHandler(PHAuthorizationStatusAuthorized);
+    }else{
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            AuthorizedHandler(status);
+        }];
     }
-    
-    //    PHFetchResult *fetchResult = [PHAssetCollection fetchAssetCollectionsWithType:(PHAssetCollectionTypeSmartAlbum) subtype:(PHAssetCollectionSubtypeSmartAlbumVideos) options:option];
-
-//    for (PHAssetCollection *collection in fetchResult) {
-//        PHFetchResult *assetsInCollection = [PHAsset fetchAssetsInAssetCollection:collection options:nil];
-//        NSLog(@"collection ====-----===== %@",collection);
-//    }
     
     return assetArray;
 }

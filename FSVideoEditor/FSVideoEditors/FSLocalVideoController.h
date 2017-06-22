@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSVideoListView.h"
 
-@interface FSLocalVideoController : UIViewController
+
+@interface FSLocalVideoController : UIViewController<FSVideoListViewDelegate>
 
 @end

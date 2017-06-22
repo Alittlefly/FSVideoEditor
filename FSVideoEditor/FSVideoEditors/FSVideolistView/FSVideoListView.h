@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class FSVideoListView,PHAsset;
 @protocol FSVideoListViewDelegate <NSObject>
-
+-(void)videoListView:(FSVideoListView *)videoListView didSelectedVideo:(PHAsset *)video;
 
 @end
 

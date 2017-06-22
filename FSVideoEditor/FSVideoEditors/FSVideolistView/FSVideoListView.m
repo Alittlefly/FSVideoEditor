@@ -55,7 +55,13 @@
     cell.asset = [_videos objectAtIndex:indexPath.row];
     return cell;
 }
+
 #pragma mark -
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.delegate respondsToSelector:@selector(videoListView:didSelectedVideo:)]) {
+        [self.delegate videoListView:self didSelectedVideo:[_videos objectAtIndex:indexPath.row]];
+    }
+}
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat itemWidth = (CGRectGetWidth(collectionView.frame) - 4.0)/3.0;
     return CGSizeMake(itemWidth,itemWidth);

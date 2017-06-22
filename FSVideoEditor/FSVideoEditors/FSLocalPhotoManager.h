@@ -8,7 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
+@class FSLocalPhotoManager;
+@protocol FSLocalPhotoManagerDelegate <NSObject>
+@optional
+-(void)localPhotoManager:(FSLocalPhotoManager *)manager authorizedStatus:(PHAuthorizationStatus)status;
+
+@end
 
 @interface FSLocalPhotoManager : NSObject
--(NSArray *)photosWithType:(PHAssetSourceType)type;
+@property(nonatomic,assign)id<FSLocalPhotoManagerDelegate>delegate;
+-(NSArray *)photosWithType:(PHAssetMediaType)type;
 @end
