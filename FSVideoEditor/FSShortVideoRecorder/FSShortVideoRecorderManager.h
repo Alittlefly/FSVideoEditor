@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <NvsStreamingContext.h>
+#import "NvsStreamingContext.h"
 
 @interface FSShortVideoRecorderManager : NSObject
 

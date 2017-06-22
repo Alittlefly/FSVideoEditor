@@ -7,6 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		567A3D421EFB66B60026247E /* FSFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1A1EFB66B60026247E /* FSFile.m */; };
+		567A3D431EFB66B60026247E /* FSFileSlice.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1C1EFB66B60026247E /* FSFileSlice.m */; };
+		567A3D441EFB66B60026247E /* FSFileDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1F1EFB66B60026247E /* FSFileDivider.m */; };
+		567A3D451EFB66B60026247E /* FSFileSizeDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D211EFB66B60026247E /* FSFileSizeDivider.m */; };
+		567A3D461EFB66B60026247E /* FSFileDownLoadTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D251EFB66B60026247E /* FSFileDownLoadTool.m */; };
+		567A3D471EFB66B60026247E /* FSFileDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D281EFB66B60026247E /* FSFileDownloadCache.m */; };
+		567A3D481EFB66B60026247E /* FSFileUploadTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D2C1EFB66B60026247E /* FSFileUploadTool.m */; };
+		567A3D491EFB66B60026247E /* FSDBUploadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D2F1EFB66B60026247E /* FSDBUploadCache.m */; };
+		567A3D4A1EFB66B60026247E /* FSFileUploadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D321EFB66B60026247E /* FSFileUploadCache.m */; };
+		567A3D4B1EFB66B60026247E /* FSUploadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D341EFB66B60026247E /* FSUploadCache.m */; };
+		567A3D4C1EFB66B60026247E /* FSFileUploadChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D371EFB66B60026247E /* FSFileUploadChecker.m */; };
+		567A3D4D1EFB66B60026247E /* FSFileUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D3A1EFB66B60026247E /* FSFileUploader.m */; };
+		567A3D4E1EFB66B60026247E /* FSUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D3C1EFB66B60026247E /* FSUploader.m */; };
+		567A3D4F1EFB66B60026247E /* FSFileUploadDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D3F1EFB66B60026247E /* FSFileUploadDBManager.m */; };
+		567A3D501EFB66B60026247E /* FSMD5Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D411EFB66B60026247E /* FSMD5Utils.m */; };
+		567A3D611EFB6F830026247E /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 567A3D521EFB6F830026247E /* LICENSE.txt */; };
+		567A3D621EFB6F830026247E /* README.markdown in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D531EFB6F830026247E /* README.markdown */; };
+		567A3D631EFB6F830026247E /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D571EFB6F830026247E /* FMDatabase.m */; };
+		567A3D641EFB6F830026247E /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D591EFB6F830026247E /* FMDatabaseAdditions.m */; };
+		567A3D651EFB6F830026247E /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D5B1EFB6F830026247E /* FMDatabasePool.m */; };
+		567A3D661EFB6F830026247E /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D5D1EFB6F830026247E /* FMDatabaseQueue.m */; };
+		567A3D671EFB6F830026247E /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D601EFB6F830026247E /* FMResultSet.m */; };
+		567A3D811EFB6F8E0026247E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 567A3D691EFB6F8E0026247E /* LICENSE */; };
+		567A3D821EFB6F8E0026247E /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D6D1EFB6F8E0026247E /* MJExtensionConst.m */; };
+		567A3D831EFB6F8E0026247E /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D6F1EFB6F8E0026247E /* MJFoundation.m */; };
+		567A3D841EFB6F8E0026247E /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D711EFB6F8E0026247E /* MJProperty.m */; };
+		567A3D851EFB6F8E0026247E /* MJPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D731EFB6F8E0026247E /* MJPropertyKey.m */; };
+		567A3D861EFB6F8E0026247E /* MJPropertyType.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D751EFB6F8E0026247E /* MJPropertyType.m */; };
+		567A3D871EFB6F8E0026247E /* NSObject+MJClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D771EFB6F8E0026247E /* NSObject+MJClass.m */; };
+		567A3D881EFB6F8E0026247E /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D791EFB6F8E0026247E /* NSObject+MJCoding.m */; };
+		567A3D891EFB6F8E0026247E /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D7B1EFB6F8E0026247E /* NSObject+MJKeyValue.m */; };
+		567A3D8A1EFB6F8E0026247E /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D7D1EFB6F8E0026247E /* NSObject+MJProperty.m */; };
+		567A3D8B1EFB6F8E0026247E /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D7F1EFB6F8E0026247E /* NSString+MJExtension.m */; };
+		567A3D8C1EFB6F8E0026247E /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D801EFB6F8E0026247E /* README.md */; };
+		567A3D8E1EFB6FC90026247E /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 567A3D8D1EFB6FC90026247E /* libsqlite3.tbd */; };
+		567A3D911EFB7EC80026247E /* FSFileSliceDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D901EFB7EC80026247E /* FSFileSliceDivider.m */; };
 		567E0B531EF930D100C4C527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B521EF930D100C4C527 /* main.m */; };
 		567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B551EF930D100C4C527 /* AppDelegate.m */; };
 		567E0B591EF930D100C4C527 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B581EF930D100C4C527 /* ViewController.m */; };
@@ -65,6 +101,76 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		567A3D191EFB66B60026247E /* FSFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFile.h; sourceTree = "<group>"; };
+		567A3D1A1EFB66B60026247E /* FSFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFile.m; sourceTree = "<group>"; };
+		567A3D1B1EFB66B60026247E /* FSFileSlice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileSlice.h; sourceTree = "<group>"; };
+		567A3D1C1EFB66B60026247E /* FSFileSlice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileSlice.m; sourceTree = "<group>"; };
+		567A3D1E1EFB66B60026247E /* FSFileDivider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileDivider.h; sourceTree = "<group>"; };
+		567A3D1F1EFB66B60026247E /* FSFileDivider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileDivider.m; sourceTree = "<group>"; };
+		567A3D201EFB66B60026247E /* FSFileSizeDivider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileSizeDivider.h; sourceTree = "<group>"; };
+		567A3D211EFB66B60026247E /* FSFileSizeDivider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileSizeDivider.m; sourceTree = "<group>"; };
+		567A3D241EFB66B60026247E /* FSFileDownLoadTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileDownLoadTool.h; sourceTree = "<group>"; };
+		567A3D251EFB66B60026247E /* FSFileDownLoadTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileDownLoadTool.m; sourceTree = "<group>"; };
+		567A3D271EFB66B60026247E /* FSFileDownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileDownloadCache.h; sourceTree = "<group>"; };
+		567A3D281EFB66B60026247E /* FSFileDownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileDownloadCache.m; sourceTree = "<group>"; };
+		567A3D2B1EFB66B60026247E /* FSFileUploadTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileUploadTool.h; sourceTree = "<group>"; };
+		567A3D2C1EFB66B60026247E /* FSFileUploadTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileUploadTool.m; sourceTree = "<group>"; };
+		567A3D2E1EFB66B60026247E /* FSDBUploadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDBUploadCache.h; sourceTree = "<group>"; };
+		567A3D2F1EFB66B60026247E /* FSDBUploadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDBUploadCache.m; sourceTree = "<group>"; };
+		567A3D301EFB66B60026247E /* FSFileCacheProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileCacheProtocol.h; sourceTree = "<group>"; };
+		567A3D311EFB66B60026247E /* FSFileUploadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileUploadCache.h; sourceTree = "<group>"; };
+		567A3D321EFB66B60026247E /* FSFileUploadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileUploadCache.m; sourceTree = "<group>"; };
+		567A3D331EFB66B60026247E /* FSUploadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSUploadCache.h; sourceTree = "<group>"; };
+		567A3D341EFB66B60026247E /* FSUploadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSUploadCache.m; sourceTree = "<group>"; };
+		567A3D361EFB66B60026247E /* FSFileUploadChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileUploadChecker.h; sourceTree = "<group>"; };
+		567A3D371EFB66B60026247E /* FSFileUploadChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileUploadChecker.m; sourceTree = "<group>"; };
+		567A3D391EFB66B60026247E /* FSFileUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileUploader.h; sourceTree = "<group>"; };
+		567A3D3A1EFB66B60026247E /* FSFileUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileUploader.m; sourceTree = "<group>"; };
+		567A3D3B1EFB66B60026247E /* FSUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSUploader.h; sourceTree = "<group>"; };
+		567A3D3C1EFB66B60026247E /* FSUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSUploader.m; sourceTree = "<group>"; };
+		567A3D3E1EFB66B60026247E /* FSFileUploadDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileUploadDBManager.h; sourceTree = "<group>"; };
+		567A3D3F1EFB66B60026247E /* FSFileUploadDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileUploadDBManager.m; sourceTree = "<group>"; };
+		567A3D401EFB66B60026247E /* FSMD5Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMD5Utils.h; sourceTree = "<group>"; };
+		567A3D411EFB66B60026247E /* FSMD5Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMD5Utils.m; sourceTree = "<group>"; };
+		567A3D521EFB6F830026247E /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		567A3D531EFB6F830026247E /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.markdown; sourceTree = "<group>"; };
+		567A3D561EFB6F830026247E /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		567A3D571EFB6F830026247E /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		567A3D581EFB6F830026247E /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		567A3D591EFB6F830026247E /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		567A3D5A1EFB6F830026247E /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		567A3D5B1EFB6F830026247E /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		567A3D5C1EFB6F830026247E /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		567A3D5D1EFB6F830026247E /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		567A3D5E1EFB6F830026247E /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		567A3D5F1EFB6F830026247E /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		567A3D601EFB6F830026247E /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		567A3D691EFB6F8E0026247E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		567A3D6B1EFB6F8E0026247E /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
+		567A3D6C1EFB6F8E0026247E /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
+		567A3D6D1EFB6F8E0026247E /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
+		567A3D6E1EFB6F8E0026247E /* MJFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJFoundation.h; sourceTree = "<group>"; };
+		567A3D6F1EFB6F8E0026247E /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
+		567A3D701EFB6F8E0026247E /* MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProperty.h; sourceTree = "<group>"; };
+		567A3D711EFB6F8E0026247E /* MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProperty.m; sourceTree = "<group>"; };
+		567A3D721EFB6F8E0026247E /* MJPropertyKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyKey.h; sourceTree = "<group>"; };
+		567A3D731EFB6F8E0026247E /* MJPropertyKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyKey.m; sourceTree = "<group>"; };
+		567A3D741EFB6F8E0026247E /* MJPropertyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyType.h; sourceTree = "<group>"; };
+		567A3D751EFB6F8E0026247E /* MJPropertyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyType.m; sourceTree = "<group>"; };
+		567A3D761EFB6F8E0026247E /* NSObject+MJClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJClass.h"; sourceTree = "<group>"; };
+		567A3D771EFB6F8E0026247E /* NSObject+MJClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJClass.m"; sourceTree = "<group>"; };
+		567A3D781EFB6F8E0026247E /* NSObject+MJCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJCoding.h"; sourceTree = "<group>"; };
+		567A3D791EFB6F8E0026247E /* NSObject+MJCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJCoding.m"; sourceTree = "<group>"; };
+		567A3D7A1EFB6F8E0026247E /* NSObject+MJKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJKeyValue.h"; sourceTree = "<group>"; };
+		567A3D7B1EFB6F8E0026247E /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
+		567A3D7C1EFB6F8E0026247E /* NSObject+MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJProperty.h"; sourceTree = "<group>"; };
+		567A3D7D1EFB6F8E0026247E /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
+		567A3D7E1EFB6F8E0026247E /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
+		567A3D7F1EFB6F8E0026247E /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
+		567A3D801EFB6F8E0026247E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		567A3D8D1EFB6FC90026247E /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		567A3D8F1EFB7EC80026247E /* FSFileSliceDivider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileSliceDivider.h; sourceTree = "<group>"; };
+		567A3D901EFB7EC80026247E /* FSFileSliceDivider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileSliceDivider.m; sourceTree = "<group>"; };
 		567E0B4E1EF930D100C4C527 /* FSVideoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSVideoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		567E0B521EF930D100C4C527 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		567E0B541EF930D100C4C527 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -141,6 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567A3D8E1EFB6FC90026247E /* libsqlite3.tbd in Frameworks */,
 				984060571EF940810049B58E /* libc++.tbd in Frameworks */,
 				984060551EF9407B0049B58E /* libz.tbd in Frameworks */,
 				984060531EF940730049B58E /* libiconv.tbd in Frameworks */,
@@ -167,6 +274,208 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		567A3D171EFB66B60026247E /* FSUploadKit */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D181EFB66B60026247E /* FSFile */,
+				567A3D1D1EFB66B60026247E /* FSFileDivider */,
+				567A3D221EFB66B60026247E /* FSFileDownLoader */,
+				567A3D291EFB66B60026247E /* FSFileUploader */,
+				567A3D3B1EFB66B60026247E /* FSUploader.h */,
+				567A3D3C1EFB66B60026247E /* FSUploader.m */,
+				567A3D3D1EFB66B60026247E /* Utils */,
+			);
+			path = FSUploadKit;
+			sourceTree = "<group>";
+		};
+		567A3D181EFB66B60026247E /* FSFile */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D191EFB66B60026247E /* FSFile.h */,
+				567A3D1A1EFB66B60026247E /* FSFile.m */,
+				567A3D1B1EFB66B60026247E /* FSFileSlice.h */,
+				567A3D1C1EFB66B60026247E /* FSFileSlice.m */,
+			);
+			path = FSFile;
+			sourceTree = "<group>";
+		};
+		567A3D1D1EFB66B60026247E /* FSFileDivider */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D1E1EFB66B60026247E /* FSFileDivider.h */,
+				567A3D1F1EFB66B60026247E /* FSFileDivider.m */,
+				567A3D201EFB66B60026247E /* FSFileSizeDivider.h */,
+				567A3D211EFB66B60026247E /* FSFileSizeDivider.m */,
+				567A3D8F1EFB7EC80026247E /* FSFileSliceDivider.h */,
+				567A3D901EFB7EC80026247E /* FSFileSliceDivider.m */,
+			);
+			path = FSFileDivider;
+			sourceTree = "<group>";
+		};
+		567A3D221EFB66B60026247E /* FSFileDownLoader */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D231EFB66B60026247E /* FSFileDownloadAPI */,
+				567A3D261EFB66B60026247E /* FSFileDownloadCache */,
+			);
+			path = FSFileDownLoader;
+			sourceTree = "<group>";
+		};
+		567A3D231EFB66B60026247E /* FSFileDownloadAPI */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D241EFB66B60026247E /* FSFileDownLoadTool.h */,
+				567A3D251EFB66B60026247E /* FSFileDownLoadTool.m */,
+			);
+			path = FSFileDownloadAPI;
+			sourceTree = "<group>";
+		};
+		567A3D261EFB66B60026247E /* FSFileDownloadCache */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D271EFB66B60026247E /* FSFileDownloadCache.h */,
+				567A3D281EFB66B60026247E /* FSFileDownloadCache.m */,
+			);
+			path = FSFileDownloadCache;
+			sourceTree = "<group>";
+		};
+		567A3D291EFB66B60026247E /* FSFileUploader */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D2A1EFB66B60026247E /* FSFileUploadAPI */,
+				567A3D2D1EFB66B60026247E /* FSFileUploadCache */,
+				567A3D351EFB66B60026247E /* FSFileUploadChecker */,
+				567A3D381EFB66B60026247E /* FSFileUpLoader */,
+			);
+			path = FSFileUploader;
+			sourceTree = "<group>";
+		};
+		567A3D2A1EFB66B60026247E /* FSFileUploadAPI */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D2B1EFB66B60026247E /* FSFileUploadTool.h */,
+				567A3D2C1EFB66B60026247E /* FSFileUploadTool.m */,
+			);
+			path = FSFileUploadAPI;
+			sourceTree = "<group>";
+		};
+		567A3D2D1EFB66B60026247E /* FSFileUploadCache */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D2E1EFB66B60026247E /* FSDBUploadCache.h */,
+				567A3D2F1EFB66B60026247E /* FSDBUploadCache.m */,
+				567A3D301EFB66B60026247E /* FSFileCacheProtocol.h */,
+				567A3D311EFB66B60026247E /* FSFileUploadCache.h */,
+				567A3D321EFB66B60026247E /* FSFileUploadCache.m */,
+				567A3D331EFB66B60026247E /* FSUploadCache.h */,
+				567A3D341EFB66B60026247E /* FSUploadCache.m */,
+			);
+			path = FSFileUploadCache;
+			sourceTree = "<group>";
+		};
+		567A3D351EFB66B60026247E /* FSFileUploadChecker */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D361EFB66B60026247E /* FSFileUploadChecker.h */,
+				567A3D371EFB66B60026247E /* FSFileUploadChecker.m */,
+			);
+			path = FSFileUploadChecker;
+			sourceTree = "<group>";
+		};
+		567A3D381EFB66B60026247E /* FSFileUpLoader */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D391EFB66B60026247E /* FSFileUploader.h */,
+				567A3D3A1EFB66B60026247E /* FSFileUploader.m */,
+			);
+			path = FSFileUpLoader;
+			sourceTree = "<group>";
+		};
+		567A3D3D1EFB66B60026247E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D3E1EFB66B60026247E /* FSFileUploadDBManager.h */,
+				567A3D3F1EFB66B60026247E /* FSFileUploadDBManager.m */,
+				567A3D401EFB66B60026247E /* FSMD5Utils.h */,
+				567A3D411EFB66B60026247E /* FSMD5Utils.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		567A3D511EFB6F830026247E /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D521EFB6F830026247E /* LICENSE.txt */,
+				567A3D531EFB6F830026247E /* README.markdown */,
+				567A3D541EFB6F830026247E /* src */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
+		567A3D541EFB6F830026247E /* src */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D551EFB6F830026247E /* fmdb */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		567A3D551EFB6F830026247E /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D561EFB6F830026247E /* FMDatabase.h */,
+				567A3D571EFB6F830026247E /* FMDatabase.m */,
+				567A3D581EFB6F830026247E /* FMDatabaseAdditions.h */,
+				567A3D591EFB6F830026247E /* FMDatabaseAdditions.m */,
+				567A3D5A1EFB6F830026247E /* FMDatabasePool.h */,
+				567A3D5B1EFB6F830026247E /* FMDatabasePool.m */,
+				567A3D5C1EFB6F830026247E /* FMDatabaseQueue.h */,
+				567A3D5D1EFB6F830026247E /* FMDatabaseQueue.m */,
+				567A3D5E1EFB6F830026247E /* FMDB.h */,
+				567A3D5F1EFB6F830026247E /* FMResultSet.h */,
+				567A3D601EFB6F830026247E /* FMResultSet.m */,
+			);
+			path = fmdb;
+			sourceTree = "<group>";
+		};
+		567A3D681EFB6F8E0026247E /* MJExtension */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D691EFB6F8E0026247E /* LICENSE */,
+				567A3D6A1EFB6F8E0026247E /* MJExtension */,
+				567A3D801EFB6F8E0026247E /* README.md */,
+			);
+			path = MJExtension;
+			sourceTree = "<group>";
+		};
+		567A3D6A1EFB6F8E0026247E /* MJExtension */ = {
+			isa = PBXGroup;
+			children = (
+				567A3D6B1EFB6F8E0026247E /* MJExtension.h */,
+				567A3D6C1EFB6F8E0026247E /* MJExtensionConst.h */,
+				567A3D6D1EFB6F8E0026247E /* MJExtensionConst.m */,
+				567A3D6E1EFB6F8E0026247E /* MJFoundation.h */,
+				567A3D6F1EFB6F8E0026247E /* MJFoundation.m */,
+				567A3D701EFB6F8E0026247E /* MJProperty.h */,
+				567A3D711EFB6F8E0026247E /* MJProperty.m */,
+				567A3D721EFB6F8E0026247E /* MJPropertyKey.h */,
+				567A3D731EFB6F8E0026247E /* MJPropertyKey.m */,
+				567A3D741EFB6F8E0026247E /* MJPropertyType.h */,
+				567A3D751EFB6F8E0026247E /* MJPropertyType.m */,
+				567A3D761EFB6F8E0026247E /* NSObject+MJClass.h */,
+				567A3D771EFB6F8E0026247E /* NSObject+MJClass.m */,
+				567A3D781EFB6F8E0026247E /* NSObject+MJCoding.h */,
+				567A3D791EFB6F8E0026247E /* NSObject+MJCoding.m */,
+				567A3D7A1EFB6F8E0026247E /* NSObject+MJKeyValue.h */,
+				567A3D7B1EFB6F8E0026247E /* NSObject+MJKeyValue.m */,
+				567A3D7C1EFB6F8E0026247E /* NSObject+MJProperty.h */,
+				567A3D7D1EFB6F8E0026247E /* NSObject+MJProperty.m */,
+				567A3D7E1EFB6F8E0026247E /* NSString+MJExtension.h */,
+				567A3D7F1EFB6F8E0026247E /* NSString+MJExtension.m */,
+			);
+			path = MJExtension;
+			sourceTree = "<group>";
+		};
 		567E0B451EF930D100C4C527 = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +501,7 @@
 			children = (
 				981F6F731EFBB41D00FDF542 /* PDColoredProgressView.h */,
 				981F6F741EFBB41D00FDF542 /* PDColoredProgressView.m */,
+				567A3D171EFB66B60026247E /* FSUploadKit */,
 				984060351EF93F130049B58E /* FSVideoRecorder */,
 				567E0B8B1EF939F000C4C527 /* FSVideoEditors */,
 				567E0B541EF930D100C4C527 /* AppDelegate.h */,
@@ -273,6 +583,9 @@
 		9840603F1EF9401E0049B58E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				567A3D8D1EFB6FC90026247E /* libsqlite3.tbd */,
+				567A3D681EFB6F8E0026247E /* MJExtension */,
+				567A3D511EFB6F830026247E /* FMDB */,
 				98E3C9B81EFA1B9B00A2FDD6 /* include */,
 				984060561EF940810049B58E /* libc++.tbd */,
 				984060541EF9407B0049B58E /* libz.tbd */,
@@ -348,8 +661,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				567E0B831EF939CC00C4C527 /* FSVideoEditorKit.h in Headers */,
-				567E0B9C1EFA20BC00C4C527 /* FSLocalPhotoManager.h in Headers */,
 				567E0B8E1EF93A1C00C4C527 /* FSLocalVideoController.h in Headers */,
+				567E0B9C1EFA20BC00C4C527 /* FSLocalPhotoManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,9 +751,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567A3D611EFB6F830026247E /* LICENSE.txt in Resources */,
 				567E0B611EF930D100C4C527 /* LaunchScreen.storyboard in Resources */,
 				567E0B5E1EF930D100C4C527 /* Assets.xcassets in Resources */,
 				567E0B5C1EF930D100C4C527 /* Main.storyboard in Resources */,
+				567A3D811EFB6F8E0026247E /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,16 +773,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567A3D4C1EFB66B60026247E /* FSFileUploadChecker.m in Sources */,
+				567A3D481EFB66B60026247E /* FSFileUploadTool.m in Sources */,
 				9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */,
+				567A3D421EFB66B60026247E /* FSFile.m in Sources */,
+				567A3D8B1EFB6F8E0026247E /* NSString+MJExtension.m in Sources */,
+				567A3D651EFB6F830026247E /* FMDatabasePool.m in Sources */,
+				567A3D661EFB6F830026247E /* FMDatabaseQueue.m in Sources */,
+				567A3D4D1EFB66B60026247E /* FSFileUploader.m in Sources */,
+				567A3D8A1EFB6F8E0026247E /* NSObject+MJProperty.m in Sources */,
+				567A3D841EFB6F8E0026247E /* MJProperty.m in Sources */,
 				567E0B9D1EFA20BC00C4C527 /* FSLocalPhotoManager.m in Sources */,
-				567E0B591EF930D100C4C527 /* ViewController.m in Sources */,
-				981F6F751EFBB41D00FDF542 /* PDColoredProgressView.m in Sources */,
+				567A3D861EFB6F8E0026247E /* MJPropertyType.m in Sources */,
+				567A3D821EFB6F8E0026247E /* MJExtensionConst.m in Sources */,
+				567A3D621EFB6F830026247E /* README.markdown in Sources */,
+				567A3D451EFB66B60026247E /* FSFileSizeDivider.m in Sources */,
+				567A3D871EFB6F8E0026247E /* NSObject+MJClass.m in Sources */,
+				567E0B591EF930D100C4C527 /* ViewController.m in Sources */,				981F6F751EFBB41D00FDF542 /* PDColoredProgressView.m in Sources */,
+				567A3D831EFB6F8E0026247E /* MJFoundation.m in Sources */,
+				567A3D671EFB6F830026247E /* FMResultSet.m in Sources */,
+				567A3D471EFB66B60026247E /* FSFileDownloadCache.m in Sources */,
+				567A3D441EFB66B60026247E /* FSFileDivider.m in Sources */,
+				567A3D4B1EFB66B60026247E /* FSUploadCache.m in Sources */,
+				567A3D631EFB6F830026247E /* FMDatabase.m in Sources */,
+				567A3D4E1EFB66B60026247E /* FSUploader.m in Sources */,
+				567A3D8C1EFB6F8E0026247E /* README.md in Sources */,
 				567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */,
+				567A3D431EFB66B60026247E /* FSFileSlice.m in Sources */,
+				567A3D851EFB6F8E0026247E /* MJPropertyKey.m in Sources */,
 				567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */,
 				9840603D1EF93F130049B58E /* FSShortVideoRecorderManager.m in Sources */,
+				567A3D501EFB66B60026247E /* FSMD5Utils.m in Sources */,
+				567A3D891EFB6F8E0026247E /* NSObject+MJKeyValue.m in Sources */,
+				567A3D911EFB7EC80026247E /* FSFileSliceDivider.m in Sources */,
+				567A3D641EFB6F830026247E /* FMDatabaseAdditions.m in Sources */,
+				567A3D461EFB66B60026247E /* FSFileDownLoadTool.m in Sources */,
+				567A3D4F1EFB66B60026247E /* FSFileUploadDBManager.m in Sources */,
 				567E0BA21EFA49F500C4C527 /* FSVideoListView.m in Sources */,
 				567E0B8F1EF93A1C00C4C527 /* FSLocalVideoController.m in Sources */,
 				567E0B531EF930D100C4C527 /* main.m in Sources */,
+				567A3D881EFB6F8E0026247E /* NSObject+MJCoding.m in Sources */,
+				567A3D4A1EFB66B60026247E /* FSFileUploadCache.m in Sources */,
+				567A3D491EFB66B60026247E /* FSDBUploadCache.m in Sources */,
 				9840603E1EF93F130049B58E /* FSShortVideoRecorderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -650,6 +997,10 @@
 				INFOPLIST_FILE = FSVideoEditorKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditorKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -672,6 +1023,10 @@
 				INFOPLIST_FILE = FSVideoEditorKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditorKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
