@@ -270,6 +270,9 @@ static FSShortVideoRecorderManager *recorderManager;
 - (void)updateVideoTime {
     _videoTime++;
     _perTime++;
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerProgress:)]) {
+        [self.delegate FSShortVideoRecorderManagerProgress:_videoTime];
+    }
     NSLog(@"%ld",_videoTime);
 }
 
@@ -362,6 +365,9 @@ static FSShortVideoRecorderManager *recorderManager;
 //    if (success) {
         NSInteger time = [[_timeArray objectAtIndex:_videoIndex] integerValue];
         _videoTime = _videoTime - time;
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerDeleteVideo:)]) {
+        [self.delegate FSShortVideoRecorderManagerDeleteVideo:_videoTime];
+    }
         [_timeArray removeLastObject];
     
     [_filePathArray removeLastObject];

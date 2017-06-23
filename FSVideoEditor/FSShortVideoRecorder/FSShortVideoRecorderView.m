@@ -8,9 +8,9 @@
 
 #import "FSShortVideoRecorderView.h"
 #import "FSShortVideoRecorderManager.h"
-#import "PDColoredProgressView.h"
+#import "FSProgressView.h"
 
-@interface FSShortVideoRecorderView()
+@interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate>
 
 @property (nonatomic, strong) UIButton *flashButton;  //闪光灯
 @property (nonatomic, strong) UIButton *finishButton;  //完成按钮
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) UILabel *filterLabel;
 @property (nonatomic, strong) UILabel *countdownLabel;
 
-@property (nonatomic, strong) PDColoredProgressView *progressView;
+@property (nonatomic, strong) FSProgressView *progressView;
 
 @property (nonatomic, strong) UIImageView *imageAutoFocusRect; //对焦视图
 
@@ -69,6 +69,7 @@
         _isRecording = NO;
         
         _recorderManager = [[FSShortVideoRecorderManager alloc] init];
+        _recorderManager.delegate = self;
         _recorderView = [_recorderManager getLiveWindow];
         _recorderView.frame= CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:_recorderView];
@@ -91,11 +92,11 @@
 }
 
 - (void)initBaseToolView {
-    _progressView = [[PDColoredProgressView alloc] initWithFrame:CGRectMake(0, 20, self.frame.size.width, 20)];
-    [_progressView setTintColor:[UIColor yellowColor]];
+    _progressView = [[FSProgressView alloc] initWithFrame:CGRectMake(0, 20, self.frame.size.width, 20)];
+    _progressView.backgroundColor = [UIColor lightGrayColor];
+    _progressView.progressViewColor = [UIColor yellowColor];
     [self addSubview:_progressView];
     
-    [_progressView setProgress:0.5 animated:YES];
     
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _backButton.frame = IsArabic ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
@@ -347,7 +348,7 @@
 }
 
 - (void)deleteVideo {
-    
+    [_recorderManager deleteVideoFile];
 }
 
 - (void)faceuClick {
@@ -380,6 +381,16 @@
             break;
     }
     [_speedSegment setImage:[self createImageWithColor:[UIColor yellowColor]] forSegmentAtIndex:sender.selectedSegmentIndex];
+}
+
+#pragma mark - FSShortVideoRecorderManagerDelegate
+
+- (void)FSShortVideoRecorderManagerProgress:(NSInteger)time {
+    [self.progressView setProgress:((CGFloat)time)/30.0 animated:YES];
+}
+
+- (void)FSShortVideoRecorderManagerDeleteVideo:(NSInteger)videoTime {
+    [self.progressView setProgress:((CGFloat)videoTime)/30.0 animated:NO];
 }
 
 @end

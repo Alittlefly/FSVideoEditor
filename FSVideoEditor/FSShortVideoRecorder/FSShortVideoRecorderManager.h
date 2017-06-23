@@ -13,6 +13,8 @@
 
 - (void)FSShortVideoRecorderManagerFinishRecorder:(NSString *)filePath;
 - (void)FSShortVideoRecorderManagerFailedRecorder;
+- (void)FSShortVideoRecorderManagerProgress:(NSInteger)time;
+- (void)FSShortVideoRecorderManagerDeleteVideo:(NSInteger)videoTime;
 
 @end
 
