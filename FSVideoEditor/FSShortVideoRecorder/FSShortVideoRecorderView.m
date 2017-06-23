@@ -68,7 +68,7 @@
         _playSpeed = FSShortVideoPlaySpeed_Normal;
         _isRecording = NO;
         
-        _recorderManager = [FSShortVideoRecorderManager sharedInstance];
+        _recorderManager = [[FSShortVideoRecorderManager alloc] init];
         _recorderView = [_recorderManager getLiveWindow];
         _recorderView.frame= CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:_recorderView];
@@ -84,6 +84,8 @@
 
         
         [self initBaseToolView];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeCapturePreview) name:@"ResumeCapturePreview" object:nil];
     }
     return self;
 }
@@ -239,7 +241,12 @@
     return theImage;
 }
 
+- (void)resumeCapturePreview {
+    [_recorderManager resumeCapturePreview];
+}
+
 - (void)backClik {
+    [_recorderManager quitRecording];
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewQuitRecorderView)]) {
         [self.delegate FSShortVideoRecorderViewQuitRecorderView];
     }
@@ -277,6 +284,11 @@
 
 - (void)recoverCameraClik {
     BOOL isSuccess = [_recorderManager switchCamera];
+    if (isSuccess) {
+        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:)]) {
+            [self.delegate FSShortVideoRecorderViewFinishRecorder:[_recorderManager getVideoPath]];
+        }
+    }
 }
 
 - (void)flashClik {
@@ -320,16 +332,17 @@
     if (_isRecording) {
         _isRecording = NO;
         [self.recorderManager stopRecording];
-        [self.recorderManager resumeCapturePreview];
-        [self.recorderButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [self.recorderButton setBackgroundColor:[UIColor redColor]];
+       // [self.recorderManager resumeCapturePreview];
+        [self.recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
+
     }
     else {
         _isRecording = YES;
         [self.recorderManager startRecording:nil];
         [self.recorderButton setBackgroundColor:[UIColor clearColor]];
+        [self.recorderButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [self.recorderButton setBackgroundColor:[UIColor redColor]];
 
-        [self.recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
     }
 }
 
