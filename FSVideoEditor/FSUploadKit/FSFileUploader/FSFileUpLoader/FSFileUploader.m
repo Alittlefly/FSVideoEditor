@@ -36,7 +36,7 @@
 -(void)uploadFileWithFile:(FSFile *)file{
     [self uploadFileWithFile:file completeBlock:nil];
 }
--(void)uploadFileWithFile:(FSFile *)file completeBlock:(void (^)(CGFloat progress, NSString *filePath))complete{
+-(void)uploadFileWithFile:(FSFile *)file completeBlock:(FSUploadProgressBlock)complete{
     dispatch_async(_uploadQueue, ^{
         // 存储file
 //          [FSFileUploadChecker fileUploadCheckerAddWaitingUploadFile:file];
@@ -47,12 +47,12 @@
 -(void)uploadFileWithFilePath:(NSString *)filePath{
     [self uploadFileWithFilePath:filePath completeBlock:nil];
 }
--(void)uploadFileWithFilePath:(NSString *)filePath completeBlock:(void (^)(CGFloat progress, NSString *filePath))complete{
+-(void)uploadFileWithFilePath:(NSString *)filePath completeBlock:(FSUploadProgressBlock)complete{
     dispatch_async(_uploadQueue, ^{
         [self uploadFileWithPath:filePath completBlock:complete];
     });
 }
--(void)uploadFileWithPath:(NSString *)filePath completBlock:(void (^)(CGFloat progress, NSString *filePath))complete{
+-(void)uploadFileWithPath:(NSString *)filePath completBlock:(FSUploadProgressBlock)complete{
     //1.检查上传文件的状态
     FSFileUpLoadState state = [FSFileUploadChecker fileUploadCheckerCheckState:filePath];
     //1).上传剩余没上传的文件
@@ -64,7 +64,7 @@
         // 2.已经完成上传
         if (complete) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                complete(1.0,filePath);
+                complete(1.0,filePath,nil);
             });
         }
 
@@ -80,7 +80,7 @@
         }
     }
 }
--(void)uploadFileWithFileData:(NSArray<FSFileSlice *> *)fileDatas filePath:(NSString *)filePath completeBlock:(void(^)(CGFloat progress, NSString *filePath))complete{
+-(void)uploadFileWithFileData:(NSArray<FSFileSlice *> *)fileDatas filePath:(NSString *)filePath completeBlock:(FSUploadProgressBlock)complete{
     NSFileHandle *handler = [NSFileHandle fileHandleForReadingAtPath:filePath];
     
     [FSFileUploadChecker fileUploadCheckerSaveFiles:fileDatas filePath:filePath];
@@ -93,7 +93,7 @@
         NSData *postData = [handler readDataOfLength:file.fileSize];
         if ([self.delegate respondsToSelector:@selector(fileUploaderWillUploadFilePath:file:fileData:)]) {
             id<FSFileUploaderProtocol> op = [self.delegate fileUploaderWillUploadFilePath:filePath file:file fileData:postData];
-            [op uploadFile:postData file:file completeBlock:^(FSFileSlice *file, BOOL success) {
+            [op uploadFile:postData file:file completeBlock:^(FSFileSlice *file, BOOL success,id info) {
                 //
                 if (success) {
                     dispatch_async(_uploadQueue, ^{
@@ -107,7 +107,7 @@
                                 if ([weakSelf.delegate respondsToSelector:@selector(fileUploadUploaded:progress:uploader:)]) {
                                     [weakSelf.delegate fileUploadUploaded:filePath progress:cprogress uploader:weakSelf];
                                 }
-                                complete(cprogress,filePath);
+                                complete(cprogress,filePath,info);
                             });
                             
                             NSLog(@"success:当前的上传进度是 %.2f",cprogress);
@@ -116,9 +116,9 @@
                 }else{
                     //
                     // test
-                    float cprogress = [FSFileUploadChecker fileUploadCheckUploadSuccess:file filePath:filePath];
+//                    float cprogress = [FSFileUploadChecker fileUploadCheckUploadSuccess:file filePath:filePath];
 
-                    NSLog(@" test faild :当前的上传进度是 %.2f",cprogress);
+                    NSLog(@" test faild :当前的上传进度是 %.2f",1.0);
                 }
             }];
             
@@ -127,7 +127,7 @@
     }
     [self.uploadOperaters setValue:ops forKey:filePath];
 }
--(void)uploadWithFilePath:(NSString *)filePath completeBlock:(void(^)(CGFloat progress,NSString *filePath))complete{
+-(void)uploadWithFilePath:(NSString *)filePath completeBlock:(FSUploadProgressBlock)complete{
     NSFileHandle *handler = [NSFileHandle fileHandleForReadingAtPath:filePath];
     NSData *postData = [handler readDataToEndOfFile];
     FSFileSlice *file = [FSFileSlice fileWithfilePath:filePath];
@@ -137,7 +137,7 @@
     __weak typeof(self) weakSelf = self;
     if ([self.delegate respondsToSelector:@selector(fileUploaderWillUploadFilePath:file:fileData:)]) {
         id<FSFileUploaderProtocol> op = [self.delegate fileUploaderWillUploadFilePath:filePath file:file fileData:postData];
-        [op uploadFile:postData file:file completeBlock:^(FSFileSlice *file, BOOL success) {
+        [op uploadFile:postData file:file completeBlock:^(FSFileSlice *file, BOOL success,id info) {
             //
             dispatch_async(_uploadQueue, ^{
                 float cprogress = [FSFileUploadChecker fileUploadCheckUploadSuccess:file filePath:filePath];
@@ -148,7 +148,7 @@
                             [weakSelf.delegate fileUploadUploaded:filePath progress:cprogress uploader:weakSelf];
                         }
                         
-                        complete(cprogress,filePath);
+                        complete(cprogress,filePath,info);
                     });
                 }
             });
