@@ -19,6 +19,7 @@ typedef enum{
 @protocol FSShortVideoRecorderViewDelegate <NSObject>
 
 - (void)FSShortVideoRecorderViewQuitRecorderView;
+- (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath;
 
 @end
 

@@ -8,6 +8,7 @@
 
 #import "FSShortVideoRecorderView.h"
 #import "FSShortVideoRecorderManager.h"
+#import "PDColoredProgressView.h"
 
 @interface FSShortVideoRecorderView()
 
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) UILabel *filterLabel;
 @property (nonatomic, strong) UILabel *countdownLabel;
 
+@property (nonatomic, strong) PDColoredProgressView *progressView;
 
 @property (nonatomic, strong) UIImageView *imageAutoFocusRect; //对焦视图
 
@@ -40,6 +42,7 @@
 @property (nonatomic, assign) BOOL isBeautyOpened;
 @property (nonatomic, assign) BOOL supportAutoFocus;
 @property (nonatomic, assign) BOOL supportAutoExposure;
+@property (nonatomic, assign) BOOL isRecording;
 
 @property (nonatomic, assign) FSShortVideoPlaySpeed playSpeed;
 
@@ -63,8 +66,9 @@
         _isFlashOpened = NO;
         _isBeautyOpened = YES;
         _playSpeed = FSShortVideoPlaySpeed_Normal;
+        _isRecording = NO;
         
-        _recorderManager = [FSShortVideoRecorderManager sharedInstance];
+        _recorderManager = [[FSShortVideoRecorderManager alloc] init];
         _recorderView = [_recorderManager getLiveWindow];
         _recorderView.frame= CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:_recorderView];
@@ -80,11 +84,19 @@
 
         
         [self initBaseToolView];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeCapturePreview) name:@"ResumeCapturePreview" object:nil];
     }
     return self;
 }
 
 - (void)initBaseToolView {
+    _progressView = [[PDColoredProgressView alloc] initWithFrame:CGRectMake(0, 20, self.frame.size.width, 20)];
+    [_progressView setTintColor:[UIColor yellowColor]];
+    [self addSubview:_progressView];
+    
+    [_progressView setProgress:0.5 animated:YES];
+    
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _backButton.frame = IsArabic ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
     //[_backButton setTitle:@"back" forState:UIControlStateNormal];
@@ -229,7 +241,12 @@
     return theImage;
 }
 
+- (void)resumeCapturePreview {
+    [_recorderManager resumeCapturePreview];
+}
+
 - (void)backClik {
+    [_recorderManager quitRecording];
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewQuitRecorderView)]) {
         [self.delegate FSShortVideoRecorderViewQuitRecorderView];
     }
@@ -262,11 +279,16 @@
 }
 
 - (void)finishClik {
-
+    [_recorderManager finishRecorder];
 }
 
 - (void)recoverCameraClik {
     BOOL isSuccess = [_recorderManager switchCamera];
+    if (isSuccess) {
+        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:)]) {
+            [self.delegate FSShortVideoRecorderViewFinishRecorder:[_recorderManager getVideoPath]];
+        }
+    }
 }
 
 - (void)flashClik {
@@ -307,7 +329,21 @@
 }
 
 - (void)startRecorder {
+    if (_isRecording) {
+        _isRecording = NO;
+        [self.recorderManager stopRecording];
+       // [self.recorderManager resumeCapturePreview];
+        [self.recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
 
+    }
+    else {
+        _isRecording = YES;
+        [self.recorderManager startRecording:nil];
+        [self.recorderButton setBackgroundColor:[UIColor clearColor]];
+        [self.recorderButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [self.recorderButton setBackgroundColor:[UIColor redColor]];
+
+    }
 }
 
 - (void)deleteVideo {
@@ -321,6 +357,29 @@
 - (void)selectPlaySpeed:(UISegmentedControl *)sender {
     NSLog(@"sender: %ld",sender.selectedSegmentIndex); //输出当前的索引值
     //_playSpeed = sender.selectedSegmentIndex;
+    [_speedSegment setImage:[self createImageWithColor:[UIColor clearColor]] forSegmentAtIndex:_playSpeed];
+
+    switch (sender.selectedSegmentIndex) {
+        case 0:
+            _playSpeed = FSShortVideoPlaySpeed_Hyperslow;
+            break;
+        case 1:
+            _playSpeed = FSShortVideoPlaySpeed_Slow;
+            break;
+        case 2:
+            _playSpeed = FSShortVideoPlaySpeed_Normal;
+            break;
+        case 3:
+            _playSpeed = FSShortVideoPlaySpeed_Quick;
+            break;
+        case 4:
+            _playSpeed = FSShortVideoPlaySpeed_VeryFast;
+            break;
+            
+        default:
+            break;
+    }
+    [_speedSegment setImage:[self createImageWithColor:[UIColor yellowColor]] forSegmentAtIndex:sender.selectedSegmentIndex];
 }
 
 @end

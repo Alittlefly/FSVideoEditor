@@ -9,7 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "NvsStreamingContext.h"
 
+@protocol FSShortVideoRecorderManagerDelegate <NSObject>
+
+- (void)FSShortVideoRecorderManagerFinishRecorder:(NSString *)filePath;
+- (void)FSShortVideoRecorderManagerFailedRecorder;
+
+@end
+
 @interface FSShortVideoRecorderManager : NSObject
+
+@property (nonatomic, weak) id<FSShortVideoRecorderManagerDelegate> delegate;
 
 + (instancetype)sharedInstance;
 
@@ -49,5 +58,14 @@
 - (BOOL)isSupportAutoFocus;
 
 - (BOOL)isSupportAutoExposure;
+
+- (void)startRecording:(NSString *)filePath;
+
+- (void)stopRecording;
+- (BOOL)finishRecorder;
+- (BOOL)deleteVideoFile;
+- (void)resumeCapturePreview;
+- (NSString *)getVideoPath;
+- (void)quitRecording;
 
 @end
