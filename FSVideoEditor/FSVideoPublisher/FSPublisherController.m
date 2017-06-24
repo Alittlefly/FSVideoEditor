@@ -11,12 +11,13 @@
 #import "NvsTimeline.h"
 #import "NvsVideoClip.h"
 #import "NvsVideoTrack.h"
-
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate>
+#import "FSPublishView.h"
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublishViewDelegate>
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsTimeline   *timeLine;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
+@property(nonatomic,strong)FSPublishView *publishContent;
 @end
 
 @implementation FSPublisherController
@@ -26,6 +27,10 @@
     // Do any additional setup after loading the view.
     _prewidow = [[NvsLiveWindow alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_prewidow];
+    
+    _publishContent = [[FSPublishView alloc] initWithFrame:self.view.bounds];
+    [_publishContent setDelegate:self];
+    [self.view addSubview:_publishContent];
     
     if (!_filePath) {
         return;
@@ -70,7 +75,12 @@
     if(![_context playbackTimeline:_timeLine startTime:0 endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:NO flags:0]) {
     }
 }
-
+#pragma mark - 
+-(void)publishViewClickVideoFx:(FSPublishView *)publish{
+    FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
+    fxController.timeLine = _timeLine;
+    [self.navigationController pushViewController:fxController animated:YES];
+}
 -(void)dealloc{
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));
 }
