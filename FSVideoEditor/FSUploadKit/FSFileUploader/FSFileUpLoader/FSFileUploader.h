@@ -11,6 +11,10 @@
 #import "FSFileSizeDivider.h"
 #import "FSFileUploadChecker.h"
 
+
+typedef void(^FSUploadProgressBlock)(CGFloat progress,NSString *filePath,id info);
+typedef void(^FSUploadCompleteBlock)(FSFileSlice *file,BOOL success,id info);
+
 @protocol FSFileUploaderProtocol <NSObject>
 // 停止上传
 -(void)uploadFileStopUploadFile:(NSString *)filePath;
@@ -23,7 +27,7 @@
 // 无回调的上传 用在不需要展示上传进度场景
 -(void)uploadFile:(NSData *)data file:(FSFileSlice *)file;
 // 有回调的上传 用在
--(void)uploadFile:(NSData *)data file:(FSFileSlice *)file completeBlock:(void (^)(FSFileSlice *file,BOOL success))completecomplete;
+-(void)uploadFile:(NSData *)data file:(FSFileSlice *)file completeBlock:(FSUploadCompleteBlock)completecomplete;
 
 @end
 
@@ -38,6 +42,7 @@
 @end
 
 
+
 @interface FSFileUploader : NSObject
 
 @property(nonatomic,assign)id<FSFileUploaderDelegate>delegate;
@@ -47,7 +52,9 @@
 
 -(void)uploadFileWithFile:(FSFile *)file;
 -(void)uploadFileWithFilePath:(NSString *)filePath;
--(void)uploadFileWithFilePath:(NSString *)filePath completeBlock:(void(^)(CGFloat progress,NSString *filePath))complete;
+-(void)uploadFileWithFilePath:(NSString *)filePath completeBlock:(FSUploadProgressBlock)complete;
+
+
 
 -(void)uploadFileStopUpload:(NSString *)filePath;
 -(void)uploadFileResumeUpload:(NSString *)filePath;

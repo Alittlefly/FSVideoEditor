@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "FSFileUploader.h"
+#import "FSFileSliceDivider.h"
+
 
 @protocol FSUploaderDelegate <NSObject>
 -(void)uploadUpFiles:(NSString *)filePath progress:(float)progress;

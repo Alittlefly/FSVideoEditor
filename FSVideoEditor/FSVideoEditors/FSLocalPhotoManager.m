@@ -27,7 +27,7 @@
         PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:type options:option];
         
         for (PHAsset *asset in fetchResult) {
-            NSLog(@"asset %@",asset);
+//            NSLog(@"asset %@",asset);
             [assetArray addObject:asset];
         }
     };

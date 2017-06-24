@@ -7,6 +7,8 @@
 //
 
 #import "FSFileUploadTool.h"
+#import "AFNetworking.h"
+#import "MJExtension.h"
 
 @interface FSFileUploadTool ()
 {
@@ -31,7 +33,7 @@
 }
 -(void)uploadFile:(NSData *)data
              file:(FSFileSlice *)file
-    completeBlock:(void (^)(FSFileSlice *file,BOOL success))complete{
+    completeBlock:(FSUploadCompleteBlock)complete{
     
     if (!_file) {
         _file = file;
@@ -41,13 +43,38 @@
         _data = data;
     }
     
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+//    NSDictionary *param = @{@"file":data};
+    _uploadTask = (NSURLSessionUploadTask *)[mgr  POST:[self requestUrl] parameters:@{} constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:data name:@"file" fileName:file.fileName mimeType:@"video/quicktime"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [responseObject mj_JSONObject];
+        NSInteger code = [[dict valueForKey:@"code"] intValue];
+        if (code == 0) {
+            NSLog(@"上传成功");
+            if (complete) {
+                complete(file,YES,dict);
+            }
+        }else{
+            if (complete) {
+                complete(file,NO,dict);
+            }
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (complete) {
+            complete(file,NO,nil);
+        }
+    }];
+    /*
     NSMutableURLRequest *customUrl = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[self requestUrl]]];
     [customUrl setHTTPMethod:@"POST"];
     NSDictionary *requestHeader = [self requestHeaderFieldValueDictionaryFile:file];
     for (NSString *key in requestHeader) {
         [customUrl setValue:[requestHeader valueForKey:key] forHTTPHeaderField:key];
     }
-    [customUrl setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
+//    [customUrl setValue:data forKey:@"file"];
     [customUrl setHTTPBody:data];
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -58,18 +85,24 @@
 
         BOOL success = NO;
         
+        
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         NSInteger code = httpResponse.statusCode;
         if (code == 200) {
             success = YES;
+            
+            NSString *str = [[NSString alloc] initWithData:data encoding:(NSUTF8StringEncoding)];
+            
+            NSLog(@"上传成功 %@",str);
         }
         
         if (complete) {
             complete(file,success);
         }
     }];
-    [uploadTask resume];
-    _uploadTask = uploadTask;
+     */
+//    [uploadTask resume];
+//    _uploadTask = uploadTask;
 }
 -(void)uploadFileStopUploadFile:(NSString *)filePath{
     if (_uploadTask) {
@@ -114,10 +147,12 @@
 }
 
 - (NSString *)requestUrl {
-    NSString *name = _file.fileName;
+//    NSString *name = _file.fileName;
 //    NSLog(@"uploadName %@",name);
 //    http://10.10.32.145:8086/files/shortvideo/upload/file
-    NSString *url = @"http://10.10.32.145:8086/files/shortvideo/upload/file";// [@"http://221.176.30.232:8888/file/" stringByAppendingString:name];
+//    NSString *url = @"http://10.10.32.157:8086/files/shortvideo/upload/file";
+   NSString *url = @"http://10.10.32.145:8086/files/shortvideo/upload/file";
+    //[@"http://221.176.30.232:8888/file/" stringByAppendingString:name];
     return url;
 }
 
@@ -127,7 +162,7 @@
 //    NSLog(@"post range:%@ totalSize:%@",rangeString,size);
     
     return @{
-             @"Content-Type":@"application/octet-stream",
+             @"Content-Type":@"multipart/form-data",
              @"x-fission-range":rangeString,
              @"x-fission-length":size
              };
