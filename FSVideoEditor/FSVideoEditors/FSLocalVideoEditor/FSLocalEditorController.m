@@ -20,9 +20,9 @@
     UISegmentedControl *_speedSegment;
     NSString *_outPutPath;
 }
-@property(nonatomic,strong)NvsThumbnailSequenceView *thumbnailSequence;
 @property(nonatomic,strong)UIScrollView *thumbContent;
 
+@property(nonatomic,strong)NvsThumbnailSequenceView *thumbnailSequence;
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsTimeline   *timeLine;
@@ -136,7 +136,13 @@
     return item;
 }
 - (void)saveVideoFile{
+    // test
+    FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
+    fxController.timeLine = _timeLine;
+    [self.navigationController pushViewController:fxController animated:YES];
     
+    
+    /*
     [self.view addSubview:self.loading];
     [self.loading loadingViewShow];
     
@@ -147,7 +153,7 @@
     
     
     if([_context compileTimeline:_timeLine startTime:0 endTime:_timeLine.duration outputFilePath:_outPutPath videoResolutionGrade:(NvsCompileVideoResolutionGrade2160) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0]){
-    }
+    }*/
 }
 - (void)deleteCurrentCompileFile:(NSString *)outPutFilePath{
     if ([[NSFileManager defaultManager] fileExistsAtPath:outPutFilePath]) {

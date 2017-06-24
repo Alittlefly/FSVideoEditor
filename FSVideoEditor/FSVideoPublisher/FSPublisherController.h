@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSVideoFxController.h"
+
 
 @interface FSPublisherController : UIViewController
 @property(nonatomic,copy)NSString *filePath;
