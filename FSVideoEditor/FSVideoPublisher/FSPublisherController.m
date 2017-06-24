@@ -11,13 +11,19 @@
 #import "NvsTimeline.h"
 #import "NvsVideoClip.h"
 #import "NvsVideoTrack.h"
+#import "FSPublisherToolView.h"
 #import "FSPublishView.h"
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublishViewDelegate>
+
+
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSPublishViewDelegate>
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsTimeline   *timeLine;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
+
+@property (nonatomic, strong) FSPublisherToolView *toolView;
 @property(nonatomic,strong)FSPublishView *publishContent;
+
 @end
 
 @implementation FSPublisherController
@@ -61,13 +67,28 @@
         if(![_context playbackTimeline:_timeLine startTime:startTime endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:NO flags:0]) {
         }
     }
+    
+    _toolView = [[FSPublisherToolView alloc] initWithFrame:self.view.bounds];
+    _toolView.backgroundColor = [UIColor clearColor];
+    _toolView.delegate =self;
+    [self.view addSubview:_toolView];
  
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setHidden:YES];
+}
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
         [_context stop];
     [_context setDelegate:nil];
+    
+    [self.navigationController.navigationBar setHidden:NO];
+
 }
 #pragma mark -
 -(void)didPlaybackEOF:(NvsTimeline *)timeline{
@@ -75,12 +96,43 @@
     if(![_context playbackTimeline:_timeLine startTime:0 endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:NO flags:0]) {
     }
 }
-#pragma mark - 
+
+#pragma mark - FSPublisherToolViewDelegate
+- (void)FSPublisherToolViewPublished {
+
+}
+
+- (void)FSPublisherToolViewQuit {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)FSPublisherToolViewEditMusic {
+
+}
+
+- (void)FSPublisherToolViewAddEffects {
+
+}
+
+- (void)FSPublisherToolViewEditVolume {
+
+}
+
+- (void)FSPublisherToolViewChooseMusic {
+
+}
+
+- (void)FSPublisherToolViewSaveToDraft {
+
+}
+
+#pragma mark -
 -(void)publishViewClickVideoFx:(FSPublishView *)publish{
     FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
     fxController.timeLine = _timeLine;
     [self.navigationController pushViewController:fxController animated:YES];
 }
+
 -(void)dealloc{
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));
 }

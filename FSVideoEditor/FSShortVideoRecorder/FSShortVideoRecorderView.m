@@ -314,7 +314,9 @@
 }
 
 - (void)cutMusicClik {
-
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewEditMusic)]) {
+        [self.delegate FSShortVideoRecorderViewEditMusic];
+    }
 }
 
 - (void)beautyClik {
