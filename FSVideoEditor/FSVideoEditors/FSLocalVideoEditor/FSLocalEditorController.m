@@ -137,12 +137,12 @@
 }
 - (void)saveVideoFile{
     // test
-    FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
-    fxController.timeLine = _timeLine;
-    [self.navigationController pushViewController:fxController animated:YES];
+//    FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
+//    fxController.timeLine = _timeLine;
+//    [self.navigationController pushViewController:fxController animated:YES];
     
     
-    /*
+    
     [self.view addSubview:self.loading];
     [self.loading loadingViewShow];
     
@@ -153,7 +153,7 @@
     
     
     if([_context compileTimeline:_timeLine startTime:0 endTime:_timeLine.duration outputFilePath:_outPutPath videoResolutionGrade:(NvsCompileVideoResolutionGrade2160) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0]){
-    }*/
+    }
 }
 - (void)deleteCurrentCompileFile:(NSString *)outPutFilePath{
     if ([[NSFileManager defaultManager] fileExistsAtPath:outPutFilePath]) {

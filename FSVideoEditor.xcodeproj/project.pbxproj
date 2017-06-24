@@ -96,6 +96,12 @@
 		988AC6D91EFE560B007FBCEF /* FSEditVideoNameView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6D71EFE560B007FBCEF /* FSEditVideoNameView.h */; };
 		988AC6DA1EFE560B007FBCEF /* FSEditVideoNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6D81EFE560B007FBCEF /* FSEditVideoNameView.m */; };
 		988AC6DB1EFE560B007FBCEF /* FSEditVideoNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6D81EFE560B007FBCEF /* FSEditVideoNameView.m */; };
+		988AC6DE1EFE65C2007FBCEF /* FSFilterView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6DC1EFE65C2007FBCEF /* FSFilterView.h */; };
+		988AC6DF1EFE65C2007FBCEF /* FSFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6DD1EFE65C2007FBCEF /* FSFilterView.m */; };
+		988AC6E01EFE65C2007FBCEF /* FSFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6DD1EFE65C2007FBCEF /* FSFilterView.m */; };
+		988AC6E31EFE6926007FBCEF /* FSFilterButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6E11EFE6926007FBCEF /* FSFilterButton.h */; };
+		988AC6E41EFE6926007FBCEF /* FSFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E21EFE6926007FBCEF /* FSFilterButton.m */; };
+		988AC6E51EFE6926007FBCEF /* FSFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E21EFE6926007FBCEF /* FSFilterButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,6 +271,10 @@
 		988AC6D31EFE4B99007FBCEF /* FSPublisherToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPublisherToolView.m; sourceTree = "<group>"; };
 		988AC6D71EFE560B007FBCEF /* FSEditVideoNameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEditVideoNameView.h; sourceTree = "<group>"; };
 		988AC6D81EFE560B007FBCEF /* FSEditVideoNameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEditVideoNameView.m; sourceTree = "<group>"; };
+		988AC6DC1EFE65C2007FBCEF /* FSFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFilterView.h; sourceTree = "<group>"; };
+		988AC6DD1EFE65C2007FBCEF /* FSFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFilterView.m; sourceTree = "<group>"; };
+		988AC6E11EFE6926007FBCEF /* FSFilterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFilterButton.h; sourceTree = "<group>"; };
+		988AC6E21EFE6926007FBCEF /* FSFilterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFilterButton.m; sourceTree = "<group>"; };
 		98E3C9BB1EFA1B9B00A2FDD6 /* NvsAssetPackageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAssetPackageManager.h; sourceTree = "<group>"; };
 		98E3C9BC1EFA1B9B00A2FDD6 /* NvsAudioClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioClip.h; sourceTree = "<group>"; };
 		98E3C9BD1EFA1B9B00A2FDD6 /* NvsAudioFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioFx.h; sourceTree = "<group>"; };
@@ -658,6 +668,10 @@
 				567E0B8D1EF93A1C00C4C527 /* FSLocalVideoController.m */,
 				567E0B9A1EFA20BC00C4C527 /* FSLocalPhotoManager.h */,
 				567E0B9B1EFA20BC00C4C527 /* FSLocalPhotoManager.m */,
+				988AC6DC1EFE65C2007FBCEF /* FSFilterView.h */,
+				988AC6DD1EFE65C2007FBCEF /* FSFilterView.m */,
+				988AC6E11EFE6926007FBCEF /* FSFilterButton.h */,
+				988AC6E21EFE6926007FBCEF /* FSFilterButton.m */,
 			);
 			path = FSVideoEditors;
 			sourceTree = "<group>";
@@ -772,12 +786,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				988AC6E31EFE6926007FBCEF /* FSFilterButton.h in Headers */,
 				567E0B831EF939CC00C4C527 /* FSVideoEditorKit.h in Headers */,
 				988AC6D91EFE560B007FBCEF /* FSEditVideoNameView.h in Headers */,
 				988AC6CB1EFD3BB7007FBCEF /* FSEditVideoTool.h in Headers */,
 				567E0B8E1EF93A1C00C4C527 /* FSLocalVideoController.h in Headers */,
 				567E0B9C1EFA20BC00C4C527 /* FSLocalPhotoManager.h in Headers */,
 				988AC6C61EFD1D3D007FBCEF /* FSProgressView.h in Headers */,
+				988AC6DE1EFE65C2007FBCEF /* FSFilterView.h in Headers */,
 				988AC6D41EFE4B99007FBCEF /* FSPublisherToolView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -896,6 +912,7 @@
 				567A3D8B1EFB6F8E0026247E /* NSString+MJExtension.m in Sources */,
 				567A3D651EFB6F830026247E /* FMDatabasePool.m in Sources */,
 				567A3D661EFB6F830026247E /* FMDatabaseQueue.m in Sources */,
+				988AC6DF1EFE65C2007FBCEF /* FSFilterView.m in Sources */,
 				567A3D4D1EFB66B60026247E /* FSFileUploader.m in Sources */,
 				567A3D8A1EFB6F8E0026247E /* NSObject+MJProperty.m in Sources */,
 				567A3D841EFB6F8E0026247E /* MJProperty.m in Sources */,
@@ -922,6 +939,7 @@
 				567A3D8C1EFB6F8E0026247E /* README.md in Sources */,
 				562D40641EFE402E00BF0E0D /* FSPublishView.m in Sources */,
 				562D40561EFD1DE200BF0E0D /* AFSecurityPolicy.m in Sources */,
+				988AC6E41EFE6926007FBCEF /* FSFilterButton.m in Sources */,
 				567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */,
 				567A3D431EFB66B60026247E /* FSFileSlice.m in Sources */,
 				562D403F1EFBE8A100BF0E0D /* FSLocalEditorController.m in Sources */,
@@ -957,6 +975,8 @@
 				988AC6CD1EFD3BB7007FBCEF /* FSEditVideoTool.m in Sources */,
 				988AC6C81EFD1D3D007FBCEF /* FSProgressView.m in Sources */,
 				988AC6DB1EFE560B007FBCEF /* FSEditVideoNameView.m in Sources */,
+				988AC6E01EFE65C2007FBCEF /* FSFilterView.m in Sources */,
+				988AC6E51EFE6926007FBCEF /* FSFilterButton.m in Sources */,
 				988AC6D61EFE4B99007FBCEF /* FSPublisherToolView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

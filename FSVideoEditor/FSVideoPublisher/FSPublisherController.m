@@ -13,9 +13,10 @@
 #import "NvsVideoTrack.h"
 #import "FSPublisherToolView.h"
 #import "FSPublishView.h"
+#import "FSFilterView.h"
 
 
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSPublishViewDelegate>
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSPublishViewDelegate,FSFilterViewDelegate>
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsTimeline   *timeLine;
@@ -23,6 +24,9 @@
 
 @property (nonatomic, strong) FSPublisherToolView *toolView;
 @property(nonatomic,strong)FSPublishView *publishContent;
+
+@property (nonatomic, strong) FSFilterView *filterView;
+
 
 @end
 
@@ -111,7 +115,21 @@
 }
 
 - (void)FSPublisherToolViewAddEffects {
+    self.toolView.hidden = YES;
+    
+    if (!_filterView) {
+        _filterView = [[FSFilterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-120, self.view.frame.size.width, 120)];
+        _filterView.backgroundColor = [UIColor clearColor];
+        _filterView.hidden = YES;
+        [self.view addSubview:_filterView];
+    }
+    
+    _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.view.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
+    _filterView.hidden = NO;
+    [UIView animateWithDuration:1 animations:^{
+        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.view.frame.size.height-_filterView.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
 
+    }];
 }
 
 - (void)FSPublisherToolViewEditVolume {
@@ -123,6 +141,22 @@
 }
 
 - (void)FSPublisherToolViewSaveToDraft {
+
+}
+
+#pragma mark -
+- (void)FSFilterViewFinishedChooseFilter {
+    [UIView animateWithDuration:1 animations:^{
+        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.view.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
+        
+    } completion:^(BOOL finished) {
+        _filterView.hidden = YES;
+        _toolView.hidden = NO;
+    }];
+
+}
+
+- (void)FSFilterViewChooseFilter:(id)filter {
 
 }
 
