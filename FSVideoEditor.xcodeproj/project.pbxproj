@@ -76,6 +76,9 @@
 		988AC6C61EFD1D3D007FBCEF /* FSProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */; };
 		988AC6C71EFD1D3D007FBCEF /* FSProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */; };
 		988AC6C81EFD1D3D007FBCEF /* FSProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */; };
+		988AC6CB1EFD3BB7007FBCEF /* FSEditVideoTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C91EFD3BB7007FBCEF /* FSEditVideoTool.h */; };
+		988AC6CC1EFD3BB7007FBCEF /* FSEditVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6CA1EFD3BB7007FBCEF /* FSEditVideoTool.m */; };
+		988AC6CD1EFD3BB7007FBCEF /* FSEditVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6CA1EFD3BB7007FBCEF /* FSEditVideoTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,6 +219,8 @@
 		984060561EF940810049B58E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSProgressView.h; sourceTree = "<group>"; };
 		988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSProgressView.m; sourceTree = "<group>"; };
+		988AC6C91EFD3BB7007FBCEF /* FSEditVideoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEditVideoTool.h; sourceTree = "<group>"; };
+		988AC6CA1EFD3BB7007FBCEF /* FSEditVideoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEditVideoTool.m; sourceTree = "<group>"; };
 		98E3C9BB1EFA1B9B00A2FDD6 /* NvsAssetPackageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAssetPackageManager.h; sourceTree = "<group>"; };
 		98E3C9BC1EFA1B9B00A2FDD6 /* NvsAudioClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioClip.h; sourceTree = "<group>"; };
 		98E3C9BD1EFA1B9B00A2FDD6 /* NvsAudioFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioFx.h; sourceTree = "<group>"; };
@@ -577,6 +582,8 @@
 				9840603B1EF93F130049B58E /* FSShortVideoRecorderView.m */,
 				988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */,
 				988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */,
+				988AC6C91EFD3BB7007FBCEF /* FSEditVideoTool.h */,
+				988AC6CA1EFD3BB7007FBCEF /* FSEditVideoTool.m */,
 			);
 			name = FSVideoRecorder;
 			path = FSShortVideoRecorder;
@@ -663,6 +670,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				567E0B831EF939CC00C4C527 /* FSVideoEditorKit.h in Headers */,
+				988AC6CB1EFD3BB7007FBCEF /* FSEditVideoTool.h in Headers */,
 				567E0B8E1EF93A1C00C4C527 /* FSLocalVideoController.h in Headers */,
 				567E0B9C1EFA20BC00C4C527 /* FSLocalPhotoManager.h in Headers */,
 				988AC6C61EFD1D3D007FBCEF /* FSProgressView.h in Headers */,
@@ -807,6 +815,7 @@
 				567A3D851EFB6F8E0026247E /* MJPropertyKey.m in Sources */,
 				567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */,
 				9840603D1EF93F130049B58E /* FSShortVideoRecorderManager.m in Sources */,
+				988AC6CC1EFD3BB7007FBCEF /* FSEditVideoTool.m in Sources */,
 				567A3D501EFB66B60026247E /* FSMD5Utils.m in Sources */,
 				567A3D891EFB6F8E0026247E /* NSObject+MJKeyValue.m in Sources */,
 				567A3D911EFB7EC80026247E /* FSFileSliceDivider.m in Sources */,
@@ -827,6 +836,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				988AC6CD1EFD3BB7007FBCEF /* FSEditVideoTool.m in Sources */,
 				988AC6C81EFD1D3D007FBCEF /* FSProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
