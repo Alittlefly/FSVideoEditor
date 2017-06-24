@@ -19,7 +19,6 @@
 {
     NSMutableString *_videoFxPackageId;
 }
-@property(nonatomic,strong)NvsThumbnailSequenceView *thumbnailSequence;
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
@@ -35,7 +34,6 @@
     [self creatSubViews];
     
      _context = [NvsStreamingContext sharedInstance];
-    [_context setDelegate:self];
 
     NSString *SoulfxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx"];
     NSString *ScalefxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx"];
@@ -48,7 +46,8 @@
     
     NSArray *fxs = [_context.assetPackageManager getAssetPackageListOfType:(NvsAssetPackageType_VideoFx)];
     
-    _videoFxView = [[FSVideoFxView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_prewidow.frame), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(_prewidow.frame)) fxs:fxs];
+     _videoFxView = [[FSVideoFxView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_prewidow.frame), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(_prewidow.frame)) fxs:fxs];
+    [_videoFxView setDelegate:self];
     [self.view addSubview:_videoFxView];
     
     if (!_timeLine) {
@@ -57,32 +56,19 @@
      _videoTrack = [_timeLine getVideoTrackByIndex:0];
     [_context connectTimeline:_timeLine withLiveWindow:_prewidow];
     
-    NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:0];
-    [videoClip removeAllFx];
-    [videoClip appendPackagedFx:[_context.assetPackageManager getAssetPackageIdFromAssetPackageFilePath:ScalefxPath]];
+    NvsThumbnailSequenceView *thumbnailSequence = [[NvsThumbnailSequenceView alloc] init];
+    thumbnailSequence.stillImageHint = NO;
+    thumbnailSequence.mediaFilePath = _filePath;
+    thumbnailSequence.startTime = 0;
+    thumbnailSequence.duration = _timeLine.duration;
+    thumbnailSequence.thumbnailAspectRatio = 1.0;
+    [thumbnailSequence setFrame:CGRectMake(0, 0,CGRectGetWidth(self.view.bounds), 27)];
+    [thumbnailSequence setClipsToBounds:NO];
+    _videoFxView.progressBackView = thumbnailSequence;
     
-//    if (!_thumbnailSequence) {
-//        _thumbnailSequence = [[NvsThumbnailSequenceView alloc] init];
-//        _thumbContent = [[UIScrollView alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds) - 70, CGRectGetWidth(self.view.bounds),60)];
-//        [_thumbContent setBackgroundColor:[UIColor redColor]];
-//        [_thumbContent addSubview:_thumbnailSequence];
-//        [_thumbContent setContentSize:CGSizeMake(CGRectGetWidth(self.view.bounds), 0)];
-//        [self.view addSubview:_thumbContent];
-//        
-//    }
-    
-//    NvsVideoClip* clip = [_videoTrack insertClip:_filePath clipIndex:0];
-//    [clip setSourceBackgroundMode:NvsSourceBackgroundModeColorSolid];
-    
-//    self.thumbnailSequence.stillImageHint = NO;
-//    self.thumbnailSequence.mediaFilePath = _filePath;
-//    self.thumbnailSequence.startTime = 0;
-//    self.thumbnailSequence.duration = _timeLine.duration;
-//    self.thumbnailSequence.thumbnailAspectRatio = 1.0;
-//    [self.thumbnailSequence setFrame:CGRectMake(0, 0,CGRectGetWidth(self.view.bounds), 60)];
-//    [self.thumbnailSequence setClipsToBounds:NO];
-    
-    
+    [self playVideoFromHead];
+}
+-(void)playVideoFromHead{
     if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
         NSLog(@"Failed to seek timeline!");
     }
@@ -92,11 +78,12 @@
         if(![_context playbackTimeline:_timeLine startTime:startTime endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
         }
     }
-    
-    
 }
-
--(void)viewWillDisappear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [_context setDelegate:self];
+}
+-(void)viewDidDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
         [_context stop];
@@ -124,6 +111,24 @@
 - (void)save{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+#pragma make -
+-(void)didPlaybackEOF:(NvsTimeline *)timeline{
+    [self playVideoFromHead];
+
+}
+#pragma mark -
+-(void)videoFxViewSelectTimeFx:(FSVideoFxType)type{
+
+}
+-(void)videoFxViewSelectFxPackageId:(NSString *)fxId{
+    NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:0];
+    [videoClip removeAllFx];
+    [videoClip appendPackagedFx:fxId];
+    
+    [self playVideoFromHead];
+
+}
+
 
 -(void)dealloc{
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));

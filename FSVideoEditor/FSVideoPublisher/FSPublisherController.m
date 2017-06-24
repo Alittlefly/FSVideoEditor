@@ -130,6 +130,7 @@
 -(void)publishViewClickVideoFx:(FSPublishView *)publish{
     FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
     fxController.timeLine = _timeLine;
+    fxController.filePath = _filePath;
     [self.navigationController pushViewController:fxController animated:YES];
 }
 

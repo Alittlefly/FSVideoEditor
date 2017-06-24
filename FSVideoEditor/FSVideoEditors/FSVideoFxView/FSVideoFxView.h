@@ -10,15 +10,14 @@
 
 typedef NS_ENUM(NSInteger,FSVideoFxType){
     FSVideoFxTypeNone,
-    FSVideoFxTypeSoul,
-    FSVideoFxTypeShake,
     FSVideoFxTypeRevert,
     FSVideoFxTypeSlow,
     FSVideoFxTypeRepeat,
 };
 
 @protocol FSVideoFxViewDelegate <NSObject>
-
+-(void)videoFxViewSelectFxPackageId:(NSString *)fxId;
+-(void)videoFxViewSelectTimeFx:(FSVideoFxType)type;
 @end
 
 @interface FSVideoFxView : UIView
