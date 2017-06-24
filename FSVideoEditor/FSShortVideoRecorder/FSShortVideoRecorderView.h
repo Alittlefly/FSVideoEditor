@@ -20,6 +20,7 @@ typedef enum{
 
 - (void)FSShortVideoRecorderViewQuitRecorderView;
 - (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath;
+- (void)FSShortVideoRecorderViewEditMusic;
 
 @end
 
