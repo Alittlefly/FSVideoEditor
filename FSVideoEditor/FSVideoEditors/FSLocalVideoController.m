@@ -44,25 +44,25 @@
     
     __weak typeof(self) weakS = self;
     [[PHImageManager defaultManager] requestAVAssetForVideo:video options:videoOption resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
-       // NSString *tokenKey = [info valueForKey:@"PHImageFileSandboxExtensionTokenKey"];
-       // NSArray *tokenS = [tokenKey componentsSeparatedByString:@";"];
-       // NSString *filePath = [tokenS lastObject];
+
         AVURLAsset *urlAsset = (AVURLAsset *)asset;
         dispatch_async(dispatch_get_main_queue(), ^{
             FSLocalEditorController *vc = [[FSLocalEditorController alloc] init];
             vc.filePath = urlAsset.URL.relativeString;
             [self.navigationController pushViewController:vc animated:YES];
         });
-        
-//        NSString *localFilePath = [weakS saveVideoFileToCache:filePath];
-        
-//        [weakS uploadFile:localFilePath];
     }];
     
 }
+//        NSString *tokenKey = [info valueForKey:@"PHImageFileSandboxExtensionTokenKey"];
+//        NSArray *tokenS = [tokenKey componentsSeparatedByString:@";"];
+//        NSString *filePath = [tokenS lastObject];
+//        NSString *localFilePath = [weakS saveVideoFileToCache:filePath];
+//
+//        [weakS uploadFile:localFilePath];
+
 - (NSString *)saveVideoFileToCache:(NSString *)filePath{
     NSData *videoData = [NSData dataWithContentsOfFile:filePath];
-//    NSLog(@"fileSize %ld",videoData.length);
     NSString *localFilePath = NSTemporaryDirectory();
     localFilePath = [localFilePath stringByAppendingPathComponent:[filePath lastPathComponent]];
    BOOL success = [videoData writeToFile:localFilePath atomically:YES];
@@ -75,7 +75,6 @@
 - (void)uploadFile:(NSString *)filePath{
     NSLog(@"filePath %@",filePath);
     [_uploader uploadFileWithFilePath:filePath];
-
 }
 -(void)uploadUpFiles:(NSString *)filePath progress:(float)progress{
     NSLog(@"progress %.2f",progress);

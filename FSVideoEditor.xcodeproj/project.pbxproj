@@ -14,6 +14,8 @@
 		562D40571EFD1DE200BF0E0D /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D404F1EFD1DE200BF0E0D /* AFURLRequestSerialization.m */; };
 		562D40581EFD1DE200BF0E0D /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40511EFD1DE200BF0E0D /* AFURLResponseSerialization.m */; };
 		562D40591EFD1DE200BF0E0D /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40531EFD1DE200BF0E0D /* AFURLSessionManager.m */; };
+		562D405D1EFD39F100BF0E0D /* FSPublisherController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D405C1EFD39F100BF0E0D /* FSPublisherController.m */; };
+		562D40611EFE3B5000BF0E0D /* FSEditorLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40601EFE3B5000BF0E0D /* FSEditorLoading.m */; };
 		567A3D421EFB66B60026247E /* FSFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1A1EFB66B60026247E /* FSFile.m */; };
 		567A3D431EFB66B60026247E /* FSFileSlice.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1C1EFB66B60026247E /* FSFileSlice.m */; };
 		567A3D441EFB66B60026247E /* FSFileDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1F1EFB66B60026247E /* FSFileDivider.m */; };
@@ -82,7 +84,6 @@
 		984060571EF940810049B58E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060561EF940810049B58E /* libc++.tbd */; };
 		988AC6C61EFD1D3D007FBCEF /* FSProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */; };
 		988AC6C71EFD1D3D007FBCEF /* FSProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */; };
-		988AC6C81EFD1D3D007FBCEF /* FSProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,10 @@
 		562D40511EFD1DE200BF0E0D /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		562D40521EFD1DE200BF0E0D /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		562D40531EFD1DE200BF0E0D /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		562D405B1EFD39F100BF0E0D /* FSPublisherController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPublisherController.h; sourceTree = "<group>"; };
+		562D405C1EFD39F100BF0E0D /* FSPublisherController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPublisherController.m; sourceTree = "<group>"; };
+		562D405F1EFE3B5000BF0E0D /* FSEditorLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEditorLoading.h; sourceTree = "<group>"; };
+		562D40601EFE3B5000BF0E0D /* FSEditorLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEditorLoading.m; sourceTree = "<group>"; };
 		567A3D191EFB66B60026247E /* FSFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFile.h; sourceTree = "<group>"; };
 		567A3D1A1EFB66B60026247E /* FSFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFile.m; sourceTree = "<group>"; };
 		567A3D1B1EFB66B60026247E /* FSFileSlice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileSlice.h; sourceTree = "<group>"; };
@@ -325,6 +330,24 @@
 				562D40531EFD1DE200BF0E0D /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		562D405A1EFD38A500BF0E0D /* FSVideoPublisher */ = {
+			isa = PBXGroup;
+			children = (
+				562D405B1EFD39F100BF0E0D /* FSPublisherController.h */,
+				562D405C1EFD39F100BF0E0D /* FSPublisherController.m */,
+			);
+			path = FSVideoPublisher;
+			sourceTree = "<group>";
+		};
+		562D405E1EFE3B4600BF0E0D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				562D405F1EFE3B5000BF0E0D /* FSEditorLoading.h */,
+				562D40601EFE3B5000BF0E0D /* FSEditorLoading.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		567A3D171EFB66B60026247E /* FSUploadKit */ = {
@@ -552,7 +575,9 @@
 		567E0B501EF930D100C4C527 /* FSVideoEditor */ = {
 			isa = PBXGroup;
 			children = (
+				562D405E1EFE3B4600BF0E0D /* Utils */,
 				567A3D171EFB66B60026247E /* FSUploadKit */,
+				562D405A1EFD38A500BF0E0D /* FSVideoPublisher */,
 				984060351EF93F130049B58E /* FSVideoRecorder */,
 				567E0B8B1EF939F000C4C527 /* FSVideoEditors */,
 				567E0B541EF930D100C4C527 /* AppDelegate.h */,
@@ -862,6 +887,7 @@
 				567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */,
 				567A3D431EFB66B60026247E /* FSFileSlice.m in Sources */,
 				562D403F1EFBE8A100BF0E0D /* FSLocalEditorController.m in Sources */,
+				562D405D1EFD39F100BF0E0D /* FSPublisherController.m in Sources */,
 				567A3D851EFB6F8E0026247E /* MJPropertyKey.m in Sources */,
 				567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */,
 				562D40581EFD1DE200BF0E0D /* AFURLResponseSerialization.m in Sources */,
@@ -872,6 +898,7 @@
 				567A3D641EFB6F830026247E /* FMDatabaseAdditions.m in Sources */,
 				567A3D461EFB66B60026247E /* FSFileDownLoadTool.m in Sources */,
 				562D40571EFD1DE200BF0E0D /* AFURLRequestSerialization.m in Sources */,
+				562D40611EFE3B5000BF0E0D /* FSEditorLoading.m in Sources */,
 				567A3D4F1EFB66B60026247E /* FSFileUploadDBManager.m in Sources */,
 				567E0BA21EFA49F500C4C527 /* FSVideoListView.m in Sources */,
 				567E0B8F1EF93A1C00C4C527 /* FSLocalVideoController.m in Sources */,
@@ -887,7 +914,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				988AC6C81EFD1D3D007FBCEF /* FSProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
