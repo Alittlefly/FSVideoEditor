@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
+    FSPublisherToolViewTypeFromAlbum,
+    FSPublisherToolViewTypeFromRecoder,
+};
 @protocol FSPublisherToolViewDelegate <NSObject>
 
 - (void)FSPublisherToolViewQuit;
@@ -24,4 +28,5 @@
 
 @property (nonatomic, weak) id<FSPublisherToolViewDelegate> delegate;
 
+-(instancetype)initWithFrame:(CGRect)frame type:(FSPublisherToolViewType)type;
 @end

@@ -8,13 +8,11 @@
 
 #import "FSLocalVideoController.h"
 #import "FSLocalPhotoManager.h"
-#import "FSUploader.h"
 #import "FSLocalEditorController.h"
 
-@interface FSLocalVideoController ()<FSUploaderDelegate>
+@interface FSLocalVideoController ()
 {
     FSLocalPhotoManager *_manager;
-    FSUploader *_uploader;
 }
 @property(nonatomic,strong)FSVideoListView *videoListView;
 @end
@@ -32,17 +30,12 @@
     [_videoListView setDelegate:self];
     [_videoListView setVideos:assets];
     [self.view addSubview:_videoListView];
-    
-     FSFileSliceDivider *divider = [[FSFileSliceDivider alloc] initWithSliceCount:1];
-     _uploader = [FSUploader uploaderWithDivider:divider];
-    [_uploader setDelegate:self];
 }
 #pragma mark - 
 -(void)videoListView:(FSVideoListView *)videoListView didSelectedVideo:(PHAsset *)video{
     
     PHVideoRequestOptions *videoOption = [PHVideoRequestOptions new];
     
-    __weak typeof(self) weakS = self;
     [[PHImageManager defaultManager] requestAVAssetForVideo:video options:videoOption resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
 
         AVURLAsset *urlAsset = (AVURLAsset *)asset;
@@ -54,31 +47,7 @@
     }];
     
 }
-//        NSString *tokenKey = [info valueForKey:@"PHImageFileSandboxExtensionTokenKey"];
-//        NSArray *tokenS = [tokenKey componentsSeparatedByString:@";"];
-//        NSString *filePath = [tokenS lastObject];
-//        NSString *localFilePath = [weakS saveVideoFileToCache:filePath];
-//
-//        [weakS uploadFile:localFilePath];
 
-- (NSString *)saveVideoFileToCache:(NSString *)filePath{
-    NSData *videoData = [NSData dataWithContentsOfFile:filePath];
-    NSString *localFilePath = NSTemporaryDirectory();
-    localFilePath = [localFilePath stringByAppendingPathComponent:[filePath lastPathComponent]];
-   BOOL success = [videoData writeToFile:localFilePath atomically:YES];
-    if (success) {
-        NSLog(@"写入本地成功");
-    }
-    return localFilePath;
-}
-
-- (void)uploadFile:(NSString *)filePath{
-    NSLog(@"filePath %@",filePath);
-    [_uploader uploadFileWithFilePath:filePath];
-}
--(void)uploadUpFiles:(NSString *)filePath progress:(float)progress{
-    NSLog(@"progress %.2f",progress);
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

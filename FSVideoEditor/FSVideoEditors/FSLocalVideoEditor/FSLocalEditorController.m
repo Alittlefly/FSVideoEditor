@@ -13,12 +13,10 @@
 #import "NvsVideoTrack.h"
 #import "FSPublisherController.h"
 
-#import "FSEditorLoading.h"
 
 @interface FSLocalEditorController ()<NvsStreamingContextDelegate>
 {
     UISegmentedControl *_speedSegment;
-    NSString *_outPutPath;
 }
 @property(nonatomic,strong)UIScrollView *thumbContent;
 
@@ -27,18 +25,12 @@
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsTimeline   *timeLine;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
-@property(nonatomic,strong)FSEditorLoading *loading;
 
 
 @end
 
 @implementation FSLocalEditorController
--(FSEditorLoading *)loading{
-    if (!_loading) {
-        _loading = [[FSEditorLoading alloc] initWithFrame:self.view.bounds];
-    }
-    return _loading;
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -63,25 +55,17 @@
     audioEditRes.sampleRate = 48000;
     audioEditRes.channelCount = 2;
     audioEditRes.sampleFormat = NvsAudSmpFmt_S16;
-    
     _timeLine = [_context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
     if (!_timeLine) {
         NSLog(@"Timeline is null!");
         return;
     }
-    
-    
     _videoTrack = [_timeLine appendVideoTrack];
     if (!_videoTrack) {
         NSLog(@"Video track is null!");
         return;
     }
-    
-    // 将timeline连接到NvsLiveWindow控件
-    if (![_context connectTimeline:_timeLine withLiveWindow:_prewidow]) {
-        NSLog(@"Failed to connect timeline to liveWindow!");
-        return;
-    }
+
     
     if (!_filePath) {
         return;
@@ -106,19 +90,7 @@
      self.thumbnailSequence.thumbnailAspectRatio = 1.0;
     [self.thumbnailSequence setFrame:CGRectMake(0, 0,CGRectGetWidth(self.view.bounds), 60)];
     [self.thumbnailSequence setClipsToBounds:NO];
-    
-    
-    if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
-        NSLog(@"Failed to seek timeline!");
-    }
-    
-    if([_context getStreamingEngineState] != NvsStreamingEngineState_Playback){
-        int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
-        if(![_context playbackTimeline:_timeLine startTime:startTime endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
-        }
-    }
-    
-    
+
     _speedSegment = [[UISegmentedControl alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
     _speedSegment.frame = CGRectMake(32.5, CGRectGetMaxY(_prewidow.frame)+76, CGRectGetWidth(self.view.frame) - 65, 37);
     _speedSegment.selectedSegmentIndex = 2;
@@ -136,57 +108,26 @@
     return item;
 }
 - (void)saveVideoFile{
-    // test
-//    FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
-//    fxController.timeLine = _timeLine;
-//    [self.navigationController pushViewController:fxController animated:YES];
+
+    FSPublisherController *publish = [[FSPublisherController alloc] init];
+    publish.filePath = _filePath;
+    publish.timeLine = _timeLine;
+    [self.navigationController pushViewController:publish animated:YES];
     
-    
-    
-    [self.view addSubview:self.loading];
-    [self.loading loadingViewShow];
-    
-    _outPutPath = [self outPutFilePath];
-    
-    [self deleteCurrentCompileFile:_outPutPath];
-    
-    
-    
-    if([_context compileTimeline:_timeLine startTime:0 endTime:_timeLine.duration outputFilePath:_outPutPath videoResolutionGrade:(NvsCompileVideoResolutionGrade2160) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0]){
-    }
 }
-- (void)deleteCurrentCompileFile:(NSString *)outPutFilePath{
-    if ([[NSFileManager defaultManager] fileExistsAtPath:outPutFilePath]) {
-        NSError *error;
-        if ([[NSFileManager defaultManager] removeItemAtPath:outPutFilePath error:&error] == NO) {
-            NSLog(@"removeItemAtPath failed, error: %@", error);
-            return;
+- (void)playVideoFromHead{
+    
+    if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
+        NSLog(@"Failed to seek timeline!");
+    }
+    
+    if([_context getStreamingEngineState] != NvsStreamingEngineState_Playback){
+        int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
+        if(![_context playbackTimeline:_timeLine startTime:startTime endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
         }
     }
 }
-- (NSString *)getDocumentPath {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    return documentsDirectory;
-}
 
-- (NSString *)getCompileTmpPath {
-    return [[self getDocumentPath] stringByAppendingPathComponent:@"tmp"];
-}
-
-- (NSString *)getCompilePath {
-    return [[self getCompileTmpPath] stringByAppendingFormat:@"/video%@.mp4",[self getTimeAndRandom]];
-}
-
-
-- (NSString *)getTimeAndRandom {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyyMMddHHmmss"];
-    return [formatter stringFromDate:[NSDate date]];
-}
-- (NSString *)outPutFilePath{
-    return [self getCompilePath];
-}
 - (void)selectPlaySpeed:(UISegmentedControl *)sender {
     NSLog(@"sender: %ld",sender.selectedSegmentIndex); //输出当前的索引值
     NvsClip *clip = [_videoTrack getClipWithIndex:0];
@@ -194,9 +135,16 @@
     if(![_context playbackTimeline:_timeLine startTime:0 endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
     }
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [_context setDelegate:self];
+    // 将timeline连接到NvsLiveWindow控件
+    [_context connectTimeline:_timeLine withLiveWindow:_prewidow];
 
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
+    [self playVideoFromHead];
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
     
     if ([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped) {
         [_context stop];
@@ -214,29 +162,12 @@
     }
 }
 
-// 生成完成的回调函数
-- (void)didCompileFinished:(NvsTimeline *)timeline{
-    
-    NSLog(@"Compile success!");
-    
-    [self.loading loadingViewhide];
-
-    FSPublisherController *publish = [[FSPublisherController alloc] init];
-    publish.filePath = _outPutPath;
-    [self.navigationController pushViewController:publish animated:YES];
-
-}
 // 生成进度的回调函数
 - (void)didCompileProgress:(NvsTimeline *)timeline progress:(int)progress {
     NSLog(@"Compile timeline progress: %d", progress);
 }
 
-// 生成失败的回调函数
-- (void)didCompileFailed:(NvsTimeline *)timeline {
-    NSLog(@"Compile Failed!");
-    
-    [self.loading loadingViewhide];
-}
+
 
 -(void)dealloc{
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));

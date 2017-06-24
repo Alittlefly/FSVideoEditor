@@ -12,4 +12,5 @@
 
 @interface FSPublisherController : UIViewController
 @property(nonatomic,copy)NSString *filePath;
+@property(nonatomic,strong)NvsTimeline *timeLine;
 @end

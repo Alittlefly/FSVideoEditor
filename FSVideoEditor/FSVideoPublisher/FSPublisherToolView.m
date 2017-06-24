@@ -27,7 +27,7 @@
 @property (nonatomic, strong) UIButton *draftButton;
 @property (nonatomic, strong) UIButton *publishButton;
 
-
+@property (nonatomic, assign)FSPublisherToolViewType type;
 
 @end
 
@@ -35,6 +35,19 @@ static BOOL IsArabic = NO;
 
 @implementation FSPublisherToolView
 
+-(instancetype)initWithFrame:(CGRect)frame type:(FSPublisherToolViewType)type{
+    if (self = [super initWithFrame:frame]) {
+        _type = type;
+        [self initBaseUI];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick)];
+        [self addGestureRecognizer:tapGesture];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoradShows:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoradHides:) name:UIKeyboardWillHideNotification object:nil];
+    }
+    return self;
+    
+}
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self initBaseUI];

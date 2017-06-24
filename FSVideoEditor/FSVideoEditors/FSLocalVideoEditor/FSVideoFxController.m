@@ -65,8 +65,6 @@
     [thumbnailSequence setFrame:CGRectMake(0, 0,CGRectGetWidth(self.view.bounds), 27)];
     [thumbnailSequence setClipsToBounds:NO];
     _videoFxView.progressBackView = thumbnailSequence;
-    
-    [self playVideoFromHead];
 }
 -(void)playVideoFromHead{
     if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
@@ -82,9 +80,11 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [_context setDelegate:self];
+    
+    [self playVideoFromHead];
 }
 -(void)viewDidDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
     if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
         [_context stop];
     [_context setDelegate:nil];
@@ -114,7 +114,6 @@
 #pragma make -
 -(void)didPlaybackEOF:(NvsTimeline *)timeline{
     [self playVideoFromHead];
-
 }
 #pragma mark -
 -(void)videoFxViewSelectTimeFx:(FSVideoFxType)type{
