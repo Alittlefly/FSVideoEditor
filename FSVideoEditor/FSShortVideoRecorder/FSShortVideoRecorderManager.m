@@ -363,7 +363,10 @@ static FSShortVideoRecorderManager *recorderManager;
 - (BOOL)deleteVideoFile {
 //    BOOL success = [self.videoTrack removeClip:(unsigned int)_videoIndex keepSpace:false];
 //    if (success) {
-        NSInteger time = [[_timeArray objectAtIndex:_videoIndex] integerValue];
+    if (_videoIndex == 0) {
+        return NO;
+    }
+        NSInteger time = [[_timeArray objectAtIndex:_videoIndex-1] integerValue];
         _videoTime = _videoTime - time;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerDeleteVideo:)]) {
         [self.delegate FSShortVideoRecorderManagerDeleteVideo:_videoTime];
@@ -394,6 +397,9 @@ static FSShortVideoRecorderManager *recorderManager;
 - (void)didCompileFinished:(NvsTimeline *)timeline {
     NSLog(@"didCompileFinished");
     UISaveVideoAtPathToSavedPhotosAlbum(_videoFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinishRecorder:)]) {
+        [self.delegate FSShortVideoRecorderManagerFinishRecorder:_videoFilePath];
+    }
 
 
 }

@@ -35,6 +35,8 @@
 @property (nonatomic, strong) UIButton *deleteButton;
 @property (nonatomic, strong) UISegmentedControl *speedSegment;
 
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+
 @property (nonatomic, strong) NvsLiveWindow *recorderView;
 @property (nonatomic, strong) FSShortVideoRecorderManager *recorderManager;
 
@@ -92,8 +94,8 @@
 }
 
 - (void)initBaseToolView {
-    _progressView = [[FSProgressView alloc] initWithFrame:CGRectMake(0, 20, self.frame.size.width, 20)];
-    _progressView.backgroundColor = [UIColor lightGrayColor];
+    _progressView = [[FSProgressView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 5)];
+    _progressView.backgroundColor = [UIColor clearColor];
     _progressView.progressViewColor = [UIColor yellowColor];
     [self addSubview:_progressView];
     
@@ -280,6 +282,13 @@
 }
 
 - (void)finishClik {
+    if (!_activityView) {
+        _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        _activityView.frame = CGRectMake(0, 0, 100, 100);
+        _activityView.center = self.center;
+        [self addSubview:_activityView];
+    }
+    [_activityView startAnimating];
     [_recorderManager finishRecorder];
 }
 
@@ -391,6 +400,10 @@
 
 - (void)FSShortVideoRecorderManagerDeleteVideo:(NSInteger)videoTime {
     [self.progressView setProgress:((CGFloat)videoTime)/30.0 animated:NO];
+}
+
+- (void)FSShortVideoRecorderManagerFinishRecorder:(NSString *)filePath {
+    [_activityView stopAnimating];
 }
 
 @end
