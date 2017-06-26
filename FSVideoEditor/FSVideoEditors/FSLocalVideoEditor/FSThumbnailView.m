@@ -9,7 +9,7 @@
 #import "FSThumbnailView.h"
 
 
-@interface FSThumbnailView()
+@interface FSThumbnailView()<UIScrollViewDelegate>
 {
     CGFloat _sliderGap;
     SliderType _sliderType;
@@ -33,6 +33,10 @@
         _length = length;
         _allLength = allLength;
         _minLength = minLength;
+        
+        if (allLength < _length) {
+            _length = allLength;
+        }
         
         _sliderType = SliderTypeNone;
         _startValue = 0;
@@ -62,7 +66,8 @@
 }
 -(void)creatSubviews:(CGRect)frame{
     _backContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 0, CGRectGetWidth(frame) - 40, CGRectGetHeight(frame))];
-    [_backContentView setBackgroundColor:[UIColor blueColor]];
+    [_backContentView setBackgroundColor:[UIColor clearColor]];
+    [_backContentView setDelegate:self];
     [self addSubview:_backContentView];
     
     _contentBorder = [[UIView alloc] initWithFrame:CGRectMake(40, 0, CGRectGetWidth(frame) - 80, CGRectGetHeight(frame))];
@@ -95,7 +100,10 @@
         return;
     }
     _backGroundView = backGroundView;
-     backGroundView.frame = CGRectMake(0, 0,CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+    
+    CGFloat width = _allLength/_length * CGRectGetWidth(_backContentView.frame);
+     backGroundView.frame = CGRectMake(0, 0,width, CGRectGetHeight(self.bounds));
+    [_backContentView setContentSize:CGSizeMake(width, 0)];
     [_backContentView addSubview:backGroundView];
 }
 
@@ -142,8 +150,13 @@
     [self updateContentBorder];
     
     [self updateNvsStreamContent];
+    
+    [self updateTipText];
 }
 -(void)updateNvsStreamContent{
+    
+    _endValue = _startOffSet + CGRectGetMinX(_rightSlide.frame)/CGRectGetWidth(_backContentView.frame)  *_length;
+    _startValue = _startOffSet + CGRectGetMaxX(_leftSlide.frame)/CGRectGetWidth(_backContentView.frame) *_length;
     
     if ([self.delegate respondsToSelector:@selector(thumbnailViewSelectValue:type:)]) {
         double value = 0;
@@ -171,9 +184,6 @@
     _collide = [self isCollide:type];
 
     [self resetBoundry:type];
-    
-    _endValue = _startOffSet + CGRectGetMinX(_rightSlide.frame)/CGRectGetWidth(_backContentView.frame)  *_length;
-    _startValue = _startOffSet + CGRectGetMaxX(_leftSlide.frame)/CGRectGetWidth(_backContentView.frame) *_length;
 }
 -(void)updateContentBorder{
     CGFloat startx = CGRectGetMaxX(_leftSlide.frame);
@@ -238,5 +248,44 @@
         }
     }
     _sliderType = SliderTypeNone;
+}
+#pragma mark - 
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    NSLog(@" scrollViewDidEndDragging contentOffSet %f",scrollView.contentOffset.x);
+    
+    CGFloat offSetx = scrollView.contentOffset.x;
+    if (offSetx < 0) {
+        return;
+    }
+    
+    _startOffSet = offSetx/scrollView.contentSize.width;
+    _startValue = _startOffSet + CGRectGetMaxX(_leftSlide.frame)/CGRectGetWidth(_backContentView.frame) *_length;
+    _endValue = _startOffSet + CGRectGetMinX(_rightSlide.frame)/CGRectGetWidth(_backContentView.frame)  *_length;
+    
+    if ([self.delegate respondsToSelector:@selector(thumbnailViewSelectStartValue:endValue:)]) {
+        [self.delegate thumbnailViewSelectStartValue:_startValue endValue:_endValue];
+    }
+    
+    [self updateTipText];
+}
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    NSLog(@" scrollViewDidEndDecelerating contentOffSet %f",scrollView.contentOffset.x);
+    
+    
+    if ([self.delegate respondsToSelector:@selector(thumbnailViewEndSelect)]) {
+        [self.delegate thumbnailViewEndSelect];
+    }
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@" scrollViewDidScroll contentOffSet %f",scrollView.contentOffset.x);
+}
+-(void)updateTipText{
+    NSInteger timeLength = _endValue - _startValue;
+    NSString *text = [NSString stringWithFormat:@"已选取%lds",timeLength];
+    [_tipLabel setText:text];
+}
+
+-(void)dealloc{
+    NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
 @end

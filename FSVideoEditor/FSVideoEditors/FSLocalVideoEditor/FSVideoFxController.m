@@ -45,16 +45,19 @@
     [self.view addSubview:_prewidow];
     
     NSArray *fxs = [_context.assetPackageManager getAssetPackageListOfType:(NvsAssetPackageType_VideoFx)];
-    
-     _videoFxView = [[FSVideoFxView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_prewidow.frame), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(_prewidow.frame)) fxs:fxs];
-    [_videoFxView setDelegate:self];
-    [self.view addSubview:_videoFxView];
-    
+
     if (!_timeLine) {
         return;
     }
+    
+    _videoFxView = [[FSVideoFxView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_prewidow.frame), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(_prewidow.frame)) fxs:fxs];
+    [_videoFxView setDelegate:self];
+    [self.view addSubview:_videoFxView];
+    _videoFxView.duration = _timeLine.duration/1000000.0;
+    
      _videoTrack = [_timeLine getVideoTrackByIndex:0];
     [_context connectTimeline:_timeLine withLiveWindow:_prewidow];
+    
     
     NvsThumbnailSequenceView *thumbnailSequence = [[NvsThumbnailSequenceView alloc] init];
     thumbnailSequence.stillImageHint = NO;
@@ -73,8 +76,10 @@
     
     if([_context getStreamingEngineState] != NvsStreamingEngineState_Playback){
         int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
-        if(![_context playbackTimeline:_timeLine startTime:startTime endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
+        if(![_context playbackTimeline:_timeLine startTime:startTime endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:NO flags:0]) {
         }
+        
+        [_videoFxView start];
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -88,6 +93,7 @@
     if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
         [_context stop];
     [_context setDelegate:nil];
+    [_videoFxView stop];
 }
 
 - (void)creatSubViews{
@@ -115,9 +121,30 @@
 -(void)didPlaybackEOF:(NvsTimeline *)timeline{
     [self playVideoFromHead];
 }
+-(void)didPlaybackStopped:(NvsTimeline *)timeline{
+
+}
 #pragma mark -
 -(void)videoFxViewSelectTimeFx:(FSVideoFxType)type{
+    if (type == FSVideoFxTypeSlow) {
+        //缓慢
+        int64_t point = _timeLine.duration * 0.5;
+        NvsVideoClip *videoClip = [_videoTrack getClipWithTimelinePosition:point];
+        [videoClip changeSpeed:0.5];
+        
+    }else if(type == FSVideoFxTypeRepeat){
+        // 重复
+        int64_t point = _timeLine.duration * 0.5;
+        
+        [_videoTrack addClip:_filePath inPoint:point trimIn:0 trimOut:_timeLine.duration*0.01];
+        [_videoTrack addClip:_filePath inPoint:point trimIn:0 trimOut:_timeLine.duration*0.01];
+        [_videoTrack addClip:_filePath inPoint:point trimIn:0 trimOut:_timeLine.duration*0.01];
 
+    }else if (type == FSVideoFxTypeRevert){
+        // 倒序播放
+    }
+    
+    [self playVideoFromHead];
 }
 -(void)videoFxViewSelectFxPackageId:(NSString *)fxId{
     NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:0];
@@ -125,7 +152,12 @@
     [videoClip appendPackagedFx:fxId];
     
     [self playVideoFromHead];
-
+}
+-(CGFloat)videoFxViewUpdateProgress{
+    
+    int64_t current = [_context getTimelineCurrentPosition:_timeLine];
+    CGFloat progress = (CGFloat)current/_timeLine.duration;
+    return progress;
 }
 
 

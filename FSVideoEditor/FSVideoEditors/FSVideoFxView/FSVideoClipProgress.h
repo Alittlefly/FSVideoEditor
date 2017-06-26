@@ -13,8 +13,16 @@ typedef struct{
     CGFloat endValue;
 }ProgressRange;
 
+typedef NS_ENUM(NSInteger,FSVideoFxType){
+    FSVideoFxTypeNone,
+    FSVideoFxTypeRevert,
+    FSVideoFxTypeSlow,
+    FSVideoFxTypeRepeat,
+};
+
 @interface FSVideoClipProgress : UIView
-@property(nonatomic,assign)CGFloat value;
+@property(nonatomic,assign)CGFloat progress;
 @property(nonatomic,assign,readonly)ProgressRange valueRange;
 @property(nonatomic,strong)UIView *backGroundView;
+
 @end

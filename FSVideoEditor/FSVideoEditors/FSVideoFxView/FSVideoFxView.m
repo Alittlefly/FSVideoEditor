@@ -7,7 +7,6 @@
 //
 
 #import "FSVideoFxView.h"
-#import "FSVideoClipProgress.h"
 #import <objc/runtime.h>
 
 #define FxButtonH 50.0
@@ -94,6 +93,8 @@
 @interface FSVideoFxView()
 {
     FSLineButton *_currentSelectButton;
+    NSTimer      *_progressTimer;
+    NSInteger _currentTime;
 }
 @property(nonatomic,strong)FSVideoClipProgress *progress;
 
@@ -115,6 +116,7 @@
          self.videofxs = fxs;
         
         [self creatSubiviews];
+
     }
     return self;
 }
@@ -278,5 +280,25 @@
         [_tipLabel setText:@"点击选择时间特效"];
         [self initTimeFxs];
     }
+}
+-(void)start{
+    if (!_progressTimer) {
+        _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateClipProgress) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_progressTimer forMode:NSRunLoopCommonModes];
+    }
+    [_progressTimer setFireDate:[NSDate distantPast]];
+}
+-(void)stop{
+    [_progressTimer setFireDate:[NSDate distantFuture]];
+    [_progressTimer invalidate];
+}
+-(void)updateClipProgress{
+    if ([self.delegate respondsToSelector:@selector(videoFxViewUpdateProgress)]) {
+        CGFloat progress = [self.delegate videoFxViewUpdateProgress];
+        _progress.progress = progress;
+    }
+}
+-(void)dealloc{
+    NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
 @end

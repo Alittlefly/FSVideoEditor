@@ -13,9 +13,10 @@ typedef NS_ENUM(NSInteger,SliderType){
     SliderTypeRightSlider
 };
 @protocol FSThumbnailViewDelegate <NSObject>
+-(void)thumbnailViewSelectValue:(double)value type:(SliderType)type;
 
 @optional
--(void)thumbnailViewSelectValue:(double)value type:(SliderType)type;
+-(void)thumbnailViewSelectStartValue:(double)startValue endValue:(double)endvalue;
 
 -(void)thumbnailViewEndSelect;
 @end

@@ -121,7 +121,11 @@
     
     NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
     [clip changeTrimInPoint:_startTime affectSibling:YES];
-    [clip changeTrimOutPoint:_endTime affectSibling:YES];
+    int64_t endTime = _endTime;
+    if (endTime == 0) {
+        endTime = _timeLine.duration;
+    }
+    [clip changeTrimOutPoint:endTime affectSibling:YES];
     
     FSPublisherController *publish = [[FSPublisherController alloc] init];
     publish.filePath = _filePath;
@@ -185,12 +189,17 @@
 -(void)thumbnailViewSelectValue:(double)value type:(SliderType)type{
     if (type == SliderTypeLeftSlider) {
         // startValue
-         _startTime = value * 1000000;
+         _startTime = value * 1000000.0;
         [_context seekTimeline:_timeLine timestamp:_startTime videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     }else if(type == SliderTypeRightSlider){
-         _endTime = value * 1000000;
+         _endTime = value * 1000000.0;
         [_context seekTimeline:_timeLine timestamp:_endTime videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     }
+}
+-(void)thumbnailViewSelectStartValue:(double)startValue endValue:(double)endvalue{
+     _startTime = startValue * 1000000.0;
+     _endTime = endvalue * 1000000.0;
+    [_context seekTimeline:_timeLine timestamp:_startTime videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
 }
 -(void)thumbnailViewEndSelect{
     int64_t endTime = 0;

@@ -35,4 +35,22 @@
     [backGroundView setFrame:_backContent.bounds];
     [_backContent addSubview:backGroundView];
 }
+-(void)setProgress:(CGFloat)progress{
+    _progress = progress;
+    
+    [self updateLineFrame];
+}
+-(void)updateLineFrame{
+    CGRect lFrame = _line.frame;
+    lFrame.origin.x = _progress * CGRectGetWidth(self.bounds);
+    if (lFrame.origin.x < 0) {
+        lFrame.origin.x = 0;
+    }else if (lFrame.origin.x > CGRectGetWidth(self.bounds) - CGRectGetWidth(lFrame)){
+        lFrame.origin.x = CGRectGetWidth(self.bounds) - CGRectGetWidth(lFrame);
+    }
+    _line.frame = lFrame;
+}
+-(void)dealloc{
+    NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
+}
 @end
