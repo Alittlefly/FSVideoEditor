@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
 - (void)FSPublisherToolViewEditMusic;
 - (void)FSPublisherToolViewEditVolume;
 - (void)FSPublisherToolViewAddEffects;
+- (void)FSPublisherToolViewAddFilter;
 - (void)FSPublisherToolViewSaveToDraft;
 - (void)FSPublisherToolViewPublished;
 

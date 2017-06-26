@@ -69,5 +69,7 @@
 - (void)resumeCapturePreview;
 - (NSString *)getVideoPath;
 - (void)quitRecording;
+- (NSArray *)getAllVideoFilters;
+- (void)addFilter:(NSString *)filter;
 
 @end

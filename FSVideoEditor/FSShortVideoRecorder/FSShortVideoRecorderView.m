@@ -9,8 +9,9 @@
 #import "FSShortVideoRecorderView.h"
 #import "FSShortVideoRecorderManager.h"
 #import "FSProgressView.h"
+#import "FSFilterView.h"
 
-@interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate>
+@interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate>
 
 @property (nonatomic, strong) UIButton *flashButton;  //闪光灯
 @property (nonatomic, strong) UIButton *finishButton;  //完成按钮
@@ -45,8 +46,12 @@
 @property (nonatomic, assign) BOOL supportAutoFocus;
 @property (nonatomic, assign) BOOL supportAutoExposure;
 @property (nonatomic, assign) BOOL isRecording;
+@property (nonatomic, assign) BOOL isOpenFilterView;
 
 @property (nonatomic, assign) FSShortVideoPlaySpeed playSpeed;
+
+@property (nonatomic, strong) FSFilterView *filterView;
+
 
 @end
 
@@ -70,11 +75,13 @@
         _playSpeed = FSShortVideoPlaySpeed_Normal;
         _isRecording = NO;
         
-        _recorderManager = [[FSShortVideoRecorderManager alloc] init];
+        _recorderManager = [FSShortVideoRecorderManager sharedInstance];
         _recorderManager.delegate = self;
         _recorderView = [_recorderManager getLiveWindow];
         _recorderView.frame= CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:_recorderView];
+        [_recorderManager resumeCapturePreview];
+
         
         [_recorderManager switchBeauty:YES];
         
@@ -256,6 +263,9 @@
 }
 
 - (void)tapToFocus:(UITapGestureRecognizer *)recognizer {
+    if (_isOpenFilterView) {
+        return;
+    }
     CGPoint point = [recognizer locationInView:self.recorderView];
     CGFloat rectHalfWidth = self.imageAutoFocusRect.frame.size.width/2;
     if (point.x - rectHalfWidth < 0 || point.x + rectHalfWidth > self.recorderView.frame.size.width || point.y - rectHalfWidth < 0 || point.y + rectHalfWidth > self.recorderView.frame.size.height) {
@@ -331,8 +341,74 @@
 }
 
 - (void)filterClik {
-
+    _backButton.hidden= YES;
+    _recoverCamera.hidden = YES;
+    _finishButton.hidden = YES;
+    _flashButton.hidden = YES;
+    _cutMusicButton.hidden = YES;
+    _beautyButton.hidden = YES;
+    _filterButton.hidden = YES;
+    _countdownButton.hidden = YES;
+    _cutMusicLabel.hidden = YES;
+    _filterLabel.hidden = YES;
+    _beautyLabel.hidden = YES;
+    _countdownLabel.hidden = YES;
+    _recorderButton.hidden = YES;
+    _faceUButton.hidden = YES;
+    _deleteButton.hidden = YES;
+    _speedSegment.hidden = YES;
+    
+    _isOpenFilterView = YES;
+    
+    if (!_filterView) {
+        _filterView = [[FSFilterView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-120, self.frame.size.width, 120)];
+        _filterView.backgroundColor = [UIColor clearColor];
+        _filterView.hidden = YES;
+        _filterView.delegate =self;
+        [self addSubview:_filterView];
+    }
+    
+    _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
+    _filterView.hidden = NO;
+    [UIView animateWithDuration:0.5 animations:^{
+        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.frame.size.height-_filterView.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
+        
+    }];
 }
+
+- (void)FSFilterViewFinishedChooseFilter {
+    [UIView animateWithDuration:0.5 animations:^{
+        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
+        
+    } completion:^(BOOL finished) {
+        _filterView.hidden = YES;
+        
+        _backButton.hidden= NO;
+        _recoverCamera.hidden = NO;
+        _finishButton.hidden = NO;
+        _flashButton.hidden = NO;
+        _cutMusicButton.hidden = NO;
+        _beautyButton.hidden = NO;
+        _filterButton.hidden = NO;
+        _countdownButton.hidden = NO;
+        _cutMusicLabel.hidden = NO;
+        _filterLabel.hidden = NO;
+        _beautyLabel.hidden = NO;
+        _countdownLabel.hidden = NO;
+        _recorderButton.hidden = NO;
+        _faceUButton.hidden = NO;
+        _deleteButton.hidden = NO;
+        _speedSegment.hidden = NO;
+        _isOpenFilterView = NO;
+
+    }];
+}
+
+- (void)FSFilterViewChooseFilter:(NSString *)filter {
+    [_recorderManager addFilter:filter];
+    
+}
+
 
 - (void)countdownClik {
     //倒计时动画

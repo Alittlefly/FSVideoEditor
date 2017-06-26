@@ -114,6 +114,7 @@
         _filterView = [[FSFilterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-120, self.view.frame.size.width, 120)];
         _filterView.backgroundColor = [UIColor clearColor];
         _filterView.hidden = YES;
+        _filterView.delegate =self;
         [self.view addSubview:_filterView];
     }
 
@@ -209,6 +210,10 @@
     [self.navigationController pushViewController:fxController animated:YES];
 }
 
+- (void)FSPublisherToolViewAddFilter {
+    [self chooseFilter];
+}
+
 - (void)FSPublisherToolViewEditVolume {
     [self chooseFilter];
 }
@@ -232,7 +237,23 @@
     }];
 }
 
-- (void)FSFilterViewChooseFilter:(id)filter {
+- (void)FSFilterViewChooseFilter:(NSString *)filter {
+    if ([filter isEqualToString:@"None"]) {
+        for (unsigned int i = 0; i < _videoTrack.clipCount; i++)
+            [[_videoTrack getClipWithIndex:i] removeAllFx];
+    } else if ([filter isEqualToString:@"Package1"]) {
+        for (unsigned int i = 0; i < _videoTrack.clipCount; i++) {
+            NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:i];
+            [videoClip removeAllFx];
+            //[videoClip appendPackagedFx:_videoFxPackageId];     // 追加包裹特效
+        }
+    } else {
+        for (unsigned int i = 0; i < _videoTrack.clipCount; i++) {
+            NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:i];
+            [videoClip removeAllFx];
+            [videoClip appendBuiltinFx:filter];         // 追加内嵌特效
+        }
+    }
 
 }
 

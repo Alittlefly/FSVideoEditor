@@ -17,10 +17,12 @@
 @property (nonatomic, strong) UIButton *cutMusicButton;  //剪音乐
 @property (nonatomic, strong) UIButton *volumeButton;  //音量调节
 @property (nonatomic, strong) UIButton *effectsButton; //特效
+@property (nonatomic, strong) UIButton *filterButton;
 
 @property (nonatomic, strong) UILabel *cutMusicLabel;
 @property (nonatomic, strong) UILabel *volumeLabel;
 @property (nonatomic, strong) UILabel *effectsLabel;
+@property (nonatomic, strong) UILabel *filterLabel;
 
 @property (nonatomic, strong) FSEditVideoNameView *videoNameView;
 
@@ -114,8 +116,31 @@ static BOOL IsArabic = NO;
     _volumeLabel.text = @"音量";
     [self addSubview:_volumeLabel];
     
+    if (_type == FSPublisherToolViewTypeFromAlbum) {
+        _filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _filterButton.frame = CGRectMake(CGRectGetMinX(_volumeLabel.frame), CGRectGetMaxY(_volumeLabel.frame)+20, 40, 40);
+        //[_filterButton setTitle:@"filter" forState:UIControlStateNormal];
+        [_filterButton setImage:[UIImage imageNamed:@"recorder-filter"] forState:UIControlStateNormal];
+        [_filterButton addTarget:self action:@selector(filterClik) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_filterButton];
+        
+        _filterLabel = [[UILabel alloc] init];
+        _filterLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15) : CGRectMake(CGRectGetMaxX(_filterButton.frame) - CGRectGetWidth(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15);
+        _filterLabel.backgroundColor = [UIColor clearColor];
+        _filterLabel.font = [UIFont systemFontOfSize:9];
+        _filterLabel.textColor = [UIColor whiteColor];
+        _filterLabel.textAlignment = NSTextAlignmentCenter;// IsArabic ? NSTextAlignmentLeft : NSTextAlignmentRight;
+        _filterLabel.text = @"滤镜";
+        [self addSubview:_filterLabel];
+    }
+    
     _effectsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _effectsButton.frame = CGRectMake(CGRectGetMinX(_volumeButton.frame), CGRectGetMaxY(_volumeLabel.frame)+20, 40, 40);
+    if (_type == FSPublisherToolViewTypeFromAlbum) {
+        _effectsButton.frame = CGRectMake(CGRectGetMinX(_volumeButton.frame), CGRectGetMaxY(_filterLabel.frame)+20, 40, 40);
+    }
+    else {
+        _effectsButton.frame = CGRectMake(CGRectGetMinX(_volumeButton.frame), CGRectGetMaxY(_volumeLabel.frame)+20, 40, 40);
+    }
     //[_filterButton setTitle:@"filter" forState:UIControlStateNormal];
     [_effectsButton setImage:[UIImage imageNamed:@"recorder-filter"] forState:UIControlStateNormal];
     [_effectsButton addTarget:self action:@selector(effectsClik) forControlEvents:UIControlEventTouchUpInside];
@@ -173,6 +198,12 @@ static BOOL IsArabic = NO;
 - (void)volumeClik {
     if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewEditVolume)]) {
         [self.delegate FSPublisherToolViewEditVolume];
+    }
+}
+
+- (void)filterClik {
+    if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewAddFilter)]) {
+        [self.delegate FSPublisherToolViewAddFilter];
     }
 }
 
