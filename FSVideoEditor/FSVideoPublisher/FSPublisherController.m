@@ -11,6 +11,9 @@
 #import "NvsTimeline.h"
 #import "NvsVideoClip.h"
 #import "NvsVideoTrack.h"
+#import "NvsVideoFrameRetriever.h"
+
+
 #import "FSPublisherToolView.h"
 #import "FSFilterView.h"
 #import "FSUploader.h"
@@ -31,6 +34,7 @@
 
 @property (nonatomic, strong) FSFilterView *filterView;
 @property(nonatomic,strong)FSEditorLoading *loading;
+@property(nonatomic,strong)NvsVideoFrameRetriever *frameRetriever;
 
 
 @end
@@ -54,7 +58,6 @@
         return;
     }
     _context = [NvsStreamingContext sharedInstance];
-    
     if (!_timeLine) {
         return;
     }
@@ -164,6 +167,14 @@
 - (void)didCompileFinished:(NvsTimeline *)timeline{
     
     NSLog(@"Compile success!");
+//    _frameRetriever = [_context createVideoFrameRetriever:_outPutPath];
+//    UIImage *firstFrame = [_frameRetriever getFrameAtTime:0 videoFrameHeightGrade:(NvsVideoFrameHeightGrade720)];
+//    
+//    UIImageView *imageView = [[UIImageView alloc] initWithImage:firstFrame];
+//    [imageView setContentMode:(UIViewContentModeScaleAspectFill)];
+//    [imageView setFrame:self.view.bounds];
+//    [self.view addSubview:imageView];
+    
     [self.loading loadingViewhide];
     [self uploadFile:_outPutPath];
     

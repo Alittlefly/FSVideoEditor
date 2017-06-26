@@ -12,13 +12,16 @@
 #import "NvsVideoClip.h"
 #import "NvsVideoTrack.h"
 #import "FSPublisherController.h"
+#import "FSThumbnailView.h"
 
 
-@interface FSLocalEditorController ()<NvsStreamingContextDelegate>
+@interface FSLocalEditorController ()<NvsStreamingContextDelegate,FSThumbnailViewDelegate>
 {
     UISegmentedControl *_speedSegment;
+    int64_t _startTime;
+    int64_t _endTime;
 }
-@property(nonatomic,strong)UIScrollView *thumbContent;
+@property(nonatomic,strong)FSThumbnailView *thumbContent;
 
 @property(nonatomic,strong)NvsThumbnailSequenceView *thumbnailSequence;
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
@@ -35,6 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor blackColor]];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
     _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds)/2.0 - 210/2.0, CGRectGetWidth(self.view.bounds), 210)];
     [self.view addSubview:_prewidow];
@@ -56,6 +60,10 @@
     audioEditRes.channelCount = 2;
     audioEditRes.sampleFormat = NvsAudSmpFmt_S16;
     _timeLine = [_context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
+    
+    _startTime = 0;
+    _endTime = 0;
+    
     if (!_timeLine) {
         NSLog(@"Timeline is null!");
         return;
@@ -70,27 +78,25 @@
     if (!_filePath) {
         return;
     }
-    
-    if (!_thumbnailSequence) {
-        _thumbnailSequence = [[NvsThumbnailSequenceView alloc] init];
-        _thumbContent = [[UIScrollView alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds) - 70, CGRectGetWidth(self.view.bounds),60)];
-        [_thumbContent setBackgroundColor:[UIColor redColor]];
-        [_thumbContent addSubview:_thumbnailSequence];
-        [_thumbContent setContentSize:CGSizeMake(CGRectGetWidth(self.view.bounds), 0)];
-        [self.view addSubview:_thumbContent];
-
-    }
 
     NvsVideoClip* clip = [_videoTrack insertClip:_filePath clipIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
+    
+    if (!_thumbnailSequence) {
+        _thumbnailSequence = [[NvsThumbnailSequenceView alloc] init];
+        _thumbContent = [[FSThumbnailView alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds) - 70, CGRectGetWidth(self.view.bounds),60) length:15.0 allLength:_timeLine.duration/1000000 minLength:3.0f];
+        _thumbContent.delegate = self;
+        _thumbContent.backGroundView = _thumbnailSequence;
+        [self.view addSubview:_thumbContent];
+        
+    }
      self.thumbnailSequence.stillImageHint = NO;
      self.thumbnailSequence.mediaFilePath = _filePath;
-     self.thumbnailSequence.startTime = 0;
+     self.thumbnailSequence.startTime = _startTime;
      self.thumbnailSequence.duration = _timeLine.duration;
      self.thumbnailSequence.thumbnailAspectRatio = 1.0;
-    [self.thumbnailSequence setFrame:CGRectMake(0, 0,CGRectGetWidth(self.view.bounds), 60)];
-    [self.thumbnailSequence setClipsToBounds:NO];
-
+    
+    
     _speedSegment = [[UISegmentedControl alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
     _speedSegment.frame = CGRectMake(32.5, CGRectGetMaxY(_prewidow.frame)+76, CGRectGetWidth(self.view.frame) - 65, 37);
     _speedSegment.selectedSegmentIndex = 2;
@@ -109,6 +115,14 @@
 }
 - (void)saveVideoFile{
 
+    //
+    // tijiao
+    //
+    
+    NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
+    [clip changeTrimInPoint:_startTime affectSibling:YES];
+    [clip changeTrimOutPoint:_endTime affectSibling:YES];
+    
     FSPublisherController *publish = [[FSPublisherController alloc] init];
     publish.filePath = _filePath;
     publish.timeLine = _timeLine;
@@ -167,8 +181,26 @@
     NSLog(@"Compile timeline progress: %d", progress);
 }
 
-
-
+#pragma mark -
+-(void)thumbnailViewSelectValue:(double)value type:(SliderType)type{
+    if (type == SliderTypeLeftSlider) {
+        // startValue
+         _startTime = value * 1000000;
+        [_context seekTimeline:_timeLine timestamp:_startTime videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
+    }else if(type == SliderTypeRightSlider){
+         _endTime = value * 1000000;
+        [_context seekTimeline:_timeLine timestamp:_endTime videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
+    }
+}
+-(void)thumbnailViewEndSelect{
+    int64_t endTime = 0;
+    if (_endTime == 0) {
+        endTime = _timeLine.duration;
+    }else{
+        endTime = _endTime;
+    }
+    [_context playbackTimeline:_timeLine startTime:_startTime endTime:endTime videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
+}
 -(void)dealloc{
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));
 }
