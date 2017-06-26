@@ -83,44 +83,59 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (instancetype)init {
     if (self = [super init]) {
-        _currentDeviceIndex = 0;
-        _supportAutoFocus = false;
-        _supportAutoExposure = false;
-        _fxRecord = true;
-        _videoIndex = 0;
-        _outputFilePath = nil;
-        _videoTime = 0;
-        _timeArray = [NSMutableArray arrayWithCapacity:0];
-        _filePathArray = [NSMutableArray arrayWithCapacity:0];
-        
-        // 初始化NvsStreamingContext
-        _context = [NvsStreamingContext sharedInstance];
-        
-        if (!_context) {
-            
-        }
-        
-        // 可用采集设备的数量
-        if ([_context captureDeviceCount] == 0) {
-            NSLog(@"没有可用于采集的设备");
-        }
-        
-        // 将采集预览输出连接到NvsLiveWindow控件
-        if (![_context connectCapturePreviewWithLiveWindow:self.liveWindow]) {
-            NSLog(@"连接预览窗口失败");
-        }
-        
-        // 此样例使用高质量、横纵比为1:1的设置启动采集预览
-        if (![_context startCapturePreview:0 videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
-            NSLog(@"启动预览失败");
-        }
-        
-        _context.delegate = self;
+        [self initBaseData];
         
         
        // [self resumeCapturePreview];
     }
     return self;
+}
+
+- (void)initBaseData {
+    _currentDeviceIndex = 0;
+    _supportAutoFocus = false;
+    _supportAutoExposure = false;
+    _fxRecord = true;
+    _videoIndex = 0;
+    _outputFilePath = nil;
+    _videoTime = 0;
+    _timeArray = [NSMutableArray arrayWithCapacity:0];
+    _filePathArray = [NSMutableArray arrayWithCapacity:0];
+    
+    // 初始化NvsStreamingContext
+    _context = [NvsStreamingContext sharedInstance];
+    
+    if (!_context) {
+        
+    }
+    
+    // 可用采集设备的数量
+    if ([_context captureDeviceCount] == 0) {
+        NSLog(@"没有可用于采集的设备");
+    }
+    
+    // 将采集预览输出连接到NvsLiveWindow控件
+    if (![_context connectCapturePreviewWithLiveWindow:self.liveWindow]) {
+        NSLog(@"连接预览窗口失败");
+    }
+    
+    // 此样例使用高质量、横纵比为1:1的设置启动采集预览
+    if (![_context startCapturePreview:0 videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
+        NSLog(@"启动预览失败");
+    }
+    
+    _context.delegate = self;
+}
+
+- (void)clearData {
+    _supportAutoFocus = false;
+    _supportAutoExposure = false;
+    _fxRecord = true;
+    _videoIndex = 0;
+    _outputFilePath = nil;
+    _videoTime = 0;
+    _timeArray = nil;
+    _filePathArray = nil;
 }
 
 - (NvsTimeline *)timeLine {
@@ -196,6 +211,16 @@ static FSShortVideoRecorderManager *recorderManager;
     }
 }
 
+- (void)addFilter:(NSString *)filter {
+    if ([filter isEqualToString:@"None"]) {
+        [_context removeAllCaptureVideoFx];
+    }
+    else {
+        [_context removeAllCaptureVideoFx];
+        [_context appendBuiltinCaptureVideoFx:filter];
+    }
+}
+
 - (BOOL)isSupportAutoFocus {
     return _supportAutoFocus;
 }
@@ -215,6 +240,10 @@ static FSShortVideoRecorderManager *recorderManager;
 // 获取当前引擎状态
 - (NvsStreamingEngineState)getCurrentEngineState {
     return [_context getStreamingEngineState];
+}
+
+- (NSArray *)getAllVideoFilters {
+    return [_context getAllBuiltinVideoFxNames];
 }
 
 - (void)startRecording:(NSString *)filePath {

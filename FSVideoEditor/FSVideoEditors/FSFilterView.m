@@ -8,6 +8,7 @@
 
 #import "FSFilterView.h"
 #import "FSFilterButton.h"
+#import "FSShortVideoRecorderManager.h"
 
 @interface FSFilterView()
 
@@ -15,7 +16,7 @@
 @property (nonatomic, strong) UIButton *chooseButton;
 @property (nonatomic, strong) UIScrollView *contentScrollView;
 
-@property (nonatomic, strong) NSArray *filtersArray;
+@property (nonatomic, strong) NSMutableArray *filtersArray;
 
 @end
 
@@ -23,7 +24,10 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _filtersArray = [NSArray arrayWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8", nil];
+        // 初始化视频特效列表
+        _filtersArray = [NSMutableArray arrayWithObject:@"None"];
+        // 获取全部内嵌视频特效的名称
+        [_filtersArray addObjectsFromArray:[[FSShortVideoRecorderManager sharedInstance] getAllVideoFilters]];
         [self initBaseUI];
     }
     return self;
@@ -53,21 +57,21 @@
     [self addSubview:_contentScrollView];
     
     for (int i = 0; i < _filtersArray.count; i++) {
-        id filter = _filtersArray[i];
+        NSString *filter = _filtersArray[i];
         FSFilterButton *button = [[FSFilterButton alloc] initWithFrame:CGRectMake((_contentScrollView.frame.size.height-4+5)*i, 2, _contentScrollView.frame.size.height-4, _contentScrollView.frame.size.height-4)];
         button.backgroundColor = [UIColor redColor];
         button.tag = i;
-        button.title = [NSString stringWithFormat:@"%d",i];
+        button.title = filter;
         [button addTarget:self action:@selector(chooseFilter:) forControlEvents:UIControlEventTouchUpInside];
         [_contentScrollView addSubview:button];
     }
 }
 
 - (void)chooseFilter:(UIButton *)sender {
-    id filter = [_filtersArray objectAtIndex:sender.tag];
+     NSString *fxName = [_filtersArray objectAtIndex:sender.tag];
     
     if ([self.delegate respondsToSelector:@selector(FSFilterViewChooseFilter:)]) {
-        [self.delegate FSFilterViewChooseFilter:filter];
+        [self.delegate FSFilterViewChooseFilter:fxName];
     }
 }
 

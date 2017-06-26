@@ -10,7 +10,7 @@
 
 @protocol FSFilterViewDelegate <NSObject>
 
-- (void)FSFilterViewChooseFilter:(id)filter;
+- (void)FSFilterViewChooseFilter:(NSString *)filter;
 - (void)FSFilterViewFinishedChooseFilter;
 
 @end
