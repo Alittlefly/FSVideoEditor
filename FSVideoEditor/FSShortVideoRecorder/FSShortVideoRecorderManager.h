@@ -13,8 +13,9 @@
 
 - (void)FSShortVideoRecorderManagerFinishRecorder:(NSString *)filePath;
 - (void)FSShortVideoRecorderManagerFailedRecorder;
-- (void)FSShortVideoRecorderManagerProgress:(NSInteger)time;
-- (void)FSShortVideoRecorderManagerDeleteVideo:(NSInteger)videoTime;
+- (void)FSShortVideoRecorderManagerProgress:(CGFloat)time;
+- (void)FSShortVideoRecorderManagerDeleteVideo:(CGFloat)videoTime;
+- (void)FSShortVideoRecorderManagerPauseRecorder;
 
 @end
 
@@ -71,5 +72,6 @@
 - (void)quitRecording;
 - (NSArray *)getAllVideoFilters;
 - (void)addFilter:(NSString *)filter;
+- (NvsTimeline *)createTimeLine;
 
 @end

@@ -19,11 +19,11 @@
 @property (nonatomic, strong) NSString *outputFilePath;
 @property (nonatomic, strong) NSString *videoFilePath;
 @property (nonatomic, assign) NSInteger videoIndex;
-@property (nonatomic, assign) NSInteger videoTime;
+@property (nonatomic, assign) CGFloat videoTime;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSMutableArray *timeArray;
 @property (nonatomic, strong) NSMutableArray *filePathArray;
-@property (nonatomic, assign) NSInteger perTime;
+@property (nonatomic, assign) CGFloat perTime;
 
 @end
 
@@ -140,20 +140,24 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (NvsTimeline *)timeLine {
     if (!_timeLine) {
-        NvsVideoResolution videoEditRes;
-        videoEditRes.imageWidth = 1280;
-        videoEditRes.imageHeight = 720;
-        videoEditRes.imagePAR = (NvsRational){1,1};
-        NvsRational videoFps = {25,1};
-        
-        NvsAudioResolution audioEditRes;
-        audioEditRes.sampleRate = 48000;
-        audioEditRes.channelCount =2;
-        audioEditRes.sampleFormat = NvsAudSmpFmt_S16;
-        
-        _timeLine = [_context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
+        _timeLine = [self createTimeLine];
     }
     return _timeLine;
+}
+
+- (NvsTimeline *)createTimeLine {
+    NvsVideoResolution videoEditRes;
+    videoEditRes.imageWidth = 1280;
+    videoEditRes.imageHeight = 720;
+    videoEditRes.imagePAR = (NvsRational){1,1};
+    NvsRational videoFps = {25,1};
+    
+    NvsAudioResolution audioEditRes;
+    audioEditRes.sampleRate = 48000;
+    audioEditRes.channelCount =2;
+    audioEditRes.sampleFormat = NvsAudSmpFmt_S16;
+    
+   return [_context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
 }
 
 - (NvsVideoTrack *)videoTrack {
@@ -248,6 +252,9 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (void)startRecording:(NSString *)filePath {
     if (_videoTime >= MaxVideoTime) {
+        if ([_timer isValid]) {
+            [_timer setFireDate:[NSDate distantFuture]];
+        }
         return;
     }
     if ([self getCurrentEngineState] != NvsStreamingEngineState_CaptureRecording) {
@@ -265,7 +272,7 @@ static FSShortVideoRecorderManager *recorderManager;
         }
         
         if (!_timer) {
-            _timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+            _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                       target:self
                                                     selector:@selector(updateVideoTime)
                                                     userInfo:nil
@@ -297,8 +304,8 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (void)updateVideoTime {
-    _videoTime++;
-    _perTime++;
+    _videoTime= _videoTime+0.1;
+    _perTime = _perTime+0.1;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerProgress:)]) {
         [self.delegate FSShortVideoRecorderManagerProgress:_videoTime];
     }
@@ -335,6 +342,10 @@ static FSShortVideoRecorderManager *recorderManager;
 //    UISaveVideoAtPathToSavedPhotosAlbum(_outputFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     
     [_timeArray addObject:[NSNumber numberWithInteger:_perTime]];
+    
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerPauseRecorder)]) {
+        [self.delegate FSShortVideoRecorderManagerPauseRecorder];
+    }
 }
 
 // 视频保存回调
@@ -395,7 +406,7 @@ static FSShortVideoRecorderManager *recorderManager;
     if (_videoIndex == 0) {
         return NO;
     }
-        NSInteger time = [[_timeArray objectAtIndex:_videoIndex-1] integerValue];
+        CGFloat time = [[_timeArray objectAtIndex:_videoIndex-1] integerValue];
         _videoTime = _videoTime - time;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerDeleteVideo:)]) {
         [self.delegate FSShortVideoRecorderManagerDeleteVideo:_videoTime];

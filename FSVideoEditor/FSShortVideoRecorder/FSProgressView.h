@@ -14,5 +14,9 @@
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)isAnimated;
 
+- (void)stopAnimationWithCuttingLine;
+
+- (void)deleteCuttingLine;
+
 
 @end

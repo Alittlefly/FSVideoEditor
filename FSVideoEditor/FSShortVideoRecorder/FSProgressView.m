@@ -11,6 +11,7 @@
 @interface FSProgressView()
 
 @property (nonatomic, strong) UIView *progressView;
+@property (nonatomic, strong) NSMutableArray *linesArray;
 
 @end
 
@@ -22,6 +23,7 @@
         _progressView.backgroundColor = [UIColor redColor];
         [self addSubview:_progressView];
         
+        _linesArray = [NSMutableArray arrayWithCapacity:0];
     }
     return self;
 }
@@ -32,15 +34,34 @@
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)isAnimated {
     CGFloat width = progress * self.bounds.size.width;
+    CGFloat oldW = self.progressView.frame.size.width;
 
     if (isAnimated) {
-        [UIView animateWithDuration:0.5*(width-self.progressView.frame.size.width) animations:^{
+        NSTimeInterval time = ((width-oldW)*30)/self.progressView.frame.size.width;//0.5*(width-self.progressView.frame.size.width)
+        [UIView animateWithDuration:0.1 animations:^{
             self.progressView.frame = CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, width, self.progressView.frame.size.height);
         }];
     }
     else {
         self.progressView.frame = CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, width, self.progressView.frame.size.height);
     }
+}
+
+- (void)stopAnimationWithCuttingLine {
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(self.progressView.frame.size.width, 0, 2, self.frame.size.height)];
+    line.backgroundColor = [UIColor whiteColor];
+    [self addSubview:line];
+    
+    [_linesArray addObject:line];
+}
+
+- (void)deleteCuttingLine {
+    if (_linesArray.count == 0) {
+        return;
+    }
+    UIView *line = [_linesArray lastObject];
+    [line removeFromSuperview];
+    [_linesArray removeLastObject];
 }
 
 /*

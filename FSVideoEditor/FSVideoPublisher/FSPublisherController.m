@@ -18,9 +18,9 @@
 #import "FSFilterView.h"
 #import "FSUploader.h"
 #import "FSEditorLoading.h"
+#import "FSControlVolumeView.h"
 
-
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate>
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate>
 {
     FSUploader *_uploader;
     NSString *_outPutPath;
@@ -35,6 +35,8 @@
 @property (nonatomic, strong) FSFilterView *filterView;
 @property(nonatomic,strong)FSEditorLoading *loading;
 @property(nonatomic,strong)NvsVideoFrameRetriever *frameRetriever;
+
+@property (nonatomic, strong) FSControlVolumeView *volumeView;
 
 
 @end
@@ -89,12 +91,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [_context connectTimeline:_timeLine withLiveWindow:_prewidow];
-    [self.navigationController.navigationBar setHidden:NO];
+    [self.navigationController.navigationBar setHidden:YES];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [_context setDelegate:self];
     [self playVideoFromHead];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setHidden:NO];
+
 }
 
 -(void)vieDidDisappear:(BOOL)animated{
@@ -215,7 +223,15 @@
 }
 
 - (void)FSPublisherToolViewEditVolume {
-    [self chooseFilter];
+    if (!_volumeView) {
+        _volumeView = [[FSControlVolumeView alloc] initWithFrame:self.view.bounds];
+        _volumeView.delegate = self;
+        [self.view addSubview:_volumeView];
+        _volumeView.hidden = YES;
+    }
+    self.toolView.hidden = YES;
+    _volumeView.hidden = NO;
+    
 }
 
 - (void)FSPublisherToolViewChooseMusic {
@@ -255,6 +271,20 @@
         }
     }
 
+}
+
+#pragma mark - FSControlVolumeViewDelegate
+- (void)FSControlVolumeViewChangeScore:(CGFloat)value {
+
+}
+
+- (void)FSControlVolumeViewChangeSoundtrack:(CGFloat)value {
+
+}
+
+- (void)FSControlVolumeViewChangeFinished {
+    _volumeView.hidden = YES;
+    self.toolView.hidden = NO;
 }
 
 #pragma mark -

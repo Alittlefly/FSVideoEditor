@@ -37,6 +37,7 @@
     
     _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 145, self.frame.size.width, 145)];
     _contentView.backgroundColor = [UIColor whiteColor];
+    _contentView.alpha = 0.9;
     [self addSubview:_contentView];
     
     if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)) {
@@ -78,7 +79,7 @@
     [_soundtrackSlider addTarget:self action:@selector(changeSoundtrack) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_soundtrackSlider];
     
-    _scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_soundtrackLabel.frame), 0, 27)];
+    _scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_soundtrackLabel.frame)+30, 0, 27)];
     _scoreLabel.backgroundColor = [UIColor clearColor];
     _scoreLabel.font = [UIFont systemFontOfSize:15];
     _scoreLabel.textColor = [UIColor blackColor];
@@ -87,7 +88,7 @@
     _scoreLabel.frame = CGRectMake(_scoreLabel.frame.origin.x, _scoreLabel.frame.origin.y, _scoreLabel.frame.size.width, _scoreLabel.frame.size.height);
     [_contentView addSubview:_scoreLabel];
     
-    _scoreSlider = [[UISlider alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_scoreLabel.frame)+15, 23, _contentView.frame.size.width-CGRectGetMaxX(_scoreLabel.frame)-15-15, 27)];
+    _scoreSlider = [[UISlider alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_scoreLabel.frame)+15, CGRectGetMaxY(_soundtrackLabel.frame)+30, _contentView.frame.size.width-CGRectGetMaxX(_scoreLabel.frame)-15-15, 27)];
     _scoreSlider.value = 0.5;
     _scoreSlider.minimumTrackTintColor = [UIColor orangeColor];
     _scoreSlider.maximumTrackTintColor = [UIColor blackColor];

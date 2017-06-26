@@ -28,6 +28,7 @@
 @property (nonatomic, strong) UILabel *countdownLabel;
 
 @property (nonatomic, strong) FSProgressView *progressView;
+//@property (nonatomic, strong) UISlider *progressView;
 
 @property (nonatomic, strong) UIImageView *imageAutoFocusRect; //对焦视图
 
@@ -47,6 +48,7 @@
 @property (nonatomic, assign) BOOL supportAutoExposure;
 @property (nonatomic, assign) BOOL isRecording;
 @property (nonatomic, assign) BOOL isOpenFilterView;
+@property (nonatomic, strong) NSMutableArray *linesArray;
 
 @property (nonatomic, assign) FSShortVideoPlaySpeed playSpeed;
 
@@ -74,6 +76,7 @@
         _isBeautyOpened = YES;
         _playSpeed = FSShortVideoPlaySpeed_Normal;
         _isRecording = NO;
+        _linesArray = [NSMutableArray arrayWithCapacity:0];
         
         _recorderManager = [FSShortVideoRecorderManager sharedInstance];
         _recorderManager.delegate = self;
@@ -104,6 +107,11 @@
     _progressView = [[FSProgressView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 5)];
     _progressView.backgroundColor = [UIColor clearColor];
     _progressView.progressViewColor = [UIColor yellowColor];
+//    _progressView = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 5)];
+//    _progressView.thumbTintColor = [UIColor clearColor];
+//    _progressView.minimumTrackTintColor = [UIColor yellowColor];
+//    _progressView.maximumTrackTintColor = [UIColor clearColor];
+//    _progressView.value = 0;
     [self addSubview:_progressView];
     
     
@@ -472,16 +480,38 @@
 
 #pragma mark - FSShortVideoRecorderManagerDelegate
 
-- (void)FSShortVideoRecorderManagerProgress:(NSInteger)time {
-    [self.progressView setProgress:((CGFloat)time)/30.0 animated:YES];
+- (void)FSShortVideoRecorderManagerProgress:(CGFloat)time {
+    [self.progressView setProgress:time/30.0 animated:YES];
+    //self.progressView.value = ((CGFloat)time)/30.0;
 }
 
-- (void)FSShortVideoRecorderManagerDeleteVideo:(NSInteger)videoTime {
-    [self.progressView setProgress:((CGFloat)videoTime)/30.0 animated:NO];
+- (void)FSShortVideoRecorderManagerDeleteVideo:(CGFloat)videoTime {
+    [self.progressView setProgress:videoTime/30.0 animated:NO];
+    [self.progressView deleteCuttingLine];
+//    self.progressView.value = ((CGFloat)videoTime)/30.0;
+//    if (_linesArray.count == 0) {
+//        return;
+//    }
+//    UIView *line = [_linesArray lastObject];
+//    [line removeFromSuperview];
+//    [_linesArray removeLastObject];
+}
+
+- (void)FSShortVideoRecorderManagerPauseRecorder {
+    [self.progressView stopAnimationWithCuttingLine];
+//    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(self.progressView.frame.size.width, 0, 2, self.frame.size.height)];
+//    line.backgroundColor = [UIColor whiteColor];
+//    [self.progressView addSubview:line];
+//    
+//    [_linesArray addObject:line];
 }
 
 - (void)FSShortVideoRecorderManagerFinishRecorder:(NSString *)filePath {
     [_activityView stopAnimating];
+    
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:)]) {
+        [self.delegate FSShortVideoRecorderViewFinishRecorder:filePath];
+    }
 }
 
 @end
