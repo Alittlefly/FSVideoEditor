@@ -12,6 +12,81 @@
 #define FxButtonH 50.0
 #define FxButtonP 30.0
 
+
+@interface FSFxLongPressButton : UIView
+{
+    __weak id _target;
+    SEL _sel;
+}
+@property(nonatomic,strong)UIImageView *colorView;
+@property(nonatomic,strong)UILabel *titleLabel;
+-(void)addTarget:(id)target longPressAction:(SEL)selector;
+@end
+
+@implementation FSFxLongPressButton
+
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        [self setClipsToBounds:NO];
+        _titleLabel = [[UILabel alloc] initWithFrame:[self titleRectForContentRect:self.bounds]];
+        [self addSubview:_titleLabel];
+        [_titleLabel setTextColor:FSHexRGB(0xf5f5f5)];
+        [_titleLabel setFont:[UIFont systemFontOfSize:11.0]];
+        [_titleLabel setTextAlignment:(NSTextAlignmentCenter)];
+        
+         _colorView = [[UIImageView alloc] initWithFrame:self.bounds];
+        [_colorView.layer setCornerRadius:CGRectGetHeight(frame)/2.0];
+        [_colorView.layer setMasksToBounds:YES];
+        [_colorView setUserInteractionEnabled:NO];
+        [self addSubview:_colorView];
+        
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                action:@selector(longPressHandler:)];
+        [self addGestureRecognizer:longPress];
+    }
+    return self;
+}
+-(void)addTarget:(id)target longPressAction:(SEL)selector{
+    _target = target;
+    _sel = selector;
+}
+
+-(void)longPressHandler:(UILongPressGestureRecognizer *)recognizer{
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"UIGestureRecognizerStateBegan");
+    }else if (recognizer.state == UIGestureRecognizerStateEnded){
+        NSLog(@"UIGestureRecognizerStateEnded");
+    }else{
+    
+    }
+    
+//    if (_target && _sel && [_target respondsToSelector:_sel]) {
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+//        [_target performSelector:_sel withObject:self];
+//#pragma clang diagnostic pop
+//    }
+}
+
+
+-(void)setBackgroundColor:(UIColor *)backgroundColor{
+    [_colorView setBackgroundColor:backgroundColor];
+}
+-(CGRect)imageRectForContentRect:(CGRect)contentRect{
+    return self.bounds;
+}
+-(CGRect)titleRectForContentRect:(CGRect)contentRect{
+    CGRect titleRect;
+    titleRect.size.width = CGRectGetWidth(contentRect);
+    titleRect.size.height = 16.0;
+    titleRect.origin.x = 0;
+    titleRect.origin.y = CGRectGetHeight(contentRect) + 11.0;
+    return titleRect;
+}
+
+@end
+
 @interface FSFxButton : UIButton
 @property(nonatomic,strong)UIView *colorView;
 @end
@@ -105,6 +180,7 @@
 @property(nonatomic,strong)NSArray *videofuncs;
 
 @property(nonatomic,strong)NSMutableArray *fxButtons;
+@property(nonatomic,strong)UIButton *unDoButton;
 
 @end
 
@@ -150,6 +226,12 @@
     [_tipLabel setTextAlignment:(NSTextAlignmentLeft)];
     [self addSubview:_tipLabel];
     
+    
+     _unDoButton = [[UIButton alloc] initWithFrame:CGRectMake(311, CGRectGetMaxY(_progress.frame), 54, 30)];
+    [_unDoButton setTitle:@"撤销" forState:(UIControlStateNormal)];
+    [_unDoButton addTarget:self action:@selector(unDoFix) forControlEvents:(UIControlEventTouchUpInside)];
+    [_contentView addSubview:_unDoButton];
+    
     // fx
     [self initFxs];
 
@@ -180,21 +262,23 @@
     
 }
 -(void)initFxs{
-    for (FSFxButton *button in self.fxButtons) {
+    for (UIView *button in self.fxButtons) {
         [button removeFromSuperview];
     }
+    
     FSFxButton *soulfx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
-    [soulfx addTarget:self action:@selector(clickfxButton:) forControlEvents:(UIControlEventTouchUpInside)];
+//    [soulfx addTarget:self longPressAction:@selector(pressfxButton:)];
     [soulfx setTitle:@"灵魂出窍" forState:(UIControlStateNormal)];
     [soulfx setBackgroundColor:[UIColor redColor]];
     objc_setAssociatedObject(soulfx, FxIdKey, @"C6273A8F-C899-4765-8BFC-E683EE37AA84", OBJC_ASSOCIATION_COPY);
-
+    
     [_contentView addSubview:soulfx];
     
     FSFxButton *shakefx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(soulfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
-    [shakefx addTarget:self action:@selector(clickfxButton:) forControlEvents:(UIControlEventTouchUpInside)];
+//    [shakefx addTarget:self longPressAction:@selector(pressfxButton:)];
     [shakefx setBackgroundColor:[UIColor yellowColor]];
     [shakefx setTitle:@"抖动" forState:(UIControlStateNormal)];
+
      objc_setAssociatedObject(shakefx, FxIdKey, @"A8A4344D-45DA-460F-A18F-C0E2355FE864", OBJC_ASSOCIATION_COPY);
 
     [_contentView addSubview:shakefx];
@@ -202,9 +286,12 @@
     [self.fxButtons removeAllObjects];
     [self.fxButtons addObjectsFromArray:@[soulfx,shakefx]];
 }
+-(void)unDoFix{
+    NSLog(@"unDoFix");
+}
 -(void)initTimeFxs{
     
-    for (FSFxButton *button in self.fxButtons) {
+    for (UIView *button in self.fxButtons) {
         [button removeFromSuperview];
     }
     
@@ -247,12 +334,15 @@
         [self.delegate videoFxViewSelectTimeFx:button.tag];
     }
 }
--(void)clickfxButton:(UIButton *)button{
+-(void)pressfxButton:(UIButton *)button{
     
     NSString *fxPackageId = objc_getAssociatedObject(button, FxIdKey);
-    if ([self.delegate respondsToSelector:@selector(videoFxViewSelectFxPackageId:)]) {
-        [self.delegate videoFxViewSelectFxPackageId:fxPackageId];
-    }
+    
+    NSLog(@"按住了");
+    
+//    if ([self.delegate respondsToSelector:@selector(videoFxViewSelectFxPackageId:)]) {
+//        [self.delegate videoFxViewSelectFxPackageId:fxPackageId];
+//    }
 }
 
 #pragma mark - 

@@ -138,8 +138,6 @@
         
         [_videoTrack addClip:_filePath inPoint:point trimIn:0 trimOut:_timeLine.duration*0.01];
         [_videoTrack addClip:_filePath inPoint:point trimIn:0 trimOut:_timeLine.duration*0.01];
-        [_videoTrack addClip:_filePath inPoint:point trimIn:0 trimOut:_timeLine.duration*0.01];
-
     }else if (type == FSVideoFxTypeRevert){
         // 倒序播放
     }
