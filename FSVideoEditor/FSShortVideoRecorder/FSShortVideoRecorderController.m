@@ -8,6 +8,11 @@
 
 #import "FSShortVideoRecorderController.h"
 #import "FSShortVideoRecorderView.h"
+#import "FSPublisherController.h"
+#import "FSShortVideoRecorderManager.h"
+#import "NvsVideoTrack.h"
+#import "NvsVideoClip.h"
+
 
 @interface FSShortVideoRecorderController ()<FSShortVideoRecorderViewDelegate>
 
@@ -53,6 +58,17 @@
 - (void)FSShortVideoRecorderViewQuitRecorderView {
     [self.navigationController popViewControllerAnimated:YES];
 
+}
+
+- (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath {
+    FSPublisherController *publish = [[FSPublisherController alloc] init];
+    publish.filePath = filePath;
+    NvsTimeline *timeLine = [[FSShortVideoRecorderManager sharedInstance] createTimeLine];
+    NvsVideoTrack *videoTrack = [timeLine appendVideoTrack];
+    NvsVideoClip *clip = [videoTrack insertClip:filePath clipIndex:0];
+    [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
+    publish.timeLine = timeLine;
+    [self.navigationController pushViewController:publish animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
