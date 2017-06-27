@@ -81,9 +81,10 @@
         _recorderManager = [FSShortVideoRecorderManager sharedInstance];
         _recorderManager.delegate = self;
         _recorderView = [_recorderManager getLiveWindow];
+        [_recorderManager initBaseData];
         _recorderView.frame= CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:_recorderView];
-        [_recorderManager resumeCapturePreview];
+        //[_recorderManager resumeCapturePreview];
 
         
         [_recorderManager switchBeauty:YES];
@@ -125,6 +126,7 @@
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _finishButton.frame = IsArabic ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
    // [_finishButton setTitle:@"finish" forState:UIControlStateNormal];
+    _finishButton.enabled = NO;
     [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(finishClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_finishButton];
@@ -219,7 +221,8 @@
     _recorderButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _recorderButton.frame = CGRectMake((CGRectGetWidth(self.frame)-90)/2, CGRectGetHeight(self.frame)-25-90, 90, 90);
     [_recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
-    [_recorderButton addTarget:self action:@selector(startRecorder) forControlEvents:UIControlEventTouchUpInside];
+    [_recorderButton addTarget:self action:@selector(pauseRecorder) forControlEvents:UIControlEventTouchUpInside];
+    [_recorderButton addTarget:self action:@selector(startRecorder) forControlEvents:UIControlEventTouchDown];
     [self addSubview:_recorderButton];
     
     _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -425,21 +428,30 @@
 }
 
 - (void)startRecorder {
-    if (_isRecording) {
-        _isRecording = NO;
-        [self.recorderManager stopRecording];
-       // [self.recorderManager resumeCapturePreview];
-        [self.recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
-
-    }
-    else {
+    NSLog(@"startRecorder");
+//    if (_isRecording) {
+//        _isRecording = NO;
+//        [self.recorderManager stopRecording];
+//       // [self.recorderManager resumeCapturePreview];
+//        [self.recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
+//
+//    }
+//    else {
         _isRecording = YES;
         [self.recorderManager startRecording:nil];
         [self.recorderButton setBackgroundColor:[UIColor clearColor]];
         [self.recorderButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
         [self.recorderButton setBackgroundColor:[UIColor redColor]];
 
-    }
+ //   }
+}
+
+- (void)pauseRecorder {
+    NSLog(@"pauseRecorder");
+    _isRecording = NO;
+    [self.recorderManager stopRecording];
+    // [self.recorderManager resumeCapturePreview];
+    [self.recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
 }
 
 - (void)deleteVideo {
@@ -482,6 +494,9 @@
 
 - (void)FSShortVideoRecorderManagerProgress:(CGFloat)time {
     [self.progressView setProgress:time/30.0 animated:YES];
+    if (time >= 3.0) {
+        _finishButton.enabled = YES;
+    }
     //self.progressView.value = ((CGFloat)time)/30.0;
 }
 
@@ -495,6 +510,9 @@
 //    UIView *line = [_linesArray lastObject];
 //    [line removeFromSuperview];
 //    [_linesArray removeLastObject];
+    if (videoTime < 3.0) {
+        _finishButton.enabled = NO;
+    }
 }
 
 - (void)FSShortVideoRecorderManagerPauseRecorder {

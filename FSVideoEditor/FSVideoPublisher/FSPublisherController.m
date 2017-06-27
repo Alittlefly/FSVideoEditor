@@ -278,7 +278,20 @@
             [videoClip appendBuiltinFx:filter];         // 追加内嵌特效
         }
     }
+    [self seekTimeline];
+}
 
+- (void)seekTimeline {
+    if ([_context getStreamingEngineState] == NvsStreamingEngineState_Playback) {
+//        [_playbackProgressTimer invalidate];
+//        [self.buttonPlay setTitle:@"播放" forState:UIControlStateNormal];
+    }
+    // 定位时间线
+    // NvsVideoPreviewSizeModeLiveWindowSize模式可以提高图像显示的效率
+    // flags设置成NvsStreamingEngineSeekFlag_ShowCaptionPoster | NvsStreamingEngineSeekFlag_ShowAnimatedStickerPoster，即可整体展示字幕和动画贴纸的效果
+    if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster | NvsStreamingEngineSeekFlag_ShowAnimatedStickerPoster])
+        NSLog(@"Failed to seek timeline!");
+    [self playVideoFromHead];
 }
 
 #pragma mark - FSControlVolumeViewDelegate

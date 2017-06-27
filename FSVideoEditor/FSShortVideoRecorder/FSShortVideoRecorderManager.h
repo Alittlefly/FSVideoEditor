@@ -73,5 +73,6 @@
 - (NSArray *)getAllVideoFilters;
 - (void)addFilter:(NSString *)filter;
 - (NvsTimeline *)createTimeLine;
+- (void)initBaseData;
 
 @end

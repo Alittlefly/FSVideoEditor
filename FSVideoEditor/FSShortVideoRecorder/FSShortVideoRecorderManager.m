@@ -102,6 +102,16 @@ static FSShortVideoRecorderManager *recorderManager;
     _timeArray = [NSMutableArray arrayWithCapacity:0];
     _filePathArray = [NSMutableArray arrayWithCapacity:0];
     
+    [self initContext];
+}
+
+- (void)initContext {
+    if (_context) {
+        _context.delegate = self;
+        [self resumeCapturePreview];
+        return;
+        
+    }
     // 初始化NvsStreamingContext
     _context = [NvsStreamingContext sharedInstance];
     
@@ -339,7 +349,9 @@ static FSShortVideoRecorderManager *recorderManager;
 //    
 //    
 //    // 保存视频
-//    UISaveVideoAtPathToSavedPhotosAlbum(_outputFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    UISaveVideoAtPathToSavedPhotosAlbum(_outputFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+//    [self.videoTrack appendClip:_outputFilePath];
+
     
     [_timeArray addObject:[NSNumber numberWithInteger:_perTime]];
     
@@ -383,7 +395,7 @@ static FSShortVideoRecorderManager *recorderManager;
     
     for (NSString *path in _filePathArray) {
         [self.videoTrack appendClip:path];
-        UISaveVideoAtPathToSavedPhotosAlbum(path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+       // UISaveVideoAtPathToSavedPhotosAlbum(path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     }
     
     
@@ -436,7 +448,7 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (void)didCompileFinished:(NvsTimeline *)timeline {
     NSLog(@"didCompileFinished");
-    UISaveVideoAtPathToSavedPhotosAlbum(_videoFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+   // UISaveVideoAtPathToSavedPhotosAlbum(_videoFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinishRecorder:)]) {
         [self.delegate FSShortVideoRecorderManagerFinishRecorder:_videoFilePath];
     }
