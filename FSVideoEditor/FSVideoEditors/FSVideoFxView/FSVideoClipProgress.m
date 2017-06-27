@@ -7,26 +7,64 @@
 //
 
 #import "FSVideoClipProgress.h"
+
+typedef NS_ENUM(NSInteger,FSProgressMoveType){
+    FSProgressMoveTypeNone,
+    FSProgressMoveTypeLine,
+    FSProgressMoveTypeTint,
+};
 @interface FSVideoClipProgress()
+{
+    FSProgressMoveType _moveType;
+}
 @property(nonatomic,strong)UIView *line;
 @property(nonatomic,strong)UIView *backContent;
+@property(nonatomic,strong)UIImageView *tintImage;
+@property(nonatomic,strong)UIView *revertView;
+@property(nonatomic,strong)NSMutableArray *renderRangeViews;
 @end
 @implementation FSVideoClipProgress
+-(NSMutableArray *)renderRangeViews{
+    if (!_renderRangeViews) {
+        _renderRangeViews = [NSMutableArray array];
+    }
+    return _renderRangeViews;
+}
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        _type = FSVideoFxTypeNone;
+        _moveType = FSProgressMoveTypeNone;
         [self creatSubViews:frame];
     }
     return self;
 }
 -(void)creatSubViews:(CGRect)frame{
-    _backContent = [[UIView alloc] initWithFrame:CGRectMake(0, 6.5, CGRectGetWidth(frame), CGRectGetHeight(frame) - 13)];
+     _backContent = [[UIView alloc] initWithFrame:CGRectMake(0, 6.5, CGRectGetWidth(frame), CGRectGetHeight(frame) - 13)];
+    [_backContent setUserInteractionEnabled:NO];
     [self addSubview:_backContent];
+    
+     _revertView = [[UIView alloc] initWithFrame:CGRectMake(0, 6.5, CGRectGetWidth(frame), CGRectGetHeight(frame) - 13)];
+    [_revertView setUserInteractionEnabled:NO];
+    [_revertView setBackgroundColor:FSHexRGBAlpha(0xff39ad,0.9)];
+    [_revertView setHidden:YES];
+    [self addSubview:_revertView];
+    
     
      _line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, CGRectGetHeight(frame))];
     [_line setBackgroundColor:FSHexRGB(0xFACE15)];
      _line.layer.cornerRadius = 2.5;
      _line.layer.masksToBounds = YES;
     [self addSubview:_line];
+    
+    _tintImage = [[UIImageView alloc] init];
+    [_tintImage setAlpha:0.8];
+    [_tintImage setFrame:CGRectMake(0, 0, 30, CGRectGetHeight(frame))];
+    [_tintImage setUserInteractionEnabled:YES];
+    [_tintImage setBackgroundColor:[UIColor redColor]];
+    [_tintImage setHidden:YES];
+    [self addSubview:_tintImage];
+    
+
 }
 -(void)setBackGroundView:(UIView *)backGroundView{
     if (!backGroundView) {
@@ -36,7 +74,7 @@
     [_backContent addSubview:backGroundView];
 }
 -(void)setProgress:(CGFloat)progress{
-    _progress = progress;
+    _progress = (_type != FSVideoFxTypeRevert)?progress:(1-progress);
     
     [self updateLineFrame];
 }
@@ -49,6 +87,64 @@
         lFrame.origin.x = CGRectGetWidth(self.bounds) - CGRectGetWidth(lFrame);
     }
     _line.frame = lFrame;
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    
+    UITouch *touch = touches.anyObject;
+    CGPoint point = [touch locationInView:self];
+    if (CGRectContainsPoint(_tintImage.frame, point) && !_tintImage.hidden) {
+        _moveType = FSProgressMoveTypeTint;
+    }else{
+        _moveType = FSProgressMoveTypeNone;
+    }
+}
+-(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesMoved:touches withEvent:event];
+    
+    UITouch *touch = touches.anyObject;
+    CGPoint point = [touch locationInView:self];
+    if (_moveType == FSProgressMoveTypeTint) {
+        CGRect tintFrame = _tintImage.frame;
+        tintFrame.origin.x = point.x;
+        _tintImage.frame = tintFrame;
+    }
+    
+    [self resetBoundary];
+}
+-(void)resetBoundary{
+    if (CGRectGetMaxX(_tintImage.frame) > CGRectGetWidth(self.bounds) - CGRectGetWidth(_tintImage.frame)) {
+        CGRect tintFrame = _tintImage.frame;
+        tintFrame.origin.x = CGRectGetWidth(self.bounds) - CGRectGetWidth(_tintImage.frame);
+        _tintImage.frame = tintFrame;
+    }
+    
+    if (CGRectGetMinX(_tintImage.frame) < 0) {
+        CGRect tintFrame = _tintImage.frame;
+        tintFrame.origin.x = 0;
+        _tintImage.frame = tintFrame;
+    }
+    
+}
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesEnded:touches withEvent:event];
+    
+    if (_moveType == FSProgressMoveTypeTint) {
+        self.selectProgress = CGRectGetMidX(_tintImage.frame)/CGRectGetWidth(self.bounds);
+    }
+    _moveType = FSProgressMoveTypeNone;
+}
+-(void)setType:(FSVideoFxType)type{
+    _type = type;
+    if (type == FSVideoFxTypeSlow) {
+        [_tintImage setImage:[UIImage imageNamed:@"slow"]];
+    }else if (type == FSVideoFxTypeRepeat){
+        [_tintImage setImage:[UIImage imageNamed:@"repeat"]];
+    }else{
+        [_tintImage setImage:nil];
+    }
+    [_tintImage setHidden:type == FSVideoFxTypeNone || type == FSVideoFxTypeRevert];
+    [_revertView setHidden:type != FSVideoFxTypeRevert];
 }
 -(void)dealloc{
     NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));

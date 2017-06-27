@@ -210,7 +210,7 @@
 }
 -(void)creatSubiviews{
     CGRect sframe = self.bounds;
-    
+    [self setBackgroundColor:FSHexRGB(0x000f1e)];
     // content
      _contentView = [[UIView alloc] initWithFrame:sframe];
     [_contentView setBackgroundColor:FSHexRGB(0x000f1e)];
@@ -267,16 +267,16 @@
     }
     
     FSFxButton *soulfx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
-//    [soulfx addTarget:self longPressAction:@selector(pressfxButton:)];
     [soulfx setTitle:@"灵魂出窍" forState:(UIControlStateNormal)];
     [soulfx setBackgroundColor:[UIColor redColor]];
+    [soulfx addTarget:self action:@selector(pressfxButton:) forControlEvents:(UIControlEventTouchUpInside)];
     objc_setAssociatedObject(soulfx, FxIdKey, @"C6273A8F-C899-4765-8BFC-E683EE37AA84", OBJC_ASSOCIATION_COPY);
     
     [_contentView addSubview:soulfx];
     
     FSFxButton *shakefx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(soulfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
-//    [shakefx addTarget:self longPressAction:@selector(pressfxButton:)];
     [shakefx setBackgroundColor:[UIColor yellowColor]];
+    [shakefx addTarget:self action:@selector(pressfxButton:) forControlEvents:(UIControlEventTouchUpInside)];
     [shakefx setTitle:@"抖动" forState:(UIControlStateNormal)];
 
      objc_setAssociatedObject(shakefx, FxIdKey, @"A8A4344D-45DA-460F-A18F-C0E2355FE864", OBJC_ASSOCIATION_COPY);
@@ -288,6 +288,9 @@
 }
 -(void)unDoFix{
     NSLog(@"unDoFix");
+    if ([self.delegate respondsToSelector:@selector(videoFxUndoPackageFx:)]) {
+        [self.delegate videoFxUndoPackageFx:self];
+    }
 }
 -(void)initTimeFxs{
     
@@ -330,8 +333,10 @@
     [self.fxButtons addObjectsFromArray:@[noneFx,revertFx,repeatFx,slowFx]];
 }
 -(void)clickTimeFxButtion:(UIButton *)button{
-    if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:)]) {
-        [self.delegate videoFxViewSelectTimeFx:button.tag];
+    _progress.type = button.tag;
+    
+    if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
+        [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:1000000 progress:_progress.selectProgress];
     }
 }
 -(void)pressfxButton:(UIButton *)button{
@@ -340,9 +345,9 @@
     
     NSLog(@"按住了");
     
-//    if ([self.delegate respondsToSelector:@selector(videoFxViewSelectFxPackageId:)]) {
-//        [self.delegate videoFxViewSelectFxPackageId:fxPackageId];
-//    }
+    if ([self.delegate respondsToSelector:@selector(videoFxViewSelectFx:PackageId:startProgress:endProgress:)]) {
+        [self.delegate videoFxViewSelectFx:self PackageId:fxPackageId startProgress:0.4 endProgress:0.6];
+    }
 }
 
 #pragma mark - 
@@ -380,13 +385,20 @@
 }
 -(void)stop{
     [_progressTimer setFireDate:[NSDate distantFuture]];
-    [_progressTimer invalidate];
+//    [_progressTimer invalidate];
 }
 -(void)updateClipProgress{
-    if ([self.delegate respondsToSelector:@selector(videoFxViewUpdateProgress)]) {
-        CGFloat progress = [self.delegate videoFxViewUpdateProgress];
+    if ([self.delegate respondsToSelector:@selector(videoFxViewUpdateProgress:)]) {
+        CGFloat progress = [self.delegate videoFxViewUpdateProgress:self];
         _progress.progress = progress;
     }
+}
+
+-(void)hideUndoButton{
+    [_unDoButton setHidden:YES];
+}
+-(void)showUndoButton{
+    [_unDoButton setHidden:NO];
 }
 -(void)dealloc{
     NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));

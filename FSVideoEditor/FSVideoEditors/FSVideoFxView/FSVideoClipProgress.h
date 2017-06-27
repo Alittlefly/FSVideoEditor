@@ -22,7 +22,8 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 
 @interface FSVideoClipProgress : UIView
 @property(nonatomic,assign)CGFloat progress;
+@property(nonatomic,assign)CGFloat selectProgress;
 @property(nonatomic,assign,readonly)ProgressRange valueRange;
 @property(nonatomic,strong)UIView *backGroundView;
-
+@property(nonatomic,assign)FSVideoFxType type;
 @end

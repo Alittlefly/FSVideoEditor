@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "FSVideoClipProgress.h"
 
-
+@class FSVideoFxView;
 @protocol FSVideoFxViewDelegate <NSObject>
--(void)videoFxViewSelectFxPackageId:(NSString *)fxId;
--(void)videoFxViewSelectTimeFx:(FSVideoFxType)type;
--(CGFloat)videoFxViewUpdateProgress;
+-(void)videoFxViewSelectFx:(FSVideoFxView *)videoFxView PackageId:(NSString *)fxId startProgress:(CGFloat)startProgress endProgress:(CGFloat)endProgress;
+-(void)videoFxViewSelectTimeFx:(FSVideoFxView *)videoFxView type:(FSVideoFxType)type duration:(int64_t)duration progress:(CGFloat)progress;
+-(CGFloat)videoFxViewUpdateProgress:(FSVideoFxView *)videoFxView;
+@optional
+-(void)videoFxUndoPackageFx:(FSVideoFxView *)videoFxView;
 @end
 
 @interface FSVideoFxView : UIView
@@ -27,4 +29,7 @@
 
 -(void)start;
 -(void)stop;
+
+-(void)hideUndoButton;
+-(void)showUndoButton;
 @end
