@@ -10,8 +10,9 @@
 #import "FSShortVideoRecorderManager.h"
 #import "FSProgressView.h"
 #import "FSFilterView.h"
+#import "FSTimeCountdownView.h"
 
-@interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate>
+@interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate, FSTimeCountdownViewDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIButton *flashButton;  //闪光灯
 @property (nonatomic, strong) UIButton *finishButton;  //完成按钮
@@ -21,6 +22,8 @@
 @property (nonatomic, strong) UIButton *beautyButton;  //美颜开关
 @property (nonatomic, strong) UIButton *filterButton; //滤镜开关
 @property (nonatomic, strong) UIButton *countdownButton;//倒计时开关
+
+@property (nonatomic, strong) FSTimeCountdownView *timeCountdownView;
 
 @property (nonatomic, strong) UILabel *cutMusicLabel;
 @property (nonatomic, strong) UILabel *beautyLabel;
@@ -267,9 +270,17 @@
 }
 
 - (void)backClik {
-    [_recorderManager quitRecording];
-    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewQuitRecorderView)]) {
-        [self.delegate FSShortVideoRecorderViewQuitRecorderView];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出录制吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [_recorderManager quitRecording];
+        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewQuitRecorderView)]) {
+            [self.delegate FSShortVideoRecorderViewQuitRecorderView];
+        }
     }
 }
 
@@ -315,11 +326,11 @@
 
 - (void)recoverCameraClik {
     BOOL isSuccess = [_recorderManager switchCamera];
-    if (isSuccess) {
-        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:)]) {
-            [self.delegate FSShortVideoRecorderViewFinishRecorder:[_recorderManager getVideoPath]];
-        }
-    }
+//    if (isSuccess) {
+//        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:)]) {
+//            [self.delegate FSShortVideoRecorderViewFinishRecorder:[_recorderManager getVideoPath]];
+//        }
+//    }
 }
 
 - (void)flashClik {
@@ -423,7 +434,14 @@
 
 - (void)countdownClik {
     //倒计时动画
-    
+    //倒计时View
+    if (!_timeCountdownView) {
+        self.timeCountdownView =[[FSTimeCountdownView alloc] initWithFrame:CGRectMake((self.frame.size.width-50)/2, (self.frame.size.height-50)/2, 50, 50) timeNumber:3 number:15];
+        self.timeCountdownView.delegate = self;
+
+    }
+    self.timeCountdownView.backgroundColor =[UIColor clearColor];
+    [self addSubview:self.timeCountdownView];
     
 }
 
@@ -449,6 +467,24 @@
 - (void)pauseRecorder {
     NSLog(@"pauseRecorder");
     _isRecording = NO;
+    
+    _backButton.hidden= NO;
+    _recoverCamera.hidden = NO;
+    _flashButton.hidden = NO;
+    _cutMusicButton.hidden = NO;
+    _beautyButton.hidden = NO;
+    _filterButton.hidden = NO;
+    _countdownButton.hidden = NO;
+    _cutMusicLabel.hidden = NO;
+    _filterLabel.hidden = NO;
+    _beautyLabel.hidden = NO;
+    _countdownLabel.hidden = NO;
+    _faceUButton.hidden = NO;
+    _deleteButton.hidden = NO;
+    _speedSegment.hidden = NO;
+    
+    _isOpenFilterView = NO;
+    
     [self.recorderManager stopRecording];
     // [self.recorderManager resumeCapturePreview];
     [self.recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
@@ -488,6 +524,32 @@
             break;
     }
     [_speedSegment setImage:[self createImageWithColor:[UIColor yellowColor]] forSegmentAtIndex:sender.selectedSegmentIndex];
+}
+
+#pragma mark - FSTimeCountdownViewDelegate
+- (void)timeCountViewCountToZero {
+    _timeCountdownView.delegate = nil;
+    [_timeCountdownView removeFromSuperview];
+    _timeCountdownView = nil;
+    
+    _backButton.hidden= YES;
+    _recoverCamera.hidden = YES;
+    _flashButton.hidden = YES;
+    _cutMusicButton.hidden = YES;
+    _beautyButton.hidden = YES;
+    _filterButton.hidden = YES;
+    _countdownButton.hidden = YES;
+    _cutMusicLabel.hidden = YES;
+    _filterLabel.hidden = YES;
+    _beautyLabel.hidden = YES;
+    _countdownLabel.hidden = YES;
+    _faceUButton.hidden = YES;
+    _deleteButton.hidden = YES;
+    _speedSegment.hidden = YES;
+    
+    _isOpenFilterView = YES;
+    
+    [self startRecorder];
 }
 
 #pragma mark - FSShortVideoRecorderManagerDelegate

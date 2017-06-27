@@ -8,10 +8,11 @@
 
 #import "FSShortVideoRecorderManager.h"
 #import "NvsVideoTrack.h"
+#import "NvConvertor.h"
 
 #define MaxVideoTime 30
 
-@interface FSShortVideoRecorderManager ()<NvsStreamingContextDelegate>
+@interface FSShortVideoRecorderManager ()<NvsStreamingContextDelegate, NVConvertorDelegate>
 
 @property (nonatomic, strong) NvsLiveWindow *liveWindow;
 @property (nonatomic, strong) NvsTimeline *timeLine;
@@ -24,6 +25,9 @@
 @property (nonatomic, strong) NSMutableArray *timeArray;
 @property (nonatomic, strong) NSMutableArray *filePathArray;
 @property (nonatomic, assign) CGFloat perTime;
+
+@property (nonatomic, strong) NVConvertor *mConvertor;
+@property (nonatomic, copy) NSString *convertorFilePath;
 
 @end
 
@@ -58,6 +62,14 @@ static FSShortVideoRecorderManager *recorderManager;
         //        _liveWindow.backgroundColor = [UIColor blueColor];
     }
     return _liveWindow;
+}
+
+- (NVConvertor *)mConvertor {
+    if (!_mConvertor) {
+        _mConvertor = [[NVConvertor alloc] init];
+        _mConvertor.delegate = self;
+    }
+    return _mConvertor;
 }
 
 - (NSString *)getVideoPath {
@@ -269,8 +281,11 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     if ([self getCurrentEngineState] != NvsStreamingEngineState_CaptureRecording) {
         // 获取输出文件路径
-        NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        NSString *outputFilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
+        NSArray *docPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSString *outputFilePath = [[docPath objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
+        
+       // NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+       // NSString *outputFilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
         _outputFilePath = outputFilePath;
         
         if ([[NSFileManager defaultManager] fileExistsAtPath:outputFilePath]) {
@@ -332,6 +347,11 @@ static FSShortVideoRecorderManager *recorderManager;
         [_context stopRecording];
     }
     
+    for (NSString *path in _filePathArray) {
+        [self deleteCacheFile:path];
+    }
+    [_filePathArray removeAllObjects];
+    
     _context.delegate = nil;
     _context = nil;
 }
@@ -349,7 +369,7 @@ static FSShortVideoRecorderManager *recorderManager;
 //    
 //    
 //    // 保存视频
-    UISaveVideoAtPathToSavedPhotosAlbum(_outputFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+ //   UISaveVideoAtPathToSavedPhotosAlbum(_outputFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 //    [self.videoTrack appendClip:_outputFilePath];
 
     
@@ -391,15 +411,20 @@ static FSShortVideoRecorderManager *recorderManager;
         _timer = nil;
     }
     
-    NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    //NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSArray *docPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     
     for (NSString *path in _filePathArray) {
-        [self.videoTrack appendClip:path];
+        NSFileManager* fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:path])
+        {
+            [self.videoTrack appendClip:path];
+        }
        // UISaveVideoAtPathToSavedPhotosAlbum(path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     }
     
     
-    _videoFilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
+    _videoFilePath = [[docPath objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];//[docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
     
     BOOL isSuccess = [_context compileTimeline:self.timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_videoFilePath videoResolutionGrade:NvsCompileVideoResolutionGrade720 videoBitrateGrade:NvsCompileBitrateGradeHigh flags:0];
     if (isSuccess) {
@@ -425,11 +450,36 @@ static FSShortVideoRecorderManager *recorderManager;
     }
         [_timeArray removeLastObject];
     
-    [_filePathArray removeLastObject];
+        //文件名
+    NSString *uniquePath= [_filePathArray lastObject];
+    BOOL deleted= [self deleteCacheFile:uniquePath];
+    if (deleted) {
+        [_filePathArray removeLastObject];
+    }
+
 
         _videoIndex--;
    // }
     return YES;
+}
+
+- (BOOL)deleteCacheFile:(NSString *)filePath {
+    BOOL deleted = NO;
+    BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:filePath];
+    if (!blHave) {
+        NSLog(@"no  have");
+    }else {
+        NSLog(@" have");
+        BOOL blDele= [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+        if (blDele) {
+            NSLog(@"dele success");
+            deleted = YES;
+        }else {
+            NSLog(@"dele fail");
+        }
+        
+    }
+    return deleted;
 }
 
 #pragma mark - NvsStreamingContextDelegate
@@ -459,6 +509,85 @@ static FSShortVideoRecorderManager *recorderManager;
 - (void)didCompileFailed:(NvsTimeline *)timeline {
     NSLog(@"didCompileFailed");
 
+}
+
+#pragma mark - NVConvertorDelegate
+- (void)convertFinished {
+    [self.mConvertor stop];
+    [self.mConvertor close];
+    
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:_convertorFilePath] == NO)
+    {
+        [self convertFaild:nil];
+    }
+    else {
+        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerConvertorFinished:)]) {
+            [self.delegate FSShortVideoRecorderManagerConvertorFinished:_convertorFilePath];
+        }
+    }
+}
+
+- (void)convertFaild:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerConvertorFaild)]) {
+        [self.delegate FSShortVideoRecorderManagerConvertorFaild];
+    }
+}
+
+- (BOOL)beginConvertReverse:(NSString *)filePath {
+    if (filePath == nil) {
+        return NO;
+    }
+    
+    if ([self.mConvertor IsOpened]) {
+        [self.mConvertor stop];
+        [self.mConvertor close];
+        return NO;
+    }
+    
+    [self setupConvertor:filePath];
+    return YES;
+}
+
+- (void)setupConvertor:(NSString *)filePath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *tmpfilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"bbb.mov"]];
+    _convertorFilePath = tmpfilePath;
+    
+    struct SNvOutputConfig config ;
+    config.from = 0;
+    config.to = INT_MAX;
+    config.dataRate = 0;
+    config.scale.num = 1;
+    config.scale.den = 1;
+    
+    //倒序
+    int nTmp = config.from;
+    config.from = config.to;
+    config.to = nTmp;
+    
+    NSInteger ret = [self.mConvertor open:filePath outputFile:tmpfilePath setting:&config];
+    if (ret != NV_NOERROR) {
+        NSString *error = nil;
+        if (ret == NV_E_INVALID_POINTER) {
+            error = @"无效指针";
+        }
+        else if (ret == NV_E_INVALID_PARAMETER) {
+            error = @"无效参数";
+        }
+        else if (ret == NV_E_NO_VIDEO_STREAM) {
+            error = @"输入文件不存在视频流";
+        }
+        else if (ret == NV_E_CONVERTOR_IS_OPENED) {
+            error = @"当前转码器已经打开";
+        }
+        else if (ret == NV_E_CONVERTOR_IS_STARTED) {
+            error = @" 正在转码";
+        }
+        return;
+    }
+    
+    [self.mConvertor start];
 }
 
 @end
