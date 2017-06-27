@@ -31,7 +31,6 @@
     int64_t _endTime;
 
 }
-@property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
 
@@ -113,13 +112,6 @@
     [_context setDelegate:self];
     [self playVideoFromHead];
 }
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar setHidden:NO];
-
-}
-
 -(void)vieDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
@@ -223,7 +215,9 @@
     FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
     fxController.timeLine = _timeLine;
     fxController.filePath = _filePath;
-    [self.navigationController pushViewController:fxController animated:YES];
+    
+    [self presentViewController:fxController animated:YES completion:nil];
+//    [self.navigationController pushViewController:fxController animated:YES];
 }
 
 - (void)FSPublisherToolViewAddFilter {

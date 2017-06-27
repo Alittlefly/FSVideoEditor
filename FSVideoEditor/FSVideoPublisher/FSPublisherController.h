@@ -16,4 +16,5 @@
 
 @property(nonatomic,assign)int64_t trimIn;
 @property(nonatomic,assign)int64_t trimOut;
+@property(nonatomic,strong)NvsLiveWindow *prewidow;
 @end

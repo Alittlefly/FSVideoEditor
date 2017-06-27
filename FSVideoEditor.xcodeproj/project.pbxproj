@@ -24,6 +24,8 @@
 		562D40761EFE6A8A00BF0E0D /* FSVideoClipProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40751EFE6A8A00BF0E0D /* FSVideoClipProgress.m */; };
 		563A37901EFFE43800852642 /* FSThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A378F1EFFE43800852642 /* FSThumbnailView.m */; };
 		5647BC3C1F0272110072B618 /* FSControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC3B1F0272110072B618 /* FSControlView.m */; };
+		5647BC3F1F02954B0072B618 /* FSDissolveAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC3E1F02954B0072B618 /* FSDissolveAnimator.m */; };
+		5647BC421F0295E00072B618 /* FSSpringAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC411F0295E00072B618 /* FSSpringAnimator.m */; };
 		567A3D421EFB66B60026247E /* FSFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1A1EFB66B60026247E /* FSFile.m */; };
 		567A3D431EFB66B60026247E /* FSFileSlice.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1C1EFB66B60026247E /* FSFileSlice.m */; };
 		567A3D441EFB66B60026247E /* FSFileDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1F1EFB66B60026247E /* FSFileDivider.m */; };
@@ -155,6 +157,10 @@
 		563A378F1EFFE43800852642 /* FSThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSThumbnailView.m; sourceTree = "<group>"; };
 		5647BC3A1F0272110072B618 /* FSControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSControlView.h; sourceTree = "<group>"; };
 		5647BC3B1F0272110072B618 /* FSControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSControlView.m; sourceTree = "<group>"; };
+		5647BC3D1F02954B0072B618 /* FSDissolveAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDissolveAnimator.h; sourceTree = "<group>"; };
+		5647BC3E1F02954B0072B618 /* FSDissolveAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDissolveAnimator.m; sourceTree = "<group>"; };
+		5647BC401F0295E00072B618 /* FSSpringAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSpringAnimator.h; sourceTree = "<group>"; };
+		5647BC411F0295E00072B618 /* FSSpringAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSpringAnimator.m; sourceTree = "<group>"; };
 		567A3D191EFB66B60026247E /* FSFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFile.h; sourceTree = "<group>"; };
 		567A3D1A1EFB66B60026247E /* FSFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFile.m; sourceTree = "<group>"; };
 		567A3D1B1EFB66B60026247E /* FSFileSlice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileSlice.h; sourceTree = "<group>"; };
@@ -390,6 +396,10 @@
 			children = (
 				562D405F1EFE3B5000BF0E0D /* FSEditorLoading.h */,
 				562D40601EFE3B5000BF0E0D /* FSEditorLoading.m */,
+				5647BC3D1F02954B0072B618 /* FSDissolveAnimator.h */,
+				5647BC3E1F02954B0072B618 /* FSDissolveAnimator.m */,
+				5647BC401F0295E00072B618 /* FSSpringAnimator.h */,
+				5647BC411F0295E00072B618 /* FSSpringAnimator.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -964,6 +974,7 @@
 				562D40641EFE402E00BF0E0D /* FSPublishView.m in Sources */,
 				562D40561EFD1DE200BF0E0D /* AFSecurityPolicy.m in Sources */,
 				988AC6E41EFE6926007FBCEF /* FSFilterButton.m in Sources */,
+				5647BC3F1F02954B0072B618 /* FSDissolveAnimator.m in Sources */,
 				567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */,
 				567A3D431EFB66B60026247E /* FSFileSlice.m in Sources */,
 				562D403F1EFBE8A100BF0E0D /* FSLocalEditorController.m in Sources */,
@@ -990,6 +1001,7 @@
 				567A3D881EFB6F8E0026247E /* NSObject+MJCoding.m in Sources */,
 				567A3D4A1EFB66B60026247E /* FSFileUploadCache.m in Sources */,
 				562D40671EFE41CE00BF0E0D /* FSVideoFxController.m in Sources */,
+				5647BC421F0295E00072B618 /* FSSpringAnimator.m in Sources */,
 				988AC6E91F010B0D007FBCEF /* FSControlVolumeView.m in Sources */,
 				567A3D491EFB66B60026247E /* FSDBUploadCache.m in Sources */,
 				9840603E1EF93F130049B58E /* FSShortVideoRecorderView.m in Sources */,
