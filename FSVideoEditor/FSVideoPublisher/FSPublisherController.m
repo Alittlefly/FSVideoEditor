@@ -11,6 +11,8 @@
 #import "NvsTimeline.h"
 #import "NvsVideoClip.h"
 #import "NvsVideoTrack.h"
+#import "NvsAudioTrack.h"
+#import "NvsAudioClip.h"
 #import "NvsVideoFrameRetriever.h"
 
 
@@ -24,9 +26,11 @@
 {
     FSUploader *_uploader;
     NSString *_outPutPath;
+    
+    int64_t _startTime;
+    int64_t _endTime;
 
 }
-@property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
 
@@ -48,6 +52,15 @@
     }
     return _loading;
 }
+-(void)setTrimIn:(int64_t)trimIn{
+    _trimIn = trimIn;
+    _startTime = trimIn;
+}
+-(void)setTrimOut:(int64_t)trimOut{
+    _trimOut = trimOut;
+    _endTime = trimOut;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -64,6 +77,7 @@
         return;
     }
     _videoTrack = [_timeLine getVideoTrackByIndex:0];
+//    NvsAudioTrack *audioTrack = [_timeLine getAudioTrackByIndex:0];
     
     NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
@@ -98,13 +112,6 @@
     [_context setDelegate:self];
     [self playVideoFromHead];
 }
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar setHidden:NO];
-
-}
-
 -(void)vieDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
@@ -165,7 +172,7 @@
 
     [self deleteCurrentCompileFile:_outPutPath];
 
-    if([_context compileTimeline:_timeLine startTime:0 endTime:_timeLine.duration outputFilePath:_outPutPath videoResolutionGrade:(NvsCompileVideoResolutionGrade2160) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0]){
+    if([_context compileTimeline:_timeLine startTime:_startTime endTime:_endTime outputFilePath:_outPutPath videoResolutionGrade:(NvsCompileVideoResolutionGrade2160) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0]){
     }
 }
 #pragma mark -
@@ -176,13 +183,6 @@
 - (void)didCompileFinished:(NvsTimeline *)timeline{
     
     NSLog(@"Compile success!");
-//    _frameRetriever = [_context createVideoFrameRetriever:_outPutPath];
-//    UIImage *firstFrame = [_frameRetriever getFrameAtTime:0 videoFrameHeightGrade:(NvsVideoFrameHeightGrade720)];
-//    
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:firstFrame];
-//    [imageView setContentMode:(UIViewContentModeScaleAspectFill)];
-//    [imageView setFrame:self.view.bounds];
-//    [self.view addSubview:imageView];
     
     [self.loading loadingViewhide];
     [self uploadFile:_outPutPath];
@@ -215,7 +215,9 @@
     FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
     fxController.timeLine = _timeLine;
     fxController.filePath = _filePath;
-    [self.navigationController pushViewController:fxController animated:YES];
+    
+    [self presentViewController:fxController animated:YES completion:nil];
+//    [self.navigationController pushViewController:fxController animated:YES];
 }
 
 - (void)FSPublisherToolViewAddFilter {

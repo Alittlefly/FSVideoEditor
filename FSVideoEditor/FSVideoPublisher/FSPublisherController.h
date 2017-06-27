@@ -13,4 +13,8 @@
 @interface FSPublisherController : UIViewController
 @property(nonatomic,copy)NSString *filePath;
 @property(nonatomic,strong)NvsTimeline *timeLine;
+
+@property(nonatomic,assign)int64_t trimIn;
+@property(nonatomic,assign)int64_t trimOut;
+@property(nonatomic,strong)NvsLiveWindow *prewidow;
 @end
