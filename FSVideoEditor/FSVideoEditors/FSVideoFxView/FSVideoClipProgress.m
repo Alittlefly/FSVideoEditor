@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 @property(nonatomic,strong)UIView *revertView;
 @property(nonatomic,strong)NSMutableArray *renderRangeViews;
 @property(nonatomic,strong)UIView *fxView;
+@property(nonatomic,strong)UIView *fxContent;
 @end
 @implementation FSVideoClipProgress
 -(NSMutableArray *)renderRangeViews{
@@ -51,6 +52,10 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     [_revertView setBackgroundColor:FSHexRGBAlpha(0xff39ad,0.9)];
     [_revertView setHidden:YES];
     [self addSubview:_revertView];
+    
+     _fxContent = [[UIView alloc] initWithFrame:CGRectMake(0, 6.5, CGRectGetWidth(frame), CGRectGetHeight(frame) - 13)];
+    [_fxContent setUserInteractionEnabled:NO];
+    [self addSubview:_fxContent];
     
     
      _line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, CGRectGetHeight(frame))];
@@ -99,10 +104,17 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     if (CGRectContainsPoint(_tintImage.frame, point) && !_tintImage.hidden) {
         _moveType = FSProgressMoveTypeTint;
     }
-    else if (CGRectContainsPoint(_line.frame, point)) {
-        _moveType = FSProgressMoveTypeLine;
-    }
-    else{
+    else if (CGRectContainsPoint(CGRectMake(CGRectGetMinX(_line.frame) - 10, CGRectGetMinY(_line.frame) - 10, CGRectGetWidth(_line.frame) + 20, CGRectGetHeight(_line.frame)+20), point)) {
+        if (_ftype == FSFilterTypeFx) {
+            _moveType = FSProgressMoveTypeLine;
+        }else{
+            if(_type != FSVideoFxTypeRevert && _type !=  FSVideoFxTypeSlow && _type !=  FSVideoFxTypeRepeat){
+                _moveType = FSProgressMoveTypeLine;
+            }else{
+                _moveType = FSProgressMoveTypeNone;
+            }
+        }
+    }else{
         _moveType = FSProgressMoveTypeNone;
     }
 }
@@ -157,8 +169,14 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesEnded:touches withEvent:event];
     
-    if (_moveType == FSProgressMoveTypeTint) {
+    if (_moveType == FSProgressMoveTypeTint && _ftype != FSFilterTypeFx) {
         self.selectProgress = CGRectGetMidX(_tintImage.frame)/CGRectGetWidth(self.bounds);
+        
+        [self setProgress:self.selectProgress];
+        
+        if ([self.delegate respondsToSelector:@selector(FSVideoClipProgressUpdateProgress:)]) {
+            [self.delegate FSVideoClipProgressUpdateProgress:self.selectProgress];
+        }
     }
     _moveType = FSProgressMoveTypeNone;
 }
@@ -180,38 +198,58 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     if (_ftype == FSFilterTypeFx) {
         [_tintImage setHidden:YES];
         [_revertView setHidden:YES];
+        [_fxContent setHidden:NO];
     }else{
+        [_fxContent setHidden:YES];
         [self setType:_type];
     }
 }
 #pragma mark - 
 -(void)addFxView{
-    if (!_fxView) {
-        _fxView = [[UIView alloc] initWithFrame:CGRectMake(_progress*self.bounds.size.width, 0, self.bounds.size.width*0.1/10, self.bounds.size.height)];
-        _fxView.backgroundColor = _fxViewColor;
-        [self addSubview:_fxView];
-    }
-    else {
-        CGRect fxFrame = self.fxView.frame;
-        fxFrame.size.width += self.bounds.size.width*0.1/10;
-        self.fxView.frame = fxFrame;
-    }
     
-    _progress = (self.fxView.frame.size.width+self.fxView.frame.origin.x)/self.bounds.size.width;
-    [self updateLineFrame];
+    if (_progress <= 1.0) {
+        
+        if (!_fxView) {
+            _fxView = [[UIView alloc] initWithFrame:CGRectMake(_progress*self.bounds.size.width, -6.5, self.bounds.size.width*0.1/10, CGRectGetHeight(self.bounds))];
+            _fxView.backgroundColor = _fxViewColor;
+            [_fxContent addSubview:_fxView];
+        }
+        else {
+            CGRect fxFrame = self.fxView.frame;
+            fxFrame.size.width += self.bounds.size.width*0.1/10;
+            self.fxView.frame = fxFrame;
+        }
+        
+        _progress = (self.fxView.frame.size.width+self.fxView.frame.origin.x)/self.bounds.size.width;
+        [self updateLineFrame];
+        if ([self.delegate respondsToSelector:@selector(FSVideoClipProgressUpdateProgress:)]) {
+            [self.delegate FSVideoClipProgressUpdateProgress:_progress];
+        }
+        
+    }
 }
 #pragma mark -
 -(void)beginFxView{
-//    if (!_fxTimer) {
-//        _fxTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(addFxView) userInfo:nil repeats:YES];
-//    }
-//    [_fxTimer setFireDate:[NSDate distantPast]];
+    if (!_fxTimer) {
+        _fxTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(addFxView) userInfo:nil repeats:YES];
+    }
+    [_fxTimer setFireDate:[NSDate distantPast]];
 }
 -(void)endFxView{
     [_fxTimer setFireDate:[NSDate distantFuture]];
     
+    NSInteger old = [self.renderRangeViews count];
+    
     UIView *aView = self.fxView;
-    [self.renderRangeViews addObject:aView];
+    if (aView) {
+        [self.renderRangeViews addObject:aView];
+    }
+    if (old == 0 && [self.renderRangeViews count] > 0) {
+        if ([self.delegate respondsToSelector:@selector(videoClipProgressUndoState:)]) {
+            [self.delegate videoClipProgressUndoState:YES];
+        }
+    }
+    
     _fxView = nil;
 }
 -(void)undoFxView{
@@ -219,8 +257,18 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     [fxView removeFromSuperview];
     [self.renderRangeViews removeLastObject];
     fxView = nil;
+    
+    if (![self.renderRangeViews count]) {
+        if ([self.delegate respondsToSelector:@selector(videoClipProgressUndoState:)]) {
+            [self.delegate videoClipProgressUndoState:NO];
+        }
+    }
+
 }
 -(void)dealloc{
     NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
+}
+-(NSInteger)fiterCout{
+    return [self.renderRangeViews count];
 }
 @end

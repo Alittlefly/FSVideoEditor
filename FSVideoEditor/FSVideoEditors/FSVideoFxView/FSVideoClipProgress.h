@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 
 - (void)FSVideoClipProgressUpdateProgress:(CGFloat)progress;
 
+- (void)videoClipProgressUndoState:(BOOL)shouldShow;
+
 @end
 
 
@@ -43,6 +45,8 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 @property(nonatomic,weak) id<FSVideoClipProgressDelegate> delegate;
 
 @property(nonatomic,strong)UIColor *fxViewColor;
+
+@property(nonatomic,assign,readonly)NSInteger fiterCout;
 
 -(void)beginFxView;
 -(void)endFxView;

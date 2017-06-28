@@ -170,6 +170,7 @@
     FSLineButton *_currentSelectButton;
     NSTimer      *_progressTimer;
     NSInteger _currentTime;
+    NSString *_currentFxId;
 }
 @property(nonatomic,strong)FSVideoClipProgress *progress;
 
@@ -230,6 +231,7 @@
     
      _unDoButton = [[UIButton alloc] initWithFrame:CGRectMake(311, CGRectGetMaxY(_progress.frame), 54, 30)];
     [_unDoButton setTitle:@"撤销" forState:(UIControlStateNormal)];
+    [_unDoButton setHidden:YES];
     [_unDoButton addTarget:self action:@selector(unDoFix) forControlEvents:(UIControlEventTouchUpInside)];
     [_contentView addSubview:_unDoButton];
     
@@ -272,6 +274,8 @@
     [soulfx setBackgroundColor:[UIColor redColor]];
     [soulfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [soulfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
+    [soulfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
+
     [soulfx setTag:1];
     objc_setAssociatedObject(soulfx, FxIdKey, @"C6273A8F-C899-4765-8BFC-E683EE37AA84", OBJC_ASSOCIATION_COPY);
     
@@ -282,6 +286,8 @@
     [shakefx setTag:2];
     [shakefx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [shakefx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
+    [shakefx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
+
     [shakefx setTitle:@"抖动" forState:(UIControlStateNormal)];
 
      objc_setAssociatedObject(shakefx, FxIdKey, @"A8A4344D-45DA-460F-A18F-C0E2355FE864", OBJC_ASSOCIATION_COPY);
@@ -293,6 +299,8 @@
 }
 -(void)unDoFix{
     NSLog(@"unDoFix");
+    [_progress undoFxView];
+    
     if ([self.delegate respondsToSelector:@selector(videoFxUndoPackageFx:)]) {
         [self.delegate videoFxUndoPackageFx:self];
     }
@@ -306,16 +314,11 @@
     }
     
     [_progress beginFxView];
+    
+     _currentFxId = objc_getAssociatedObject(button, FxIdKey);
 }
 -(void)endFx:(UIButton *)button{
-    
-//    NSString *fxPackageId = objc_getAssociatedObject(button, FxIdKey);
-    
-    NSLog(@"按住了");
-    
-//    if ([self.delegate respondsToSelector:@selector(videoFxViewSelectFx:PackageId:startProgress:endProgress:)]) {
-//        [self.delegate videoFxViewSelectFx:self PackageId:fxPackageId startProgress:0.4 endProgress:0.6];
-//    }
+    _currentFxId = nil;
     [_progress endFxView];
 }
 -(void)initTimeFxs{
@@ -369,8 +372,13 @@
 #pragma mark - FSVideoClipProgressDelegate
 - (void)FSVideoClipProgressUpdateProgress:(CGFloat)progress {
     NSLog(@"UpdateProgress:  %f",progress);
+    if ([self.delegate respondsToSelector:@selector(videoFxSelectProgress:progress:packageFxId:)]) {
+        [self.delegate videoFxSelectProgress:self progress:progress packageFxId:_currentFxId];
+    }
 }
-
+-(void)videoClipProgressUndoState:(BOOL)shouldShow{
+    [_unDoButton setHidden:!shouldShow];
+}
 #pragma mark - 
 -(void)showFx:(FSLineButton *)button{
     if ([_currentSelectButton isEqual:button]) {
@@ -397,6 +405,7 @@
         [self initTimeFxs];
     }
     
+    [_unDoButton setHidden:(tag == 2)|| _progress.fiterCout == 0];
     [_progress setFtype:(tag - 1)];
 }
 -(void)start{
@@ -407,6 +416,7 @@
     [_progressTimer setFireDate:[NSDate distantPast]];
 }
 -(void)stop{
+
     [_progressTimer setFireDate:[NSDate distantFuture]];
     [_progressTimer invalidate];
     _progressTimer = nil;
