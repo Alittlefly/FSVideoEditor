@@ -551,7 +551,7 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (void)setupConvertor:(NSString *)filePath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *tmpfilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"bbb.mov"]];
+    NSString *tmpfilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
     _convertorFilePath = tmpfilePath;
     
     struct SNvOutputConfig config ;
