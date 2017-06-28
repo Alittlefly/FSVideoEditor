@@ -17,6 +17,9 @@
 - (void)FSShortVideoRecorderManagerDeleteVideo:(CGFloat)videoTime;
 - (void)FSShortVideoRecorderManagerPauseRecorder;
 
+- (void)FSShortVideoRecorderManagerConvertorFinished:(NSString *)filePath;
+- (void)FSShortVideoRecorderManagerConvertorFaild;
+
 @end
 
 @interface FSShortVideoRecorderManager : NSObject
@@ -32,6 +35,11 @@
  @return <#return value description#>
  */
 - (NvsLiveWindow *)getLiveWindow;
+
+/**
+ 初始化预览界面
+ */
+- (void)initBaseData;
 
 /**
  切换摄像头
@@ -70,9 +78,36 @@
 - (void)resumeCapturePreview;
 - (NSString *)getVideoPath;
 - (void)quitRecording;
+
+/**
+ 获取所有特效
+
+ @return <#return value description#>
+ */
 - (NSArray *)getAllVideoFilters;
+
+/**
+ 添加特效
+
+ @param filter 特效名称
+ */
 - (void)addFilter:(NSString *)filter;
+
+/**
+ 获取新的时间线
+
+ @return <#return value description#>
+ */
 - (NvsTimeline *)createTimeLine;
-- (void)initBaseData;
+
+
+
+/**
+ 视频倒序
+
+ @param filePath 原视频路径
+ @return 是否开始执行倒序操作
+ */
+- (BOOL)beginConvertReverse:(NSString *)filePath;
 
 @end

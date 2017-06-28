@@ -9,12 +9,18 @@
 #import "ViewController.h"
 #import "FSShortVideoRecorderController.h"
 #import "FSLocalVideoController.h"
+#include "NvConvertor.h"
+#import <AVKit/AVKit.h>
 
-@interface ViewController ()
+
+@interface ViewController ()<NVConvertorDelegate>
 
 @end
 
 @implementation ViewController
+{
+    NVConvertor*  mConvertor;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,6 +41,16 @@
     [videoListButton setTitle:@"视频" forState:UIControlStateNormal];
     [videoListButton addTarget:self action:@selector(videoList) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:videoListButton];
+    
+    UIButton * mStartBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [mStartBtn setFrame:CGRectMake(120, 400, 100, 50)];
+    [mStartBtn setTitle:@"开始转码" forState:UIControlStateNormal];
+    [mStartBtn addTarget:self action:@selector(beginConvert) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:mStartBtn];
+    
+    mConvertor=[[NVConvertor alloc] init];
+    mConvertor.delegate = self;
 }
 
 - (void)videoRecorder {
@@ -51,6 +67,94 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)beginConvert{
+//    mConvertorFileName = [NSURL URLWithString:@"file:///var/mobile/Media/DCIM/100APPLE/IMG_0262.mp4"];
+//    if(mConvertorFileName == nil)
+//        return;
+//    
+    if([mConvertor IsOpened]){
+        
+        [mConvertor stop];
+        [mConvertor close];
+        return;
+    }
+    
+    [self setupConvertor:[NSURL URLWithString:@"file:///var/mobile/Media/DCIM/100APPLE/IMG_0262.mp4"]];
+    
+}
+
+- (void)setupConvertor:(NSURL*)path
+{
+    NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString * tmpfilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"outtt.mov"];
+    
+    struct SNvOutputConfig config;
+    config.from = 0;
+    config.to = INT_MAX;
+    config.dataRate = 0;
+    config.scale.num = 1;
+    config.scale.den = 1;
+    
+    int nTmp = config.from;
+    config.from = config.to;
+    config.to = nTmp;
+    
+    NSInteger ret = [mConvertor open:path.absoluteString outputFile:tmpfilePath setting:&config];
+    if(ret != NV_NOERROR){
+        NSString* error = nil;
+        if(ret == NV_E_INVALID_POINTER)
+            error = @"无效指针";
+        else if(ret == NV_E_INVALID_PARAMETER)
+            error = @"无效参数";
+        else if(ret == NV_E_NO_VIDEO_STREAM)
+            error = @"输入文件不存在视频流";
+        else if(ret == NV_E_CONVERTOR_IS_OPENED)
+            error = @"当前转码器已经打开";
+        else if(ret == NV_E_CONVERTOR_IS_STARTED)
+            error = @"正在转码";
+        
+        return;
+    }
+    
+    [mConvertor start];
+    
+    
+}
+
+#pragma mark NVConvertorDelegate
+- (void)convertFinished
+{
+    
+    [mConvertor stop];
+    [mConvertor close];
+    NSString* segmentPath = nil;
+    
+    
+    
+    NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    segmentPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"out.mov"];
+    
+    
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:segmentPath] == NO)
+    {
+        return;
+    }
+    
+//    AVPlayerViewController *player = [[AVPlayerViewController alloc]init];
+//    NSURL* pathURL = [NSURL fileURLWithPath:segmentPath];
+//    player.player = [AVPlayer pla]
+//    player.player = [AVPlayer playerWithURL:pathURL];
+    
+ //   [self presentViewController:player animated:YES completion:nil];
+}
+
+- (void)convertFaild:(NSError *)error
+{
+}
+
+
 
 
 @end

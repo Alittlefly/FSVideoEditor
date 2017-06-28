@@ -106,6 +106,10 @@
 		988AC6E81F010B0D007FBCEF /* FSControlVolumeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6E61F010B0D007FBCEF /* FSControlVolumeView.h */; };
 		988AC6E91F010B0D007FBCEF /* FSControlVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */; };
 		988AC6EA1F010B0D007FBCEF /* FSControlVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */; };
+		988E3D121F024562004E837F /* libNvConvertorLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 988E3D111F024562004E837F /* libNvConvertorLib.a */; };
+		988E3D1D1F026D78004E837F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 988E3D1C1F026D78004E837F /* libstdc++.tbd */; };
+		988E3D271F0271A1004E837F /* FSTimeCountdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988E3D221F0271A1004E837F /* FSTimeCountdownView.m */; };
+		988E3D291F0271A1004E837F /* NSString+Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 988E3D261F0271A1004E837F /* NSString+Time.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -284,6 +288,15 @@
 		988AC6E21EFE6926007FBCEF /* FSFilterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFilterButton.m; sourceTree = "<group>"; };
 		988AC6E61F010B0D007FBCEF /* FSControlVolumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSControlVolumeView.h; sourceTree = "<group>"; };
 		988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSControlVolumeView.m; sourceTree = "<group>"; };
+		988E3D111F024562004E837F /* libNvConvertorLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvConvertorLib.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios/libNvConvertorLib.a; sourceTree = "<group>"; };
+		988E3D131F0245B0004E837F /* NvConvertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvConvertor.h; sourceTree = "<group>"; };
+		988E3D141F0245B0004E837F /* NvConvertorBaseDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvConvertorBaseDef.h; sourceTree = "<group>"; };
+		988E3D151F0245B0004E837F /* NvConvertorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvConvertorDelegate.h; sourceTree = "<group>"; };
+		988E3D1C1F026D78004E837F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		988E3D211F0271A1004E837F /* FSTimeCountdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTimeCountdownView.h; sourceTree = "<group>"; };
+		988E3D221F0271A1004E837F /* FSTimeCountdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTimeCountdownView.m; sourceTree = "<group>"; };
+		988E3D251F0271A1004E837F /* NSString+Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Time.h"; sourceTree = "<group>"; };
+		988E3D261F0271A1004E837F /* NSString+Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Time.m"; sourceTree = "<group>"; };
 		98E3C9BB1EFA1B9B00A2FDD6 /* NvsAssetPackageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAssetPackageManager.h; sourceTree = "<group>"; };
 		98E3C9BC1EFA1B9B00A2FDD6 /* NvsAudioClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioClip.h; sourceTree = "<group>"; };
 		98E3C9BD1EFA1B9B00A2FDD6 /* NvsAudioFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioFx.h; sourceTree = "<group>"; };
@@ -317,6 +330,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				988E3D1D1F026D78004E837F /* libstdc++.tbd in Frameworks */,
+				988E3D121F024562004E837F /* libNvConvertorLib.a in Frameworks */,
 				567A3D8E1EFB6FC90026247E /* libsqlite3.tbd in Frameworks */,
 				984060571EF940810049B58E /* libc++.tbd in Frameworks */,
 				984060551EF9407B0049B58E /* libz.tbd in Frameworks */,
@@ -394,6 +409,10 @@
 		562D405E1EFE3B4600BF0E0D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				988E3D211F0271A1004E837F /* FSTimeCountdownView.h */,
+				988E3D221F0271A1004E837F /* FSTimeCountdownView.m */,
+				988E3D251F0271A1004E837F /* NSString+Time.h */,
+				988E3D261F0271A1004E837F /* NSString+Time.m */,
 				562D405F1EFE3B5000BF0E0D /* FSEditorLoading.h */,
 				562D40601EFE3B5000BF0E0D /* FSEditorLoading.m */,
 				5647BC3D1F02954B0072B618 /* FSDissolveAnimator.h */,
@@ -739,6 +758,8 @@
 		9840603F1EF9401E0049B58E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				988E3D1C1F026D78004E837F /* libstdc++.tbd */,
+				988E3D111F024562004E837F /* libNvConvertorLib.a */,
 				562D40461EFD1DE200BF0E0D /* AFNetworking */,
 				567A3D8D1EFB6FC90026247E /* libsqlite3.tbd */,
 				567A3D681EFB6F8E0026247E /* MJExtension */,
@@ -780,6 +801,9 @@
 		98E3C9BA1EFA1B9B00A2FDD6 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				988E3D131F0245B0004E837F /* NvConvertor.h */,
+				988E3D141F0245B0004E837F /* NvConvertorBaseDef.h */,
+				988E3D151F0245B0004E837F /* NvConvertorDelegate.h */,
 				98E3C9BB1EFA1B9B00A2FDD6 /* NvsAssetPackageManager.h */,
 				98E3C9BC1EFA1B9B00A2FDD6 /* NvsAudioClip.h */,
 				98E3C9BD1EFA1B9B00A2FDD6 /* NvsAudioFx.h */,
@@ -942,6 +966,7 @@
 				563A37901EFFE43800852642 /* FSThumbnailView.m in Sources */,
 				567A3D481EFB66B60026247E /* FSFileUploadTool.m in Sources */,
 				9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */,
+				988E3D291F0271A1004E837F /* NSString+Time.m in Sources */,
 				567A3D421EFB66B60026247E /* FSFile.m in Sources */,
 				567A3D8B1EFB6F8E0026247E /* NSString+MJExtension.m in Sources */,
 				567A3D651EFB6F830026247E /* FMDatabasePool.m in Sources */,
@@ -960,6 +985,7 @@
 				567A3D871EFB6F8E0026247E /* NSObject+MJClass.m in Sources */,
 				988AC6DA1EFE560B007FBCEF /* FSEditVideoNameView.m in Sources */,
 				988AC6C71EFD1D3D007FBCEF /* FSProgressView.m in Sources */,
+				988E3D271F0271A1004E837F /* FSTimeCountdownView.m in Sources */,
 				988AC6D51EFE4B99007FBCEF /* FSPublisherToolView.m in Sources */,
 				567E0B591EF930D100C4C527 /* ViewController.m in Sources */,
 				567A3D831EFB6F8E0026247E /* MJFoundation.m in Sources */,
