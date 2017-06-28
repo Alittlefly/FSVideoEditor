@@ -56,11 +56,10 @@
     [_context.assetPackageManager installAssetPackage:SoulfxPath license:nil type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
     [_context.assetPackageManager installAssetPackage:ScalefxPath license:nil type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
     
-     _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake(82, 54, 210, 373)];
+     _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.bounds) - 210)/2.0, 54, 210, CGRectGetHeight(self.view.bounds) - 228 - 54 - 12)];
     [self.view addSubview:_prewidow];
 
-     _controlView = [[FSControlView alloc] initWithFrame:CGRectMake(82, 54, 210, 373)];
-//    [_controlView setBackgroundView:_prewidow];
+     _controlView = [[FSControlView alloc] initWithFrame:_prewidow.frame];
     UITapGestureRecognizer *tapGesturs = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(controlVideo)];
     [_controlView addGestureRecognizer:tapGesturs];
     [self.view addSubview:_controlView];
@@ -71,7 +70,7 @@
         return;
     }
     
-    _videoFxView = [[FSVideoFxView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_prewidow.frame), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - CGRectGetMaxY(_prewidow.frame)) fxs:fxs];
+    _videoFxView = [[FSVideoFxView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 228, CGRectGetWidth(self.view.bounds),228) fxs:fxs];
     [_videoFxView setDelegate:self];
     [self.view addSubview:_videoFxView];
     _videoFxView.duration = _timeLine.duration/1000000.0;
