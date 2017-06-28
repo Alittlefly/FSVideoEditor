@@ -269,14 +269,18 @@
     FSFxButton *soulfx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [soulfx setTitle:@"灵魂出窍" forState:(UIControlStateNormal)];
     [soulfx setBackgroundColor:[UIColor redColor]];
-    [soulfx addTarget:self action:@selector(pressfxButton:) forControlEvents:(UIControlEventTouchUpInside)];
+    [soulfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
+    [soulfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
+    [soulfx setTag:1];
     objc_setAssociatedObject(soulfx, FxIdKey, @"C6273A8F-C899-4765-8BFC-E683EE37AA84", OBJC_ASSOCIATION_COPY);
     
     [_contentView addSubview:soulfx];
     
     FSFxButton *shakefx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(soulfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [shakefx setBackgroundColor:[UIColor yellowColor]];
-    [shakefx addTarget:self action:@selector(pressfxButton:) forControlEvents:(UIControlEventTouchUpInside)];
+    [shakefx setTag:2];
+    [shakefx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
+    [shakefx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [shakefx setTitle:@"抖动" forState:(UIControlStateNormal)];
 
      objc_setAssociatedObject(shakefx, FxIdKey, @"A8A4344D-45DA-460F-A18F-C0E2355FE864", OBJC_ASSOCIATION_COPY);
@@ -291,6 +295,27 @@
     if ([self.delegate respondsToSelector:@selector(videoFxUndoPackageFx:)]) {
         [self.delegate videoFxUndoPackageFx:self];
     }
+}
+-(void)beginFx:(UIButton *)button{
+    NSInteger tag = button.tag;
+    if (tag == 1) {
+        _progress.fxViewColor = [UIColor redColor];
+    }else{
+        _progress.fxViewColor = [UIColor whiteColor];
+    }
+    
+    [_progress beginFxView];
+}
+-(void)endFx:(UIButton *)button{
+    
+//    NSString *fxPackageId = objc_getAssociatedObject(button, FxIdKey);
+    
+    NSLog(@"按住了");
+    
+//    if ([self.delegate respondsToSelector:@selector(videoFxViewSelectFx:PackageId:startProgress:endProgress:)]) {
+//        [self.delegate videoFxViewSelectFx:self PackageId:fxPackageId startProgress:0.4 endProgress:0.6];
+//    }
+    [_progress endFxView];
 }
 -(void)initTimeFxs{
     
@@ -339,16 +364,7 @@
         [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:1000000 progress:_progress.selectProgress];
     }
 }
--(void)pressfxButton:(UIButton *)button{
-    
-    NSString *fxPackageId = objc_getAssociatedObject(button, FxIdKey);
-    
-    NSLog(@"按住了");
-    
-    if ([self.delegate respondsToSelector:@selector(videoFxViewSelectFx:PackageId:startProgress:endProgress:)]) {
-        [self.delegate videoFxViewSelectFx:self PackageId:fxPackageId startProgress:0.4 endProgress:0.6];
-    }
-}
+
 
 #pragma mark - 
 -(void)showFx:(FSLineButton *)button{
@@ -375,6 +391,8 @@
         [_tipLabel setText:@"点击选择时间特效"];
         [self initTimeFxs];
     }
+    
+    [_progress setFtype:(tag - 1)];
 }
 -(void)start{
     if (!_progressTimer) {

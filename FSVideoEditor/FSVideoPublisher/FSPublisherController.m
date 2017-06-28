@@ -216,7 +216,7 @@
     fxController.timeLine = _timeLine;
     fxController.filePath = _filePath;
     
-    [self presentViewController:fxController animated:YES completion:nil];
+    [self presentViewController:fxController animated:NO completion:nil];
 //    [self.navigationController pushViewController:fxController animated:YES];
 }
 

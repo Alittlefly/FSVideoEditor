@@ -127,6 +127,7 @@
         [_context stop];
     [_context setDelegate:nil];
     [_videoFxView stop];
+    
 }
 
 - (void)creatSubViews{
