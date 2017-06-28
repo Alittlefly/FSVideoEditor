@@ -16,17 +16,15 @@
 #import "NvsVideoClip.h"
 #import "NvsThumbnailSequenceView.h"
 #import "FSVideoFxView.h"
-#import "FSControlView.h"
+#import "FSDissolveAnimator.h"
+#import "FSSpringAnimator.h"
 
-@interface FSVideoFxController ()<NvsStreamingContextDelegate,FSVideoFxViewDelegate>
+@interface FSVideoFxController ()<NvsStreamingContextDelegate,FSVideoFxViewDelegate,UIViewControllerTransitioningDelegate>
 {
     NSMutableString *_videoFxPackageId;
 }
-@property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
-@property(nonatomic,strong)FSVideoFxView *videoFxView;
-@property(nonatomic,strong)FSControlView *controlView;
 
 @property(nonatomic,strong)NSMutableArray *trackFxs;
 @end
@@ -37,6 +35,12 @@
         _trackFxs = [NSMutableArray array];
     }
     return _trackFxs;
+}
+- (instancetype)init{
+    if (self = [super init]) {
+        [self setTransitioningDelegate:self];
+    }
+    return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,13 +57,14 @@
     [_context.assetPackageManager installAssetPackage:ScalefxPath license:nil type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
     
      _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake(82, 54, 210, 373)];
+    [self.view addSubview:_prewidow];
+
      _controlView = [[FSControlView alloc] initWithFrame:CGRectMake(82, 54, 210, 373)];
-    [_controlView setBackgroundView:_prewidow];
+//    [_controlView setBackgroundView:_prewidow];
     UITapGestureRecognizer *tapGesturs = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(controlVideo)];
     [_controlView addGestureRecognizer:tapGesturs];
     [self.view addSubview:_controlView];
 
-    
     NSArray *fxs = [_context.assetPackageManager getAssetPackageListOfType:(NvsAssetPackageType_VideoFx)];
 
     if (!_timeLine) {
@@ -72,7 +77,6 @@
     _videoFxView.duration = _timeLine.duration/1000000.0;
     
      _videoTrack = [_timeLine getVideoTrackByIndex:0];
-    [_context connectTimeline:_timeLine withLiveWindow:_prewidow];
     
     
     NvsThumbnailSequenceView *thumbnailSequence = [[NvsThumbnailSequenceView alloc] init];
@@ -113,21 +117,27 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [_context setDelegate:self];
-    
-    if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
-        NSLog(@"Failed to seek timeline!");
-    }
-    [self playVideoFromHead];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
-        [_context stop];
-    [_context setDelegate:nil];
+//    if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
+//        [_context stop];
+//    [_context setDelegate:nil];
     [_videoFxView stop];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     
+    [_context connectTimeline:_timeLine withLiveWindow:_prewidow];
+
+    [_context setDelegate:self];
+    
+    if (![_context seekTimeline:_timeLine timestamp:[_context getTimelineCurrentPosition:_timeLine] videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
+        NSLog(@"Failed to seek timeline!");
+    }
+    [self playVideoFromHead];
 }
 
 - (void)creatSubViews{
@@ -254,6 +264,13 @@
     }
 }
 
+#pragma mark - 
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
+    return [FSDissolveAnimator initWithSourceVc:source];
+}
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed{
+    return [FSSpringAnimator initWithSourceVc:dismissed];
+}
 
 -(void)dealloc{
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));

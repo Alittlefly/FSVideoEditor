@@ -403,7 +403,9 @@
 }
 -(void)stop{
     [_progressTimer setFireDate:[NSDate distantFuture]];
-//    [_progressTimer invalidate];
+    [_progressTimer invalidate];
+    _progressTimer = nil;
+
 }
 -(void)updateClipProgress{
     if ([self.delegate respondsToSelector:@selector(videoFxViewUpdateProgress:)]) {

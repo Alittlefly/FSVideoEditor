@@ -16,11 +16,11 @@
 #import "NvsVideoFrameRetriever.h"
 
 
-#import "FSPublisherToolView.h"
 #import "FSFilterView.h"
 #import "FSUploader.h"
 #import "FSEditorLoading.h"
 #import "FSControlVolumeView.h"
+#import <CoreGraphics/CoreGraphics.h>
 
 @interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate>
 {
@@ -34,7 +34,6 @@
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
 
-@property (nonatomic, strong) FSPublisherToolView *toolView;
 
 @property (nonatomic, strong) FSFilterView *filterView;
 @property(nonatomic,strong)FSEditorLoading *loading;
@@ -90,6 +89,8 @@
     FSFileSliceDivider *divider = [[FSFileSliceDivider alloc] initWithSliceCount:1];
      _uploader = [FSUploader uploaderWithDivider:divider];
     [_uploader setDelegate:self];
+    
+
  
 }
 -(void)playVideoFromHead{
@@ -104,13 +105,18 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [_context connectTimeline:_timeLine withLiveWindow:_prewidow];
+    
+    [self.toolView setHidden:NO];
     [self.navigationController.navigationBar setHidden:YES];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [_context connectTimeline:_timeLine withLiveWindow:_prewidow];
     [_context setDelegate:self];
     [self playVideoFromHead];
+    
+    [self.navigationController.navigationBar setHidden:NO];
+
 }
 -(void)vieDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -212,12 +218,15 @@
 }
 
 - (void)FSPublisherToolViewAddEffects {
+    
+    [_context seekTimeline:_timeLine timestamp:[_context getTimelineCurrentPosition:_timeLine] videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster | NvsStreamingEngineSeekFlag_ShowAnimatedStickerPoster];
+
+    
     FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
     fxController.timeLine = _timeLine;
     fxController.filePath = _filePath;
     
-    [self presentViewController:fxController animated:NO completion:nil];
-//    [self.navigationController pushViewController:fxController animated:YES];
+    [self presentViewController:fxController animated:YES completion:nil];
 }
 
 - (void)FSPublisherToolViewAddFilter {

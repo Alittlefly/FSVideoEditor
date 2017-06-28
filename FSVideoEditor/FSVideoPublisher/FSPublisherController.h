@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "FSVideoFxController.h"
-
+#import "FSPublisherToolView.h"
+#import "NvsLiveWindow.h"
 
 @interface FSPublisherController : UIViewController
 @property(nonatomic,copy)NSString *filePath;
@@ -16,5 +17,9 @@
 
 @property(nonatomic,assign)int64_t trimIn;
 @property(nonatomic,assign)int64_t trimOut;
+
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
+@property (nonatomic, strong) FSPublisherToolView *toolView;
+
+
 @end
