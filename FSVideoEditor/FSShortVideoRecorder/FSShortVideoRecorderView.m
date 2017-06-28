@@ -11,8 +11,9 @@
 #import "FSProgressView.h"
 #import "FSFilterView.h"
 #import "FSTimeCountdownView.h"
+#import "FSSegmentView.h"
 
-@interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate, FSTimeCountdownViewDelegate,UIAlertViewDelegate>
+@interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate, FSTimeCountdownViewDelegate,UIAlertViewDelegate, FSSegmentViewDelegate>
 
 @property (nonatomic, strong) UIButton *flashButton;  //闪光灯
 @property (nonatomic, strong) UIButton *finishButton;  //完成按钮
@@ -39,6 +40,7 @@
 @property (nonatomic, strong) UIButton *faceUButton;
 @property (nonatomic, strong) UIButton *deleteButton;
 @property (nonatomic, strong) UISegmentedControl *speedSegment;
+@property (nonatomic, strong) FSSegmentView *segmentView;
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
@@ -242,15 +244,28 @@
     [_faceUButton addTarget:self action:@selector(faceuClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_faceUButton];
     
-    _speedSegment = [[UISegmentedControl alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
-    _speedSegment.frame = CGRectMake(30, CGRectGetMinY(_recorderButton.frame)-15-40, CGRectGetWidth(self.frame)-60, 40);
-    _speedSegment.selectedSegmentIndex = 2;
-    _speedSegment.backgroundColor = [UIColor lightGrayColor];
-    _speedSegment.tintColor = [UIColor yellowColor];
-    _speedSegment.layer.cornerRadius = 20;
-    _speedSegment.layer.masksToBounds = YES;
-    [_speedSegment addTarget:self action:@selector(selectPlaySpeed:) forControlEvents:UIControlEventValueChanged];
-    [self addSubview:_speedSegment];
+//    _speedSegment = [[UISegmentedControl alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
+//    _speedSegment.frame = CGRectMake(30, CGRectGetMinY(_recorderButton.frame)-15-40, CGRectGetWidth(self.frame)-60, 40);
+//    _speedSegment.selectedSegmentIndex = 2;
+//    _speedSegment.backgroundColor = [UIColor lightGrayColor];
+//    _speedSegment.tintColor = [UIColor yellowColor];
+//    _speedSegment.layer.cornerRadius = 20;
+//    _speedSegment.layer.masksToBounds = YES;
+//    [_speedSegment addTarget:self action:@selector(selectPlaySpeed:) forControlEvents:UIControlEventValueChanged];
+//    [self addSubview:_speedSegment];
+    
+    _segmentView = [[FSSegmentView alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
+    _segmentView.frame = CGRectMake(30, CGRectGetMinY(_recorderButton.frame)-15-40, CGRectGetWidth(self.frame)-60, 40);
+    _segmentView.selectedColor = FSHexRGB(0xFACE15);//[UIColor yellowColor];
+    _segmentView.backgroundColor = FSHexRGBAlpha(0x001428, 0.6);[UIColor lightGrayColor];
+    _segmentView.selectedTextColor = FSHexRGB(0x1A1D20);//[UIColor redColor];
+    _segmentView.unSelectedTextColor = FSHexRGB(0xF5F5F5);
+    _segmentView.selectedSegmentIndex = 2;
+    _segmentView.layer.cornerRadius = 20;
+    _segmentView.layer.masksToBounds = YES;
+    _segmentView.delegate = self;
+    [self addSubview:_segmentView];
+    
 }
 
 -(UIImage*) createImageWithColor:(UIColor*) color
@@ -433,6 +448,22 @@
 
 
 - (void)countdownClik {
+    _backButton.hidden= YES;
+    _recoverCamera.hidden = YES;
+    _flashButton.hidden = YES;
+    _cutMusicButton.hidden = YES;
+    _beautyButton.hidden = YES;
+    _filterButton.hidden = YES;
+    _countdownButton.hidden = YES;
+    _cutMusicLabel.hidden = YES;
+    _filterLabel.hidden = YES;
+    _beautyLabel.hidden = YES;
+    _countdownLabel.hidden = YES;
+    _faceUButton.hidden = YES;
+    _deleteButton.hidden = YES;
+    _speedSegment.hidden = YES;
+    
+   // _isOpenFilterView = YES;
     //倒计时动画
     //倒计时View
     if (!_timeCountdownView) {
@@ -458,8 +489,7 @@
         _isRecording = YES;
         [self.recorderManager startRecording:nil];
         [self.recorderButton setBackgroundColor:[UIColor clearColor]];
-        [self.recorderButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [self.recorderButton setBackgroundColor:[UIColor redColor]];
+        [self.recorderButton setImage:[UIImage imageNamed:@"recorder-auto"] forState:UIControlStateNormal];
 
  //   }
 }
@@ -523,7 +553,31 @@
         default:
             break;
     }
-    [_speedSegment setImage:[self createImageWithColor:[UIColor yellowColor]] forSegmentAtIndex:sender.selectedSegmentIndex];
+    //[_speedSegment setImage:[self createImageWithColor:[UIColor yellowColor]] forSegmentAtIndex:sender.selectedSegmentIndex];
+}
+
+- (void)FSSegmentView:(FSSegmentView *)segmentView selected:(NSInteger)index {
+    switch (index) {
+        case 0:
+            _playSpeed = FSShortVideoPlaySpeed_Hyperslow;
+            break;
+        case 1:
+            _playSpeed = FSShortVideoPlaySpeed_Slow;
+            break;
+        case 2:
+            _playSpeed = FSShortVideoPlaySpeed_Normal;
+            break;
+        case 3:
+            _playSpeed = FSShortVideoPlaySpeed_Quick;
+            break;
+        case 4:
+            _playSpeed = FSShortVideoPlaySpeed_VeryFast;
+            break;
+            
+        default:
+            break;
+    }
+
 }
 
 #pragma mark - FSTimeCountdownViewDelegate
@@ -531,23 +585,6 @@
     _timeCountdownView.delegate = nil;
     [_timeCountdownView removeFromSuperview];
     _timeCountdownView = nil;
-    
-    _backButton.hidden= YES;
-    _recoverCamera.hidden = YES;
-    _flashButton.hidden = YES;
-    _cutMusicButton.hidden = YES;
-    _beautyButton.hidden = YES;
-    _filterButton.hidden = YES;
-    _countdownButton.hidden = YES;
-    _cutMusicLabel.hidden = YES;
-    _filterLabel.hidden = YES;
-    _beautyLabel.hidden = YES;
-    _countdownLabel.hidden = YES;
-    _faceUButton.hidden = YES;
-    _deleteButton.hidden = YES;
-    _speedSegment.hidden = YES;
-    
-    _isOpenFilterView = YES;
     
     [self startRecorder];
 }
@@ -558,6 +595,7 @@
     [self.progressView setProgress:time/30.0 animated:YES];
     if (time >= 3.0) {
         _finishButton.enabled = YES;
+        [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-red"] forState:UIControlStateNormal];
     }
     //self.progressView.value = ((CGFloat)time)/30.0;
 }
@@ -574,6 +612,7 @@
 //    [_linesArray removeLastObject];
     if (videoTime < 3.0) {
         _finishButton.enabled = NO;
+        [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
     }
 }
 

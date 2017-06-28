@@ -8,11 +8,11 @@
 
 #import "FSShortVideoRecorderManager.h"
 #import "NvsVideoTrack.h"
-#import "NvConvertor.h"
+#import "NvcConvertor.h"
 
 #define MaxVideoTime 30
 
-@interface FSShortVideoRecorderManager ()<NvsStreamingContextDelegate, NVConvertorDelegate>
+@interface FSShortVideoRecorderManager ()<NvsStreamingContextDelegate, NvcConvertorDelegate>
 
 @property (nonatomic, strong) NvsLiveWindow *liveWindow;
 @property (nonatomic, strong) NvsTimeline *timeLine;
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSMutableArray *filePathArray;
 @property (nonatomic, assign) CGFloat perTime;
 
-@property (nonatomic, strong) NVConvertor *mConvertor;
+@property (nonatomic, strong) NvcConvertor *mConvertor;
 @property (nonatomic, copy) NSString *convertorFilePath;
 
 @end
@@ -64,9 +64,9 @@ static FSShortVideoRecorderManager *recorderManager;
     return _liveWindow;
 }
 
-- (NVConvertor *)mConvertor {
+- (NvcConvertor *)mConvertor {
     if (!_mConvertor) {
-        _mConvertor = [[NVConvertor alloc] init];
+        _mConvertor = [[NvcConvertor alloc] init];
         _mConvertor.delegate = self;
     }
     return _mConvertor;
@@ -554,7 +554,7 @@ static FSShortVideoRecorderManager *recorderManager;
     NSString *tmpfilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
     _convertorFilePath = tmpfilePath;
     
-    struct SNvOutputConfig config ;
+    struct SNvcOutputConfig config ;
     config.from = 0;
     config.to = INT_MAX;
     config.dataRate = 0;
@@ -567,21 +567,21 @@ static FSShortVideoRecorderManager *recorderManager;
     config.to = nTmp;
     
     NSInteger ret = [self.mConvertor open:filePath outputFile:tmpfilePath setting:&config];
-    if (ret != NV_NOERROR) {
+    if (ret != NVC_NOERROR) {
         NSString *error = nil;
-        if (ret == NV_E_INVALID_POINTER) {
+        if (ret == NVC_E_INVALID_POINTER) {
             error = @"无效指针";
         }
-        else if (ret == NV_E_INVALID_PARAMETER) {
+        else if (ret == NVC_E_INVALID_PARAMETER) {
             error = @"无效参数";
         }
-        else if (ret == NV_E_NO_VIDEO_STREAM) {
+        else if (ret == NVC_E_NO_VIDEO_STREAM) {
             error = @"输入文件不存在视频流";
         }
-        else if (ret == NV_E_CONVERTOR_IS_OPENED) {
+        else if (ret == NVC_E_CONVERTOR_IS_OPENED) {
             error = @"当前转码器已经打开";
         }
-        else if (ret == NV_E_CONVERTOR_IS_STARTED) {
+        else if (ret == NVC_E_CONVERTOR_IS_STARTED) {
             error = @" 正在转码";
         }
         return;
