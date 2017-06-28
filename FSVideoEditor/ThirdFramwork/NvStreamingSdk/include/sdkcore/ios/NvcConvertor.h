@@ -1,33 +1,33 @@
 //================================================================================
 //
-// (c) Copyright China Digital Video (Beijing) Limited, 2014. All rights reserved.
+// (c) Copyright China Digital Video (Beijing) Limited, 2016. All rights reserved.
 //
 // This code and information is provided "as is" without warranty of any kind,
 // either expressed or implied, including but not limited to the implied
 // warranties of merchantability and/or fitness for a particular purpose.
 //
 //--------------------------------------------------------------------------------
-//   Birth Date:    Mar 26. 2014
+//   Birth Date:    June 28. 2017
 //   Author:        NewAuto video team
 //================================================================================
 #pragma once
 
-#include "NvConvertorBaseDef.h"
-#include "NvConvertorDelegate.h"
+#include "NvcConvertorBaseDef.h"
+#include "NvcConvertorDelegate.h"
 #import <Foundation/Foundation.h>
 
-@interface NVConvertor : NSObject{
+@interface NvcConvertor : NSObject{
     
-  id<NVConvertorDelegate> _delegate;     //代理
+  id<NvcConvertorDelegate> _delegate;     //代理
 }
 
-@property(nonatomic, strong) id<NVConvertorDelegate> delegate;
+@property(nonatomic, strong) id<NvcConvertorDelegate> delegate;
 
 + (BOOL)InstallLicense:(NSString*)licenseFile;
 
 - (instancetype)initWithMaxCacheSample:(NSInteger)maxCacheCount;
 //
-- (NSInteger)open:(NSString*)inputFile outputFile:(NSString*)outputPath setting:(struct SNvOutputConfig*)config;
+- (NSInteger)open:(NSString*)inputFile outputFile:(NSString*)outputPath setting:(struct SNvcOutputConfig*)config;
 //
 - (void)close;
 

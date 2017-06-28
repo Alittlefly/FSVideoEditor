@@ -433,6 +433,22 @@
 
 
 - (void)countdownClik {
+    _backButton.hidden= YES;
+    _recoverCamera.hidden = YES;
+    _flashButton.hidden = YES;
+    _cutMusicButton.hidden = YES;
+    _beautyButton.hidden = YES;
+    _filterButton.hidden = YES;
+    _countdownButton.hidden = YES;
+    _cutMusicLabel.hidden = YES;
+    _filterLabel.hidden = YES;
+    _beautyLabel.hidden = YES;
+    _countdownLabel.hidden = YES;
+    _faceUButton.hidden = YES;
+    _deleteButton.hidden = YES;
+    _speedSegment.hidden = YES;
+    
+   // _isOpenFilterView = YES;
     //倒计时动画
     //倒计时View
     if (!_timeCountdownView) {
@@ -458,8 +474,7 @@
         _isRecording = YES;
         [self.recorderManager startRecording:nil];
         [self.recorderButton setBackgroundColor:[UIColor clearColor]];
-        [self.recorderButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [self.recorderButton setBackgroundColor:[UIColor redColor]];
+        [self.recorderButton setImage:[UIImage imageNamed:@"recorder-auto"] forState:UIControlStateNormal];
 
  //   }
 }
@@ -532,23 +547,6 @@
     [_timeCountdownView removeFromSuperview];
     _timeCountdownView = nil;
     
-    _backButton.hidden= YES;
-    _recoverCamera.hidden = YES;
-    _flashButton.hidden = YES;
-    _cutMusicButton.hidden = YES;
-    _beautyButton.hidden = YES;
-    _filterButton.hidden = YES;
-    _countdownButton.hidden = YES;
-    _cutMusicLabel.hidden = YES;
-    _filterLabel.hidden = YES;
-    _beautyLabel.hidden = YES;
-    _countdownLabel.hidden = YES;
-    _faceUButton.hidden = YES;
-    _deleteButton.hidden = YES;
-    _speedSegment.hidden = YES;
-    
-    _isOpenFilterView = YES;
-    
     [self startRecorder];
 }
 
@@ -558,6 +556,7 @@
     [self.progressView setProgress:time/30.0 animated:YES];
     if (time >= 3.0) {
         _finishButton.enabled = YES;
+        [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-red"] forState:UIControlStateNormal];
     }
     //self.progressView.value = ((CGFloat)time)/30.0;
 }
@@ -574,6 +573,7 @@
 //    [_linesArray removeLastObject];
     if (videoTime < 3.0) {
         _finishButton.enabled = NO;
+        [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
     }
 }
 

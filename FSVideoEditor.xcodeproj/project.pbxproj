@@ -271,6 +271,9 @@
 		984060521EF940730049B58E /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		984060541EF9407B0049B58E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		984060561EF940810049B58E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		987700A91F03A6520043394E /* NvcConvertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertor.h; sourceTree = "<group>"; };
+		987700AA1F03A6520043394E /* NvcConvertorBaseDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertorBaseDef.h; sourceTree = "<group>"; };
+		987700AB1F03A6520043394E /* NvcConvertorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertorDelegate.h; sourceTree = "<group>"; };
 		988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSProgressView.h; sourceTree = "<group>"; };
 		988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSProgressView.m; sourceTree = "<group>"; };
 		988AC6C91EFD3BB7007FBCEF /* FSEditVideoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEditVideoTool.h; sourceTree = "<group>"; };
@@ -286,9 +289,6 @@
 		988AC6E61F010B0D007FBCEF /* FSControlVolumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSControlVolumeView.h; sourceTree = "<group>"; };
 		988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSControlVolumeView.m; sourceTree = "<group>"; };
 		988E3D111F024562004E837F /* libNvConvertorLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvConvertorLib.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios/libNvConvertorLib.a; sourceTree = "<group>"; };
-		988E3D131F0245B0004E837F /* NvConvertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvConvertor.h; sourceTree = "<group>"; };
-		988E3D141F0245B0004E837F /* NvConvertorBaseDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvConvertorBaseDef.h; sourceTree = "<group>"; };
-		988E3D151F0245B0004E837F /* NvConvertorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvConvertorDelegate.h; sourceTree = "<group>"; };
 		988E3D1C1F026D78004E837F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		988E3D211F0271A1004E837F /* FSTimeCountdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTimeCountdownView.h; sourceTree = "<group>"; };
 		988E3D221F0271A1004E837F /* FSTimeCountdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTimeCountdownView.m; sourceTree = "<group>"; };
@@ -796,9 +796,9 @@
 		98E3C9BA1EFA1B9B00A2FDD6 /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				988E3D131F0245B0004E837F /* NvConvertor.h */,
-				988E3D141F0245B0004E837F /* NvConvertorBaseDef.h */,
-				988E3D151F0245B0004E837F /* NvConvertorDelegate.h */,
+				987700A91F03A6520043394E /* NvcConvertor.h */,
+				987700AA1F03A6520043394E /* NvcConvertorBaseDef.h */,
+				987700AB1F03A6520043394E /* NvcConvertorDelegate.h */,
 				98E3C9BB1EFA1B9B00A2FDD6 /* NvsAssetPackageManager.h */,
 				98E3C9BC1EFA1B9B00A2FDD6 /* NvsAudioClip.h */,
 				98E3C9BD1EFA1B9B00A2FDD6 /* NvsAudioFx.h */,
