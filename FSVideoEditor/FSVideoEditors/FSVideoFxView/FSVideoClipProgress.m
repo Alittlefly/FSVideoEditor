@@ -16,6 +16,8 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 @interface FSVideoClipProgress()
 {
     FSProgressMoveType _moveType;
+    
+    NSTimer *_fxTimer;
 }
 @property(nonatomic,strong)UIView *line;
 @property(nonatomic,strong)UIView *backContent;
@@ -145,6 +147,33 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     }
     [_tintImage setHidden:type == FSVideoFxTypeNone || type == FSVideoFxTypeRevert];
     [_revertView setHidden:type != FSVideoFxTypeRevert];
+}
+-(void)setFtype:(FSFilterType)ftype{
+    _ftype = ftype;
+    
+    if (_ftype == FSFilterTypeFx) {
+        [_tintImage setHidden:YES];
+        [_revertView setHidden:YES];
+    }else{
+        [self setType:_type];
+    }
+}
+#pragma mark - 
+-(void)addFxView{
+    
+}
+#pragma mark -
+-(void)beginFxView{
+    if (!_fxTimer) {
+        _fxTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(addFxView) userInfo:nil repeats:YES];
+    }
+    [_fxTimer setFireDate:[NSDate distantPast]];
+}
+-(void)endFxView{
+    [_fxTimer setFireDate:[NSDate distantFuture]];
+}
+-(void)undoFxView{
+    
 }
 -(void)dealloc{
     NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
