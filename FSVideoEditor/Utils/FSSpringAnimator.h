@@ -10,5 +10,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FSSpringAnimator : NSObject<UIViewControllerAnimatedTransitioning>
-
++(instancetype)initWithSourceVc:(UIViewController *)sourceVc;
 @end

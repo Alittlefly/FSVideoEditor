@@ -16,7 +16,6 @@
 		562D40591EFD1DE200BF0E0D /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40531EFD1DE200BF0E0D /* AFURLSessionManager.m */; };
 		562D405D1EFD39F100BF0E0D /* FSPublisherController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D405C1EFD39F100BF0E0D /* FSPublisherController.m */; };
 		562D40611EFE3B5000BF0E0D /* FSEditorLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40601EFE3B5000BF0E0D /* FSEditorLoading.m */; };
-		562D40641EFE402E00BF0E0D /* FSPublishView.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40631EFE402E00BF0E0D /* FSPublishView.m */; };
 		562D40671EFE41CE00BF0E0D /* FSVideoFxController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40661EFE41CE00BF0E0D /* FSVideoFxController.m */; };
 		562D406B1EFE4B4400BF0E0D /* FSVideoFxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D406A1EFE4B4400BF0E0D /* FSVideoFxView.m */; };
 		562D40701EFE4D2A00BF0E0D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 562D406F1EFE4D2A00BF0E0D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx */; };
@@ -146,8 +145,6 @@
 		562D405C1EFD39F100BF0E0D /* FSPublisherController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPublisherController.m; sourceTree = "<group>"; };
 		562D405F1EFE3B5000BF0E0D /* FSEditorLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEditorLoading.h; sourceTree = "<group>"; };
 		562D40601EFE3B5000BF0E0D /* FSEditorLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEditorLoading.m; sourceTree = "<group>"; };
-		562D40621EFE402E00BF0E0D /* FSPublishView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPublishView.h; sourceTree = "<group>"; };
-		562D40631EFE402E00BF0E0D /* FSPublishView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPublishView.m; sourceTree = "<group>"; };
 		562D40651EFE41CE00BF0E0D /* FSVideoFxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSVideoFxController.h; sourceTree = "<group>"; };
 		562D40661EFE41CE00BF0E0D /* FSVideoFxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVideoFxController.m; sourceTree = "<group>"; };
 		562D40691EFE4B4400BF0E0D /* FSVideoFxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSVideoFxView.h; sourceTree = "<group>"; };
@@ -400,8 +397,6 @@
 				988AC6D31EFE4B99007FBCEF /* FSPublisherToolView.m */,
 				988AC6D71EFE560B007FBCEF /* FSEditVideoNameView.h */,
 				988AC6D81EFE560B007FBCEF /* FSEditVideoNameView.m */,
-				562D40621EFE402E00BF0E0D /* FSPublishView.h */,
-				562D40631EFE402E00BF0E0D /* FSPublishView.m */,
 			);
 			path = FSVideoPublisher;
 			sourceTree = "<group>";
@@ -997,7 +992,6 @@
 				562D40591EFD1DE200BF0E0D /* AFURLSessionManager.m in Sources */,
 				567A3D4E1EFB66B60026247E /* FSUploader.m in Sources */,
 				567A3D8C1EFB6F8E0026247E /* README.md in Sources */,
-				562D40641EFE402E00BF0E0D /* FSPublishView.m in Sources */,
 				562D40561EFD1DE200BF0E0D /* AFSecurityPolicy.m in Sources */,
 				988AC6E41EFE6926007FBCEF /* FSFilterButton.m in Sources */,
 				5647BC3F1F02954B0072B618 /* FSDissolveAnimator.m in Sources */,

@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @interface FSDissolveAnimator : NSObject<UIViewControllerAnimatedTransitioning>
-
++(instancetype)initWithSourceVc:(UIViewController *)sourceVc;
 @end

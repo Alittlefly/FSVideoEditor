@@ -276,5 +276,8 @@ static BOOL IsArabic = NO;
     [UIView commitAnimations];
 }
 
+- (void)dealloc{
+    NSLog(@"%@ dealloc",NSStringFromClass([self class]));
+}
 
 @end
