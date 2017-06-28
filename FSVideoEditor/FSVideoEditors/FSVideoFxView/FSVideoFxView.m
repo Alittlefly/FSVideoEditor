@@ -165,7 +165,7 @@
 @end
 
 #define FxIdKey @"FxIdKey"
-@interface FSVideoFxView()
+@interface FSVideoFxView()<FSVideoClipProgressDelegate>
 {
     FSLineButton *_currentSelectButton;
     NSTimer      *_progressTimer;
@@ -217,6 +217,7 @@
     [self addSubview:_contentView];
     
     _progress = [[FSVideoClipProgress alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(sframe), 40)];
+    _progress.delegate = self;
     [self addSubview:_progress];
     
      _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30, 21)];
@@ -365,6 +366,10 @@
     }
 }
 
+#pragma mark - FSVideoClipProgressDelegate
+- (void)FSVideoClipProgressUpdateProgress:(CGFloat)progress {
+    NSLog(@"UpdateProgress:  %f",progress);
+}
 
 #pragma mark - 
 -(void)showFx:(FSLineButton *)button{

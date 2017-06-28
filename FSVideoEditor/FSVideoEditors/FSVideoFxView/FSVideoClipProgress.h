@@ -25,6 +25,12 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
     FSVideoFxTypeRepeat,
 };
 
+@protocol FSVideoClipProgressDelegate <NSObject>
+
+- (void)FSVideoClipProgressUpdateProgress:(CGFloat)progress;
+
+@end
+
 
 @interface FSVideoClipProgress : UIView
 @property(nonatomic,assign)CGFloat progress;
@@ -33,6 +39,8 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 @property(nonatomic,strong)UIView *backGroundView;
 @property(nonatomic,assign)FSVideoFxType type;
 @property(nonatomic,assign)FSFilterType ftype;
+
+@property(nonatomic,weak) id<FSVideoClipProgressDelegate> delegate;
 
 @property(nonatomic,strong)UIColor *fxViewColor;
 
