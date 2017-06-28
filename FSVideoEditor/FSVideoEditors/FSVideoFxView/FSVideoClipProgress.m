@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 @property(nonatomic,strong)UIImageView *tintImage;
 @property(nonatomic,strong)UIView *revertView;
 @property(nonatomic,strong)NSMutableArray *renderRangeViews;
+@property(nonatomic,strong)UIView *fxView;
 @end
 @implementation FSVideoClipProgress
 -(NSMutableArray *)renderRangeViews{
@@ -97,7 +98,11 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     CGPoint point = [touch locationInView:self];
     if (CGRectContainsPoint(_tintImage.frame, point) && !_tintImage.hidden) {
         _moveType = FSProgressMoveTypeTint;
-    }else{
+    }
+    else if (CGRectContainsPoint(_line.frame, point)) {
+        _moveType = FSProgressMoveTypeLine;
+    }
+    else{
         _moveType = FSProgressMoveTypeNone;
     }
 }
@@ -110,6 +115,15 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
         CGRect tintFrame = _tintImage.frame;
         tintFrame.origin.x = point.x;
         _tintImage.frame = tintFrame;
+    }
+    else if (_moveType == FSProgressMoveTypeLine) {
+        CGRect lineFrame = _line.frame;
+        lineFrame.origin.x = point.x;
+        _line.frame = lineFrame;
+        _progress = point.x/self.bounds.size.width;
+        if ([self.delegate respondsToSelector:@selector(FSVideoClipProgressUpdateProgress:)]) {
+            [self.delegate FSVideoClipProgressUpdateProgress:_progress];
+        }
     }
     
     [self resetBoundary];
@@ -125,6 +139,18 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
         CGRect tintFrame = _tintImage.frame;
         tintFrame.origin.x = 0;
         _tintImage.frame = tintFrame;
+    }
+    
+    if (CGRectGetMaxX(_line.frame) > CGRectGetWidth(self.bounds)-CGRectGetWidth(_line.frame)) {
+        CGRect lineFrame = _line.frame;
+        lineFrame.origin.x = CGRectGetWidth(self.bounds)-CGRectGetWidth(_line.frame);
+        _line.frame = lineFrame;
+    }
+    
+    if (CGRectGetMinX(_line.frame) < 0) {
+        CGRect lineFrame = _line.frame;
+        lineFrame.origin.x = 0;
+        _line.frame = lineFrame;
     }
     
 }
@@ -160,7 +186,19 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 }
 #pragma mark - 
 -(void)addFxView{
+    if (!_fxView) {
+        _fxView = [[UIView alloc] initWithFrame:CGRectMake(_progress*self.bounds.size.width, 0, self.bounds.size.width*0.1/10, self.bounds.size.height)];
+        _fxView.backgroundColor = [UIColor redColor];
+        [self addSubview:_fxView];
+    }
+    else {
+        CGRect fxFrame = self.fxView.frame;
+        fxFrame.size.width += self.bounds.size.width*0.1/10;
+        self.fxView.frame = fxFrame;
+    }
     
+    _progress = (self.fxView.frame.size.width+self.fxView.frame.origin.x)/self.bounds.size.width;
+    [self updateLineFrame];
 }
 #pragma mark -
 -(void)beginFxView{
@@ -171,9 +209,16 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 }
 -(void)endFxView{
     [_fxTimer setFireDate:[NSDate distantFuture]];
+    
+    UIView *aView = self.fxView;
+    [self.renderRangeViews addObject:aView];
+    _fxView = nil;
 }
 -(void)undoFxView{
-    
+    UIView *fxView = [self.renderRangeViews lastObject];
+    [fxView removeFromSuperview];
+    [self.renderRangeViews removeLastObject];
+    fxView = nil;
 }
 -(void)dealloc{
     NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
