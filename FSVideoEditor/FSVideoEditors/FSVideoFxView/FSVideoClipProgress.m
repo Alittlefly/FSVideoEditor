@@ -188,7 +188,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 -(void)addFxView{
     if (!_fxView) {
         _fxView = [[UIView alloc] initWithFrame:CGRectMake(_progress*self.bounds.size.width, 0, self.bounds.size.width*0.1/10, self.bounds.size.height)];
-        _fxView.backgroundColor = [UIColor redColor];
+        _fxView.backgroundColor = _fxViewColor;
         [self addSubview:_fxView];
     }
     else {
