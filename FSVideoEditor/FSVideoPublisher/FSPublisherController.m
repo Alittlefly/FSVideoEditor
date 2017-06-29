@@ -7,6 +7,7 @@
 //
 
 #import "FSPublisherController.h"
+
 #import "NvsStreamingContext.h"
 #import "NvsTimeline.h"
 #import "NvsVideoClip.h"
@@ -20,7 +21,7 @@
 #import "FSUploader.h"
 #import "FSEditorLoading.h"
 #import "FSControlVolumeView.h"
-#import <CoreGraphics/CoreGraphics.h>
+#import "FSMusicController.h"
 
 @interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate>
 {
@@ -214,6 +215,10 @@
 }
 
 - (void)FSPublisherToolViewEditMusic {
+    
+    [self FSPublisherToolViewChooseMusic];
+    
+    /*
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *musicPath = [mainBundle pathForResource:@"wind" ofType:@"mp3"];
     
@@ -223,7 +228,8 @@
     NvsAudioClip *audio = [_audiotrack appendClip:musicPath];
     [audio changeTrimOutPoint:length affectSibling:YES];
     
-    
+    [self playVideoFromHead];
+     */
 }
 
 - (void)FSPublisherToolViewAddEffects {
@@ -255,7 +261,9 @@
 }
 
 - (void)FSPublisherToolViewChooseMusic {
-
+    FSMusicController *music = [FSMusicController new];
+    music.timeLine = _timeLine;
+    [self.navigationController pushViewController:music animated:YES];
 }
 
 - (void)FSPublisherToolViewSaveToDraft {
