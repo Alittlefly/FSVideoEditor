@@ -118,12 +118,18 @@
     }
 }
 
+/**
+ 视频音量
+ */
 - (void)changeSoundtrack {
     if ([self.delegate respondsToSelector:@selector(FSControlVolumeViewChangeSoundtrack:)]) {
         [self.delegate FSControlVolumeViewChangeSoundtrack:_soundtrackSlider.value];
     }
 }
 
+/**
+ 配乐音量
+ */
 - (void)changeScore {
     if ([self.delegate respondsToSelector:@selector(FSControlVolumeViewChangeScore:)]) {
         [self.delegate FSControlVolumeViewChangeScore:_scoreSlider.value];

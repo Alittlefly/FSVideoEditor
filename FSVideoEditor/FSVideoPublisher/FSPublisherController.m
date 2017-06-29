@@ -308,7 +308,9 @@
 
 #pragma mark - FSControlVolumeViewDelegate
 - (void)FSControlVolumeViewChangeScore:(CGFloat)value {
-
+    NvsAudioTrack *audioTrack = [_timeLine getAudioTrackByIndex:0];
+    NvsAudioClip *audioClip = [audioTrack getClipWithIndex:0];
+    [audioClip setVolumeGain:value rightVolumeGain:value];
 }
 
 - (void)FSControlVolumeViewChangeSoundtrack:(CGFloat)value {
