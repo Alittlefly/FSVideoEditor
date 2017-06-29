@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NvsTimeline.h"
+#import "NvsAudioClip.h"
+#import "NvsAudioTrack.h"
 
 @interface FSMusicController : UIViewController
-
+@property(nonatomic,assign)NvsTimeline *timeLine;
 @end
