@@ -25,6 +25,7 @@
 @interface FSShortVideoRecorderManager : NSObject
 
 @property (nonatomic, weak) id<FSShortVideoRecorderManagerDelegate> delegate;
+@property (nonatomic, assign) CGFloat recorderSpeed;
 
 + (instancetype)sharedInstance;
 
