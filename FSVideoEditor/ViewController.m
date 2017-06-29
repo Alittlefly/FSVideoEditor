@@ -12,6 +12,7 @@
 #include "NvcConvertor.h"
 #import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "FSMusicController.h"
 
 
 @interface ViewController ()<NvcConvertorDelegate>
@@ -34,7 +35,12 @@
     [videoRecorderButton addTarget:self action:@selector(videoRecorder) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:videoRecorderButton];
     
-    
+//    UIButton *musicListButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    musicListButton.frame = CGRectMake(170, 100, 60, 30);
+//    musicListButton.backgroundColor = [UIColor redColor];
+//    [musicListButton setTitle:@"选择音乐" forState:UIControlStateNormal];
+//    [musicListButton addTarget:self action:@selector(musicList) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:musicListButton];
     
     UIButton *videoListButton = [UIButton buttonWithType:UIButtonTypeCustom];
     videoListButton.frame = CGRectMake(250, 100, 60, 30);
@@ -52,6 +58,12 @@
     
     mConvertor=[[NvcConvertor alloc] init];
     mConvertor.delegate = self;
+    
+    FSMusicController *music = [[FSMusicController alloc] init];
+//    [self.navigationController pushViewController:music animated:YES];
+    [self addChildViewController:music];
+    [music.view setFrame:CGRectMake(0, 200, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 200)];
+    [self.view addSubview:music.view];
 }
 
 - (void)videoRecorder {
@@ -62,6 +74,9 @@
 - (void)videoList {
     FSLocalVideoController *svc = [[FSLocalVideoController alloc] init];
     [self.navigationController pushViewController:svc animated:YES];
+}
+- (void)musicList{
+
 }
 
 - (void)didReceiveMemoryWarning {

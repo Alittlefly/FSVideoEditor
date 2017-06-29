@@ -263,6 +263,7 @@
 - (void)FSPublisherToolViewChooseMusic {
     FSMusicController *music = [FSMusicController new];
     music.timeLine = _timeLine;
+    music.pushed = YES;
     [self.navigationController pushViewController:music animated:YES];
 }
 

@@ -73,7 +73,6 @@
     _speedSegment.layer.masksToBounds = YES;
     [_speedSegment addTarget:self action:@selector(selectPlaySpeed:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_speedSegment];
-    
     self.navigationItem.rightBarButtonItem = [self rightBarbuttonItem];
 }
 - (UIBarButtonItem *)rightBarbuttonItem{
