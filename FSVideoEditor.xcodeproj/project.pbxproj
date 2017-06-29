@@ -95,6 +95,7 @@
 		984060551EF9407B0049B58E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060541EF9407B0049B58E /* libz.tbd */; };
 		984060571EF940810049B58E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060561EF940810049B58E /* libc++.tbd */; };
 		987700AF1F03AFE50043394E /* FSSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 987700AE1F03AFE50043394E /* FSSegmentView.m */; };
+		987ECEE81F04F92D00221273 /* FSCutMusicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 987ECEE71F04F92D00221273 /* FSCutMusicView.m */; };
 		988AC6C61EFD1D3D007FBCEF /* FSProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */; };
 		988AC6C71EFD1D3D007FBCEF /* FSProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */; };
 		988AC6CB1EFD3BB7007FBCEF /* FSEditVideoTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C91EFD3BB7007FBCEF /* FSEditVideoTool.h */; };
@@ -286,6 +287,8 @@
 		987700AB1F03A6520043394E /* NvcConvertorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertorDelegate.h; sourceTree = "<group>"; };
 		987700AD1F03AFE50043394E /* FSSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSegmentView.h; sourceTree = "<group>"; };
 		987700AE1F03AFE50043394E /* FSSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSegmentView.m; sourceTree = "<group>"; };
+		987ECEE61F04F92D00221273 /* FSCutMusicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCutMusicView.h; sourceTree = "<group>"; };
+		987ECEE71F04F92D00221273 /* FSCutMusicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCutMusicView.m; sourceTree = "<group>"; };
 		988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSProgressView.h; sourceTree = "<group>"; };
 		988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSProgressView.m; sourceTree = "<group>"; };
 		988AC6C91EFD3BB7007FBCEF /* FSEditVideoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEditVideoTool.h; sourceTree = "<group>"; };
@@ -752,6 +755,8 @@
 				988AC6E21EFE6926007FBCEF /* FSFilterButton.m */,
 				988AC6E61F010B0D007FBCEF /* FSControlVolumeView.h */,
 				988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */,
+				987ECEE61F04F92D00221273 /* FSCutMusicView.h */,
+				987ECEE71F04F92D00221273 /* FSCutMusicView.m */,
 			);
 			path = FSVideoEditors;
 			sourceTree = "<group>";
@@ -1033,6 +1038,7 @@
 				562D40561EFD1DE200BF0E0D /* AFSecurityPolicy.m in Sources */,
 				988AC6E41EFE6926007FBCEF /* FSFilterButton.m in Sources */,
 				5647BC3F1F02954B0072B618 /* FSDissolveAnimator.m in Sources */,
+				987ECEE81F04F92D00221273 /* FSCutMusicView.m in Sources */,
 				567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */,
 				567A3D431EFB66B60026247E /* FSFileSlice.m in Sources */,
 				562D403F1EFBE8A100BF0E0D /* FSLocalEditorController.m in Sources */,

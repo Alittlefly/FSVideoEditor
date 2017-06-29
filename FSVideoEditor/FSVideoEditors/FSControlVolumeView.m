@@ -36,8 +36,8 @@
 - (void)initBaseUI {
     
     _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 145, self.frame.size.width, 145)];
-    _contentView.backgroundColor = [UIColor whiteColor];
-    _contentView.alpha = 0.9;
+    _contentView.backgroundColor = FSHexRGB(0xFFFFFF);//[UIColor whiteColor];
+    _contentView.alpha = 0.7;
     [self addSubview:_contentView];
     
     if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)) {
@@ -102,11 +102,15 @@
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.text = @"音量";
+    _titleLabel.shadowColor = [UIColor blackColor];
+    //阴影偏移  x，y为正表示向右下偏移
+    _titleLabel.shadowOffset = CGSizeMake(1, 1);
     [self addSubview:_titleLabel];
     
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _finishButton.backgroundColor = [UIColor greenColor];
+    _finishButton.backgroundColor = [UIColor clearColor];
     _finishButton.frame = CGRectMake(self.frame.size.width-20-54, CGRectGetMinY(_contentView.frame)-20-30, 54, 30);
+    [_finishButton setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_finishButton];
     
