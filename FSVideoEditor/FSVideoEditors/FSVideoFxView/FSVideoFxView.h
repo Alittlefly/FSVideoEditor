@@ -27,6 +27,8 @@
 
 @property(nonatomic,strong)UIView *progressBackView;
 @property(nonatomic,assign)CGFloat duration;
+
+@property(nonatomic,assign)BOOL needCovert;
 // 特效
 -(instancetype)initWithFrame:(CGRect)frame fxs:(NSArray *)fxs;
 

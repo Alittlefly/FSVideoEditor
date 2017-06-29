@@ -171,6 +171,7 @@
     NSTimer      *_progressTimer;
     NSInteger _currentTime;
     NSString *_currentFxId;
+    BOOL _needConvert;
 }
 @property(nonatomic,strong)FSVideoClipProgress *progress;
 
@@ -364,9 +365,16 @@
 -(void)clickTimeFxButtion:(UIButton *)button{
     _progress.type = button.tag;
     
-    if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
-        [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:1000000 progress:_progress.selectProgress];
+    _needConvert = (button.tag == FSVideoFxTypeRevert);
+    
+    if (button.tag != FSVideoFxTypeRevert) {
+        if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
+            [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:1000000 progress:_progress.selectProgress];
+        }
+    }else{
+        
     }
+
 }
 
 #pragma mark - FSVideoClipProgressDelegate
@@ -434,6 +442,9 @@
 }
 -(void)showUndoButton{
     [_unDoButton setHidden:NO];
+}
+-(BOOL)needCovert{
+    return _needConvert;
 }
 -(void)dealloc{
     NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));

@@ -24,6 +24,8 @@
 @interface FSVideoFxController ()<NvsStreamingContextDelegate,FSVideoFxViewDelegate,UIViewControllerTransitioningDelegate>
 {
     NSMutableString *_videoFxPackageId;
+    
+    BOOL _needConvert;
 }
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
@@ -197,10 +199,6 @@
                 [fxClip appendPackagedFx:fxId];
             }
         }
-        
-        NvsFxDescription *des = [[_videoTrack getClipWithTimelinePosition:startPoint] getFxWithIndex:0].description;
-        
-        NSLog(@"getAllParamsInfo %@",[des getAllParamsInfo]);
         
         [_context seekTimeline:_timeLine timestamp:endPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
         

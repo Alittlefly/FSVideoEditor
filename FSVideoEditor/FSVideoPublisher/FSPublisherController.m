@@ -214,7 +214,16 @@
 }
 
 - (void)FSPublisherToolViewEditMusic {
-
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *musicPath = [mainBundle pathForResource:@"wind" ofType:@"mp3"];
+    
+    int64_t length = _timeLine.duration;
+    
+    NvsAudioTrack *_audiotrack = [_timeLine appendAudioTrack];
+    NvsAudioClip *audio = [_audiotrack appendClip:musicPath];
+    [audio changeTrimOutPoint:length affectSibling:YES];
+    
+    
 }
 
 - (void)FSPublisherToolViewAddEffects {
