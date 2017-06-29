@@ -560,18 +560,23 @@
     switch (index) {
         case 0:
             _playSpeed = FSShortVideoPlaySpeed_Hyperslow;
+            self.recorderManager.recorderSpeed = 3;
             break;
         case 1:
             _playSpeed = FSShortVideoPlaySpeed_Slow;
+            self.recorderManager.recorderSpeed = 2;
             break;
         case 2:
             _playSpeed = FSShortVideoPlaySpeed_Normal;
+            self.recorderManager.recorderSpeed = 1;
             break;
         case 3:
             _playSpeed = FSShortVideoPlaySpeed_Quick;
+            self.recorderManager.recorderSpeed = 0.75;
             break;
         case 4:
             _playSpeed = FSShortVideoPlaySpeed_VeryFast;
+            self.recorderManager.recorderSpeed = 0.5;
             break;
             
         default:
@@ -592,8 +597,28 @@
 #pragma mark - FSShortVideoRecorderManagerDelegate
 
 - (void)FSShortVideoRecorderManagerProgress:(CGFloat)time {
+    CGFloat speed = 1;
+    switch (_playSpeed) {
+        case FSShortVideoPlaySpeed_Hyperslow:
+            speed = 3;
+            break;
+        case FSShortVideoPlaySpeed_Slow:
+            speed = 2;
+            break;
+        case FSShortVideoPlaySpeed_Normal:
+            speed = 1;
+            break;
+        case FSShortVideoPlaySpeed_Quick:
+            speed = 0.75;
+            break;
+        case FSShortVideoPlaySpeed_VeryFast:
+            speed = 0.5;
+            break;
+        default:
+            break;
+    }
     [self.progressView setProgress:time/30.0 animated:YES];
-    if (time >= 3.0) {
+    if (time >= 5.0) {
         _finishButton.enabled = YES;
         [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-red"] forState:UIControlStateNormal];
     }

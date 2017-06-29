@@ -25,6 +25,7 @@
 @interface FSShortVideoRecorderManager : NSObject
 
 @property (nonatomic, weak) id<FSShortVideoRecorderManagerDelegate> delegate;
+@property (nonatomic, assign) CGFloat recorderSpeed;
 
 + (instancetype)sharedInstance;
 
@@ -109,5 +110,6 @@
  @return 是否开始执行倒序操作
  */
 - (BOOL)beginConvertReverse:(NSString *)filePath;
+
 
 @end

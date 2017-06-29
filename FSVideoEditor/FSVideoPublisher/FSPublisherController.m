@@ -22,8 +22,9 @@
 #import "FSEditorLoading.h"
 #import "FSControlVolumeView.h"
 #import "FSMusicController.h"
+#import "FSCutMusicView.h"
 
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate>
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate>
 {
     FSUploader *_uploader;
     NSString *_outPutPath;
@@ -41,7 +42,7 @@
 @property(nonatomic,strong)NvsVideoFrameRetriever *frameRetriever;
 
 @property (nonatomic, strong) FSControlVolumeView *volumeView;
-
+@property (nonatomic, strong) FSCutMusicView *cutMusicView;
 
 @end
 
@@ -215,8 +216,25 @@
 }
 
 - (void)FSPublisherToolViewEditMusic {
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *musicPath = [mainBundle pathForResource:@"wind" ofType:@"mp3"];
+
+    int64_t length = _timeLine.duration;
     
-    [self FSPublisherToolViewChooseMusic];
+    NvsAudioTrack *_audiotrack = [_timeLine appendAudioTrack];
+    NvsAudioClip *audio = [_audiotrack appendClip:musicPath];
+    [audio changeTrimOutPoint:length affectSibling:YES];
+    
+    if (!_cutMusicView) {
+        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds audioClip:audio];
+        _cutMusicView.delegate = self;
+        [self.view addSubview:_cutMusicView];
+        _cutMusicView.hidden = YES;
+    }
+    self.toolView.hidden = YES;
+    _cutMusicView.hidden = NO;
+    
+   // [self FSPublisherToolViewChooseMusic];
     
     /*
     NSBundle *mainBundle = [NSBundle mainBundle];
@@ -317,15 +335,32 @@
 
 #pragma mark - FSControlVolumeViewDelegate
 - (void)FSControlVolumeViewChangeScore:(CGFloat)value {
-
+    NvsAudioTrack *audioTrack = [_timeLine getAudioTrackByIndex:0];
+    NvsAudioClip *audioClip = [audioTrack getClipWithIndex:0];
+    [audioClip setVolumeGain:value rightVolumeGain:value];
 }
 
 - (void)FSControlVolumeViewChangeSoundtrack:(CGFloat)value {
-
+    NvsVideoTrack *videoTrack = [_timeLine getVideoTrackByIndex:0];
+    NvsVideoClip *videoClip = [videoTrack getClipWithIndex:0];
+    [videoClip setVolumeGain:value rightVolumeGain:value];
 }
 
 - (void)FSControlVolumeViewChangeFinished {
     _volumeView.hidden = YES;
+    self.toolView.hidden = NO;
+}
+
+- (void)FSCutMusicViewFinishCutMusic:(NvsAudioClip *)newAudioClip {
+    NvsAudioTrack *_audiotrack = [_timeLine getAudioTrackByIndex:0];
+//    [_audiotrack removeAllClips];
+    NvsAudioClip *audioClip = [_audiotrack getClipWithIndex:0];
+    audioClip = newAudioClip;
+
+    [self playVideoFromHead];
+
+
+    _cutMusicView.hidden = YES;
     self.toolView.hidden = NO;
 }
 

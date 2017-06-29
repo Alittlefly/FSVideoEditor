@@ -111,6 +111,7 @@ static FSShortVideoRecorderManager *recorderManager;
     _videoIndex = 0;
     _outputFilePath = nil;
     _videoTime = 0;
+    _recorderSpeed = 1;
     _timeArray = [NSMutableArray arrayWithCapacity:0];
     _filePathArray = [NSMutableArray arrayWithCapacity:0];
     
@@ -329,8 +330,8 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (void)updateVideoTime {
-    _videoTime= _videoTime+0.1;
-    _perTime = _perTime+0.1;
+    _videoTime= _videoTime+0.1*_recorderSpeed;
+    _perTime = _perTime+0.1*_recorderSpeed;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerProgress:)]) {
         [self.delegate FSShortVideoRecorderManagerProgress:_videoTime];
     }

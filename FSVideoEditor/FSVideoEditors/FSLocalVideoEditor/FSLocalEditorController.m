@@ -15,11 +15,13 @@
 #import "FSThumbnailView.h"
 #import "NvsAudioClip.h"
 #import "NvsAudioTrack.h"
+#import "FSSegmentView.h"
 
 
-@interface FSLocalEditorController ()<NvsStreamingContextDelegate,FSThumbnailViewDelegate>
+@interface FSLocalEditorController ()<NvsStreamingContextDelegate,FSThumbnailViewDelegate,FSSegmentViewDelegate>
 {
-    UISegmentedControl *_speedSegment;
+    //UISegmentedControl *_speedSegment;
+    FSSegmentView *_segmentView;
     int64_t _startTime;
     int64_t _endTime;
 }
@@ -64,15 +66,19 @@
     audioEditRes.sampleFormat = NvsAudSmpFmt_S16;
     _timeLine = [_context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
     
-    _speedSegment = [[UISegmentedControl alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
-    _speedSegment.frame = CGRectMake(32.5, CGRectGetMaxY(_prewidow.frame)+76, CGRectGetWidth(self.view.frame) - 65, 37);
-    _speedSegment.selectedSegmentIndex = 2;
-    _speedSegment.backgroundColor = [UIColor lightGrayColor];
-    _speedSegment.tintColor = [UIColor yellowColor];
-    _speedSegment.layer.cornerRadius = 20;
-    _speedSegment.layer.masksToBounds = YES;
-    [_speedSegment addTarget:self action:@selector(selectPlaySpeed:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:_speedSegment];
+    
+    _segmentView = [[FSSegmentView alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
+    _segmentView.frame = CGRectMake(32.5, CGRectGetMaxY(_prewidow.frame)+76, CGRectGetWidth(self.view.frame) - 65, 37);
+    _segmentView.selectedColor = FSHexRGB(0xFACE15);//[UIColor yellowColor];
+    _segmentView.backgroundColor = FSHexRGBAlpha(0x001428, 0.6);[UIColor lightGrayColor];
+    _segmentView.selectedTextColor = FSHexRGB(0x1A1D20);//[UIColor redColor];
+    _segmentView.unSelectedTextColor = FSHexRGB(0xF5F5F5);
+    _segmentView.selectedSegmentIndex = 2;
+    _segmentView.layer.cornerRadius = 20;
+    _segmentView.layer.masksToBounds = YES;
+    _segmentView.delegate = self;
+    [self.view addSubview:_segmentView];
+    
     self.navigationItem.rightBarButtonItem = [self rightBarbuttonItem];
 }
 - (UIBarButtonItem *)rightBarbuttonItem{
@@ -133,6 +139,23 @@
     if(![_context playbackTimeline:_timeLine startTime:_startTime endTime:endTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
     }
 }
+
+- (void)FSSegmentView:(FSSegmentView *)segmentView selected:(NSInteger)index {
+    
+    NSLog(@"sender: %ld",index); //输出当前的索引值
+    NvsClip *clip = [_videoTrack getClipWithIndex:0];
+    [clip changeSpeed:index/2.0];
+    
+    int64_t endTime = _endTime?:_timeLine.duration;
+    if (endTime > _timeLine.duration) {
+        endTime = _timeLine.duration;
+        _endTime = _timeLine.duration;
+    }
+    if(![_context playbackTimeline:_timeLine startTime:_startTime endTime:endTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
+    }
+    
+}
+
 -(void)reselectTrack{
     
     if (!_timeLine) {
