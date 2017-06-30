@@ -37,7 +37,6 @@
     CGFloat oldW = self.progressView.frame.size.width;
 
     if (isAnimated) {
-        NSTimeInterval time = ((width-oldW)*30)/self.progressView.frame.size.width;//0.5*(width-self.progressView.frame.size.width)
         [UIView animateWithDuration:0.1 animations:^{
             self.progressView.frame = CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, width, self.progressView.frame.size.height);
         }];

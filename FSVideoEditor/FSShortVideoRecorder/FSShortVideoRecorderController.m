@@ -46,14 +46,25 @@
     [self.navigationController.navigationBar setHidden:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[FSShortVideoRecorderManager sharedInstance] initBaseData];
+
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     [self.navigationController.navigationBar setHidden:NO];
+    
+//    if([[FSShortVideoRecorderManager sharedInstance] getStreamingEngineState] != NvsStreamingEngineState_Stopped)
+//        [_context stop];
+//    [_context setDelegate:nil];
 
 }
 
-#pragma mark - FSShortVideoRecorderViewDelegate 
+#pragma mark - FSShortVideoRecorderViewDelegate
 
 - (void)FSShortVideoRecorderViewQuitRecorderView {
     [self.navigationController popViewControllerAnimated:YES];
