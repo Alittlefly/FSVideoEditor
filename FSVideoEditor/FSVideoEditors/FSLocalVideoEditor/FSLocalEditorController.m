@@ -66,15 +66,6 @@
     audioEditRes.sampleFormat = NvsAudSmpFmt_S16;
     _timeLine = [_context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
     
-//    _speedSegment = [[UISegmentedControl alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
-//    _speedSegment.frame = CGRectMake(32.5, CGRectGetMaxY(_prewidow.frame)+76, CGRectGetWidth(self.view.frame) - 65, 37);
-//    _speedSegment.selectedSegmentIndex = 2;
-//    _speedSegment.backgroundColor = [UIColor lightGrayColor];
-//    _speedSegment.tintColor = [UIColor yellowColor];
-//    _speedSegment.layer.cornerRadius = 20;
-//    _speedSegment.layer.masksToBounds = YES;
-//    [_speedSegment addTarget:self action:@selector(selectPlaySpeed:) forControlEvents:UIControlEventValueChanged];
-//    [self.view addSubview:_speedSegment];
     
     _segmentView = [[FSSegmentView alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
     _segmentView.frame = CGRectMake(32.5, CGRectGetMaxY(_prewidow.frame)+76, CGRectGetWidth(self.view.frame) - 65, 37);

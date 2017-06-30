@@ -7,6 +7,8 @@
 //
 
 #import "FSMusicController.h"
+#import "NvsStreamingContext.h"
+#import "FSShortVideoRecorderController.h"
 
 @interface FSMusicController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -22,6 +24,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+
     // Do any additional setup after loading the view.
      _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStyleGrouped)];
     [_tableView setDelegate:self];
@@ -45,22 +49,35 @@
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (!_timeLine) {
-        return;
-    }
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:[self.musics objectAtIndex:indexPath.row] ofType:@"mp3"];
-    
     if (bundlePath) {
+        if (!_timeLine) {
+            NvsStreamingContext *context = [NvsStreamingContext sharedInstance];
+            NvsVideoResolution videoEditRes;
+            videoEditRes.imageWidth = 1200;
+            videoEditRes.imageHeight = 720;
+            videoEditRes.imagePAR = (NvsRational){1, 1};
+            NvsRational videoFps = {25, 1};
+            NvsAudioResolution audioEditRes;
+            audioEditRes.sampleRate = 48000;
+            audioEditRes.channelCount = 2;
+            audioEditRes.sampleFormat = NvsAudSmpFmt_S16;
+            _timeLine = [context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
+        }
         
         int64_t length = _timeLine.duration;
-        
         [_timeLine removeAudioTrack:0];
         NvsAudioTrack *audioTrack = [_timeLine appendAudioTrack];
         [audioTrack appendClip:bundlePath];
         NvsAudioClip *audio = [audioTrack getClipWithIndex:0];
         [audio changeTrimOutPoint:length affectSibling:YES];
-        
+    }
+    
+    if (_pushed) {
         [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
+        [self.navigationController pushViewController:recoder animated:YES];
     }
 
 }
