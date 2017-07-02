@@ -108,7 +108,8 @@
     
     if (_musicPath != nil && _musicPath.length > 0) {
         [[FSMusicPlayer sharedPlayer] stop];
-        [[FSMusicPlayer sharedPlayer] setRate:_playSpeed];
+//        [[FSMusicPlayer sharedPlayer] setRate:_playSpeed];
+        [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
         [[FSMusicPlayer sharedPlayer] play];
     }
 }
@@ -174,7 +175,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *final = [documentsDirectory stringByAppendingPathComponent:@"tmp"];
-    return [final stringByAppendingFormat:@"/video%@.mp4",timeRandom];
+    return [final stringByAppendingFormat:@"/video%@.mov",timeRandom];
 }
                              
                              
@@ -183,14 +184,43 @@
     [self.navigationController.view addSubview:self.loading];
     [self.loading loadingViewShow];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    
+    int64_t length = _timeLine.duration;
+    
+    if (_musicPath != nil && _musicPath.length > 0) {
+        NvsAudioTrack *_audiotrack = [_timeLine appendAudioTrack];
+        NvsAudioClip *audio = [_audiotrack appendClip:_musicPath];
+        [audio changeTrimInPoint:_musicStartTime affectSibling:YES];
+        [audio changeTrimOutPoint:length+_musicStartTime affectSibling:YES];
+    }
+    
+//    NvsVideoTrack *_audiotrack = [_timeLine getVideoTrackByIndex:0];
+//    NvsVideoClip *audio = [_audiotrack getClipWithIndex:0];
+//    [audio changeSpeed:_playSpeed];
 
     _outPutPath = [self getCompilePath];
 
     [self deleteCurrentCompileFile:_outPutPath];
+    
+    
+//    BOOL isSuccess = [_context compileTimeline:self.timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_outPutPath videoResolutionGrade:NvsCompileVideoResolutionGrade720 videoBitrateGrade:NvsCompileBitrateGradeHigh flags:0];
 
-    if([_context compileTimeline:_timeLine startTime:_startTime endTime:_endTime outputFilePath:_outPutPath videoResolutionGrade:(NvsCompileVideoResolutionGrade2160) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0]){
+    if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_outPutPath videoResolutionGrade:(NvsCompileVideoResolutionGrade2160) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0]){
+        NSLog(@"11111111");
+    }
+    else {
+        NSLog(@"0000000");
     }
 }
+
+- (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo: (void *)contextInfo {
+    
+    NSLog(@"%@",videoPath);
+    
+    NSLog(@"%@",error);
+    
+}
+
 #pragma mark -
 -(void)didPlaybackEOF:(NvsTimeline *)timeline{
     [self playVideoFromHead];
@@ -202,6 +232,8 @@
     
     [self.loading loadingViewhide];
     [self uploadFile:_outPutPath];
+    UISaveVideoAtPathToSavedPhotosAlbum(_outPutPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+
     
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 
@@ -234,7 +266,8 @@
     [audio changeTrimOutPoint:length affectSibling:YES];
     
     if (!_cutMusicView) {
-        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds audioClip:audio];
+        //_cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds audioClip:audio];
+        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath];
         _cutMusicView.delegate = self;
         [self.view addSubview:_cutMusicView];
         _cutMusicView.hidden = YES;
@@ -369,6 +402,21 @@
 
 
     _cutMusicView.hidden = YES;
+    [_cutMusicView removeFromSuperview];
+    _cutMusicView = nil;
+    
+    self.toolView.hidden = NO;
+}
+
+- (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval)newStartTime {
+    _musicStartTime = newStartTime;
+    [self playVideoFromHead];
+
+    
+    _cutMusicView.hidden = YES;
+    [_cutMusicView removeFromSuperview];
+    _cutMusicView = nil;
+    
     self.toolView.hidden = NO;
 }
 

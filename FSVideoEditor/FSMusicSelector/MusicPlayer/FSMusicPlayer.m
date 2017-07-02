@@ -76,7 +76,7 @@ static id object = nil;
         return;
     }
     
-    [_musicPlayer play];
+    [_musicPlayer stop];
 }
 -(void)pause{
     [_musicPlayer pause];
@@ -90,6 +90,11 @@ static id object = nil;
 }
 
 -(void)playAtTime:(NSTimeInterval)atTime{
-    [_musicPlayer playAtTime:atTime];
+    if (atTime > _musicPlayer.duration) {
+        return;
+    }
+    _musicPlayer.currentTime = atTime;
+    //[_musicPlayer playAtTime:atTime];
 }
+
 @end

@@ -49,7 +49,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [[FSShortVideoRecorderManager sharedInstance] initBaseData];
+    [[FSShortVideoRecorderManager sharedInstance] resumeCapturePreview];
     if (_musicFilePath != nil && _musicFilePath.length > 0) {
         _recorderView.musicFilePath = _musicFilePath;
     }
@@ -83,6 +83,19 @@
     NvsVideoTrack *videoTrack = [timeLine appendVideoTrack];
     NvsVideoClip *clip = [videoTrack insertClip:filePath clipIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
+    publish.timeLine = timeLine;
+    [self.navigationController pushViewController:publish animated:YES];
+}
+
+- (void)FSShortVideoRecorderViewFinishTimeLine:(NvsTimeline *)timeLine speed:(CGFloat)speed {
+    FSPublisherController *publish = [[FSPublisherController alloc] init];
+    //publish.filePath = filePath;
+    publish.playSpeed = speed;
+    publish.musicPath = _musicFilePath;
+//    NvsTimeline *timeLine = [[FSShortVideoRecorderManager sharedInstance] createTimeLine];
+//    NvsVideoTrack *videoTrack = [timeLine appendVideoTrack];
+//    NvsVideoClip *clip = [videoTrack insertClip:filePath clipIndex:0];
+//    [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
     publish.timeLine = timeLine;
     [self.navigationController pushViewController:publish animated:YES];
 }

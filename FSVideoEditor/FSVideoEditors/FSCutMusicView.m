@@ -26,6 +26,8 @@
 @property (nonatomic, copy) NSString *filePath;
 @property (nonatomic, assign) NSTimeInterval newTime;
 
+@property (nonatomic, assign) CGFloat totalTime;
+
 @end
 
 @implementation FSCutMusicView
@@ -49,19 +51,20 @@
 }
 
 - (void)createBaseUI {
-    CGFloat totalTime = 0;//
     if (_filePath) {
-        totalTime = [[FSMusicPlayer sharedPlayer] soundTotalTime];
+        _totalTime = [[FSMusicPlayer sharedPlayer] soundTotalTime];
     }
     else {
-        totalTime = (_audioClip.outPoint-_audioClip.inPoint)/(1000*1000);
+        _totalTime = (_audioClip.outPoint-_audioClip.inPoint)/(1000*1000);
     }
-    CGFloat totalWidth = self.frame.size.width*totalTime/15;
+    CGFloat totalWidth = self.frame.size.width*_totalTime/15;
 
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-110, self.frame.size.width, 110)];
+    _scrollView.directionalLockEnabled = YES;
     _scrollView.backgroundColor = [UIColor clearColor];
     _scrollView.showsHorizontalScrollIndicator = YES;
     _scrollView.showsVerticalScrollIndicator = NO;
+    _scrollView.bounces = NO;
     _scrollView.delegate = self;
     _scrollView.contentSize = CGSizeMake(totalWidth, _scrollView.frame.size.height);
     [self addSubview:_scrollView];
@@ -153,11 +156,17 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    NSLog(@"%f",scrollView.contentOffset.x);
+    if ([_timer isValid]) {
+        
+    }
+    [_timer setFireDate:[NSDate distantFuture]];
+    
     CGRect frame = self.maskView.frame;
     frame.size.width = scrollView.contentOffset.x;
     self.maskView.frame =frame;
     
-    int time = ceilf(scrollView.contentOffset.x*15/scrollView.contentSize.width) ;
+    int time = ceilf(scrollView.contentOffset.x*_totalTime/scrollView.contentSize.width) ;
     int min = floor(time/60);
     int sec = time%60;
     NSLog(@"min:%d     sec:%d",min,sec);
@@ -165,8 +174,11 @@
     
     _newTime = time;
     
+    [_timer setFireDate:[NSDate date]];
+    
     if (_filePath) {
         [[FSMusicPlayer sharedPlayer] stop];
+        [[FSMusicPlayer sharedPlayer] playAtTime:time];
         [[FSMusicPlayer sharedPlayer] play];
     }
     else {

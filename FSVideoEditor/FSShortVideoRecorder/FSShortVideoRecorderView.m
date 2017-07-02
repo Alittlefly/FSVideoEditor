@@ -312,12 +312,12 @@
 }
 
 - (void)backClik {
-    if (_cutMusicButton.enabled == YES) {
-        
-    }
-    else {
-    
-    }
+//    if () {
+//        
+//    }
+//    else {
+//    
+//    }
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出录制吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alert show];
     
@@ -369,6 +369,7 @@
         [self addSubview:_activityView];
     }
     [_activityView startAnimating];
+    [self pauseRecorder];
     [_recorderManager finishRecorder];
 }
 
@@ -798,6 +799,8 @@
 #pragma mark - 
 - (void)FSCutMusicViewFinishCutMusic:(NvsAudioClip *)newAudioClip {
     _cutMusicView.hidden = YES;
+    [_cutMusicView removeFromSuperview];
+    _cutMusicView = nil;
     
     _backButton.hidden= NO;
     _recoverCamera.hidden = NO;
@@ -820,6 +823,8 @@
 
 - (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval)newStartTime {
     _cutMusicView.hidden = YES;
+    [_cutMusicView removeFromSuperview];
+    _cutMusicView = nil;
     
     _backButton.hidden= NO;
     _recoverCamera.hidden = NO;
@@ -873,24 +878,32 @@
         default:
             break;
     }
-    [self.progressView setProgress:time/15.0 animated:YES];
     
     if (time <= 15) {
         _cutMusicButton.enabled = NO;
+        [self.progressView setProgress:time/15.0 animated:YES];
     }
     
-    if (time >= 5.0 && time <=15) {
+    if (time >= 5.0 && time <15) {
         _finishButton.enabled = YES;
         [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-red"] forState:UIControlStateNormal];
     }
-    else if (time > 15) {
+    else if (time >= 15) {
+        self.countdownButton.enabled = NO;
+        self.recorderButton.enabled = NO;
         [self finishClik];
     }
 }
 
 - (void)FSShortVideoRecorderManagerDeleteVideo:(CGFloat)videoTime {
+    NSLog(@"FSShortVideoRecorderManagerDeleteVideo: %f",videoTime);
+    
     [self.progressView setProgress:videoTime/15.0 animated:NO];
     [self.progressView deleteCuttingLine];
+    
+    self.countdownButton.enabled = YES;
+    self.recorderButton.enabled = YES;
+
 
     if (videoTime < 5.0) {
         _finishButton.enabled = NO;
@@ -909,8 +922,16 @@
 - (void)FSShortVideoRecorderManagerFinishRecorder:(NSString *)filePath {
     [_activityView stopAnimating];
     
-    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:)]) {
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:speed:)]) {
         [self.delegate FSShortVideoRecorderViewFinishRecorder:filePath speed:self.recorderManager.recorderSpeed] ;
+    }
+}
+
+- (void)FSShortVideoRecorderManagerFinish:(NvsTimeline *)timeLine {
+    [_activityView stopAnimating];
+    
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishTimeLine:speed:)]) {
+        [self.delegate FSShortVideoRecorderViewFinishTimeLine:timeLine speed:self.recorderManager.recorderSpeed] ;
     }
 }
 

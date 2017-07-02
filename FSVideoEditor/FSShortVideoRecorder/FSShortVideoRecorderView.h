@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class NvsTimeline;
+
 typedef enum{
     FSShortVideoPlaySpeed_Hyperslow = 0,
     FSShortVideoPlaySpeed_Slow,
@@ -20,6 +22,7 @@ typedef enum{
 
 - (void)FSShortVideoRecorderViewQuitRecorderView;
 - (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath speed:(CGFloat)speed;
+- (void)FSShortVideoRecorderViewFinishTimeLine:(NvsTimeline *)timeLine speed:(CGFloat)speed;
 - (void)FSShortVideoRecorderViewEditMusic;
 
 @end
