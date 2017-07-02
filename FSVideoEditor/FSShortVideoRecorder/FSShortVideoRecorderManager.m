@@ -10,7 +10,7 @@
 #import "NvsVideoTrack.h"
 #import "NvcConvertor.h"
 
-#define MaxVideoTime 30
+#define MaxVideoTime 15
 
 @interface FSShortVideoRecorderManager ()<NvsStreamingContextDelegate, NvcConvertorDelegate>
 
@@ -353,6 +353,8 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     [_filePathArray removeAllObjects];
     
+    if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
+        [_context stop];
     _context.delegate = nil;
     _context = nil;
 }

@@ -119,7 +119,7 @@
     [self.navigationController.navigationBar setHidden:NO];
 
 }
--(void)vieDidDisappear:(BOOL)animated{
+-(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
         [_context stop];

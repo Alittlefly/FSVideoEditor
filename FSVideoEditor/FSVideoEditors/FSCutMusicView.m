@@ -35,7 +35,7 @@
 }
 
 - (void)createBaseUI {
-    CGFloat totalTime = 30;//(_audioClip.outPoint-_audioClip.inPoint)/(1000*1000);
+    CGFloat totalTime = (_audioClip.outPoint-_audioClip.inPoint)/(1000*1000);
     CGFloat totalWidth = self.frame.size.width*totalTime/15;
     
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-110, self.frame.size.width, 110)];
