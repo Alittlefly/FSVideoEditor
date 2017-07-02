@@ -13,7 +13,7 @@
 #import "FSMusicPlayer.h"
 
 @interface FSMusicController ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate>{
-    NSString *_music;
+    FSMusic *_music;
 }
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *musics;
@@ -23,7 +23,30 @@
 @implementation FSMusicController
 -(NSArray *)musics{
     if (!_musics) {
-        _musics = [NSArray arrayWithObjects:@"month",@"wind",@"ugly",nil];
+        
+        FSMusic *music = [[FSMusic alloc] init];
+        music.name = @"month";
+        music.time = 15;
+        music.pic = @"";
+        music.author = @"徐子谦";
+        
+        
+        FSMusic *music1 = [[FSMusic alloc] init];
+        music1.name = @"wind";
+        music1.time = 15;
+        music1.pic = @"";
+        music1.author = @"高超";
+
+        
+        FSMusic *music2 = [[FSMusic alloc] init];
+        music2.name = @"ugly";
+        music2.time = 15;
+        music2.pic = @"";
+        music2.author = @"王明";
+
+        _musics = [NSArray arrayWithObjects:music,music1,music2,nil];
+        
+        
     }
     return _musics;
 }
@@ -45,16 +68,48 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FSMusicCell *cell = [FSMusicCell musicCellWithTableView:tableView indexPath:indexPath];
     [cell setDelegate:self];
-    [cell setMusic:[self.musics objectAtIndex:indexPath.row]];
+    FSMusic *music = [self.musics objectAtIndex:indexPath.row];
+    [cell setMusic:music];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    FSMusic *music = [self.musics objectAtIndex:indexPath.row];
+    
+    if (music.opend) {
+        return 147;
+    }
+    
     return 107;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:[self.musics objectAtIndex:indexPath.row] ofType:@"mp3"];
     
-   if (bundlePath) {
+    FSMusic *music = [self.musics objectAtIndex:indexPath.row];
+    
+    if (![_music isEqual:music]) {
+        NSIndexPath *preIndexPath = nil;
+        if (_music != nil) {
+            
+            [_music setIsPlaying:NO];
+            [_music setOpend:NO];
+            
+            NSInteger index = [self.musics indexOfObject:_music];
+            preIndexPath = [NSIndexPath indexPathWithIndex:index];
+        }
+        music.opend = YES;
+       [tableView reloadData];
+    }
+    
+    [self musicCell:[tableView cellForRowAtIndexPath:indexPath] wouldPlay:music];
+    
+    _music = music;
+
+}
+
+#pragma mark -
+-(void)musicCell:(FSMusicCell *)cell wuoldUseMusic:(FSMusic *)music{
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:music.name ofType:@"mp3"];
+    
+    if (bundlePath) {
         if (!_timeLine) {
             NvsStreamingContext *context = [NvsStreamingContext sharedInstance];
             NvsVideoResolution videoEditRes;
@@ -87,20 +142,20 @@
     [[FSMusicPlayer sharedPlayer] stop];
 }
 
--(void)musicCell:(FSMusicCell *)cell wouldPlay:(NSString *)music{
+-(void)musicCell:(FSMusicCell *)cell wouldPlay:(FSMusic *)music{
     
-    if (![_music isEqualToString:music]) {
-        _music = music;
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:_music ofType:@"mp3"];
-        
+    if (![_music isEqual:music]) {
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:_music.name ofType:@"mp3"];
         [[FSMusicPlayer sharedPlayer] stop];
         [[FSMusicPlayer sharedPlayer] setFilePath:filePath];
     }
-    
+
     if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
         [[FSMusicPlayer sharedPlayer] pause];
+        music.isPlaying = NO;
     }else{
         [[FSMusicPlayer sharedPlayer] play];
+        music.isPlaying = YES;
     }
 }
 

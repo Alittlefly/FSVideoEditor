@@ -183,13 +183,13 @@
         _startProgress = progress;
         int64_t startPoint = _timeLine.duration * progress;
         [_timeLine addPackagedTimelineVideoFx:startPoint duration:_timeLine.duration videoFxPackageId:fxId];
-        
         [_context seekTimeline:_timeLine timestamp:startPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
         [_context playbackTimeline:_timeLine startTime:startPoint endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
-        
+        [_controlView setState:YES];
     }else{
         int64_t point = _timeLine.duration * progress;
         [_context seekTimeline:_timeLine timestamp:point videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
+        [_controlView setState:NO];
     }
 }
 -(void)videoFxSelectEnd:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId{
@@ -201,6 +201,8 @@
     [timeLineFx changeOutPoint:endPoint];
     
     [_context seekTimeline:_timeLine timestamp:endPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
+    
+    [_controlView setState:NO];
     [videoFxView showUndoButton];
 }
 -(void)videoFxViewSelectTimeFx:(FSVideoFxView *)videoFxView type:(FSVideoFxType)type duration:(int64_t)duration progress:(CGFloat)progress{
@@ -252,6 +254,9 @@
 -(CGFloat)videoFxViewUpdateProgress:(FSVideoFxView *)videoFxView{
     int64_t current = [_context getTimelineCurrentPosition:_timeLine];
     CGFloat progress = (CGFloat)current/_timeLine.duration;
+    
+    NSLog(@"current %lld",current);
+    
     return progress;
 }
 #pragma mark - 

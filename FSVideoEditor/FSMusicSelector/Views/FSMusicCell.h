@@ -7,16 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSMusic.h"
 @class FSMusicCell;
+
 @protocol FSMusicCellDelegate <NSObject>
 
--(void)musicCell:(FSMusicCell *)cell wouldPlay:(NSString *)music;
+-(void)musicCell:(FSMusicCell *)cell wouldPlay:(FSMusic *)music;
+
+-(void)musicCell:(FSMusicCell *)cell wuoldUseMusic:(FSMusic *)music;
 
 @end
 
 @interface FSMusicCell : UITableViewCell
 
 @property(nonatomic,assign)id<FSMusicCellDelegate>delegate;
-@property(nonatomic,strong)NSString * music;
+@property(nonatomic,strong)FSMusic * music;
 +(instancetype)musicCellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 @end

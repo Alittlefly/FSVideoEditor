@@ -40,7 +40,14 @@ static id object = nil;
 -(void)setFilePath:(NSString *)filePath{
     _filePath = filePath;
     
+    NSLog(@"file Path %@",filePath);
+    
     NSData *mp3Data = [NSData dataWithContentsOfFile:filePath];
+    
+    if (!mp3Data) {
+        NSLog(@"文件地址错误");
+        return;
+    }
     
     if (_musicPlayer) {
         [_musicPlayer stop];
@@ -77,5 +84,7 @@ static id object = nil;
 -(BOOL)isPlaying{
     return _musicPlayer.isPlaying;
 }
-
+-(void)playAtTime:(NSTimeInterval)atTime{
+    [_musicPlayer playAtTime:atTime];
+}
 @end
