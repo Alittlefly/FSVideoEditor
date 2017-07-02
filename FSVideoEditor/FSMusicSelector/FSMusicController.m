@@ -81,6 +81,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
+        recoder.musicFilePath = bundlePath;
         [self.navigationController pushViewController:recoder animated:YES];
     }
     

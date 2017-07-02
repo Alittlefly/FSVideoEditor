@@ -10,6 +10,6 @@
 
 @interface FSShortVideoRecorderController : UIViewController
 
-
+@property (nonatomic, copy) NSString *musicFilePath;
 
 @end

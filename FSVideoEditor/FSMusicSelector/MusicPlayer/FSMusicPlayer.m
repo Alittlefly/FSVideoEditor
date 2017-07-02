@@ -78,4 +78,8 @@ static id object = nil;
     return _musicPlayer.isPlaying;
 }
 
+- (NSTimeInterval)soundTotalTime {
+    return _musicPlayer.duration;
+}
+
 @end

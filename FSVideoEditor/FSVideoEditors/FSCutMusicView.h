@@ -13,6 +13,7 @@
 @protocol FSCutMusicViewDelegate <NSObject>
 
 - (void)FSCutMusicViewFinishCutMusic:(NvsAudioClip *)newAudioClip;
+- (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval )newStartTime;
 
 @end
 
@@ -21,5 +22,6 @@
 @property (nonatomic, weak) id<FSCutMusicViewDelegate> delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame audioClip:(NvsAudioClip *)audioClip;
+- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath;
 
 @end

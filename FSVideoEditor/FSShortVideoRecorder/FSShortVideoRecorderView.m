@@ -13,8 +13,11 @@
 #import "FSTimeCountdownView.h"
 #import "FSSegmentView.h"
 #import "FSMoveButton.h"
+#import "FSCutMusicView.h"
+#import "NvsAudioTrack.h"
+#import "FSMusicPlayer.h"
 
-@interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate, FSTimeCountdownViewDelegate,UIAlertViewDelegate, FSSegmentViewDelegate, FSMoveButtonDelegate>
+@interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate, FSTimeCountdownViewDelegate,UIAlertViewDelegate, FSSegmentViewDelegate, FSMoveButtonDelegate, FSCutMusicViewDelegate>
 
 @property (nonatomic, strong) UIButton *flashButton;  //闪光灯
 @property (nonatomic, strong) UIButton *finishButton;  //完成按钮
@@ -62,6 +65,8 @@
 @property (nonatomic, strong) FSFilterView *filterView;
 @property (nonatomic, strong) UILabel *recorderAniLabel;
 
+@property (nonatomic, strong) FSCutMusicView *cutMusicView;
+
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 
 
@@ -77,7 +82,11 @@
 //    [NvsStreamingContext destroyInstance];
 }
 
-
+- (void)setMusicFilePath:(NSString *)musicFilePath {
+    _musicFilePath = musicFilePath;
+    self.cutMusicButton.enabled = YES;
+    [[FSMusicPlayer sharedPlayer] setFilePath:_musicFilePath];
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -162,6 +171,13 @@
     [_cutMusicButton setImage:[UIImage imageNamed:@"recorder-cut"] forState:UIControlStateNormal];
     [_cutMusicButton addTarget:self action:@selector(cutMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_cutMusicButton];
+    
+    if (_musicFilePath != nil && _musicFilePath.length > 0) {
+        _cutMusicButton.enabled = YES;
+    }
+    else {
+        _cutMusicButton.enabled = NO;
+    }
     
     _cutMusicLabel = [[UILabel alloc] init];
     _cutMusicLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
@@ -296,6 +312,12 @@
 }
 
 - (void)backClik {
+    if (_cutMusicButton.enabled == YES) {
+        
+    }
+    else {
+    
+    }
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出录制吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alert show];
     
@@ -372,9 +394,45 @@
 }
 
 - (void)cutMusicClik {
-    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewEditMusic)]) {
-        [self.delegate FSShortVideoRecorderViewEditMusic];
+    _backButton.hidden= YES;
+    _recoverCamera.hidden = YES;
+    _finishButton.hidden = YES;
+    _flashButton.hidden = YES;
+    _cutMusicButton.hidden = YES;
+    _beautyButton.hidden = YES;
+    _filterButton.hidden = YES;
+    _countdownButton.hidden = YES;
+    _cutMusicLabel.hidden = YES;
+    _filterLabel.hidden = YES;
+    _beautyLabel.hidden = YES;
+    _countdownLabel.hidden = YES;
+    _recorderButton.hidden = YES;
+    _faceUButton.hidden = YES;
+    _deleteButton.hidden = YES;
+    _segmentView.hidden = YES;
+    
+    _isOpenFilterView = YES;
+    
+    
+    
+    NvsTimeline *timeLine = [_recorderManager createTimeLine];
+    
+    NvsAudioTrack *_audiotrack = [timeLine appendAudioTrack];
+    NvsAudioClip *audio = [_audiotrack appendClip:_musicFilePath];
+    int64_t length = [[FSMusicPlayer sharedPlayer] soundTotalTime];//timeLine.duration;
+    [audio changeTrimOutPoint:length affectSibling:YES];
+    
+    if (!_cutMusicView) {
+//        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds audioClip:audio];
+        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds filePath:_musicFilePath];
+        _cutMusicView.delegate = self;
+        [self addSubview:_cutMusicView];
+        _cutMusicView.hidden = YES;
     }
+    _cutMusicView.hidden = NO;
+//    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewEditMusic)]) {
+//        [self.delegate FSShortVideoRecorderViewEditMusic];
+//    }
 }
 
 - (void)beautyClik {
@@ -513,6 +571,11 @@
     [self.recorderButton setBackgroundColor:[UIColor clearColor]];
     [self.recorderButton setImage:[UIImage imageNamed:@"recorder-auto"] forState:UIControlStateNormal];
     
+    if (_musicFilePath != nil && _musicFilePath.length > 0) {
+        [[FSMusicPlayer sharedPlayer] setRate:self.recorderManager.recorderSpeed];
+        [[FSMusicPlayer sharedPlayer] play];
+    }
+    
     if (!_isAutoRecorder) {
         [self.recorderButton setImage:[[UIImage alloc] init] forState:UIControlStateNormal];
         [self.recorderButton setBackgroundColor:[UIColor redColor]];
@@ -570,6 +633,12 @@
     
     [self.recorderManager stopRecording];
     // [self.recorderManager resumeCapturePreview];
+    
+    if (_musicFilePath != nil && _musicFilePath.length > 0) {
+        if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+            [[FSMusicPlayer sharedPlayer] pause];
+        }
+    }
     
     if (!_isAutoRecorder) {
         [self.recorderAniLabel.layer removeAnimationForKey:@"aAlpha"];
@@ -726,6 +795,51 @@
 
 }
 
+#pragma mark - 
+- (void)FSCutMusicViewFinishCutMusic:(NvsAudioClip *)newAudioClip {
+    _cutMusicView.hidden = YES;
+    
+    _backButton.hidden= NO;
+    _recoverCamera.hidden = NO;
+    _finishButton.hidden = NO;
+    _flashButton.hidden = NO;
+    _cutMusicButton.hidden = NO;
+    _beautyButton.hidden = NO;
+    _filterButton.hidden = NO;
+    _countdownButton.hidden = NO;
+    _cutMusicLabel.hidden = NO;
+    _filterLabel.hidden = NO;
+    _beautyLabel.hidden = NO;
+    _countdownLabel.hidden = NO;
+    _recorderButton.hidden = NO;
+    _faceUButton.hidden = NO;
+    _deleteButton.hidden = NO;
+    _speedSegment.hidden = NO;
+    _isOpenFilterView = NO;
+}
+
+- (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval)newStartTime {
+    _cutMusicView.hidden = YES;
+    
+    _backButton.hidden= NO;
+    _recoverCamera.hidden = NO;
+    _finishButton.hidden = NO;
+    _flashButton.hidden = NO;
+    _cutMusicButton.hidden = NO;
+    _beautyButton.hidden = NO;
+    _filterButton.hidden = NO;
+    _countdownButton.hidden = NO;
+    _cutMusicLabel.hidden = NO;
+    _filterLabel.hidden = NO;
+    _beautyLabel.hidden = NO;
+    _countdownLabel.hidden = NO;
+    _recorderButton.hidden = NO;
+    _faceUButton.hidden = NO;
+    _deleteButton.hidden = NO;
+    _speedSegment.hidden = NO;
+    _isOpenFilterView = NO;
+}
+
 #pragma mark - FSTimeCountdownViewDelegate
 - (void)timeCountViewCountToZero {
     _timeCountdownView.delegate = nil;
@@ -760,6 +874,11 @@
             break;
     }
     [self.progressView setProgress:time/15.0 animated:YES];
+    
+    if (time <= 15) {
+        _cutMusicButton.enabled = NO;
+    }
+    
     if (time >= 5.0 && time <=15) {
         _finishButton.enabled = YES;
         [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-red"] forState:UIControlStateNormal];
@@ -777,6 +896,10 @@
         _finishButton.enabled = NO;
         [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
     }
+    
+    if (videoTime <= 0 && _musicFilePath != nil && _musicFilePath.length > 0) {
+        _cutMusicButton.enabled = YES;
+    }
 }
 
 - (void)FSShortVideoRecorderManagerPauseRecorder {
@@ -787,7 +910,7 @@
     [_activityView stopAnimating];
     
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:)]) {
-        [self.delegate FSShortVideoRecorderViewFinishRecorder:filePath];
+        [self.delegate FSShortVideoRecorderViewFinishRecorder:filePath speed:self.recorderManager.recorderSpeed] ;
     }
 }
 

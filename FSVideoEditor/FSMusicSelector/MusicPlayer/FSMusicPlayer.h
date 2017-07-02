@@ -18,4 +18,5 @@
 -(void)play;
 +(instancetype)sharedPlayer;
 -(BOOL)isPlaying;
+- (NSTimeInterval)soundTotalTime;
 @end

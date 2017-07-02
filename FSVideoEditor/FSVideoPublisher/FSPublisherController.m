@@ -23,6 +23,7 @@
 #import "FSControlVolumeView.h"
 #import "FSMusicController.h"
 #import "FSCutMusicView.h"
+#import "FSMusicPlayer.h"
 
 @interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate>
 {
@@ -91,7 +92,9 @@
      _uploader = [FSUploader uploaderWithDivider:divider];
     [_uploader setDelegate:self];
     
-
+    if (_musicPath != nil && _musicPath.length > 0) {
+        [[FSMusicPlayer sharedPlayer] setFilePath:_musicPath];
+    }
  
 }
 -(void)playVideoFromHead{
@@ -101,6 +104,12 @@
         int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
         if(![_context playbackTimeline:_timeLine startTime:startTime endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:NO flags:0]) {
         }
+    }
+    
+    if (_musicPath != nil && _musicPath.length > 0) {
+        [[FSMusicPlayer sharedPlayer] stop];
+        [[FSMusicPlayer sharedPlayer] setRate:_playSpeed];
+        [[FSMusicPlayer sharedPlayer] play];
     }
 }
 
@@ -215,13 +224,13 @@
 }
 
 - (void)FSPublisherToolViewEditMusic {
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    NSString *musicPath = [mainBundle pathForResource:@"wind" ofType:@"mp3"];
+//    NSBundle *mainBundle = [NSBundle mainBundle];
+//    NSString *musicPath = [mainBundle pathForResource:@"wind" ofType:@"mp3"];
 
     int64_t length = _timeLine.duration;
     
     NvsAudioTrack *_audiotrack = [_timeLine appendAudioTrack];
-    NvsAudioClip *audio = [_audiotrack appendClip:musicPath];
+    NvsAudioClip *audio = [_audiotrack appendClip:_musicPath];
     [audio changeTrimOutPoint:length affectSibling:YES];
     
     if (!_cutMusicView) {

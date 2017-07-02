@@ -7,6 +7,7 @@
 //
 
 #import "FSCutMusicView.h"
+#import "FSMusicPlayer.h"
 
 @interface FSCutMusicView()<UIScrollViewDelegate>
 
@@ -22,6 +23,9 @@
 
 @property (nonatomic, strong) NSTimer *timer;
 
+@property (nonatomic, copy) NSString *filePath;
+@property (nonatomic, assign) NSTimeInterval newTime;
+
 @end
 
 @implementation FSCutMusicView
@@ -34,10 +38,26 @@
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath{
+    if (self = [super initWithFrame:frame]) {
+        _filePath = filePath;
+        [[FSMusicPlayer sharedPlayer] setFilePath:filePath];
+        [self createBaseUI];
+        [[FSMusicPlayer sharedPlayer] play];
+    }
+    return self;
+}
+
 - (void)createBaseUI {
-    CGFloat totalTime = (_audioClip.outPoint-_audioClip.inPoint)/(1000*1000);
+    CGFloat totalTime = 0;//
+    if (_filePath) {
+        totalTime = [[FSMusicPlayer sharedPlayer] soundTotalTime];
+    }
+    else {
+        totalTime = (_audioClip.outPoint-_audioClip.inPoint)/(1000*1000);
+    }
     CGFloat totalWidth = self.frame.size.width*totalTime/15;
-    
+
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-110, self.frame.size.width, 110)];
     _scrollView.backgroundColor = [UIColor clearColor];
     _scrollView.showsHorizontalScrollIndicator = YES;
@@ -96,9 +116,20 @@
 }
 
 - (void)finishCutMusic {
-    if ([self.delegate respondsToSelector:@selector(FSCutMusicViewFinishCutMusic:)]) {
-        [self.delegate FSCutMusicViewFinishCutMusic:_audioClip];
+    if (_filePath) {
+        if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+            [[FSMusicPlayer sharedPlayer] stop];
+        }
+        if ([self.delegate respondsToSelector:@selector(FSCutMusicViewFinishCutMusicWithTime:)]) {
+            [self.delegate FSCutMusicViewFinishCutMusicWithTime:_newTime];
+        }
     }
+    else {
+        if ([self.delegate respondsToSelector:@selector(FSCutMusicViewFinishCutMusic:)]) {
+            [self.delegate FSCutMusicViewFinishCutMusic:_audioClip];
+        }
+    }
+    
 }
 
 - (void)updateMaskViewFrame {
@@ -132,7 +163,15 @@
     NSLog(@"min:%d     sec:%d",min,sec);
     self.timeLabel.text = [NSString stringWithFormat:@"当前从%.2d:%.2d开始",min,sec];
     
-    [_audioClip changeTrimInPoint:time*1000*1000 affectSibling:NO];
+    _newTime = time;
+    
+    if (_filePath) {
+        [[FSMusicPlayer sharedPlayer] stop];
+        [[FSMusicPlayer sharedPlayer] play];
+    }
+    else {
+        [_audioClip changeTrimInPoint:time*1000*1000 affectSibling:NO];
+    }
 }
 
 @end
