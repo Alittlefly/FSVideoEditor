@@ -9,10 +9,15 @@
 #import "FSMusicController.h"
 #import "NvsStreamingContext.h"
 #import "FSShortVideoRecorderController.h"
+#import "FSMusicCell.h"
+#import "FSMusicPlayer.h"
 
-@interface FSMusicController ()<UITableViewDelegate,UITableViewDataSource>
+@interface FSMusicController ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate>{
+    NSString *_music;
+}
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *musics;
+
 @end
 
 @implementation FSMusicController
@@ -38,19 +43,18 @@
     return [self.musics count];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    static NSString *cellid = @"asdasd";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellid];//[tableView dequeueReusableCellWithIdentifier:cellid forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:cellid];
-    }
-    [cell.textLabel setText:[self.musics objectAtIndex:indexPath.row]];
+    FSMusicCell *cell = [FSMusicCell musicCellWithTableView:tableView indexPath:indexPath];
+    [cell setDelegate:self];
+    [cell setMusic:[self.musics objectAtIndex:indexPath.row]];
     return cell;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 107;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:[self.musics objectAtIndex:indexPath.row] ofType:@"mp3"];
-    if (bundlePath) {
+    
+   if (bundlePath) {
         if (!_timeLine) {
             NvsStreamingContext *context = [NvsStreamingContext sharedInstance];
             NvsVideoResolution videoEditRes;
@@ -79,7 +83,25 @@
         FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
         [self.navigationController pushViewController:recoder animated:YES];
     }
+    
+    [[FSMusicPlayer sharedPlayer] stop];
+}
 
+-(void)musicCell:(FSMusicCell *)cell wouldPlay:(NSString *)music{
+    
+    if (![_music isEqualToString:music]) {
+        _music = music;
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:_music ofType:@"mp3"];
+        
+        [[FSMusicPlayer sharedPlayer] stop];
+        [[FSMusicPlayer sharedPlayer] setFilePath:filePath];
+    }
+    
+    if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+        [[FSMusicPlayer sharedPlayer] pause];
+    }else{
+        [[FSMusicPlayer sharedPlayer] play];
+    }
 }
 
 

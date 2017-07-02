@@ -14,6 +14,7 @@
 #import "NvsAudioTrack.h"
 #import "NvsAudioClip.h"
 #import "NvsVideoClip.h"
+#import "NvsTimelineVideoFx.h"
 #import "NvsThumbnailSequenceView.h"
 #import "FSVideoFxView.h"
 #import "FSDissolveAnimator.h"
@@ -26,20 +27,14 @@
     NSMutableString *_videoFxPackageId;
     
     BOOL _needConvert;
+    
+    CGFloat _startProgress;
 }
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
-
-@property(nonatomic,strong)NSMutableArray *trackFxs;
 @end
 
 @implementation FSVideoFxController
--(NSMutableArray *)trackFxs{
-    if (!_trackFxs) {
-        _trackFxs = [NSMutableArray array];
-    }
-    return _trackFxs;
-}
 - (instancetype)init{
     if (self = [super init]) {
         [self setTransitioningDelegate:self];
@@ -185,27 +180,28 @@
 -(void)videoFxSelectProgress:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId{
 
     if (fxId != nil) {
-        int64_t startPoint = [_context getTimelineCurrentPosition:_timeLine];
-        int64_t endPoint = _timeLine.duration * progress;
-        NvsVideoClip *startIn = [_videoTrack getClipWithTimelinePosition:startPoint];
-        [_videoTrack splitClip:startIn.index splitPoint:startPoint];
+        _startProgress = progress;
+        int64_t startPoint = _timeLine.duration * progress;
+        [_timeLine addPackagedTimelineVideoFx:startPoint duration:_timeLine.duration videoFxPackageId:fxId];
         
-        NvsVideoClip *endClip = [_videoTrack getClipWithTimelinePosition:endPoint];
-        [_videoTrack splitClip:endClip.index splitPoint:endPoint];
-        for(int index = startIn.index;index <= endClip.index;index++){
-           NvsVideoClip * fxClip = [_videoTrack getClipWithIndex:index];
-            if (fxClip) {
-                [fxClip removeAllFx];
-                [fxClip appendPackagedFx:fxId];
-            }
-        }
-        
-        [_context seekTimeline:_timeLine timestamp:endPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
+        [_context seekTimeline:_timeLine timestamp:startPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
+        [_context playbackTimeline:_timeLine startTime:startPoint endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
         
     }else{
         int64_t point = _timeLine.duration * progress;
         [_context seekTimeline:_timeLine timestamp:point videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     }
+}
+-(void)videoFxSelectEnd:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId{
+    int64_t startPoint = _timeLine.duration * _startProgress;
+    int64_t endPoint = _timeLine.duration * progress;
+    
+    NvsTimelineVideoFx *timeLineFx = [_timeLine getLastTimelineVideoFx];
+    [timeLineFx changeInPoint:startPoint];
+    [timeLineFx changeOutPoint:endPoint];
+    
+    [_context seekTimeline:_timeLine timestamp:endPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
+    [videoFxView showUndoButton];
 }
 -(void)videoFxViewSelectTimeFx:(FSVideoFxView *)videoFxView type:(FSVideoFxType)type duration:(int64_t)duration progress:(CGFloat)progress{
     if (type == FSVideoFxTypeSlow) {
@@ -227,6 +223,10 @@
     }else if(type == FSVideoFxTypeRepeat){
         // 重复
         int64_t point = _timeLine.duration * progress;
+        
+        NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
+
+    
         [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
         [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
         [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
@@ -234,65 +234,26 @@
         // 倒序播放
         
     }
-    
     videoFxView.duration = _timeLine.duration;
-    [_videoTrack setVolumeGain:0 rightVolumeGain:0];
-    
-//    [self playVideoFromHead];
 }
--(void)videoFxViewSelectFx:(FSVideoFxView *)videoFxView PackageId:(NSString *)fxId startProgress:(CGFloat)startProgress endProgress:(CGFloat)endProgress{
-    
-    int64_t startPoint = _timeLine.duration * startProgress;
-    int64_t endPoint = _timeLine.duration *endProgress;
-    NvsVideoClip *clipStart = [_videoTrack getClipWithTimelinePosition:startPoint];
-    [_videoTrack splitClip:clipStart.index splitPoint:startPoint];
-    
-    NvsVideoClip *clipEnd = [_videoTrack getClipWithTimelinePosition:endPoint];
-    [_videoTrack splitClip:clipEnd.index splitPoint:endPoint];
-    
-    NvsVideoClip *splitedClipStart = [_videoTrack getClipWithTimelinePosition:startPoint + 1];
-    NvsVideoClip *splitedClipEnd = [_videoTrack getClipWithTimelinePosition:endPoint - 1];
-    
-    NSMutableArray *indexs = [NSMutableArray array];
-    for(int index = splitedClipStart.index;index <= splitedClipEnd.index;index++){
-        NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:index];
-        [videoClip appendPackagedFx:fxId];
-        [indexs addObject:@{@"index":@(index),@"fxid":@(videoClip.fxCount)}];
+-(void)videoFxUndoPackageFx:(FSVideoFxView *)videoFxView{
+    NvsTimelineVideoFx *timeLineFx = [_timeLine getLastTimelineVideoFx];
+    if (timeLineFx) {
+        
+        [_timeLine removeTimelineVideoFx:timeLineFx];
+        
+        if (![_timeLine getLastTimelineVideoFx]) {
+            [videoFxView hideUndoButton];
+        }
     }
-    
-    NSDictionary *trackFx = @{@"indexs":indexs};
-    
-    [_videoTrack setVolumeGain:0 rightVolumeGain:0];
-    videoFxView.duration = _timeLine.duration;
-
-    [self.trackFxs addObject:trackFx];
-    [videoFxView showUndoButton];
-    
-//    [self playVideoFromHead];
 }
+
+
 -(CGFloat)videoFxViewUpdateProgress:(FSVideoFxView *)videoFxView{
-    
     int64_t current = [_context getTimelineCurrentPosition:_timeLine];
     CGFloat progress = (CGFloat)current/_timeLine.duration;
     return progress;
 }
--(void)videoFxUndoPackageFx:(FSVideoFxView *)videoFxView{
-    if ([self.trackFxs count] == 0) {
-        return;
-    }
-    NSDictionary *trackFx = [self.trackFxs lastObject];
-    NSArray *indexs = [trackFx valueForKey:@"indexs"];
-    for (NSDictionary *dict in indexs) {
-        NvsVideoClip *video = [_videoTrack getClipWithIndex:[[dict valueForKey:@"index"] intValue]];
-        [video removeFx:[[dict valueForKey:@"fxid"] intValue]];
-    }
-    [self.trackFxs removeLastObject];
-    
-    if ([self.trackFxs count] == 0) {
-        [videoFxView hideUndoButton];
-    }
-}
-
 #pragma mark - 
 -(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
     return [FSDissolveAnimator initWithSourceVc:source];

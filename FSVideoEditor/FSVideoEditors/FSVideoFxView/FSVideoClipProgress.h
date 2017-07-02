@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 
 - (void)FSVideoClipProgressUpdateProgress:(CGFloat)progress;
 
+- (void)videoClipProgressEndSelect:(CGFloat)progress;
+
 - (void)videoClipProgressUndoState:(BOOL)shouldShow;
 
 @end

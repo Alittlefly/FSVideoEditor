@@ -12,13 +12,14 @@
 @class FSVideoFxView;
 @protocol FSVideoFxViewDelegate <NSObject>
 
--(void)videoFxViewSelectFx:(FSVideoFxView *)videoFxView PackageId:(NSString *)fxId startProgress:(CGFloat)startProgress endProgress:(CGFloat)endProgress;
 -(void)videoFxViewSelectTimeFx:(FSVideoFxView *)videoFxView type:(FSVideoFxType)type duration:(int64_t)duration progress:(CGFloat)progress;
 -(CGFloat)videoFxViewUpdateProgress:(FSVideoFxView *)videoFxView;
 @optional
 -(void)videoFxUndoPackageFx:(FSVideoFxView *)videoFxView;
 
 -(void)videoFxSelectProgress:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId;
+
+-(void)videoFxSelectEnd:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId;
 @end
 
 @interface FSVideoFxView : UIView

@@ -78,7 +78,6 @@
         return;
     }
     _videoTrack = [_timeLine getVideoTrackByIndex:0];
-//    NvsAudioTrack *audioTrack = [_timeLine getAudioTrackByIndex:0];
     
     NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];

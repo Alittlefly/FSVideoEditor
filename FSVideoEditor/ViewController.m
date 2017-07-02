@@ -13,6 +13,7 @@
 #import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "FSMusicController.h"
+#import "AFNetworking.h"
 
 
 @interface ViewController ()<NvcConvertorDelegate>

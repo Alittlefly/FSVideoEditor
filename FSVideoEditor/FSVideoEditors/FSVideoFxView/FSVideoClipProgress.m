@@ -222,14 +222,15 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
         
         _progress = (self.fxView.frame.size.width+self.fxView.frame.origin.x)/self.bounds.size.width;
         [self updateLineFrame];
-        if ([self.delegate respondsToSelector:@selector(FSVideoClipProgressUpdateProgress:)]) {
-            [self.delegate FSVideoClipProgressUpdateProgress:_progress];
-        }
-        
     }
 }
 #pragma mark -
 -(void)beginFxView{
+    
+    if ([self.delegate respondsToSelector:@selector(FSVideoClipProgressUpdateProgress:)]) {
+        [self.delegate FSVideoClipProgressUpdateProgress:_progress];
+    }
+    
     if (!_fxTimer) {
         _fxTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(addFxView) userInfo:nil repeats:YES];
     }
@@ -251,6 +252,11 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     }
     
     _fxView = nil;
+    
+    if ([self.delegate respondsToSelector:@selector(videoClipProgressEndSelect:)]) {
+        [self.delegate videoClipProgressEndSelect:_progress];
+    }
+    
 }
 -(void)undoFxView{
     UIView *fxView = [self.renderRangeViews lastObject];

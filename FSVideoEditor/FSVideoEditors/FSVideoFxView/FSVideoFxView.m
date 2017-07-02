@@ -314,12 +314,12 @@
         _progress.fxViewColor = [UIColor whiteColor];
     }
     
-    [_progress beginFxView];
-    
      _currentFxId = objc_getAssociatedObject(button, FxIdKey);
+    
+    [_progress beginFxView];
 }
 -(void)endFx:(UIButton *)button{
-    _currentFxId = nil;
+     _currentFxId = nil;
     [_progress endFxView];
 }
 -(void)initTimeFxs{
@@ -371,10 +371,7 @@
         if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
             [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:1000000 progress:_progress.selectProgress];
         }
-    }else{
-        
     }
-
 }
 
 #pragma mark - FSVideoClipProgressDelegate
@@ -382,6 +379,11 @@
     NSLog(@"UpdateProgress:  %f",progress);
     if ([self.delegate respondsToSelector:@selector(videoFxSelectProgress:progress:packageFxId:)]) {
         [self.delegate videoFxSelectProgress:self progress:progress packageFxId:_currentFxId];
+    }
+}
+-(void)videoClipProgressEndSelect:(CGFloat)progress{
+    if ([self.delegate respondsToSelector:@selector(videoFxSelectEnd:progress:packageFxId:)]) {
+        [self.delegate videoFxSelectEnd:self progress:progress packageFxId:_currentFxId];
     }
 }
 -(void)videoClipProgressUndoState:(BOOL)shouldShow{
