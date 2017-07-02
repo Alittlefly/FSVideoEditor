@@ -21,4 +21,5 @@
 -(void)playAtTime:(NSTimeInterval)atTime;
 
 -(BOOL)isPlaying;
+- (NSTimeInterval)soundTotalTime;
 @end

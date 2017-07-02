@@ -34,7 +34,7 @@
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)isAnimated {
     CGFloat width = progress * self.bounds.size.width;
-    CGFloat oldW = self.progressView.frame.size.width;
+    //CGFloat oldW = self.progressView.frame.size.width;
 
     if (isAnimated) {
         [UIView animateWithDuration:0.1 animations:^{

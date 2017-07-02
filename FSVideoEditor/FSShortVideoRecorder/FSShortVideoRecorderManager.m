@@ -9,6 +9,7 @@
 #import "FSShortVideoRecorderManager.h"
 #import "NvsVideoTrack.h"
 #import "NvcConvertor.h"
+#import "NvsVideoClip.h"
 
 #define MaxVideoTime 15
 
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSMutableArray *timeArray;
 @property (nonatomic, strong) NSMutableArray *filePathArray;
+@property (nonatomic, strong) NSMutableArray *speedArray;
 @property (nonatomic, assign) CGFloat perTime;
 
 @property (nonatomic, strong) NvcConvertor *mConvertor;
@@ -93,6 +95,11 @@ static FSShortVideoRecorderManager *recorderManager;
     }
 }
 
+- (void)setRecorderSpeed:(CGFloat)recorderSpeed {
+    _recorderSpeed = recorderSpeed;
+    
+}
+
 - (instancetype)init {
     if (self = [super init]) {
         [self initBaseData];
@@ -114,6 +121,7 @@ static FSShortVideoRecorderManager *recorderManager;
     _recorderSpeed = 1;
     _timeArray = [NSMutableArray arrayWithCapacity:0];
     _filePathArray = [NSMutableArray arrayWithCapacity:0];
+    _speedArray = [NSMutableArray arrayWithCapacity:0];
     
     [self initContext];
 }
@@ -159,6 +167,16 @@ static FSShortVideoRecorderManager *recorderManager;
     _videoTime = 0;
     _timeArray = nil;
     _filePathArray = nil;
+    _speedArray = nil;
+    
+//    for (int i = 0; i < [self.timeLine videoTrackCount]; i++) {
+//        NvsVideoTrack *track = [self.timeLine getVideoTrackByIndex:i];
+//    }
+    
+    if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
+        [_context stop];
+    _context.delegate = nil;
+    _context = nil;
 }
 
 - (NvsTimeline *)timeLine {
@@ -335,7 +353,7 @@ static FSShortVideoRecorderManager *recorderManager;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerProgress:)]) {
         [self.delegate FSShortVideoRecorderManagerProgress:_videoTime];
     }
-    NSLog(@"%ld",_videoTime);
+    NSLog(@"_videoTime: %f    _perTime: %f",_videoTime,_perTime);
 }
 
 - (void)quitRecording {
@@ -360,6 +378,9 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (void)stopRecording {
+    if ([self getCurrentEngineState] != NvsStreamingEngineState_CaptureRecording) {
+        return;
+    }
     if ([_timer isValid]) {
         [_timer setFireDate:[NSDate distantFuture]];
     }
@@ -376,7 +397,26 @@ static FSShortVideoRecorderManager *recorderManager;
 //    [self.videoTrack appendClip:_outputFilePath];
 
     
-    [_timeArray addObject:[NSNumber numberWithInteger:_perTime]];
+    [_timeArray addObject:[NSNumber numberWithFloat:_perTime]];
+    
+    CGFloat speed = 1;
+    if (_recorderSpeed == 3) {
+        speed = 1.0/3.0;
+    }
+    else if (_recorderSpeed == 2) {
+        speed = 0.5;
+    }
+    else if (_recorderSpeed == 1) {
+        speed = 1;
+    }
+    else if (_recorderSpeed == 0.5) {
+        speed = 2;
+    }
+    else if (_recorderSpeed == 1.0/3.0) {
+        speed = 3;
+    }
+    
+    [_speedArray addObject:[NSNumber numberWithFloat:speed]];
     
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerPauseRecorder)]) {
         [self.delegate FSShortVideoRecorderManagerPauseRecorder];
@@ -417,23 +457,37 @@ static FSShortVideoRecorderManager *recorderManager;
     //NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSArray *docPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     
+    
+    
+    [self.videoTrack removeAllClips];
+    int i = 0;
     for (NSString *path in _filePathArray) {
         NSFileManager* fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:path])
         {
-            [self.videoTrack appendClip:path];
+            CGFloat speed = [[_speedArray objectAtIndex:i] floatValue];
+            NvsVideoClip *clip = [self.videoTrack appendClip:path];
+            [clip changeSpeed:speed];
+            NSLog(@"----speed:%f  duration:%lld   count:%d ",speed,self.timeLine.duration,[self.timeLine videoTrackCount]);
         }
+        i++;
        // UISaveVideoAtPathToSavedPhotosAlbum(path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     }
     
     
     _videoFilePath = [[docPath objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];//[docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
     
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinish:)]) {
+        [self.delegate FSShortVideoRecorderManagerFinish:self.timeLine];
+    }
+    
+    return YES;
+    
     BOOL isSuccess = [_context compileTimeline:self.timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_videoFilePath videoResolutionGrade:NvsCompileVideoResolutionGrade720 videoBitrateGrade:NvsCompileBitrateGradeHigh flags:0];
     if (isSuccess) {
-        _videoIndex = 0;
-        _outputFilePath = nil;
-       // UISaveVideoAtPathToSavedPhotosAlbum(_videoFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+//        _videoIndex = 0;
+//        _outputFilePath = nil;
+//        UISaveVideoAtPathToSavedPhotosAlbum(_videoFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 
     }
     return isSuccess;
@@ -443,15 +497,16 @@ static FSShortVideoRecorderManager *recorderManager;
 - (BOOL)deleteVideoFile {
 //    BOOL success = [self.videoTrack removeClip:(unsigned int)_videoIndex keepSpace:false];
 //    if (success) {
-    if (_videoIndex == 0) {
+    if (_timeArray.count == 0) {
         return NO;
     }
-        CGFloat time = [[_timeArray objectAtIndex:_videoIndex-1] integerValue];
-        _videoTime = _videoTime - time;
+    CGFloat time = [[_timeArray objectAtIndex:_videoIndex-1] floatValue];
+    _videoTime = _videoTime - time;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerDeleteVideo:)]) {
         [self.delegate FSShortVideoRecorderManagerDeleteVideo:_videoTime];
     }
-        [_timeArray removeLastObject];
+    [_timeArray removeLastObject];
+    [_speedArray removeLastObject];
     
         //文件名
     NSString *uniquePath= [_filePathArray lastObject];
@@ -501,11 +556,12 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (void)didCompileFinished:(NvsTimeline *)timeline {
     NSLog(@"didCompileFinished");
-   // UISaveVideoAtPathToSavedPhotosAlbum(_videoFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    UISaveVideoAtPathToSavedPhotosAlbum(_videoFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinishRecorder:)]) {
         [self.delegate FSShortVideoRecorderManagerFinishRecorder:_videoFilePath];
     }
 
+  //  [self clearData];
 
 }
 
