@@ -376,7 +376,7 @@
 
 #pragma mark - FSVideoClipProgressDelegate
 - (void)FSVideoClipProgressUpdateProgress:(CGFloat)progress {
-    NSLog(@"UpdateProgress:  %f",progress);
+//    NSLog(@"UpdateProgress:  %f",progress);
     if ([self.delegate respondsToSelector:@selector(videoFxSelectProgress:progress:packageFxId:)]) {
         [self.delegate videoFxSelectProgress:self progress:progress packageFxId:_currentFxId];
     }

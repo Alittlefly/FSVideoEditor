@@ -180,7 +180,7 @@
     
     if (!_thumbnailSequence) {
         _thumbnailSequence = [[NvsThumbnailSequenceView alloc] init];
-        _thumbContent = [[FSThumbnailView alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds) - 70, CGRectGetWidth(self.view.bounds),60) length:15.0 allLength:_timeLine.duration/1000000 minLength:3.0f];
+        _thumbContent = [[FSThumbnailView alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds) - 70, CGRectGetWidth(self.view.bounds),60) length:15.0 allLength:_timeLine.duration/1000000 minLength:5.0f];
         _thumbContent.delegate = self;
         _thumbContent.backGroundView = _thumbnailSequence;
         [self.view addSubview:_thumbContent];

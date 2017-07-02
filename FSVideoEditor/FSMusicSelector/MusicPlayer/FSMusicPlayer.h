@@ -13,10 +13,13 @@
 @property(nonatomic,copy)NSString *filePath;
 @property(nonatomic,assign)CGFloat rate;
 
++(instancetype)sharedPlayer;
+
 -(void)pause;
 -(void)stop;
 -(void)play;
-+(instancetype)sharedPlayer;
+-(void)playAtTime:(NSTimeInterval)atTime;
+
 -(BOOL)isPlaying;
 - (NSTimeInterval)soundTotalTime;
 @end
