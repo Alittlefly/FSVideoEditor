@@ -27,6 +27,7 @@
 		563B79F11F08C41D0035346A /* FSMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79F01F08C41D0035346A /* FSMusic.m */; };
 		563B79F61F08D3290035346A /* FSMusicSever.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79F51F08D3290035346A /* FSMusicSever.m */; };
 		563B79F91F08D3360035346A /* FSMusicAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79F81F08D3360035346A /* FSMusicAPI.m */; };
+		563B79FC1F08F3B40035346A /* FSMusicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79FB1F08F3B40035346A /* FSMusicManager.m */; };
 		5647BC3C1F0272110072B618 /* FSControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC3B1F0272110072B618 /* FSControlView.m */; };
 		5647BC3F1F02954B0072B618 /* FSDissolveAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC3E1F02954B0072B618 /* FSDissolveAnimator.m */; };
 		5647BC421F0295E00072B618 /* FSSpringAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC411F0295E00072B618 /* FSSpringAnimator.m */; };
@@ -178,6 +179,8 @@
 		563B79F51F08D3290035346A /* FSMusicSever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicSever.m; sourceTree = "<group>"; };
 		563B79F71F08D3360035346A /* FSMusicAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicAPI.h; sourceTree = "<group>"; };
 		563B79F81F08D3360035346A /* FSMusicAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicAPI.m; sourceTree = "<group>"; };
+		563B79FA1F08F3B40035346A /* FSMusicManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicManager.h; sourceTree = "<group>"; };
+		563B79FB1F08F3B40035346A /* FSMusicManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicManager.m; sourceTree = "<group>"; };
 		5647BC3A1F0272110072B618 /* FSControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSControlView.h; sourceTree = "<group>"; };
 		5647BC3B1F0272110072B618 /* FSControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSControlView.m; sourceTree = "<group>"; };
 		5647BC3D1F02954B0072B618 /* FSDissolveAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDissolveAnimator.h; sourceTree = "<group>"; };
@@ -509,6 +512,8 @@
 			children = (
 				563B79F41F08D3290035346A /* FSMusicSever.h */,
 				563B79F51F08D3290035346A /* FSMusicSever.m */,
+				563B79FA1F08F3B40035346A /* FSMusicManager.h */,
+				563B79FB1F08F3B40035346A /* FSMusicManager.m */,
 			);
 			path = Sever;
 			sourceTree = "<group>";
@@ -1102,6 +1107,7 @@
 				567A3D671EFB6F830026247E /* FMResultSet.m in Sources */,
 				567A3D471EFB66B60026247E /* FSFileDownloadCache.m in Sources */,
 				567A3D441EFB66B60026247E /* FSFileDivider.m in Sources */,
+				563B79FC1F08F3B40035346A /* FSMusicManager.m in Sources */,
 				567A3D4B1EFB66B60026247E /* FSUploadCache.m in Sources */,
 				563B79D91F0656E00035346A /* FSMusicPlayer.m in Sources */,
 				567A3D631EFB6F830026247E /* FMDatabase.m in Sources */,

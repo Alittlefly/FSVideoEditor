@@ -39,9 +39,7 @@ static id object = nil;
 }
 -(void)setFilePath:(NSString *)filePath{
     _filePath = filePath;
-    
-    NSLog(@"file Path %@",filePath);
-    
+        
     NSData *mp3Data = [NSData dataWithContentsOfFile:filePath];
     
     if (!mp3Data) {

@@ -22,5 +22,6 @@
 
 @property(nonatomic,assign)id<FSMusicCellDelegate>delegate;
 @property(nonatomic,strong)FSMusic * music;
+@property(nonatomic,assign)BOOL isPlayIng;
 +(instancetype)musicCellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 @end

@@ -42,6 +42,7 @@
 @property(nonatomic,strong)UIButton *collectButton;
 
 @property(nonatomic,strong)FSMusicUseButton *useButton;
+@property(nonatomic,strong)UIButton *controlButton;
 
 @end
 @implementation FSMusicCell
@@ -70,6 +71,7 @@ static NSString *identifier = @"FSMusicCell";
         [_playButton setImage:[UIImage imageNamed:@"musicPlay"] forState:(UIControlStateNormal)];
         [_playButton setImage:[UIImage imageNamed:@"musicPause"] forState:(UIControlStateSelected)];
         [_playButton addTarget:self action:@selector(playMusic:) forControlEvents:(UIControlEventTouchUpInside)];
+        [_playButton setUserInteractionEnabled:NO];
     }
     return _playButton;
 }
@@ -109,9 +111,17 @@ static NSString *identifier = @"FSMusicCell";
 }
 -(UIButton *)collectButton{
     if (!_collectButton) {
-        _collectButton = [[UIButton alloc] init];
+         _collectButton = [[UIButton alloc] init];
+        [_collectButton setImage:[UIImage imageNamed:@"musicCollect"] forState:(UIControlStateNormal)];
+        [_controlButton addTarget:self action:@selector(playMusic:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _collectButton;
+}
+-(UIButton *)controlButton{
+    if (!_controlButton) {
+         _controlButton = [[UIButton alloc] init];
+    }
+    return _controlButton;
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
@@ -122,6 +132,8 @@ static NSString *identifier = @"FSMusicCell";
     [self addSubview:self.authorLabel];
     [self addSubview:self.timeLabel];
     [self addSubview:self.useButton];
+    [self addSubview:self.collectButton];
+    [self addSubview:self.controlButton];
     
     [self setClipsToBounds:YES];
     
@@ -133,21 +145,26 @@ static NSString *identifier = @"FSMusicCell";
     
     [self.timeLabel setFrame:CGRectMake(100.0, CGRectGetMaxY(self.authorLabel.frame) + 8.0, CGRectGetWidth(self.nameLabel.frame), 18)];
     [self.useButton setFrame:CGRectMake(10, 102, CGRectGetWidth(self.bounds) - 20, 40)];
+    
+    [self.collectButton setFrame:CGRectMake(CGRectGetWidth(self.bounds) - 40, (107 - 20)/2.0, 20, 20)];
 }
 
 -(void)setMusic:(FSMusic *)music{
-    [self.nameLabel setText:music.name];
-    [self.authorLabel setText:music.author];
+    [self.nameLabel setText:music.songTitle];
+    [self.authorLabel setText:music.songAuthor];
     [self.timeLabel setText:@"00:18"];
-    _music = music;
-    
+     _music = music;
     [self.useButton setHidden:!_music.opend];
     [self.playButton setSelected:_music.isPlaying];
 }
+-(void)setIsPlayIng:(BOOL)isPlayIng{
+    _isPlayIng = isPlayIng;
+    
+    _music.isPlaying = isPlayIng;
+    
+    [self.playButton setSelected:isPlayIng];
+}
 -(void)playMusic:(UIButton *)button{
-    
-    [button setSelected:!button.selected];
-    
     if ([self.delegate respondsToSelector:@selector(musicCell:wouldPlay:)]) {
         [self.delegate musicCell:self wouldPlay:_music];
     }
