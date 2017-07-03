@@ -88,7 +88,7 @@
     
     _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(_scrollView.frame)-5-25, 100, 25)];
     _timeLabel.backgroundColor = FSHexRGBAlpha(0x000F1E, 0.5);
-    _timeLabel.textColor = FSHexRGB(0x000000);
+    _timeLabel.textColor = FSHexRGB(0xF5F5F5);
     _timeLabel.font = [UIFont systemFontOfSize:11];
     _timeLabel.textAlignment = NSTextAlignmentCenter;
     _timeLabel.text = @"当前从00:00开始";

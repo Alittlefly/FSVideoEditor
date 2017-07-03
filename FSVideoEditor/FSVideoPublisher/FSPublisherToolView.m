@@ -73,7 +73,7 @@ static BOOL IsArabic = NO;
     _chooseMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _chooseMusicButton.frame = IsArabic ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
     // [_finishButton setTitle:@"finish" forState:UIControlStateNormal];
-    [_chooseMusicButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
+    [_chooseMusicButton setImage:[UIImage imageNamed:@"choose-music"] forState:UIControlStateNormal];
     [_chooseMusicButton addTarget:self action:@selector(chooseMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_chooseMusicButton];
     
