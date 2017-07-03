@@ -23,7 +23,7 @@
 -(instancetype)init{
     if (self = [super init]) {
         _glayer = (CAGradientLayer *)self.layer;
-        _glayer.colors = @[(__bridge id)FSHexRGB(0x3023ae).CGColor,(__bridge id)FSHexRGB(0xC96DD8).CGColor];
+        _glayer.colors = @[(__bridge id)FSHexRGB(0x3023AE).CGColor,(__bridge id)FSHexRGB(0xC96DD8).CGColor];
         _glayer.startPoint = CGPointMake(0, 0);
         _glayer.endPoint = CGPointMake(0, 1);
     }
@@ -78,7 +78,6 @@ static NSString *identifier = @"FSMusicCell";
 -(UIImageView *)pic{
     if (!_pic) {
          _pic = [[UIImageView alloc] init];
-        [_pic setBackgroundColor:[UIColor redColor]];
     }
     return _pic;
 }
@@ -138,6 +137,8 @@ static NSString *identifier = @"FSMusicCell";
     [self setClipsToBounds:YES];
     
     [self.pic setFrame:CGRectMake(10, 20, 72, 72)];
+    
+    [self.pic setImage:[UIImage imageNamed:@"musicPlaceHolder"]];
     [self.playButton setFrame:self.pic.frame];
     
     [self.nameLabel setFrame:CGRectMake(100.0, 20, CGRectGetWidth(self.bounds) - 38 - 82, 21)];
