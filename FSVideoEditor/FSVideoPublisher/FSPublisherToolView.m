@@ -177,6 +177,10 @@ static BOOL IsArabic = NO;
     [self addSubview:_videoNameView];
 }
 
+- (void)canEditMusic:(BOOL)enable {
+    self.cutMusicButton.enabled = enable;
+}
+
 - (void)backClik {
     if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewQuit)]) {
         [self.delegate FSPublisherToolViewQuit];

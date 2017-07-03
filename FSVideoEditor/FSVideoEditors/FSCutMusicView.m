@@ -122,6 +122,10 @@
 }
 
 - (void)finishCutMusic {
+    if ([_timer isValid]) {
+        [_timer setFireDate:[NSDate distantFuture]];
+        _timer = nil;
+    }
     if (_filePath) {
         if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
             [[FSMusicPlayer sharedPlayer] stop];
@@ -185,9 +189,8 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSLog(@"%f",scrollView.contentOffset.x);
     if ([_timer isValid]) {
-        
+        [_timer setFireDate:[NSDate distantFuture]];
     }
-    [_timer setFireDate:[NSDate distantFuture]];
     _playTime = 0;
     
     CGRect frame = self.maskView.frame;

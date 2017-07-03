@@ -30,4 +30,5 @@ typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
 @property (nonatomic, weak) id<FSPublisherToolViewDelegate> delegate;
 
 -(instancetype)initWithFrame:(CGRect)frame type:(FSPublisherToolViewType)type;
+- (void)canEditMusic:(BOOL)enable;
 @end

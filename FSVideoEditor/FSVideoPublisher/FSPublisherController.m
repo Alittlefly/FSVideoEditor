@@ -95,6 +95,10 @@
     
     if (_musicPath != nil && _musicPath.length > 0) {
         [[FSMusicPlayer sharedPlayer] setFilePath:_musicPath];
+        [_toolView canEditMusic:YES];
+    }
+    else {
+        [_toolView canEditMusic:NO];
     }
  
 }
