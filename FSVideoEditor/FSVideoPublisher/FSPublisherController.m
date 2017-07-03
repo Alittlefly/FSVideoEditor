@@ -136,6 +136,9 @@
 //    if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
 //        [_context stop];
     [_context setDelegate:nil];
+    if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+        [[FSMusicPlayer sharedPlayer] stop];
+    }
     
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
@@ -250,14 +253,16 @@
 }
 
 - (void)FSPublisherToolViewEditMusic {
-    if (!_cutMusicView) {
-        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath];
-        _cutMusicView.delegate = self;
-        [self.view addSubview:_cutMusicView];
-        _cutMusicView.hidden = YES;
+    if (_musicPath !=nil && _musicPath.length > 0) {
+        if (!_cutMusicView) {
+            _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath];
+            _cutMusicView.delegate = self;
+            [self.view addSubview:_cutMusicView];
+            _cutMusicView.hidden = YES;
+        }
+        self.toolView.hidden = YES;
+        _cutMusicView.hidden = NO;
     }
-    self.toolView.hidden = YES;
-    _cutMusicView.hidden = NO;
 }
 
 - (void)FSPublisherToolViewAddEffects {
@@ -303,8 +308,11 @@
 
 }
 #pragma mark - 
--(void)musicControllerSelectMusic:(FSMusic *)music{
-
+-(void)musicControllerSelectMusic:(NSString *)music{
+    if (music != nil && music.length > 0) {
+        [_toolView canEditMusic:YES];
+        _musicPath = music;
+    }
 }
 
 #pragma mark -
