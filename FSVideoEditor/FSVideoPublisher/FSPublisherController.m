@@ -128,8 +128,8 @@
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
-        [_context stop];
+//    if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
+//        [_context stop];
     [_context setDelegate:nil];
     
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;

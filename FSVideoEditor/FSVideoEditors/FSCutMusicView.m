@@ -27,6 +27,7 @@
 @property (nonatomic, assign) NSTimeInterval newTime;
 
 @property (nonatomic, assign) CGFloat totalTime;
+@property (nonatomic, assign) CGFloat playTime;
 
 @end
 
@@ -35,6 +36,8 @@
 - (instancetype)initWithFrame:(CGRect)frame audioClip:(NvsAudioClip *)audioClip{
     if (self = [super initWithFrame:frame]) {
         _audioClip = audioClip;
+        _playTime = 0;
+        _totalTime = 0;
         [self createBaseUI];
     }
     return self;
@@ -137,30 +140,55 @@
 
 - (void)updateMaskViewFrame {
     CGRect frame = self.maskView.frame;
-    frame.size.width += 0.1*self.frame.size.width/15;
+
+    if (_playTime >= 15.0) {
+        _playTime = 0;
+        frame.size.width = _scrollView.contentOffset.x;
+        if (_filePath) {
+            [[FSMusicPlayer sharedPlayer] stop];
+            [[FSMusicPlayer sharedPlayer] playAtTime:_newTime];
+            [[FSMusicPlayer sharedPlayer] play];
+        }
+        else {
+            [_audioClip changeTrimInPoint:_newTime*1000*1000 affectSibling:NO];
+        }
+    }
+    else {
+        _playTime += 0.1;
+        frame.size.width += 0.1*self.frame.size.width/15;
+    }
+    
     self.maskView.frame = frame;
+    
+    
 
     
-    if (frame.size.width > self.frame.size.width && frame.size.width <= self.scrollView.contentSize.width) {
-        self.scrollView.contentOffset = CGPointMake(frame.size.width-self.frame.size.width, 0);
-    }
-    else if (frame.size.width > self.scrollView.contentSize.width){
-        [_timer setFireDate:[NSDate distantFuture]];
-    }
+//    if (frame.size.width > self.frame.size.width && frame.size.width <= self.scrollView.contentSize.width) {
+//        self.scrollView.contentOffset = CGPointMake(frame.size.width-self.frame.size.width, 0);
+//    }
+//    else if (frame.size.width > self.scrollView.contentSize.width){
+//        [_timer setFireDate:[NSDate distantFuture]];
+//    }
 }
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
    // NSLog(@" scrollViewDidScroll contentOffSet %f",scrollView.contentOffset.x);
+    if (scrollView.contentOffset.x+self.frame.size.width <= self.maskView.frame.size.width) {
+        CGRect frame = self.maskView.frame;
+        frame.size.width -= self.frame.size.width/2;
+        self.maskView.frame =frame;
+    }
 
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSLog(@"%f",scrollView.contentOffset.x);
     if ([_timer isValid]) {
         
     }
     [_timer setFireDate:[NSDate distantFuture]];
+    _playTime = 0;
     
     CGRect frame = self.maskView.frame;
     frame.size.width = scrollView.contentOffset.x;
@@ -184,6 +212,11 @@
     else {
         [_audioClip changeTrimInPoint:time*1000*1000 affectSibling:NO];
     }
+
 }
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+   }
 
 @end

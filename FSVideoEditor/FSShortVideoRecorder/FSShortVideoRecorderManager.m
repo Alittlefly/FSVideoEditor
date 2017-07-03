@@ -84,6 +84,10 @@ static FSShortVideoRecorderManager *recorderManager;
         return;
     }
     
+    if (!_context.delegate) {
+        _context.delegate = self;
+    }
+    
     // 判断当前引擎状态是否为采集预览状态，避免重复启动采集预览引起引擎停止再启动，造成启动慢或者其他不良影响
     if ([self getCurrentEngineState] == NvsStreamingEngineState_CapturePreview) {
         return;

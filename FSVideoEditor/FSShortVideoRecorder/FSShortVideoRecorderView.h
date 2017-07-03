@@ -32,4 +32,6 @@ typedef enum{
 @property (nonatomic, weak) id<FSShortVideoRecorderViewDelegate> delegate;
 @property (nonatomic, copy) NSString *musicFilePath;
 
+- (void)resumeCapturePreview;
+
 @end
