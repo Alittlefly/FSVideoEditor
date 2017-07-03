@@ -17,6 +17,8 @@
 #import "NvsAudioTrack.h"
 #import "FSMusicPlayer.h"
 
+BOOL IsArabic;
+
 @interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate, FSTimeCountdownViewDelegate,UIAlertViewDelegate, FSSegmentViewDelegate, FSMoveButtonDelegate, FSCutMusicViewDelegate>
 
 @property (nonatomic, strong) UIButton *flashButton;  //闪光灯
@@ -72,10 +74,7 @@
 
 @end
 
-@implementation FSShortVideoRecorderView {
-    BOOL IsArabic;
-
-}
+@implementation FSShortVideoRecorderView
 
 - (void)dealloc {
 //    _context = nil;

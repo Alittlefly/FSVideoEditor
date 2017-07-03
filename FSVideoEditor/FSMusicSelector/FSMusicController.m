@@ -65,7 +65,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
     // Do any additional setup after loading the view.
      _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     [_tableView setDelegate:self];
@@ -78,10 +77,16 @@
     [tableHeader setTextAlignment:(NSTextAlignmentCenter)];
     [tableHeader setFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 52)];
     [_tableView setTableHeaderView:tableHeader];
+    [_tableView setTableFooterView:[UIView new]];
     
      _sever = [[FSMusicSever alloc] init];
     [_sever setDelegate:self];
     [_sever getMusicList];
+}
+-(void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    
+    [_tableView setFrame:self.view.bounds];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -269,6 +274,9 @@
 }
 -(void)musicSeverGetFaild{
 
+}
+-(void)dealloc{
+    NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
 
 - (void)didReceiveMemoryWarning {

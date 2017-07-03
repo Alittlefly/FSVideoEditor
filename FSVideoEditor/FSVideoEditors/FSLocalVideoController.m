@@ -26,10 +26,15 @@
     NSArray *assets = [_manager photosWithType:(PHAssetMediaTypeVideo)];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-     _videoListView = [[FSVideoListView alloc] initWithFrame:self.view.bounds];
+     _videoListView = [[FSVideoListView alloc] init];
     [_videoListView setDelegate:self];
     [_videoListView setVideos:assets];
     [self.view addSubview:_videoListView];
+}
+
+-(void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    [_videoListView setFrame:self.view.bounds];
 }
 #pragma mark - 
 -(void)videoListView:(FSVideoListView *)videoListView didSelectedVideo:(PHAsset *)video{
@@ -48,10 +53,8 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)dealloc{
+    NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
-
 
 @end
