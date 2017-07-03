@@ -416,12 +416,12 @@
     
     
     
-    NvsTimeline *timeLine = [_recorderManager createTimeLine];
-    
-    NvsAudioTrack *_audiotrack = [timeLine appendAudioTrack];
-    NvsAudioClip *audio = [_audiotrack appendClip:_musicFilePath];
-    int64_t length = [[FSMusicPlayer sharedPlayer] soundTotalTime];//timeLine.duration;
-    [audio changeTrimOutPoint:length affectSibling:YES];
+//    NvsTimeline *timeLine = [_recorderManager createTimeLine];
+//    
+//    NvsAudioTrack *_audiotrack = [timeLine appendAudioTrack];
+//    NvsAudioClip *audio = [_audiotrack appendClip:_musicFilePath];
+//    int64_t length = [[FSMusicPlayer sharedPlayer] soundTotalTime];//timeLine.duration;
+//    [audio changeTrimOutPoint:length affectSibling:YES];
     
     if (!_cutMusicView) {
 //        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds audioClip:audio];

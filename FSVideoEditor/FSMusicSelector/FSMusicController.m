@@ -67,11 +67,17 @@
     
 
     // Do any additional setup after loading the view.
-     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStyleGrouped)];
+     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     [_tableView setDelegate:self];
     [_tableView setDataSource:self];
     
     [self.view addSubview:_tableView];
+    
+    UILabel *tableHeader = [[UILabel alloc] init];
+    [tableHeader setText:@"热门歌曲"];
+    [tableHeader setTextAlignment:(NSTextAlignmentCenter)];
+    [tableHeader setFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 52)];
+    [_tableView setTableHeaderView:tableHeader];
     
      _sever = [[FSMusicSever alloc] init];
     [_sever setDelegate:self];
@@ -207,18 +213,23 @@
 #pragma mark -
 -(void)musicCell:(FSMusicCell *)cell wuoldUseMusic:(FSMusic *)music{
     
+    NSString *path = nil;
     if (music.songUrl) {
         NSString *localPath = [FSMusicManager musicPathWithFileName:music.songUrl];
+        path = localPath;
         [self updateVideoStreamUrl:localPath];
     }else{
         NSString *bundlePath = [[NSBundle mainBundle] pathForResource:music.songTitle ofType:@"mp3"];
+        path = bundlePath;
         [self updateVideoStreamUrl:bundlePath];
     }
 
     if (_pushed) {
         [self.navigationController popViewControllerAnimated:YES];
     }else{
+        
         FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
+        recoder.musicFilePath = path;
         [self.navigationController pushViewController:recoder animated:YES];
     }
     

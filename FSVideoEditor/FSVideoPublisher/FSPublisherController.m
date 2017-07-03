@@ -82,6 +82,7 @@
     
     NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
+    [clip setVolumeGain:_musicPath?0:1 rightVolumeGain:_musicPath?0:1];
     
     _toolView = [[FSPublisherToolView alloc] initWithFrame:self.view.bounds];
     _toolView.backgroundColor = [UIColor clearColor];
@@ -108,7 +109,6 @@
     
     if (_musicPath != nil && _musicPath.length > 0) {
         [[FSMusicPlayer sharedPlayer] stop];
-//        [[FSMusicPlayer sharedPlayer] setRate:_playSpeed];
         [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
         [[FSMusicPlayer sharedPlayer] play];
     }
@@ -193,17 +193,10 @@
         [audio changeTrimInPoint:_musicStartTime affectSibling:YES];
         [audio changeTrimOutPoint:length+_musicStartTime affectSibling:YES];
     }
-    
-//    NvsVideoTrack *_audiotrack = [_timeLine getVideoTrackByIndex:0];
-//    NvsVideoClip *audio = [_audiotrack getClipWithIndex:0];
-//    [audio changeSpeed:_playSpeed];
 
     _outPutPath = [self getCompilePath];
 
     [self deleteCurrentCompileFile:_outPutPath];
-    
-    
-//    BOOL isSuccess = [_context compileTimeline:self.timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_outPutPath videoResolutionGrade:NvsCompileVideoResolutionGrade720 videoBitrateGrade:NvsCompileBitrateGradeHigh flags:0];
 
     if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_outPutPath videoResolutionGrade:(NvsCompileVideoResolutionGrade2160) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0]){
         NSLog(@"11111111");
@@ -256,17 +249,7 @@
 }
 
 - (void)FSPublisherToolViewEditMusic {
-//    NSBundle *mainBundle = [NSBundle mainBundle];
-//    NSString *musicPath = [mainBundle pathForResource:@"wind" ofType:@"mp3"];
-
-    int64_t length = _timeLine.duration;
-    
-    NvsAudioTrack *_audiotrack = [_timeLine appendAudioTrack];
-    NvsAudioClip *audio = [_audiotrack appendClip:_musicPath];
-    [audio changeTrimOutPoint:length affectSibling:YES];
-    
     if (!_cutMusicView) {
-        //_cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds audioClip:audio];
         _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath];
         _cutMusicView.delegate = self;
         [self.view addSubview:_cutMusicView];
@@ -274,31 +257,19 @@
     }
     self.toolView.hidden = YES;
     _cutMusicView.hidden = NO;
-    
-   // [self FSPublisherToolViewChooseMusic];
-    
-    /*
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    NSString *musicPath = [mainBundle pathForResource:@"wind" ofType:@"mp3"];
-    
-    int64_t length = _timeLine.duration;
-    
-    NvsAudioTrack *_audiotrack = [_timeLine appendAudioTrack];
-    NvsAudioClip *audio = [_audiotrack appendClip:musicPath];
-    [audio changeTrimOutPoint:length affectSibling:YES];
-    
-    [self playVideoFromHead];
-     */
 }
 
 - (void)FSPublisherToolViewAddEffects {
     
     [_context seekTimeline:_timeLine timestamp:[_context getTimelineCurrentPosition:_timeLine] videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster | NvsStreamingEngineSeekFlag_ShowAnimatedStickerPoster];
 
+    [[FSMusicPlayer sharedPlayer] stop];
     
     FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
     fxController.timeLine = _timeLine;
     fxController.filePath = _filePath;
+    fxController.musicAttime = _musicStartTime?:0;
+    fxController.musicUrl = _musicPath?:nil;
     
     [self presentViewController:fxController animated:YES completion:nil];
 }
@@ -391,28 +362,10 @@
     _volumeView.hidden = YES;
     self.toolView.hidden = NO;
 }
-
-- (void)FSCutMusicViewFinishCutMusic:(NvsAudioClip *)newAudioClip {
-    NvsAudioTrack *_audiotrack = [_timeLine getAudioTrackByIndex:0];
-//    [_audiotrack removeAllClips];
-    NvsAudioClip *audioClip = [_audiotrack getClipWithIndex:0];
-    audioClip = newAudioClip;
-
-    [self playVideoFromHead];
-
-
-    _cutMusicView.hidden = YES;
-    [_cutMusicView removeFromSuperview];
-    _cutMusicView = nil;
-    
-    self.toolView.hidden = NO;
-}
-
 - (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval)newStartTime {
     _musicStartTime = newStartTime;
     [self playVideoFromHead];
 
-    
     _cutMusicView.hidden = YES;
     [_cutMusicView removeFromSuperview];
     _cutMusicView = nil;
