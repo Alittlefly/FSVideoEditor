@@ -40,12 +40,16 @@
     _titLabel.backgroundColor = [UIColor clearColor];
     _titLabel.font = [UIFont systemFontOfSize:15];
     _titLabel.text = @"滤镜";
+    _titLabel.shadowColor = [UIColor blackColor];
+    //阴影偏移  x，y为正表示向右下偏移
+    _titLabel.shadowOffset = CGSizeMake(1, 1);
     [_titLabel sizeToFit];
     _titLabel.frame = CGRectMake((self.frame.size.width- _titLabel.frame.size.width)/2, (self.frame.size.height/2-_titLabel.frame.size.height)/2, _titLabel.frame.size.width, _titLabel.frame.size.height);
     [self addSubview:_titLabel];
     
     _chooseButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _chooseButton.backgroundColor = [UIColor redColor];
+    _chooseButton.backgroundColor = [UIColor clearColor];
+    [_chooseButton setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
     _chooseButton.frame = CGRectMake(self.frame.size.width-20-54, (self.frame.size.height/2-30)/2, 54, 30);
     [_chooseButton addTarget:self action:@selector(finishChooseFilter) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_chooseButton];
