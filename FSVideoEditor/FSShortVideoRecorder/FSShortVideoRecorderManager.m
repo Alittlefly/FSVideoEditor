@@ -84,6 +84,10 @@ static FSShortVideoRecorderManager *recorderManager;
         return;
     }
     
+    if (!_context.delegate) {
+        _context.delegate = self;
+    }
+    
     // 判断当前引擎状态是否为采集预览状态，避免重复启动采集预览引起引擎停止再启动，造成启动慢或者其他不良影响
     if ([self getCurrentEngineState] == NvsStreamingEngineState_CapturePreview) {
         return;
@@ -477,11 +481,11 @@ static FSShortVideoRecorderManager *recorderManager;
     
     _videoFilePath = [[docPath objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];//[docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
     
-    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinish:)]) {
-        [self.delegate FSShortVideoRecorderManagerFinish:self.timeLine];
-    }
-    
-    return YES;
+//    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinish:)]) {
+//        [self.delegate FSShortVideoRecorderManagerFinish:self.timeLine];
+//    }
+//    
+//    return YES;
     
     BOOL isSuccess = [_context compileTimeline:self.timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_videoFilePath videoResolutionGrade:NvsCompileVideoResolutionGrade720 videoBitrateGrade:NvsCompileBitrateGradeHigh flags:0];
     if (isSuccess) {

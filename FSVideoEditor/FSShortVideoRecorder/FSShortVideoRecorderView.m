@@ -308,6 +308,7 @@
 }
 
 - (void)resumeCapturePreview {
+    //_recorderManager.delegate = self;
     [_recorderManager resumeCapturePreview];
 }
 
@@ -326,6 +327,9 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         [_recorderManager quitRecording];
+        if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+            [[FSMusicPlayer sharedPlayer] stop];
+        }
         if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewQuitRecorderView)]) {
             [self.delegate FSShortVideoRecorderViewQuitRecorderView];
         }
@@ -413,15 +417,6 @@
     _segmentView.hidden = YES;
     
     _isOpenFilterView = YES;
-    
-    
-    
-    NvsTimeline *timeLine = [_recorderManager createTimeLine];
-    
-    NvsAudioTrack *_audiotrack = [timeLine appendAudioTrack];
-    NvsAudioClip *audio = [_audiotrack appendClip:_musicFilePath];
-    int64_t length = [[FSMusicPlayer sharedPlayer] soundTotalTime];//timeLine.duration;
-    [audio changeTrimOutPoint:length affectSibling:YES];
     
     if (!_cutMusicView) {
 //        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds audioClip:audio];
@@ -532,6 +527,8 @@
     _faceUButton.hidden = YES;
     _deleteButton.hidden = YES;
     _segmentView.hidden = YES;
+    
+    _finishButton.enabled = NO;
     
    // _isOpenFilterView = YES;
     //倒计时动画
@@ -853,6 +850,9 @@
     _isAutoRecorder = YES;
     
     [self startRecorder];
+    
+    _finishButton.enabled = YES;
+
 }
 
 #pragma mark - FSShortVideoRecorderManagerDelegate

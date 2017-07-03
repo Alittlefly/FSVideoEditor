@@ -49,7 +49,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [[FSShortVideoRecorderManager sharedInstance] resumeCapturePreview];
+    [_recorderView resumeCapturePreview];
     if (_musicFilePath != nil && _musicFilePath.length > 0) {
         _recorderView.musicFilePath = _musicFilePath;
     }
