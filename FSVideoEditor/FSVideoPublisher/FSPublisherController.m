@@ -122,7 +122,6 @@
     [super viewWillAppear:animated];
     
     [self.toolView setHidden:NO];
-    [self.navigationController.navigationBar setHidden:YES];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -130,8 +129,6 @@
     [_context setDelegate:self];
     [self playVideoFromHead];
     
-    [self.navigationController.navigationBar setHidden:NO];
-
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -139,7 +136,6 @@
 //        [_context stop];
     [_context setDelegate:nil];
     
-    [self.navigationController.navigationBar setHidden:NO];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 #pragma mark - 

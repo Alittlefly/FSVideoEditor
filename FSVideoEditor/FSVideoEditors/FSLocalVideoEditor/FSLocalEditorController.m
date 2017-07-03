@@ -17,13 +17,17 @@
 #import "NvsAudioTrack.h"
 #import "FSSegmentView.h"
 
+extern int IsArabic;
 
 @interface FSLocalEditorController ()<NvsStreamingContextDelegate,FSThumbnailViewDelegate,FSSegmentViewDelegate>
 {
-    //UISegmentedControl *_speedSegment;
     FSSegmentView *_segmentView;
     int64_t _startTime;
     int64_t _endTime;
+    
+    UIButton *_backButton;
+    UIButton *_finishButton;
+
 }
 @property(nonatomic,strong)FSThumbnailView *thumbContent;
 
@@ -39,11 +43,27 @@
 
 @implementation FSLocalEditorController
 
+- (void)creatButtons{
+    _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _backButton.frame = IsArabic ? CGRectMake(CGRectGetWidth(self.view.bounds) - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
+    [_backButton setImage:[UIImage imageNamed:@"recorder-back"] forState:UIControlStateNormal];
+    [_backButton addTarget:self action:@selector(backClik) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_backButton];
+    
+    
+    _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _finishButton.frame = IsArabic ? CGRectMake(15, 20, 40, 40) : CGRectMake(CGRectGetWidth(self.view.bounds)- 15 -40, 20, 40, 40);
+    [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-red"] forState:UIControlStateNormal];
+    [_finishButton addTarget:self action:@selector(saveVideoFile) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_finishButton];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor blackColor]];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    
+    
     
     _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds)/2.0 - 210/2.0, CGRectGetWidth(self.view.bounds), 210)];
     [self.view addSubview:_prewidow];
@@ -79,12 +99,12 @@
     _segmentView.delegate = self;
     [self.view addSubview:_segmentView];
     
-    self.navigationItem.rightBarButtonItem = [self rightBarbuttonItem];
+    [self creatButtons];
 }
-- (UIBarButtonItem *)rightBarbuttonItem{
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"save" style:(UIBarButtonItemStyleDone) target:self action:@selector(saveVideoFile)];
-    return item;
+- (void)backClik{
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (void)saveVideoFile{
 
     //

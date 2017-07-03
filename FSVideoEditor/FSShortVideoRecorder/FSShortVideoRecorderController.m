@@ -36,14 +36,13 @@
 - (void)backClik {
 }
 
-- (void)dealloc {
-    //_recorderView = nil;
+-(void)dealloc{
+    NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController.navigationBar setHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -59,7 +58,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [self.navigationController.navigationBar setHidden:NO];
     
 //    if([[FSShortVideoRecorderManager sharedInstance] getStreamingEngineState] != NvsStreamingEngineState_Stopped)
 //        [_context stop];
