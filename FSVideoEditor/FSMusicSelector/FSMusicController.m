@@ -9,7 +9,6 @@
 #import "FSMusicController.h"
 #import "NvsStreamingContext.h"
 #import "FSShortVideoRecorderController.h"
-#import "FSMusicCell.h"
 #import "FSMusicPlayer.h"
 #import "FSMusicSever.h"
 #import "FSMusicManager.h"
@@ -229,7 +228,13 @@
         [self updateVideoStreamUrl:bundlePath];
     }
 
+    [[FSMusicPlayer sharedPlayer] stop];
+    
     if (_pushed) {
+        
+        if ([self.delegate respondsToSelector:@selector(musicControllerSelectMusic:)]) {
+            [self.delegate musicControllerSelectMusic:path];
+        }
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         

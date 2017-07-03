@@ -10,8 +10,18 @@
 #import "NvsTimeline.h"
 #import "NvsAudioClip.h"
 #import "NvsAudioTrack.h"
+#import "FSMusicCell.h"
+
+@protocol FSMusicControllerDelegate <NSObject>
+
+-(void)musicControllerSelectMusic:(NSString *)musicPath;
+
+@end
 
 @interface FSMusicController : UIViewController
+
+@property(nonatomic,assign)id<FSMusicControllerDelegate>delegate;
+
 @property(nonatomic,assign)NvsTimeline *timeLine;
 @property(nonatomic,assign)BOOL pushed;
 @end

@@ -24,8 +24,9 @@
 #import "FSMusicController.h"
 #import "FSCutMusicView.h"
 #import "FSMusicPlayer.h"
+#import "FSMusicManager.h"
 
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate>
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSMusicControllerDelegate>
 {
     FSUploader *_uploader;
     NSString *_outPutPath;
@@ -294,10 +295,15 @@
     FSMusicController *music = [FSMusicController new];
     music.timeLine = _timeLine;
     music.pushed = YES;
+    [music setDelegate:self];
     [self.navigationController pushViewController:music animated:YES];
 }
 
 - (void)FSPublisherToolViewSaveToDraft {
+
+}
+#pragma mark - 
+-(void)musicControllerSelectMusic:(FSMusic *)music{
 
 }
 
