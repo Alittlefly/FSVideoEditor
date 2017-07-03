@@ -17,6 +17,8 @@
 @property(nonatomic,strong)FSControlView *controlView;
 @property(nonatomic,strong)FSVideoFxView *videoFxView;
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
+@property(nonatomic,assign)NSTimeInterval musicAttime;
+@property(nonatomic,strong)NSString *musicUrl;
 
 
 @end

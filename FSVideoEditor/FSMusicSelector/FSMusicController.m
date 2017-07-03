@@ -11,40 +11,52 @@
 #import "FSShortVideoRecorderController.h"
 #import "FSMusicCell.h"
 #import "FSMusicPlayer.h"
+#import "FSMusicSever.h"
+#import "FSMusicManager.h"
+#import "FSEditorLoading.h"
 
-@interface FSMusicController ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate>{
+@interface FSMusicController ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate,FSMusicSeverDelegate>{
     FSMusic *_music;
+    FSMusicSever *_sever;
 }
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSArray *musics;
+@property(nonatomic,strong)NSMutableArray *musics;
+@property(nonatomic,strong)FSEditorLoading *loading;
 
 @end
 
 @implementation FSMusicController
--(NSArray *)musics{
+
+-(FSEditorLoading *)loading{
+    if (!_loading) {
+        _loading = [[FSEditorLoading alloc] initWithFrame:self.view.bounds];
+    }
+    return _loading;
+}
+-(NSMutableArray *)musics{
     if (!_musics) {
         
         FSMusic *music = [[FSMusic alloc] init];
-        music.name = @"month";
-        music.time = 15;
-        music.pic = @"";
-        music.author = @"徐子谦";
+        music.songTitle = @"month";
+        music.lastSeconds = 15;
+        music.songPic = @"";
+        music.songAuthor = @"徐子谦";
         
         
         FSMusic *music1 = [[FSMusic alloc] init];
-        music1.name = @"wind";
-        music1.time = 15;
-        music1.pic = @"";
-        music1.author = @"高超";
+        music1.songTitle = @"wind";
+        music1.lastSeconds = 15;
+        music1.songPic = @"";
+        music1.songAuthor = @"高超";
 
         
         FSMusic *music2 = [[FSMusic alloc] init];
-        music2.name = @"ugly";
-        music2.time = 15;
-        music2.pic = @"";
-        music2.author = @"王明";
+        music2.songTitle = @"ugly";
+        music2.lastSeconds = 15;
+        music2.songPic = @"";
+        music2.songAuthor = @"王明";
 
-        _musics = [NSArray arrayWithObjects:music,music1,music2,nil];
+        _musics = [NSMutableArray arrayWithObjects:music,music1,music2,nil];
         
         
     }
@@ -55,11 +67,21 @@
     
 
     // Do any additional setup after loading the view.
-     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStyleGrouped)];
+     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     [_tableView setDelegate:self];
     [_tableView setDataSource:self];
     
     [self.view addSubview:_tableView];
+    
+    UILabel *tableHeader = [[UILabel alloc] init];
+    [tableHeader setText:@"热门歌曲"];
+    [tableHeader setTextAlignment:(NSTextAlignmentCenter)];
+    [tableHeader setFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 52)];
+    [_tableView setTableHeaderView:tableHeader];
+    
+     _sever = [[FSMusicSever alloc] init];
+    [_sever setDelegate:self];
+    [_sever getMusicList];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -76,40 +98,147 @@
     FSMusic *music = [self.musics objectAtIndex:indexPath.row];
     
     if (music.opend) {
-        return 147;
+        return 147.0;
     }
-    
-    return 107;
+    return 107.0;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
     FSMusic *music = [self.musics objectAtIndex:indexPath.row];
     
-    if (![_music isEqual:music]) {
-        NSIndexPath *preIndexPath = nil;
-        if (_music != nil) {
-            
-            [_music setIsPlaying:NO];
-            [_music setOpend:NO];
-            
-            NSInteger index = [self.musics indexOfObject:_music];
-            preIndexPath = [NSIndexPath indexPathWithIndex:index];
-        }
-        music.opend = YES;
-       [tableView reloadData];
-    }
-    
-    [self musicCell:[tableView cellForRowAtIndexPath:indexPath] wouldPlay:music];
-    
-    _music = music;
+    // cell 动画
+    [self tableView:tableView updateTableWithMusic:music selectIndexPath:indexPath];
+    // 播放
+    FSMusicCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
+    [self playMusic:music playViewCell:cell];
+    
 }
 
+-(void)playMusic:(FSMusic *)music playViewCell:(FSMusicCell *)cell{
+    //
+    if ([_music isEqual:music]) {
+        // 相同的音乐
+        [cell setIsPlayIng:!cell.isPlayIng];
+        
+        if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+            [[FSMusicPlayer sharedPlayer] pause];
+        }else{
+            [[FSMusicPlayer sharedPlayer] play];
+        }
+    }else{
+        //
+        if (_music) {
+            NSInteger index = [self.musics indexOfObject:_music];
+            NSIndexPath *IndexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            FSMusicCell *preCell = [self.tableView cellForRowAtIndexPath:IndexPath];
+            [preCell setIsPlayIng:NO];
+        }
+        
+        [self.view addSubview:self.loading];
+        [self.loading loadingViewShow];
+        [cell setIsPlayIng:YES];
+        
+        if (music.songUrl) {
+            
+            NSString *url = [@"http://10.10.32.152:20000/" stringByAppendingString:music.songUrl];
+            __weak typeof(self) weakS = self;
+            [FSMusicManager downLoadMusic:url complete:^(NSString *localPath, NSError *error) {
+                if (!error) {
+                    [[FSMusicPlayer sharedPlayer] stop];
+                    [[FSMusicPlayer sharedPlayer] setFilePath:localPath];
+                }else{
+                    return ;
+                }
+                
+                if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+                    [[FSMusicPlayer sharedPlayer] pause];
+                }else{
+                    [[FSMusicPlayer sharedPlayer] play];
+                }
+                [weakS.loading loadingViewhide];
+            }];
+        }else{
+            // 测试数据
+            if (![_music isEqual:music]) {
+                NSString *filePath = [[NSBundle mainBundle] pathForResource:music.songTitle ofType:@"mp3"];
+                [[FSMusicPlayer sharedPlayer] stop];
+                [[FSMusicPlayer sharedPlayer] setFilePath:filePath];
+                
+            }
+            
+            if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+                [[FSMusicPlayer sharedPlayer] pause];
+            }else{
+                [[FSMusicPlayer sharedPlayer] play];
+            }
+            
+            [self.loading loadingViewhide];
+            
+        }
+    }
+    // 更新当前选中的音乐
+    _music = music;
+}
+
+-(void)tableView:(UITableView *)tableView updateTableWithMusic:(FSMusic *)music selectIndexPath:(NSIndexPath *)indexPath{
+
+    if (![_music isEqual:music]) {
+        NSIndexPath *selectedPath = nil;
+        if (_music) {
+            NSInteger index = [self.musics indexOfObject:_music];
+            selectedPath = [NSIndexPath indexPathForRow:index inSection:0];
+            _music.opend =  NO;
+        }
+        music.opend = YES;
+        NSMutableArray *paths = [NSMutableArray array];
+        if (selectedPath) {
+            [paths addObject:selectedPath];
+        }
+        [paths addObject:indexPath];
+        [tableView beginUpdates];
+        [tableView reloadRowsAtIndexPaths:paths withRowAnimation:(UITableViewRowAnimationFade)];
+        [tableView endUpdates];
+    }
+}
+
+-(void)musicCell:(FSMusicCell *)cell wouldPlay:(FSMusic *)music{
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+
+    [self tableView:self.tableView updateTableWithMusic:music selectIndexPath:indexPath];
+
+    [self playMusic:music playViewCell:cell];
+}
 #pragma mark -
 -(void)musicCell:(FSMusicCell *)cell wuoldUseMusic:(FSMusic *)music{
-    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:music.name ofType:@"mp3"];
     
-    if (bundlePath) {
+    NSString *path = nil;
+    if (music.songUrl) {
+        NSString *localPath = [FSMusicManager musicPathWithFileName:music.songUrl];
+        path = localPath;
+        [self updateVideoStreamUrl:localPath];
+    }else{
+        NSString *bundlePath = [[NSBundle mainBundle] pathForResource:music.songTitle ofType:@"mp3"];
+        path = bundlePath;
+        [self updateVideoStreamUrl:bundlePath];
+    }
+
+    if (_pushed) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        
+        FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
+        recoder.musicFilePath = path;
+        [self.navigationController pushViewController:recoder animated:YES];
+    }
+    
+    
+    [self playMusic:music playViewCell:cell];
+}
+
+-(void)updateVideoStreamUrl:(NSString *)filePath{
+    if (filePath) {
         if (!_timeLine) {
             NvsStreamingContext *context = [NvsStreamingContext sharedInstance];
             NvsVideoResolution videoEditRes;
@@ -127,39 +256,20 @@
         int64_t length = _timeLine.duration;
         [_timeLine removeAudioTrack:0];
         NvsAudioTrack *audioTrack = [_timeLine appendAudioTrack];
-        [audioTrack appendClip:bundlePath];
+        [audioTrack appendClip:filePath];
         NvsAudioClip *audio = [audioTrack getClipWithIndex:0];
         [audio changeTrimOutPoint:length affectSibling:YES];
     }
-    
-    if (_pushed) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }else{
-        FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
-        recoder.musicFilePath = bundlePath;
-        [self.navigationController pushViewController:recoder animated:YES];
-    }
-    
-    [[FSMusicPlayer sharedPlayer] stop];
 }
 
--(void)musicCell:(FSMusicCell *)cell wouldPlay:(FSMusic *)music{
-    
-    if (![_music isEqual:music]) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:_music.name ofType:@"mp3"];
-        [[FSMusicPlayer sharedPlayer] stop];
-        [[FSMusicPlayer sharedPlayer] setFilePath:filePath];
-    }
-
-    if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
-        [[FSMusicPlayer sharedPlayer] pause];
-        music.isPlaying = NO;
-    }else{
-        [[FSMusicPlayer sharedPlayer] play];
-        music.isPlaying = YES;
-    }
+#pragma mark -
+- (void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics{
+    [self.musics addObjectsFromArray:musics];
+    [self.tableView reloadData];
 }
+-(void)musicSeverGetFaild{
 
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

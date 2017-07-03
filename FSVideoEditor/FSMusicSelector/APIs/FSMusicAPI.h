@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol FSMusicAPIDelegate<NSObject>
+
+-(void)musicApiGetMusics:(id)responesObject;
+
+@end
 @interface FSMusicAPI : NSObject
 
+@property(nonatomic,assign)id<FSMusicAPIDelegate>delegate;
+-(void)getMusicWithParam:(id)param;
+-(void)cancleTask;
 @end

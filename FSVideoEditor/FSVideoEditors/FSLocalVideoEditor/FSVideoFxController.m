@@ -19,6 +19,7 @@
 #import "FSVideoFxView.h"
 #import "FSDissolveAnimator.h"
 #import "FSSpringAnimator.h"
+#import "FSMusicPlayer.h"
 
 #import "NvsFxDescription.h"
 
@@ -86,17 +87,22 @@
     [thumbnailSequence setFrame:CGRectMake(0, 0,CGRectGetWidth(self.view.bounds), 27)];
     [thumbnailSequence setClipsToBounds:NO];
     _videoFxView.progressBackView = thumbnailSequence;
+    
+    [[FSMusicPlayer sharedPlayer] setFilePath:_musicUrl];
+
 }
 -(void)controlVideo{
     if ([_context getStreamingEngineState] != NvsStreamingEngineState_Playback) {
         [self playVideoFromHead];
     }else{
         [self stopVideoForCrrentTime];
+        
     }
 }
 
 -(void)stopVideoForCrrentTime{
     [_videoFxView stop];
+    [[FSMusicPlayer sharedPlayer] stop];
     [_controlView setState:NO];
     int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
     [_context seekTimeline:_timeLine timestamp:startTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster];
@@ -111,11 +117,16 @@
         
         [_videoFxView start];
         [_controlView setState:YES];
+        [[FSMusicPlayer sharedPlayer] playAtTime:startTime/1000000.0+_musicAttime];
+        [[FSMusicPlayer sharedPlayer] play];
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [_context setDelegate:self];
+    
+    NvsAudioTrack *audiotrack = [_timeLine getAudioTrackByIndex:0];
+    [audiotrack setVolumeGain:_musicUrl?0:1 rightVolumeGain:_musicUrl?0:1];
     
     if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
         NSLog(@"Failed to seek timeline!");
@@ -124,6 +135,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [_videoFxView stop];
+    [[FSMusicPlayer sharedPlayer] stop];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -154,11 +166,11 @@
     [self.view addSubview:save];
 }
 - (void)cancle{
-    // 重新设置
-     _videoTrack = [_timeLine appendVideoTrack];
-    [_videoTrack appendClip:_filePath];
-    
-    
+    NvsTimelineVideoFx *lastVideoFx =  [_timeLine getLastTimelineVideoFx];
+    while (lastVideoFx) {
+        [_timeLine removeTimelineVideoFx:lastVideoFx];
+        lastVideoFx = [_timeLine getLastTimelineVideoFx];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)save{
@@ -169,12 +181,15 @@
     if (![_context seekTimeline:timeline timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
         NSLog(@"Failed to seek timeline!");
     }
+    [[FSMusicPlayer sharedPlayer] stop];
+
     [self playVideoFromHead];
 }
 -(void)didPlaybackStopped:(NvsTimeline *)timeline{
     
     [_controlView setState:NO];
     [_videoFxView stop];
+    [[FSMusicPlayer sharedPlayer] stop];
 }
 #pragma mark -
 -(void)videoFxSelectProgress:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId{
@@ -186,11 +201,17 @@
         [_context seekTimeline:_timeLine timestamp:startPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
         [_context playbackTimeline:_timeLine startTime:startPoint endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
         [_controlView setState:YES];
+        [[FSMusicPlayer sharedPlayer] playAtTime:startPoint/1000000.0 + _musicAttime];
+        [[FSMusicPlayer sharedPlayer] play];
     }else{
         int64_t point = _timeLine.duration * progress;
         [_context seekTimeline:_timeLine timestamp:point videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
         [_controlView setState:NO];
+        [[FSMusicPlayer sharedPlayer] stop];
+
     }
+    
+
 }
 -(void)videoFxSelectEnd:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId{
     int64_t startPoint = _timeLine.duration * _startProgress;
@@ -203,6 +224,7 @@
     [_context seekTimeline:_timeLine timestamp:endPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     
     [_controlView setState:NO];
+    [[FSMusicPlayer sharedPlayer] stop];
     [videoFxView showUndoButton];
 }
 -(void)videoFxViewSelectTimeFx:(FSVideoFxView *)videoFxView type:(FSVideoFxType)type duration:(int64_t)duration progress:(CGFloat)progress{
@@ -259,6 +281,7 @@
     
     return progress;
 }
+
 #pragma mark - 
 -(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
     return [FSDissolveAnimator initWithSourceVc:source];

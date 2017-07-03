@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface FSMusicPlayer : NSObject
-@property(nonatomic,copy)NSString *filePath;
+@property(nonatomic,strong)NSString *filePath;
 @property(nonatomic,assign)CGFloat rate;
 
 +(instancetype)sharedPlayer;

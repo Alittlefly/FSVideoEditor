@@ -40,7 +40,10 @@ static id object = nil;
 -(void)setFilePath:(NSString *)filePath{
     _filePath = filePath;
     
-    NSLog(@"file Path %@",filePath);
+    if (_musicPlayer) {
+        [_musicPlayer stop];
+    }
+    _musicPlayer = nil;
     
     NSData *mp3Data = [NSData dataWithContentsOfFile:filePath];
     
@@ -48,11 +51,7 @@ static id object = nil;
         NSLog(@"文件地址错误");
         return;
     }
-    
-    if (_musicPlayer) {
-        [_musicPlayer stop];
-    }
-    
+
     _musicPlayer = [[AVAudioPlayer alloc] initWithData:mp3Data fileTypeHint:AVFileTypeMPEGLayer3 error:nil];
     [_musicPlayer prepareToPlay];
     [_musicPlayer setVolume:1.0];

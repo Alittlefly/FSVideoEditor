@@ -429,7 +429,7 @@
 
     [_progressTimer setFireDate:[NSDate distantFuture]];
     [_progressTimer invalidate];
-    _progressTimer = nil;
+     _progressTimer = nil;
 
 }
 -(void)updateClipProgress{

@@ -417,7 +417,7 @@
     _segmentView.hidden = YES;
     
     _isOpenFilterView = YES;
-    
+
     if (!_cutMusicView) {
 //        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds audioClip:audio];
         _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds filePath:_musicFilePath];
