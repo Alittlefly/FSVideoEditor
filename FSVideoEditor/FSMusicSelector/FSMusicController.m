@@ -248,6 +248,7 @@
 }
 
 -(void)updateVideoStreamUrl:(NSString *)filePath{
+    return;
     if (filePath) {
         if (!_timeLine) {
             NvsStreamingContext *context = [NvsStreamingContext sharedInstance];
