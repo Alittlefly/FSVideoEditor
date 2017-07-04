@@ -40,7 +40,7 @@
         
         _sliderType = SliderTypeNone;
         _startValue = 0;
-        _endValue = _length;
+        _endValue = MIN(_allLength, _length);
         _startOffSet = 0;
         
         _collide = NO;
@@ -99,9 +99,7 @@
     [_tipLabel setTextColor:FSHexRGB(0xffffff)];
     [_tipLabel setTextAlignment:(NSTextAlignmentCenter)];
     
-    NSInteger duration =_length>_allLength?_allLength:_length;
-    NSString *text = [NSString stringWithFormat:@"已选取%lds",duration];
-    [_tipLabel setText:text];
+    [self updateTipText];
     [self addSubview:_tipLabel];
 
     // 重置边界
