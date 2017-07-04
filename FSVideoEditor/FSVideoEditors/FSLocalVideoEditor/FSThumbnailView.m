@@ -11,18 +11,22 @@
 
 @interface FSThumbnailView()<UIScrollViewDelegate>
 {
-    CGFloat _sliderGap;
     SliderType _sliderType;
+    
     double _startValue;
     double _endValue;
+    
     CGPoint _startPoint;
     BOOL _collide;
     NSInteger _touchBegin;
     double _startOffSet;
+    
+    CGFloat _minWidth;
+    CGFloat _maxWidth;
 }
 @property(nonatomic,strong)UIView *contentBorder;
-@property(nonatomic,strong)UIView *leftSlide;
-@property(nonatomic,strong)UIView *rightSlide;
+@property(nonatomic,strong)UIImageView *leftSlide;
+@property(nonatomic,strong)UIImageView *rightSlide;
 @property(nonatomic,strong)UIScrollView *backContentView;
 @property(nonatomic,strong)UILabel *tipLabel;
 @end
@@ -34,23 +38,24 @@
         _allLength = allLength;
         _minLength = minLength;
         
-        if (allLength < _length) {
-            _length = allLength;
-        }
-        
         _sliderType = SliderTypeNone;
         _startValue = 0;
         _endValue = _length;
         _startOffSet = 0;
         
         _collide = NO;
-        _sliderGap = _minLength/_length * CGRectGetWidth(frame);
+
         _startOffSet = 0;
         
+        
+        if (_length != 0) {
+            _minWidth = _minLength/_length * (CGRectGetWidth(frame) - 60);
+            _maxWidth = MAX(_minLength/_length, MIN(_allLength/_length, 1)) *(CGRectGetWidth(frame) - 60);
+        }
         [self creatSubviews:frame];
         [self setClipsToBounds:NO];
-  
-        [self setBackgroundColor:[UIColor redColor]];
+        
+        
     }
     return self;
 }
@@ -65,33 +70,43 @@
     return self;
 }
 -(void)creatSubviews:(CGRect)frame{
-    _backContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 0, CGRectGetWidth(frame) - 40, CGRectGetHeight(frame))];
-    [_backContentView setBackgroundColor:[UIColor clearColor]];
+    CGFloat padding = 30;
+     _backContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(padding, 0, CGRectGetWidth(frame) - padding * 2, CGRectGetHeight(frame))];
+    [_backContentView setBackgroundColor:[UIColor redColor]];
     [_backContentView setDelegate:self];
+    [_backContentView setClipsToBounds:NO];
+    [_backContentView setShowsHorizontalScrollIndicator:NO];
     [self addSubview:_backContentView];
     
-    _contentBorder = [[UIView alloc] initWithFrame:CGRectMake(40, 0, CGRectGetWidth(frame) - 80, CGRectGetHeight(frame))];
-    _contentBorder.layer.borderColor = [UIColor redColor].CGColor;
+    _contentBorder = [[UIView alloc] initWithFrame:CGRectMake(padding, 0, CGRectGetWidth(frame) - padding * 2, CGRectGetHeight(frame))];
+    _contentBorder.layer.borderColor = FSHexRGB(0xF9CC35).CGColor;
     _contentBorder.layer.borderWidth = 2.0;
     _contentBorder.userInteractionEnabled = NO;
     [self addSubview:_contentBorder];
     
-     _leftSlide = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 20, CGRectGetHeight(frame))];
-    [_leftSlide setBackgroundColor:[UIColor redColor]];
+     _leftSlide = [[UIImageView alloc] initWithFrame:CGRectMake(padding - 15, 0, 15, CGRectGetHeight(frame))];
+    [_leftSlide setImage:[UIImage imageNamed:@"videoSelectSlider"]];
+    [_leftSlide setUserInteractionEnabled:YES];
     [self addSubview:_leftSlide];
     
-     _rightSlide = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(frame) - 40,0, 20, CGRectGetHeight(frame))];
-    [_rightSlide setBackgroundColor:[UIColor blueColor]];
+     _rightSlide = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(frame) - padding,0,15, CGRectGetHeight(frame))];
+    [_rightSlide setImage:[UIImage imageNamed:@"videoSelectSlider"]];
+    [_rightSlide setUserInteractionEnabled:YES];
     [self addSubview:_rightSlide];
     
      _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -31, CGRectGetWidth(frame), 16.0)];
     [_tipLabel setFont:[UIFont systemFontOfSize:11.0]];
     [_tipLabel setTextColor:FSHexRGB(0xffffff)];
     [_tipLabel setTextAlignment:(NSTextAlignmentCenter)];
-    [_tipLabel setText:@"已选取15s"];
+    
+    NSInteger duration =_length>_allLength?_allLength:_length;
+    NSString *text = [NSString stringWithFormat:@"已选取%lds",duration];
+    [_tipLabel setText:text];
     [self addSubview:_tipLabel];
 
     // 重置边界
+    [self resetBoundry:(SliderTypeRightSlider)];
+    // 绘制border
     [self updateContentBorder];
 }
 
@@ -155,8 +170,10 @@
 }
 -(void)updateNvsStreamContent{
     
-    _endValue = _startOffSet + CGRectGetMinX(_rightSlide.frame)/CGRectGetWidth(_backContentView.frame)  *_length;
-    _startValue = _startOffSet + CGRectGetMaxX(_leftSlide.frame)/CGRectGetWidth(_backContentView.frame) *_length;
+    _endValue = _startOffSet + (CGRectGetMinX(_rightSlide.frame) - 30)/CGRectGetWidth(_backContentView.frame)  *_length;
+    _startValue = _startOffSet + (CGRectGetMaxX(_leftSlide.frame) - 30)/CGRectGetWidth(_backContentView.frame) *_length;
+    
+    NSLog(@"_startValue %f _endValue %f",_startValue,_endValue);
     
     if ([self.delegate respondsToSelector:@selector(thumbnailViewSelectValue:type:)]) {
         double value = 0;
@@ -196,15 +213,18 @@
     
     //
     if (type == SliderTypeLeftSlider) {
-        if (CGRectGetMinX(_leftSlide.frame) <= -1) {
+        if (CGRectGetMinX(_leftSlide.frame) < 15) {
             CGRect lframe = _leftSlide.frame;
-            lframe.origin.x = 0;
+            lframe.origin.x = 15;
             _leftSlide.frame = lframe;
         }
     }else if(type == SliderTypeRightSlider){
-        if (CGRectGetMaxX(_rightSlide.frame) >= CGRectGetWidth(self.bounds) - 39) {
+        
+        CGFloat maxX = MAX(_minLength/_length, MIN(_allLength/_length, 1)) * (CGRectGetWidth(self.bounds) - 60) + CGRectGetMinX(_backContentView.frame);
+        
+        if (CGRectGetMaxX(_rightSlide.frame) > maxX) {
             CGRect rframe = _rightSlide.frame;
-            rframe.origin.x = CGRectGetWidth(self.bounds) - 40;
+            rframe.origin.x = maxX ;
             _rightSlide.frame = rframe;
         }
     }
@@ -214,12 +234,12 @@
         if (_sliderType == SliderTypeRightSlider) {
             // 修正右边
             CGRect rFrame = _rightSlide.frame;
-            rFrame.origin.x = CGRectGetMaxX(_leftSlide.frame) + _sliderGap;
+            rFrame.origin.x = CGRectGetMaxX(_leftSlide.frame) + _minWidth;
             _rightSlide.frame = rFrame;
         }else{
             // 修正左边
             CGRect lFrame = _leftSlide.frame;
-            lFrame.origin.x = CGRectGetMinX(_rightSlide.frame) - CGRectGetWidth(_leftSlide.frame) - _sliderGap;
+            lFrame.origin.x = CGRectGetMinX(_rightSlide.frame) - _minWidth - CGRectGetWidth(_leftSlide.frame);
             _leftSlide.frame = lFrame;
         }
     }
@@ -231,7 +251,7 @@
     }
     
     CGFloat currentGap = CGRectGetMinX(_rightSlide.frame) - CGRectGetMaxX(_leftSlide.frame);
-    if (currentGap <= _sliderGap) {
+    if (currentGap < _minWidth) {
         return YES;
     }
     
@@ -259,30 +279,38 @@
     }
     
     _startOffSet = offSetx/scrollView.contentSize.width;
-    _startValue = _startOffSet + CGRectGetMaxX(_leftSlide.frame)/CGRectGetWidth(_backContentView.frame) *_length;
-    _endValue = _startOffSet + CGRectGetMinX(_rightSlide.frame)/CGRectGetWidth(_backContentView.frame)  *_length;
+    _startValue = _startOffSet + (CGRectGetMaxX(_leftSlide.frame) - 30)/CGRectGetWidth(_backContentView.frame) *_length;
+    _endValue = _startOffSet + (CGRectGetMinX(_rightSlide.frame) - 30)/CGRectGetWidth(_backContentView.frame) *_length;
     
     if ([self.delegate respondsToSelector:@selector(thumbnailViewSelectStartValue:endValue:)]) {
         [self.delegate thumbnailViewSelectStartValue:_startValue endValue:_endValue];
     }
     
     [self updateTipText];
-}
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    NSLog(@" scrollViewDidEndDecelerating contentOffSet %f",scrollView.contentOffset.x);
-    
     
     if ([self.delegate respondsToSelector:@selector(thumbnailViewEndSelect)]) {
         [self.delegate thumbnailViewEndSelect];
     }
 }
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@" scrollViewDidScroll contentOffSet %f",scrollView.contentOffset.x);
-}
+
 -(void)updateTipText{
-    NSInteger timeLength = _endValue - _startValue;
-    NSString *text = [NSString stringWithFormat:@"已选取%lds",timeLength];
-    [_tipLabel setText:text];
+    double timeLength = _endValue - _startValue;
+    BOOL shouldBeRed = (timeLength == _minLength) || (timeLength == _length) || (timeLength == _allLength);
+    
+    NSString *time = [NSString stringWithFormat:@"%.2f",timeLength];
+    NSString *orginalText = @"已选取<T>s";
+    NSString *finalSting = [orginalText stringByReplacingOccurrencesOfString:@"<T>" withString:time];
+    
+    NSDictionary *timeAttrRed = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName,nil];
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:finalSting];
+    
+    if (shouldBeRed) {
+        NSRange range = [finalSting rangeOfString:time];
+        if(range.location != NSNotFound)
+            [attrString addAttributes:timeAttrRed range:range];
+    }
+
+    [_tipLabel setAttributedText:attrString];
 }
 
 -(void)dealloc{
