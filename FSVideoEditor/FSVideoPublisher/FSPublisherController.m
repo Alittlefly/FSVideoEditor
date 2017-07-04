@@ -140,7 +140,6 @@
         [[FSMusicPlayer sharedPlayer] stop];
     }
     
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 #pragma mark - 
 -(void)chooseFilter{
@@ -187,7 +186,6 @@
 -(void)publishFiles{
     [self.navigationController.view addSubview:self.loading];
     [self.loading loadingViewShow];
-    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
     int64_t length = _timeLine.duration;
     
@@ -231,17 +229,12 @@
     [self uploadFile:_outPutPath];
     UISaveVideoAtPathToSavedPhotosAlbum(_outPutPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 
-    
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-
 }
 // 生成失败的回调函数
 - (void)didCompileFailed:(NvsTimeline *)timeline {
     NSLog(@"Compile Failed!");
     
     [self.loading loadingViewhide];
-    
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 
 }
 #pragma mark - FSPublisherToolViewDelegate
@@ -301,7 +294,6 @@
     music.timeLine = _timeLine;
     music.pushed = YES;
     [music setDelegate:self];
-    [self.navigationController pushViewController:music animated:YES];
 }
 
 - (void)FSPublisherToolViewSaveToDraft {

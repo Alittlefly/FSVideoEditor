@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    self.interactivePopGestureRecognizer.enabled = NO;
     [self.view setBackgroundColor:[UIColor clearColor]];
 }
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{

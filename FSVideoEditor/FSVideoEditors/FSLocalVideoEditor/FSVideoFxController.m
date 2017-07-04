@@ -90,6 +90,8 @@
     
     [[FSMusicPlayer sharedPlayer] setFilePath:_musicUrl];
 
+    
+    [self.view setBackgroundColor:FSHexRGB(0x000f1e)];
 }
 -(void)controlVideo{
     if ([_context getStreamingEngineState] != NvsStreamingEngineState_Playback) {

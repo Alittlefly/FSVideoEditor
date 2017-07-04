@@ -61,7 +61,6 @@ extern int IsArabic;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor blackColor]];
-    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
     
     
