@@ -354,6 +354,7 @@ BOOL IsArabic;
 }
 
 - (void)finishClik {
+    _recorderButton.enabled = NO;
     if (!_activityView) {
         _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         _activityView.frame = CGRectMake(0, 0, 100, 100);
@@ -361,7 +362,9 @@ BOOL IsArabic;
         [self addSubview:_activityView];
     }
     [_activityView startAnimating];
-    [self pauseRecorder];
+    if (_isRecording) {
+        [self pauseRecorder];
+    }
     [_recorderManager finishRecorder];
 }
 
@@ -408,7 +411,7 @@ BOOL IsArabic;
 
     if (!_cutMusicView) {
 //        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds audioClip:audio];
-        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds filePath:_musicFilePath];
+        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds filePath:_musicFilePath startTime:_musicStartTime];
         _cutMusicView.delegate = self;
         [self addSubview:_cutMusicView];
         _cutMusicView.hidden = YES;
@@ -560,6 +563,7 @@ BOOL IsArabic;
     
     if (_musicFilePath != nil && _musicFilePath.length > 0) {
         [[FSMusicPlayer sharedPlayer] setRate:self.recorderManager.recorderSpeed];
+        [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
         [[FSMusicPlayer sharedPlayer] play];
     }
     
@@ -780,6 +784,8 @@ BOOL IsArabic;
 }
 
 - (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval)newStartTime {
+    _musicStartTime = newStartTime;
+    
     _cutMusicView.hidden = YES;
     [_cutMusicView removeFromSuperview];
     _cutMusicView = nil;
@@ -812,7 +818,7 @@ BOOL IsArabic;
     
     [self startRecorder];
     
-    _finishButton.enabled = YES;
+    //_finishButton.enabled = YES;
     _recorderButton.enabled = YES;
 
 }
@@ -855,6 +861,10 @@ BOOL IsArabic;
         self.recorderButton.enabled = NO;
         [self finishClik];
     }
+    else if (time < 5.0) {
+        _finishButton.enabled = NO;
+        [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)FSShortVideoRecorderManagerDeleteVideo:(CGFloat)videoTime {
@@ -884,16 +894,16 @@ BOOL IsArabic;
 - (void)FSShortVideoRecorderManagerFinishRecorder:(NSString *)filePath {
     [_activityView stopAnimating];
     
-    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:speed:)]) {
-        [self.delegate FSShortVideoRecorderViewFinishRecorder:filePath speed:self.recorderManager.recorderSpeed] ;
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:speed:musicStartTime:)]) {
+        [self.delegate FSShortVideoRecorderViewFinishRecorder:filePath speed:self.recorderManager.recorderSpeed musicStartTime:_musicStartTime] ;
     }
 }
 
 - (void)FSShortVideoRecorderManagerFinish:(NvsTimeline *)timeLine {
     [_activityView stopAnimating];
     
-    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishTimeLine:speed:)]) {
-        [self.delegate FSShortVideoRecorderViewFinishTimeLine:timeLine speed:self.recorderManager.recorderSpeed] ;
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishTimeLine:speed:musicStartTime:)]) {
+        [self.delegate FSShortVideoRecorderViewFinishTimeLine:timeLine speed:self.recorderManager.recorderSpeed musicStartTime:_musicStartTime] ;
     }
 }
 

@@ -43,10 +43,14 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath{
+- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath startTime:(NSTimeInterval)startTime{
     if (self = [super initWithFrame:frame]) {
         _filePath = filePath;
+        _playTime = 0;
+        _totalTime = 0;
+        _newTime = startTime;
         [[FSMusicPlayer sharedPlayer] setFilePath:filePath];
+        [[FSMusicPlayer sharedPlayer] playAtTime:startTime];
         [self createBaseUI];
         [[FSMusicPlayer sharedPlayer] play];
     }
@@ -71,6 +75,7 @@
     _scrollView.delegate = self;
     _scrollView.contentSize = CGSizeMake(totalWidth, _scrollView.frame.size.height);
     [self addSubview:_scrollView];
+    _scrollView.contentOffset = CGPointMake(_newTime*totalWidth/_totalTime, 0);
     
     _totalTimeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, totalWidth, _scrollView.frame.size.height)];
     _totalTimeImageView.backgroundColor = FSHexRGB(0xA2A4A1);
@@ -80,7 +85,7 @@
     _currentImageView.backgroundColor =  [UIColor redColor];//FSHexRGB(0xFACE15);
     [_scrollView addSubview:_currentImageView];
     
-    _maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, _scrollView.frame.size.height)];
+    _maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _newTime*totalWidth/_totalTime, _scrollView.frame.size.height)];
     _maskView.translatesAutoresizingMaskIntoConstraints = NO;
     _maskView.backgroundColor = [UIColor blueColor];
     
@@ -91,7 +96,7 @@
     _timeLabel.textColor = FSHexRGB(0xF5F5F5);
     _timeLabel.font = [UIFont systemFontOfSize:11];
     _timeLabel.textAlignment = NSTextAlignmentCenter;
-    _timeLabel.text = @"当前从00:00开始";
+    _timeLabel.text = [NSString stringWithFormat:@"当前从%@开始",[self getCurrentTimeString:_newTime]];
     _timeLabel.layer.cornerRadius = 25/2;
     _timeLabel.layer.masksToBounds = YES;
     [self addSubview:_timeLabel];
@@ -149,6 +154,8 @@
         _playTime = 0;
         frame.size.width = _scrollView.contentOffset.x;
         if (_filePath) {
+            NSLog(@"updateMaskViewFrame   FSMusicPlayer %f",_newTime);
+
             [[FSMusicPlayer sharedPlayer] stop];
             [[FSMusicPlayer sharedPlayer] playAtTime:_newTime];
             [[FSMusicPlayer sharedPlayer] play];
@@ -177,7 +184,7 @@
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-   // NSLog(@" scrollViewDidScroll contentOffSet %f",scrollView.contentOffset.x);
+    NSLog(@" scrollViewDidScroll contentOffSet %f",scrollView.contentOffset.x);
     if (scrollView.contentOffset.x+self.frame.size.width <= self.maskView.frame.size.width) {
         CGRect frame = self.maskView.frame;
         frame.size.width -= self.frame.size.width/2;
@@ -187,7 +194,7 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSLog(@"%f",scrollView.contentOffset.x);
+    NSLog(@"scrollViewDidEndDecelerating: %f",scrollView.contentOffset.x);
     if ([_timer isValid]) {
         [_timer setFireDate:[NSDate distantFuture]];
     }
@@ -198,16 +205,17 @@
     self.maskView.frame =frame;
     
     int time = ceilf(scrollView.contentOffset.x*_totalTime/scrollView.contentSize.width) ;
-    int min = floor(time/60);
-    int sec = time%60;
-    NSLog(@"min:%d     sec:%d",min,sec);
-    self.timeLabel.text = [NSString stringWithFormat:@"当前从%.2d:%.2d开始",min,sec];
+//    int min = floor(time/60);
+//    int sec = time%60;
+//    NSLog(@"min:%d     sec:%d",min,sec);
+    self.timeLabel.text = [NSString stringWithFormat:@"当前从%@开始",[self getCurrentTimeString:time]];
     
     _newTime = time;
     
     [_timer setFireDate:[NSDate date]];
     
     if (_filePath) {
+        NSLog(@"scrollViewDidEndDecelerating   FSMusicPlayer %f",_newTime);
         [[FSMusicPlayer sharedPlayer] stop];
         [[FSMusicPlayer sharedPlayer] playAtTime:time];
         [[FSMusicPlayer sharedPlayer] play];
@@ -216,6 +224,13 @@
         [_audioClip changeTrimInPoint:time*1000*1000 affectSibling:NO];
     }
 
+}
+
+- (NSString *)getCurrentTimeString:(NSTimeInterval)time {
+    int min = floor(time/60);
+    int sec = ((int)time)%60;
+    
+    return [NSString stringWithFormat:@"%.2d:%.2d",min,sec];
 }
 
 

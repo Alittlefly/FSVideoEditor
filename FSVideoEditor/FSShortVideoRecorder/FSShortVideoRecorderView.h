@@ -21,8 +21,8 @@ typedef enum{
 @protocol FSShortVideoRecorderViewDelegate <NSObject>
 
 - (void)FSShortVideoRecorderViewQuitRecorderView;
-- (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath speed:(CGFloat)speed;
-- (void)FSShortVideoRecorderViewFinishTimeLine:(NvsTimeline *)timeLine speed:(CGFloat)speed;
+- (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath speed:(CGFloat)speed musicStartTime:(NSTimeInterval)time;
+- (void)FSShortVideoRecorderViewFinishTimeLine:(NvsTimeline *)timeLine speed:(CGFloat)speed musicStartTime:(NSTimeInterval)time;
 - (void)FSShortVideoRecorderViewEditMusic;
 
 @end
@@ -31,6 +31,7 @@ typedef enum{
 
 @property (nonatomic, weak) id<FSShortVideoRecorderViewDelegate> delegate;
 @property (nonatomic, copy) NSString *musicFilePath;
+@property (nonatomic, assign) NSTimeInterval musicStartTime;
 
 - (void)resumeCapturePreview;
 

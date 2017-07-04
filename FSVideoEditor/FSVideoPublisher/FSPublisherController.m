@@ -46,6 +46,8 @@
 @property (nonatomic, strong) FSControlVolumeView *volumeView;
 @property (nonatomic, strong) FSCutMusicView *cutMusicView;
 
+@property (nonatomic, assign) BOOL isEnterCutMusicView;
+
 @end
 
 @implementation FSPublisherController
@@ -71,6 +73,8 @@
     // Do any additional setup after loading the view.
     _prewidow = [[NvsLiveWindow alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_prewidow];
+    
+    _isEnterCutMusicView = NO;
     
     if (!_filePath) {
         return;
@@ -112,7 +116,7 @@
         }
     }
     
-    if (_musicPath != nil && _musicPath.length > 0) {
+    if (_musicPath != nil && _musicPath.length > 0 && !_isEnterCutMusicView) {
         [[FSMusicPlayer sharedPlayer] stop];
         [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
         [[FSMusicPlayer sharedPlayer] play];
@@ -247,14 +251,22 @@
 
 - (void)FSPublisherToolViewEditMusic {
     if (_musicPath !=nil && _musicPath.length > 0) {
+        _isEnterCutMusicView = YES;
+        
+        if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+            [[FSMusicPlayer sharedPlayer] stop];
+        }
+        
         if (!_cutMusicView) {
-            _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath];
+            _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath startTime:_musicStartTime];
             _cutMusicView.delegate = self;
             [self.view addSubview:_cutMusicView];
             _cutMusicView.hidden = YES;
         }
         self.toolView.hidden = YES;
         _cutMusicView.hidden = NO;
+        
+        
     }
 }
 
@@ -304,6 +316,7 @@
     if (music != nil && music.length > 0) {
         [_toolView canEditMusic:YES];
         _musicPath = music;
+        _musicStartTime = 0;
     }
 }
 
@@ -370,6 +383,8 @@
 }
 - (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval)newStartTime {
     _musicStartTime = newStartTime;
+    _isEnterCutMusicView = NO;
+    
     [self playVideoFromHead];
 
     _cutMusicView.hidden = YES;
