@@ -298,6 +298,7 @@ BOOL IsArabic;
 - (void)resumeCapturePreview {
     //_recorderManager.delegate = self;
     [_recorderManager resumeCapturePreview];
+    _recorderButton.enabled = YES;
 }
 
 - (void)backClik {
