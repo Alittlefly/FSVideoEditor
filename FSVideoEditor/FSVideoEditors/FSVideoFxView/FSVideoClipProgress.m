@@ -264,11 +264,15 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     [self.renderRangeViews removeLastObject];
     fxView = nil;
     
-    if (![self.renderRangeViews count]) {
-        if ([self.delegate respondsToSelector:@selector(videoClipProgressUndoState:)]) {
-            [self.delegate videoClipProgressUndoState:NO];
-        }
-    }
+//    if (![self.renderRangeViews count]) {
+//        if ([self.delegate respondsToSelector:@selector(videoClipProgressUndoState:)]) {
+//            [self.delegate videoClipProgressUndoState:NO];
+//        }
+//    }
+
+}
+-(void)addFiterdView:(FSNvsFxManager *)manager{
+    NSArray *allVideoFx = [manager allVideoFx];
 
 }
 -(void)dealloc{

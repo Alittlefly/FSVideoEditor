@@ -10,6 +10,7 @@
 #import "NvsTimeline.h"
 #import "FSControlView.h"
 #import "FSVideoFxView.h"
+#import "FSNvsFxManager.h"
 
 @interface FSVideoFxController : UIViewController
 @property(nonatomic,copy)NSString *filePath;
@@ -19,6 +20,8 @@
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,assign)NSTimeInterval musicAttime;
 @property(nonatomic,strong)NSString *musicUrl;
+
+@property(nonatomic,strong)FSNvsFxManager *fxManager;
 
 
 @end

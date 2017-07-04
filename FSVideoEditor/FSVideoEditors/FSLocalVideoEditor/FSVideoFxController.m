@@ -30,6 +30,8 @@
     BOOL _needConvert;
     
     CGFloat _startProgress;
+    
+    FSNvsFxManager *_tempFxManager;
 }
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
@@ -45,6 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _tempFxManager = [[FSNvsFxManager alloc] init];
     
     [self creatSubViews];
     
@@ -168,14 +171,18 @@
     [self.view addSubview:save];
 }
 - (void)cancle{
-    NvsTimelineVideoFx *lastVideoFx =  [_timeLine getLastTimelineVideoFx];
+    NvsTimelineVideoFx *lastVideoFx =  [_tempFxManager popVideoFx].timeLineFx;
     while (lastVideoFx) {
         [_timeLine removeTimelineVideoFx:lastVideoFx];
-        lastVideoFx = [_timeLine getLastTimelineVideoFx];
+        lastVideoFx = [_tempFxManager popVideoFx].timeLineFx;
     }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)save{
+    
+    [_fxManager pushVideoFxFromManager:_tempFxManager];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma make -
@@ -199,7 +206,16 @@
     if (fxId != nil) {
         _startProgress = progress;
         int64_t startPoint = _timeLine.duration * progress;
+        // 添加特效
         [_timeLine addPackagedTimelineVideoFx:startPoint duration:_timeLine.duration videoFxPackageId:fxId];
+        // 进入存储队列
+        FSVideoFx *videoFx = [[FSVideoFx alloc] init];
+        videoFx.startPoint = startPoint;
+        videoFx.endPoint = _timeLine.duration;
+        videoFx.videoFxId = fxId;
+        videoFx.timeLineFx = [_timeLine getLastTimelineVideoFx];
+        [_tempFxManager pushVideoFx:videoFx];
+
         [_context seekTimeline:_timeLine timestamp:startPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
         [_context playbackTimeline:_timeLine startTime:startPoint endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
         [_controlView setState:YES];
@@ -222,6 +238,13 @@
     NvsTimelineVideoFx *timeLineFx = [_timeLine getLastTimelineVideoFx];
     [timeLineFx changeInPoint:startPoint];
     [timeLineFx changeOutPoint:endPoint];
+    
+    FSVideoFx *topVideoFx = [_tempFxManager topVideoFx];
+    if (topVideoFx) {
+        topVideoFx.startPoint = startPoint;
+        topVideoFx.endPoint = endPoint;
+        topVideoFx.timeLineFx = timeLineFx;
+    }
     
     [_context seekTimeline:_timeLine timestamp:endPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     
@@ -252,7 +275,6 @@
         
         NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
 
-    
         [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
         [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
         [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
@@ -263,15 +285,25 @@
     videoFxView.duration = _timeLine.duration;
 }
 -(void)videoFxUndoPackageFx:(FSVideoFxView *)videoFxView{
-    NvsTimelineVideoFx *timeLineFx = [_timeLine getLastTimelineVideoFx];
+    
+    FSVideoFx *videoFx = [_tempFxManager popVideoFx];
+    NvsTimelineVideoFx *timeLineFx = videoFx.timeLineFx;
     if (timeLineFx) {
-        
+        // 临时存储没有了
         [_timeLine removeTimelineVideoFx:timeLineFx];
-        
-        if (![_timeLine getLastTimelineVideoFx]) {
-            [videoFxView hideUndoButton];
-        }
+    }else{
+        // 查看之前的
+        FSVideoFx *videoFx = [_fxManager popVideoFx];
+        NvsTimelineVideoFx *timeLineFx = videoFx.timeLineFx;
+        [_timeLine removeTimelineVideoFx:timeLineFx];
     }
+    
+    if (![_timeLine getLastTimelineVideoFx]) {
+        [videoFxView hideUndoButton];
+    }
+    
+    
+
 }
 
 

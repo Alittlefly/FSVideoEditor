@@ -47,6 +47,7 @@
 @property (nonatomic, strong) FSCutMusicView *cutMusicView;
 
 @property (nonatomic, assign) BOOL isEnterCutMusicView;
+@property (nonatomic, strong) FSNvsFxManager *fxmanager;
 
 @end
 
@@ -281,6 +282,8 @@
     fxController.filePath = _filePath;
     fxController.musicAttime = _musicStartTime?:0;
     fxController.musicUrl = _musicPath?:nil;
+    _fxmanager = _fxmanager?:[FSNvsFxManager new];
+    fxController.fxManager = _fxmanager;
     
     [self presentViewController:fxController animated:YES completion:nil];
 }

@@ -34,6 +34,7 @@
 		563B7A111F0A42FC0035346A /* FSPresentAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A101F0A42FC0035346A /* FSPresentAnimator.m */; };
 		563B7A171F0A4DF50035346A /* FSAnimationNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A161F0A4DF50035346A /* FSAnimationNavController.m */; };
 		563B7A1A1F0A52080035346A /* FSDismissAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A191F0A52080035346A /* FSDismissAnimator.m */; };
+		563B7A1D1F0BBF950035346A /* FSNvsFxManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A1C1F0BBF950035346A /* FSNvsFxManager.m */; };
 		5647BC3C1F0272110072B618 /* FSControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC3B1F0272110072B618 /* FSControlView.m */; };
 		5647BC451F04D6A70072B618 /* wind.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5647BC441F04D6A70072B618 /* wind.mp3 */; };
 		5647BC491F04E0040072B618 /* month.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5647BC481F04E0040072B618 /* month.mp3 */; };
@@ -197,6 +198,8 @@
 		563B7A161F0A4DF50035346A /* FSAnimationNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAnimationNavController.m; sourceTree = "<group>"; };
 		563B7A181F0A52080035346A /* FSDismissAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDismissAnimator.h; sourceTree = "<group>"; };
 		563B7A191F0A52080035346A /* FSDismissAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDismissAnimator.m; sourceTree = "<group>"; };
+		563B7A1B1F0BBF950035346A /* FSNvsFxManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSNvsFxManager.h; sourceTree = "<group>"; };
+		563B7A1C1F0BBF950035346A /* FSNvsFxManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSNvsFxManager.m; sourceTree = "<group>"; };
 		5647BC3A1F0272110072B618 /* FSControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSControlView.h; sourceTree = "<group>"; };
 		5647BC3B1F0272110072B618 /* FSControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSControlView.m; sourceTree = "<group>"; };
 		5647BC441F04D6A70072B618 /* wind.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wind.mp3; sourceTree = "<group>"; };
@@ -476,6 +479,8 @@
 				562D40751EFE6A8A00BF0E0D /* FSVideoClipProgress.m */,
 				5647BC3A1F0272110072B618 /* FSControlView.h */,
 				5647BC3B1F0272110072B618 /* FSControlView.m */,
+				563B7A1B1F0BBF950035346A /* FSNvsFxManager.h */,
+				563B7A1C1F0BBF950035346A /* FSNvsFxManager.m */,
 			);
 			path = FSVideoFxView;
 			sourceTree = "<group>";
@@ -1153,6 +1158,7 @@
 				562D403F1EFBE8A100BF0E0D /* FSLocalEditorController.m in Sources */,
 				562D405D1EFD39F100BF0E0D /* FSPublisherController.m in Sources */,
 				5647BC3C1F0272110072B618 /* FSControlView.m in Sources */,
+				563B7A1D1F0BBF950035346A /* FSNvsFxManager.m in Sources */,
 				567A3D851EFB6F8E0026247E /* MJPropertyKey.m in Sources */,
 				567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */,
 				562D40581EFD1DE200BF0E0D /* AFURLResponseSerialization.m in Sources */,
