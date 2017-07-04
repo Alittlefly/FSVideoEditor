@@ -78,11 +78,11 @@
     _scrollView.contentOffset = CGPointMake(_newTime*totalWidth/_totalTime, 0);
     
     _totalTimeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, totalWidth, _scrollView.frame.size.height)];
-    _totalTimeImageView.backgroundColor = FSHexRGB(0xA2A4A1);
+    _totalTimeImageView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"audio-gray"]];//FSHexRGB(0xA2A4A1);
     [_scrollView addSubview:_totalTimeImageView];
     
     _currentImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, totalWidth, _scrollView.frame.size.height)];
-    _currentImageView.backgroundColor =  [UIColor redColor];//FSHexRGB(0xFACE15);
+    _currentImageView.backgroundColor =  [UIColor colorWithPatternImage:[UIImage imageNamed:@"audio-yellow"]];;//FSHexRGB(0xFACE15);
     [_scrollView addSubview:_currentImageView];
     
     _maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _newTime*totalWidth/_totalTime, _scrollView.frame.size.height)];
