@@ -13,6 +13,8 @@
 @interface FSAnimationNavController ()
 {
     CGFloat _defaultFraction;
+    
+    UIPanGestureRecognizer *_pan;
 }
 @property(nonatomic,strong)UIPercentDrivenInteractiveTransition *percentInter;
 @property(nonatomic,assign)CGFloat fraction;
@@ -23,18 +25,53 @@
     if (self = [super initWithRootViewController:rootViewController]) {
         [self setTransitioningDelegate:self];
         _defaultFraction = 0.5;
+        
+        [self setEnablePanToDismiss:YES];
     }
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    UIPanGestureRecognizer *screenPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlerPan:)];
-    [self.view addGestureRecognizer:screenPan];
-    
+
     [self.view setBackgroundColor:[UIColor clearColor]];
 }
+-(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    [super pushViewController:viewController animated:animated];
+    
+    if ([self.childViewControllers count] > 1) {
+        [self setEnablePanToDismiss:NO];
+    }
+    
+}
+-(UIViewController *)popViewControllerAnimated:(BOOL)animated{
+    
+    UIViewController *willPop =  [super popViewControllerAnimated:animated];
+    
+    if ([self.childViewControllers count] == 1) {
+        [self setEnablePanToDismiss:YES];
+    }
+    
+    return willPop;
+}
+-(void)initPanToDismissGesture{
+    if (!_pan) {
+        UIPanGestureRecognizer *screenPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlerPan:)];
+        _pan = screenPan;
+    }
+
+    [self.view addGestureRecognizer:_pan];
+}
+-(void)setEnablePanToDismiss:(BOOL)enablePanToDismiss{
+    if (enablePanToDismiss) {
+        [self initPanToDismissGesture];
+    }else{
+        if (_pan) {
+            [self.view removeGestureRecognizer:_pan];
+        }
+    }
+}
+
 -(void)handlerPan:(UIPanGestureRecognizer *)gestureRecognizer{
     
     CGPoint translation = [gestureRecognizer translationInView:gestureRecognizer.view];

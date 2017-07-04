@@ -136,12 +136,15 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     [self.navigationController.navigationBar setHidden:YES];
     
     if (_currentButton.tag == 3) {
         
     }
-    
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
 }
 - (void)musicList{
     

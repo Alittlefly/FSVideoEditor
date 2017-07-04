@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FSAnimationNavController : UINavigationController<UIViewControllerTransitioningDelegate>
-
+@property(nonatomic,assign)BOOL enablePanToDismiss;
 @end
