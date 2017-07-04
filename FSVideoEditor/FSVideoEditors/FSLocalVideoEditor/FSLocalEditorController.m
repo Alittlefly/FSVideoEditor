@@ -31,7 +31,6 @@ extern int IsArabic;
 }
 @property(nonatomic,strong)FSThumbnailView *thumbContent;
 
-@property(nonatomic,strong)NvsThumbnailSequenceView *thumbnailSequence;
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsTimeline   *timeLine;
@@ -145,20 +144,6 @@ extern int IsArabic;
     }
 }
 
-- (void)selectPlaySpeed:(UISegmentedControl *)sender {
-    NSLog(@"sender: %ld",sender.selectedSegmentIndex); //输出当前的索引值
-    NvsClip *clip = [_videoTrack getClipWithIndex:0];
-    [clip changeSpeed:sender.selectedSegmentIndex/2.0];
-    
-    int64_t endTime = _endTime?:_timeLine.duration;
-    if (endTime > _timeLine.duration) {
-        endTime = _timeLine.duration;
-        _endTime = _timeLine.duration;
-    }
-    if(![_context playbackTimeline:_timeLine startTime:_startTime endTime:endTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
-    }
-}
-
 - (void)FSSegmentView:(FSSegmentView *)segmentView selected:(NSInteger)index {
     
     NSLog(@"sender: %ld",index); //输出当前的索引值
@@ -170,9 +155,12 @@ extern int IsArabic;
         endTime = _timeLine.duration;
         _endTime = _timeLine.duration;
     }
+    
     if(![_context playbackTimeline:_timeLine startTime:_startTime endTime:endTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
     }
     
+    
+    [self initThubnaiView];
 }
 
 -(void)reselectTrack{
@@ -195,21 +183,30 @@ extern int IsArabic;
     [clip setVolumeGain:0 rightVolumeGain:0];
     
     [_audioTrack insertClip:_filePath clipIndex:0];
+
+    [self initThubnaiView];
+}
+-(void)initThubnaiView{
     
+    if (_thumbContent) {
+        [_thumbContent setDelegate:nil];
+        [_thumbContent removeFromSuperview];
+         _thumbContent = nil;
+    }
     
-    if (!_thumbnailSequence) {
-        _thumbnailSequence = [[NvsThumbnailSequenceView alloc] init];
+    if (!_thumbContent) {
         _thumbContent = [[FSThumbnailView alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds) - 70, CGRectGetWidth(self.view.bounds),60) length:15.0 allLength:_timeLine.duration/1000000 minLength:5.0f];
         _thumbContent.delegate = self;
-        _thumbContent.backGroundView = _thumbnailSequence;
+         NvsThumbnailSequenceView *thumbnailSequence = [[NvsThumbnailSequenceView alloc] init];
+        _thumbContent.backGroundView = thumbnailSequence;
+        thumbnailSequence.stillImageHint = NO;
+        thumbnailSequence.mediaFilePath = _filePath;
+        thumbnailSequence.startTime = _startTime;
+        thumbnailSequence.duration = _timeLine.duration;
+        thumbnailSequence.thumbnailAspectRatio = 1.0;
         [self.view addSubview:_thumbContent];
-        
     }
-    self.thumbnailSequence.stillImageHint = NO;
-    self.thumbnailSequence.mediaFilePath = _filePath;
-    self.thumbnailSequence.startTime = _startTime;
-    self.thumbnailSequence.duration = _timeLine.duration;
-    self.thumbnailSequence.thumbnailAspectRatio = 1.0;
+
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

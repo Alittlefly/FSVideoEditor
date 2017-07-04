@@ -85,10 +85,10 @@
             [button setBackgroundColor:[UIColor clearColor]];
             [button setTitleColor:_unSelectedTextColor forState:UIControlStateNormal];
         }
-
-        if ([self.delegate respondsToSelector:@selector(FSSegmentView:selected:)]) {
-            [self.delegate FSSegmentView:self selected:sender.tag];
-        }
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(FSSegmentView:selected:)]) {
+        [self.delegate FSSegmentView:self selected:sender.tag];
     }
 }
 
