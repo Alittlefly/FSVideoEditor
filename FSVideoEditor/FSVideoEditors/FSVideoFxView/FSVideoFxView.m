@@ -319,8 +319,8 @@
     [_progress beginFxView];
 }
 -(void)endFx:(UIButton *)button{
-     _currentFxId = nil;
     [_progress endFxView];
+    _currentFxId = nil;
 }
 -(void)initTimeFxs{
     
@@ -405,6 +405,16 @@
         [self changeContentWithTag:tag];
         [_contentView setAlpha:1];
     } completion:nil];
+}
+-(NSArray *)addedViews{
+    return _progress.renderRangeViews;
+}
+-(void)addFiltterViews:(NSArray *)filterViews{
+    [_progress addFitteredView:filterViews];
+    
+    if([filterViews count]){
+        [self showUndoButton];
+    }
 }
 -(void)changeContentWithTag:(NSInteger)tag{
     if (tag == 1) {

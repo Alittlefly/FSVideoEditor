@@ -23,7 +23,6 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 @property(nonatomic,strong)UIView *backContent;
 @property(nonatomic,strong)UIImageView *tintImage;
 @property(nonatomic,strong)UIView *revertView;
-@property(nonatomic,strong)NSMutableArray *renderRangeViews;
 @property(nonatomic,strong)UIView *fxView;
 @property(nonatomic,strong)UIView *fxContent;
 @end
@@ -210,7 +209,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     if (_progress <= 1.0) {
         
         if (!_fxView) {
-            _fxView = [[UIView alloc] initWithFrame:CGRectMake(_progress*self.bounds.size.width, -6.5, self.bounds.size.width*0.1/10, CGRectGetHeight(self.bounds))];
+            _fxView = [[UIView alloc] initWithFrame:CGRectMake(_progress*self.bounds.size.width, 0, self.bounds.size.width*0.1/10, CGRectGetHeight(self.bounds) - 13)];
             _fxView.backgroundColor = _fxViewColor;
             [_fxContent addSubview:_fxView];
         }
@@ -263,18 +262,17 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     [fxView removeFromSuperview];
     [self.renderRangeViews removeLastObject];
     fxView = nil;
+}
+
+-(void)addFitteredView:(NSArray *)fiterdViews{
     
-//    if (![self.renderRangeViews count]) {
-//        if ([self.delegate respondsToSelector:@selector(videoClipProgressUndoState:)]) {
-//            [self.delegate videoClipProgressUndoState:NO];
-//        }
-//    }
-
+    [self.renderRangeViews addObjectsFromArray:fiterdViews];
+    
+    for (UIView *view in fiterdViews) {
+        [_fxContent addSubview:view];
+    }
 }
--(void)addFiterdView:(FSNvsFxManager *)manager{
-    NSArray *allVideoFx = [manager allVideoFx];
 
-}
 -(void)dealloc{
     NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }

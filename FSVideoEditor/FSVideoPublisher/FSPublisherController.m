@@ -26,7 +26,7 @@
 #import "FSMusicPlayer.h"
 #import "FSMusicManager.h"
 
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSMusicControllerDelegate>
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate>
 {
     FSUploader *_uploader;
     NSString *_outPutPath;
@@ -47,11 +47,19 @@
 @property (nonatomic, strong) FSCutMusicView *cutMusicView;
 
 @property (nonatomic, assign) BOOL isEnterCutMusicView;
-@property (nonatomic, strong) FSNvsFxManager *fxmanager;
+@property (nonatomic, strong) FSVideoFxOperationStack *fxOperationStack;
+
+@property (nonatomic, strong) NSMutableArray *addedViews;
 
 @end
 
 @implementation FSPublisherController
+-(NSMutableArray *)addedViews{
+    if (!_addedViews) {
+        _addedViews = [NSMutableArray array];
+    }
+    return _addedViews;
+}
 -(FSEditorLoading *)loading{
     if (!_loading) {
         _loading = [[FSEditorLoading alloc] initWithFrame:self.view.bounds];
@@ -136,11 +144,13 @@
     [self playVideoFromHead];
     
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_context setDelegate:nil];
+}
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-//    if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
-//        [_context stop];
-    [_context setDelegate:nil];
+
     if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
         [[FSMusicPlayer sharedPlayer] stop];
     }
@@ -282,8 +292,10 @@
     fxController.filePath = _filePath;
     fxController.musicAttime = _musicStartTime?:0;
     fxController.musicUrl = _musicPath?:nil;
-    _fxmanager = _fxmanager?:[FSNvsFxManager new];
-    fxController.fxManager = _fxmanager;
+    fxController.delegate = self;
+    fxController.addedViews = self.addedViews;
+    _fxOperationStack = _fxOperationStack?:[FSVideoFxOperationStack new];
+    fxController.fxOperationStack = _fxOperationStack;
     
     [self presentViewController:fxController animated:YES completion:nil];
 }

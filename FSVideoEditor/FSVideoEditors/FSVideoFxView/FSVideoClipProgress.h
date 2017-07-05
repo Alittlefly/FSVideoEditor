@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FSNvsFxManager.h"
 
 typedef struct{
     CGFloat startValue;
@@ -48,13 +47,16 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 @property(nonatomic,weak) id<FSVideoClipProgressDelegate> delegate;
 
 @property(nonatomic,strong)UIColor *fxViewColor;
+@property(nonatomic,strong)NSMutableArray *renderRangeViews;
 
 @property(nonatomic,assign,readonly)NSInteger fiterCout;
 
--(void)addFiterdView:(FSNvsFxManager *)manager;
+
 
 -(void)beginFxView;
 -(void)endFxView;
 
 -(void)undoFxView;
+
+-(void)addFitteredView:(NSArray *)fiterdViews;
 @end

@@ -30,6 +30,9 @@
 @property(nonatomic,assign)CGFloat duration;
 
 @property(nonatomic,assign)BOOL needCovert;
+
+@property(nonatomic,strong)NSArray *addedViews;
+-(void)addFiltterViews:(NSArray *)filterViews;
 // 特效
 -(instancetype)initWithFrame:(CGRect)frame fxs:(NSArray *)fxs;
 
