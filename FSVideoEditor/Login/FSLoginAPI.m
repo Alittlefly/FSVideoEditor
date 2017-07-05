@@ -23,37 +23,27 @@
         [_currentTask cancel];
     }
     
-    //[_loginUserSever loginUserWithName:name password:pwd sex:nil birthday:nil profileImage:nil email:name base:@"base" FromType:@"1" nickName:@"" pinCode:_loginView.pinCode thirdToken:nil tokenSecret:nil];
-//    FSUserLoginParam *param = [[FSUserLoginParam alloc] init];
-//    [param setLoginName:name];
-//    [param setPassword:pwd];
-//    [param setCheckcode:pinCode];
-//    [param setToken:token];
-//    [param setTokenSecret:tokenSecret?:@""];
-//    
-//    if (sex != nil) {
-//        if ([sex isEqualToString:@"male"] || [sex isEqualToString:@"Male"]) {
-//            // [dic setObject:[NSNumber numberWithInt:1] forKey:@"sex"];
-//            [param setSex:1];
-//        }
-//        else if ([sex isEqualToString:@"female"] || [sex isEqualToString:@"Female"]) {
-//            [param setSex:2];
-//        }
-//    }
-//    [param setBirthday:birthday];
-//    [param setFromType:fromType];
-//    [param setProfileImage:profileImage];
-//    [param setEmail:email];
-//    
-//    [param setBase:base];
-//    [param setNickName:nickName];
-//    [param setValidatekey:[param validatekey]];
+//    "_v" = "4.5.0";
+//    base = base;
+//    checkcode = "";
+//    date = 1499258666113;
+//    email = "Test15@qq.com";
+//    fromType = 1;
+//    loginName = "Test15@qq.com";
+//    machineId = "3007FEDB-FC52-4B9F-AA80-4B434EA77CCB";
+//    machineType = "iPhone5s(A1457/A1518/A1528/A1530)";
+//    nickName = "";
+//    password = 111111;
+//    requestType = 4;
+//    sex = 0;
+//    tokenSecret = "";
+//    validatekey = "3007FEDB-FC52-4B9F-AA80-4B434EA77CCB";
 
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     __weak typeof(self) weakS = self;
-    NSString *address = @"http://10.10.32.152:9999/service/user/v3/login/mobile/v4";
-    NSURLSessionTask *task = [manager GET:address parameters:nil progress:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSString *address = @"http://www.7najm.com/service/user/v3/login/mobile/v4";
+    NSURLSessionTask *task = [manager POST:address parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([weakS.delegate respondsToSelector:@selector(FSLoginAPISecceed:)]) {
             [weakS.delegate FSLoginAPISecceed:responseObject];
         }

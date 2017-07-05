@@ -25,6 +25,8 @@
 
 @property (strong, nonatomic) FSLoginServer *loginServer;
 
+@property (strong, nonatomic) UIActivityIndicatorView  *activityView;
+
 @end
 
 @implementation ViewController
@@ -51,6 +53,26 @@
         self.passwordTextField.hidden = YES;
         self.loginButton.hidden = YES;
     }
+    
+    UIView *uidView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    uidView.backgroundColor = [UIColor clearColor];
+    UIImageView *uidImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"phone-number"]];
+    uidImageView.frame = CGRectMake(10, 10, 20, 20);
+    [uidView addSubview:uidImageView];
+    
+    self.uidTextField.leftView = uidView;
+    self.uidTextField.leftViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
+    self.uidTextField.delegate = self;
+    
+    UIView *passwordView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    passwordView.backgroundColor = [UIColor clearColor];
+    UIImageView *passwordImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"password"]];
+    passwordImageView.frame = CGRectMake(10, 10, 20, 20);
+    [passwordView addSubview:passwordImageView];
+
+    self.passwordTextField.leftView = passwordView;
+    self.passwordTextField.leftViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
+    self.passwordTextField.delegate = self;
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
     [self.view addGestureRecognizer:tapGesture];
@@ -83,6 +105,13 @@
         [self showMessage:@"密码不能为空！"];
         return;
     }
+    if (!_activityView) {
+        _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        _activityView.frame = CGRectMake(0, 0, 100, 100);
+        _activityView.center = self.view.center;
+        [self.view addSubview:_activityView];
+    }
+    [_activityView startAnimating];
     
     if (!_loginServer) {
         _loginServer = [[FSLoginServer alloc] init];
@@ -99,6 +128,8 @@
 
 #pragma mark -  FSLoginServerDelegate
 - (void)FSLoginServerSucceed:(id)objec {
+    [_activityView stopAnimating];
+
     self.recorderButton.hidden = NO;
     self.logoutButton.hidden = NO;
     
@@ -111,6 +142,7 @@
 }
 
 - (void)FSLoginServerFaild:(NSError *)error {
+    [_activityView stopAnimating];
     [self showMessage:@"登录失败"];
 }
 
