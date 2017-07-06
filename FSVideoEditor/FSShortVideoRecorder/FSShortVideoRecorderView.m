@@ -893,10 +893,18 @@ BOOL IsArabic;
 }
 
 - (void)FSShortVideoRecorderManagerFinishRecorder:(NSString *)filePath {
+//    [_activityView stopAnimating];
+//    
+//    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:speed:musicStartTime:)]) {
+//        [self.delegate FSShortVideoRecorderViewFinishRecorder:filePath speed:self.recorderManager.recorderSpeed musicStartTime:_musicStartTime] ;
+//    }
+}
+
+- (void)FSShortVideoRecorderManagerFinishedRecorder:(NSString *)normalFilePath convertFilePath:(NSString *)convertFilePath {
     [_activityView stopAnimating];
     
-    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:speed:musicStartTime:)]) {
-        [self.delegate FSShortVideoRecorderViewFinishRecorder:filePath speed:self.recorderManager.recorderSpeed musicStartTime:_musicStartTime] ;
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:convertFilePath:speed:musicStartTime:)]) {
+        [self.delegate FSShortVideoRecorderViewFinishRecorder:normalFilePath convertFilePath:convertFilePath speed:self.recorderManager.recorderSpeed musicStartTime:_musicStartTime] ;
     }
 }
 

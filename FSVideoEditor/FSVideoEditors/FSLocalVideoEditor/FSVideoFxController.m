@@ -75,11 +75,11 @@
         return;
     }
     
-    _videoFxView = [[FSVideoFxView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 228, CGRectGetWidth(self.view.bounds),228) fxs:fxs];
+     _videoFxView = [[FSVideoFxView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 228, CGRectGetWidth(self.view.bounds),228) fxs:fxs];
     [_videoFxView setDelegate:self];
     [self.view addSubview:_videoFxView];
     [_videoFxView addFiltterViews:_addedViews];
-    _videoFxView.duration = _timeLine.duration/1000000.0;
+     _videoFxView.duration = _timeLine.duration/1000000.0;
     
      _videoTrack = [_timeLine getVideoTrackByIndex:0];
     
@@ -203,10 +203,6 @@
     // 保存当前的处理堆栈状态
     [_fxOperationStack popAll];
     [_fxOperationStack pushVideoFxWithFxManager:_tempFxStack];
-//    
-//    if([self.delegate respondsToSelector:@selector(videoFxControllerSaved:)]){
-//        [self.delegate videoFxControllerSaved:_videoFxView.addedViews];
-//    }
     
     [self.addedViews addObjectsFromArray:_videoFxView.addedViews];
     
