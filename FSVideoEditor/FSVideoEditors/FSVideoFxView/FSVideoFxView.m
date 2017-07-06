@@ -14,8 +14,22 @@
 
 @interface FSFxButton : UIButton
 @property(nonatomic,strong)UIView *colorView;
+@property(nonatomic,strong)UIImageView *selectedImage;
+@property(nonatomic,strong)UIImageView *backImage;
 @end
 @implementation FSFxButton
+-(UIImageView *)selectedImage{
+    if (!_selectedImage) {
+        _selectedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"room_btn_yes"]];
+    }
+    return _selectedImage;
+}
+-(UIImageView *)backImage{
+    if (!_backImage) {
+        _backImage = [[UIImageView alloc] init];
+    }
+    return _backImage;
+}
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self setClipsToBounds:NO];
@@ -23,16 +37,26 @@
         [self.titleLabel setTextAlignment:(NSTextAlignmentCenter)];
         [self setTitleColor:FSHexRGB(0xf5f5f5) forState:(UIControlStateNormal)];
         
+        [self.backImage setFrame:self.bounds];
+        [self.backImage.layer setCornerRadius:CGRectGetHeight(frame)/2.0];
+        [self.backImage.layer setMasksToBounds:YES];
+        [self addSubview:self.backImage];
+
          _colorView = [[UIView alloc] initWithFrame:self.bounds];
         [_colorView.layer setCornerRadius:CGRectGetHeight(frame)/2.0];
         [_colorView.layer setMasksToBounds:YES];
         [_colorView setUserInteractionEnabled:NO];
         [self addSubview:_colorView];
+        
+        [self.selectedImage setFrame:CGRectMake(0, 0, 22, 17)];
+        [self.selectedImage setCenter:CGPointMake(CGRectGetWidth(frame)/2.0, CGRectGetHeight(frame)/2.0)];
+        [self.selectedImage setHidden:YES];
+        [self addSubview:self.selectedImage];
     }
     return self;
 }
 -(void)setBackgroundColor:(UIColor *)backgroundColor{
-    [_colorView setBackgroundColor:backgroundColor];
+    [self.backImage setBackgroundColor:backgroundColor];
 }
 -(CGRect)imageRectForContentRect:(CGRect)contentRect{
     return self.bounds;
@@ -45,7 +69,12 @@
     titleRect.origin.y = CGRectGetHeight(contentRect) + 11.0;
     return titleRect;
 }
-
+-(void)setSelected:(BOOL)selected{
+    [super setSelected:selected];
+    
+    [self.colorView setHidden:!selected];
+    [self.selectedImage setHidden:!selected];
+}
 @end
 
 
@@ -93,6 +122,7 @@
 @interface FSVideoFxView()<FSVideoClipProgressDelegate>
 {
     FSLineButton *_currentSelectButton;
+    FSFxButton   *_currentSelectFxButton;
     NSTimer      *_progressTimer;
     NSInteger _currentTime;
     NSString *_currentFxId;
@@ -109,10 +139,17 @@
 
 @property(nonatomic,strong)NSMutableArray *fxButtons;
 @property(nonatomic,strong)UIButton *unDoButton;
+@property(nonatomic,strong)NSMutableDictionary *fxButtonDict;
 @end
 
 @implementation FSVideoFxView
 
+-(NSMutableDictionary *)fxButtonDict{
+    if (!_fxButtonDict) {
+        _fxButtonDict = [NSMutableDictionary dictionary];
+    }
+    return _fxButtonDict;
+}
 -(instancetype)initWithFrame:(CGRect)frame fxs:(NSArray *)fxs{
     if (self = [super initWithFrame:frame]) {
        
@@ -236,13 +273,15 @@
         [button removeFromSuperview];
     }
     
+    [self.fxButtonDict removeAllObjects];
+    
     FSFxButton *noneFx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [noneFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [noneFx setBackgroundColor:[UIColor redColor]];
     [noneFx setTitle:@"无" forState:(UIControlStateNormal)];
-    noneFx.tag = FSVideoFxTypeNone;
-    noneFx.selected = (_fxType == FSVideoFxTypeNone);
-
+     noneFx.tag = FSVideoFxTypeNone;
+    [noneFx.colorView setBackgroundColor:FSHexRGB(0x000000)];
+    [self.fxButtonDict setObject:noneFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeNone]];
     
     [_contentView addSubview:noneFx];
     
@@ -250,8 +289,9 @@
     [revertFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [revertFx setBackgroundColor:[UIColor yellowColor]];
     [revertFx setTitle:@"时光倒流" forState:(UIControlStateNormal)];
-    revertFx.tag = FSVideoFxTypeRevert;
-    revertFx.selected = (_fxType == FSVideoFxTypeRevert);
+    [revertFx.colorView setBackgroundColor:FSHexRGB(0xff39ad)];
+     revertFx.tag = FSVideoFxTypeRevert;
+    [self.fxButtonDict setObject:revertFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeRevert]];
     [_contentView addSubview:revertFx];
     
     
@@ -259,7 +299,10 @@
     [repeatFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [repeatFx setBackgroundColor:[UIColor yellowColor]];
     [repeatFx setTitle:@"反复" forState:(UIControlStateNormal)];
+    [repeatFx.colorView setBackgroundColor:FSHexRGB(0x7778ff)];
     repeatFx.tag = FSVideoFxTypeRepeat;
+    [self.fxButtonDict setObject:repeatFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeRepeat]];
+
     repeatFx.selected = (_fxType == FSVideoFxTypeRepeat);
 
     [_contentView addSubview:repeatFx];
@@ -268,8 +311,9 @@
     [slowFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [slowFx setBackgroundColor:[UIColor yellowColor]];
     [slowFx setTitle:@"慢动作" forState:(UIControlStateNormal)];
+    [slowFx.colorView setBackgroundColor:FSHexRGB(0xbcff77)];
     slowFx.tag = FSVideoFxTypeSlow;
-    slowFx.selected = (_fxType == FSVideoFxTypeSlow);
+    [self.fxButtonDict setObject:slowFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeSlow]];
 
     [_contentView addSubview:slowFx];
     
@@ -283,6 +327,10 @@
         if (_needCovert) {
             [_progress setProgress:1.0];
         }
+        NSString *key = [NSString stringWithFormat:@"%ld",(long)_fxType];
+        _currentSelectFxButton = [self.fxButtonDict objectForKey:key];
+        [_currentSelectFxButton setSelected:YES];
+        
          _firstInitTimeFx = YES;
     }
 }
@@ -307,10 +355,19 @@
      _currentFxId = nil;
 }
 #pragma mark - 选择时间特效
--(void)clickTimeFxButtion:(UIButton *)button{
+-(void)clickTimeFxButtion:(FSFxButton *)button{
+    if ([_currentSelectFxButton isEqual:button]) {
+        return;
+    }
+    [_currentSelectFxButton setSelected:NO];
+     _currentSelectFxButton = button;
+    [_currentSelectFxButton setSelected:YES];
+
     _progress.type = button.tag;
     _fxType = button.tag;
     [_progress setProgress:1];
+    
+    
     // 切换资源
     
     BOOL newValue = (button.tag == FSVideoFxTypeRevert);
