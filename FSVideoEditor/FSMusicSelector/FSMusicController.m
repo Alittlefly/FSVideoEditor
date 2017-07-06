@@ -145,7 +145,10 @@
         
         if (music.songUrl) {
             
-            NSString *url = [@"http://10.10.32.152:20000/" stringByAppendingString:music.songUrl];
+            NSString *url = music.songUrl;//[@"http://10.10.32.152:20000/" stringByAppendingString:music.songUrl];
+            if (![url hasPrefix:@"http"]) {
+                url = [@"http://10.10.32.152:20000/" stringByAppendingString:music.songUrl];
+            }
             __weak typeof(self) weakS = self;
             [FSMusicManager downLoadMusic:url complete:^(NSString *localPath, NSError *error) {
                 if (!error) {
@@ -248,7 +251,7 @@
 }
 
 -(void)updateVideoStreamUrl:(NSString *)filePath{
-    return;
+    //return;
     if (filePath) {
         if (!_timeLine) {
             NvsStreamingContext *context = [NvsStreamingContext sharedInstance];

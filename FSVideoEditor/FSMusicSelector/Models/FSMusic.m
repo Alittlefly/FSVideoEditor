@@ -10,4 +10,23 @@
 
 @implementation FSMusic
 
++ (NSArray *)getDataArrayFromArray:(NSArray *)array
+{
+    NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:0];
+    for (NSDictionary *dic in array) {
+        FSMusic *music = [[FSMusic alloc] init];
+        [music setSongId:[[dic objectForKey:@"sid"] integerValue]];
+        [music setSongIndex:[[dic objectForKey:@"i"] integerValue]];
+        [music setSongTitle:[dic objectForKey:@"n"]];
+        [music setSongPic:[dic objectForKey:@"p"]];
+        [music setSongUrl:[dic objectForKey:@"u"]];
+        [music setSongAuthor:[dic objectForKey:@"a"]];
+        
+        [dataArray addObject:music];
+        
+    }
+    
+    return dataArray;
+}
+
 @end

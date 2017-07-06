@@ -22,13 +22,15 @@
  */
 @property(nonatomic,assign)long long createTime;
 @property(nonatomic,assign)long long lastSeconds;
-@property(nonatomic,assign)NSInteger songId;
-@property(nonatomic,assign)NSInteger songIndex;
-@property(nonatomic,copy)NSString *songAuthor;
-@property(nonatomic,strong)NSString *songPic;
-@property(nonatomic,copy)NSString *songTitle;
-@property(nonatomic,copy)NSString *songUrl;
+@property(nonatomic,assign)NSInteger songId;        //歌曲id
+@property(nonatomic,assign)NSInteger songIndex;     //歌曲序号
+@property(nonatomic,copy)NSString *songAuthor;      //歌曲作者
+@property(nonatomic,strong)NSString *songPic;       //歌曲封面url
+@property(nonatomic,copy)NSString *songTitle;       //歌曲名称
+@property(nonatomic,copy)NSString *songUrl;         //歌曲url
 
 @property(nonatomic,assign)BOOL opend;
 @property(nonatomic,assign)BOOL isPlaying;
+
++ (NSArray *)getDataArrayFromArray:(NSArray *)array;
 @end

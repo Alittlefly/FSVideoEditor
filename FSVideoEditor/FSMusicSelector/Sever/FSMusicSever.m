@@ -31,7 +31,7 @@
         NSDictionary *dataDict = (NSDictionary *)responesObject;
         NSArray *ms = [dataDict valueForKey:@"dataInfo"];
         
-        NSArray *musics = [FSMusic mj_objectArrayWithKeyValuesArray:ms];
+        NSArray *musics = [FSMusic getDataArrayFromArray:ms];
         
         if ([self.delegate respondsToSelector:@selector(musicSeverGetMusics:)]) {
             [self.delegate musicSeverGetMusics:musics];
