@@ -12,81 +12,6 @@
 #define FxButtonH 50.0
 #define FxButtonP 30.0
 
-
-@interface FSFxLongPressButton : UIView
-{
-    __weak id _target;
-    SEL _sel;
-}
-@property(nonatomic,strong)UIImageView *colorView;
-@property(nonatomic,strong)UILabel *titleLabel;
--(void)addTarget:(id)target longPressAction:(SEL)selector;
-@end
-
-@implementation FSFxLongPressButton
-
--(instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
-        [self setClipsToBounds:NO];
-        _titleLabel = [[UILabel alloc] initWithFrame:[self titleRectForContentRect:self.bounds]];
-        [self addSubview:_titleLabel];
-        [_titleLabel setTextColor:FSHexRGB(0xf5f5f5)];
-        [_titleLabel setFont:[UIFont systemFontOfSize:11.0]];
-        [_titleLabel setTextAlignment:(NSTextAlignmentCenter)];
-        
-         _colorView = [[UIImageView alloc] initWithFrame:self.bounds];
-        [_colorView.layer setCornerRadius:CGRectGetHeight(frame)/2.0];
-        [_colorView.layer setMasksToBounds:YES];
-        [_colorView setUserInteractionEnabled:NO];
-        [self addSubview:_colorView];
-        
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                                                                action:@selector(longPressHandler:)];
-        [self addGestureRecognizer:longPress];
-    }
-    return self;
-}
--(void)addTarget:(id)target longPressAction:(SEL)selector{
-    _target = target;
-    _sel = selector;
-}
-
--(void)longPressHandler:(UILongPressGestureRecognizer *)recognizer{
-    
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"UIGestureRecognizerStateBegan");
-    }else if (recognizer.state == UIGestureRecognizerStateEnded){
-        NSLog(@"UIGestureRecognizerStateEnded");
-    }else{
-    
-    }
-    
-//    if (_target && _sel && [_target respondsToSelector:_sel]) {
-//#pragma clang diagnostic push
-//#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-//        [_target performSelector:_sel withObject:self];
-//#pragma clang diagnostic pop
-//    }
-}
-
-
--(void)setBackgroundColor:(UIColor *)backgroundColor{
-    [_colorView setBackgroundColor:backgroundColor];
-}
--(CGRect)imageRectForContentRect:(CGRect)contentRect{
-    return self.bounds;
-}
--(CGRect)titleRectForContentRect:(CGRect)contentRect{
-    CGRect titleRect;
-    titleRect.size.width = CGRectGetWidth(contentRect);
-    titleRect.size.height = 16.0;
-    titleRect.origin.x = 0;
-    titleRect.origin.y = CGRectGetHeight(contentRect) + 11.0;
-    return titleRect;
-}
-
-@end
-
 @interface FSFxButton : UIButton
 @property(nonatomic,strong)UIView *colorView;
 @end
@@ -298,14 +223,47 @@
     [self.fxButtons removeAllObjects];
     [self.fxButtons addObjectsFromArray:@[soulfx,shakefx]];
 }
--(void)unDoFix{
-    NSLog(@"unDoFix");
-    [_progress undoFxView];
+-(void)initTimeFxs{
     
-    if ([self.delegate respondsToSelector:@selector(videoFxUndoPackageFx:)]) {
-        [self.delegate videoFxUndoPackageFx:self];
+    for (UIView *button in self.fxButtons) {
+        [button removeFromSuperview];
     }
+    
+    FSFxButton *noneFx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
+    [noneFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
+    [noneFx setBackgroundColor:[UIColor redColor]];
+    [noneFx setTitle:@"无" forState:(UIControlStateNormal)];
+    noneFx.tag = FSVideoFxTypeNone;
+    
+    [_contentView addSubview:noneFx];
+    
+    FSFxButton *revertFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(noneFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
+    [revertFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
+    [revertFx setBackgroundColor:[UIColor yellowColor]];
+    [revertFx setTitle:@"时光倒流" forState:(UIControlStateNormal)];
+    revertFx.tag = FSVideoFxTypeRevert;
+    
+    [_contentView addSubview:revertFx];
+    
+    
+    FSFxButton *repeatFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(revertFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
+    [repeatFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
+    [repeatFx setBackgroundColor:[UIColor yellowColor]];
+    [repeatFx setTitle:@"反复" forState:(UIControlStateNormal)];
+    repeatFx.tag = FSVideoFxTypeRepeat;
+    [_contentView addSubview:repeatFx];
+    
+    FSFxButton *slowFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(repeatFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
+    [slowFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
+    [slowFx setBackgroundColor:[UIColor yellowColor]];
+    [slowFx setTitle:@"慢动作" forState:(UIControlStateNormal)];
+    slowFx.tag = FSVideoFxTypeSlow;
+    [_contentView addSubview:slowFx];
+    
+    [self.fxButtons removeAllObjects];
+    [self.fxButtons addObjectsFromArray:@[noneFx,revertFx,repeatFx,slowFx]];
 }
+#pragma mark - 动作
 -(void)beginFx:(UIButton *)button{
     NSInteger tag = button.tag;
     if (tag == 1) {
@@ -319,64 +277,23 @@
     [_progress beginFxView];
 }
 -(void)endFx:(UIButton *)button{
-     _currentFxId = nil;
     [_progress endFxView];
+     _currentFxId = nil;
 }
--(void)initTimeFxs{
-    
-    for (UIView *button in self.fxButtons) {
-        [button removeFromSuperview];
-    }
-    
-    FSFxButton *noneFx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
-    [noneFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
-    [noneFx setBackgroundColor:[UIColor redColor]];
-    [noneFx setTitle:@"无" forState:(UIControlStateNormal)];
-    noneFx.tag = FSVideoFxTypeNone;
-
-    [_contentView addSubview:noneFx];
-    
-    FSFxButton *revertFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(noneFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
-    [revertFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
-    [revertFx setBackgroundColor:[UIColor yellowColor]];
-    [revertFx setTitle:@"时光倒流" forState:(UIControlStateNormal)];
-     revertFx.tag = FSVideoFxTypeRevert;
-
-    [_contentView addSubview:revertFx];
-    
-    
-    FSFxButton *repeatFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(revertFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
-    [repeatFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
-    [repeatFx setBackgroundColor:[UIColor yellowColor]];
-    [repeatFx setTitle:@"反复" forState:(UIControlStateNormal)];
-     repeatFx.tag = FSVideoFxTypeRepeat;
-    [_contentView addSubview:repeatFx];
-    
-    FSFxButton *slowFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(repeatFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
-    [slowFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
-    [slowFx setBackgroundColor:[UIColor yellowColor]];
-    [slowFx setTitle:@"慢动作" forState:(UIControlStateNormal)];
-     slowFx.tag = FSVideoFxTypeSlow;
-    [_contentView addSubview:slowFx];
-    
-    [self.fxButtons removeAllObjects];
-    [self.fxButtons addObjectsFromArray:@[noneFx,revertFx,repeatFx,slowFx]];
-}
+#pragma mark - 选择时间特效
 -(void)clickTimeFxButtion:(UIButton *)button{
     _progress.type = button.tag;
-    
     _needConvert = (button.tag == FSVideoFxTypeRevert);
-    
     if (button.tag != FSVideoFxTypeRevert) {
         if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
-            [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:1000000 progress:_progress.selectProgress];
+            [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:1000000.0 progress:_progress.selectProgress];
         }
     }
+    
+    [_progress setNeedConvert:_needConvert];
 }
-
 #pragma mark - FSVideoClipProgressDelegate
 - (void)FSVideoClipProgressUpdateProgress:(CGFloat)progress {
-//    NSLog(@"UpdateProgress:  %f",progress);
     if ([self.delegate respondsToSelector:@selector(videoFxSelectProgress:progress:packageFxId:)]) {
         [self.delegate videoFxSelectProgress:self progress:progress packageFxId:_currentFxId];
     }
@@ -388,6 +305,9 @@
 }
 -(void)videoClipProgressUndoState:(BOOL)shouldShow{
     [_unDoButton setHidden:!shouldShow];
+}
+-(NSArray *)addedViews{
+    return _progress.renderRangeViews;
 }
 #pragma mark - 
 -(void)showFx:(FSLineButton *)button{
@@ -418,6 +338,7 @@
     [_unDoButton setHidden:(tag == 2)|| _progress.fiterCout == 0];
     [_progress setFtype:(tag - 1)];
 }
+#pragma mark - 更新progress 上的进度
 -(void)start{
     if (!_progressTimer) {
         _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateClipProgress) userInfo:nil repeats:YES];
@@ -438,13 +359,30 @@
         _progress.progress = progress;
     }
 }
-
+-(void)addFiltterViews:(NSArray *)filterViews{
+    [_progress addFitteredView:filterViews];
+    
+    if([filterViews count]){
+        [self showUndoButton];
+    }
+}
+#pragma mark - 展示影藏撤销按钮
 -(void)hideUndoButton{
     [_unDoButton setHidden:YES];
 }
 -(void)showUndoButton{
     [_unDoButton setHidden:NO];
 }
+// 撤销特效
+-(void)unDoFix{
+    NSLog(@"unDoFix");
+    [_progress undoFxView];
+    
+    if ([self.delegate respondsToSelector:@selector(videoFxUndoPackageFx:)]) {
+        [self.delegate videoFxUndoPackageFx:self];
+    }
+}
+#pragma mark - 翻转
 -(BOOL)needCovert{
     return _needConvert;
 }

@@ -34,6 +34,10 @@
 		563B7A111F0A42FC0035346A /* FSPresentAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A101F0A42FC0035346A /* FSPresentAnimator.m */; };
 		563B7A171F0A4DF50035346A /* FSAnimationNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A161F0A4DF50035346A /* FSAnimationNavController.m */; };
 		563B7A1A1F0A52080035346A /* FSDismissAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A191F0A52080035346A /* FSDismissAnimator.m */; };
+		563B7A241F0C8FE00035346A /* FSEditorAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A231F0C8FE00035346A /* FSEditorAlertView.m */; };
+		563B7A2B1F0CBC720035346A /* FSVideoFx.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A2A1F0CBC720035346A /* FSVideoFx.m */; };
+		563B7A2E1F0CE6F50035346A /* FSVideoFxOperationStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A2D1F0CE6F50035346A /* FSVideoFxOperationStack.m */; };
+		563B7A311F0CE79A0035346A /* FSVirtualTimeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A301F0CE79A0035346A /* FSVirtualTimeLine.m */; };
 		5647BC3C1F0272110072B618 /* FSControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC3B1F0272110072B618 /* FSControlView.m */; };
 		5647BC451F04D6A70072B618 /* wind.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5647BC441F04D6A70072B618 /* wind.mp3 */; };
 		5647BC491F04E0040072B618 /* month.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5647BC481F04E0040072B618 /* month.mp3 */; };
@@ -201,6 +205,18 @@
 		563B7A161F0A4DF50035346A /* FSAnimationNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAnimationNavController.m; sourceTree = "<group>"; };
 		563B7A181F0A52080035346A /* FSDismissAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDismissAnimator.h; sourceTree = "<group>"; };
 		563B7A191F0A52080035346A /* FSDismissAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDismissAnimator.m; sourceTree = "<group>"; };
+		563B7A1E1F0C8E570035346A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		563B7A1F1F0C8E570035346A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		563B7A201F0C8E8D0035346A /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
+		563B7A211F0C8E8D0035346A /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		563B7A221F0C8FE00035346A /* FSEditorAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEditorAlertView.h; sourceTree = "<group>"; };
+		563B7A231F0C8FE00035346A /* FSEditorAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSEditorAlertView.m; sourceTree = "<group>"; };
+		563B7A291F0CBC720035346A /* FSVideoFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSVideoFx.h; sourceTree = "<group>"; };
+		563B7A2A1F0CBC720035346A /* FSVideoFx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVideoFx.m; sourceTree = "<group>"; };
+		563B7A2C1F0CE6F50035346A /* FSVideoFxOperationStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSVideoFxOperationStack.h; sourceTree = "<group>"; };
+		563B7A2D1F0CE6F50035346A /* FSVideoFxOperationStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVideoFxOperationStack.m; sourceTree = "<group>"; };
+		563B7A2F1F0CE79A0035346A /* FSVirtualTimeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSVirtualTimeLine.h; sourceTree = "<group>"; };
+		563B7A301F0CE79A0035346A /* FSVirtualTimeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVirtualTimeLine.m; sourceTree = "<group>"; };
 		5647BC3A1F0272110072B618 /* FSControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSControlView.h; sourceTree = "<group>"; };
 		5647BC3B1F0272110072B618 /* FSControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSControlView.m; sourceTree = "<group>"; };
 		5647BC441F04D6A70072B618 /* wind.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wind.mp3; sourceTree = "<group>"; };
@@ -331,6 +347,8 @@
 		987700AD1F03AFE50043394E /* FSSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSegmentView.h; sourceTree = "<group>"; };
 		987700AE1F03AFE50043394E /* FSSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSegmentView.m; sourceTree = "<group>"; };
 		987B58AC1F0E217800E85A37 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		987B58AE1F0E5DAD00E85A37 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		987B58AF1F0E5DAD00E85A37 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		987ECEE61F04F92D00221273 /* FSCutMusicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCutMusicView.h; sourceTree = "<group>"; };
 		987ECEE71F04F92D00221273 /* FSCutMusicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCutMusicView.m; sourceTree = "<group>"; };
 		988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSProgressView.h; sourceTree = "<group>"; };
@@ -477,6 +495,8 @@
 				98725BF11F064F8C00445EF2 /* FSMoveButton.m */,
 				983445FA1F0CF06C00A6E977 /* FSAlertView.h */,
 				983445FB1F0CF06C00A6E977 /* FSAlertView.m */,
+				563B7A221F0C8FE00035346A /* FSEditorAlertView.h */,
+				563B7A231F0C8FE00035346A /* FSEditorAlertView.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -484,6 +504,7 @@
 		562D40681EFE4B3500BF0E0D /* FSVideoFxView */ = {
 			isa = PBXGroup;
 			children = (
+				563B7A251F0C99B30035346A /* FSFxManager */,
 				562D40691EFE4B4400BF0E0D /* FSVideoFxView.h */,
 				562D406A1EFE4B4400BF0E0D /* FSVideoFxView.m */,
 				562D40741EFE6A8A00BF0E0D /* FSVideoClipProgress.h */,
@@ -563,6 +584,19 @@
 				563B7A191F0A52080035346A /* FSDismissAnimator.m */,
 			);
 			path = FSAnimator;
+			sourceTree = "<group>";
+		};
+		563B7A251F0C99B30035346A /* FSFxManager */ = {
+			isa = PBXGroup;
+			children = (
+				563B7A2C1F0CE6F50035346A /* FSVideoFxOperationStack.h */,
+				563B7A2D1F0CE6F50035346A /* FSVideoFxOperationStack.m */,
+				563B7A2F1F0CE79A0035346A /* FSVirtualTimeLine.h */,
+				563B7A301F0CE79A0035346A /* FSVirtualTimeLine.m */,
+				563B7A291F0CBC720035346A /* FSVideoFx.h */,
+				563B7A2A1F0CBC720035346A /* FSVideoFx.m */,
+			);
+			path = FSFxManager;
 			sourceTree = "<group>";
 		};
 		5647BC431F04D66F0072B618 /* FSMusicSource */ = {
@@ -1084,7 +1118,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 			);
 			mainGroup = 567E0B451EF930D100C4C527;
@@ -1136,13 +1169,16 @@
 				9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */,
 				988E3D291F0271A1004E837F /* NSString+Time.m in Sources */,
 				567A3D421EFB66B60026247E /* FSFile.m in Sources */,
+				563B7A2E1F0CE6F50035346A /* FSVideoFxOperationStack.m in Sources */,
 				567A3D8B1EFB6F8E0026247E /* NSString+MJExtension.m in Sources */,
 				563B79F91F08D3360035346A /* FSMusicAPI.m in Sources */,
+				563B7A2B1F0CBC720035346A /* FSVideoFx.m in Sources */,
 				567A3D651EFB6F830026247E /* FMDatabasePool.m in Sources */,
 				567A3D661EFB6F830026247E /* FMDatabaseQueue.m in Sources */,
 				988AC6DF1EFE65C2007FBCEF /* FSFilterView.m in Sources */,
 				567A3D4D1EFB66B60026247E /* FSFileUploader.m in Sources */,
 				563B7A0A1F0A42AA0035346A /* FSDissolveAnimator.m in Sources */,
+				563B7A241F0C8FE00035346A /* FSEditorAlertView.m in Sources */,
 				567A3D8A1EFB6F8E0026247E /* NSObject+MJProperty.m in Sources */,
 				567A3D841EFB6F8E0026247E /* MJProperty.m in Sources */,
 				567E0B9D1EFA20BC00C4C527 /* FSLocalPhotoManager.m in Sources */,
@@ -1181,6 +1217,7 @@
 				562D403F1EFBE8A100BF0E0D /* FSLocalEditorController.m in Sources */,
 				562D405D1EFD39F100BF0E0D /* FSPublisherController.m in Sources */,
 				983445FC1F0CF06C00A6E977 /* FSAlertView.m in Sources */,
+				563B7A311F0CE79A0035346A /* FSVirtualTimeLine.m in Sources */,
 				5647BC3C1F0272110072B618 /* FSControlView.m in Sources */,
 				567A3D851EFB6F8E0026247E /* MJPropertyKey.m in Sources */,
 				567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */,
@@ -1233,6 +1270,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				567E0B5B1EF930D100C4C527 /* Base */,
+				563B7A1E1F0C8E570035346A /* zh-Hans */,
+				563B7A201F0C8E8D0035346A /* ar */,
+				987B58AE1F0E5DAD00E85A37 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1241,6 +1281,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				567E0B601EF930D100C4C527 /* Base */,
+				563B7A1F1F0C8E570035346A /* zh-Hans */,
+				563B7A211F0C8E8D0035346A /* ar */,
+				987B58AF1F0E5DAD00E85A37 /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1252,6 +1295,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1301,6 +1345,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

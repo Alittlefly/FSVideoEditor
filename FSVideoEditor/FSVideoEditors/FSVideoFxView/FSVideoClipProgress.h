@@ -43,15 +43,21 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 @property(nonatomic,strong)UIView *backGroundView;
 @property(nonatomic,assign)FSVideoFxType type;
 @property(nonatomic,assign)FSFilterType ftype;
+@property(nonatomic,assign)BOOL needConvert;
 
 @property(nonatomic,weak) id<FSVideoClipProgressDelegate> delegate;
 
 @property(nonatomic,strong)UIColor *fxViewColor;
+@property(nonatomic,strong)NSMutableArray *renderRangeViews;
 
 @property(nonatomic,assign,readonly)NSInteger fiterCout;
+
+
 
 -(void)beginFxView;
 -(void)endFxView;
 
 -(void)undoFxView;
+
+-(void)addFitteredView:(NSArray *)fiterdViews;
 @end

@@ -39,6 +39,10 @@
 #pragma mark - 
 -(void)videoListView:(FSVideoListView *)videoListView didSelectedVideo:(PHAsset *)video{
     
+    if (video.duration < 5) {
+        
+    }
+    
     PHVideoRequestOptions *videoOption = [PHVideoRequestOptions new];
     
     [[PHImageManager defaultManager] requestAVAssetForVideo:video options:videoOption resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {

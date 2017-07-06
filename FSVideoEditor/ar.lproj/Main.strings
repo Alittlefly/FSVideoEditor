@@ -1,0 +1,94 @@
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "EmT-ai-sOL"; */
+"EmT-ai-sOL.title" = "Root View Controller";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "m0V-QV-ECw"; */
+"m0V-QV-ECw.normalTitle" = "Button";
+
+NoNetWork = "حالياً لا توجد شبكة! الرجاء التأكد من إعدادات الإنترنت";
+NotWifi = "أنت الآن غير متصل بشبكة وايفاي، هل تريد الإستمرار في التحميل؟";
+
+Account = "الحساب";
+Password = "كلمة السر";
+Login = "تسجيل دخول";
+BadPassword = "كلمة السر غير صحيحة";
+LoginFailed = "فشل في تسجيل الدخول";
+logout = "خروج";
+
+UploadVideo = "حمل الفيديو";
+ChooseMusic = "اختر موسيقى";
+Record = "فتح فيديو";
+HotMusic = "أجمل الأغاني";
+RecordNow = "البدء بتسجيل الفيديو";
+Loading = "جاري التحميل";
+Cancel = "إلغاء";
+
+VideoLengthTip = "يجب أن تكون مدة الفيديو (0) ثواني على الأقل لتتمكن من النشر";
+Edit = "تعديل";
+Volume = "مستوى الصوت";
+Effects = "مؤثرات خاصة";
+EnterTitle = "اكتب عنوان";
+AddHashtag = "إضافة هاشتاج";
+SaveInGallery = "حفظ في الأستوديو";
+Draft = "حفظ في الذاكرة";
+Upload = "نشر";
+UploadFailed = "فشل النشر";
+Uploading = "جاري التحميل ....";
+UploadSecceed = "تم النشر";
+CancelRecording = "هل تريد إلغاء التسجيل الحالي؟";
+CancelRecorded = "إلغاء الأمر";
+OriginalVoice = "الصوت الأصلي للفيديو";
+CancelEditing = "هل تريد إلغاء تسجيل الفيديو؟";
+CancelEditWarning = "إذا استمريت بالعودة سيتم حذف جميع الفلاتر، هل تريد الإستمرار؟";
+Done = "تأكيد";
+Save = "حفظ";
+
+Filters = "فلاتر الفيديو";
+Timeline = "فلاتر الزمن";
+Magic = "فلتر سحري";
+Vibrating = "فلتر هزاز";
+Repeat = "تكرار الحركة";
+Reverse = "عكس الزمن";
+NoFilter = "بدون فلتر";
+ChooseEffectsTip = "اضغط لاختيار فلاتر الزمن";
+SlowMotion = "حركة بطيئة";
+Delete = "مسح";
+AddFilterTip = "استمر بالضغط لتحدد المكان الذي تريد إضافة فلتر له";
+EraseEffectsTip = "متأكد أنك تريد مسح التأثيرات السابقة؟";
+Erase = "مسح";
+LongPress = "اضغط مطولاً للتسجيل";
+
+VerySlow = "بطئ جداً";
+Slow = "بطئ";
+Normal = "طبيعي";
+Fast = "سريع";
+VeryFast = "سريع جداً";
+Countdown = "العد التنازلي";
+ColorFilter = "فلتر اللون";
+
+BlackWhite = "ظل";
+Sweet = "رومنسي";
+Dim = "كوول";
+Classic = "كلاسيكي";
+Blueish = "سماوي";
+Light = "فاتح";
+Milky = "خافت";
+Warm = "مشع";
+OldTimes = "باهت";
+Nostalgia = "لأمع";
+
+BeautifyOn = "فتح تحسينات الصورة";
+BeautifyOff = "غلق تحسينات الصورة";
+CutMusic = "قص الأغاني";
+BeautifyOnTip = "تم فتح تحسينات الصورة";
+BeautifyOffTip = "تم غلق تحسينات الصورة";
+PressToRecord = "استمر بالضغط على الزر الأخضر للتسجيل";
+DeleteVideoTip = "هل تريد حذف الفيديو؟";
+Confirm = "تأكيد";
+EditMusicTip = "حرك المؤشر يميناً و يساراً لقص الموسيقى كما تريد";
+MusicStartTime = "الوقت : (0)";
+
+Original = "الصوت الأصلي";
+Music = "اضف موسيقى";
+ChoseVideoTime = "تم اختيار (0) ثانية من الفيديو";
+Processing = "جاري المعالجة...";
