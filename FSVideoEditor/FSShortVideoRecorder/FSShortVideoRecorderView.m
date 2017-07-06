@@ -527,7 +527,7 @@ BOOL IsArabic;
     //倒计时动画
     //倒计时View
     if (!_timeCountdownView) {
-        self.timeCountdownView =[[FSTimeCountdownView alloc] initWithFrame:CGRectMake((self.frame.size.width-50)/2, (self.frame.size.height-50)/2, 50, 50) timeNumber:3 number:15];
+        self.timeCountdownView =[[FSTimeCountdownView alloc] initWithFrame:CGRectMake((self.frame.size.width-91)/2, (self.frame.size.height-174)/2, 91, 174) timeNumber:3 number:15];
         self.timeCountdownView.delegate = self;
 
     }

@@ -33,6 +33,14 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+    
+    CAGradientLayer *bgGradientLayer = [CAGradientLayer layer];
+    bgGradientLayer.colors = @[(__bridge id)FSHexRGB(0x000000).CGColor, (__bridge id)FSHexRGB(0x2D062D).CGColor];
+    //gradientLayer.locations = @[@0.0];
+    bgGradientLayer.startPoint = CGPointMake(0, 0);
+    bgGradientLayer.endPoint = CGPointMake(0, 1.0);
+    bgGradientLayer.frame = self.view.bounds;
+    [self.view.layer insertSublayer:bgGradientLayer atIndex:0];
 
     _uid = [[NSUserDefaults standardUserDefaults] valueForKey:@"UID"];
     _password = [[NSUserDefaults standardUserDefaults] valueForKey:@"Password"];
@@ -54,25 +62,39 @@
         self.loginButton.hidden = YES;
     }
     
-    UIView *uidView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    UIView *uidView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     uidView.backgroundColor = [UIColor clearColor];
     UIImageView *uidImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"phone-number"]];
-    uidImageView.frame = CGRectMake(10, 10, 20, 20);
+    uidImageView.frame = CGRectMake(5, 5, 20, 20);
     [uidView addSubview:uidImageView];
     
     self.uidTextField.leftView = uidView;
     self.uidTextField.leftViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
     self.uidTextField.delegate = self;
     
-    UIView *passwordView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    UIView *passwordView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     passwordView.backgroundColor = [UIColor clearColor];
     UIImageView *passwordImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"password"]];
-    passwordImageView.frame = CGRectMake(10, 10, 20, 20);
+    passwordImageView.frame = CGRectMake(5, 5, 20, 20);
     [passwordView addSubview:passwordImageView];
 
     self.passwordTextField.leftView = passwordView;
     self.passwordTextField.leftViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
     self.passwordTextField.delegate = self;
+    
+    [self.logoutButton setTitleColor:FSHexRGB(0x00FFEF) forState:UIControlStateNormal];
+    
+    [self.loginButton setTitleColor:FSHexRGB(0x00FFEF) forState:UIControlStateNormal];
+    self.loginButton.frame = CGRectMake(CGRectGetMinX(self.passwordTextField.frame), CGRectGetMaxY(self.passwordTextField.frame)+20, CGRectGetWidth(self.passwordTextField.frame), CGRectGetHeight(self.passwordTextField.frame));
+    self.loginButton.layer.cornerRadius = self.loginButton.frame.size.height/2;
+    self.loginButton.layer.masksToBounds = YES;
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[(__bridge id)FSHexRGB(0x07FDFC).CGColor, (__bridge id)FSHexRGB(0xEC1DF9).CGColor];
+    //gradientLayer.locations = @[@0.0];
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(1.0, 0);
+    gradientLayer.frame = self.loginButton.bounds;
+    [self.loginButton.layer addSublayer:gradientLayer];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
     [self.view addGestureRecognizer:tapGesture];

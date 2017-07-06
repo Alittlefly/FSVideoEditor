@@ -95,10 +95,11 @@
                         
                     });
                 }else{
+                    int temN = timeout;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         NSString *ctime = [NSString lastTimeWithOutZeroStartWithUnit:timeout];
                        // [_timeLabel setText:[NSString stringWithFormat:@"%d",timeout]];
-                        [_timeImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"countdown%d",timeout]]];
+                        [_timeImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"countdown%d",temN]]];
                     });
                     timeout--;
                 }

@@ -158,16 +158,16 @@ static BOOL IsArabic = NO;
     _draftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _draftButton.frame = IsArabic ? CGRectMake(self.frame.size.width-20-(self.frame.size.width-60)/2, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44) : CGRectMake(20, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44);
     [_draftButton setTitle:@"草稿" forState:UIControlStateNormal];
-    _draftButton.backgroundColor = [UIColor lightGrayColor];
-   // [_draftButton setImage:[UIImage imageNamed:@"recorder-filter"] forState:UIControlStateNormal];
+    _draftButton.backgroundColor = FSHexRGB(0xD8D8D8);
+    [_draftButton setImage:[UIImage imageNamed:@"draft"] forState:UIControlStateNormal];
     [_draftButton addTarget:self action:@selector(draftClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_draftButton];
     
     _publishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _publishButton.frame = IsArabic ? CGRectMake(20, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44) : CGRectMake(self.frame.size.width-20-(self.frame.size.width-60)/2, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44);
     [_publishButton setTitle:@"发布" forState:UIControlStateNormal];
-    _publishButton.backgroundColor = [UIColor redColor];
-    // [_draftButton setImage:[UIImage imageNamed:@"recorder-filter"] forState:UIControlStateNormal];
+    _publishButton.backgroundColor = FSHexRGB(0xFE2C54);
+     [_publishButton setImage:[UIImage imageNamed:@"publish"] forState:UIControlStateNormal];
     [_publishButton addTarget:self action:@selector(publishClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_publishButton];
     
