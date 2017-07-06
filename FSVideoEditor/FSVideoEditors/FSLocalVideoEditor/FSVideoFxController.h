@@ -22,6 +22,7 @@
 
 @property(nonatomic,assign)id<FSVideoFxControllerDelegate>delegate;
 @property(nonatomic,copy)NSString *filePath;
+@property(nonatomic,copy)NSString *convertFilePath;
 @property(nonatomic,assign)NvsTimeline *timeLine;
 @property(nonatomic,strong)FSControlView *controlView;
 @property(nonatomic,strong)FSVideoFxView *videoFxView;
