@@ -256,13 +256,13 @@
     _convert = convert;
     _selectType = type;
     
+    [self removeAllFx];
+    
     NSString *newPath = convert?_convertFilePath:_filePath;
     [_timeLine removeVideoTrack:0];
      _videoTrack = [_timeLine appendVideoTrack];
     [_videoTrack insertClip:newPath clipIndex:0];
     [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
-    //
-    [self removeAllFx];
     //
     FSVirtualTimeLine *vtimelin = [_tempFxStack topVirtualTimeLine];
     [self addVideoFxWithVirtualTimeline:vtimelin];
