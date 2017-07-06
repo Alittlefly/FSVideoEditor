@@ -8,25 +8,33 @@
 
 #import "FSLoginServer.h"
 #import "FSLoginAPI.h"
+#import <UIKit/UIKit.h>
 
 @interface FSLoginServer()<FSLoginAPIDelegate>
+
+@property (nonatomic, strong) FSLoginAPI *loginAPI;
 
 @end
 
 @implementation FSLoginServer
 
 - (void)loginWithUid:(NSString *)uid password:(NSString *)password {
+    NSDate *curDate = [NSDate date];
+    NSTimeInterval curTime = [curDate timeIntervalSince1970]*1000;
+    
     NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:0];
-    [dic setValue:@"Test12@qq.com" forKey:@"email"];
-    [dic setValue:@"111111" forKey:@"password"];
-    [dic setValue:@"4.5.0" forKey:@"_v"];
+    [dic setValue:uid forKey:@"email"];
+    [dic setValue:password forKey:@"password"];
+    [dic setValue:@"4.5.2" forKey:@"_v"];
     [dic setValue:@"base" forKey:@"base"];
-    [dic setValue:@"1" forKey:@"fromType"];
-    [dic setValue:@"3007FEDB-FC52-4B9F-AA80-4B434EA77CCB" forKey:@"machineId"];
-    [dic setValue:@"iPhone5s(A1457/A1518/A1528/A1530)" forKey:@"machineType"];
-    [dic setValue:@"4" forKey:@"requestType"];
+    [dic setValue:[NSString stringWithFormat:@"%@",[NSNumber numberWithDouble:floor(curTime)]] forKey:@"date"];
+    [dic setValue:[NSNumber numberWithInteger:1] forKey:@"fromType"];
+    [dic setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"machineId"];
+    [dic setValue:@"" forKey:@"machineType"];
+    [dic setValue:[NSNumber numberWithInteger:4] forKey:@"requestType"];
+    [dic setValue:uid forKey:@"loginName"];
 
-   // [dic setValue:@"3007FEDB-FC52-4B9F-AA80-4B434EA77CCB" forKey:@"validatekey"];
+    [dic setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"validatekey"];
 
 
     
@@ -45,10 +53,12 @@
     //    sex = 0;
     //    tokenSecret = "";
     //    validatekey = "3007FEDB-FC52-4B9F-AA80-4B434EA77CCB";
+    if (!_loginAPI) {
+        _loginAPI = [[FSLoginAPI alloc] init];
+        _loginAPI.delegate = self;
+    }
     
-    FSLoginAPI *api = [[FSLoginAPI alloc] init];
-    api.delegate = self;
-    [api loginWithParam:dic];
+    [_loginAPI loginWithParam:dic];
 }
 
 #pragma mark - FSLoginAPIDelegate

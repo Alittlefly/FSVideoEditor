@@ -92,7 +92,15 @@
 }
 
 - (IBAction)logoutClick:(id)sender {
+    self.recorderButton.hidden = YES;
+    self.logoutButton.hidden = YES;
     
+    self.uidTextField.hidden = NO;
+    self.passwordTextField.hidden = NO;
+    self.loginButton.hidden = NO;
+    
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"UID"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Password"];
 }
 
 - (IBAction)loginClick:(id)sender {
