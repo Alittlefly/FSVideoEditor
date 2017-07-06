@@ -336,6 +336,8 @@
 		987700AB1F03A6520043394E /* NvcConvertorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertorDelegate.h; sourceTree = "<group>"; };
 		987700AD1F03AFE50043394E /* FSSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSegmentView.h; sourceTree = "<group>"; };
 		987700AE1F03AFE50043394E /* FSSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSegmentView.m; sourceTree = "<group>"; };
+		987B58AE1F0E5DAD00E85A37 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		987B58AF1F0E5DAD00E85A37 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		987ECEE61F04F92D00221273 /* FSCutMusicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCutMusicView.h; sourceTree = "<group>"; };
 		987ECEE71F04F92D00221273 /* FSCutMusicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCutMusicView.m; sourceTree = "<group>"; };
 		988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSProgressView.h; sourceTree = "<group>"; };
@@ -1089,7 +1091,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 			);
 			mainGroup = 567E0B451EF930D100C4C527;
@@ -1241,6 +1242,7 @@
 				567E0B5B1EF930D100C4C527 /* Base */,
 				563B7A1E1F0C8E570035346A /* zh-Hans */,
 				563B7A201F0C8E8D0035346A /* ar */,
+				987B58AE1F0E5DAD00E85A37 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1251,6 +1253,7 @@
 				567E0B601EF930D100C4C527 /* Base */,
 				563B7A1F1F0C8E570035346A /* zh-Hans */,
 				563B7A211F0C8E8D0035346A /* ar */,
+				987B58AF1F0E5DAD00E85A37 /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

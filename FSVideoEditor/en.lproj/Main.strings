@@ -1,0 +1,94 @@
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "EmT-ai-sOL"; */
+"EmT-ai-sOL.title" = "Root View Controller";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "m0V-QV-ECw"; */
+"m0V-QV-ECw.normalTitle" = "Button";
+
+NoNetWork = "Connection failed! Please check your internet settings";
+NotWifi = "You are not connected to Wifi, are you sure you want to continue?";
+
+Account = "Account";
+Password = "Password";
+Login = "Login";
+BadPassword = "Incorrect Password";
+LoginFailed = "Login Failed";
+logout = "Log Out";
+
+UploadVideo = "Upload Video";
+ChooseMusic = "Choose Music";
+Record = "Record";
+HotMusic = "Hot Music";
+RecordNow = "Record Now";
+Loading = "Loading";
+Cancel = "Cancel";
+
+VideoLengthTip = "Video length should be (0) seconds at least";
+Edit = "Edit";
+Volume = "Volume";
+Effects = "Special Effects";
+EnterTitle = "Write Something";
+AddHashtag = "Add a Hashtag";
+SaveInGallery = "Save in Gallery";
+Draft = "Draft Box";
+Upload = "Upload";
+UploadFailed = "Uploading Failed";
+Uploading = "Uploading…";
+UploadSecceed = "Uploaded";
+CancelRecording = "Do you want to cancel recording?";
+CancelRecorded = "Yes";
+OriginalVoice = "Original Voice";
+CancelEditing = "Do you want to cancel editing?";
+CancelEditWarning = "If continue all effects will be deleted, continue?";
+Done = "Done";
+Save = "Save";
+
+Filters = "Filters";
+Timeline = "Timeline";
+Magic = "Magic";
+Vibrating = "Vibrating";
+Repeat = "Repeat";
+Reverse = "Reverse";
+NoFilter = "No Filter";
+ChooseEffectsTip = "Press to choose timeline effects";
+SlowMotion = "Slow Motion";
+Delete = "Delete";
+AddFilterTip = "Press and hold to choose where to add filter";
+EraseEffectsTip = "Do you want to erase all saved effects?";
+Erase = "Erase";
+LongPress = "Long press to record";
+
+VerySlow = "Very Slow";
+Slow = "Slow";
+Normal = "Normal";
+Fast = "Fast";
+VeryFast = "Very Fast";
+Countdown = "Countdown";
+ColorFilter = "Color Filter";
+
+BlackWhite = "Black & White";
+Sweet = "Sweet";
+Dim = "Dim";
+Classic = "Classic";
+Blueish = "Blueish";
+Light = "Light";
+Milky = "Milky";
+Warm = "Warm";
+OldTimes = "Old Times";
+Nostalgia = "Nostalgia";
+
+BeautifyOn = "Beautify On";
+BeautifyOff = "Beautify Off";
+CutMusic = "Cut Music";
+BeautifyOnTip = "Beautify Mode On";
+BeautifyOffTip = "Beautify Mode Off";
+PressToRecord = "Press long on the green button to record";
+DeleteVideoTip = "Do you want to delete the previouse video?";
+Confirm = "Confirm";
+EditMusicTip = "Slide left and right to edit music";
+MusicStartTime = "Music starts at (0)";
+
+Original = "Original";
+Music = "Music";
+ChoseVideoTime = "You chose (0) seconds";
+Processing = "Processing…";
