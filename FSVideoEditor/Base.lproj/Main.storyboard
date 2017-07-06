@@ -33,14 +33,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NhV-Pm-qyj">
                                 <rect key="frame" x="0.0" y="145.5" width="375" height="521.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0V-QV-ECw">
-                                        <rect key="frame" x="123" y="196.5" width="128" height="128"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0V-QV-ECw">
+                                        <rect key="frame" x="123.5" y="197" width="128" height="128"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="30v-wW-Zps"/>
                                             <constraint firstAttribute="height" constant="128" id="rma-T1-YcI"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Button" image="kaipai"/>
                                         <connections>
                                             <action selector="beginCreat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zDr-rW-pto"/>
                                         </connections>
@@ -95,7 +95,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4JZ-OD-Zed">
                                         <rect key="frame" x="137" y="463.5" width="100" height="30"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="CF6-lb-7aH"/>
                                             <constraint firstAttribute="height" constant="30" id="Em0-jV-KKS"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="HRm-an-Dqi"/>
                                         </constraints>
                                         <state key="normal" title="LOG OUT"/>
                                         <connections>
@@ -111,7 +113,6 @@
                                     <constraint firstItem="nH7-tl-73v" firstAttribute="top" secondItem="yVE-dm-a0b" secondAttribute="bottom" constant="20" id="Cye-91-jzA"/>
                                     <constraint firstItem="yVE-dm-a0b" firstAttribute="top" secondItem="fOx-kX-Rfg" secondAttribute="bottom" constant="20" id="Ia6-YW-aNk"/>
                                     <constraint firstItem="nH7-tl-73v" firstAttribute="top" secondItem="yVE-dm-a0b" secondAttribute="bottom" constant="20" id="Juc-hA-AoK"/>
-                                    <constraint firstItem="4JZ-OD-Zed" firstAttribute="leading" secondItem="NhV-Pm-qyj" secondAttribute="leading" constant="137" id="NW1-fR-imn"/>
                                     <constraint firstItem="m0V-QV-ECw" firstAttribute="centerY" secondItem="NhV-Pm-qyj" secondAttribute="centerY" id="Njj-Ej-uNx"/>
                                     <constraint firstItem="fOx-kX-Rfg" firstAttribute="leading" secondItem="NhV-Pm-qyj" secondAttribute="leading" constant="37" id="RQe-U5-yOn"/>
                                     <constraint firstAttribute="trailing" secondItem="nH7-tl-73v" secondAttribute="trailing" constant="38" id="Yso-7l-NIG"/>
@@ -120,8 +121,8 @@
                                     <constraint firstAttribute="bottom" secondItem="4JZ-OD-Zed" secondAttribute="bottom" constant="28" id="pCQ-3s-rE4"/>
                                     <constraint firstAttribute="trailing" secondItem="yVE-dm-a0b" secondAttribute="trailing" constant="38" id="pq4-Km-Ygw"/>
                                     <constraint firstItem="m0V-QV-ECw" firstAttribute="centerX" secondItem="NhV-Pm-qyj" secondAttribute="centerX" id="qOy-kz-bd9"/>
-                                    <constraint firstAttribute="trailing" secondItem="4JZ-OD-Zed" secondAttribute="trailing" constant="138" id="tWS-BL-Je1"/>
                                     <constraint firstItem="yVE-dm-a0b" firstAttribute="leading" secondItem="NhV-Pm-qyj" secondAttribute="leading" constant="37" id="uDe-Tf-EJp"/>
+                                    <constraint firstItem="4JZ-OD-Zed" firstAttribute="centerX" secondItem="NhV-Pm-qyj" secondAttribute="centerX" id="v6s-a0-ob8"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -197,5 +198,6 @@
     <resources>
         <image name="7nujoom" width="168" height="39"/>
         <image name="BG" width="375" height="260"/>
+        <image name="kaipai" width="151" height="151"/>
     </resources>
 </document>
