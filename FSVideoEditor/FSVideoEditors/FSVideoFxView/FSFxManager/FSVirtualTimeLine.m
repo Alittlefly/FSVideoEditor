@@ -21,8 +21,28 @@
         return;
     }
     //
-    NSMutableArray *copyArray = [NSMutableArray arrayWithArray:self.videoFxs];
+    BOOL standardConvert = videoFx.convert;
+    // videoFxs 为有序数组
+    NSMutableArray *willDealed = [NSMutableArray arrayWithArray:self.videoFxs];
+    NSMutableArray *dealedArray = [NSMutableArray array];
     
+    for (FSVideoFx *sVideofx in willDealed) {
+        // 和标杆不同 就要在时间上反算
+        if (sVideofx.convert != standardConvert) {
+            //
+            int64_t tempStart = sVideofx.startPoint;
+            int64_t tempEnd = sVideofx.endPoint;
+            sVideofx.startPoint = _duration - tempEnd;
+            sVideofx.endPoint = _duration - tempStart;
+            sVideofx.convert = standardConvert;
+        }
+        
+        // 统一到一个时间轴上去
+        [dealedArray addObject:sVideofx];
+    }
+    
+    //
+    NSMutableArray *copyArray = [NSMutableArray arrayWithArray:dealedArray];
     NSMutableArray *before = [NSMutableArray array];
     NSMutableArray *after = [NSMutableArray array];
     
@@ -64,6 +84,7 @@
             newBeforeFx.startPoint = headfx.startPoint;
             newBeforeFx.endPoint = videoFx.startPoint;
             newBeforeFx.videoFxId = headfx.videoFxId;
+            newBeforeFx.convert = standardConvert;
         }
 
         if (videoFx.endPoint < nailfx.endPoint) {
@@ -71,6 +92,8 @@
             newAfterFx.startPoint = videoFx.endPoint;
             newAfterFx.endPoint = nailfx.endPoint;
             newAfterFx.videoFxId = nailfx.videoFxId;
+            newAfterFx.convert = standardConvert;
+
         }
 
         if (newBeforeFx) {
@@ -97,9 +120,6 @@
     for (FSVideoFx *videoFx in fxs) {
         [self.videoFxs addObject:[videoFx copy]];
     }
-    
-    
-    NSLog(@"asd");
 }
 -(NSArray *)allVideoFxs{
     return [NSArray arrayWithArray:self.videoFxs];

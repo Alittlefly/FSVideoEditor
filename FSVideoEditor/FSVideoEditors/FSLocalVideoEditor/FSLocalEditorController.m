@@ -16,10 +16,12 @@
 #import "NvsAudioClip.h"
 #import "NvsAudioTrack.h"
 #import "FSSegmentView.h"
+#import "FSEditorLoading.h"
+#import "FSShortVideoRecorderManager.h"
 
 extern int IsArabic;
 
-@interface FSLocalEditorController ()<NvsStreamingContextDelegate,FSThumbnailViewDelegate,FSSegmentViewDelegate>
+@interface FSLocalEditorController ()<NvsStreamingContextDelegate,FSThumbnailViewDelegate,FSSegmentViewDelegate,FSShortVideoRecorderManagerDelegate>
 {
     FSSegmentView *_segmentView;
     int64_t _startTime;
@@ -27,6 +29,9 @@ extern int IsArabic;
     
     UIButton *_backButton;
     UIButton *_finishButton;
+    
+    NSString *_outPutFilePath;
+    NSString *_convertOutPutFilePath;
 
 }
 @property(nonatomic,strong)FSThumbnailView *thumbContent;
@@ -36,12 +41,18 @@ extern int IsArabic;
 @property(nonatomic,assign)NvsTimeline   *timeLine;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
 @property(nonatomic,assign)NvsAudioTrack *audioTrack;
+@property(nonatomic,strong)FSEditorLoading *loading;
 
 
 @end
 
 @implementation FSLocalEditorController
-
+-(FSEditorLoading *)loading{
+    if(!_loading){
+        _loading = [[FSEditorLoading alloc] initWithFrame:self.view.bounds];
+    }
+    return _loading;
+}
 - (void)creatButtons{
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _backButton.frame = IsArabic ? CGRectMake(CGRectGetWidth(self.view.bounds) - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
@@ -74,8 +85,8 @@ extern int IsArabic;
 //
     // 初始化timeline
     NvsVideoResolution videoEditRes;
-    videoEditRes.imageWidth = 1200;//CGRectGetWidth(self.view.bounds);
-    videoEditRes.imageHeight = 720;// CGRectGetHeight(self.view.bounds);
+    videoEditRes.imageWidth = 1200;
+    videoEditRes.imageHeight = 720;
     videoEditRes.imagePAR = (NvsRational){1, 1};
     NvsRational videoFps = {25, 1};
     NvsAudioResolution audioEditRes;
@@ -104,10 +115,7 @@ extern int IsArabic;
 }
 
 - (void)saveVideoFile{
-
-    //
-    // tijiao
-    //
+    
     NvsVideoClip *videoclip = [_videoTrack getClipWithIndex:0];
     int64_t endTime = _endTime;
     if (endTime == 0) {
@@ -120,16 +128,27 @@ extern int IsArabic;
     [audioClip changeTrimInPoint:_startTime affectSibling:YES];
     [audioClip changeTrimOutPoint:endTime affectSibling:YES];
     
-    FSPublisherController *publish = [[FSPublisherController alloc] init];
+    [self.view addSubview:self.loading];
+    [self.loading loadingViewShow];
     
-    publish.filePath = _filePath;
-    publish.timeLine = _timeLine;
-    publish.trimIn = _startTime;
-    publish.trimOut = _endTime;
-    
-    [self.navigationController pushViewController:publish animated:YES];
-    
+     _outPutFilePath = [self getCompilePath];
+    [_context compileTimeline:_timeLine startTime:_startTime endTime:endTime outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeLow) flags:0];
 }
+
+- (NSString *)getCompilePath {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString * timeRandom = [formatter stringFromDate:[NSDate date]];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *final = [documentsDirectory stringByAppendingPathComponent:@"tmp"];
+    return [final stringByAppendingFormat:@"/video%@.mov",timeRandom];
+}
+
+- (void)showInPublic{
+
+}
+
 - (void)playVideoFromHead{
     
     if (![_context seekTimeline:_timeLine timestamp:_startTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
@@ -239,9 +258,30 @@ extern int IsArabic;
     }
 }
 
-// 生成进度的回调函数
-- (void)didCompileProgress:(NvsTimeline *)timeline progress:(int)progress {
-    NSLog(@"Compile timeline progress: %d", progress);
+-(void)didCompileFailed:(NvsTimeline *)timeline{
+    [self.loading loadingViewhide];
+}
+-(void)didCompileFinished:(NvsTimeline *)timeline{
+    
+    [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
+    [[FSShortVideoRecorderManager sharedInstance] beginConvertReverse:_outPutFilePath];
+}
+
+#pragma mark - 
+
+- (void)FSShortVideoRecorderManagerConvertorFinished:(NSString *)filePath{
+    [self.loading loadingViewhide];
+
+    FSPublisherController *publish = [[FSPublisherController alloc] init];
+    publish.filePath = _outPutFilePath;
+    publish.timeLine = _timeLine;
+    publish.trimIn = _startTime;
+    publish.trimOut = _endTime;
+    publish.convertFilePath = filePath;
+    [self.navigationController pushViewController:publish animated:YES];
+}
+- (void)FSShortVideoRecorderManagerConvertorFaild{
+    [self.loading loadingViewhide];
 }
 
 #pragma mark -

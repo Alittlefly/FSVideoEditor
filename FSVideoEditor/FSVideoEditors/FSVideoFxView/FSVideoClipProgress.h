@@ -27,12 +27,15 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 
 @protocol FSVideoClipProgressDelegate <NSObject>
 
-- (void)FSVideoClipProgressUpdateProgress:(CGFloat)progress;
+//  滑动滑动块 选择进度
+- (void)videoClipProgressMoveSlideSelectPoint:(CGFloat)progress;
+// 滑动进度 选择缩略图
+- (void)videoClipProgressSelectPoint:(CGFloat)progress;
 
+//  开始绘制
+- (void)videoClipProgressStartSelect:(CGFloat)progress;
+//  结束绘制
 - (void)videoClipProgressEndSelect:(CGFloat)progress;
-
-- (void)videoClipProgressUndoState:(BOOL)shouldShow;
-
 @end
 
 
@@ -53,11 +56,11 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 @property(nonatomic,assign,readonly)NSInteger fiterCout;
 
 
-
 -(void)beginFxView;
 -(void)endFxView;
-
 -(void)undoFxView;
 
 -(void)addFitteredView:(NSArray *)fiterdViews;
+
+-(void)setTintPosition:(CGFloat)postion;
 @end

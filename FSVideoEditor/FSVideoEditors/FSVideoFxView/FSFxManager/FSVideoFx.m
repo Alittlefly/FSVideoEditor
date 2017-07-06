@@ -14,6 +14,7 @@
     newFx -> _startPoint = self.startPoint;
     newFx -> _endPoint = self.endPoint;
     newFx -> _videoFxId = self.videoFxId;
+    newFx -> _convert  = self.convert;
     return newFx;
 }
 @end

@@ -10,6 +10,8 @@
 #import "FSVideoFx.h"
 
 @interface FSVirtualTimeLine : NSObject
+
+@property(nonatomic,assign)int64_t duration;
 @property(nonatomic,strong)NSMutableArray *videoFxs;
 
 -(void)addVideoFx:(FSVideoFx *)videoFx;
