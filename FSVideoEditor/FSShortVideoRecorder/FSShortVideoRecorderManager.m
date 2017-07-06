@@ -582,26 +582,32 @@ static FSShortVideoRecorderManager *recorderManager;
     [self.mConvertor stop];
     [self.mConvertor close];
     
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:_convertorFilePath] == NO)
-    {
-        [self convertFaild:nil];
-    }
-    else {
-        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerConvertorFinished:)]) {
-            [self.delegate FSShortVideoRecorderManagerConvertorFinished:_convertorFilePath];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSFileManager* fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:_convertorFilePath] == NO)
+        {
+            [self convertFaild:nil];
         }
-        
-        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinishedRecorder:convertFilePath:)]) {
-            [self.delegate FSShortVideoRecorderManagerFinishedRecorder:_videoFilePath convertFilePath:_convertorFilePath];
+        else {
+            if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerConvertorFinished:)]) {
+                [self.delegate FSShortVideoRecorderManagerConvertorFinished:_convertorFilePath];
+            }
+            
+            if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinishedRecorder:convertFilePath:)]) {
+                [self.delegate FSShortVideoRecorderManagerFinishedRecorder:_videoFilePath convertFilePath:_convertorFilePath];
+            }
         }
-    }
+    });
+
 }
 
 - (void)convertFaild:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerConvertorFaild)]) {
-        [self.delegate FSShortVideoRecorderManagerConvertorFaild];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerConvertorFaild)]) {
+            [self.delegate FSShortVideoRecorderManagerConvertorFaild];
+        }
+    });
 }
 
 - (BOOL)beginConvertReverse:(NSString *)filePath {

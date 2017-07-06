@@ -51,6 +51,8 @@
 
 @property (nonatomic, strong) NSMutableArray *addedViews;
 
+@property (nonatomic, assign)BOOL converted;
+@property (nonatomic, assign)FSVideoFxType currentFxType;
 @end
 
 @implementation FSPublisherController
@@ -294,6 +296,8 @@
     fxController.musicUrl = _musicPath?:nil;
     fxController.delegate = self;
     fxController.addedViews = self.addedViews;
+    fxController.convertFilePath = _convertFilePath;
+    fxController.currentFxType = _currentFxType;
     _fxOperationStack = _fxOperationStack?:[FSVideoFxOperationStack new];
     fxController.fxOperationStack = _fxOperationStack;
     
@@ -367,13 +371,7 @@
 }
 
 - (void)seekTimeline {
-    if ([_context getStreamingEngineState] == NvsStreamingEngineState_Playback) {
-//        [_playbackProgressTimer invalidate];
-//        [self.buttonPlay setTitle:@"播放" forState:UIControlStateNormal];
-    }
-    // 定位时间线
-    // NvsVideoPreviewSizeModeLiveWindowSize模式可以提高图像显示的效率
-    // flags设置成NvsStreamingEngineSeekFlag_ShowCaptionPoster | NvsStreamingEngineSeekFlag_ShowAnimatedStickerPoster，即可整体展示字幕和动画贴纸的效果
+
     if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster | NvsStreamingEngineSeekFlag_ShowAnimatedStickerPoster])
         NSLog(@"Failed to seek timeline!");
     [self playVideoFromHead];
@@ -408,14 +406,24 @@
     
     self.toolView.hidden = NO;
 }
+#pragma mark - 
 
+-(void)videoFxControllerTimelineFxType:(FSVideoFxType)fxType startPoint:(int64_t)startPoint duration:(int64_t)duration{
+    if (fxType == FSVideoFxTypeRevert) {
+        self.converted = YES;
+    }else{
+        self.converted = NO;
+    }
+    
+    self.currentFxType = fxType;
+}
 #pragma mark -
 - (void)uploadFile:(NSString *)filePath{
-    NSLog(@"filePath %@",filePath);
+//    NSLog(@"filePath %@",filePath);
     [_uploader uploadFileWithFilePath:filePath];
 }
 -(void)uploadUpFiles:(NSString *)filePath progress:(float)progress{
-    NSLog(@"progress %.2f",progress);
+//    NSLog(@"progress %.2f",progress);
 }
 
 -(void)dealloc{

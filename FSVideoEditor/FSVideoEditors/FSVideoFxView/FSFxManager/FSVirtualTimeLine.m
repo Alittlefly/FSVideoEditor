@@ -97,9 +97,6 @@
     for (FSVideoFx *videoFx in fxs) {
         [self.videoFxs addObject:[videoFx copy]];
     }
-    
-    
-    NSLog(@"asd");
 }
 -(NSArray *)allVideoFxs{
     return [NSArray arrayWithArray:self.videoFxs];

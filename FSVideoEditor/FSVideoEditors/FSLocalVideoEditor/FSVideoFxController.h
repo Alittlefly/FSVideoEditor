@@ -11,10 +11,13 @@
 #import "FSControlView.h"
 #import "FSVideoFxView.h"
 #import "FSVideoFxOperationStack.h"
+#import "NvsThumbnailSequenceView.h"
 
 @protocol FSVideoFxControllerDelegate <NSObject>
 
 -(void)videoFxControllerSaved:(NSArray *)addedViews;
+
+-(void)videoFxControllerTimelineFxType:(FSVideoFxType)fxType startPoint:(int64_t)startPoint duration:(int64_t)duration;
 
 @end
 
@@ -32,6 +35,6 @@
 @property(nonatomic,strong)NSMutableArray *addedViews;
 
 @property(nonatomic,strong)FSVideoFxOperationStack *fxOperationStack;
-
-
+@property(nonatomic,strong)NvsThumbnailSequenceView *thumBailView;
+@property(nonatomic,assign)FSVideoFxType currentFxType;
 @end

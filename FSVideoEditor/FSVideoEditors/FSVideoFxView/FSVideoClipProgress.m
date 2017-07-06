@@ -81,13 +81,17 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     [_backContent addSubview:backGroundView];
 }
 -(void)setProgress:(CGFloat)progress{
-    _progress = (_type != FSVideoFxTypeRevert)?progress:(1-progress);
-    
+    _progress = progress;
     [self updateLineFrame];
+}
+-(void)setNeedConvert:(BOOL)needConvert{
+    _needConvert = needConvert;
 }
 -(void)updateLineFrame{
     CGRect lFrame = _line.frame;
-    lFrame.origin.x = _progress * CGRectGetWidth(self.bounds);
+    CGFloat currentBe = _progress;
+    lFrame.origin.x = currentBe * CGRectGetWidth(self.bounds);
+    // 边界
     if (lFrame.origin.x < 0) {
         lFrame.origin.x = 0;
     }else if (lFrame.origin.x > CGRectGetWidth(self.bounds) - CGRectGetWidth(lFrame)){
@@ -132,11 +136,16 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
         lineFrame.origin.x = point.x;
         _line.frame = lineFrame;
         _progress = point.x/self.bounds.size.width;
-        if ([self.delegate respondsToSelector:@selector(FSVideoClipProgressUpdateProgress:)]) {
-            [self.delegate FSVideoClipProgressUpdateProgress:_progress];
+        // 需要反转
+        
+        CGFloat outProgress = _progress;
+        if (_needConvert) {
+            outProgress = 1 - _progress;
+        }
+        if ([self.delegate respondsToSelector:@selector(videoClipProgressSelectPoint:)]) {
+            [self.delegate videoClipProgressSelectPoint:outProgress];
         }
     }
-    
     [self resetBoundary];
 }
 -(void)resetBoundary{
@@ -173,8 +182,8 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
         
         [self setProgress:self.selectProgress];
         
-        if ([self.delegate respondsToSelector:@selector(FSVideoClipProgressUpdateProgress:)]) {
-            [self.delegate FSVideoClipProgressUpdateProgress:self.selectProgress];
+        if ([self.delegate respondsToSelector:@selector(videoClipProgressMoveSlideSelectPoint:)]) {
+            [self.delegate videoClipProgressMoveSlideSelectPoint:self.selectProgress];
         }
     }
     _moveType = FSProgressMoveTypeNone;
@@ -205,29 +214,42 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 }
 #pragma mark - 
 -(void)addFxView{
-    
     if (_progress <= 1.0) {
-        
         if (!_fxView) {
-            _fxView = [[UIView alloc] initWithFrame:CGRectMake(_progress*self.bounds.size.width, 0, self.bounds.size.width*0.1/10, CGRectGetHeight(self.bounds) - 13)];
-            _fxView.backgroundColor = _fxViewColor;
+            CGFloat startProgress = _progress;
+             _fxView = [[UIView alloc] initWithFrame:CGRectMake(startProgress * self.bounds.size.width, 0, self.bounds.size.width*0.1/10, CGRectGetHeight(self.bounds) - 13)];
+             _fxView.backgroundColor = _fxViewColor;
             [_fxContent addSubview:_fxView];
         }
         else {
-            CGRect fxFrame = self.fxView.frame;
-            fxFrame.size.width += self.bounds.size.width*0.1/10;
-            self.fxView.frame = fxFrame;
+            if (_needConvert) {
+                CGRect fxFrame = self.fxView.frame;
+                fxFrame.origin.x -= self.bounds.size.width*0.1/10;
+                fxFrame.size.width += self.bounds.size.width*0.1/10;
+                self.fxView.frame = fxFrame;
+            }else{
+                CGRect fxFrame = self.fxView.frame;
+                fxFrame.size.width += self.bounds.size.width*0.1/10;
+                self.fxView.frame = fxFrame;
+            }
         }
         
-        _progress = (self.fxView.frame.size.width+self.fxView.frame.origin.x)/self.bounds.size.width;
+        
+        if (_needConvert) {
+             _progress = MIN(1, MAX(CGRectGetMinX(self.fxView.frame)/self.bounds.size.width, 0));
+        }else{
+             _progress = MIN(1, MAX(CGRectGetMaxX(self.fxView.frame)/self.bounds.size. width, 0));
+        }
+        
         [self updateLineFrame];
     }
 }
 #pragma mark -
 -(void)beginFxView{
+    CGFloat outProgress = _needConvert?(1-_progress):_progress;
     
-    if ([self.delegate respondsToSelector:@selector(FSVideoClipProgressUpdateProgress:)]) {
-        [self.delegate FSVideoClipProgressUpdateProgress:_progress];
+    if ([self.delegate respondsToSelector:@selector(videoClipProgressStartSelect:)]) {
+        [self.delegate videoClipProgressStartSelect:MIN(1, MAX(outProgress, 0))];
     }
     
     if (!_fxTimer) {
@@ -238,22 +260,17 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 -(void)endFxView{
     [_fxTimer setFireDate:[NSDate distantFuture]];
     
-    NSInteger old = [self.renderRangeViews count];
-    
     UIView *aView = self.fxView;
     if (aView) {
         [self.renderRangeViews addObject:aView];
     }
-    if (old == 0 && [self.renderRangeViews count] > 0) {
-        if ([self.delegate respondsToSelector:@selector(videoClipProgressUndoState:)]) {
-            [self.delegate videoClipProgressUndoState:YES];
-        }
-    }
     
     _fxView = nil;
     
+    CGFloat outProgress = _needConvert?(1-_progress):_progress;
+
     if ([self.delegate respondsToSelector:@selector(videoClipProgressEndSelect:)]) {
-        [self.delegate videoClipProgressEndSelect:_progress];
+        [self.delegate videoClipProgressEndSelect:MIN(1, MAX(outProgress, 0))];
     }
     
 }

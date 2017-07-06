@@ -123,6 +123,9 @@
     }
     return self;
 }
+-(void)setFxType:(FSVideoFxType)fxType{
+    _fxType = fxType;
+}
 -(void)setProgressBackView:(UIView *)progressBackView{
     if (!progressBackView) {
         return;
@@ -284,27 +287,40 @@
 -(void)clickTimeFxButtion:(UIButton *)button{
     _progress.type = button.tag;
     _needConvert = (button.tag == FSVideoFxTypeRevert);
+    _fxType = button.tag;
+    [_progress setNeedConvert:_needConvert];
+    // 切换资源
+    if ([self.delegate respondsToSelector:@selector(videoFxViewNeedConvertView:)]) {
+        [self.delegate videoFxViewNeedConvertView:_needConvert];
+    }
+    
     if (button.tag != FSVideoFxTypeRevert) {
         if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
             [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:1000000.0 progress:_progress.selectProgress];
         }
     }
-    
-    [_progress setNeedConvert:_needConvert];
 }
 #pragma mark - FSVideoClipProgressDelegate
-- (void)FSVideoClipProgressUpdateProgress:(CGFloat)progress {
-    if ([self.delegate respondsToSelector:@selector(videoFxSelectProgress:progress:packageFxId:)]) {
-        [self.delegate videoFxSelectProgress:self progress:progress packageFxId:_currentFxId];
+- (void)videoClipProgressSelectPoint:(CGFloat)progress{
+    if ([self.delegate respondsToSelector:@selector(videoFxSelectTimeLinePosition:position:)]) {
+        [self.delegate videoFxSelectTimeLinePosition:self position:progress];
     }
 }
+- (void)videoClipProgressMoveSlideSelectPoint:(CGFloat)progress{
+    if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
+        [self.delegate videoFxViewSelectTimeFx:self type:_fxType duration:1000000.0 progress:_progress.selectProgress];
+    }
+}
+-(void)videoClipProgressStartSelect:(CGFloat)progress{
+    if ([self.delegate respondsToSelector:@selector(videoFxSelectStart:progress:packageFxId:videoFxType:)]) {
+        [self.delegate videoFxSelectStart:self progress:progress packageFxId:_currentFxId videoFxType:_fxType];
+    }
+}
+
 -(void)videoClipProgressEndSelect:(CGFloat)progress{
-    if ([self.delegate respondsToSelector:@selector(videoFxSelectEnd:progress:packageFxId:)]) {
-        [self.delegate videoFxSelectEnd:self progress:progress packageFxId:_currentFxId];
+    if ([self.delegate respondsToSelector:@selector(videoFxSelectEnd:progress:packageFxId:videoFxType:)]) {
+        [self.delegate videoFxSelectEnd:self progress:progress packageFxId:_currentFxId videoFxType:(_fxType)];
     }
-}
--(void)videoClipProgressUndoState:(BOOL)shouldShow{
-    [_unDoButton setHidden:!shouldShow];
 }
 -(NSArray *)addedViews{
     return _progress.renderRangeViews;
@@ -339,29 +355,26 @@
     [_progress setFtype:(tag - 1)];
 }
 #pragma mark - 更新progress 上的进度
--(void)start{
+-(void)startMoveTint{
     if (!_progressTimer) {
-        _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateClipProgress) userInfo:nil repeats:YES];
+        _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(moveProgressBarTint) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_progressTimer forMode:NSRunLoopCommonModes];
     }
     [_progressTimer setFireDate:[NSDate distantPast]];
 }
--(void)stop{
-
+-(void)stopMoveTint{
     [_progressTimer setFireDate:[NSDate distantFuture]];
     [_progressTimer invalidate];
      _progressTimer = nil;
-
 }
--(void)updateClipProgress{
-    if ([self.delegate respondsToSelector:@selector(videoFxViewUpdateProgress:)]) {
-        CGFloat progress = [self.delegate videoFxViewUpdateProgress:self];
-        _progress.progress = progress;
+-(void)moveProgressBarTint{
+    if ([self.delegate respondsToSelector:@selector(videoFxViewUpdatePosition:)]) {
+        CGFloat progress = [self.delegate videoFxViewUpdatePosition:self];
+        _progress.progress = _progress.needConvert?(1-progress):progress;
     }
 }
 -(void)addFiltterViews:(NSArray *)filterViews{
     [_progress addFitteredView:filterViews];
-    
     if([filterViews count]){
         [self showUndoButton];
     }
