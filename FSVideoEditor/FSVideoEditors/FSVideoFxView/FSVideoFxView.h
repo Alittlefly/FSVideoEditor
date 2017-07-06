@@ -13,7 +13,7 @@
 @protocol FSVideoFxViewDelegate <NSObject>
 
 // 保存反转
--(void)videoFxViewNeedConvertView:(BOOL)convert;
+-(void)videoFxViewNeedConvertView:(BOOL)convert type:(FSVideoFxType)type;
 
 //  添加时间特效
 -(void)videoFxViewSelectTimeFx:(FSVideoFxView *)videoFxView type:(FSVideoFxType)type duration:(int64_t)duration progress:(CGFloat)progress;
@@ -24,11 +24,11 @@
 //  撤销
 -(void)videoFxUndoPackageFx:(FSVideoFxView *)videoFxView;
 //  选择时间点
--(void)videoFxSelectTimeLinePosition:(FSVideoFxView *)videoFxView position:(CGFloat)progress;
+-(void)videoFxSelectTimeLinePosition:(FSVideoFxView *)videoFxView position:(CGFloat)progress shouldPlay:(BOOL)play;
 
 // 添加特效方法
--(void)videoFxSelectStart:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId videoFxType:(FSVideoFxType)type;
--(void)videoFxSelectEnd:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId videoFxType:(FSVideoFxType)type;
+-(void)videoFxSelectStart:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId;
+-(void)videoFxSelectEnd:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId;
 //
 @end
 
@@ -42,6 +42,7 @@
 @property(nonatomic,assign)BOOL needCovert;
 @property(nonatomic,assign)FSVideoFxType fxType;
 @property(nonatomic,strong)NSArray *addedViews;
+@property(nonatomic,assign)CGFloat tintPositon;
 -(void)addFiltterViews:(NSArray *)filterViews;
 // 特效
 -(instancetype)initWithFrame:(CGRect)frame fxs:(NSArray *)fxs;

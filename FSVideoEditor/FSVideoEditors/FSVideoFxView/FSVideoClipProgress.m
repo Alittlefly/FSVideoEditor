@@ -289,6 +289,12 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
         [_fxContent addSubview:view];
     }
 }
+-(void)setTintPosition:(CGFloat)postion{
+    CGFloat centerX = postion * CGRectGetWidth(self.bounds);
+    CGPoint tintCenter = self.tintImage.center;
+    tintCenter.x = centerX;
+    self.tintImage.center = tintCenter;
+}
 
 -(void)dealloc{
     NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));

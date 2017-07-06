@@ -33,7 +33,8 @@
     
     int64_t _startTime;
     int64_t _endTime;
-
+    
+    CGFloat _fxPosition;
 }
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
@@ -295,9 +296,14 @@
     fxController.musicAttime = _musicStartTime?:0;
     fxController.musicUrl = _musicPath?:nil;
     fxController.delegate = self;
-    fxController.addedViews = self.addedViews;
     fxController.convertFilePath = _convertFilePath;
+    
+    //
+    fxController.addedViews = self.addedViews;
     fxController.currentFxType = _currentFxType;
+    fxController.convert = _converted;
+    fxController.position = _fxPosition;
+    
     _fxOperationStack = _fxOperationStack?:[FSVideoFxOperationStack new];
     fxController.fxOperationStack = _fxOperationStack;
     
@@ -407,16 +413,18 @@
     self.toolView.hidden = NO;
 }
 #pragma mark - 
-
--(void)videoFxControllerTimelineFxType:(FSVideoFxType)fxType startPoint:(int64_t)startPoint duration:(int64_t)duration{
-    if (fxType == FSVideoFxTypeRevert) {
-        self.converted = YES;
-    }else{
-        self.converted = NO;
-    }
+-(void)videoFxControllerSaved:(NSArray *)addedViews
+                       fxType:(FSVideoFxType)type
+                     position:(CGFloat)position
+                      convert:(BOOL)convert{
     
-    self.currentFxType = fxType;
+    [self.addedViews removeAllObjects];
+    [self.addedViews addObjectsFromArray:addedViews];
+    _currentFxType = type;
+    _fxPosition = position;
+    _converted = convert;
 }
+
 #pragma mark -
 - (void)uploadFile:(NSString *)filePath{
 //    NSLog(@"filePath %@",filePath);

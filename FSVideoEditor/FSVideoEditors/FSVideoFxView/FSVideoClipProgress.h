@@ -56,11 +56,11 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 @property(nonatomic,assign,readonly)NSInteger fiterCout;
 
 
-
 -(void)beginFxView;
 -(void)endFxView;
-
 -(void)undoFxView;
 
 -(void)addFitteredView:(NSArray *)fiterdViews;
+
+-(void)setTintPosition:(CGFloat)postion;
 @end

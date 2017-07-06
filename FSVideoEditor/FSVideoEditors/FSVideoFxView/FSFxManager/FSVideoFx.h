@@ -13,5 +13,6 @@
 @property(nonatomic,strong)NSString *videoFxId;
 @property(nonatomic,assign)int64_t startPoint;
 @property(nonatomic,assign)int64_t endPoint;
+@property(nonatomic,assign)BOOL convert;
 
 @end

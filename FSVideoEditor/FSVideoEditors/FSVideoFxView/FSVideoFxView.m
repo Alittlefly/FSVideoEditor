@@ -96,7 +96,8 @@
     NSTimer      *_progressTimer;
     NSInteger _currentTime;
     NSString *_currentFxId;
-    BOOL _needConvert;
+    
+    BOOL _firstInitTimeFx;
 }
 @property(nonatomic,strong)FSVideoClipProgress *progress;
 
@@ -108,7 +109,6 @@
 
 @property(nonatomic,strong)NSMutableArray *fxButtons;
 @property(nonatomic,strong)UIButton *unDoButton;
-
 @end
 
 @implementation FSVideoFxView
@@ -117,7 +117,7 @@
     if (self = [super initWithFrame:frame]) {
        
          self.videofxs = fxs;
-        
+        _firstInitTimeFx = NO;
         [self creatSubiviews];
 
     }
@@ -132,6 +132,10 @@
     }
     _progress.backGroundView = progressBackView;
 }
+-(void)setTintPositon:(CGFloat)tintPositon{
+    _tintPositon = tintPositon;
+}
+
 -(NSMutableArray *)fxButtons{
     if (!_fxButtons) {
         _fxButtons = [NSMutableArray array];
@@ -165,7 +169,7 @@
     [_contentView addSubview:_unDoButton];
     
     // fx
-    [self initFxs];
+    [self initFilerFxs];
 
     // bottom
     CGFloat bottomH = 45.0;
@@ -193,7 +197,7 @@
     [_bottomView addSubview:timefxButton];
     
 }
--(void)initFxs{
+-(void)initFilerFxs{
     for (UIView *button in self.fxButtons) {
         [button removeFromSuperview];
     }
@@ -237,6 +241,8 @@
     [noneFx setBackgroundColor:[UIColor redColor]];
     [noneFx setTitle:@"无" forState:(UIControlStateNormal)];
     noneFx.tag = FSVideoFxTypeNone;
+    noneFx.selected = (_fxType == FSVideoFxTypeNone);
+
     
     [_contentView addSubview:noneFx];
     
@@ -245,7 +251,7 @@
     [revertFx setBackgroundColor:[UIColor yellowColor]];
     [revertFx setTitle:@"时光倒流" forState:(UIControlStateNormal)];
     revertFx.tag = FSVideoFxTypeRevert;
-    
+    revertFx.selected = (_fxType == FSVideoFxTypeRevert);
     [_contentView addSubview:revertFx];
     
     
@@ -254,6 +260,8 @@
     [repeatFx setBackgroundColor:[UIColor yellowColor]];
     [repeatFx setTitle:@"反复" forState:(UIControlStateNormal)];
     repeatFx.tag = FSVideoFxTypeRepeat;
+    repeatFx.selected = (_fxType == FSVideoFxTypeRepeat);
+
     [_contentView addSubview:repeatFx];
     
     FSFxButton *slowFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(repeatFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
@@ -261,10 +269,25 @@
     [slowFx setBackgroundColor:[UIColor yellowColor]];
     [slowFx setTitle:@"慢动作" forState:(UIControlStateNormal)];
     slowFx.tag = FSVideoFxTypeSlow;
+    slowFx.selected = (_fxType == FSVideoFxTypeSlow);
+
     [_contentView addSubview:slowFx];
     
     [self.fxButtons removeAllObjects];
     [self.fxButtons addObjectsFromArray:@[noneFx,revertFx,repeatFx,slowFx]];
+    
+    if (!_firstInitTimeFx) {
+        [_progress setType:_fxType];
+        [_progress setTintPosition:_tintPositon];
+        [_progress setNeedConvert:_needCovert];
+        if (_needCovert) {
+            [_progress setProgress:1.0];
+        }
+         _firstInitTimeFx = YES;
+    }
+}
+-(void)setNeedCovert:(BOOL)needCovert{
+     _needCovert = needCovert;
 }
 #pragma mark - 动作
 -(void)beginFx:(UIButton *)button{
@@ -286,14 +309,21 @@
 #pragma mark - 选择时间特效
 -(void)clickTimeFxButtion:(UIButton *)button{
     _progress.type = button.tag;
-    _needConvert = (button.tag == FSVideoFxTypeRevert);
     _fxType = button.tag;
-    [_progress setNeedConvert:_needConvert];
+    [_progress setProgress:1];
     // 切换资源
-    if ([self.delegate respondsToSelector:@selector(videoFxViewNeedConvertView:)]) {
-        [self.delegate videoFxViewNeedConvertView:_needConvert];
-    }
     
+    BOOL newValue = (button.tag == FSVideoFxTypeRevert);
+    [_progress setNeedConvert:newValue];
+
+    if (_needCovert != newValue) {
+        _needCovert = newValue;
+        if ([self.delegate respondsToSelector:@selector(videoFxViewNeedConvertView:type:)]) {
+            [self.delegate videoFxViewNeedConvertView:newValue type:_fxType];
+        }
+        
+    }
+
     if (button.tag != FSVideoFxTypeRevert) {
         if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
             [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:1000000.0 progress:_progress.selectProgress];
@@ -302,8 +332,8 @@
 }
 #pragma mark - FSVideoClipProgressDelegate
 - (void)videoClipProgressSelectPoint:(CGFloat)progress{
-    if ([self.delegate respondsToSelector:@selector(videoFxSelectTimeLinePosition:position:)]) {
-        [self.delegate videoFxSelectTimeLinePosition:self position:progress];
+    if ([self.delegate respondsToSelector:@selector(videoFxSelectTimeLinePosition:position:shouldPlay:)]) {
+        [self.delegate videoFxSelectTimeLinePosition:self position:progress shouldPlay:NO];
     }
 }
 - (void)videoClipProgressMoveSlideSelectPoint:(CGFloat)progress{
@@ -312,14 +342,14 @@
     }
 }
 -(void)videoClipProgressStartSelect:(CGFloat)progress{
-    if ([self.delegate respondsToSelector:@selector(videoFxSelectStart:progress:packageFxId:videoFxType:)]) {
-        [self.delegate videoFxSelectStart:self progress:progress packageFxId:_currentFxId videoFxType:_fxType];
+    if ([self.delegate respondsToSelector:@selector(videoFxSelectStart:progress:packageFxId:)]) {
+        [self.delegate videoFxSelectStart:self progress:progress packageFxId:_currentFxId];
     }
 }
 
 -(void)videoClipProgressEndSelect:(CGFloat)progress{
-    if ([self.delegate respondsToSelector:@selector(videoFxSelectEnd:progress:packageFxId:videoFxType:)]) {
-        [self.delegate videoFxSelectEnd:self progress:progress packageFxId:_currentFxId videoFxType:(_fxType)];
+    if ([self.delegate respondsToSelector:@selector(videoFxSelectEnd:progress:packageFxId:)]) {
+        [self.delegate videoFxSelectEnd:self progress:progress packageFxId:_currentFxId];
     }
 }
 -(NSArray *)addedViews{
@@ -345,7 +375,7 @@
 -(void)changeContentWithTag:(NSInteger)tag{
     if (tag == 1) {
         [_tipLabel setText:@"选择位置后,按住使用效果"];
-        [self initFxs];
+        [self initFilerFxs];
     }else if (tag == 2){
         [_tipLabel setText:@"点击选择时间特效"];
         [self initTimeFxs];
@@ -396,9 +426,7 @@
     }
 }
 #pragma mark - 翻转
--(BOOL)needCovert{
-    return _needConvert;
-}
+
 -(void)dealloc{
     NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }

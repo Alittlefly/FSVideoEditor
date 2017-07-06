@@ -15,9 +15,8 @@
 
 @protocol FSVideoFxControllerDelegate <NSObject>
 
--(void)videoFxControllerSaved:(NSArray *)addedViews;
+-(void)videoFxControllerSaved:(NSArray *)addedViews fxType:(FSVideoFxType)type position:(CGFloat)position convert:(BOOL)convert;
 
--(void)videoFxControllerTimelineFxType:(FSVideoFxType)fxType startPoint:(int64_t)startPoint duration:(int64_t)duration;
 
 @end
 
@@ -32,9 +31,13 @@
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,assign)NSTimeInterval musicAttime;
 @property(nonatomic,strong)NSString *musicUrl;
+
 @property(nonatomic,strong)NSMutableArray *addedViews;
+
 
 @property(nonatomic,strong)FSVideoFxOperationStack *fxOperationStack;
 @property(nonatomic,strong)NvsThumbnailSequenceView *thumBailView;
 @property(nonatomic,assign)FSVideoFxType currentFxType;
+@property(nonatomic,assign)BOOL convert;
+@property(nonatomic,assign)CGFloat position;
 @end
