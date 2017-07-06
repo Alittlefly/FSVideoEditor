@@ -17,6 +17,8 @@
 - (void)FSShortVideoRecorderManagerProgress:(CGFloat)time;
 - (void)FSShortVideoRecorderManagerDeleteVideo:(CGFloat)videoTime;
 - (void)FSShortVideoRecorderManagerPauseRecorder;
+- (void)FSShortVideoRecorderManagerFinishedRecorder:(NSString *)normalFilePath convertFilePath:(NSString *)convertFilePath;
+
 
 - (void)FSShortVideoRecorderManagerConvertorFinished:(NSString *)filePath;
 - (void)FSShortVideoRecorderManagerConvertorFaild;

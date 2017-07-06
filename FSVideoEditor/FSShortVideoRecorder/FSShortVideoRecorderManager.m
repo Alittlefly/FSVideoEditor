@@ -560,7 +560,8 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (void)didCompileFinished:(NvsTimeline *)timeline {
     NSLog(@"didCompileFinished");
-    UISaveVideoAtPathToSavedPhotosAlbum(_videoFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    //UISaveVideoAtPathToSavedPhotosAlbum(_videoFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    [self setupConvertor:_videoFilePath];
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinishRecorder:)]) {
         [self.delegate FSShortVideoRecorderManagerFinishRecorder:_videoFilePath];
     }
@@ -571,7 +572,9 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (void)didCompileFailed:(NvsTimeline *)timeline {
     NSLog(@"didCompileFailed");
-
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFailedRecorder)]) {
+        [self.delegate FSShortVideoRecorderManagerFailedRecorder];
+    }
 }
 
 #pragma mark - NVConvertorDelegate
@@ -587,6 +590,10 @@ static FSShortVideoRecorderManager *recorderManager;
     else {
         if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerConvertorFinished:)]) {
             [self.delegate FSShortVideoRecorderManagerConvertorFinished:_convertorFilePath];
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinishedRecorder:convertFilePath:)]) {
+            [self.delegate FSShortVideoRecorderManagerFinishedRecorder:_videoFilePath convertFilePath:_convertorFilePath];
         }
     }
 }
