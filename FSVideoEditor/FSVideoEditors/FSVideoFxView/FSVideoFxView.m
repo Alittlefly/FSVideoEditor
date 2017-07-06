@@ -327,12 +327,12 @@
         if (_needCovert) {
             [_progress setProgress:1.0];
         }
-        NSString *key = [NSString stringWithFormat:@"%ld",(long)_fxType];
-        _currentSelectFxButton = [self.fxButtonDict objectForKey:key];
-        [_currentSelectFxButton setSelected:YES];
-        
          _firstInitTimeFx = YES;
     }
+    
+    NSString *key = [NSString stringWithFormat:@"%ld",(long)_fxType];
+    _currentSelectFxButton = [self.fxButtonDict objectForKey:key];
+    [_currentSelectFxButton setSelected:YES];
 }
 -(void)setNeedCovert:(BOOL)needCovert{
      _needCovert = needCovert;
