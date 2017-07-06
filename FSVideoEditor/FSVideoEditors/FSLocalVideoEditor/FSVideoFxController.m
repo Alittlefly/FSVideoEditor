@@ -160,14 +160,14 @@
 - (void)creatSubViews{
     UIButton *cancle = [[UIButton alloc] init];
     [cancle addTarget:self action:@selector(cancle) forControlEvents:(UIControlEventTouchUpInside)];
-    [cancle setTitle:@"cancle" forState:(UIControlStateNormal)];
+    [cancle setTitle:NSLocalizedString(@"Cancel", nil) forState:(UIControlStateNormal)];
     [cancle sizeToFit];
     [cancle setFrame:CGRectMake(20, 20, 100, 24)];
     [self.view addSubview:cancle];
     
     UIButton *save = [[UIButton alloc] init];
     [save addTarget:self action:@selector(save) forControlEvents:(UIControlEventTouchUpInside)];
-    [save setTitle:@"save" forState:(UIControlStateNormal)];
+    [save setTitle:NSLocalizedString(@"Save", nil) forState:(UIControlStateNormal)];
     [save sizeToFit];
     [save setFrame:CGRectMake(270, 20, 100, 24)];
     [self.view addSubview:save];

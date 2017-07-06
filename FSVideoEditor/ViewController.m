@@ -52,6 +52,8 @@
         self.uidTextField.hidden = NO;
         self.passwordTextField.hidden = NO;
         self.loginButton.hidden = NO;
+        [self.loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
+
     }
     else {
         self.recorderButton.hidden = NO;
@@ -60,6 +62,7 @@
         self.uidTextField.hidden = YES;
         self.passwordTextField.hidden = YES;
         self.loginButton.hidden = YES;
+        [self.logoutButton setTitle:NSLocalizedString(@"logout", nil) forState:UIControlStateNormal];
     }
     
     UIView *uidView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -71,6 +74,9 @@
     self.uidTextField.leftView = uidView;
     self.uidTextField.leftViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
     self.uidTextField.delegate = self;
+    self.uidTextField.placeholder = NSLocalizedString(@"Account",nil);
+    self.uidTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Account",nil) attributes:@{NSForegroundColorAttributeName:FSHexRGBAlpha(0xF5F5F5, 0.5)}];
+
     
     UIView *passwordView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     passwordView.backgroundColor = [UIColor clearColor];
@@ -81,6 +87,8 @@
     self.passwordTextField.leftView = passwordView;
     self.passwordTextField.leftViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
     self.passwordTextField.delegate = self;
+    self.passwordTextField.placeholder = NSLocalizedString(@"Password",nil);
+    self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Password",nil) attributes:@{NSForegroundColorAttributeName:FSHexRGBAlpha(0xF5F5F5, 0.5)}];
     
     [self.logoutButton setTitleColor:FSHexRGB(0x00FFEF) forState:UIControlStateNormal];
     
@@ -123,6 +131,7 @@
     
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"UID"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Password"];
+    //[self showMessage:NSLocalizedString(@"", nil)];
 }
 
 - (IBAction)loginClick:(id)sender {
@@ -132,7 +141,7 @@
     }
     
     if (self.passwordTextField.text.length == 0) {
-        [self showMessage:@"密码不能为空！"];
+        [self showMessage:NSLocalizedString(@"BadPassword", nil)];
         return;
     }
     if (!_activityView) {
@@ -173,7 +182,7 @@
 
 - (void)FSLoginServerFaild:(NSError *)error {
     [_activityView stopAnimating];
-    [self showMessage:@"登录失败"];
+    [self showMessage:NSLocalizedString(@"LoginFailed", nil)];
 }
 
 - (void)showMessage:(NSString *)message {

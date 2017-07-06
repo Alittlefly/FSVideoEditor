@@ -296,8 +296,8 @@
     BOOL shouldBeRed = (timeLength == _minLength) || (timeLength == _length) || (timeLength == _allLength);
     
     NSString *time = [NSString stringWithFormat:@"%.2f",timeLength];
-    NSString *orginalText = @"已选取<T>s";
-    NSString *finalSting = [orginalText stringByReplacingOccurrencesOfString:@"<T>" withString:time];
+    NSString *orginalText = NSLocalizedString(@"ChoseVideoTime", nil);
+    NSString *finalSting = [orginalText stringByReplacingOccurrencesOfString:@"(0)" withString:time];
     
     NSDictionary *timeAttrRed = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName,nil];
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:finalSting];

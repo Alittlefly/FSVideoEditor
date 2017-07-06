@@ -45,6 +45,7 @@
             CGFloat width = self.bounds.size.width/self.itmesArray.count;
             button.frame = CGRectMake(i*width, 0, width, self.bounds.size.height);
             button.tag = i;
+            [button.titleLabel setFont:[UIFont systemFontOfSize:10]];
             [button setTitleColor:_unSelectedTextColor forState:UIControlStateNormal];
             [button addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
             

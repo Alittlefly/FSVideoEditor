@@ -114,6 +114,7 @@
 		98725BF21F064F8C00445EF2 /* FSMoveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 98725BF11F064F8C00445EF2 /* FSMoveButton.m */; };
 		987700AF1F03AFE50043394E /* FSSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 987700AE1F03AFE50043394E /* FSSegmentView.m */; };
 		987B58AD1F0E217800E85A37 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987B58AC1F0E217800E85A37 /* UIKit.framework */; };
+		987B58BA1F0E796E00E85A37 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 987B58BC1F0E796E00E85A37 /* Localizable.strings */; };
 		987ECEE81F04F92D00221273 /* FSCutMusicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 987ECEE71F04F92D00221273 /* FSCutMusicView.m */; };
 		988AC6C61EFD1D3D007FBCEF /* FSProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */; };
 		988AC6C71EFD1D3D007FBCEF /* FSProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */; };
@@ -349,6 +350,10 @@
 		987B58AC1F0E217800E85A37 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		987B58AE1F0E5DAD00E85A37 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		987B58AF1F0E5DAD00E85A37 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		987B58BB1F0E796E00E85A37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		987B58BD1F0E797000E85A37 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		987B58BE1F0E797000E85A37 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		987B58BF1F0E797200E85A37 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		987ECEE61F04F92D00221273 /* FSCutMusicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCutMusicView.h; sourceTree = "<group>"; };
 		987ECEE71F04F92D00221273 /* FSCutMusicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCutMusicView.m; sourceTree = "<group>"; };
 		988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSProgressView.h; sourceTree = "<group>"; };
@@ -828,6 +833,7 @@
 		567E0B451EF930D100C4C527 = {
 			isa = PBXGroup;
 			children = (
+				987B58BC1F0E796E00E85A37 /* Localizable.strings */,
 				567E0B501EF930D100C4C527 /* FSVideoEditor */,
 				567E0B801EF939CC00C4C527 /* FSVideoEditorKit */,
 				567E0B4F1EF930D100C4C527 /* Products */,
@@ -1119,6 +1125,9 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
+				"zh-Hans",
+				ar,
+				en,
 			);
 			mainGroup = 567E0B451EF930D100C4C527;
 			productRefGroup = 567E0B4F1EF930D100C4C527 /* Products */;
@@ -1138,6 +1147,7 @@
 			files = (
 				567A3D611EFB6F830026247E /* LICENSE.txt in Resources */,
 				562D40721EFE4FD900BF0E0D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */,
+				987B58BA1F0E796E00E85A37 /* Localizable.strings in Resources */,
 				567E0B611EF930D100C4C527 /* LaunchScreen.storyboard in Resources */,
 				5647BC4B1F04E0110072B618 /* ugly.mp3 in Resources */,
 				567E0B5E1EF930D100C4C527 /* Assets.xcassets in Resources */,
@@ -1286,6 +1296,17 @@
 				987B58AF1F0E5DAD00E85A37 /* en */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		987B58BC1F0E796E00E85A37 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				987B58BB1F0E796E00E85A37 /* Base */,
+				987B58BD1F0E797000E85A37 /* zh-Hans */,
+				987B58BE1F0E797000E85A37 /* ar */,
+				987B58BF1F0E797200E85A37 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

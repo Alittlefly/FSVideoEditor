@@ -96,7 +96,8 @@
     _timeLabel.textColor = FSHexRGB(0xF5F5F5);
     _timeLabel.font = [UIFont systemFontOfSize:11];
     _timeLabel.textAlignment = NSTextAlignmentCenter;
-    _timeLabel.text = [NSString stringWithFormat:@"当前从%@开始",[self getCurrentTimeString:_newTime]];
+    NSString *timeString = NSLocalizedString(@"MusicStartTime", nil);
+    _timeLabel.text = [timeString stringByReplacingOccurrencesOfString:@"(0)" withString:[self getCurrentTimeString:_newTime]];
     _timeLabel.layer.cornerRadius = 25/2;
     _timeLabel.layer.masksToBounds = YES;
     [self addSubview:_timeLabel];
@@ -106,7 +107,7 @@
     _titleLabel.textColor = FSHexRGB(0xF5F5F5);
     _titleLabel.font = [UIFont systemFontOfSize:15];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
-    _titleLabel.text = @"左右拖动声谱以剪取音乐";
+    _titleLabel.text = NSLocalizedString(@"EditMusicTip", nil);
     _titleLabel.shadowColor = [UIColor blackColor];
     //阴影偏移  x，y为正表示向右下偏移
     _titleLabel.shadowOffset = CGSizeMake(1, 1);
@@ -208,7 +209,8 @@
 //    int min = floor(time/60);
 //    int sec = time%60;
 //    NSLog(@"min:%d     sec:%d",min,sec);
-    self.timeLabel.text = [NSString stringWithFormat:@"当前从%@开始",[self getCurrentTimeString:time]];
+    NSString *timeString = NSLocalizedString(@"MusicStartTime", nil);
+    self.timeLabel.text = [timeString stringByReplacingOccurrencesOfString:@"(0)" withString:[self getCurrentTimeString:_newTime]];
     
     _newTime = time;
     

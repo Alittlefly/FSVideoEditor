@@ -85,8 +85,8 @@ extern int IsArabic;
     _timeLine = [_context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
     
     
-    _segmentView = [[FSSegmentView alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
-    _segmentView.frame = CGRectMake(32.5, CGRectGetMaxY(_prewidow.frame)+76, CGRectGetWidth(self.view.frame) - 65, 37);
+    _segmentView = [[FSSegmentView alloc] initWithItems:@[NSLocalizedString(@"VerySlow", nil),NSLocalizedString(@"Slow", nil),NSLocalizedString(@"Normal", nil),NSLocalizedString(@"Fast", nil),NSLocalizedString(@"VeryFast", nil)]];
+    _segmentView.frame = CGRectMake(32.5, CGRectGetMaxY(_prewidow.frame)+30, CGRectGetWidth(self.view.frame) - 65, 37);
     _segmentView.selectedColor = FSHexRGB(0xFACE15);//[UIColor yellowColor];
     _segmentView.backgroundColor = FSHexRGBAlpha(0x001428, 0.6);[UIColor lightGrayColor];
     _segmentView.selectedTextColor = FSHexRGB(0x1A1D20);//[UIColor redColor];

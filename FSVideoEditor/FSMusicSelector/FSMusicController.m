@@ -72,7 +72,7 @@
     [self.view addSubview:_tableView];
     
     UILabel *tableHeader = [[UILabel alloc] init];
-    [tableHeader setText:@"热门歌曲"];
+    [tableHeader setText:NSLocalizedString(@"HotMusic", nil)];
     [tableHeader setTextAlignment:(NSTextAlignmentCenter)];
     [tableHeader setFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 52)];
     [_tableView setTableHeaderView:tableHeader];

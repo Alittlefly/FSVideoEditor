@@ -39,7 +39,7 @@
     _titLabel.textAlignment = NSTextAlignmentCenter;
     _titLabel.backgroundColor = [UIColor clearColor];
     _titLabel.font = [UIFont systemFontOfSize:15];
-    _titLabel.text = @"滤镜";
+    _titLabel.text = NSLocalizedString(@"ColorFilter", nil);
     _titLabel.shadowColor = [UIColor blackColor];
     //阴影偏移  x，y为正表示向右下偏移
     _titLabel.shadowOffset = CGSizeMake(1, 1);

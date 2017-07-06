@@ -16,6 +16,7 @@
 #import "FSCutMusicView.h"
 #import "NvsAudioTrack.h"
 #import "FSMusicPlayer.h"
+#import "FSAlertView.h"
 
 BOOL IsArabic;
 
@@ -136,14 +137,12 @@ BOOL IsArabic;
     
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _backButton.frame = IsArabic ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
-    //[_backButton setTitle:@"back" forState:UIControlStateNormal];
     [_backButton setImage:[UIImage imageNamed:@"recorder-back"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_backButton];
     
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _finishButton.frame = IsArabic ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
-   // [_finishButton setTitle:@"finish" forState:UIControlStateNormal];
     _finishButton.enabled = NO;
     [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(finishClik) forControlEvents:UIControlEventTouchUpInside];
@@ -151,21 +150,18 @@ BOOL IsArabic;
     
     _recoverCamera = [UIButton buttonWithType:UIButtonTypeCustom];
     _recoverCamera.frame = IsArabic ? CGRectMake(CGRectGetMaxX(_finishButton.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetMinX(_finishButton.frame) - 30 -40, 20, 40, 40);
-    //[_recoverCamera setTitle:@"recorder-camera" forState:UIControlStateNormal];
     [_recoverCamera setImage:[UIImage imageNamed:@"recorder-camera"] forState:UIControlStateNormal];
     [_recoverCamera addTarget:self action:@selector(recoverCameraClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_recoverCamera];
     
     _flashButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _flashButton.frame = IsArabic ? CGRectMake(CGRectGetMaxX(_recoverCamera.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetMinX(_recoverCamera.frame) - 30 -40, 20, 40, 40);
-   // [_flashButton setTitle:@"flash" forState:UIControlStateNormal];
     [_flashButton setImage:[UIImage imageNamed:@"recorder-flash-off"] forState:UIControlStateNormal];
     [_flashButton addTarget:self action:@selector(flashClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_flashButton];
 
     _cutMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _cutMusicButton.frame = IsArabic ? CGRectMake(CGRectGetMaxX(_recoverCamera.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetWidth(self.frame) - 15 -40, CGRectGetMaxY(_finishButton.frame)+30, 40, 40);
-    //[_cutMusicButton setTitle:@"cutMusic" forState:UIControlStateNormal];
     [_cutMusicButton setImage:[UIImage imageNamed:@"recorder-cut"] forState:UIControlStateNormal];
     [_cutMusicButton addTarget:self action:@selector(cutMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_cutMusicButton];
@@ -179,16 +175,15 @@ BOOL IsArabic;
     
     _cutMusicLabel = [[UILabel alloc] init];
     _cutMusicLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
-    _cutMusicLabel.font = [UIFont systemFontOfSize:9];
+    _cutMusicLabel.font = [UIFont systemFontOfSize:7];
     _cutMusicLabel.textColor = [UIColor whiteColor];
     _cutMusicLabel.backgroundColor = [UIColor clearColor];
     _cutMusicLabel.textAlignment = NSTextAlignmentCenter;
-    _cutMusicLabel.text = @"剪音乐";
+    _cutMusicLabel.text = NSLocalizedString(@"CutMusic", nil);
     [self addSubview:_cutMusicLabel];
     
     _beautyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _beautyButton.frame = CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicLabel.frame)+20, 40, 40);
-    //[_beautyButton setTitle:@"beaty" forState:UIControlStateNormal];
     [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-on"] forState:UIControlStateNormal];
     [_beautyButton addTarget:self action:@selector(beautyClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_beautyButton];
@@ -196,15 +191,14 @@ BOOL IsArabic;
     _beautyLabel = [[UILabel alloc] init];
     _beautyLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_beautyButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_beautyButton.frame), 10) : CGRectMake(CGRectGetMaxX(_beautyButton.frame) - CGRectGetWidth(_beautyButton.frame), CGRectGetMaxY(_beautyButton.frame), CGRectGetWidth(_beautyButton.frame), 10);
     _beautyLabel.backgroundColor = [UIColor clearColor];
-    _beautyLabel.font = [UIFont systemFontOfSize:9];
+    _beautyLabel.font = [UIFont systemFontOfSize:7];
     _beautyLabel.textColor = [UIColor whiteColor];
     _beautyLabel.textAlignment = NSTextAlignmentCenter;
-    _beautyLabel.text = @"美颜开";
+    _beautyLabel.text = NSLocalizedString(@"BeautifyOn", nil);
     [self addSubview:_beautyLabel];
     
     _filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _filterButton.frame = CGRectMake(CGRectGetMinX(_beautyButton.frame), CGRectGetMaxY(_beautyLabel.frame)+20, 40, 40);
-    //[_filterButton setTitle:@"filter" forState:UIControlStateNormal];
     [_filterButton setImage:[UIImage imageNamed:@"recorder-filter"] forState:UIControlStateNormal];
     [_filterButton addTarget:self action:@selector(filterClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_filterButton];
@@ -212,15 +206,14 @@ BOOL IsArabic;
     _filterLabel = [[UILabel alloc] init];
     _filterLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15) : CGRectMake(CGRectGetMaxX(_filterButton.frame) - CGRectGetWidth(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15);
     _filterLabel.backgroundColor = [UIColor clearColor];
-    _filterLabel.font = [UIFont systemFontOfSize:9];
+    _filterLabel.font = [UIFont systemFontOfSize:7];
     _filterLabel.textColor = [UIColor whiteColor];
     _filterLabel.textAlignment = NSTextAlignmentCenter;// IsArabic ? NSTextAlignmentLeft : NSTextAlignmentRight;
-    _filterLabel.text = @"滤镜";
+    _filterLabel.text = NSLocalizedString(@"ColorFilter", nil);
     [self addSubview:_filterLabel];
     
     _countdownButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _countdownButton.frame = CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterLabel.frame)+20, 40, 40);
-    //[_countdownButton setTitle:@"countdown" forState:UIControlStateNormal];
     [_countdownButton setImage:[UIImage imageNamed:@"recorder-watch"] forState:UIControlStateNormal];
     [_countdownButton addTarget:self action:@selector(countdownClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_countdownButton];
@@ -228,10 +221,10 @@ BOOL IsArabic;
     _countdownLabel = [[UILabel alloc] init];
     _countdownLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_countdownButton.frame), CGRectGetMaxY(_countdownButton.frame), CGRectGetWidth(_countdownButton.frame), 10) : CGRectMake(CGRectGetMaxX(_countdownButton.frame) - CGRectGetWidth(_countdownButton.frame), CGRectGetMaxY(_countdownButton.frame), CGRectGetWidth(_countdownButton.frame), 10);
     _countdownLabel.backgroundColor = [UIColor clearColor];
-    _countdownLabel.font = [UIFont systemFontOfSize:9];
+    _countdownLabel.font = [UIFont systemFontOfSize:7];
     _countdownLabel.textColor = [UIColor whiteColor];
     _countdownLabel.textAlignment = NSTextAlignmentCenter;
-    _countdownLabel.text = @"倒计时";
+    _countdownLabel.text = NSLocalizedString(@"Countdown", nil);
     [self addSubview:_countdownLabel];
     
     _imageAutoFocusRect = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
@@ -270,7 +263,7 @@ BOOL IsArabic;
     _faceUButton.hidden = YES;
     [self addSubview:_faceUButton];
     
-    _segmentView = [[FSSegmentView alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
+    _segmentView = [[FSSegmentView alloc] initWithItems:@[NSLocalizedString(@"VerySlow", nil),NSLocalizedString(@"Slow", nil),NSLocalizedString(@"Normal", nil),NSLocalizedString(@"Fast", nil),NSLocalizedString(@"VeryFast", nil)]];
     _segmentView.frame = CGRectMake(30, CGRectGetMinY(_recorderButton.frame)-15-40, CGRectGetWidth(self.frame)-60, 40);
     _segmentView.selectedColor = FSHexRGB(0xFACE15);//[UIColor yellowColor];
     _segmentView.backgroundColor = FSHexRGBAlpha(0x001428, 0.6);[UIColor lightGrayColor];
@@ -309,7 +302,7 @@ BOOL IsArabic;
 //    else {
 //    
 //    }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出录制吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"CancelEditing", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Confirm", nil), nil];
     [alert show];
     
 }
@@ -428,9 +421,14 @@ BOOL IsArabic;
     _isBeautyOpened = !_isBeautyOpened;
     if (_isBeautyOpened) {
         [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-on"] forState:UIControlStateNormal];
+        [_beautyLabel setText:NSLocalizedString(@"BeautifyOn", nil)];
+        [self showAlertView:NSLocalizedString(@"BeautifyOnTip", nil)];
     }
     else {
         [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-off"] forState:UIControlStateNormal];
+        [_beautyLabel setText:NSLocalizedString(@"BeautifyOff", nil)];
+        [self showAlertView:NSLocalizedString(@"BeautifyOffTip", nil)];
+
     }
     [_recorderManager switchBeauty:_isBeautyOpened];
 }
@@ -491,7 +489,7 @@ BOOL IsArabic;
         _beautyLabel.hidden = NO;
         _countdownLabel.hidden = NO;
         _recorderButton.hidden = NO;
-        _faceUButton.hidden = NO;
+        _faceUButton.hidden = YES;
         _deleteButton.hidden = NO;
         _segmentView.hidden = NO;
         _isOpenFilterView = NO;
@@ -618,7 +616,7 @@ BOOL IsArabic;
     _filterLabel.hidden = NO;
     _beautyLabel.hidden = NO;
     _countdownLabel.hidden = NO;
-    _faceUButton.hidden = NO;
+    _faceUButton.hidden = YES;
     _deleteButton.hidden = NO;
     _segmentView.hidden = NO;
     
@@ -662,6 +660,11 @@ BOOL IsArabic;
     }
 }
 
+- (void)showAlertView:(NSString *)message {
+    FSAlertView *alet = [[FSAlertView alloc] initWithFrame:self.bounds];
+    [alet showWithMessage:message];
+}
+
 
 #pragma mark - FSMoveButtonDelegate
 - (void)FSMoveButtonCancelTrackingWithEvent:(UIEvent *)event {
@@ -702,7 +705,6 @@ BOOL IsArabic;
     //获取手势的位置
     CGPoint position =[gesture translationInView:self];
     
-    NSLog(@"");
     
     //通过stransform 进行平移交换
     self.recorderButton.transform = CGAffineTransformTranslate(self.recorderButton.transform, position.x, position.y);
@@ -779,7 +781,7 @@ BOOL IsArabic;
     _beautyLabel.hidden = NO;
     _countdownLabel.hidden = NO;
     _recorderButton.hidden = NO;
-    _faceUButton.hidden = NO;
+    _faceUButton.hidden = YES;
     _deleteButton.hidden = NO;
     _segmentView.hidden = NO;
     _isOpenFilterView = NO;
@@ -805,7 +807,7 @@ BOOL IsArabic;
     _beautyLabel.hidden = NO;
     _countdownLabel.hidden = NO;
     _recorderButton.hidden = NO;
-    _faceUButton.hidden = NO;
+    _faceUButton.hidden = YES;
     _deleteButton.hidden = NO;
     _segmentView.hidden = NO;
     _isOpenFilterView = NO;

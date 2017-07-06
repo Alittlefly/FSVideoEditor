@@ -42,7 +42,7 @@
         [_titleLabel setTextAlignment:NSTextAlignmentCenter];
         [_titleLabel setBackgroundColor:[UIColor clearColor]];
         [_titleLabel setTextColor:[UIColor whiteColor]];
-        [_titleLabel setText:@"Loading"];
+        [_titleLabel setText:NSLocalizedString(@"Loading", nil)];
     }
     return _titleLabel;
 }

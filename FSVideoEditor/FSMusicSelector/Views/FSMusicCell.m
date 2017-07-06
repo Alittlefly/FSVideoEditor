@@ -59,7 +59,7 @@ static NSString *identifier = @"FSMusicCell";
     if (!_useButton) {
          _useButton = [[FSMusicUseButton alloc] init];
         [_useButton setImage:[UIImage imageNamed:@"musicSelectRecoder"] forState:(UIControlStateNormal)];
-        [_useButton setTitle:@"确定使用并开始" forState:UIControlStateNormal];
+        [_useButton setTitle:NSLocalizedString(@"RecordNow", nil) forState:UIControlStateNormal];
         [_useButton setAdjustsImageWhenHighlighted:NO];
         [_useButton addTarget:self action:@selector(useMusic:) forControlEvents:(UIControlEventTouchUpInside)];
     }

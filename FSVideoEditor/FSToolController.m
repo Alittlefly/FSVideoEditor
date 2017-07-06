@@ -41,7 +41,7 @@
     
     UIButton *videoRecorderButton = [UIButton buttonWithType:UIButtonTypeCustom];
     videoRecorderButton.frame = CGRectMake(CGRectGetWidth(_contentView.frame) - 80, 17, 75, 21);
-    [videoRecorderButton setTitle:@"直接开拍 >" forState:UIControlStateNormal];
+    [videoRecorderButton setTitle:[NSString stringWithFormat:@"%@ >",NSLocalizedString(@"Record", nil)] forState:UIControlStateNormal];
     [videoRecorderButton setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
     [videoRecorderButton setTitleColor:FSHexRGB(0x010A12) forState:(UIControlStateSelected)];
     [videoRecorderButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
@@ -52,7 +52,7 @@
     
     UIButton *selectMusic = [UIButton buttonWithType:UIButtonTypeCustom];
     selectMusic.frame = CGRectMake((CGRectGetWidth(_contentView.frame) - 60)/2.0, 17, 60, 21);
-    [selectMusic setTitle:@"选择音乐" forState:UIControlStateNormal];
+    [selectMusic setTitle:NSLocalizedString(@"ChooseMusic", nil) forState:UIControlStateNormal];
     [selectMusic addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     selectMusic.tag = 2;
     [selectMusic setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
@@ -65,7 +65,7 @@
     
     UIButton *videoListButton = [UIButton buttonWithType:UIButtonTypeCustom];
      videoListButton.frame = CGRectMake(20, 17, 60, 21);
-    [videoListButton setTitle:@"上传视频" forState:UIControlStateNormal];
+    [videoListButton setTitle:NSLocalizedString(@"UploadVideo", nil) forState:UIControlStateNormal];
     [videoListButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     [videoListButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
      videoListButton.tag = 3;

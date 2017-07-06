@@ -321,11 +321,15 @@
     music.timeLine = _timeLine;
     music.pushed = YES;
     [music setDelegate:self];
+    
+    [self presentViewController:music animated:YES completion:nil];
 }
 
 - (void)FSPublisherToolViewSaveToDraft {
-
+#warning 区分正序倒序，重复监测
+    UISaveVideoAtPathToSavedPhotosAlbum(_filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 }
+
 #pragma mark - 
 -(void)musicControllerSelectMusic:(NSString *)music{
     if (music != nil && music.length > 0) {

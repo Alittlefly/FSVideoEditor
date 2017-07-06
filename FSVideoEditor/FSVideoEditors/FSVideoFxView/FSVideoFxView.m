@@ -148,7 +148,7 @@
     [self addSubview:_progress];
     
      _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30, 21)];
-    [_tipLabel setText:@"选择位置后,按住使用效果"];
+    [_tipLabel setText:NSLocalizedString(@"AddFilterTip", nil)];
     [_tipLabel setFont:[UIFont systemFontOfSize:15]];
     [_tipLabel setTextColor:FSHexRGB(0xCBCBCB)];
     [_tipLabel setTextAlignment:(NSTextAlignmentLeft)];
@@ -156,7 +156,7 @@
     
     
      _unDoButton = [[UIButton alloc] initWithFrame:CGRectMake(311, CGRectGetMaxY(_progress.frame), 54, 30)];
-    [_unDoButton setTitle:@"撤销" forState:(UIControlStateNormal)];
+    [_unDoButton setTitle:NSLocalizedString(@"Delete", nil) forState:(UIControlStateNormal)];
     [_unDoButton setHidden:YES];
     [_unDoButton addTarget:self action:@selector(unDoFix) forControlEvents:(UIControlEventTouchUpInside)];
     [_contentView addSubview:_unDoButton];
@@ -171,7 +171,7 @@
     [self addSubview:_bottomView];
     
     FSLineButton *fxButton = [[FSLineButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(sframe)/2.0 - 1, 45)];
-    [fxButton setTitle:@"滤镜特效" forState:UIControlStateNormal];
+    [fxButton setTitle:NSLocalizedString(@"Filters", nil) forState:UIControlStateNormal];
     [fxButton addTarget:self action:@selector(showFx:) forControlEvents:(UIControlEventTouchUpInside)];
     fxButton.tag = 1;
     [fxButton setSelected:YES];
@@ -184,7 +184,7 @@
     [_bottomView addSubview:sepLine];
     
     FSLineButton *timefxButton = [[FSLineButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sframe)/2.0+1, 0, CGRectGetWidth(sframe)/2.0 - 1, 45)];
-    [timefxButton setTitle:@"时间特效" forState:UIControlStateNormal];
+    [timefxButton setTitle:NSLocalizedString(@"Timeline", nil) forState:UIControlStateNormal];
     [timefxButton addTarget:self action:@selector(showFx:) forControlEvents:(UIControlEventTouchUpInside)];
     timefxButton.tag = 2;
     [_bottomView addSubview:timefxButton];
@@ -196,7 +196,7 @@
     }
     
     FSFxButton *soulfx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
-    [soulfx setTitle:@"灵魂出窍" forState:(UIControlStateNormal)];
+    [soulfx setTitle:NSLocalizedString(@"Magic", nil) forState:(UIControlStateNormal)];
     [soulfx setBackgroundColor:[UIColor redColor]];
     [soulfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [soulfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -214,7 +214,7 @@
     [shakefx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [shakefx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
 
-    [shakefx setTitle:@"抖动" forState:(UIControlStateNormal)];
+    [shakefx setTitle:NSLocalizedString(@"Vibrating", nil) forState:(UIControlStateNormal)];
 
      objc_setAssociatedObject(shakefx, FxIdKey, @"A8A4344D-45DA-460F-A18F-C0E2355FE864", OBJC_ASSOCIATION_COPY);
 
@@ -232,7 +232,7 @@
     FSFxButton *noneFx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [noneFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [noneFx setBackgroundColor:[UIColor redColor]];
-    [noneFx setTitle:@"无" forState:(UIControlStateNormal)];
+    [noneFx setTitle:NSLocalizedString(@"NoFilter", nil) forState:(UIControlStateNormal)];
     noneFx.tag = FSVideoFxTypeNone;
     
     [_contentView addSubview:noneFx];
@@ -240,7 +240,7 @@
     FSFxButton *revertFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(noneFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [revertFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [revertFx setBackgroundColor:[UIColor yellowColor]];
-    [revertFx setTitle:@"时光倒流" forState:(UIControlStateNormal)];
+    [revertFx setTitle:NSLocalizedString(@"Reverse", nil) forState:(UIControlStateNormal)];
     revertFx.tag = FSVideoFxTypeRevert;
     
     [_contentView addSubview:revertFx];
@@ -249,14 +249,14 @@
     FSFxButton *repeatFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(revertFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [repeatFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [repeatFx setBackgroundColor:[UIColor yellowColor]];
-    [repeatFx setTitle:@"反复" forState:(UIControlStateNormal)];
+    [repeatFx setTitle:NSLocalizedString(@"Repeat", nil) forState:(UIControlStateNormal)];
     repeatFx.tag = FSVideoFxTypeRepeat;
     [_contentView addSubview:repeatFx];
     
     FSFxButton *slowFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(repeatFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [slowFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [slowFx setBackgroundColor:[UIColor yellowColor]];
-    [slowFx setTitle:@"慢动作" forState:(UIControlStateNormal)];
+    [slowFx setTitle:NSLocalizedString(@"SlowMotion", nil) forState:(UIControlStateNormal)];
     slowFx.tag = FSVideoFxTypeSlow;
     [_contentView addSubview:slowFx];
     
@@ -328,10 +328,10 @@
 }
 -(void)changeContentWithTag:(NSInteger)tag{
     if (tag == 1) {
-        [_tipLabel setText:@"选择位置后,按住使用效果"];
+        [_tipLabel setText:NSLocalizedString(@"AddFilterTip", nil)];
         [self initFxs];
     }else if (tag == 2){
-        [_tipLabel setText:@"点击选择时间特效"];
+        [_tipLabel setText:NSLocalizedString(@"ChooseEffectsTip", nil)];
         [self initTimeFxs];
     }
     
