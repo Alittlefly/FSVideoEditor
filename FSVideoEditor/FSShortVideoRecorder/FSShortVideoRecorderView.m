@@ -267,6 +267,7 @@ BOOL IsArabic;
     _faceUButton.center = CGPointMake(_faceUButton.center.x, _recorderButton.center.y);
     [_faceUButton setImage:[UIImage imageNamed:@"recorder-faceu"] forState:UIControlStateNormal];
     [_faceUButton addTarget:self action:@selector(faceuClick) forControlEvents:UIControlEventTouchUpInside];
+    _faceUButton.hidden = YES;
     [self addSubview:_faceUButton];
     
     _segmentView = [[FSSegmentView alloc] initWithItems:@[@"极慢",@"慢",@"标准",@"快",@"极快"]];
