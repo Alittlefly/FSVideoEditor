@@ -203,7 +203,13 @@
     NSArray *videoFxs = [vTimeLine allVideoFxs];
     
     for (FSVideoFx *fx in videoFxs) {
-        [_timeLine addPackagedTimelineVideoFx:fx.startPoint duration:fx.endPoint - fx.startPoint videoFxPackageId:fx.videoFxId];
+        
+        int64_t startTime = fx.startPoint;
+        int64_t duration = fx.endPoint - fx.startPoint;
+        if (_needConvert) {
+            startTime = _timeLine.duration - fx.endPoint;
+        }
+        [_timeLine addPackagedTimelineVideoFx:startTime duration:duration videoFxPackageId:fx.videoFxId];
     }
 }
 
@@ -233,8 +239,9 @@
 }
 #pragma mark -
 -(void)videoFxViewNeedConvertView:(BOOL)convert{
+    _needConvert = convert;
+
     NSString *newPath = convert?_convertFilePath:_filePath;
-    
     [_timeLine removeVideoTrack:0];
      _videoTrack = [_timeLine appendVideoTrack];
     [_videoTrack insertClip:newPath clipIndex:0];
@@ -246,6 +253,7 @@
     if ([self.delegate respondsToSelector:@selector(videoFxControllerTimelineFxType:startPoint:duration:)]) {
         [self.delegate videoFxControllerTimelineFxType:(FSVideoFxTypeRevert) startPoint:0 duration:0];
     }
+    
 }
 
 -(void)videoFxSelectTimeLinePosition:(FSVideoFxView *)videoFxView position:(CGFloat)progress{
