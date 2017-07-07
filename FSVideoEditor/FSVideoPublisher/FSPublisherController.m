@@ -254,7 +254,7 @@
     
     [self.loading loadingViewhide];
     [self uploadFile:_outPutPath];
-    UISaveVideoAtPathToSavedPhotosAlbum(_outPutPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+  //  UISaveVideoAtPathToSavedPhotosAlbum(_outPutPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 
 }
 // 生成失败的回调函数
@@ -346,7 +346,7 @@
 
 - (void)FSPublisherToolViewSaveToDraft {
 #warning 区分正序倒序，重复监测
-    UISaveVideoAtPathToSavedPhotosAlbum(_filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    //UISaveVideoAtPathToSavedPhotosAlbum(_filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 }
 
 #pragma mark - 

@@ -175,6 +175,7 @@
     [cancle addTarget:self action:@selector(cancle) forControlEvents:(UIControlEventTouchUpInside)];
     [cancle setTitle:NSLocalizedString(@"Cancel", nil) forState:(UIControlStateNormal)];
     [cancle sizeToFit];
+    cancle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [cancle setFrame:CGRectMake(20, 20, 100, 24)];
     [self.view addSubview:cancle];
     
@@ -182,7 +183,8 @@
     [save addTarget:self action:@selector(save) forControlEvents:(UIControlEventTouchUpInside)];
     [save setTitle:NSLocalizedString(@"Save", nil) forState:(UIControlStateNormal)];
     [save sizeToFit];
-    [save setFrame:CGRectMake(270, 20, 100, 24)];
+    [save setFrame:CGRectMake(self.view.frame.size.width-20-100, 20, 100, 24)];
+    save.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [self.view addSubview:save];
 }
 - (void)cancle{
@@ -393,9 +395,9 @@
 
     [self addVideoFxWithVirtualTimeline:shouldBe];
     
-    if (![_timeLine getLastTimelineVideoFx]) {
-        [videoFxView hideUndoButton];
-    }
+//    if (![_timeLine getLastTimelineVideoFx]) {
+//        [videoFxView hideUndoButton];
+//    }
 }
 // 当前的位置进度
 -(CGFloat)videoFxViewUpdatePosition:(FSVideoFxView *)videoFxView{

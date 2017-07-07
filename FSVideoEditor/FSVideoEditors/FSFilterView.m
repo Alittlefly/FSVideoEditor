@@ -25,7 +25,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         // 初始化视频特效列表
-        _filtersArray = [NSMutableArray arrayWithObject:@"None"];
+        _filtersArray = [NSMutableArray arrayWithObject:NSLocalizedString(@"NoFilter", nil)];
         // 获取全部内嵌视频特效的名称
         [_filtersArray addObjectsFromArray:[[FSShortVideoRecorderManager sharedInstance] getAllVideoFilters]];
         [self initBaseUI];

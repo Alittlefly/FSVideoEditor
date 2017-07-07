@@ -191,7 +191,7 @@
     _progress.delegate = self;
     [self addSubview:_progress];
     
-     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30, 21)];
+     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30-54, 21)];
     [_tipLabel setText:NSLocalizedString(@"AddFilterTip", nil)];
     [_tipLabel setFont:[UIFont systemFontOfSize:15]];
     [_tipLabel setTextColor:FSHexRGB(0xCBCBCB)];
@@ -199,7 +199,7 @@
     [self addSubview:_tipLabel];
     
     
-     _unDoButton = [[UIButton alloc] initWithFrame:CGRectMake(311, CGRectGetMaxY(_progress.frame), 54, 30)];
+     _unDoButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sframe)-10-54, CGRectGetMaxY(_progress.frame), 54, 30)];
     [_unDoButton setTitle:NSLocalizedString(@"Delete", nil) forState:(UIControlStateNormal)];
     [_unDoButton setHidden:YES];
     [_unDoButton addTarget:self action:@selector(unDoFix) forControlEvents:(UIControlEventTouchUpInside)];
@@ -477,6 +477,8 @@
 -(void)unDoFix{
     NSLog(@"unDoFix");
     [_progress undoFxView];
+    
+    [_unDoButton setHidden:_progress.fiterCout == 0 ? YES : NO];
     
     if ([self.delegate respondsToSelector:@selector(videoFxUndoPackageFx:)]) {
         [self.delegate videoFxUndoPackageFx:self];
