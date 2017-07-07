@@ -28,8 +28,8 @@
 -(void)musicApiGetMusics:(id)responesObject{
     
     if ([responesObject isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *dataDict = (NSDictionary *)responesObject;
-        NSArray *ms = [dataDict valueForKey:@"dataInfo"];
+        NSDictionary *dataDict = [(NSDictionary *)responesObject valueForKey:@"dataInfo"];
+        NSArray *ms = [dataDict valueForKey:@"shl"];
         
         NSArray *musics = [FSMusic getDataArrayFromArray:ms];
         

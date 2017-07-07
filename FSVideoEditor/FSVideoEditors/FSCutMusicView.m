@@ -98,6 +98,8 @@
     _timeLabel.textAlignment = NSTextAlignmentCenter;
     NSString *timeString = NSLocalizedString(@"MusicStartTime", nil);
     _timeLabel.text = [timeString stringByReplacingOccurrencesOfString:@"(0)" withString:[self getCurrentTimeString:_newTime]];
+    [_timeLabel sizeToFit];
+    _timeLabel.frame = CGRectMake(20, CGRectGetMinY(_scrollView.frame)-5-25, _timeLabel.frame.size.width, 25);
     _timeLabel.layer.cornerRadius = 25/2;
     _timeLabel.layer.masksToBounds = YES;
     [self addSubview:_timeLabel];
@@ -105,7 +107,7 @@
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(_timeLabel.frame)-5-30, 100, 30)];
     _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.textColor = FSHexRGB(0xF5F5F5);
-    _titleLabel.font = [UIFont systemFontOfSize:15];
+    _titleLabel.font = [UIFont systemFontOfSize:13];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.text = NSLocalizedString(@"EditMusicTip", nil);
     _titleLabel.shadowColor = [UIColor blackColor];

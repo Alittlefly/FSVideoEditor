@@ -22,10 +22,10 @@
 
 -(instancetype)init{
     if (self = [super init]) {
-        _glayer = (CAGradientLayer *)self.layer;
-        _glayer.colors = @[(__bridge id)FSHexRGB(0x3023AE).CGColor,(__bridge id)FSHexRGB(0xC96DD8).CGColor];
-        _glayer.startPoint = CGPointMake(0, 0);
-        _glayer.endPoint = CGPointMake(0, 1);
+//        _glayer = (CAGradientLayer *)self.layer;
+//        _glayer.colors = @[(__bridge id)FSHexRGB(0x3023AE).CGColor,(__bridge id)FSHexRGB(0xC96DD8).CGColor];
+//        _glayer.startPoint = CGPointMake(0, 0);
+//        _glayer.endPoint = CGPointMake(0, 1);
     }
     return self;
 }
@@ -59,6 +59,7 @@ static NSString *identifier = @"FSMusicCell";
     if (!_useButton) {
          _useButton = [[FSMusicUseButton alloc] init];
         [_useButton setImage:[UIImage imageNamed:@"musicSelectRecoder"] forState:(UIControlStateNormal)];
+        _useButton.backgroundColor = FSHexRGB(0x0BC2C6);
         [_useButton setTitle:NSLocalizedString(@"RecordNow", nil) forState:UIControlStateNormal];
         [_useButton setAdjustsImageWhenHighlighted:NO];
         [_useButton addTarget:self action:@selector(useMusic:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -153,11 +154,19 @@ static NSString *identifier = @"FSMusicCell";
 -(void)setMusic:(FSMusic *)music{
     [self.nameLabel setText:music.songTitle];
     [self.authorLabel setText:music.songAuthor];
-    [self.timeLabel setText:@"00:18"];
+    [self.timeLabel setText:[self getCurrentTimeString:music.songTime]];
      _music = music;
     [self.useButton setHidden:!_music.opend];
     [self.playButton setSelected:_music.isPlaying];
 }
+
+- (NSString *)getCurrentTimeString:(NSTimeInterval)time {
+    int min = floor(time/60);
+    int sec = ((int)time)%60;
+    
+    return [NSString stringWithFormat:@"%.2d:%.2d",min,sec];
+}
+
 -(void)setIsPlayIng:(BOOL)isPlayIng{
     _isPlayIng = isPlayIng;
     

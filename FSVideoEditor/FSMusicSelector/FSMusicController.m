@@ -147,10 +147,13 @@
             
             NSString *url = music.songUrl;//[@"http://10.10.32.152:20000/" stringByAppendingString:music.songUrl];
             if (![url hasPrefix:@"http"]) {
-                url = [@"http://10.10.32.152:20000/" stringByAppendingString:music.songUrl];
+                //http://www.7nujoom.com/    http://10.10.32.152:20000/
+                url = [@"http://www.7nujoom.com/" stringByAppendingString:music.songUrl];
             }
             __weak typeof(self) weakS = self;
             [FSMusicManager downLoadMusic:url complete:^(NSString *localPath, NSError *error) {
+                [weakS.loading loadingViewhide];
+
                 if (!error) {
                     [[FSMusicPlayer sharedPlayer] stop];
                     [[FSMusicPlayer sharedPlayer] setFilePath:localPath];
@@ -163,7 +166,6 @@
                 }else{
                     [[FSMusicPlayer sharedPlayer] play];
                 }
-                [weakS.loading loadingViewhide];
             }];
         }else{
             // 测试数据
@@ -238,7 +240,8 @@
         if ([self.delegate respondsToSelector:@selector(musicControllerSelectMusic:)]) {
             [self.delegate musicControllerSelectMusic:path];
         }
-        [self.navigationController popViewControllerAnimated:YES];
+       // [self.navigationController popViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }else{
         
         FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
@@ -253,6 +256,9 @@
 -(void)updateVideoStreamUrl:(NSString *)filePath{
     if (filePath) {
         if (!_timeLine) {
+            NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"];
+            
+            [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
             NvsStreamingContext *context = [NvsStreamingContext sharedInstance];
             NvsVideoResolution videoEditRes;
             videoEditRes.imageWidth = 1200;

@@ -34,6 +34,11 @@
     NSAssert(filePath, @"filePath 不能为空");
     [_fileUploader uploadFileWithFilePath:filePath];
 }
+
+- (void)uploadFileWithFilePath:(NSString *)filePath complete:(FSUploadProgressBlock)complete {
+    [_fileUploader uploadFileWithFilePath:filePath completeBlock:complete];
+}
+
 -(void)uploadFileProgressWithFilePath:(NSString *)filePath complete:(void (^)(float, NSString *))complete{
     NSAssert(complete,@"回调不能为空");
     NSAssert(filePath,@"文件路径不能为空");

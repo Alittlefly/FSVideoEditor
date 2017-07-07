@@ -42,7 +42,7 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     __weak typeof(self) weakS = self;
-    NSString *address = @"http://www.7najm.com/service/user/v3/login/mobile/v4";
+    NSString *address = @"http://www.7nujoom.com/service/user/v3/login/mobile/v4";
     NSURLSessionTask *task = [manager POST:address parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 0) {

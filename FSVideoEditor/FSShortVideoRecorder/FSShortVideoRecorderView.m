@@ -423,12 +423,17 @@ BOOL IsArabic;
         [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-on"] forState:UIControlStateNormal];
         [_beautyLabel setText:NSLocalizedString(@"BeautifyOn", nil)];
         [self showAlertView:NSLocalizedString(@"BeautifyOnTip", nil)];
+//        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewShowAlertView:)]) {
+//            [self.delegate FSShortVideoRecorderViewShowAlertView:NSLocalizedString(@"BeautifyOnTip", nil)];
+//        }
     }
     else {
         [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-off"] forState:UIControlStateNormal];
         [_beautyLabel setText:NSLocalizedString(@"BeautifyOff", nil)];
         [self showAlertView:NSLocalizedString(@"BeautifyOffTip", nil)];
-
+//        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewShowAlertView:)]) {
+//            [self.delegate FSShortVideoRecorderViewShowAlertView:NSLocalizedString(@"BeautifyOffTip", nil)];
+//        }
     }
     [_recorderManager switchBeauty:_isBeautyOpened];
 }
@@ -569,7 +574,7 @@ BOOL IsArabic;
     
     if (!_isAutoRecorder) {
         [self.recorderButton setImage:[[UIImage alloc] init] forState:UIControlStateNormal];
-        [self.recorderButton setBackgroundColor:[UIColor redColor]];
+        [self.recorderButton setBackgroundColor:FSHexRGB(0x0BC2C6)];
         self.recorderButton.layer.cornerRadius = self.recorderButton.frame.size.width/2;
         self.recorderButton.layer.masksToBounds =YES;
         
@@ -580,7 +585,7 @@ BOOL IsArabic;
         
         if (!_recorderAniLabel) {
             _recorderAniLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, self.recorderButton.frame.size.width-10, self.recorderButton.frame.size.height-10)];
-            _recorderAniLabel.backgroundColor = [UIColor blackColor];
+            _recorderAniLabel.backgroundColor = [UIColor whiteColor];
             _recorderAniLabel.layer.cornerRadius = _recorderAniLabel.frame.size.width/2;
             _recorderAniLabel.layer.masksToBounds = YES;
             _recorderAniLabel.transform =  CGAffineTransformMakeScale(0.5,0.5);
@@ -661,7 +666,7 @@ BOOL IsArabic;
 }
 
 - (void)showAlertView:(NSString *)message {
-    FSAlertView *alet = [[FSAlertView alloc] initWithFrame:self.bounds];
+    FSAlertView *alet = [[FSAlertView alloc] init];
     [alet showWithMessage:message];
 }
 

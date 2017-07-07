@@ -111,6 +111,9 @@
 		984060531EF940730049B58E /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060521EF940730049B58E /* libiconv.tbd */; };
 		984060551EF9407B0049B58E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060541EF9407B0049B58E /* libz.tbd */; };
 		984060571EF940810049B58E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060561EF940810049B58E /* libc++.tbd */; };
+		9871BC371F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */; };
+		9871BC3B1F0F85BA0065977A /* FSPublisherServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9871BC3A1F0F85BA0065977A /* FSPublisherServer.m */; };
+		9871BC3F1F0F861D0065977A /* FSPublisherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9871BC3E1F0F861D0065977A /* FSPublisherAPI.m */; };
 		98725BF21F064F8C00445EF2 /* FSMoveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 98725BF11F064F8C00445EF2 /* FSMoveButton.m */; };
 		987700AF1F03AFE50043394E /* FSSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 987700AE1F03AFE50043394E /* FSSegmentView.m */; };
 		987B58AD1F0E217800E85A37 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987B58AC1F0E217800E85A37 /* UIKit.framework */; };
@@ -340,6 +343,11 @@
 		984060521EF940730049B58E /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		984060541EF9407B0049B58E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		984060561EF940810049B58E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"; sourceTree = "<group>"; };
+		9871BC391F0F85BA0065977A /* FSPublisherServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPublisherServer.h; sourceTree = "<group>"; };
+		9871BC3A1F0F85BA0065977A /* FSPublisherServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPublisherServer.m; sourceTree = "<group>"; };
+		9871BC3D1F0F861D0065977A /* FSPublisherAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPublisherAPI.h; sourceTree = "<group>"; };
+		9871BC3E1F0F861D0065977A /* FSPublisherAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPublisherAPI.m; sourceTree = "<group>"; };
 		98725BF01F064F8C00445EF2 /* FSMoveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMoveButton.h; sourceTree = "<group>"; };
 		98725BF11F064F8C00445EF2 /* FSMoveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMoveButton.m; sourceTree = "<group>"; };
 		987700A91F03A6520043394E /* NvcConvertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertor.h; sourceTree = "<group>"; };
@@ -474,6 +482,8 @@
 		562D405A1EFD38A500BF0E0D /* FSVideoPublisher */ = {
 			isa = PBXGroup;
 			children = (
+				9871BC3C1F0F860E0065977A /* FSPublisherAPI */,
+				9871BC381F0F85A10065977A /* FSPublisherServer */,
 				562D405B1EFD39F100BF0E0D /* FSPublisherController.h */,
 				562D405C1EFD39F100BF0E0D /* FSPublisherController.m */,
 				988AC6D21EFE4B99007FBCEF /* FSPublisherToolView.h */,
@@ -523,6 +533,7 @@
 		562D406E1EFE4D2000BF0E0D /* FSVideoFxSource */ = {
 			isa = PBXGroup;
 			children = (
+				9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */,
 				563B79D01F05F88A0035346A /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx */,
 				562D40711EFE4FD900BF0E0D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx */,
 			);
@@ -986,6 +997,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9871BC381F0F85A10065977A /* FSPublisherServer */ = {
+			isa = PBXGroup;
+			children = (
+				9871BC391F0F85BA0065977A /* FSPublisherServer.h */,
+				9871BC3A1F0F85BA0065977A /* FSPublisherServer.m */,
+			);
+			path = FSPublisherServer;
+			sourceTree = "<group>";
+		};
+		9871BC3C1F0F860E0065977A /* FSPublisherAPI */ = {
+			isa = PBXGroup;
+			children = (
+				9871BC3D1F0F861D0065977A /* FSPublisherAPI.h */,
+				9871BC3E1F0F861D0065977A /* FSPublisherAPI.m */,
+			);
+			path = FSPublisherAPI;
+			sourceTree = "<group>";
+		};
 		98E3C9B81EFA1B9B00A2FDD6 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -1148,6 +1177,7 @@
 				567A3D611EFB6F830026247E /* LICENSE.txt in Resources */,
 				562D40721EFE4FD900BF0E0D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */,
 				987B58BA1F0E796E00E85A37 /* Localizable.strings in Resources */,
+				9871BC371F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */,
 				567E0B611EF930D100C4C527 /* LaunchScreen.storyboard in Resources */,
 				5647BC4B1F04E0110072B618 /* ugly.mp3 in Resources */,
 				567E0B5E1EF930D100C4C527 /* Assets.xcassets in Resources */,
@@ -1260,7 +1290,9 @@
 				983445F91F0CE01F00A6E977 /* FSLoginAPI.m in Sources */,
 				563B7A041F0A281C0035346A /* FSToolController.m in Sources */,
 				567A3D491EFB66B60026247E /* FSDBUploadCache.m in Sources */,
+				9871BC3F1F0F861D0065977A /* FSPublisherAPI.m in Sources */,
 				563B7A1A1F0A52080035346A /* FSDismissAnimator.m in Sources */,
+				9871BC3B1F0F85BA0065977A /* FSPublisherServer.m in Sources */,
 				9840603E1EF93F130049B58E /* FSShortVideoRecorderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

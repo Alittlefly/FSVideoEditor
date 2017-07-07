@@ -25,6 +25,7 @@ typedef enum{
 - (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath convertFilePath:(NSString *)convertFilePath speed:(CGFloat)speed musicStartTime:(NSTimeInterval)time;
 - (void)FSShortVideoRecorderViewFinishTimeLine:(NvsTimeline *)timeLine speed:(CGFloat)speed musicStartTime:(NSTimeInterval)time;
 - (void)FSShortVideoRecorderViewEditMusic;
+- (void)FSShortVideoRecorderViewShowAlertView:(NSString *)message;
 
 @end
 

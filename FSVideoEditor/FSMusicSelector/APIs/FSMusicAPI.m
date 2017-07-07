@@ -22,7 +22,8 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     __weak typeof(self) weakS = self;
-    NSURLSessionTask *task = [manager GET:@"http://10.10.32.145:8088/video/song/use/3" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    //http://10.10.32.145:8088/   http://www.7nujoom.com/
+    NSURLSessionTask *task = [manager GET:@"http://www.7nujoom.com/video/song/list?no=1&size=99" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([weakS.delegate respondsToSelector:@selector(musicApiGetMusics:)]) {
             [weakS.delegate musicApiGetMusics:responseObject];
         }

@@ -26,7 +26,10 @@
 #import "FSMusicPlayer.h"
 #import "FSMusicManager.h"
 
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate>
+#import "FSPublisherServer.h"
+#import "FSAlertView.h"
+
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSPublisherServerDelegate>
 {
     FSUploader *_uploader;
     NSString *_outPutPath;
@@ -54,6 +57,9 @@
 
 @property (nonatomic, assign)BOOL converted;
 @property (nonatomic, assign)FSVideoFxType currentFxType;
+
+@property (nonatomic, strong) FSPublisherServer *publishServer;
+
 @end
 
 @implementation FSPublisherController
@@ -91,6 +97,9 @@
     if (!_filePath) {
         return;
     }
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"];
+    
+    [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     _context = [NvsStreamingContext sharedInstance];
     if (!_timeLine) {
         return;
@@ -432,13 +441,54 @@
 #pragma mark -
 - (void)uploadFile:(NSString *)filePath{
 //    NSLog(@"filePath %@",filePath);
-    [_uploader uploadFileWithFilePath:filePath];
+    __block FSPublisherController *weakSelf = self;
+    [_uploader uploadFileWithFilePath:filePath complete:^(CGFloat progress, NSString *filePath, id info) {
+        NSLog(@"uploadFile: %f  %@",progress,filePath);
+        if (!_publishServer) {
+            _publishServer = [[FSPublisherServer alloc] init];
+            _publishServer.delegate = weakSelf;
+        }
+        
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
+        [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
+        [dic setValue:[NSNumber numberWithInt:4] forKey:@"requestType"];
+        [dic setValue:[info objectForKey:@"dataInfo"] forKey:@"vu"];
+        [dic setValue:@"视频描述" forKey:@"vd"];
+        [dic setValue:@"视频图片" forKey:@"vp"];
+        [dic setValue:@"视频动态图" forKey:@"vg"];
+        [dic setValue:[NSNumber numberWithInt:1111] forKey:@"si"]; //歌曲id
+        [dic setValue:[NSNumber numberWithInt:2222] forKey:@"di"];  //挑战ID
+        [dic setValue:[NSArray array] forKey:@"a"];  //消息[{"ui":12815,"nk":"tttty"},{"ui":90665,"nk":"ytest"}]
+//        [dic setValue:@"被@用户ID" forKey:@"ui"];
+//        [dic setValue:@"用户昵称" forKey:@"nk"];
+        
+        [_publishServer publisherVideo:dic];
+    }];
+//    [_uploader uploadFileProgressWithFilePath:filePath complete:^(float progress, NSString *filePath) {
+//        
+//    }];
 }
 -(void)uploadUpFiles:(NSString *)filePath progress:(float)progress{
-//    NSLog(@"progress %.2f",progress);
+    NSLog(@"progress %.2f",progress);
 }
 
 -(void)dealloc{
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));
 }
+
+#pragma mark - FSPublisherServerDelegate
+- (void)FSPublisherServerSucceed {
+    [self showMessage:NSLocalizedString(@"UploadSecceed", nil)];
+}
+
+- (void)FSPublisherServerFailed:(NSError *)error {
+    [self showMessage:NSLocalizedString(@"UploadFailed", nil)];
+}
+
+- (void)showMessage:(NSString *)message {
+    FSAlertView *alertView = [[FSAlertView alloc] init];
+    [alertView showWithMessage:message];
+}
+
+
 @end

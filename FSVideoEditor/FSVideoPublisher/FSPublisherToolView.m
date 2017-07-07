@@ -80,7 +80,7 @@ static BOOL IsArabic = NO;
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.font = [UIFont systemFontOfSize:15];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
-    _titleLabel.text = [NSString stringWithFormat:@"%@-@用户昵称",NSLocalizedString(@"OriginalVoice", nil)];
+    _titleLabel.text = [NSString stringWithFormat:@"%@-@%@",NSLocalizedString(@"OriginalVoice", nil),[[NSUserDefaults standardUserDefaults] valueForKey:@"nickName"]];
     [self addSubview:_titleLabel];
 
     _cutMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -93,7 +93,7 @@ static BOOL IsArabic = NO;
     _cutMusicLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
     _cutMusicLabel.font = [UIFont systemFontOfSize:7];
     _cutMusicLabel.textColor = [UIColor whiteColor];
-    _cutMusicLabel.backgroundColor = [UIColor lightGrayColor];
+    _cutMusicLabel.backgroundColor = [UIColor clearColor];
     _cutMusicLabel.textAlignment = NSTextAlignmentCenter;
     _cutMusicLabel.text = NSLocalizedString(@"Edit", nil);
     [self addSubview:_cutMusicLabel];
@@ -106,7 +106,7 @@ static BOOL IsArabic = NO;
     
     _volumeLabel = [[UILabel alloc] init];
     _volumeLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_volumeButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_volumeButton.frame), 10) : CGRectMake(CGRectGetMaxX(_volumeButton.frame) - CGRectGetWidth(_volumeButton.frame), CGRectGetMaxY(_volumeButton.frame), CGRectGetWidth(_volumeButton.frame), 10);
-    _volumeLabel.backgroundColor = [UIColor lightGrayColor];
+    _volumeLabel.backgroundColor = [UIColor clearColor];
     _volumeLabel.font = [UIFont systemFontOfSize:7];
     _volumeLabel.textColor = [UIColor whiteColor];
     _volumeLabel.textAlignment = NSTextAlignmentCenter;
@@ -122,7 +122,7 @@ static BOOL IsArabic = NO;
         
         _filterLabel = [[UILabel alloc] init];
         _filterLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15) : CGRectMake(CGRectGetMaxX(_filterButton.frame) - CGRectGetWidth(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15);
-        _filterLabel.backgroundColor = [UIColor lightGrayColor];
+        _filterLabel.backgroundColor = [UIColor clearColor];
         _filterLabel.font = [UIFont systemFontOfSize:7];
         _filterLabel.textColor = [UIColor whiteColor];
         _filterLabel.textAlignment = NSTextAlignmentCenter;// IsArabic ? NSTextAlignmentLeft : NSTextAlignmentRight;
@@ -143,7 +143,7 @@ static BOOL IsArabic = NO;
     
     _effectsLabel = [[UILabel alloc] init];
     _effectsLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_effectsButton.frame), CGRectGetMaxY(_effectsButton.frame), CGRectGetWidth(_effectsButton.frame), 15) : CGRectMake(CGRectGetMaxX(_effectsButton.frame) - CGRectGetWidth(_effectsButton.frame), CGRectGetMaxY(_effectsButton.frame), CGRectGetWidth(_effectsButton.frame), 15);
-    _effectsLabel.backgroundColor = [UIColor lightGrayColor];
+    _effectsLabel.backgroundColor = [UIColor clearColor];
     _effectsLabel.font = [UIFont systemFontOfSize:7];
     _effectsLabel.textColor = [UIColor whiteColor];
     _effectsLabel.textAlignment = NSTextAlignmentCenter;// IsArabic ? NSTextAlignmentLeft : NSTextAlignmentRight;
@@ -153,7 +153,9 @@ static BOOL IsArabic = NO;
     _draftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _draftButton.frame = IsArabic ? CGRectMake(self.frame.size.width-20-(self.frame.size.width-60)/2, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44) : CGRectMake(20, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44);
     [_draftButton setTitle:NSLocalizedString(@"Draft", nil) forState:UIControlStateNormal];
-    _draftButton.backgroundColor = FSHexRGB(0xD8D8D8);
+    _draftButton.backgroundColor = FSHexRGB(0x0BC2C6);
+    _draftButton.layer.cornerRadius = 22;
+    _draftButton.layer.masksToBounds = YES;
     [_draftButton setImage:[UIImage imageNamed:@"draft"] forState:UIControlStateNormal];
     [_draftButton addTarget:self action:@selector(draftClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_draftButton];
@@ -162,6 +164,8 @@ static BOOL IsArabic = NO;
     _publishButton.frame = IsArabic ? CGRectMake(20, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44) : CGRectMake(self.frame.size.width-20-(self.frame.size.width-60)/2, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44);
     [_publishButton setTitle:NSLocalizedString(@"Upload", nil) forState:UIControlStateNormal];
     _publishButton.backgroundColor = FSHexRGB(0xFE2C54);
+    _publishButton.layer.cornerRadius = 22;
+    _publishButton.layer.masksToBounds = YES;
      [_publishButton setImage:[UIImage imageNamed:@"publish"] forState:UIControlStateNormal];
     [_publishButton addTarget:self action:@selector(publishClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_publishButton];
@@ -233,13 +237,13 @@ static BOOL IsArabic = NO;
     
 }
 
-- (void)FSEditVideoNameViewSaveToPhotoLibrary {
+- (void)FSEditVideoNameViewSaveToPhotoLibrary:(BOOL)isSave {
     if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewSaveToDraft)]) {
         [self.delegate FSPublisherToolViewSaveToDraft];
     }
 }
 
-- (void)FSEditVideoNameViewAddChallenge {
+- (void)FSEditVideoNameViewAddChallenge:(NSInteger)challengeID {
 
 }
 

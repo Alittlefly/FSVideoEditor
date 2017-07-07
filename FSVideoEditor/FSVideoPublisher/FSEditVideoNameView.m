@@ -15,7 +15,8 @@
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIButton *addChallengeButton;
 @property (nonatomic, strong) UIButton *addFriendsButton;
-@property (nonatomic,strong) UIButton *saveToPhotoButton;
+@property (nonatomic, strong) UIButton *saveToPhotoButton;
+@property (nonatomic, assign) BOOL isSave;
 
 @end
 
@@ -23,9 +24,9 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        _isSave = NO;
+
         [self initBaseUI];
-        
-        
     }
     return self;
 }
@@ -56,26 +57,28 @@
     _addChallengeButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [_addChallengeButton addTarget:self action:@selector(addChallenge) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_addChallengeButton];
+    _addChallengeButton.hidden = YES;
     
     _saveToPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _saveToPhotoButton.frame = CGRectMake(self.frame.size.width-100, CGRectGetMaxY(_lineView.frame)+15, 100, 27);
     _saveToPhotoButton.backgroundColor = [UIColor clearColor];
     [_saveToPhotoButton setTitle:[NSString stringWithFormat:@"#%@",NSLocalizedString(@"SaveInGallery", nil)] forState:UIControlStateNormal];
     [_saveToPhotoButton.titleLabel setFont:[UIFont systemFontOfSize:10]];
-    _saveToPhotoButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [_saveToPhotoButton setTitleColor:_isSave?[UIColor redColor]:[UIColor whiteColor] forState:UIControlStateNormal];
     [_saveToPhotoButton addTarget:self action:@selector(saveToPhoto) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_saveToPhotoButton];
+    _saveToPhotoButton.hidden = YES;
 }
 
 - (void)addChallenge {
-    if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewAddChallenge)]) {
-        [self.delegate FSEditVideoNameViewAddChallenge];
+    if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewAddChallenge:)]) {
+        [self.delegate FSEditVideoNameViewAddChallenge:123];
     }
 }
 
 - (void)saveToPhoto {
-    if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewSaveToPhotoLibrary)]) {
-        [self.delegate FSEditVideoNameViewSaveToPhotoLibrary];
+    if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewSaveToPhotoLibrary:)]) {
+        [self.delegate FSEditVideoNameViewSaveToPhotoLibrary:NO];
     }
 }
 

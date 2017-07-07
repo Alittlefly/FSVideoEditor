@@ -12,7 +12,7 @@
 #import "FSShortVideoRecorderManager.h"
 #import "NvsVideoTrack.h"
 #import "NvsVideoClip.h"
-
+#import "FSAlertView.h"
 
 @interface FSShortVideoRecorderController ()<FSShortVideoRecorderViewDelegate>
 
@@ -113,6 +113,11 @@
 //    [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
     publish.timeLine = timeLine;
     [self.navigationController pushViewController:publish animated:YES];
+}
+
+- (void)FSShortVideoRecorderViewShowAlertView:(NSString *)message {
+    FSAlertView *alet = [[FSAlertView alloc] initWithFrame:self.view.bounds];
+    [alet showWithMessage:message];
 }
 
 - (void)didReceiveMemoryWarning {

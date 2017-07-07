@@ -45,6 +45,10 @@
     
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
 //    NSDictionary *param = @{@"file":data};
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
+    [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
+    [dic setValue:[NSNumber numberWithInteger:4] forKey:@"requestType"];
+
     _uploadTask = (NSURLSessionUploadTask *)[mgr  POST:[self requestUrl] parameters:@{} constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:data name:@"file" fileName:file.fileName mimeType:@"video/quicktime"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {

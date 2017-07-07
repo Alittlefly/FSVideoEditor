@@ -65,7 +65,7 @@
     _soundtrackLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 23, 0, 27)];
     _soundtrackLabel.backgroundColor = [UIColor clearColor];
     _soundtrackLabel.font = [UIFont systemFontOfSize:15];
-    _soundtrackLabel.textColor = [UIColor blackColor];
+    _soundtrackLabel.textColor = [UIColor whiteColor];
     _soundtrackLabel.text = NSLocalizedString(@"Original", nil);
     [_soundtrackLabel sizeToFit];
     _soundtrackLabel.frame = CGRectMake(15, 23, _soundtrackLabel.frame.size.width, 27);
@@ -75,14 +75,14 @@
     _soundtrackSlider.value = 0.5;
     _soundtrackSlider.minimumTrackTintColor = [UIColor orangeColor];
     _soundtrackSlider.maximumTrackTintColor = [UIColor blackColor];
-    _soundtrackSlider.thumbTintColor = [UIColor redColor];
+    _soundtrackSlider.thumbTintColor = FSHexRGB(0x0BC2C6);
     [_soundtrackSlider addTarget:self action:@selector(changeSoundtrack) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_soundtrackSlider];
     
     _scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_soundtrackLabel.frame)+30, 0, 27)];
     _scoreLabel.backgroundColor = [UIColor clearColor];
     _scoreLabel.font = [UIFont systemFontOfSize:15];
-    _scoreLabel.textColor = [UIColor blackColor];
+    _scoreLabel.textColor = [UIColor whiteColor];
     _scoreLabel.text = NSLocalizedString(@"Music", nil);
     [_scoreLabel sizeToFit];
     _scoreLabel.frame = CGRectMake(_scoreLabel.frame.origin.x, _scoreLabel.frame.origin.y, _scoreLabel.frame.size.width, _scoreLabel.frame.size.height);
@@ -92,13 +92,13 @@
     _scoreSlider.value = 0.5;
     _scoreSlider.minimumTrackTintColor = [UIColor orangeColor];
     _scoreSlider.maximumTrackTintColor = [UIColor blackColor];
-    _scoreSlider.thumbTintColor = [UIColor redColor];
+    _scoreSlider.thumbTintColor = FSHexRGB(0x0BC2C6);
     [_scoreSlider addTarget:self action:@selector(changeScore) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_scoreSlider];
     
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-60)/2, CGRectGetMinY(_contentView.frame)-20-30, 60, 30)];
     _titleLabel.backgroundColor = [UIColor clearColor];
-    _titleLabel.font = [UIFont systemFontOfSize:18];
+    _titleLabel.font = [UIFont systemFontOfSize:15];
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.text = NSLocalizedString(@"Volume", nil);

@@ -32,5 +32,6 @@
 -(void)uploadFileProgressWithFilePath:(NSString *)filePath complete:(void(^)(float progress,NSString *filePath))complete;
 -(void)uploadFilesWithState:(FSFileUpLoadState)state complete:(void(^)(NSArray<FSFile *> *files))complete;
 -(void)uploadFileInfoWith:(NSString *)filePath complete:(void(^)(FSFile *file))complete;
+- (void)uploadFileWithFilePath:(NSString *)filePath complete:(FSUploadProgressBlock)complete;
 
 @end

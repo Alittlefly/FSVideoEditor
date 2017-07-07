@@ -21,6 +21,7 @@
         [music setSongPic:[dic objectForKey:@"p"]];
         [music setSongUrl:[dic objectForKey:@"u"]];
         [music setSongAuthor:[dic objectForKey:@"a"]];
+        [music setSongTime:[[dic objectForKey:@"l"] integerValue]];
         
         [dataArray addObject:music];
         

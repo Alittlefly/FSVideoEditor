@@ -28,6 +28,7 @@
 @property(nonatomic,strong)NSString *songPic;       //歌曲封面url
 @property(nonatomic,copy)NSString *songTitle;       //歌曲名称
 @property(nonatomic,copy)NSString *songUrl;         //歌曲url
+@property (nonatomic,assign) NSInteger songTime;    //歌曲时长（秒）
 
 @property(nonatomic,assign)BOOL opend;
 @property(nonatomic,assign)BOOL isPlaying;

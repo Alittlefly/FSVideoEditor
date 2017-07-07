@@ -87,6 +87,7 @@
     self.passwordTextField.leftView = passwordView;
     self.passwordTextField.leftViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
     self.passwordTextField.delegate = self;
+    self.passwordTextField.secureTextEntry = YES;
     self.passwordTextField.placeholder = NSLocalizedString(@"Password",nil);
     self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Password",nil) attributes:@{NSForegroundColorAttributeName:FSHexRGBAlpha(0xF5F5F5, 0.5)}];
     
@@ -131,6 +132,9 @@
     
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"UID"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Password"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"nickName"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"loginKey"];
+
     //[self showMessage:NSLocalizedString(@"", nil)];
 }
 
@@ -168,6 +172,14 @@
 #pragma mark -  FSLoginServerDelegate
 - (void)FSLoginServerSucceed:(id)objec {
     [_activityView stopAnimating];
+    
+    NSDictionary *dataInfo = [objec objectForKey:@"dataInfo"];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginName"] forKey:@"UID"];
+    [[NSUserDefaults standardUserDefaults] setValue:self.passwordTextField.text forKey:@"Password"];
+    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"nickName"] forKey:@"nickName"];
+    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginKey"] forKey:@"loginKey"];
+
 
     self.recorderButton.hidden = NO;
     self.logoutButton.hidden = NO;
@@ -175,9 +187,6 @@
     self.uidTextField.hidden = YES;
     self.passwordTextField.hidden = YES;
     self.loginButton.hidden = YES;
-    
-    [[NSUserDefaults standardUserDefaults] setValue:@"uid" forKey:@"UID"];
-    [[NSUserDefaults standardUserDefaults] setValue:@"password" forKey:@"Password"];
 }
 
 - (void)FSLoginServerFaild:(NSError *)error {

@@ -137,6 +137,9 @@ static FSShortVideoRecorderManager *recorderManager;
         return;
         
     }
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"];
+
+    [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     // 初始化NvsStreamingContext
     _context = [NvsStreamingContext sharedInstance];
     
@@ -478,6 +481,11 @@ static FSShortVideoRecorderManager *recorderManager;
        // UISaveVideoAtPathToSavedPhotosAlbum(path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     }
     
+    if (_filePathArray.count > 1) {
+        for (int i = 0; i < _filePathArray.count-1; i++) {
+            [self.videoTrack setBuiltinTransition:i+1 withName:nil];
+        }
+    }
     
     _videoFilePath = [[docPath objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];//[docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
     
