@@ -89,7 +89,7 @@
 - (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath convertFilePath:(NSString *)convertFilePath speed:(CGFloat)speed musicStartTime:(NSTimeInterval)time {
     FSPublisherController *publish = [[FSPublisherController alloc] init];
     publish.filePath = filePath;
-    //publish.convertFilePath = convertFilePath;
+    publish.convertFilePath = convertFilePath;
     publish.playSpeed = speed;
     publish.musicPath = _musicFilePath;
     publish.musicStartTime = time;
