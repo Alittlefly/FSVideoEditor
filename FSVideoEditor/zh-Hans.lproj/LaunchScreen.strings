@@ -1,1 +1,88 @@
 
+NoNetWork = "当前没有网络，请检查网络设置";
+NotWifi = "当前为非wifi环境,  是否要使用移动网络上传？";
+
+Account = "账号";
+Password = "密码";
+Login = "登录";
+BadPassword = "密码错误";
+LoginFailed = "登录失败";
+logout = "退出登录";
+
+UploadVideo = "上传视频";
+ChooseMusic = "选择音乐";
+Record = "直接开拍";
+HotMusic = "热门歌曲";
+RecordNow = "确定使用并开拍";
+Loading = "加载中…";
+Cancel = "取消";
+
+VideoLengthTip = "选择的视频不能少于5s";
+Edit = "编辑";
+Volume = "音量";
+Effects = "特效";
+EnterTitle = "输入标题";
+AddHashtag = "添加挑战";
+SaveInGallery = "同时保存到相册";
+Draft = "草稿";
+Upload = "发布";
+UploadFailed = "发布失败";
+Uploading = "上传中...";
+UploadSecceed = "发布成功";
+CancelRecording = "是否放弃当前录制？";
+CancelRecorded = "放弃";
+OriginalVoice = "视频原声";
+CancelEditing = "是否放弃拍摄?";
+CancelEditWarning = "继续拍摄之前的特效会被清空,是否继续";
+Done = "完成";
+Save = "保存";
+
+Filters = "滤镜特效";
+Timeline = "时间特效";
+Magic = "灵魂出窍";
+Vibrating = "抖动";
+Repeat = "反复";
+Reverse = "时光倒流";
+NoFilter = "无";
+ChooseEffectsTip = "点击选择时间特效";
+SlowMotion = "慢动作";
+Delete = "撤销";
+AddFilterTip = "选择位置后,按住使用特效";
+EraseEffectsTip = "是否清除已添加的特效？";
+Erase = "清除";
+LongPress = "按住开始拍摄,松开暂停";
+
+VerySlow = "极慢";
+Slow = "慢";
+Normal = "标准";
+Fast = "快";
+VeryFast = "极快";
+Countdown = "倒计时";
+ColorFilter = "滤镜";
+
+BlackWhite = "黑白";
+Sweet = "甜美";
+Dim = "LOMO";
+Classic = "经典";
+Blueish = "蓝调";
+Light = "紫霞";
+Milky = "奶茶";
+Warm = "暖茶";
+OldTimes = "岁月";
+Nostalgia = "复古";
+
+BeautifyOn = "美颜开";
+BeautifyOff = "美颜关";
+CutMusic = "剪音乐";
+BeautifyOnTip = "美颜已开启";
+BeautifyOffTip = "美颜已关闭";
+PressToRecord = "按住下方绿色按钮开始拍摄";
+DeleteVideoTip = "确定删除上一段视频?";
+Confirm = "确定";
+EditMusicTip = "左右拖动声谱以剪取音乐";
+MusicStartTime = "当前从(0)开始";
+
+Original = "原声";
+Music = "配乐";
+ChoseVideoTime = "已选取(0)s";
+Processing = "奋力处理中";
