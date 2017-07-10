@@ -23,7 +23,7 @@
 
 @property(nonatomic, strong) id<NvcConvertorDelegate> delegate;
 
-+ (BOOL)InstallLicense:(NSString*)licenseFile;
++ (BOOL)InstallLicense:(NSData*)licenseFile;
 
 - (instancetype)initWithMaxCacheSample:(NSInteger)maxCacheCount;
 //

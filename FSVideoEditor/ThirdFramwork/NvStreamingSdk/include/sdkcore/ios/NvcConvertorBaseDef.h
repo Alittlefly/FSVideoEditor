@@ -33,13 +33,21 @@ struct SNvcRational {
     int den;    // Denominator
 };
 
+enum ENvcOutputVideoResolution {
+    NvcOutputVideoResolution_NotResize = 0,
+    NvcOutputVideoResolution_360 = 1,
+    NvcOutputVideoResolution_480 = 2,
+    NvcOutputVideoResolution_720 = 3,
+    NvcOutputVideoResolution_1080 = 4,
+};
+
 //
 // output config
 //
 #define NVC_OUTPUT_CONFIG_REVERSE   0x1
 
 struct SNvcOutputConfig {
-    struct SNvcRational scale;
+    enum ENvcOutputVideoResolution videoResolution;
     float from; //  seconds unit
     float to; //  seconds unit
     uint64_t dataRate; // Bits per second

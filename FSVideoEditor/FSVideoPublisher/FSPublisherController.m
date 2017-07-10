@@ -60,6 +60,8 @@
 
 @property (nonatomic, strong) FSPublisherServer *publishServer;
 
+@property (nonatomic, copy) NSString *videoDescription;
+@property (nonatomic, assign) BOOL isSaved;
 @end
 
 @implementation FSPublisherController
@@ -93,11 +95,12 @@
     [self.view addSubview:_prewidow];
     
     _isEnterCutMusicView = NO;
+    _videoDescription = @"";
     
     if (!_filePath) {
         return;
     }
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic"];
     
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     _context = [NvsStreamingContext sharedInstance];
@@ -252,7 +255,6 @@
     
     NSLog(@"Compile success!");
     
-    [self.loading loadingViewhide];
     [self uploadFile:_outPutPath];
   //  UISaveVideoAtPathToSavedPhotosAlbum(_outPutPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 
@@ -347,6 +349,14 @@
 - (void)FSPublisherToolViewSaveToDraft {
 #warning 区分正序倒序，重复监测
     //UISaveVideoAtPathToSavedPhotosAlbum(_filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)FSPublisherToolViewSaveToLibrary:(BOOL)isSave {
+    _isSaved = isSave;
+}
+
+- (void)FSPublisherToolViewChangeVideoDescription:(NSString *)description {
+    _videoDescription = description;
 }
 
 #pragma mark - 
@@ -453,7 +463,7 @@
         [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
         [dic setValue:[NSNumber numberWithInt:4] forKey:@"requestType"];
         [dic setValue:[info objectForKey:@"dataInfo"] forKey:@"vu"];
-        [dic setValue:@"视频描述" forKey:@"vd"];
+        [dic setValue:weakSelf.videoDescription forKey:@"vd"];
         [dic setValue:@"视频图片" forKey:@"vp"];
         [dic setValue:@"视频动态图" forKey:@"vg"];
         [dic setValue:[NSNumber numberWithInt:1111] forKey:@"si"]; //歌曲id
@@ -478,10 +488,14 @@
 
 #pragma mark - FSPublisherServerDelegate
 - (void)FSPublisherServerSucceed {
+    [self.loading loadingViewhide];
+
     [self showMessage:NSLocalizedString(@"UploadSecceed", nil)];
 }
 
 - (void)FSPublisherServerFailed:(NSError *)error {
+    [self.loading loadingViewhide];
+
     [self showMessage:NSLocalizedString(@"UploadFailed", nil)];
 }
 

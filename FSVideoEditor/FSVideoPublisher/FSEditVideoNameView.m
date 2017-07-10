@@ -67,7 +67,7 @@
     [_saveToPhotoButton setTitleColor:_isSave?[UIColor redColor]:[UIColor whiteColor] forState:UIControlStateNormal];
     [_saveToPhotoButton addTarget:self action:@selector(saveToPhoto) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_saveToPhotoButton];
-    _saveToPhotoButton.hidden = YES;
+    //_saveToPhotoButton.hidden = YES;
 }
 
 - (void)addChallenge {

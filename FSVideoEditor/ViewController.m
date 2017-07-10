@@ -11,6 +11,7 @@
 #import "FSAnimationNavController.h"
 #import "FSLoginServer.h"
 #import "FSAlertView.h"
+#import "FSEditorLoading.h"
 
 @interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate>
 
@@ -25,11 +26,18 @@
 
 @property (strong, nonatomic) FSLoginServer *loginServer;
 
-@property (strong, nonatomic) UIActivityIndicatorView  *activityView;
-
+@property (nonatomic, strong) FSEditorLoading *loading;
+ 
 @end
 
 @implementation ViewController
+
+-(FSEditorLoading *)loading{
+    if (!_loading) {
+        _loading = [[FSEditorLoading alloc] initWithFrame:self.view.bounds];
+    }
+    return _loading;
+}
 
 -(void)viewDidLoad{
     [super viewDidLoad];
@@ -148,13 +156,9 @@
         [self showMessage:NSLocalizedString(@"BadPassword", nil)];
         return;
     }
-    if (!_activityView) {
-        _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        _activityView.frame = CGRectMake(0, 0, 100, 100);
-        _activityView.center = self.view.center;
-        [self.view addSubview:_activityView];
-    }
-    [_activityView startAnimating];
+    
+    [self.view addSubview:self.loading];
+    [self.loading loadingViewShow];
     
     if (!_loginServer) {
         _loginServer = [[FSLoginServer alloc] init];
@@ -171,7 +175,7 @@
 
 #pragma mark -  FSLoginServerDelegate
 - (void)FSLoginServerSucceed:(id)objec {
-    [_activityView stopAnimating];
+    [self.loading loadingViewhide];
     
     NSDictionary *dataInfo = [objec objectForKey:@"dataInfo"];
     
@@ -190,7 +194,7 @@
 }
 
 - (void)FSLoginServerFaild:(NSError *)error {
-    [_activityView stopAnimating];
+    [self.loading loadingViewhide];
     [self showMessage:NSLocalizedString(@"LoginFailed", nil)];
 }
 

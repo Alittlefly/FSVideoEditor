@@ -137,7 +137,7 @@ static FSShortVideoRecorderManager *recorderManager;
         return;
         
     }
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic"];
 
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     // 初始化NvsStreamingContext
@@ -483,7 +483,7 @@ static FSShortVideoRecorderManager *recorderManager;
     
     if (_filePathArray.count > 1) {
         for (int i = 0; i < _filePathArray.count-1; i++) {
-            [self.videoTrack setBuiltinTransition:i+1 withName:nil];
+            [self.videoTrack setBuiltinTransition:i withName:nil];
         }
     }
     
@@ -515,7 +515,7 @@ static FSShortVideoRecorderManager *recorderManager;
     CGFloat time = [[_timeArray objectAtIndex:_videoIndex-1] floatValue];
     _videoTime = _videoTime - time;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerDeleteVideo:)]) {
-        [self.delegate FSShortVideoRecorderManagerDeleteVideo:_videoTime];
+        [self.delegate FSShortVideoRecorderManagerDeleteVideo:[[NSNumber numberWithFloat:_videoTime] floatValue]];
     }
     [_timeArray removeLastObject];
     [_speedArray removeLastObject];
@@ -634,6 +634,14 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (void)setupConvertor:(NSString *)filePath {
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"];
+    
+    NSData *JSONData = [NSData dataWithContentsOfFile:verifySdkLicenseFilePath];
+
+    BOOL isCanConver = [NvcConvertor InstallLicense:JSONData];
+    if (!isCanConver) {
+        [self convertFaild:nil];
+    }
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *tmpfilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
     _convertorFilePath = tmpfilePath;
@@ -642,8 +650,8 @@ static FSShortVideoRecorderManager *recorderManager;
     config.from = 0;
     config.to = INT_MAX;
     config.dataRate = 0;
-    config.scale.num = 1;
-    config.scale.den = 1;
+//    config.scale.num = 1;
+//    config.scale.den = 1;
     
     //倒序
     int nTmp = config.from;

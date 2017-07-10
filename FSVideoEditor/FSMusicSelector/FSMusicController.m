@@ -35,27 +35,29 @@
 -(NSMutableArray *)musics{
     if (!_musics) {
         
-        FSMusic *music = [[FSMusic alloc] init];
-        music.songTitle = @"month";
-        music.lastSeconds = 15;
-        music.songPic = @"";
-        music.songAuthor = @"徐子谦";
-        
-        
-        FSMusic *music1 = [[FSMusic alloc] init];
-        music1.songTitle = @"wind";
-        music1.lastSeconds = 15;
-        music1.songPic = @"";
-        music1.songAuthor = @"高超";
+//        FSMusic *music = [[FSMusic alloc] init];
+//        music.songTitle = @"month";
+//        music.lastSeconds = 15;
+//        music.songPic = @"";
+//        music.songAuthor = @"徐子谦";
+//        
+//        
+//        FSMusic *music1 = [[FSMusic alloc] init];
+//        music1.songTitle = @"wind";
+//        music1.lastSeconds = 15;
+//        music1.songPic = @"";
+//        music1.songAuthor = @"高超";
+//
+//        
+//        FSMusic *music2 = [[FSMusic alloc] init];
+//        music2.songTitle = @"ugly";
+//        music2.lastSeconds = 15;
+//        music2.songPic = @"";
+//        music2.songAuthor = @"王明";
 
+//        _musics = [NSMutableArray arrayWithObjects:music,music1,music2,nil];
         
-        FSMusic *music2 = [[FSMusic alloc] init];
-        music2.songTitle = @"ugly";
-        music2.lastSeconds = 15;
-        music2.songPic = @"";
-        music2.songAuthor = @"王明";
-
-        _musics = [NSMutableArray arrayWithObjects:music,music1,music2,nil];
+        _musics = [NSMutableArray arrayWithCapacity:0];
         
         
     }
@@ -81,6 +83,9 @@
      _sever = [[FSMusicSever alloc] init];
     [_sever setDelegate:self];
     [_sever getMusicList];
+    
+    [self.view addSubview:self.loading];
+    [self.loading loadingViewShow];
 }
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
@@ -148,7 +153,7 @@
             NSString *url = music.songUrl;//[@"http://10.10.32.152:20000/" stringByAppendingString:music.songUrl];
             if (![url hasPrefix:@"http"]) {
                 //http://www.7nujoom.com/    http://10.10.32.152:20000/
-                url = [@"http://www.7nujoom.com/" stringByAppendingString:music.songUrl];
+                url = [@"http://35.158.218.231/" stringByAppendingString:music.songUrl];
             }
             __weak typeof(self) weakS = self;
             [FSMusicManager downLoadMusic:url complete:^(NSString *localPath, NSError *error) {
@@ -256,7 +261,7 @@
 -(void)updateVideoStreamUrl:(NSString *)filePath{
     if (filePath) {
         if (!_timeLine) {
-            NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"];
+            NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic"];
             
             [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
             NvsStreamingContext *context = [NvsStreamingContext sharedInstance];
@@ -283,10 +288,13 @@
 
 #pragma mark -
 - (void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics{
+    [self.loading loadingViewhide];
+    
     [self.musics addObjectsFromArray:musics];
     [self.tableView reloadData];
 }
 -(void)musicSeverGetFaild{
+    [self.loading loadingViewhide];
 
 }
 -(void)dealloc{

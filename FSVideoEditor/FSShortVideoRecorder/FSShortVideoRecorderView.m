@@ -17,6 +17,7 @@
 #import "NvsAudioTrack.h"
 #import "FSMusicPlayer.h"
 #import "FSAlertView.h"
+#import "FSEditorLoading.h"
 
 BOOL IsArabic;
 
@@ -48,7 +49,7 @@ BOOL IsArabic;
 @property (nonatomic, strong) UIButton *deleteButton;
 @property (nonatomic, strong) FSSegmentView *segmentView;
 
-@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) FSEditorLoading *loading;
 
 @property (nonatomic, strong) NvsLiveWindow *recorderView;
 @property (nonatomic, strong) FSShortVideoRecorderManager *recorderManager;
@@ -75,6 +76,13 @@ BOOL IsArabic;
 @end
 
 @implementation FSShortVideoRecorderView
+
+-(FSEditorLoading *)loading{
+    if (!_loading) {
+        _loading = [[FSEditorLoading alloc] initWithFrame:self.bounds];
+    }
+    return _loading;
+}
 
 - (void)dealloc {
 //    _context = nil;
@@ -296,26 +304,18 @@ BOOL IsArabic;
 }
 
 - (void)backClik {
-//    if () {
-//        
-//    }
-//    else {
-//    
-//    }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"CancelEditing", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Confirm", nil), nil];
-    [alert show];
-    
+    [_recorderManager quitRecording];
+    if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+        [[FSMusicPlayer sharedPlayer] stop];
+    }
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewQuitRecorderView)]) {
+        [self.delegate FSShortVideoRecorderViewQuitRecorderView];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        [_recorderManager quitRecording];
-        if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
-            [[FSMusicPlayer sharedPlayer] stop];
-        }
-        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewQuitRecorderView)]) {
-            [self.delegate FSShortVideoRecorderViewQuitRecorderView];
-        }
+        [_recorderManager deleteVideoFile];
     }
 }
 
@@ -350,13 +350,10 @@ BOOL IsArabic;
 
 - (void)finishClik {
     _recorderButton.enabled = NO;
-    if (!_activityView) {
-        _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        _activityView.frame = CGRectMake(0, 0, 100, 100);
-        _activityView.center = self.center;
-        [self addSubview:_activityView];
-    }
-    [_activityView startAnimating];
+    
+    [self addSubview:self.loading];
+    [self.loading loadingViewShow];
+    
     if (_isRecording) {
         [self pauseRecorder];
     }
@@ -731,7 +728,8 @@ BOOL IsArabic;
 }
 
 - (void)deleteVideo {
-    [_recorderManager deleteVideoFile];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"DeleteVideoTip", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Confirm", nil), nil];
+    [alert show];
 }
 
 - (void)faceuClick {
@@ -856,6 +854,8 @@ BOOL IsArabic;
             break;
     }
     
+    _deleteButton.hidden = NO;
+    
     if (time <= 15) {
         _cutMusicButton.enabled = NO;
         [self.progressView setProgress:time/15.0 animated:YES];
@@ -891,8 +891,11 @@ BOOL IsArabic;
         [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
     }
     
-    if (videoTime <= 0 && _musicFilePath != nil && _musicFilePath.length > 0) {
-        _cutMusicButton.enabled = YES;
+    if (videoTime <= 0) {
+        _deleteButton.hidden = YES;
+        if (_musicFilePath != nil && _musicFilePath.length > 0) {
+            _cutMusicButton.enabled = YES;
+        }
     }
 }
 
@@ -909,7 +912,7 @@ BOOL IsArabic;
 }
 
 - (void)FSShortVideoRecorderManagerFinishedRecorder:(NSString *)normalFilePath convertFilePath:(NSString *)convertFilePath {
-    [_activityView stopAnimating];
+    [self.loading loadingViewhide];
     
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:convertFilePath:speed:musicStartTime:)]) {
         [self.delegate FSShortVideoRecorderViewFinishRecorder:normalFilePath convertFilePath:convertFilePath speed:self.recorderManager.recorderSpeed musicStartTime:_musicStartTime] ;
@@ -917,7 +920,7 @@ BOOL IsArabic;
 }
 
 - (void)FSShortVideoRecorderManagerFinish:(NvsTimeline *)timeLine {
-    [_activityView stopAnimating];
+    [self.loading loadingViewhide];
     
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishTimeLine:speed:musicStartTime:)]) {
         [self.delegate FSShortVideoRecorderViewFinishTimeLine:timeLine speed:self.recorderManager.recorderSpeed musicStartTime:_musicStartTime] ;

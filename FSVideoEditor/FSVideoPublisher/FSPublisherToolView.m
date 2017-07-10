@@ -234,12 +234,14 @@ static BOOL IsArabic = NO;
 
 #pragma mark - 
 -(void)FSEditVideoNameViewEditVideoTitle:(NSString *)title {
-    
+    if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewChangeVideoDescription:)]) {
+        [self.delegate FSPublisherToolViewChangeVideoDescription:title];
+    }
 }
 
 - (void)FSEditVideoNameViewSaveToPhotoLibrary:(BOOL)isSave {
-    if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewSaveToDraft)]) {
-        [self.delegate FSPublisherToolViewSaveToDraft];
+    if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewSaveToLibrary:)]) {
+        [self.delegate FSPublisherToolViewSaveToLibrary:isSave];
     }
 }
 
