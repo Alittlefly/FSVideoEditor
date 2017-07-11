@@ -38,6 +38,8 @@
     int64_t _endTime;
     
     CGFloat _fxPosition;
+    CGFloat _scoreVolume;
+    CGFloat _soundtrackVolume;
 }
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
@@ -97,6 +99,7 @@
     _isEnterCutMusicView = NO;
     _videoDescription = @"";
     
+    
     if (!_filePath) {
         return;
     }
@@ -123,12 +126,19 @@
     [_uploader setDelegate:self];
     
     if (_musicPath != nil && _musicPath.length > 0) {
+        _scoreVolume = 0.5;
+        _soundtrackVolume = 0;
+        
         [[FSMusicPlayer sharedPlayer] setFilePath:_musicPath];
         [_toolView canEditMusic:YES];
     }
     else {
+        _scoreVolume = 0.5;
+        _soundtrackVolume = 0.5;
+        
         [_toolView canEditMusic:NO];
     }
+    [self changeVolume];
  
 }
 -(void)playVideoFromHead{
@@ -140,11 +150,21 @@
         }
     }
     
+
     if (_musicPath != nil && _musicPath.length > 0 && !_isEnterCutMusicView) {
         [[FSMusicPlayer sharedPlayer] stop];
         [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
         [[FSMusicPlayer sharedPlayer] play];
     }
+    [self changeVolume];
+}
+
+- (void)changeVolume {
+    [[FSMusicPlayer sharedPlayer] changeVolume:_scoreVolume];
+    
+    NvsVideoTrack *videoTrack = [_timeLine getVideoTrackByIndex:0];
+    NvsVideoClip *videoClip = [videoTrack getClipWithIndex:0];
+    [videoClip setVolumeGain:_soundtrackVolume rightVolumeGain:_soundtrackVolume];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -327,7 +347,7 @@
 
 - (void)FSPublisherToolViewEditVolume {
     if (!_volumeView) {
-        _volumeView = [[FSControlVolumeView alloc] initWithFrame:self.view.bounds];
+        _volumeView = [[FSControlVolumeView alloc] initWithFrame:self.view.bounds scroe:_scoreVolume soundtrack:_soundtrackVolume];
         _volumeView.delegate = self;
         [self.view addSubview:_volumeView];
         _volumeView.hidden = YES;
@@ -362,6 +382,8 @@
 #pragma mark - 
 -(void)musicControllerSelectMusic:(NSString *)music{
     if (music != nil && music.length > 0) {
+        _soundtrackVolume = 0;
+        [self changeVolume];
         [_toolView canEditMusic:YES];
         _musicPath = music;
         _musicStartTime = 0;
@@ -408,19 +430,28 @@
 
 #pragma mark - FSControlVolumeViewDelegate
 - (void)FSControlVolumeViewChangeScore:(CGFloat)value {
-    NvsAudioTrack *audioTrack = [_timeLine getAudioTrackByIndex:0];
-    NvsAudioClip *audioClip = [audioTrack getClipWithIndex:0];
-    [audioClip setVolumeGain:value rightVolumeGain:value];
+    NSLog(@"%f  %u",value,[_timeLine audioTrackCount]);
+//    NvsAudioTrack *audioTrack = [_timeLine getAudioTrackByIndex:0];
+//    NvsAudioClip *audioClip = [audioTrack getClipWithIndex:0];
+//    [audioClip setVolumeGain:value rightVolumeGain:value];
+    _scoreVolume = value;
+    [self changeVolume];
 }
 
 - (void)FSControlVolumeViewChangeSoundtrack:(CGFloat)value {
-    NvsVideoTrack *videoTrack = [_timeLine getVideoTrackByIndex:0];
-    NvsVideoClip *videoClip = [videoTrack getClipWithIndex:0];
-    [videoClip setVolumeGain:value rightVolumeGain:value];
+    _soundtrackVolume = value;
+    [self changeVolume];
+
+//    NvsVideoTrack *videoTrack = [_timeLine getVideoTrackByIndex:0];
+//    NvsVideoClip *videoClip = [videoTrack getClipWithIndex:0];
+//    [videoClip setVolumeGain:value rightVolumeGain:value];
 }
 
 - (void)FSControlVolumeViewChangeFinished {
     _volumeView.hidden = YES;
+    [_volumeView removeFromSuperview];
+    _volumeView.delegate = nil;
+    _volumeView = nil;
     self.toolView.hidden = NO;
 }
 - (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval)newStartTime {

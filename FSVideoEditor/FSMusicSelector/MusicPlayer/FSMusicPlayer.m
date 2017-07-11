@@ -96,4 +96,8 @@ static id object = nil;
     //[_musicPlayer playAtTime:atTime];
 }
 
+- (void)changeVolume:(CGFloat)value {
+    [_musicPlayer setVolume:value];
+}
+
 @end

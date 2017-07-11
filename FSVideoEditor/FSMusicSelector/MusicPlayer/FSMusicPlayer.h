@@ -22,4 +22,5 @@
 
 -(BOOL)isPlaying;
 - (NSTimeInterval)soundTotalTime;
+- (void)changeVolume:(CGFloat)value;
 @end

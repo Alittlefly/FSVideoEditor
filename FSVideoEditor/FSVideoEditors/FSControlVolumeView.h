@@ -20,4 +20,6 @@
 
 @property (nonatomic, weak) id<FSControlVolumeViewDelegate> delegate;
 
+- (instancetype)initWithFrame:(CGRect)frame scroe:(CGFloat)scroeVolume soundtrack:(CGFloat)soundtrackVolume;
+
 @end

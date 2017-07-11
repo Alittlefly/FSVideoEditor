@@ -267,7 +267,7 @@
     }
     
     
-    [self playMusic:music playViewCell:cell];
+  //  [self playMusic:music playViewCell:cell];
 }
 
 -(void)updateVideoStreamUrl:(NSString *)filePath{

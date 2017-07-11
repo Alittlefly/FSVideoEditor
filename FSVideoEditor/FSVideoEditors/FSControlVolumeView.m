@@ -21,13 +21,19 @@
 
 @property (nonatomic, strong) UIVisualEffectView *effectView;
 
+@property (nonatomic, assign) CGFloat scroeVolume;
+@property (nonatomic, assign) CGFloat soundtrackVolume;
+
+
 @end
 
 @implementation FSControlVolumeView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame scroe:(CGFloat)scroeVolume soundtrack:(CGFloat)soundtrackVolume {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
+        _scroeVolume = scroeVolume;
+        _soundtrackVolume = soundtrackVolume;
         [self initBaseUI];
     }
     return self;
@@ -72,7 +78,7 @@
     [_contentView addSubview:_soundtrackLabel];
     
     _soundtrackSlider = [[UISlider alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_soundtrackLabel.frame)+15, 23, _contentView.frame.size.width-CGRectGetMaxX(_soundtrackLabel.frame)-15-15, 27)];
-    _soundtrackSlider.value = 0.5;
+    _soundtrackSlider.value = _soundtrackVolume;
     _soundtrackSlider.minimumTrackTintColor = [UIColor orangeColor];
     _soundtrackSlider.maximumTrackTintColor = [UIColor blackColor];
     _soundtrackSlider.thumbTintColor = FSHexRGB(0x0BC2C6);
@@ -89,12 +95,21 @@
     [_contentView addSubview:_scoreLabel];
     
     _scoreSlider = [[UISlider alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_scoreLabel.frame)+15, CGRectGetMaxY(_soundtrackLabel.frame)+30, _contentView.frame.size.width-CGRectGetMaxX(_scoreLabel.frame)-15-15, 27)];
-    _scoreSlider.value = 0.5;
+    _scoreSlider.value = _scroeVolume;
     _scoreSlider.minimumTrackTintColor = [UIColor orangeColor];
     _scoreSlider.maximumTrackTintColor = [UIColor blackColor];
     _scoreSlider.thumbTintColor = FSHexRGB(0x0BC2C6);
     [_scoreSlider addTarget:self action:@selector(changeScore) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_scoreSlider];
+    
+    if (_soundtrackVolume == 0) {
+        _soundtrackSlider.enabled = NO;
+        _scoreSlider.enabled = YES;
+    }
+    else {
+        _soundtrackSlider.enabled = YES;
+        _scoreSlider.enabled = NO;
+    }
     
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-60)/2, CGRectGetMinY(_contentView.frame)-20-30, 60, 30)];
     _titleLabel.backgroundColor = [UIColor clearColor];
