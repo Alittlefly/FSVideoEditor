@@ -124,6 +124,18 @@
     
 }
 
+- (void)stopPlayCurrentMusic {
+    for (int i = 0; i < _musics.count; i++) {
+        FSMusic *music = [_musics objectAtIndex:i];
+        if (music.isPlaying) {
+            music.isPlaying = NO;
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            FSMusicCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+            [cell setIsPlayIng:NO];
+        }
+    }
+}
+
 -(void)playMusic:(FSMusic *)music playViewCell:(FSMusicCell *)cell{
     //
     if ([_music isEqual:music]) {

@@ -24,4 +24,6 @@
 
 @property(nonatomic,assign)NvsTimeline *timeLine;
 @property(nonatomic,assign)BOOL pushed;
+
+- (void)stopPlayCurrentMusic;
 @end

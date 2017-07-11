@@ -116,6 +116,7 @@
                 [_contentView addSubview:_localView.view];
                 [self addChildViewController:_localView];
             }
+            [self stopPlayer];
         }
     
         
@@ -132,6 +133,7 @@
     [self.navigationController pushViewController:svc animated:YES];
 }
 -(void)stopPlayer{
+    [_musicView stopPlayCurrentMusic];
     [[FSMusicPlayer sharedPlayer] stop];
 }
 -(void)viewWillAppear:(BOOL)animated{
