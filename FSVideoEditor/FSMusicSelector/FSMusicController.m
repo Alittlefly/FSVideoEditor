@@ -35,29 +35,29 @@
 -(NSMutableArray *)musics{
     if (!_musics) {
         
-//        FSMusic *music = [[FSMusic alloc] init];
-//        music.songTitle = @"month";
-//        music.lastSeconds = 15;
-//        music.songPic = @"";
-//        music.songAuthor = @"徐子谦";
-//        
-//        
-//        FSMusic *music1 = [[FSMusic alloc] init];
-//        music1.songTitle = @"wind";
-//        music1.lastSeconds = 15;
-//        music1.songPic = @"";
-//        music1.songAuthor = @"高超";
-//
-//        
-//        FSMusic *music2 = [[FSMusic alloc] init];
-//        music2.songTitle = @"ugly";
-//        music2.lastSeconds = 15;
-//        music2.songPic = @"";
-//        music2.songAuthor = @"王明";
-
-//        _musics = [NSMutableArray arrayWithObjects:music,music1,music2,nil];
+        FSMusic *music = [[FSMusic alloc] init];
+        music.songTitle = @"month";
+        music.lastSeconds = 15;
+        music.songPic = @"";
+        music.songAuthor = @"徐子谦";
         
-        _musics = [NSMutableArray arrayWithCapacity:0];
+        
+        FSMusic *music1 = [[FSMusic alloc] init];
+        music1.songTitle = @"wind";
+        music1.lastSeconds = 15;
+        music1.songPic = @"";
+        music1.songAuthor = @"高超";
+
+        
+        FSMusic *music2 = [[FSMusic alloc] init];
+        music2.songTitle = @"ugly";
+        music2.lastSeconds = 15;
+        music2.songPic = @"";
+        music2.songAuthor = @"王明";
+
+        _musics = [NSMutableArray arrayWithObjects:music,music1,music2,nil];
+        
+//        _musics = [NSMutableArray arrayWithCapacity:0];
         
         
     }
@@ -247,11 +247,9 @@
     if (music.songUrl) {
         NSString *localPath = [FSMusicManager musicPathWithFileName:music.songUrl];
         path = localPath;
-        [self updateVideoStreamUrl:localPath];
     }else{
         NSString *bundlePath = [[NSBundle mainBundle] pathForResource:music.songTitle ofType:@"mp3"];
         path = bundlePath;
-        [self updateVideoStreamUrl:bundlePath];
     }
 
     [[FSMusicPlayer sharedPlayer] stop];
@@ -261,7 +259,6 @@
         if ([self.delegate respondsToSelector:@selector(musicControllerSelectMusic:)]) {
             [self.delegate musicControllerSelectMusic:path];
         }
-       // [self.navigationController popViewControllerAnimated:YES];
         [self dismissViewControllerAnimated:YES completion:nil];
     }else{
         
@@ -269,38 +266,9 @@
         recoder.musicFilePath = path;
         [self.navigationController pushViewController:recoder animated:YES];
     }
-    
-    
-  //  [self playMusic:music playViewCell:cell];
 }
 
--(void)updateVideoStreamUrl:(NSString *)filePath{
-    if (filePath) {
-        if (!_timeLine) {
-            NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic"];
-            
-            [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
-            NvsStreamingContext *context = [NvsStreamingContext sharedInstance];
-            NvsVideoResolution videoEditRes;
-            videoEditRes.imageWidth = 1200;
-            videoEditRes.imageHeight = 720;
-            videoEditRes.imagePAR = (NvsRational){1, 1};
-            NvsRational videoFps = {25, 1};
-            NvsAudioResolution audioEditRes;
-            audioEditRes.sampleRate = 48000;
-            audioEditRes.channelCount = 2;
-            audioEditRes.sampleFormat = NvsAudSmpFmt_S16;
-            _timeLine = [context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
-        }
-        
-        int64_t length = _timeLine.duration;
-        [_timeLine removeAudioTrack:0];
-        NvsAudioTrack *audioTrack = [_timeLine appendAudioTrack];
-        [audioTrack appendClip:filePath];
-        NvsAudioClip *audio = [audioTrack getClipWithIndex:0];
-        [audio changeTrimOutPoint:length affectSibling:YES];
-    }
-}
+
 
 #pragma mark -
 - (void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics{
