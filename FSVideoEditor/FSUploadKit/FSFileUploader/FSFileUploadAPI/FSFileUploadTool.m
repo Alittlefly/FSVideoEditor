@@ -54,7 +54,7 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dict = [responseObject mj_JSONObject];
+        NSDictionary *dict = [responseObject JSONObject];
         NSInteger code = [[dict valueForKey:@"code"] intValue];
         if (code == 0) {
             NSLog(@"上传成功");

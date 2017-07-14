@@ -127,7 +127,7 @@
     
     if (_musicPath != nil && _musicPath.length > 0) {
         _scoreVolume = 0.5;
-        _soundtrackVolume = 0;
+        _soundtrackVolume = -1;
         
         [[FSMusicPlayer sharedPlayer] setFilePath:_musicPath];
         [_toolView canEditMusic:YES];
@@ -382,7 +382,7 @@
 #pragma mark - 
 -(void)musicControllerSelectMusic:(NSString *)music{
     if (music != nil && music.length > 0) {
-        _soundtrackVolume = 0;
+        _soundtrackVolume = -1;
         [self changeVolume];
         [_toolView canEditMusic:YES];
         _musicPath = music;

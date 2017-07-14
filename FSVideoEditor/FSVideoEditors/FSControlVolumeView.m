@@ -102,7 +102,7 @@
     [_scoreSlider addTarget:self action:@selector(changeScore) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_scoreSlider];
     
-    if (_soundtrackVolume == 0) {
+    if (_soundtrackVolume < 0) {
         _soundtrackSlider.enabled = NO;
         _scoreSlider.enabled = YES;
     }
