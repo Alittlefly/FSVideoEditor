@@ -14,7 +14,7 @@
 
 @end
 
-@interface FSTimeCountdownView : UIView
+@interface FSTimeCountsdownView : UIView
 
 @property(nonatomic,assign)id<FSTimeCountdownViewDelegate> delegate;
 - (id)initWithFrame:(CGRect)frame timeNumber:(int)timeNumber number:(NSInteger)number;

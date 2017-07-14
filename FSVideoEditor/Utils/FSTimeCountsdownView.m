@@ -6,12 +6,12 @@
 //  Copyright © 2016年 Fission. All rights reserved.
 //
 
-#import "FSTimeCountdownView.h"
+#import "FSTimeCountsdownView.h"
 //#import "GTCommont.h"
-#import "NSString+GC.h"
-#import "NSString+Time.h"
+//#import "NSString+GC.h"
+//#import "NSString+Time.h"
 
-@interface FSTimeCountdownView (){
+@interface FSTimeCountsdownView (){
     
     dispatch_source_t _timer;
     UILabel *_timeLabel;
@@ -21,7 +21,7 @@
 @property (assign) CGFloat backViewWidth;
 @end
 
-@implementation FSTimeCountdownView
+@implementation FSTimeCountsdownView
 
 -(void)dealloc
 {
@@ -97,7 +97,6 @@
                 }else{
                     int temN = timeout;
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        NSString *ctime = [NSString lastTimeWithOutZeroStartWithUnit:timeout];
                        // [_timeLabel setText:[NSString stringWithFormat:@"%d",timeout]];
                         [_timeImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"countdown%d",temN]]];
                     });

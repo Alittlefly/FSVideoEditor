@@ -10,7 +10,7 @@
 #import "FSShortVideoRecorderManager.h"
 #import "FSProgressView.h"
 #import "FSFilterView.h"
-#import "FSTimeCountdownView.h"
+#import "FSTimeCountsdownView.h"
 #import "FSSegmentView.h"
 #import "FSMoveButton.h"
 #import "FSCutMusicView.h"
@@ -32,7 +32,7 @@ BOOL IsArabic;
 @property (nonatomic, strong) UIButton *filterButton; //滤镜开关
 @property (nonatomic, strong) UIButton *countdownButton;//倒计时开关
 
-@property (nonatomic, strong) FSTimeCountdownView *timeCountdownView;
+@property (nonatomic, strong) FSTimeCountsdownView *timeCountdownView;
 
 @property (nonatomic, strong) UILabel *cutMusicLabel;
 @property (nonatomic, strong) UILabel *beautyLabel;
@@ -581,7 +581,7 @@ BOOL IsArabic;
     //倒计时动画
     //倒计时View
     if (!_timeCountdownView) {
-        self.timeCountdownView =[[FSTimeCountdownView alloc] initWithFrame:CGRectMake((self.frame.size.width-91)/2, (self.frame.size.height-174)/2, 91, 174) timeNumber:3 number:15];
+        self.timeCountdownView =[[FSTimeCountsdownView alloc] initWithFrame:CGRectMake((self.frame.size.width-91)/2, (self.frame.size.height-174)/2, 91, 174) timeNumber:3 number:15];
         self.timeCountdownView.delegate = self;
 
     }
