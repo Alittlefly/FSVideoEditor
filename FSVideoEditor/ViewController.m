@@ -13,7 +13,7 @@
 #import "FSAlertView.h"
 #import "FSEditorLoading.h"
 
-@interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate>
+@interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *recorderButton;
 @property (weak, nonatomic) IBOutlet UITextField *uidTextField;
@@ -117,6 +117,33 @@
     [self.view addGestureRecognizer:tapGesture];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSString *country = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country"];
+    
+    if (country == nil || country.length == 0) {
+        [self showChooseCountryView];
+    }
+    
+}
+
+- (void)showChooseCountryView {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"选择国家" delegate:self cancelButtonTitle:@"tr" otherButtonTitles:@"ar", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [[NSUserDefaults standardUserDefaults] setValue:@"tr" forKey:@"Country"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    else if (buttonIndex == 1) {
+        [[NSUserDefaults standardUserDefaults] setValue:@"ar" forKey:@"Country"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
 - (void)tapGesture:(UITapGestureRecognizer *)gesture {
     if (self.uidTextField.hidden == NO) {
         [self.uidTextField resignFirstResponder];
@@ -142,13 +169,22 @@
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Password"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"nickName"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"loginKey"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Country"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 
     //[self showMessage:NSLocalizedString(@"", nil)];
 }
 
 - (IBAction)loginClick:(id)sender {
+    NSString *country = [[NSUserDefaults standardUserDefaults] valueForKey:@"Country"];
+    
+    if (country == nil || country.length == 0) {
+        [self showChooseCountryView];
+        return;
+    }
+    
     if (self.uidTextField.text.length == 0) {
-        [self showMessage:@"用户名不能为空！"];
+        [self showMessage:NSLocalizedString(@"LoginFailed", nil)];
         return;
     }
     
@@ -177,12 +213,14 @@
 - (void)FSLoginServerSucceed:(id)objec {
     [self.loading loadingViewhide];
     
+    
     NSDictionary *dataInfo = [objec objectForKey:@"dataInfo"];
     
     [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginName"] forKey:@"UID"];
     [[NSUserDefaults standardUserDefaults] setValue:self.passwordTextField.text forKey:@"Password"];
     [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"nickName"] forKey:@"nickName"];
     [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginKey"] forKey:@"loginKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 
 
     self.recorderButton.hidden = NO;

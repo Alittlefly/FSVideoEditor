@@ -11,6 +11,7 @@
 @protocol FSMusicAPIDelegate<NSObject>
 
 -(void)musicApiGetMusics:(id)responesObject;
+-(void)musicApiGetMusicsFaild:(NSError*)error;
 
 @end
 @interface FSMusicAPI : NSObject

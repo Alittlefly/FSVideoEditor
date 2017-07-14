@@ -39,4 +39,10 @@
     }
     
 }
+
+- (void)musicApiGetMusicsFaild:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(musicSeverGetFaild)]) {
+        [self.delegate musicSeverGetFaild];
+    }
+}
 @end

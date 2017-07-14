@@ -162,10 +162,10 @@
         
         if (music.songUrl) {
             
-            NSString *url = music.songUrl;//[@"http://10.10.32.152:20000/" stringByAppendingString:music.songUrl];
+            NSString *url = music.songUrl;
             if (![url hasPrefix:@"http"]) {
-                //http://www.7nujoom.com/    http://10.10.32.152:20000/
-                url = [@"http://35.158.218.231/" stringByAppendingString:music.songUrl];
+                //@"http://35.158.218.231/"    http://10.10.32.152:20000/
+                url = [AddressIP stringByAppendingString:music.songUrl];
             }
             __weak typeof(self) weakS = self;
             [FSMusicManager downLoadMusic:url complete:^(NSString *localPath, NSError *error) {

@@ -23,12 +23,14 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     __weak typeof(self) weakS = self;
     //http://10.10.32.145:8088/   http://www.7nujoom.com/
-    NSURLSessionTask *task = [manager GET:@"http://www.7nujoom.com/video/song/list?no=1&size=99" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionTask *task = [manager GET:[NSString stringWithFormat:@"%@video/song/list?no=1&size=99",AddressAPI] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([weakS.delegate respondsToSelector:@selector(musicApiGetMusics:)]) {
             [weakS.delegate musicApiGetMusics:responseObject];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        if ([weakS.delegate respondsToSelector:@selector(musicApiGetMusicsFaild:)]) {
+            [weakS.delegate musicApiGetMusicsFaild:error];
+        }
     }];
     
     [task resume];
