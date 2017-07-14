@@ -86,11 +86,15 @@
     
     [self.view addSubview:self.loading];
     [self.loading loadingViewShow];
+    
+    [self initCancleButton];
 }
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     
-    [_tableView setFrame:self.view.bounds];
+    [_tableView setFrame:CGRectMake(0,0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 49)];
+    
+    [self.cancleButton setFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 49, CGRectGetWidth(self.view.bounds), 49)];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

@@ -30,11 +30,15 @@
     [_videoListView setDelegate:self];
     [_videoListView setVideos:assets];
     [self.view addSubview:_videoListView];
+    
+    [self initCancleButton];
 }
 
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    [_videoListView setFrame:self.view.bounds];
+    [_videoListView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 49)];
+    
+    [self.cancleButton setFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 49, CGRectGetWidth(self.view.bounds), 49)];
 }
 #pragma mark - 
 -(void)videoListView:(FSVideoListView *)videoListView didSelectedVideo:(PHAsset *)video{

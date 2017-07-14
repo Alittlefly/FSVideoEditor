@@ -11,6 +11,7 @@
 #import "NvsAudioClip.h"
 #import "NvsAudioTrack.h"
 #import "FSMusicCell.h"
+#import "FSCancleController.h"
 
 @protocol FSMusicControllerDelegate <NSObject>
 
@@ -18,7 +19,7 @@
 
 @end
 
-@interface FSMusicController : UIViewController
+@interface FSMusicController : FSCancleController
 
 @property(nonatomic,assign)id<FSMusicControllerDelegate>delegate;
 
