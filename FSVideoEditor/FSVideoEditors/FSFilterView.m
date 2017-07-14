@@ -17,7 +17,8 @@
 @property (nonatomic, strong) UIScrollView *contentScrollView;
 
 @property (nonatomic, strong) NSMutableArray *filtersArray;
-
+@property (nonatomic, strong) NSMutableArray *buttonArray;
+ 
 @end
 
 @implementation FSFilterView

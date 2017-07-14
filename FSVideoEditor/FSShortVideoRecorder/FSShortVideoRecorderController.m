@@ -13,10 +13,12 @@
 #import "NvsVideoTrack.h"
 #import "NvsVideoClip.h"
 #import "FSAlertView.h"
+#import "FSFilterView.h"
 
-@interface FSShortVideoRecorderController ()<FSShortVideoRecorderViewDelegate>
+@interface FSShortVideoRecorderController ()<FSShortVideoRecorderViewDelegate, FSFilterViewDelegate>
 
 @property (nonatomic, strong) FSShortVideoRecorderView *recorderView;
+@property (nonatomic, strong) FSFilterView *filterView;
 
 @end
 
@@ -118,6 +120,41 @@
 - (void)FSShortVideoRecorderViewShowAlertView:(NSString *)message {
     FSAlertView *alet = [[FSAlertView alloc] initWithFrame:self.view.bounds];
     [alet showWithMessage:message];
+}
+
+- (void)FSShortVideoRecorderViewShowFilterView {
+    if (!_filterView) {
+        _filterView = [[FSFilterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-120, self.view.frame.size.width, 120)];
+        _filterView.backgroundColor = [UIColor clearColor];
+        _filterView.hidden = YES;
+        _filterView.delegate =self;
+        [self.view addSubview:_filterView];
+    }
+    
+    _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.view.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
+    _filterView.hidden = NO;
+    [UIView animateWithDuration:0.5 animations:^{
+        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.view.frame.size.height-_filterView.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
+        
+    }];
+}
+
+- (void)FSFilterViewChooseFilter:(NSString *)filter {
+    [_recorderView changeFilter:filter];
+}
+
+- (void)FSFilterViewFinishedChooseFilter {
+    [UIView animateWithDuration:0.5 animations:^{
+        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.view.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
+        
+    } completion:^(BOOL finished) {
+        _filterView.hidden = YES;
+        [_filterView removeFromSuperview];
+        _filterView.delegate = nil;
+        _filterView= nil;
+        [_recorderView finishChangeFilter];
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

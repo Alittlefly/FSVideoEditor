@@ -26,6 +26,7 @@ typedef enum{
 - (void)FSShortVideoRecorderViewFinishTimeLine:(NvsTimeline *)timeLine speed:(CGFloat)speed musicStartTime:(NSTimeInterval)time;
 - (void)FSShortVideoRecorderViewEditMusic;
 - (void)FSShortVideoRecorderViewShowAlertView:(NSString *)message;
+- (void)FSShortVideoRecorderViewShowFilterView;
 
 @end
 
@@ -36,5 +37,7 @@ typedef enum{
 @property (nonatomic, assign) NSTimeInterval musicStartTime;
 
 - (void)resumeCapturePreview;
+- (void)changeFilter:(NSString *)filterName;
+- (void)finishChangeFilter;
 
 @end
