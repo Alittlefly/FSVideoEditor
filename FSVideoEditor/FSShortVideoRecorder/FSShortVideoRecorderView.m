@@ -304,6 +304,18 @@ BOOL IsArabic;
 }
 
 - (void)backClik {
+    if (_deleteButton.hidden == NO) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"CancelEditing", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Confirm", nil), nil];
+        alert.tag = 1001;
+        [alert show];
+    }
+    else {
+        [self quit];
+    }
+    
+}
+
+- (void)quit {
     [_recorderManager quitRecording];
     if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
         [[FSMusicPlayer sharedPlayer] stop];
@@ -314,9 +326,17 @@ BOOL IsArabic;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        [_recorderManager deleteVideoFile];
+    if (alertView.tag == 1001) {
+        if (buttonIndex == 1) {
+            [self quit];
+        }
     }
+    else if (alertView.tag == 1002) {
+        if (buttonIndex == 1) {
+            [_recorderManager deleteVideoFile];
+        }
+    }
+    
 }
 
 - (void)tapToFocus:(UITapGestureRecognizer *)recognizer {
@@ -455,6 +475,10 @@ BOOL IsArabic;
     
     _isOpenFilterView = YES;
     
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewShowFilterView)]) {
+        [self.delegate FSShortVideoRecorderViewShowFilterView];
+    }
+    return;
     if (!_filterView) {
         _filterView = [[FSFilterView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-120, self.frame.size.width, 120)];
         _filterView.backgroundColor = [UIColor clearColor];
@@ -471,37 +495,66 @@ BOOL IsArabic;
     }];
 }
 
-- (void)FSFilterViewFinishedChooseFilter {
-    [UIView animateWithDuration:0.5 animations:^{
-        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
-        
-    } completion:^(BOOL finished) {
-        _filterView.hidden = YES;
-        
-        _backButton.hidden= NO;
-        _recoverCamera.hidden = NO;
-        _finishButton.hidden = NO;
-        _flashButton.hidden = NO;
-        _cutMusicButton.hidden = NO;
-        _beautyButton.hidden = NO;
-        _filterButton.hidden = NO;
-        _countdownButton.hidden = NO;
-        _cutMusicLabel.hidden = NO;
-        _filterLabel.hidden = NO;
-        _beautyLabel.hidden = NO;
-        _countdownLabel.hidden = NO;
-        _recorderButton.hidden = NO;
-        _faceUButton.hidden = YES;
-        _deleteButton.hidden = NO;
-        _segmentView.hidden = NO;
-        _isOpenFilterView = NO;
+#pragma mark - FSFilterViewDelegate
 
-    }];
+//- (void)FSFilterViewFinishedChooseFilter {
+//    [UIView animateWithDuration:0.5 animations:^{
+//        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
+//        
+//    } completion:^(BOOL finished) {
+//        _filterView.hidden = YES;
+//        
+//        _backButton.hidden= NO;
+//        _recoverCamera.hidden = NO;
+//        _finishButton.hidden = NO;
+//        _flashButton.hidden = NO;
+//        _cutMusicButton.hidden = NO;
+//        _beautyButton.hidden = NO;
+//        _filterButton.hidden = NO;
+//        _countdownButton.hidden = NO;
+//        _cutMusicLabel.hidden = NO;
+//        _filterLabel.hidden = NO;
+//        _beautyLabel.hidden = NO;
+//        _countdownLabel.hidden = NO;
+//        _recorderButton.hidden = NO;
+//        _faceUButton.hidden = YES;
+//        _deleteButton.hidden = NO;
+//        _segmentView.hidden = NO;
+//        _isOpenFilterView = NO;
+//        
+//        [_filterView removeFromSuperview];
+//        _filterView = nil;
+//
+//    }];
+//}
+
+- (void)finishChangeFilter {
+    _backButton.hidden= NO;
+    _recoverCamera.hidden = NO;
+    _finishButton.hidden = NO;
+    _flashButton.hidden = NO;
+    _cutMusicButton.hidden = NO;
+    _beautyButton.hidden = NO;
+    _filterButton.hidden = NO;
+    _countdownButton.hidden = NO;
+    _cutMusicLabel.hidden = NO;
+    _filterLabel.hidden = NO;
+    _beautyLabel.hidden = NO;
+    _countdownLabel.hidden = NO;
+    _recorderButton.hidden = NO;
+    _faceUButton.hidden = YES;
+    _deleteButton.hidden = NO;
+    _segmentView.hidden = NO;
+    _isOpenFilterView = NO;
 }
 
 - (void)FSFilterViewChooseFilter:(NSString *)filter {
-    [_recorderManager addFilter:filter];
     
+}
+
+- (void)changeFilter:(NSString *)filterName {
+    [_recorderManager addFilter:filterName];
+
 }
 
 
@@ -729,6 +782,7 @@ BOOL IsArabic;
 
 - (void)deleteVideo {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"DeleteVideoTip", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Confirm", nil), nil];
+    alert.tag = 1002;
     [alert show];
 }
 

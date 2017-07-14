@@ -264,11 +264,11 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (void)addFilter:(NSString *)filter {
+    [_context removeAllCaptureVideoFx];
+
     if ([filter isEqualToString:@"None"]) {
-        [_context removeAllCaptureVideoFx];
     }
     else {
-        [_context removeAllCaptureVideoFx];
         [_context appendBuiltinCaptureVideoFx:filter];
     }
 }
