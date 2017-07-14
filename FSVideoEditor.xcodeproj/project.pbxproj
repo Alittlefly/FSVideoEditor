@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		560142B51F1868FE00A06C70 /* FSCancleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 560142B41F1868FE00A06C70 /* FSCancleController.m */; };
 		562D403F1EFBE8A100BF0E0D /* FSLocalEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D403E1EFBE8A100BF0E0D /* FSLocalEditorController.m */; };
 		562D40541EFD1DE200BF0E0D /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40481EFD1DE200BF0E0D /* AFHTTPSessionManager.m */; };
 		562D40551EFD1DE200BF0E0D /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D404B1EFD1DE200BF0E0D /* AFNetworkReachabilityManager.m */; };
@@ -159,6 +160,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		560142B31F1868FE00A06C70 /* FSCancleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCancleController.h; sourceTree = "<group>"; };
+		560142B41F1868FE00A06C70 /* FSCancleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCancleController.m; sourceTree = "<group>"; };
 		562D403D1EFBE8A100BF0E0D /* FSLocalEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLocalEditorController.h; sourceTree = "<group>"; };
 		562D403E1EFBE8A100BF0E0D /* FSLocalEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLocalEditorController.m; sourceTree = "<group>"; };
 		562D40471EFD1DE200BF0E0D /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -454,6 +457,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		560142B11F18688500A06C70 /* FSCommenController */ = {
+			isa = PBXGroup;
+			children = (
+				563B7A021F0A281C0035346A /* FSToolController.h */,
+				563B7A031F0A281C0035346A /* FSToolController.m */,
+				563B7A151F0A4DF50035346A /* FSAnimationNavController.h */,
+				563B7A161F0A4DF50035346A /* FSAnimationNavController.m */,
+			);
+			name = FSCommenController;
+			sourceTree = "<group>";
+		};
+		560142B21F1868D400A06C70 /* FSCancleController */ = {
+			isa = PBXGroup;
+			children = (
+				560142B31F1868FE00A06C70 /* FSCancleController.h */,
+				560142B41F1868FE00A06C70 /* FSCancleController.m */,
+			);
+			path = FSCancleController;
+			sourceTree = "<group>";
+		};
 		562D403C1EFBE87D00BF0E0D /* FSLocalVideoEditor */ = {
 			isa = PBXGroup;
 			children = (
@@ -877,12 +900,10 @@
 			isa = PBXGroup;
 			children = (
 				983445F31F0CDFAC00A6E977 /* Login */,
-				563B7A151F0A4DF50035346A /* FSAnimationNavController.h */,
-				563B7A161F0A4DF50035346A /* FSAnimationNavController.m */,
-				563B7A021F0A281C0035346A /* FSToolController.h */,
-				563B7A031F0A281C0035346A /* FSToolController.m */,
 				562D405E1EFE3B4600BF0E0D /* Utils */,
+				560142B21F1868D400A06C70 /* FSCancleController */,
 				567A3D171EFB66B60026247E /* FSUploadKit */,
+				560142B11F18688500A06C70 /* FSCommenController */,
 				562D406E1EFE4D2000BF0E0D /* FSVideoFxSource */,
 				5647BC4C1F04E23D0072B618 /* FSMusicSelector */,
 				5647BC431F04D66F0072B618 /* FSMusicSource */,
@@ -1225,6 +1246,7 @@
 				9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */,
 				988E3D291F0271A1004E837F /* NSString+Time.m in Sources */,
 				567A3D421EFB66B60026247E /* FSFile.m in Sources */,
+				560142B51F1868FE00A06C70 /* FSCancleController.m in Sources */,
 				563B7A2E1F0CE6F50035346A /* FSVideoFxOperationStack.m in Sources */,
 				567A3D8B1EFB6F8E0026247E /* NSString+MJExtension.m in Sources */,
 				563B79F91F08D3360035346A /* FSMusicAPI.m in Sources */,

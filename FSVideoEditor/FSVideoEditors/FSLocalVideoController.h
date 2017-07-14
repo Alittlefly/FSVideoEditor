@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "FSVideoListView.h"
+#import "FSCancleController.h"
 
-
-@interface FSLocalVideoController : UIViewController<FSVideoListViewDelegate>
+@interface FSLocalVideoController : FSCancleController<FSVideoListViewDelegate>
 
 @end
