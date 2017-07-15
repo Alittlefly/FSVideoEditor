@@ -86,11 +86,7 @@
 		567E0B5C1EF930D100C4C527 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 567E0B5A1EF930D100C4C527 /* Main.storyboard */; };
 		567E0B5E1EF930D100C4C527 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 567E0B5D1EF930D100C4C527 /* Assets.xcassets */; };
 		567E0B611EF930D100C4C527 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 567E0B5F1EF930D100C4C527 /* LaunchScreen.storyboard */; };
-		567E0B831EF939CC00C4C527 /* FSVideoEditorKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0B811EF939CC00C4C527 /* FSVideoEditorKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		567E0B871EF939CC00C4C527 /* FSVideoEditorKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 567E0B7F1EF939CC00C4C527 /* FSVideoEditorKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		567E0B8E1EF93A1C00C4C527 /* FSLocalVideoController.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0B8C1EF93A1C00C4C527 /* FSLocalVideoController.h */; };
 		567E0B8F1EF93A1C00C4C527 /* FSLocalVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B8D1EF93A1C00C4C527 /* FSLocalVideoController.m */; };
-		567E0B9C1EFA20BC00C4C527 /* FSLocalPhotoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0B9A1EFA20BC00C4C527 /* FSLocalPhotoManager.h */; };
 		567E0B9D1EFA20BC00C4C527 /* FSLocalPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B9B1EFA20BC00C4C527 /* FSLocalPhotoManager.m */; };
 		567E0BA21EFA49F500C4C527 /* FSVideoListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA11EFA49F500C4C527 /* FSVideoListView.m */; };
 		567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA41EFA4DB400C4C527 /* FSAlbumVideoCell.m */; };
@@ -141,188 +137,179 @@
 		9880DEBA1F171295006E730F /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9880DEA31F171295006E730F /* UIImageView+WebCache.m */; };
 		9880DEBB1F171295006E730F /* UIView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9880DEA51F171295006E730F /* UIView+WebCache.m */; };
 		9880DEBC1F171295006E730F /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9880DEA71F171295006E730F /* UIView+WebCacheOperation.m */; };
-		988AC6C61EFD1D3D007FBCEF /* FSProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */; };
 		988AC6C71EFD1D3D007FBCEF /* FSProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */; };
-		988AC6CB1EFD3BB7007FBCEF /* FSEditVideoTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C91EFD3BB7007FBCEF /* FSEditVideoTool.h */; };
 		988AC6CC1EFD3BB7007FBCEF /* FSEditVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6CA1EFD3BB7007FBCEF /* FSEditVideoTool.m */; };
-		988AC6D41EFE4B99007FBCEF /* FSPublisherToolView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6D21EFE4B99007FBCEF /* FSPublisherToolView.h */; };
 		988AC6D51EFE4B99007FBCEF /* FSPublisherToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6D31EFE4B99007FBCEF /* FSPublisherToolView.m */; };
-		988AC6D91EFE560B007FBCEF /* FSEditVideoNameView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6D71EFE560B007FBCEF /* FSEditVideoNameView.h */; };
 		988AC6DA1EFE560B007FBCEF /* FSEditVideoNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6D81EFE560B007FBCEF /* FSEditVideoNameView.m */; };
-		988AC6DE1EFE65C2007FBCEF /* FSFilterView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6DC1EFE65C2007FBCEF /* FSFilterView.h */; };
 		988AC6DF1EFE65C2007FBCEF /* FSFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6DD1EFE65C2007FBCEF /* FSFilterView.m */; };
-		988AC6E31EFE6926007FBCEF /* FSFilterButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6E11EFE6926007FBCEF /* FSFilterButton.h */; };
 		988AC6E41EFE6926007FBCEF /* FSFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E21EFE6926007FBCEF /* FSFilterButton.m */; };
-		988AC6E81F010B0D007FBCEF /* FSControlVolumeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6E61F010B0D007FBCEF /* FSControlVolumeView.h */; };
 		988AC6E91F010B0D007FBCEF /* FSControlVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */; };
-		988AC6EA1F010B0D007FBCEF /* FSControlVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */; };
 		988E3D121F024562004E837F /* libNvConvertorLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 988E3D111F024562004E837F /* libNvConvertorLib.a */; };
 		988E3D1D1F026D78004E837F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 988E3D1C1F026D78004E837F /* libstdc++.tbd */; };
 		988E3D271F0271A1004E837F /* FSTimeCountsdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */; };
-		98D669601F18F4B700DFB572 /* FSVideoEditorSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D669571F18F4B700DFB572 /* FSVideoEditorSDK.framework */; };
-		98D6696C1F18F4B700DFB572 /* FSVideoEditorSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D669571F18F4B700DFB572 /* FSVideoEditorSDK.framework */; };
-		98D6696D1F18F4B700DFB572 /* FSVideoEditorSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 98D669571F18F4B700DFB572 /* FSVideoEditorSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		98D669741F18F53B00DFB572 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 98D6695A1F18F4B700DFB572 /* Info.plist */; };
-		98D669751F18F6AF00DFB572 /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7541F13850300CB4DDD /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic */; };
-		98D669761F18F6AF00DFB572 /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7501F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic */; };
-		98D669771F18F6AF00DFB572 /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7511F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic */; };
-		98D669781F18F6AF00DFB572 /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA74E1F1320C100CB4DDD /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic */; };
-		98D669791F18F6AF00DFB572 /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */; };
-		98D6697A1F18F6AF00DFB572 /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 563B79D01F05F88A0035346A /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx */; };
-		98D6697B1F18F6AF00DFB572 /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 562D40711EFE4FD900BF0E0D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx */; };
-		98D6697C1F18F80800DFB572 /* FSDissolveAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A061F0A42AA0035346A /* FSDissolveAnimator.h */; };
-		98D6697D1F18F80800DFB572 /* FSSpringAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A081F0A42AA0035346A /* FSSpringAnimator.h */; };
-		98D6697E1F18F80800DFB572 /* FSPresentAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A0F1F0A42FC0035346A /* FSPresentAnimator.h */; };
-		98D6697F1F18F80800DFB572 /* FSDismissAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A181F0A52080035346A /* FSDismissAnimator.h */; };
-		98D669801F18F80800DFB572 /* FSTimeCountsdownView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988E3D211F0271A1004E837F /* FSTimeCountsdownView.h */; };
-		98D669811F18F80800DFB572 /* FSEditorLoading.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D405F1EFE3B5000BF0E0D /* FSEditorLoading.h */; };
-		98D669821F18F80800DFB572 /* FSSegmentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 987700AD1F03AFE50043394E /* FSSegmentView.h */; };
-		98D669831F18F80800DFB572 /* FSMoveButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 98725BF01F064F8C00445EF2 /* FSMoveButton.h */; };
-		98D669841F18F80800DFB572 /* FSAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 983445FA1F0CF06C00A6E977 /* FSAlertView.h */; };
-		98D669851F18F80800DFB572 /* FSEditorAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A221F0C8FE00035346A /* FSEditorAlertView.h */; };
-		98D669861F18F80800DFB572 /* FSCancleController.h in Headers */ = {isa = PBXBuildFile; fileRef = 560142B31F1868FE00A06C70 /* FSCancleController.h */; };
-		98D669871F18F80800DFB572 /* FSFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D191EFB66B60026247E /* FSFile.h */; };
-		98D669881F18F80800DFB572 /* FSFileSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D1B1EFB66B60026247E /* FSFileSlice.h */; };
-		98D669891F18F80800DFB572 /* FSFileDivider.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D1E1EFB66B60026247E /* FSFileDivider.h */; };
-		98D6698A1F18F80800DFB572 /* FSFileSizeDivider.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D201EFB66B60026247E /* FSFileSizeDivider.h */; };
-		98D6698B1F18F80800DFB572 /* FSFileSliceDivider.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D8F1EFB7EC80026247E /* FSFileSliceDivider.h */; };
-		98D6698C1F18F80800DFB572 /* FSFileDownLoadTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D241EFB66B60026247E /* FSFileDownLoadTool.h */; };
-		98D6698D1F18F80800DFB572 /* FSFileDownloadCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D271EFB66B60026247E /* FSFileDownloadCache.h */; };
-		98D6698E1F18F80800DFB572 /* FSFileUploadTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D2B1EFB66B60026247E /* FSFileUploadTool.h */; };
-		98D6698F1F18F80800DFB572 /* FSDBUploadCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D2E1EFB66B60026247E /* FSDBUploadCache.h */; };
-		98D669901F18F80800DFB572 /* FSFileCacheProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D301EFB66B60026247E /* FSFileCacheProtocol.h */; };
-		98D669911F18F80800DFB572 /* FSFileUploadCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D311EFB66B60026247E /* FSFileUploadCache.h */; };
-		98D669921F18F80800DFB572 /* FSUploadCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D331EFB66B60026247E /* FSUploadCache.h */; };
-		98D669931F18F80800DFB572 /* FSFileUploadChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D361EFB66B60026247E /* FSFileUploadChecker.h */; };
-		98D669941F18F80800DFB572 /* FSFileUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D391EFB66B60026247E /* FSFileUploader.h */; };
-		98D669951F18F80800DFB572 /* FSUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D3B1EFB66B60026247E /* FSUploader.h */; };
-		98D669961F18F80800DFB572 /* FSFileUploadDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D3E1EFB66B60026247E /* FSFileUploadDBManager.h */; };
-		98D669971F18F80800DFB572 /* FSMD5Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D401EFB66B60026247E /* FSMD5Utils.h */; };
-		98D669981F18F80800DFB572 /* FSToolController.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A021F0A281C0035346A /* FSToolController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		98D669991F18F80800DFB572 /* FSAnimationNavController.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A151F0A4DF50035346A /* FSAnimationNavController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		98D6699A1F18F80800DFB572 /* FSMusicAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79F71F08D3360035346A /* FSMusicAPI.h */; };
-		98D6699B1F18F80800DFB572 /* FSMusicSever.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79F41F08D3290035346A /* FSMusicSever.h */; };
-		98D6699C1F18F80800DFB572 /* FSMusicManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79FA1F08F3B40035346A /* FSMusicManager.h */; };
-		98D6699D1F18F80800DFB572 /* FSMusic.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79EF1F08C41D0035346A /* FSMusic.h */; };
-		98D6699E1F18F80800DFB572 /* FSMusicPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79D71F0656E00035346A /* FSMusicPlayer.h */; };
-		98D6699F1F18F80800DFB572 /* FSMusicCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79D31F062F6F0035346A /* FSMusicCell.h */; };
-		98D669A01F18F80800DFB572 /* FSMusicController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5647BC4D1F04E2D80072B618 /* FSMusicController.h */; };
-		98D669A11F18F80800DFB572 /* FSPublisherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9871BC3D1F0F861D0065977A /* FSPublisherAPI.h */; };
-		98D669A21F18F80800DFB572 /* FSPublisherServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9871BC391F0F85BA0065977A /* FSPublisherServer.h */; };
-		98D669A31F18F80800DFB572 /* FSPublisherController.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D405B1EFD39F100BF0E0D /* FSPublisherController.h */; };
-		98D669A41F18F80900DFB572 /* FSPublisherToolView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6D21EFE4B99007FBCEF /* FSPublisherToolView.h */; };
-		98D669A51F18F80900DFB572 /* FSEditVideoNameView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6D71EFE560B007FBCEF /* FSEditVideoNameView.h */; };
-		98D669A61F18F80900DFB572 /* FSShortVideoRecorderController.h in Headers */ = {isa = PBXBuildFile; fileRef = 984060361EF93F130049B58E /* FSShortVideoRecorderController.h */; };
-		98D669A71F18F80900DFB572 /* FSShortVideoRecorderManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 984060381EF93F130049B58E /* FSShortVideoRecorderManager.h */; };
-		98D669A81F18F80900DFB572 /* FSShortVideoRecorderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9840603A1EF93F130049B58E /* FSShortVideoRecorderView.h */; };
-		98D669A91F18F80900DFB572 /* FSProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */; };
-		98D669AA1F18F80900DFB572 /* FSEditVideoTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C91EFD3BB7007FBCEF /* FSEditVideoTool.h */; };
-		98D669AB1F18F80900DFB572 /* FSLocalEditorController.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D403D1EFBE8A100BF0E0D /* FSLocalEditorController.h */; };
-		98D669AC1F18F80900DFB572 /* FSVideoFxController.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D40651EFE41CE00BF0E0D /* FSVideoFxController.h */; };
-		98D669AD1F18F80900DFB572 /* FSThumbnailView.h in Headers */ = {isa = PBXBuildFile; fileRef = 563A378E1EFFE43800852642 /* FSThumbnailView.h */; };
-		98D669AE1F18F80900DFB572 /* FSVideoFxOperationStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A2C1F0CE6F50035346A /* FSVideoFxOperationStack.h */; };
-		98D669AF1F18F80900DFB572 /* FSVirtualTimeLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A2F1F0CE79A0035346A /* FSVirtualTimeLine.h */; };
-		98D669B01F18F80900DFB572 /* FSVideoFx.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A291F0CBC720035346A /* FSVideoFx.h */; };
-		98D669B11F18F80900DFB572 /* FSVideoFxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D40691EFE4B4400BF0E0D /* FSVideoFxView.h */; };
-		98D669B21F18F80900DFB572 /* FSVideoClipProgress.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D40741EFE6A8A00BF0E0D /* FSVideoClipProgress.h */; };
-		98D669B31F18F80900DFB572 /* FSControlView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5647BC3A1F0272110072B618 /* FSControlView.h */; };
-		98D669B41F18F80900DFB572 /* FSVideoListView.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0BA01EFA49F500C4C527 /* FSVideoListView.h */; };
-		98D669B51F18F80900DFB572 /* FSAlbumVideoCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0BA31EFA4DB400C4C527 /* FSAlbumVideoCell.h */; };
-		98D669B61F18F80900DFB572 /* FSLocalVideoController.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0B8C1EF93A1C00C4C527 /* FSLocalVideoController.h */; };
-		98D669B71F18F80900DFB572 /* FSLocalPhotoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0B9A1EFA20BC00C4C527 /* FSLocalPhotoManager.h */; };
-		98D669B81F18F80900DFB572 /* FSFilterView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6DC1EFE65C2007FBCEF /* FSFilterView.h */; };
-		98D669B91F18F80900DFB572 /* FSFilterButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6E11EFE6926007FBCEF /* FSFilterButton.h */; };
-		98D669BA1F18F80900DFB572 /* FSControlVolumeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6E61F010B0D007FBCEF /* FSControlVolumeView.h */; };
-		98D669BB1F18F80900DFB572 /* FSCutMusicView.h in Headers */ = {isa = PBXBuildFile; fileRef = 987ECEE61F04F92D00221273 /* FSCutMusicView.h */; };
-		98D669BC1F18F87600DFB572 /* FSDissolveAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A071F0A42AA0035346A /* FSDissolveAnimator.m */; };
-		98D669BD1F18F87600DFB572 /* FSSpringAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A091F0A42AA0035346A /* FSSpringAnimator.m */; };
-		98D669BE1F18F87600DFB572 /* FSPresentAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A101F0A42FC0035346A /* FSPresentAnimator.m */; };
-		98D669BF1F18F87600DFB572 /* FSDismissAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A191F0A52080035346A /* FSDismissAnimator.m */; };
-		98D669C01F18F87600DFB572 /* FSTimeCountsdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */; };
-		98D669C11F18F87600DFB572 /* FSEditorLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40601EFE3B5000BF0E0D /* FSEditorLoading.m */; };
-		98D669C21F18F87600DFB572 /* FSSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 987700AE1F03AFE50043394E /* FSSegmentView.m */; };
-		98D669C31F18F87600DFB572 /* FSMoveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 98725BF11F064F8C00445EF2 /* FSMoveButton.m */; };
-		98D669C41F18F87600DFB572 /* FSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 983445FB1F0CF06C00A6E977 /* FSAlertView.m */; };
-		98D669C51F18F87600DFB572 /* FSEditorAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A231F0C8FE00035346A /* FSEditorAlertView.m */; };
-		98D669C61F18F87600DFB572 /* FSCancleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 560142B41F1868FE00A06C70 /* FSCancleController.m */; };
-		98D669C71F18F87600DFB572 /* FSFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1A1EFB66B60026247E /* FSFile.m */; };
-		98D669C81F18F87600DFB572 /* FSFileSlice.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1C1EFB66B60026247E /* FSFileSlice.m */; };
-		98D669C91F18F87600DFB572 /* FSFileDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1F1EFB66B60026247E /* FSFileDivider.m */; };
-		98D669CA1F18F87600DFB572 /* FSFileSizeDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D211EFB66B60026247E /* FSFileSizeDivider.m */; };
-		98D669CB1F18F87600DFB572 /* FSFileSliceDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D901EFB7EC80026247E /* FSFileSliceDivider.m */; };
-		98D669CC1F18F87600DFB572 /* FSFileDownLoadTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D251EFB66B60026247E /* FSFileDownLoadTool.m */; };
-		98D669CD1F18F87600DFB572 /* FSFileDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D281EFB66B60026247E /* FSFileDownloadCache.m */; };
-		98D669CE1F18F87600DFB572 /* FSFileUploadTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D2C1EFB66B60026247E /* FSFileUploadTool.m */; };
-		98D669CF1F18F87600DFB572 /* FSDBUploadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D2F1EFB66B60026247E /* FSDBUploadCache.m */; };
-		98D669D01F18F87600DFB572 /* FSFileUploadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D321EFB66B60026247E /* FSFileUploadCache.m */; };
-		98D669D11F18F87600DFB572 /* FSUploadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D341EFB66B60026247E /* FSUploadCache.m */; };
-		98D669D21F18F87600DFB572 /* FSFileUploadChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D371EFB66B60026247E /* FSFileUploadChecker.m */; };
-		98D669D31F18F87600DFB572 /* FSFileUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D3A1EFB66B60026247E /* FSFileUploader.m */; };
-		98D669D41F18F87600DFB572 /* FSUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D3C1EFB66B60026247E /* FSUploader.m */; };
-		98D669D51F18F87600DFB572 /* FSFileUploadDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D3F1EFB66B60026247E /* FSFileUploadDBManager.m */; };
-		98D669D61F18F87600DFB572 /* FSMD5Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D411EFB66B60026247E /* FSMD5Utils.m */; };
-		98D669D71F18F87600DFB572 /* FSToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A031F0A281C0035346A /* FSToolController.m */; };
-		98D669D81F18F87600DFB572 /* FSAnimationNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A161F0A4DF50035346A /* FSAnimationNavController.m */; };
-		98D669D91F18F87600DFB572 /* FSMusicAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79F81F08D3360035346A /* FSMusicAPI.m */; };
-		98D669DA1F18F87600DFB572 /* FSMusicSever.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79F51F08D3290035346A /* FSMusicSever.m */; };
-		98D669DB1F18F87600DFB572 /* FSMusicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79FB1F08F3B40035346A /* FSMusicManager.m */; };
-		98D669DC1F18F87600DFB572 /* FSMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79F01F08C41D0035346A /* FSMusic.m */; };
-		98D669DD1F18F87600DFB572 /* FSMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79D81F0656E00035346A /* FSMusicPlayer.m */; };
-		98D669DE1F18F87600DFB572 /* FSMusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79D41F062F6F0035346A /* FSMusicCell.m */; };
-		98D669DF1F18F87600DFB572 /* FSMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC4E1F04E2D80072B618 /* FSMusicController.m */; };
-		98D669E01F18F87600DFB572 /* FSPublisherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9871BC3E1F0F861D0065977A /* FSPublisherAPI.m */; };
-		98D669E11F18F87600DFB572 /* FSPublisherServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9871BC3A1F0F85BA0065977A /* FSPublisherServer.m */; };
-		98D669E21F18F87600DFB572 /* FSPublisherController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D405C1EFD39F100BF0E0D /* FSPublisherController.m */; };
-		98D669E31F18F87600DFB572 /* FSPublisherToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6D31EFE4B99007FBCEF /* FSPublisherToolView.m */; };
-		98D669E41F18F87600DFB572 /* FSEditVideoNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6D81EFE560B007FBCEF /* FSEditVideoNameView.m */; };
-		98D669E51F18F87600DFB572 /* FSShortVideoRecorderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060371EF93F130049B58E /* FSShortVideoRecorderController.m */; };
-		98D669E61F18F87600DFB572 /* FSShortVideoRecorderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060391EF93F130049B58E /* FSShortVideoRecorderManager.m */; };
-		98D669E71F18F87600DFB572 /* FSShortVideoRecorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840603B1EF93F130049B58E /* FSShortVideoRecorderView.m */; };
-		98D669E81F18F87600DFB572 /* FSProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */; };
-		98D669E91F18F87600DFB572 /* FSEditVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6CA1EFD3BB7007FBCEF /* FSEditVideoTool.m */; };
-		98D669EA1F18F87600DFB572 /* FSLocalEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D403E1EFBE8A100BF0E0D /* FSLocalEditorController.m */; };
-		98D669EB1F18F87600DFB572 /* FSVideoFxController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40661EFE41CE00BF0E0D /* FSVideoFxController.m */; };
-		98D669EC1F18F87600DFB572 /* FSThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A378F1EFFE43800852642 /* FSThumbnailView.m */; };
-		98D669ED1F18F87600DFB572 /* FSVideoFxOperationStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A2D1F0CE6F50035346A /* FSVideoFxOperationStack.m */; };
-		98D669EE1F18F87600DFB572 /* FSVirtualTimeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A301F0CE79A0035346A /* FSVirtualTimeLine.m */; };
-		98D669EF1F18F87600DFB572 /* FSVideoFx.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A2A1F0CBC720035346A /* FSVideoFx.m */; };
-		98D669F01F18F87600DFB572 /* FSVideoFxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D406A1EFE4B4400BF0E0D /* FSVideoFxView.m */; };
-		98D669F11F18F87600DFB572 /* FSVideoClipProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40751EFE6A8A00BF0E0D /* FSVideoClipProgress.m */; };
-		98D669F21F18F87600DFB572 /* FSControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC3B1F0272110072B618 /* FSControlView.m */; };
-		98D669F31F18F87600DFB572 /* FSVideoListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA11EFA49F500C4C527 /* FSVideoListView.m */; };
-		98D669F41F18F87600DFB572 /* FSAlbumVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA41EFA4DB400C4C527 /* FSAlbumVideoCell.m */; };
-		98D669F51F18F87600DFB572 /* FSLocalVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B8D1EF93A1C00C4C527 /* FSLocalVideoController.m */; };
-		98D669F61F18F87600DFB572 /* FSLocalPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B9B1EFA20BC00C4C527 /* FSLocalPhotoManager.m */; };
-		98D669F71F18F87600DFB572 /* FSFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6DD1EFE65C2007FBCEF /* FSFilterView.m */; };
-		98D669F81F18F87600DFB572 /* FSFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E21EFE6926007FBCEF /* FSFilterButton.m */; };
-		98D669F91F18F87600DFB572 /* FSControlVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */; };
-		98D669FA1F18F87600DFB572 /* FSCutMusicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 987ECEE71F04F92D00221273 /* FSCutMusicView.m */; };
 		98EFA74F1F1320C100CB4DDD /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA74E1F1320C100CB4DDD /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic */; };
 		98EFA7521F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7501F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic */; };
 		98EFA7531F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7511F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic */; };
 		98EFA7551F13850300CB4DDD /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7541F13850300CB4DDD /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic */; };
+		98F165F81F19F8B20084D70D /* FSVideoEditorSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F165EF1F19F8B20084D70D /* FSVideoEditorSDK.framework */; };
+		98F166041F19F8B20084D70D /* FSVideoEditorSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F165EF1F19F8B20084D70D /* FSVideoEditorSDK.framework */; };
+		98F166051F19F8B20084D70D /* FSVideoEditorSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 98F165EF1F19F8B20084D70D /* FSVideoEditorSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		98F1660C1F19F9B10084D70D /* FSDissolveAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A071F0A42AA0035346A /* FSDissolveAnimator.m */; };
+		98F1660D1F19F9B10084D70D /* FSSpringAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A091F0A42AA0035346A /* FSSpringAnimator.m */; };
+		98F1660E1F19F9B10084D70D /* FSPresentAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A101F0A42FC0035346A /* FSPresentAnimator.m */; };
+		98F1660F1F19F9B10084D70D /* FSDismissAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A191F0A52080035346A /* FSDismissAnimator.m */; };
+		98F166101F19F9B10084D70D /* FSTimeCountsdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */; };
+		98F166111F19F9B10084D70D /* FSEditorLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40601EFE3B5000BF0E0D /* FSEditorLoading.m */; };
+		98F166121F19F9B10084D70D /* FSSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 987700AE1F03AFE50043394E /* FSSegmentView.m */; };
+		98F166131F19F9B10084D70D /* FSMoveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 98725BF11F064F8C00445EF2 /* FSMoveButton.m */; };
+		98F166141F19F9B10084D70D /* FSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 983445FB1F0CF06C00A6E977 /* FSAlertView.m */; };
+		98F166151F19F9B10084D70D /* FSEditorAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A231F0C8FE00035346A /* FSEditorAlertView.m */; };
+		98F166161F19F9B10084D70D /* FSCancleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 560142B41F1868FE00A06C70 /* FSCancleController.m */; };
+		98F166171F19F9B10084D70D /* FSFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1A1EFB66B60026247E /* FSFile.m */; };
+		98F166181F19F9B10084D70D /* FSFileSlice.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1C1EFB66B60026247E /* FSFileSlice.m */; };
+		98F166191F19F9B10084D70D /* FSFileDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D1F1EFB66B60026247E /* FSFileDivider.m */; };
+		98F1661A1F19F9B10084D70D /* FSFileSizeDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D211EFB66B60026247E /* FSFileSizeDivider.m */; };
+		98F1661B1F19F9B10084D70D /* FSFileSliceDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D901EFB7EC80026247E /* FSFileSliceDivider.m */; };
+		98F1661C1F19F9B10084D70D /* FSFileDownLoadTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D251EFB66B60026247E /* FSFileDownLoadTool.m */; };
+		98F1661D1F19F9B10084D70D /* FSFileDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D281EFB66B60026247E /* FSFileDownloadCache.m */; };
+		98F1661E1F19F9B10084D70D /* FSFileUploadTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D2C1EFB66B60026247E /* FSFileUploadTool.m */; };
+		98F1661F1F19F9B10084D70D /* FSDBUploadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D2F1EFB66B60026247E /* FSDBUploadCache.m */; };
+		98F166201F19F9B10084D70D /* FSFileUploadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D321EFB66B60026247E /* FSFileUploadCache.m */; };
+		98F166211F19F9B10084D70D /* FSUploadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D341EFB66B60026247E /* FSUploadCache.m */; };
+		98F166221F19F9B10084D70D /* FSFileUploadChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D371EFB66B60026247E /* FSFileUploadChecker.m */; };
+		98F166231F19F9B10084D70D /* FSFileUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D3A1EFB66B60026247E /* FSFileUploader.m */; };
+		98F166241F19F9B10084D70D /* FSUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D3C1EFB66B60026247E /* FSUploader.m */; };
+		98F166251F19F9B10084D70D /* FSFileUploadDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D3F1EFB66B60026247E /* FSFileUploadDBManager.m */; };
+		98F166261F19F9B10084D70D /* FSMD5Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D411EFB66B60026247E /* FSMD5Utils.m */; };
+		98F166271F19F9B10084D70D /* FSToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A031F0A281C0035346A /* FSToolController.m */; };
+		98F166281F19F9B10084D70D /* FSAnimationNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A161F0A4DF50035346A /* FSAnimationNavController.m */; };
+		98F166291F19F9B10084D70D /* FSMusicAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79F81F08D3360035346A /* FSMusicAPI.m */; };
+		98F1662A1F19F9B10084D70D /* FSMusicSever.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79F51F08D3290035346A /* FSMusicSever.m */; };
+		98F1662B1F19F9B10084D70D /* FSMusicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79FB1F08F3B40035346A /* FSMusicManager.m */; };
+		98F1662C1F19F9B10084D70D /* FSMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79F01F08C41D0035346A /* FSMusic.m */; };
+		98F1662D1F19F9B10084D70D /* FSMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79D81F0656E00035346A /* FSMusicPlayer.m */; };
+		98F1662E1F19F9B10084D70D /* FSMusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B79D41F062F6F0035346A /* FSMusicCell.m */; };
+		98F1662F1F19F9B10084D70D /* FSMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC4E1F04E2D80072B618 /* FSMusicController.m */; };
+		98F166301F19F9B10084D70D /* FSPublisherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9871BC3E1F0F861D0065977A /* FSPublisherAPI.m */; };
+		98F166311F19F9B10084D70D /* FSPublisherServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9871BC3A1F0F85BA0065977A /* FSPublisherServer.m */; };
+		98F166321F19F9B10084D70D /* FSPublisherController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D405C1EFD39F100BF0E0D /* FSPublisherController.m */; };
+		98F166331F19F9B10084D70D /* FSPublisherToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6D31EFE4B99007FBCEF /* FSPublisherToolView.m */; };
+		98F166341F19F9B10084D70D /* FSEditVideoNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6D81EFE560B007FBCEF /* FSEditVideoNameView.m */; };
+		98F166351F19F9B10084D70D /* FSShortVideoRecorderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060371EF93F130049B58E /* FSShortVideoRecorderController.m */; };
+		98F166361F19F9B10084D70D /* FSShortVideoRecorderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060391EF93F130049B58E /* FSShortVideoRecorderManager.m */; };
+		98F166371F19F9B10084D70D /* FSShortVideoRecorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840603B1EF93F130049B58E /* FSShortVideoRecorderView.m */; };
+		98F166381F19F9B10084D70D /* FSProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6C51EFD1D3D007FBCEF /* FSProgressView.m */; };
+		98F166391F19F9B10084D70D /* FSEditVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6CA1EFD3BB7007FBCEF /* FSEditVideoTool.m */; };
+		98F1663A1F19F9B10084D70D /* FSLocalEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D403E1EFBE8A100BF0E0D /* FSLocalEditorController.m */; };
+		98F1663B1F19F9B10084D70D /* FSVideoFxController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40661EFE41CE00BF0E0D /* FSVideoFxController.m */; };
+		98F1663C1F19F9B10084D70D /* FSThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A378F1EFFE43800852642 /* FSThumbnailView.m */; };
+		98F1663D1F19F9B10084D70D /* FSVideoFxOperationStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A2D1F0CE6F50035346A /* FSVideoFxOperationStack.m */; };
+		98F1663E1F19F9B10084D70D /* FSVirtualTimeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A301F0CE79A0035346A /* FSVirtualTimeLine.m */; };
+		98F1663F1F19F9B10084D70D /* FSVideoFx.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A2A1F0CBC720035346A /* FSVideoFx.m */; };
+		98F166401F19F9B10084D70D /* FSVideoFxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D406A1EFE4B4400BF0E0D /* FSVideoFxView.m */; };
+		98F166411F19F9B10084D70D /* FSVideoClipProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40751EFE6A8A00BF0E0D /* FSVideoClipProgress.m */; };
+		98F166421F19F9B10084D70D /* FSControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC3B1F0272110072B618 /* FSControlView.m */; };
+		98F166431F19F9B10084D70D /* FSVideoListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA11EFA49F500C4C527 /* FSVideoListView.m */; };
+		98F166441F19F9B10084D70D /* FSAlbumVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA41EFA4DB400C4C527 /* FSAlbumVideoCell.m */; };
+		98F166451F19F9B10084D70D /* FSLocalVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B8D1EF93A1C00C4C527 /* FSLocalVideoController.m */; };
+		98F166461F19F9B10084D70D /* FSLocalPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B9B1EFA20BC00C4C527 /* FSLocalPhotoManager.m */; };
+		98F166471F19F9B10084D70D /* FSFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6DD1EFE65C2007FBCEF /* FSFilterView.m */; };
+		98F166481F19F9B10084D70D /* FSFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E21EFE6926007FBCEF /* FSFilterButton.m */; };
+		98F166491F19F9B10084D70D /* FSControlVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */; };
+		98F1664A1F19F9B10084D70D /* FSCutMusicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 987ECEE71F04F92D00221273 /* FSCutMusicView.m */; };
+		98F1664B1F19FA330084D70D /* FSDissolveAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A061F0A42AA0035346A /* FSDissolveAnimator.h */; };
+		98F1664C1F19FA330084D70D /* FSSpringAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A081F0A42AA0035346A /* FSSpringAnimator.h */; };
+		98F1664D1F19FA330084D70D /* FSPresentAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A0F1F0A42FC0035346A /* FSPresentAnimator.h */; };
+		98F1664E1F19FA330084D70D /* FSDismissAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A181F0A52080035346A /* FSDismissAnimator.h */; };
+		98F1664F1F19FA330084D70D /* FSTimeCountsdownView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988E3D211F0271A1004E837F /* FSTimeCountsdownView.h */; };
+		98F166501F19FA330084D70D /* FSEditorLoading.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D405F1EFE3B5000BF0E0D /* FSEditorLoading.h */; };
+		98F166511F19FA330084D70D /* FSSegmentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 987700AD1F03AFE50043394E /* FSSegmentView.h */; };
+		98F166521F19FA330084D70D /* FSMoveButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 98725BF01F064F8C00445EF2 /* FSMoveButton.h */; };
+		98F166531F19FA330084D70D /* FSAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 983445FA1F0CF06C00A6E977 /* FSAlertView.h */; };
+		98F166541F19FA330084D70D /* FSEditorAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A221F0C8FE00035346A /* FSEditorAlertView.h */; };
+		98F166551F19FA330084D70D /* FSCancleController.h in Headers */ = {isa = PBXBuildFile; fileRef = 560142B31F1868FE00A06C70 /* FSCancleController.h */; };
+		98F166561F19FA330084D70D /* FSFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D191EFB66B60026247E /* FSFile.h */; };
+		98F166571F19FA330084D70D /* FSFileSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D1B1EFB66B60026247E /* FSFileSlice.h */; };
+		98F166581F19FA330084D70D /* FSFileDivider.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D1E1EFB66B60026247E /* FSFileDivider.h */; };
+		98F166591F19FA330084D70D /* FSFileSizeDivider.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D201EFB66B60026247E /* FSFileSizeDivider.h */; };
+		98F1665A1F19FA330084D70D /* FSFileSliceDivider.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D8F1EFB7EC80026247E /* FSFileSliceDivider.h */; };
+		98F1665B1F19FA330084D70D /* FSFileDownLoadTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D241EFB66B60026247E /* FSFileDownLoadTool.h */; };
+		98F1665C1F19FA330084D70D /* FSFileDownloadCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D271EFB66B60026247E /* FSFileDownloadCache.h */; };
+		98F1665D1F19FA330084D70D /* FSFileUploadTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D2B1EFB66B60026247E /* FSFileUploadTool.h */; };
+		98F1665E1F19FA330084D70D /* FSDBUploadCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D2E1EFB66B60026247E /* FSDBUploadCache.h */; };
+		98F1665F1F19FA330084D70D /* FSFileCacheProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D301EFB66B60026247E /* FSFileCacheProtocol.h */; };
+		98F166601F19FA330084D70D /* FSFileUploadCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D311EFB66B60026247E /* FSFileUploadCache.h */; };
+		98F166611F19FA330084D70D /* FSUploadCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D331EFB66B60026247E /* FSUploadCache.h */; };
+		98F166621F19FA330084D70D /* FSFileUploadChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D361EFB66B60026247E /* FSFileUploadChecker.h */; };
+		98F166631F19FA330084D70D /* FSFileUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D391EFB66B60026247E /* FSFileUploader.h */; };
+		98F166641F19FA330084D70D /* FSFileUploadDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D3E1EFB66B60026247E /* FSFileUploadDBManager.h */; };
+		98F166651F19FA330084D70D /* FSMD5Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D401EFB66B60026247E /* FSMD5Utils.h */; };
+		98F166661F19FA330084D70D /* FSToolController.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A021F0A281C0035346A /* FSToolController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		98F166671F19FA330084D70D /* FSAnimationNavController.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A151F0A4DF50035346A /* FSAnimationNavController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		98F166681F19FA330084D70D /* FSMusicAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79F71F08D3360035346A /* FSMusicAPI.h */; };
+		98F166691F19FA330084D70D /* FSMusicSever.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79F41F08D3290035346A /* FSMusicSever.h */; };
+		98F1666A1F19FA330084D70D /* FSMusicManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79FA1F08F3B40035346A /* FSMusicManager.h */; };
+		98F1666B1F19FA330084D70D /* FSMusic.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79EF1F08C41D0035346A /* FSMusic.h */; };
+		98F1666C1F19FA330084D70D /* FSMusicPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79D71F0656E00035346A /* FSMusicPlayer.h */; };
+		98F1666D1F19FA330084D70D /* FSMusicCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79D31F062F6F0035346A /* FSMusicCell.h */; };
+		98F1666E1F19FA330084D70D /* FSMusicController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5647BC4D1F04E2D80072B618 /* FSMusicController.h */; };
+		98F1666F1F19FA330084D70D /* FSPublisherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9871BC3D1F0F861D0065977A /* FSPublisherAPI.h */; };
+		98F166701F19FA330084D70D /* FSPublisherServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9871BC391F0F85BA0065977A /* FSPublisherServer.h */; };
+		98F166711F19FA330084D70D /* FSPublisherController.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D405B1EFD39F100BF0E0D /* FSPublisherController.h */; };
+		98F166721F19FA330084D70D /* FSPublisherToolView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6D21EFE4B99007FBCEF /* FSPublisherToolView.h */; };
+		98F166731F19FA330084D70D /* FSEditVideoNameView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6D71EFE560B007FBCEF /* FSEditVideoNameView.h */; };
+		98F166741F19FA330084D70D /* FSShortVideoRecorderController.h in Headers */ = {isa = PBXBuildFile; fileRef = 984060361EF93F130049B58E /* FSShortVideoRecorderController.h */; };
+		98F166751F19FA330084D70D /* FSShortVideoRecorderManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 984060381EF93F130049B58E /* FSShortVideoRecorderManager.h */; };
+		98F166761F19FA330084D70D /* FSShortVideoRecorderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9840603A1EF93F130049B58E /* FSShortVideoRecorderView.h */; };
+		98F166771F19FA330084D70D /* FSProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C41EFD1D3D007FBCEF /* FSProgressView.h */; };
+		98F166781F19FA330084D70D /* FSEditVideoTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6C91EFD3BB7007FBCEF /* FSEditVideoTool.h */; };
+		98F166791F19FA330084D70D /* FSLocalEditorController.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D403D1EFBE8A100BF0E0D /* FSLocalEditorController.h */; };
+		98F1667A1F19FA330084D70D /* FSVideoFxController.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D40651EFE41CE00BF0E0D /* FSVideoFxController.h */; };
+		98F1667B1F19FA330084D70D /* FSThumbnailView.h in Headers */ = {isa = PBXBuildFile; fileRef = 563A378E1EFFE43800852642 /* FSThumbnailView.h */; };
+		98F1667C1F19FA330084D70D /* FSVideoFxOperationStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A2C1F0CE6F50035346A /* FSVideoFxOperationStack.h */; };
+		98F1667D1F19FA330084D70D /* FSVirtualTimeLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A2F1F0CE79A0035346A /* FSVirtualTimeLine.h */; };
+		98F1667E1F19FA330084D70D /* FSVideoFx.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A291F0CBC720035346A /* FSVideoFx.h */; };
+		98F1667F1F19FA330084D70D /* FSVideoFxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D40691EFE4B4400BF0E0D /* FSVideoFxView.h */; };
+		98F166801F19FA330084D70D /* FSVideoClipProgress.h in Headers */ = {isa = PBXBuildFile; fileRef = 562D40741EFE6A8A00BF0E0D /* FSVideoClipProgress.h */; };
+		98F166811F19FA330084D70D /* FSControlView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5647BC3A1F0272110072B618 /* FSControlView.h */; };
+		98F166821F19FA330084D70D /* FSVideoListView.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0BA01EFA49F500C4C527 /* FSVideoListView.h */; };
+		98F166831F19FA330084D70D /* FSAlbumVideoCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0BA31EFA4DB400C4C527 /* FSAlbumVideoCell.h */; };
+		98F166841F19FA330084D70D /* FSLocalVideoController.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0B8C1EF93A1C00C4C527 /* FSLocalVideoController.h */; };
+		98F166851F19FA330084D70D /* FSLocalPhotoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 567E0B9A1EFA20BC00C4C527 /* FSLocalPhotoManager.h */; };
+		98F166861F19FA330084D70D /* FSFilterView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6DC1EFE65C2007FBCEF /* FSFilterView.h */; };
+		98F166871F19FA330084D70D /* FSFilterButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6E11EFE6926007FBCEF /* FSFilterButton.h */; };
+		98F166881F19FA330084D70D /* FSControlVolumeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6E61F010B0D007FBCEF /* FSControlVolumeView.h */; };
+		98F166891F19FA330084D70D /* FSCutMusicView.h in Headers */ = {isa = PBXBuildFile; fileRef = 987ECEE61F04F92D00221273 /* FSCutMusicView.h */; };
+		98F1668A1F19FAF30084D70D /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7541F13850300CB4DDD /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic */; };
+		98F1668B1F19FAF30084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7501F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic */; };
+		98F1668C1F19FAF30084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7511F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic */; };
+		98F1668D1F19FAF30084D70D /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA74E1F1320C100CB4DDD /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic */; };
+		98F1668E1F19FAF30084D70D /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */; };
+		98F1668F1F19FAF30084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 563B79D01F05F88A0035346A /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx */; };
+		98F166901F19FAF30084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 562D40711EFE4FD900BF0E0D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx */; };
+		98F166911F19FAF30084D70D /* FSEditorPch.pch in Resources */ = {isa = PBXBuildFile; fileRef = 562D40731EFE61F700BF0E0D /* FSEditorPch.pch */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		98D669611F18F4B700DFB572 /* PBXContainerItemProxy */ = {
+		98F165F91F19F8B20084D70D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 567E0B461EF930D100C4C527 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 98D669561F18F4B700DFB572;
+			remoteGlobalIDString = 98F165EE1F19F8B20084D70D;
 			remoteInfo = FSVideoEditorSDK;
 		};
-		98D669631F18F4B700DFB572 /* PBXContainerItemProxy */ = {
+		98F165FB1F19F8B20084D70D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 567E0B461EF930D100C4C527 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 567E0B4D1EF930D100C4C527;
 			remoteInfo = FSVideoEditor;
 		};
-		98D6696A1F18F4B700DFB572 /* PBXContainerItemProxy */ = {
+		98F166021F19F8B20084D70D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 567E0B461EF930D100C4C527 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 98D669561F18F4B700DFB572;
+			remoteGlobalIDString = 98F165EE1F19F8B20084D70D;
 			remoteInfo = FSVideoEditorSDK;
 		};
 /* End PBXContainerItemProxy section */
@@ -334,8 +321,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				567E0B871EF939CC00C4C527 /* FSVideoEditorKit.framework in Embed Frameworks */,
-				98D6696D1F18F4B700DFB572 /* FSVideoEditorSDK.framework in Embed Frameworks */,
+				98F166051F19F8B20084D70D /* FSVideoEditorSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,9 +484,6 @@
 		567E0B5D1EF930D100C4C527 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		567E0B601EF930D100C4C527 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		567E0B621EF930D100C4C527 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		567E0B7F1EF939CC00C4C527 /* FSVideoEditorKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSVideoEditorKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		567E0B811EF939CC00C4C527 /* FSVideoEditorKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSVideoEditorKit.h; sourceTree = "<group>"; };
-		567E0B821EF939CC00C4C527 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		567E0B8C1EF93A1C00C4C527 /* FSLocalVideoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLocalVideoController.h; sourceTree = "<group>"; };
 		567E0B8D1EF93A1C00C4C527 /* FSLocalVideoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLocalVideoController.m; sourceTree = "<group>"; };
 		567E0B9A1EFA20BC00C4C527 /* FSLocalPhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLocalPhotoManager.h; sourceTree = "<group>"; };
@@ -613,10 +596,6 @@
 		988E3D1C1F026D78004E837F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		988E3D211F0271A1004E837F /* FSTimeCountsdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTimeCountsdownView.h; sourceTree = "<group>"; };
 		988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTimeCountsdownView.m; sourceTree = "<group>"; };
-		98D669571F18F4B700DFB572 /* FSVideoEditorSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSVideoEditorSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		98D6695A1F18F4B700DFB572 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		98D6695F1F18F4B700DFB572 /* FSVideoEditorSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FSVideoEditorSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		98D669681F18F4B700DFB572 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98E3C9BB1EFA1B9B00A2FDD6 /* NvsAssetPackageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAssetPackageManager.h; sourceTree = "<group>"; };
 		98E3C9BC1EFA1B9B00A2FDD6 /* NvsAudioClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioClip.h; sourceTree = "<group>"; };
 		98E3C9BD1EFA1B9B00A2FDD6 /* NvsAudioFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioFx.h; sourceTree = "<group>"; };
@@ -647,6 +626,10 @@
 		98EFA7501F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "A8A4344D-45DA-460F-A18F-C0E2355FE864.lic"; sourceTree = "<group>"; };
 		98EFA7511F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "C6273A8F-C899-4765-8BFC-E683EE37AA84.lic"; sourceTree = "<group>"; };
 		98EFA7541F13850300CB4DDD /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic"; sourceTree = "<group>"; };
+		98F165EF1F19F8B20084D70D /* FSVideoEditorSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSVideoEditorSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98F165F21F19F8B20084D70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98F165F71F19F8B20084D70D /* FSVideoEditorSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FSVideoEditorSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		98F166001F19F8B20084D70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -663,7 +646,7 @@
 				984060531EF940730049B58E /* libiconv.tbd in Frameworks */,
 				984060511EF9406A0049B58E /* AssetsLibrary.framework in Frameworks */,
 				9840604F1EF940620049B58E /* MobileCoreServices.framework in Frameworks */,
-				98D6696C1F18F4B700DFB572 /* FSVideoEditorSDK.framework in Frameworks */,
+				98F166041F19F8B20084D70D /* FSVideoEditorSDK.framework in Frameworks */,
 				9840604D1EF940580049B58E /* AudioToolbox.framework in Frameworks */,
 				9840604B1EF940500049B58E /* VideoToolbox.framework in Frameworks */,
 				984060491EF940490049B58E /* Photos.framework in Frameworks */,
@@ -674,25 +657,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		567E0B7B1EF939CC00C4C527 /* Frameworks */ = {
+		98F165EB1F19F8B20084D70D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		98D669531F18F4B700DFB572 /* Frameworks */ = {
+		98F165F41F19F8B20084D70D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		98D6695C1F18F4B700DFB572 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				98D669601F18F4B700DFB572 /* FSVideoEditorSDK.framework in Frameworks */,
+				98F165F81F19F8B20084D70D /* FSVideoEditorSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1121,9 +1097,8 @@
 			children = (
 				987B58BC1F0E796E00E85A37 /* Localizable.strings */,
 				567E0B501EF930D100C4C527 /* FSVideoEditor */,
-				567E0B801EF939CC00C4C527 /* FSVideoEditorKit */,
-				98D669581F18F4B700DFB572 /* FSVideoEditorSDK */,
-				98D669651F18F4B700DFB572 /* FSVideoEditorSDKTests */,
+				98F165F01F19F8B20084D70D /* FSVideoEditorSDK */,
+				98F165FD1F19F8B20084D70D /* FSVideoEditorSDKTests */,
 				567E0B4F1EF930D100C4C527 /* Products */,
 				9840603F1EF9401E0049B58E /* Frameworks */,
 			);
@@ -1133,9 +1108,8 @@
 			isa = PBXGroup;
 			children = (
 				567E0B4E1EF930D100C4C527 /* FSVideoEditor.app */,
-				567E0B7F1EF939CC00C4C527 /* FSVideoEditorKit.framework */,
-				98D669571F18F4B700DFB572 /* FSVideoEditorSDK.framework */,
-				98D6695F1F18F4B700DFB572 /* FSVideoEditorSDKTests.xctest */,
+				98F165EF1F19F8B20084D70D /* FSVideoEditorSDK.framework */,
+				98F165F71F19F8B20084D70D /* FSVideoEditorSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1174,15 +1148,6 @@
 				562D40731EFE61F700BF0E0D /* FSEditorPch.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		567E0B801EF939CC00C4C527 /* FSVideoEditorKit */ = {
-			isa = PBXGroup;
-			children = (
-				567E0B811EF939CC00C4C527 /* FSVideoEditorKit.h */,
-				567E0B821EF939CC00C4C527 /* Info.plist */,
-			);
-			path = FSVideoEditorKit;
 			sourceTree = "<group>";
 		};
 		567E0B8B1EF939F000C4C527 /* FSVideoEditors */ = {
@@ -1350,22 +1315,6 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
-		98D669581F18F4B700DFB572 /* FSVideoEditorSDK */ = {
-			isa = PBXGroup;
-			children = (
-				98D6695A1F18F4B700DFB572 /* Info.plist */,
-			);
-			path = FSVideoEditorSDK;
-			sourceTree = "<group>";
-		};
-		98D669651F18F4B700DFB572 /* FSVideoEditorSDKTests */ = {
-			isa = PBXGroup;
-			children = (
-				98D669681F18F4B700DFB572 /* Info.plist */,
-			);
-			path = FSVideoEditorSDKTests;
-			sourceTree = "<group>";
-		};
 		98E3C9B81EFA1B9B00A2FDD6 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -1419,94 +1368,92 @@
 			path = ios;
 			sourceTree = "<group>";
 		};
+		98F165F01F19F8B20084D70D /* FSVideoEditorSDK */ = {
+			isa = PBXGroup;
+			children = (
+				98F165F21F19F8B20084D70D /* Info.plist */,
+			);
+			path = FSVideoEditorSDK;
+			sourceTree = "<group>";
+		};
+		98F165FD1F19F8B20084D70D /* FSVideoEditorSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				98F166001F19F8B20084D70D /* Info.plist */,
+			);
+			path = FSVideoEditorSDKTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		567E0B7C1EF939CC00C4C527 /* Headers */ = {
+		98F165EC1F19F8B20084D70D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				988AC6E81F010B0D007FBCEF /* FSControlVolumeView.h in Headers */,
-				988AC6E31EFE6926007FBCEF /* FSFilterButton.h in Headers */,
-				567E0B831EF939CC00C4C527 /* FSVideoEditorKit.h in Headers */,
-				988AC6D91EFE560B007FBCEF /* FSEditVideoNameView.h in Headers */,
-				988AC6CB1EFD3BB7007FBCEF /* FSEditVideoTool.h in Headers */,
-				567E0B8E1EF93A1C00C4C527 /* FSLocalVideoController.h in Headers */,
-				567E0B9C1EFA20BC00C4C527 /* FSLocalPhotoManager.h in Headers */,
-				988AC6C61EFD1D3D007FBCEF /* FSProgressView.h in Headers */,
-				988AC6DE1EFE65C2007FBCEF /* FSFilterView.h in Headers */,
-				988AC6D41EFE4B99007FBCEF /* FSPublisherToolView.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		98D669541F18F4B700DFB572 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				98D669981F18F80800DFB572 /* FSToolController.h in Headers */,
-				98D669991F18F80800DFB572 /* FSAnimationNavController.h in Headers */,
-				98D6697C1F18F80800DFB572 /* FSDissolveAnimator.h in Headers */,
-				98D6697D1F18F80800DFB572 /* FSSpringAnimator.h in Headers */,
-				98D6697E1F18F80800DFB572 /* FSPresentAnimator.h in Headers */,
-				98D6697F1F18F80800DFB572 /* FSDismissAnimator.h in Headers */,
-				98D669801F18F80800DFB572 /* FSTimeCountsdownView.h in Headers */,
-				98D669811F18F80800DFB572 /* FSEditorLoading.h in Headers */,
-				98D669821F18F80800DFB572 /* FSSegmentView.h in Headers */,
-				98D669831F18F80800DFB572 /* FSMoveButton.h in Headers */,
-				98D669841F18F80800DFB572 /* FSAlertView.h in Headers */,
-				98D669851F18F80800DFB572 /* FSEditorAlertView.h in Headers */,
-				98D669861F18F80800DFB572 /* FSCancleController.h in Headers */,
-				98D669871F18F80800DFB572 /* FSFile.h in Headers */,
-				98D669881F18F80800DFB572 /* FSFileSlice.h in Headers */,
-				98D669891F18F80800DFB572 /* FSFileDivider.h in Headers */,
-				98D6698A1F18F80800DFB572 /* FSFileSizeDivider.h in Headers */,
-				98D6698B1F18F80800DFB572 /* FSFileSliceDivider.h in Headers */,
-				98D6698C1F18F80800DFB572 /* FSFileDownLoadTool.h in Headers */,
-				98D6698D1F18F80800DFB572 /* FSFileDownloadCache.h in Headers */,
-				98D6698E1F18F80800DFB572 /* FSFileUploadTool.h in Headers */,
-				98D6698F1F18F80800DFB572 /* FSDBUploadCache.h in Headers */,
-				98D669901F18F80800DFB572 /* FSFileCacheProtocol.h in Headers */,
-				98D669911F18F80800DFB572 /* FSFileUploadCache.h in Headers */,
-				98D669921F18F80800DFB572 /* FSUploadCache.h in Headers */,
-				98D669931F18F80800DFB572 /* FSFileUploadChecker.h in Headers */,
-				98D669941F18F80800DFB572 /* FSFileUploader.h in Headers */,
-				98D669951F18F80800DFB572 /* FSUploader.h in Headers */,
-				98D669961F18F80800DFB572 /* FSFileUploadDBManager.h in Headers */,
-				98D669971F18F80800DFB572 /* FSMD5Utils.h in Headers */,
-				98D6699A1F18F80800DFB572 /* FSMusicAPI.h in Headers */,
-				98D6699B1F18F80800DFB572 /* FSMusicSever.h in Headers */,
-				98D6699C1F18F80800DFB572 /* FSMusicManager.h in Headers */,
-				98D6699D1F18F80800DFB572 /* FSMusic.h in Headers */,
-				98D6699E1F18F80800DFB572 /* FSMusicPlayer.h in Headers */,
-				98D6699F1F18F80800DFB572 /* FSMusicCell.h in Headers */,
-				98D669A01F18F80800DFB572 /* FSMusicController.h in Headers */,
-				98D669A11F18F80800DFB572 /* FSPublisherAPI.h in Headers */,
-				98D669A21F18F80800DFB572 /* FSPublisherServer.h in Headers */,
-				98D669A31F18F80800DFB572 /* FSPublisherController.h in Headers */,
-				98D669A41F18F80900DFB572 /* FSPublisherToolView.h in Headers */,
-				98D669A51F18F80900DFB572 /* FSEditVideoNameView.h in Headers */,
-				98D669A61F18F80900DFB572 /* FSShortVideoRecorderController.h in Headers */,
-				98D669A71F18F80900DFB572 /* FSShortVideoRecorderManager.h in Headers */,
-				98D669A81F18F80900DFB572 /* FSShortVideoRecorderView.h in Headers */,
-				98D669A91F18F80900DFB572 /* FSProgressView.h in Headers */,
-				98D669AA1F18F80900DFB572 /* FSEditVideoTool.h in Headers */,
-				98D669AB1F18F80900DFB572 /* FSLocalEditorController.h in Headers */,
-				98D669AC1F18F80900DFB572 /* FSVideoFxController.h in Headers */,
-				98D669AD1F18F80900DFB572 /* FSThumbnailView.h in Headers */,
-				98D669AE1F18F80900DFB572 /* FSVideoFxOperationStack.h in Headers */,
-				98D669AF1F18F80900DFB572 /* FSVirtualTimeLine.h in Headers */,
-				98D669B01F18F80900DFB572 /* FSVideoFx.h in Headers */,
-				98D669B11F18F80900DFB572 /* FSVideoFxView.h in Headers */,
-				98D669B21F18F80900DFB572 /* FSVideoClipProgress.h in Headers */,
-				98D669B31F18F80900DFB572 /* FSControlView.h in Headers */,
-				98D669B41F18F80900DFB572 /* FSVideoListView.h in Headers */,
-				98D669B51F18F80900DFB572 /* FSAlbumVideoCell.h in Headers */,
-				98D669B61F18F80900DFB572 /* FSLocalVideoController.h in Headers */,
-				98D669B71F18F80900DFB572 /* FSLocalPhotoManager.h in Headers */,
-				98D669B81F18F80900DFB572 /* FSFilterView.h in Headers */,
-				98D669B91F18F80900DFB572 /* FSFilterButton.h in Headers */,
-				98D669BA1F18F80900DFB572 /* FSControlVolumeView.h in Headers */,
-				98D669BB1F18F80900DFB572 /* FSCutMusicView.h in Headers */,
+				98F166661F19FA330084D70D /* FSToolController.h in Headers */,
+				98F166671F19FA330084D70D /* FSAnimationNavController.h in Headers */,
+				98F1664B1F19FA330084D70D /* FSDissolveAnimator.h in Headers */,
+				98F1664C1F19FA330084D70D /* FSSpringAnimator.h in Headers */,
+				98F1664D1F19FA330084D70D /* FSPresentAnimator.h in Headers */,
+				98F1664E1F19FA330084D70D /* FSDismissAnimator.h in Headers */,
+				98F1664F1F19FA330084D70D /* FSTimeCountsdownView.h in Headers */,
+				98F166501F19FA330084D70D /* FSEditorLoading.h in Headers */,
+				98F166511F19FA330084D70D /* FSSegmentView.h in Headers */,
+				98F166521F19FA330084D70D /* FSMoveButton.h in Headers */,
+				98F166531F19FA330084D70D /* FSAlertView.h in Headers */,
+				98F166541F19FA330084D70D /* FSEditorAlertView.h in Headers */,
+				98F166551F19FA330084D70D /* FSCancleController.h in Headers */,
+				98F166561F19FA330084D70D /* FSFile.h in Headers */,
+				98F166571F19FA330084D70D /* FSFileSlice.h in Headers */,
+				98F166581F19FA330084D70D /* FSFileDivider.h in Headers */,
+				98F166591F19FA330084D70D /* FSFileSizeDivider.h in Headers */,
+				98F1665A1F19FA330084D70D /* FSFileSliceDivider.h in Headers */,
+				98F1665B1F19FA330084D70D /* FSFileDownLoadTool.h in Headers */,
+				98F1665C1F19FA330084D70D /* FSFileDownloadCache.h in Headers */,
+				98F1665D1F19FA330084D70D /* FSFileUploadTool.h in Headers */,
+				98F1665E1F19FA330084D70D /* FSDBUploadCache.h in Headers */,
+				98F1665F1F19FA330084D70D /* FSFileCacheProtocol.h in Headers */,
+				98F166601F19FA330084D70D /* FSFileUploadCache.h in Headers */,
+				98F166611F19FA330084D70D /* FSUploadCache.h in Headers */,
+				98F166621F19FA330084D70D /* FSFileUploadChecker.h in Headers */,
+				98F166631F19FA330084D70D /* FSFileUploader.h in Headers */,
+				98F166641F19FA330084D70D /* FSFileUploadDBManager.h in Headers */,
+				98F166651F19FA330084D70D /* FSMD5Utils.h in Headers */,
+				98F166681F19FA330084D70D /* FSMusicAPI.h in Headers */,
+				98F166691F19FA330084D70D /* FSMusicSever.h in Headers */,
+				98F1666A1F19FA330084D70D /* FSMusicManager.h in Headers */,
+				98F1666B1F19FA330084D70D /* FSMusic.h in Headers */,
+				98F1666C1F19FA330084D70D /* FSMusicPlayer.h in Headers */,
+				98F1666D1F19FA330084D70D /* FSMusicCell.h in Headers */,
+				98F1666E1F19FA330084D70D /* FSMusicController.h in Headers */,
+				98F1666F1F19FA330084D70D /* FSPublisherAPI.h in Headers */,
+				98F166701F19FA330084D70D /* FSPublisherServer.h in Headers */,
+				98F166711F19FA330084D70D /* FSPublisherController.h in Headers */,
+				98F166721F19FA330084D70D /* FSPublisherToolView.h in Headers */,
+				98F166731F19FA330084D70D /* FSEditVideoNameView.h in Headers */,
+				98F166741F19FA330084D70D /* FSShortVideoRecorderController.h in Headers */,
+				98F166751F19FA330084D70D /* FSShortVideoRecorderManager.h in Headers */,
+				98F166761F19FA330084D70D /* FSShortVideoRecorderView.h in Headers */,
+				98F166771F19FA330084D70D /* FSProgressView.h in Headers */,
+				98F166781F19FA330084D70D /* FSEditVideoTool.h in Headers */,
+				98F166791F19FA330084D70D /* FSLocalEditorController.h in Headers */,
+				98F1667A1F19FA330084D70D /* FSVideoFxController.h in Headers */,
+				98F1667B1F19FA330084D70D /* FSThumbnailView.h in Headers */,
+				98F1667C1F19FA330084D70D /* FSVideoFxOperationStack.h in Headers */,
+				98F1667D1F19FA330084D70D /* FSVirtualTimeLine.h in Headers */,
+				98F1667E1F19FA330084D70D /* FSVideoFx.h in Headers */,
+				98F1667F1F19FA330084D70D /* FSVideoFxView.h in Headers */,
+				98F166801F19FA330084D70D /* FSVideoClipProgress.h in Headers */,
+				98F166811F19FA330084D70D /* FSControlView.h in Headers */,
+				98F166821F19FA330084D70D /* FSVideoListView.h in Headers */,
+				98F166831F19FA330084D70D /* FSAlbumVideoCell.h in Headers */,
+				98F166841F19FA330084D70D /* FSLocalVideoController.h in Headers */,
+				98F166851F19FA330084D70D /* FSLocalPhotoManager.h in Headers */,
+				98F166861F19FA330084D70D /* FSFilterView.h in Headers */,
+				98F166871F19FA330084D70D /* FSFilterButton.h in Headers */,
+				98F166881F19FA330084D70D /* FSControlVolumeView.h in Headers */,
+				98F166891F19FA330084D70D /* FSCutMusicView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1525,39 +1472,21 @@
 			buildRules = (
 			);
 			dependencies = (
-				98D6696B1F18F4B700DFB572 /* PBXTargetDependency */,
+				98F166031F19F8B20084D70D /* PBXTargetDependency */,
 			);
 			name = FSVideoEditor;
 			productName = FSVideoEditor;
 			productReference = 567E0B4E1EF930D100C4C527 /* FSVideoEditor.app */;
 			productType = "com.apple.product-type.application";
 		};
-		567E0B7E1EF939CC00C4C527 /* FSVideoEditorKit */ = {
+		98F165EE1F19F8B20084D70D /* FSVideoEditorSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 567E0B881EF939CC00C4C527 /* Build configuration list for PBXNativeTarget "FSVideoEditorKit" */;
+			buildConfigurationList = 98F166061F19F8B20084D70D /* Build configuration list for PBXNativeTarget "FSVideoEditorSDK" */;
 			buildPhases = (
-				567E0B7A1EF939CC00C4C527 /* Sources */,
-				567E0B7B1EF939CC00C4C527 /* Frameworks */,
-				567E0B7C1EF939CC00C4C527 /* Headers */,
-				567E0B7D1EF939CC00C4C527 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = FSVideoEditorKit;
-			productName = FSVideoEditorKit;
-			productReference = 567E0B7F1EF939CC00C4C527 /* FSVideoEditorKit.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		98D669561F18F4B700DFB572 /* FSVideoEditorSDK */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 98D669721F18F4B700DFB572 /* Build configuration list for PBXNativeTarget "FSVideoEditorSDK" */;
-			buildPhases = (
-				98D669521F18F4B700DFB572 /* Sources */,
-				98D669531F18F4B700DFB572 /* Frameworks */,
-				98D669541F18F4B700DFB572 /* Headers */,
-				98D669551F18F4B700DFB572 /* Resources */,
+				98F165EA1F19F8B20084D70D /* Sources */,
+				98F165EB1F19F8B20084D70D /* Frameworks */,
+				98F165EC1F19F8B20084D70D /* Headers */,
+				98F165ED1F19F8B20084D70D /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1565,26 +1494,26 @@
 			);
 			name = FSVideoEditorSDK;
 			productName = FSVideoEditorSDK;
-			productReference = 98D669571F18F4B700DFB572 /* FSVideoEditorSDK.framework */;
+			productReference = 98F165EF1F19F8B20084D70D /* FSVideoEditorSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		98D6695E1F18F4B700DFB572 /* FSVideoEditorSDKTests */ = {
+		98F165F61F19F8B20084D70D /* FSVideoEditorSDKTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 98D669731F18F4B700DFB572 /* Build configuration list for PBXNativeTarget "FSVideoEditorSDKTests" */;
+			buildConfigurationList = 98F166091F19F8B20084D70D /* Build configuration list for PBXNativeTarget "FSVideoEditorSDKTests" */;
 			buildPhases = (
-				98D6695B1F18F4B700DFB572 /* Sources */,
-				98D6695C1F18F4B700DFB572 /* Frameworks */,
-				98D6695D1F18F4B700DFB572 /* Resources */,
+				98F165F31F19F8B20084D70D /* Sources */,
+				98F165F41F19F8B20084D70D /* Frameworks */,
+				98F165F51F19F8B20084D70D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				98D669621F18F4B700DFB572 /* PBXTargetDependency */,
-				98D669641F18F4B700DFB572 /* PBXTargetDependency */,
+				98F165FA1F19F8B20084D70D /* PBXTargetDependency */,
+				98F165FC1F19F8B20084D70D /* PBXTargetDependency */,
 			);
 			name = FSVideoEditorSDKTests;
 			productName = FSVideoEditorSDKTests;
-			productReference = 98D6695F1F18F4B700DFB572 /* FSVideoEditorSDKTests.xctest */;
+			productReference = 98F165F71F19F8B20084D70D /* FSVideoEditorSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1601,17 +1530,12 @@
 						DevelopmentTeam = 3PSN5E79R7;
 						ProvisioningStyle = Automatic;
 					};
-					567E0B7E1EF939CC00C4C527 = {
-						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 3PSN5E79R7;
-						ProvisioningStyle = Automatic;
-					};
-					98D669561F18F4B700DFB572 = {
+					98F165EE1F19F8B20084D70D = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = 3PSN5E79R7;
 						ProvisioningStyle = Automatic;
 					};
-					98D6695E1F18F4B700DFB572 = {
+					98F165F61F19F8B20084D70D = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = 3PSN5E79R7;
 						ProvisioningStyle = Automatic;
@@ -1635,9 +1559,8 @@
 			projectRoot = "";
 			targets = (
 				567E0B4D1EF930D100C4C527 /* FSVideoEditor */,
-				567E0B7E1EF939CC00C4C527 /* FSVideoEditorKit */,
-				98D669561F18F4B700DFB572 /* FSVideoEditorSDK */,
-				98D6695E1F18F4B700DFB572 /* FSVideoEditorSDKTests */,
+				98F165EE1F19F8B20084D70D /* FSVideoEditorSDK */,
+				98F165F61F19F8B20084D70D /* FSVideoEditorSDKTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1667,29 +1590,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		567E0B7D1EF939CC00C4C527 /* Resources */ = {
+		98F165ED1F19F8B20084D70D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98F1668A1F19FAF30084D70D /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic in Resources */,
+				98F1668B1F19FAF30084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */,
+				98F1668C1F19FAF30084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */,
+				98F1668D1F19FAF30084D70D /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic in Resources */,
+				98F1668E1F19FAF30084D70D /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */,
+				98F1668F1F19FAF30084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */,
+				98F166901F19FAF30084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */,
+				98F166911F19FAF30084D70D /* FSEditorPch.pch in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		98D669551F18F4B700DFB572 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				98D669751F18F6AF00DFB572 /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic in Resources */,
-				98D669761F18F6AF00DFB572 /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */,
-				98D669771F18F6AF00DFB572 /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */,
-				98D669781F18F6AF00DFB572 /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic in Resources */,
-				98D669791F18F6AF00DFB572 /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */,
-				98D6697A1F18F6AF00DFB572 /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */,
-				98D6697B1F18F6AF00DFB572 /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */,
-				98D669741F18F53B00DFB572 /* Info.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		98D6695D1F18F4B700DFB572 /* Resources */ = {
+		98F165F51F19F8B20084D70D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1817,85 +1733,77 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		567E0B7A1EF939CC00C4C527 /* Sources */ = {
+		98F165EA1F19F8B20084D70D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				988AC6EA1F010B0D007FBCEF /* FSControlVolumeView.m in Sources */,
+				98F1660C1F19F9B10084D70D /* FSDissolveAnimator.m in Sources */,
+				98F1660D1F19F9B10084D70D /* FSSpringAnimator.m in Sources */,
+				98F1660E1F19F9B10084D70D /* FSPresentAnimator.m in Sources */,
+				98F1660F1F19F9B10084D70D /* FSDismissAnimator.m in Sources */,
+				98F166101F19F9B10084D70D /* FSTimeCountsdownView.m in Sources */,
+				98F166111F19F9B10084D70D /* FSEditorLoading.m in Sources */,
+				98F166121F19F9B10084D70D /* FSSegmentView.m in Sources */,
+				98F166131F19F9B10084D70D /* FSMoveButton.m in Sources */,
+				98F166141F19F9B10084D70D /* FSAlertView.m in Sources */,
+				98F166151F19F9B10084D70D /* FSEditorAlertView.m in Sources */,
+				98F166161F19F9B10084D70D /* FSCancleController.m in Sources */,
+				98F166171F19F9B10084D70D /* FSFile.m in Sources */,
+				98F166181F19F9B10084D70D /* FSFileSlice.m in Sources */,
+				98F166191F19F9B10084D70D /* FSFileDivider.m in Sources */,
+				98F1661A1F19F9B10084D70D /* FSFileSizeDivider.m in Sources */,
+				98F1661B1F19F9B10084D70D /* FSFileSliceDivider.m in Sources */,
+				98F1661C1F19F9B10084D70D /* FSFileDownLoadTool.m in Sources */,
+				98F1661D1F19F9B10084D70D /* FSFileDownloadCache.m in Sources */,
+				98F1661E1F19F9B10084D70D /* FSFileUploadTool.m in Sources */,
+				98F1661F1F19F9B10084D70D /* FSDBUploadCache.m in Sources */,
+				98F166201F19F9B10084D70D /* FSFileUploadCache.m in Sources */,
+				98F166211F19F9B10084D70D /* FSUploadCache.m in Sources */,
+				98F166221F19F9B10084D70D /* FSFileUploadChecker.m in Sources */,
+				98F166231F19F9B10084D70D /* FSFileUploader.m in Sources */,
+				98F166241F19F9B10084D70D /* FSUploader.m in Sources */,
+				98F166251F19F9B10084D70D /* FSFileUploadDBManager.m in Sources */,
+				98F166261F19F9B10084D70D /* FSMD5Utils.m in Sources */,
+				98F166271F19F9B10084D70D /* FSToolController.m in Sources */,
+				98F166281F19F9B10084D70D /* FSAnimationNavController.m in Sources */,
+				98F166291F19F9B10084D70D /* FSMusicAPI.m in Sources */,
+				98F1662A1F19F9B10084D70D /* FSMusicSever.m in Sources */,
+				98F1662B1F19F9B10084D70D /* FSMusicManager.m in Sources */,
+				98F1662C1F19F9B10084D70D /* FSMusic.m in Sources */,
+				98F1662D1F19F9B10084D70D /* FSMusicPlayer.m in Sources */,
+				98F1662E1F19F9B10084D70D /* FSMusicCell.m in Sources */,
+				98F1662F1F19F9B10084D70D /* FSMusicController.m in Sources */,
+				98F166301F19F9B10084D70D /* FSPublisherAPI.m in Sources */,
+				98F166311F19F9B10084D70D /* FSPublisherServer.m in Sources */,
+				98F166321F19F9B10084D70D /* FSPublisherController.m in Sources */,
+				98F166331F19F9B10084D70D /* FSPublisherToolView.m in Sources */,
+				98F166341F19F9B10084D70D /* FSEditVideoNameView.m in Sources */,
+				98F166351F19F9B10084D70D /* FSShortVideoRecorderController.m in Sources */,
+				98F166361F19F9B10084D70D /* FSShortVideoRecorderManager.m in Sources */,
+				98F166371F19F9B10084D70D /* FSShortVideoRecorderView.m in Sources */,
+				98F166381F19F9B10084D70D /* FSProgressView.m in Sources */,
+				98F166391F19F9B10084D70D /* FSEditVideoTool.m in Sources */,
+				98F1663A1F19F9B10084D70D /* FSLocalEditorController.m in Sources */,
+				98F1663B1F19F9B10084D70D /* FSVideoFxController.m in Sources */,
+				98F1663C1F19F9B10084D70D /* FSThumbnailView.m in Sources */,
+				98F1663D1F19F9B10084D70D /* FSVideoFxOperationStack.m in Sources */,
+				98F1663E1F19F9B10084D70D /* FSVirtualTimeLine.m in Sources */,
+				98F1663F1F19F9B10084D70D /* FSVideoFx.m in Sources */,
+				98F166401F19F9B10084D70D /* FSVideoFxView.m in Sources */,
+				98F166411F19F9B10084D70D /* FSVideoClipProgress.m in Sources */,
+				98F166421F19F9B10084D70D /* FSControlView.m in Sources */,
+				98F166431F19F9B10084D70D /* FSVideoListView.m in Sources */,
+				98F166441F19F9B10084D70D /* FSAlbumVideoCell.m in Sources */,
+				98F166451F19F9B10084D70D /* FSLocalVideoController.m in Sources */,
+				98F166461F19F9B10084D70D /* FSLocalPhotoManager.m in Sources */,
+				98F166471F19F9B10084D70D /* FSFilterView.m in Sources */,
+				98F166481F19F9B10084D70D /* FSFilterButton.m in Sources */,
+				98F166491F19F9B10084D70D /* FSControlVolumeView.m in Sources */,
+				98F1664A1F19F9B10084D70D /* FSCutMusicView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		98D669521F18F4B700DFB572 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				98D669BC1F18F87600DFB572 /* FSDissolveAnimator.m in Sources */,
-				98D669BD1F18F87600DFB572 /* FSSpringAnimator.m in Sources */,
-				98D669BE1F18F87600DFB572 /* FSPresentAnimator.m in Sources */,
-				98D669BF1F18F87600DFB572 /* FSDismissAnimator.m in Sources */,
-				98D669C01F18F87600DFB572 /* FSTimeCountsdownView.m in Sources */,
-				98D669C11F18F87600DFB572 /* FSEditorLoading.m in Sources */,
-				98D669C21F18F87600DFB572 /* FSSegmentView.m in Sources */,
-				98D669C31F18F87600DFB572 /* FSMoveButton.m in Sources */,
-				98D669C41F18F87600DFB572 /* FSAlertView.m in Sources */,
-				98D669C51F18F87600DFB572 /* FSEditorAlertView.m in Sources */,
-				98D669C61F18F87600DFB572 /* FSCancleController.m in Sources */,
-				98D669C71F18F87600DFB572 /* FSFile.m in Sources */,
-				98D669C81F18F87600DFB572 /* FSFileSlice.m in Sources */,
-				98D669C91F18F87600DFB572 /* FSFileDivider.m in Sources */,
-				98D669CA1F18F87600DFB572 /* FSFileSizeDivider.m in Sources */,
-				98D669CB1F18F87600DFB572 /* FSFileSliceDivider.m in Sources */,
-				98D669CC1F18F87600DFB572 /* FSFileDownLoadTool.m in Sources */,
-				98D669CD1F18F87600DFB572 /* FSFileDownloadCache.m in Sources */,
-				98D669CE1F18F87600DFB572 /* FSFileUploadTool.m in Sources */,
-				98D669CF1F18F87600DFB572 /* FSDBUploadCache.m in Sources */,
-				98D669D01F18F87600DFB572 /* FSFileUploadCache.m in Sources */,
-				98D669D11F18F87600DFB572 /* FSUploadCache.m in Sources */,
-				98D669D21F18F87600DFB572 /* FSFileUploadChecker.m in Sources */,
-				98D669D31F18F87600DFB572 /* FSFileUploader.m in Sources */,
-				98D669D41F18F87600DFB572 /* FSUploader.m in Sources */,
-				98D669D51F18F87600DFB572 /* FSFileUploadDBManager.m in Sources */,
-				98D669D61F18F87600DFB572 /* FSMD5Utils.m in Sources */,
-				98D669D71F18F87600DFB572 /* FSToolController.m in Sources */,
-				98D669D81F18F87600DFB572 /* FSAnimationNavController.m in Sources */,
-				98D669D91F18F87600DFB572 /* FSMusicAPI.m in Sources */,
-				98D669DA1F18F87600DFB572 /* FSMusicSever.m in Sources */,
-				98D669DB1F18F87600DFB572 /* FSMusicManager.m in Sources */,
-				98D669DC1F18F87600DFB572 /* FSMusic.m in Sources */,
-				98D669DD1F18F87600DFB572 /* FSMusicPlayer.m in Sources */,
-				98D669DE1F18F87600DFB572 /* FSMusicCell.m in Sources */,
-				98D669DF1F18F87600DFB572 /* FSMusicController.m in Sources */,
-				98D669E01F18F87600DFB572 /* FSPublisherAPI.m in Sources */,
-				98D669E11F18F87600DFB572 /* FSPublisherServer.m in Sources */,
-				98D669E21F18F87600DFB572 /* FSPublisherController.m in Sources */,
-				98D669E31F18F87600DFB572 /* FSPublisherToolView.m in Sources */,
-				98D669E41F18F87600DFB572 /* FSEditVideoNameView.m in Sources */,
-				98D669E51F18F87600DFB572 /* FSShortVideoRecorderController.m in Sources */,
-				98D669E61F18F87600DFB572 /* FSShortVideoRecorderManager.m in Sources */,
-				98D669E71F18F87600DFB572 /* FSShortVideoRecorderView.m in Sources */,
-				98D669E81F18F87600DFB572 /* FSProgressView.m in Sources */,
-				98D669E91F18F87600DFB572 /* FSEditVideoTool.m in Sources */,
-				98D669EA1F18F87600DFB572 /* FSLocalEditorController.m in Sources */,
-				98D669EB1F18F87600DFB572 /* FSVideoFxController.m in Sources */,
-				98D669EC1F18F87600DFB572 /* FSThumbnailView.m in Sources */,
-				98D669ED1F18F87600DFB572 /* FSVideoFxOperationStack.m in Sources */,
-				98D669EE1F18F87600DFB572 /* FSVirtualTimeLine.m in Sources */,
-				98D669EF1F18F87600DFB572 /* FSVideoFx.m in Sources */,
-				98D669F01F18F87600DFB572 /* FSVideoFxView.m in Sources */,
-				98D669F11F18F87600DFB572 /* FSVideoClipProgress.m in Sources */,
-				98D669F21F18F87600DFB572 /* FSControlView.m in Sources */,
-				98D669F31F18F87600DFB572 /* FSVideoListView.m in Sources */,
-				98D669F41F18F87600DFB572 /* FSAlbumVideoCell.m in Sources */,
-				98D669F51F18F87600DFB572 /* FSLocalVideoController.m in Sources */,
-				98D669F61F18F87600DFB572 /* FSLocalPhotoManager.m in Sources */,
-				98D669F71F18F87600DFB572 /* FSFilterView.m in Sources */,
-				98D669F81F18F87600DFB572 /* FSFilterButton.m in Sources */,
-				98D669F91F18F87600DFB572 /* FSControlVolumeView.m in Sources */,
-				98D669FA1F18F87600DFB572 /* FSCutMusicView.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		98D6695B1F18F4B700DFB572 /* Sources */ = {
+		98F165F31F19F8B20084D70D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1905,20 +1813,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		98D669621F18F4B700DFB572 /* PBXTargetDependency */ = {
+		98F165FA1F19F8B20084D70D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 98D669561F18F4B700DFB572 /* FSVideoEditorSDK */;
-			targetProxy = 98D669611F18F4B700DFB572 /* PBXContainerItemProxy */;
+			target = 98F165EE1F19F8B20084D70D /* FSVideoEditorSDK */;
+			targetProxy = 98F165F91F19F8B20084D70D /* PBXContainerItemProxy */;
 		};
-		98D669641F18F4B700DFB572 /* PBXTargetDependency */ = {
+		98F165FC1F19F8B20084D70D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 567E0B4D1EF930D100C4C527 /* FSVideoEditor */;
-			targetProxy = 98D669631F18F4B700DFB572 /* PBXContainerItemProxy */;
+			targetProxy = 98F165FB1F19F8B20084D70D /* PBXContainerItemProxy */;
 		};
-		98D6696B1F18F4B700DFB572 /* PBXTargetDependency */ = {
+		98F166031F19F8B20084D70D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 98D669561F18F4B700DFB572 /* FSVideoEditorSDK */;
-			targetProxy = 98D6696A1F18F4B700DFB572 /* PBXContainerItemProxy */;
+			target = 98F165EE1F19F8B20084D70D /* FSVideoEditorSDK */;
+			targetProxy = 98F166021F19F8B20084D70D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2097,59 +2005,7 @@
 			};
 			name = Release;
 		};
-		567E0B891EF939CC00C4C527 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3PSN5E79R7;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = FSVideoEditorKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditorKit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		567E0B8A1EF939CC00C4C527 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3PSN5E79R7;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = FSVideoEditorKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditorKit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		98D6696E1F18F4B700DFB572 /* Debug */ = {
+		98F166071F19F8B20084D70D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
@@ -2159,7 +2015,7 @@
 					arm64,
 				);
 				CODE_SIGN_IDENTITY = "";
-				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\n\n";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
@@ -2182,7 +2038,7 @@
 			};
 			name = Debug;
 		};
-		98D6696F1F18F4B700DFB572 /* Release */ = {
+		98F166081F19F8B20084D70D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
@@ -2192,7 +2048,7 @@
 					arm64,
 				);
 				CODE_SIGN_IDENTITY = "";
-				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\n\n";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
@@ -2215,7 +2071,7 @@
 			};
 			name = Release;
 		};
-		98D669701F18F4B700DFB572 /* Debug */ = {
+		98F1660A1F19F8B20084D70D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 3PSN5E79R7;
@@ -2227,7 +2083,7 @@
 			};
 			name = Debug;
 		};
-		98D669711F18F4B700DFB572 /* Release */ = {
+		98F1660B1F19F8B20084D70D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 3PSN5E79R7;
@@ -2260,28 +2116,19 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		567E0B881EF939CC00C4C527 /* Build configuration list for PBXNativeTarget "FSVideoEditorKit" */ = {
+		98F166061F19F8B20084D70D /* Build configuration list for PBXNativeTarget "FSVideoEditorSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				567E0B891EF939CC00C4C527 /* Debug */,
-				567E0B8A1EF939CC00C4C527 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		98D669721F18F4B700DFB572 /* Build configuration list for PBXNativeTarget "FSVideoEditorSDK" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				98D6696E1F18F4B700DFB572 /* Debug */,
-				98D6696F1F18F4B700DFB572 /* Release */,
+				98F166071F19F8B20084D70D /* Debug */,
+				98F166081F19F8B20084D70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
-		98D669731F18F4B700DFB572 /* Build configuration list for PBXNativeTarget "FSVideoEditorSDKTests" */ = {
+		98F166091F19F8B20084D70D /* Build configuration list for PBXNativeTarget "FSVideoEditorSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				98D669701F18F4B700DFB572 /* Debug */,
-				98D669711F18F4B700DFB572 /* Release */,
+				98F1660A1F19F8B20084D70D /* Debug */,
+				98F1660B1F19F8B20084D70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

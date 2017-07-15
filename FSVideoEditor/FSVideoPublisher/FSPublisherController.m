@@ -522,6 +522,8 @@
     [self.loading loadingViewhide];
 
     [self showMessage:NSLocalizedString(@"UploadSecceed", nil)];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)FSPublisherServerFailed:(NSError *)error {
