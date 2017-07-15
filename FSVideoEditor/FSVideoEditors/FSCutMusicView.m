@@ -8,6 +8,8 @@
 
 #import "FSCutMusicView.h"
 #import "FSMusicPlayer.h"
+#import "FSVideoEditorCommenData.h"
+
 
 @interface FSCutMusicView()<UIScrollViewDelegate>
 

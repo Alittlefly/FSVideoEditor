@@ -8,6 +8,8 @@
 
 #import "FSMusicCell.h"
 #import "UIImageView+WebCache.h"
+#import "FSVideoEditorCommenData.h"
+
 
 @interface FSMusicUseButton : UIButton
 {

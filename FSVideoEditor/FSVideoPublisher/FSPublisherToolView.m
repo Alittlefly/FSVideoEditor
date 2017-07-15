@@ -8,6 +8,8 @@
 
 #import "FSPublisherToolView.h"
 #import "FSEditVideoNameView.h"
+#import "FSVideoEditorCommenData.h"
+
 
 @interface FSPublisherToolView()<FSEditVideoNameViewDelegate>
 

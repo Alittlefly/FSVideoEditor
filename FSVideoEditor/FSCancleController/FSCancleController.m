@@ -7,6 +7,7 @@
 //
 
 #import "FSCancleController.h"
+#import "FSVideoEditorCommenData.h"
 
 @interface FSCancleController ()
 @end

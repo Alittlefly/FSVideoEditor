@@ -7,7 +7,7 @@
 //
 
 #import "FSControlVolumeView.h"
-//#import "AMBlurView.h"
+#import "FSVideoEditorCommenData.h"
 
 @interface FSControlVolumeView()
 

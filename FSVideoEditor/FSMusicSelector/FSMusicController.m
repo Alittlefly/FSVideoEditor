@@ -13,6 +13,8 @@
 #import "FSMusicSever.h"
 #import "FSMusicManager.h"
 #import "FSEditorLoading.h"
+#import "FSVideoEditorCommenData.h"
+
 
 @interface FSMusicController ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate,FSMusicSeverDelegate>{
     FSMusic *_music;
@@ -35,29 +37,29 @@
 -(NSMutableArray *)musics{
     if (!_musics) {
         
-        FSMusic *music = [[FSMusic alloc] init];
-        music.songTitle = @"month";
-        music.lastSeconds = 15;
-        music.songPic = @"";
-        music.songAuthor = @"徐子谦";
+//        FSMusic *music = [[FSMusic alloc] init];
+//        music.songTitle = @"month";
+//        music.lastSeconds = 15;
+//        music.songPic = @"";
+//        music.songAuthor = @"徐子谦";
+//        
+//        
+//        FSMusic *music1 = [[FSMusic alloc] init];
+//        music1.songTitle = @"wind";
+//        music1.lastSeconds = 15;
+//        music1.songPic = @"";
+//        music1.songAuthor = @"高超";
+//
+//        
+//        FSMusic *music2 = [[FSMusic alloc] init];
+//        music2.songTitle = @"ugly";
+//        music2.lastSeconds = 15;
+//        music2.songPic = @"";
+//        music2.songAuthor = @"王明";
+//
+//        _musics = [NSMutableArray arrayWithObjects:music,music1,music2,nil];
         
-        
-        FSMusic *music1 = [[FSMusic alloc] init];
-        music1.songTitle = @"wind";
-        music1.lastSeconds = 15;
-        music1.songPic = @"";
-        music1.songAuthor = @"高超";
-
-        
-        FSMusic *music2 = [[FSMusic alloc] init];
-        music2.songTitle = @"ugly";
-        music2.lastSeconds = 15;
-        music2.songPic = @"";
-        music2.songAuthor = @"王明";
-
-        _musics = [NSMutableArray arrayWithObjects:music,music1,music2,nil];
-        
-//        _musics = [NSMutableArray arrayWithCapacity:0];
+        _musics = [NSMutableArray arrayWithCapacity:0];
         
         
     }

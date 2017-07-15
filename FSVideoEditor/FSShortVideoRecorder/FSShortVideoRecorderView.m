@@ -18,6 +18,8 @@
 #import "FSMusicPlayer.h"
 #import "FSAlertView.h"
 #import "FSEditorLoading.h"
+#import "FSVideoEditorCommenData.h"
+
 
 BOOL IsArabic;
 

@@ -9,6 +9,7 @@
 #import "FSFileUploadTool.h"
 #import "AFNetworking.h"
 #import "MJExtension.h"
+#import "FSVideoEditorCommenData.h"
 
 @interface FSFileUploadTool ()
 {
@@ -54,8 +55,13 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dict = [responseObject JSONObject];
-        NSInteger code = [[dict valueForKey:@"code"] intValue];
+        NSDictionary *dict = nil;
+        if ([responseObject isKindOfClass:[NSString class]]) {
+            dict = [NSJSONSerialization JSONObjectWithData:[((NSString *)self) dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+        } else if ([responseObject isKindOfClass:[NSData class]]) {
+            dict = [NSJSONSerialization JSONObjectWithData:(NSData *)self options:kNilOptions error:nil];
+        }
+        NSInteger code = [[responseObject valueForKey:@"code"] intValue];
         if (code == 0) {
             NSLog(@"上传成功");
             if (complete) {

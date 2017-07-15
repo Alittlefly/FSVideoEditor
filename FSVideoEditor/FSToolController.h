@@ -10,4 +10,6 @@
 
 @interface FSToolController : UIViewController
 
+- (void)setAPI:(NSString *)api resApi:(NSString *)resApi userName:(NSString *)name;
+
 @end

@@ -8,6 +8,7 @@
 
 #import "FSVideoFxView.h"
 #import <objc/runtime.h>
+#import "FSVideoEditorCommenData.h"
 
 #define FxButtonH 50.0
 #define FxButtonP 30.0

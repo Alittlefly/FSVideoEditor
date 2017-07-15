@@ -7,6 +7,8 @@
 //
 
 #import "FSVideoClipProgress.h"
+#import "FSVideoEditorCommenData.h"
+
 
 typedef NS_ENUM(NSInteger,FSProgressMoveType){
     FSProgressMoveTypeNone,

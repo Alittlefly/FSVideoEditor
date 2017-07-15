@@ -12,6 +12,7 @@
 #import "FSLoginServer.h"
 #import "FSAlertView.h"
 #import "FSEditorLoading.h"
+#import "FSVideoEditorCommenData.h"
 
 @interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate>
 
@@ -153,6 +154,7 @@
 
 - (IBAction)beginCreat:(id)sender {
     FSToolController *toolController = [[FSToolController alloc] init];
+    [toolController setAPI:@"http://www.7nujoom.com/" resApi:@"http://10.10.32.145:8086/" userName:@"name"];
     FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:toolController];
     [self presentViewController:nav animated:YES completion:nil];
 }

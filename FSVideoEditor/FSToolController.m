@@ -15,6 +15,8 @@
 #import "AFNetworking.h"
 #import "FSPresentAnimator.h"
 #import "FSMusicPlayer.h"
+#import "FSVideoEditorCommenData.h"
+
 
 @interface FSToolController ()
 {
@@ -27,6 +29,15 @@
 @end
 
 @implementation FSToolController
+
+- (void)setAPI:(NSString *)api resApi:(NSString *)resApi userName:(NSString *)name {
+    [[NSUserDefaults standardUserDefaults] setValue:name forKey:@"nickName"];
+    [[NSUserDefaults standardUserDefaults] setValue:api forKey:@"AddressAPI"];
+    [[NSUserDefaults standardUserDefaults] setValue:resApi forKey:@"AddressIP"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

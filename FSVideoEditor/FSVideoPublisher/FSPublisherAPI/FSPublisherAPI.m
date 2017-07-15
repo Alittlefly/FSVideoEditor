@@ -8,6 +8,8 @@
 
 #import "FSPublisherAPI.h"
 #import "AFNetworking.h"
+#import "FSVideoEditorCommenData.h"
+
 
 @interface FSPublisherAPI()
 {

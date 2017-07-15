@@ -20,6 +20,7 @@
 #import "FSDissolveAnimator.h"
 #import "FSSpringAnimator.h"
 #import "FSMusicPlayer.h"
+#import "FSVideoEditorCommenData.h"
 
 #import "NvsFxDescription.h"
 

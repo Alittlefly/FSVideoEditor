@@ -139,7 +139,9 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic"];
 
-    [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
+    BOOL isOK = [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
+    
+    NSLog(@"verify:%@  %D",verifySdkLicenseFilePath,isOK);
     // 初始化NvsStreamingContext
     _context = [NvsStreamingContext sharedInstance];
     
@@ -639,6 +641,8 @@ static FSShortVideoRecorderManager *recorderManager;
     NSData *JSONData = [NSData dataWithContentsOfFile:verifySdkLicenseFilePath];
 
     BOOL isCanConver = [NvcConvertor InstallLicense:JSONData];
+    NSLog(@"verify:setupConvertor %@  %D",verifySdkLicenseFilePath,isCanConver);
+
     if (!isCanConver) {
         [self convertFaild:nil];
     }

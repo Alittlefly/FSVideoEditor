@@ -18,6 +18,8 @@
 #import "FSSegmentView.h"
 #import "FSEditorLoading.h"
 #import "FSShortVideoRecorderManager.h"
+#import "FSVideoEditorCommenData.h"
+
 
 extern int IsArabic;
 

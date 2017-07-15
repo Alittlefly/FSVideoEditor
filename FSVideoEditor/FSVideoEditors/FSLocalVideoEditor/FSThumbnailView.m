@@ -7,6 +7,7 @@
 //
 
 #import "FSThumbnailView.h"
+#import "FSVideoEditorCommenData.h"
 
 
 @interface FSThumbnailView()<UIScrollViewDelegate>

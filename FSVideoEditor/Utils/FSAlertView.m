@@ -7,6 +7,7 @@
 //
 
 #import "FSAlertView.h"
+#import "FSVideoEditorCommenData.h"
 
 @interface FSAlertView()
 

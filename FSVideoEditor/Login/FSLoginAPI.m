@@ -8,6 +8,8 @@
 
 #import "FSLoginAPI.h"
 #import "AFNetworking.h"
+#import "FSVideoEditorCommenData.h"
+
 
 @interface FSLoginAPI() {
     NSURLSessionTask *_currentTask;
