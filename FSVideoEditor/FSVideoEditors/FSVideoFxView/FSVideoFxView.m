@@ -265,8 +265,35 @@
 
     [_contentView addSubview:shakefx];
     
+    
+    FSFxButton *jzfx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(shakefx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
+    [jzfx setBackgroundColor:[UIColor yellowColor]];
+    [jzfx setTag:3];
+    [jzfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
+    [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
+    [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
+    
+    [jzfx setTitle:NSLocalizedString(@"矩阵", nil) forState:(UIControlStateNormal)];
+    
+    objc_setAssociatedObject(jzfx, FxIdKey, @"9AC28816-639F-4A9B-B4BA-4060ABD229A2", OBJC_ASSOCIATION_COPY);
+    
+    [_contentView addSubview:jzfx];
+    
+    FSFxButton *fmfx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(jzfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
+    [fmfx setBackgroundColor:[UIColor yellowColor]];
+    [fmfx setTag:4];
+    [fmfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
+    [fmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
+    [fmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
+    
+    [fmfx setTitle:NSLocalizedString(@"封面", nil) forState:(UIControlStateNormal)];
+    
+    objc_setAssociatedObject(fmfx, FxIdKey, @"282275F5-B021-4728-9C2C-783254BB7C26", OBJC_ASSOCIATION_COPY);
+    
+    [_contentView addSubview:fmfx];
+    
     [self.fxButtons removeAllObjects];
-    [self.fxButtons addObjectsFromArray:@[soulfx,shakefx]];
+    [self.fxButtons addObjectsFromArray:@[soulfx,shakefx,jzfx,fmfx]];
 }
 -(void)initTimeFxs{
     
@@ -343,8 +370,12 @@
     NSInteger tag = button.tag;
     if (tag == 1) {
         _progress.fxViewColor = [UIColor redColor];
-    }else{
+    }else if(tag == 2){
         _progress.fxViewColor = [UIColor whiteColor];
+    }else if (tag == 3){
+        _progress.fxViewColor = [UIColor blueColor];
+    }else if (tag == 4){
+        _progress.fxViewColor = [UIColor blackColor];
     }
     
      _currentFxId = objc_getAssociatedObject(button, FxIdKey);
