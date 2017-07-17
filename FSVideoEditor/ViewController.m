@@ -73,6 +73,17 @@
         self.passwordTextField.hidden = YES;
         self.loginButton.hidden = YES;
         [self.logoutButton setTitle:NSLocalizedString(@"logout", nil) forState:UIControlStateNormal];
+        
+        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"tr"]) {
+            
+            self.logoImageView.image = [UIImage imageNamed:@"HAAHI"];
+        }
+        else if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"]) {
+            
+            self.logoImageView.image = [UIImage imageNamed:@"7nujoom"];
+            
+        }
+
     }
     
     UIView *uidView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
