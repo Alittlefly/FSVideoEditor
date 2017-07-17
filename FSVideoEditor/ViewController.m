@@ -28,6 +28,7 @@
 @property (strong, nonatomic) FSLoginServer *loginServer;
 
 @property (nonatomic, strong) FSEditorLoading *loading;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
  
 @end
 
@@ -130,7 +131,7 @@
 }
 
 - (void)showChooseCountryView {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"选择国家" delegate:self cancelButtonTitle:@"tr" otherButtonTitles:@"ar", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Select Country" delegate:self cancelButtonTitle:@"Turkey" otherButtonTitles:@"Arabic", nil];
     [alert show];
 }
 
@@ -138,10 +139,15 @@
     if (buttonIndex == 0) {
         [[NSUserDefaults standardUserDefaults] setValue:@"tr" forKey:@"Country"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        self.logoImageView.image = [UIImage imageNamed:@"HAAHI"];
     }
     else if (buttonIndex == 1) {
         [[NSUserDefaults standardUserDefaults] setValue:@"ar" forKey:@"Country"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        self.logoImageView.image = [UIImage imageNamed:@"7nujoom"];
+
     }
 }
 
@@ -166,6 +172,8 @@
     self.uidTextField.hidden = NO;
     self.passwordTextField.hidden = NO;
     self.loginButton.hidden = NO;
+    
+    self.logoImageView.image = [[UIImage alloc] init];
     
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"UID"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Password"];

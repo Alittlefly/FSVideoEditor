@@ -27,13 +27,13 @@
                                     <constraint firstAttribute="height" constant="128" id="IlX-GY-Zua"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="7nujoom" translatesAutoresizingMaskIntoConstraints="NO" id="5Hf-AK-6tK">
-                                <rect key="frame" x="103" y="64.5" width="168" height="39"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Hf-AK-6tK">
+                                <rect key="frame" x="133.5" y="64.5" width="107" height="39"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NhV-Pm-qyj">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NhV-Pm-qyj">
                                 <rect key="frame" x="0.0" y="145.5" width="375" height="521.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0V-QV-ECw">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0V-QV-ECw">
                                         <rect key="frame" x="123.5" y="197" width="128" height="128"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -45,7 +45,7 @@
                                             <action selector="beginCreat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zDr-rW-pto"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="UID" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fOx-kX-Rfg">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="UID" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fOx-kX-Rfg">
                                         <rect key="frame" x="37" y="180.5" width="300" height="40"/>
                                         <color key="backgroundColor" red="0.58081901073455811" green="0.05162702928712027" blue="0.40662856829100597" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -61,7 +61,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yVE-dm-a0b">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yVE-dm-a0b">
                                         <rect key="frame" x="37" y="240.5" width="300" height="40"/>
                                         <color key="backgroundColor" red="0.58081901073455811" green="0.070890323893516252" blue="0.39153076706394635" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -76,7 +76,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nH7-tl-73v">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nH7-tl-73v">
                                         <rect key="frame" x="37" y="300.5" width="300" height="40"/>
                                         <color key="backgroundColor" red="1" green="0.34889344420000001" blue="0.23956701" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -93,7 +93,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4JZ-OD-Zed">
-                                        <rect key="frame" x="137" y="463.5" width="100" height="30"/>
+                                        <rect key="frame" x="137" y="483" width="100" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="CF6-lb-7aH"/>
                                             <constraint firstAttribute="height" constant="30" id="Em0-jV-KKS"/>
@@ -142,6 +142,7 @@
                     <navigationItem key="navigationItem" id="WwY-el-WkH"/>
                     <connections>
                         <outlet property="loginButton" destination="nH7-tl-73v" id="dea-c1-jq3"/>
+                        <outlet property="logoImageView" destination="5Hf-AK-6tK" id="xXl-KL-0fV"/>
                         <outlet property="logoutButton" destination="4JZ-OD-Zed" id="T5s-Yb-Ads"/>
                         <outlet property="passwordTextField" destination="yVE-dm-a0b" id="rks-A2-6Qh"/>
                         <outlet property="recorderButton" destination="m0V-QV-ECw" id="HD2-Z6-fpP"/>
@@ -196,7 +197,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7nujoom" width="168" height="39"/>
         <image name="BG" width="375" height="260"/>
         <image name="kaipai" width="151" height="151"/>
     </resources>
