@@ -93,7 +93,7 @@
         NSData *postData = [handler readDataOfLength:file.fileSize];
         if ([self.delegate respondsToSelector:@selector(fileUploaderWillUploadFilePath:file:fileData:)]) {
             id<FSFileUploaderProtocol> op = [self.delegate fileUploaderWillUploadFilePath:filePath file:file fileData:postData];
-            [op uploadFile:postData file:file completeBlock:^(FSFileSlice *file, BOOL success,id info) {
+            [op uploadFile:postData file:file completeBlock:^(FSFileSlice *file, BOOL success,NSDictionary * info) {
                 //
                 if (success) {
                     dispatch_async(_uploadQueue, ^{
@@ -117,7 +117,9 @@
                     //
                     // test
 //                    float cprogress = [FSFileUploadChecker fileUploadCheckUploadSuccess:file filePath:filePath];
-
+                    if (complete) {
+                        complete(0,filePath,nil);
+                    }
                     NSLog(@" test faild :当前的上传进度是 %.2f",1.0);
                 }
             }];

@@ -40,6 +40,15 @@
         _file = file;
     }
     
+    NSLog(@"当前文件的大小是 %.2f Mb",file.totalSize/1024.0/1024.0);
+    
+    if (file.totalSize/1024.0/1024.0 > 5.0) {
+        if (complete) {
+            complete(file,NO,nil);
+        }
+        return;
+    }
+    
     if (!_data) {
         _data = data;
     }
@@ -60,7 +69,10 @@
             dict = [NSJSONSerialization JSONObjectWithData:[((NSString *)self) dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
         } else if ([responseObject isKindOfClass:[NSData class]]) {
             dict = [NSJSONSerialization JSONObjectWithData:(NSData *)self options:kNilOptions error:nil];
+        }else if([responseObject isKindOfClass:[NSDictionary class]]){
+            dict = responseObject;
         }
+        
         NSInteger code = [[responseObject valueForKey:@"code"] intValue];
         if (code == 0) {
             NSLog(@"上传成功");
@@ -161,7 +173,7 @@
 //    NSLog(@"uploadName %@",name);
 //    http://10.10.32.145:8086/files/shortvideo/upload/file
 //    NSString *url = @"http://10.10.32.157:8086/files/shortvideo/upload/file";
-    NSString *url = [NSString stringWithFormat:@"%@files/shortvideo/upload/file",[[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"]?AddressIP:AddressAPI];
+    NSString *url = [NSString stringWithFormat:@"%@files/shortvideo/upload/file",AddressUpload];
     //[@"http://221.176.30.232:8888/file/" stringByAppendingString:name];
     return url;
 }

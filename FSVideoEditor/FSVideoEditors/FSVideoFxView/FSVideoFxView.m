@@ -286,7 +286,7 @@
     [fmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [fmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     
-    [fmfx setTitle:NSLocalizedString(@"封面", nil) forState:(UIControlStateNormal)];
+    [fmfx setTitle:NSLocalizedString(@"镜像", nil) forState:(UIControlStateNormal)];
     
     objc_setAssociatedObject(fmfx, FxIdKey, @"282275F5-B021-4728-9C2C-783254BB7C26", OBJC_ASSOCIATION_COPY);
     
