@@ -147,7 +147,6 @@
 		988E3D121F024562004E837F /* libNvConvertorLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 988E3D111F024562004E837F /* libNvConvertorLib.a */; };
 		988E3D1D1F026D78004E837F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 988E3D1C1F026D78004E837F /* libstdc++.tbd */; };
 		988E3D271F0271A1004E837F /* FSTimeCountsdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */; };
-		98EFA74F1F1320C100CB4DDD /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA74E1F1320C100CB4DDD /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic */; };
 		98EFA7521F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7501F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic */; };
 		98EFA7531F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7511F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic */; };
 		98EFA7551F13850300CB4DDD /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7541F13850300CB4DDD /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic */; };
@@ -283,7 +282,6 @@
 		98F1668A1F19FAF30084D70D /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7541F13850300CB4DDD /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic */; };
 		98F1668B1F19FAF30084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7501F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic */; };
 		98F1668C1F19FAF30084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7511F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic */; };
-		98F1668D1F19FAF30084D70D /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA74E1F1320C100CB4DDD /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic */; };
 		98F1668E1F19FAF30084D70D /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */; };
 		98F1668F1F19FAF30084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 563B79D01F05F88A0035346A /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx */; };
 		98F166901F19FAF30084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 562D40711EFE4FD900BF0E0D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx */; };
@@ -291,11 +289,12 @@
 		98F166AE1F1A08DA0084D70D /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7541F13850300CB4DDD /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic */; };
 		98F166AF1F1A08DA0084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7501F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic */; };
 		98F166B01F1A08DA0084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7511F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic */; };
-		98F166B11F1A08DA0084D70D /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA74E1F1320C100CB4DDD /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic */; };
 		98F166B21F1A08DA0084D70D /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */; };
 		98F166B31F1A08DA0084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 563B79D01F05F88A0035346A /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx */; };
 		98F166B41F1A08DA0084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 562D40711EFE4FD900BF0E0D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx */; };
 		98F166B51F1A09860084D70D /* FSVideoEditorCommenData.h in Headers */ = {isa = PBXBuildFile; fileRef = 98F166A11F1A04580084D70D /* FSVideoEditorCommenData.h */; };
+		98F6BA1A1F1E00A6006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98F6BA191F1E00A6006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic */; };
+		98F6BA1B1F1E01D1006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98F6BA191F1E00A6006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -630,7 +629,6 @@
 		98E3C9D21EFA1B9B00A2FDD6 /* NvsVideoFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoFx.h; sourceTree = "<group>"; };
 		98E3C9D31EFA1B9B00A2FDD6 /* NvsVideoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoTrack.h; sourceTree = "<group>"; };
 		98E3C9D41EFA1B9B00A2FDD6 /* NvsVideoTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoTransition.h; sourceTree = "<group>"; };
-		98EFA74E1F1320C100CB4DDD /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic"; sourceTree = "<group>"; };
 		98EFA7501F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "A8A4344D-45DA-460F-A18F-C0E2355FE864.lic"; sourceTree = "<group>"; };
 		98EFA7511F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "C6273A8F-C899-4765-8BFC-E683EE37AA84.lic"; sourceTree = "<group>"; };
 		98EFA7541F13850300CB4DDD /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic"; sourceTree = "<group>"; };
@@ -642,6 +640,10 @@
 		98F166A21F1A054F0084D70D /* FSEditorHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEditorHeader.h; sourceTree = "<group>"; };
 		98F166A81F1A088E0084D70D /* FSVideoEditorResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FSVideoEditorResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		98F166AA1F1A088E0084D70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98F6BA191F1E00A6006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-4532bd69c375c2bc29936aa8c5af104a.lic"; sourceTree = "<group>"; };
+		98F6BA201F1E0F95006C8EA7 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
+		98F6BA211F1E0F95006C8EA7 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		98F6BA221F1E0F95006C8EA7 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -801,10 +803,10 @@
 		562D406E1EFE4D2000BF0E0D /* FSVideoFxSource */ = {
 			isa = PBXGroup;
 			children = (
+				98F6BA191F1E00A6006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic */,
 				98EFA7541F13850300CB4DDD /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic */,
 				98EFA7501F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic */,
 				98EFA7511F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic */,
-				98EFA74E1F1320C100CB4DDD /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic */,
 				9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */,
 				563B79D01F05F88A0035346A /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx */,
 				562D40711EFE4FD900BF0E0D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx */,
@@ -1606,6 +1608,7 @@
 				"zh-Hans",
 				ar,
 				en,
+				tr,
 			);
 			mainGroup = 567E0B451EF930D100C4C527;
 			productRefGroup = 567E0B4F1EF930D100C4C527 /* Products */;
@@ -1629,6 +1632,7 @@
 				562D40721EFE4FD900BF0E0D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */,
 				987B58BA1F0E796E00E85A37 /* Localizable.strings in Resources */,
 				98EFA7521F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */,
+				98F6BA1A1F1E00A6006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic in Resources */,
 				9871BC371F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */,
 				567E0B611EF930D100C4C527 /* LaunchScreen.storyboard in Resources */,
 				5647BC4B1F04E0110072B618 /* ugly.mp3 in Resources */,
@@ -1638,7 +1642,6 @@
 				567E0B5C1EF930D100C4C527 /* Main.storyboard in Resources */,
 				563B79D11F05F88A0035346A /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */,
 				98EFA7531F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */,
-				98EFA74F1F1320C100CB4DDD /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic in Resources */,
 				5647BC491F04E0040072B618 /* month.mp3 in Resources */,
 				567A3D811EFB6F8E0026247E /* LICENSE in Resources */,
 				5647BC451F04D6A70072B618 /* wind.mp3 in Resources */,
@@ -1649,10 +1652,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98F6BA1B1F1E01D1006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic in Resources */,
 				98F1668A1F19FAF30084D70D /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic in Resources */,
 				98F1668B1F19FAF30084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */,
 				98F1668C1F19FAF30084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */,
-				98F1668D1F19FAF30084D70D /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic in Resources */,
 				98F1668E1F19FAF30084D70D /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */,
 				98F1668F1F19FAF30084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */,
 				98F166901F19FAF30084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */,
@@ -1674,7 +1677,6 @@
 				98F166AE1F1A08DA0084D70D /* 198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic in Resources */,
 				98F166AF1F1A08DA0084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */,
 				98F166B01F1A08DA0084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */,
-				98F166B11F1A08DA0084D70D /* 198-14-d1d1bf5594c0a7ac84a897faebfab68e.lic in Resources */,
 				98F166B21F1A08DA0084D70D /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */,
 				98F166B31F1A08DA0084D70D /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */,
 				98F166B41F1A08DA0084D70D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */,
@@ -1914,6 +1916,7 @@
 				563B7A1E1F0C8E570035346A /* zh-Hans */,
 				563B7A201F0C8E8D0035346A /* ar */,
 				987B58AE1F0E5DAD00E85A37 /* en */,
+				98F6BA201F1E0F95006C8EA7 /* tr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1925,6 +1928,7 @@
 				563B7A1F1F0C8E570035346A /* zh-Hans */,
 				563B7A211F0C8E8D0035346A /* ar */,
 				987B58AF1F0E5DAD00E85A37 /* en */,
+				98F6BA211F1E0F95006C8EA7 /* tr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1936,6 +1940,7 @@
 				987B58BD1F0E797000E85A37 /* zh-Hans */,
 				987B58BE1F0E797000E85A37 /* ar */,
 				987B58BF1F0E797200E85A37 /* en */,
+				98F6BA221F1E0F95006C8EA7 /* tr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2235,6 +2240,7 @@
 				98F166081F19F8B20084D70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		98F166091F19F8B20084D70D /* Build configuration list for PBXNativeTarget "FSVideoEditorSDKTests" */ = {
 			isa = XCConfigurationList;
@@ -2243,6 +2249,7 @@
 				98F1660B1F19F8B20084D70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		98F166AB1F1A088E0084D70D /* Build configuration list for PBXNativeTarget "FSVideoEditorResources" */ = {
 			isa = XCConfigurationList;
@@ -2251,6 +2258,7 @@
 				98F166AD1F1A088E0084D70D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -78,7 +78,7 @@ extern int IsArabic;
     
     _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds)/2.0 - 210/2.0, CGRectGetWidth(self.view.bounds), 210)];
     [self.view addSubview:_prewidow];
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-6b6d2a13073cadf2dd283996fcf70f4f.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-4532bd69c375c2bc29936aa8c5af104a.lic"];
     
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     _context = [NvsStreamingContext sharedInstance];

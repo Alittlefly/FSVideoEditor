@@ -1,0 +1,18 @@
+
+/* Class = "UIButton"; normalTitle = "LOG OUT"; ObjectID = "4JZ-OD-Zed"; */
+"4JZ-OD-Zed.normalTitle" = "LOG OUT";
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "EmT-ai-sOL"; */
+"EmT-ai-sOL.title" = "Root View Controller";
+
+/* Class = "UITextField"; placeholder = "UID"; ObjectID = "fOx-kX-Rfg"; */
+"fOx-kX-Rfg.placeholder" = "UID";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "m0V-QV-ECw"; */
+"m0V-QV-ECw.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "nH7-tl-73v"; */
+"nH7-tl-73v.normalTitle" = "LOG IN";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "yVE-dm-a0b"; */
+"yVE-dm-a0b.placeholder" = "Password";
