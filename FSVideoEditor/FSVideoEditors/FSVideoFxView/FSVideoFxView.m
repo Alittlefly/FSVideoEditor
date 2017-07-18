@@ -288,7 +288,7 @@
     
     [fmfx setTitle:NSLocalizedString(@"镜像", nil) forState:(UIControlStateNormal)];
     
-    objc_setAssociatedObject(fmfx, FxIdKey, @"282275F5-B021-4728-9C2C-783254BB7C26", OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(fmfx, FxIdKey, @"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8", OBJC_ASSOCIATION_COPY);
     
     [_contentView addSubview:fmfx];
     

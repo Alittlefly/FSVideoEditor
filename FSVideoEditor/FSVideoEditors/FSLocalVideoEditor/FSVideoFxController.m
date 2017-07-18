@@ -67,17 +67,17 @@
     NSString *ScalefxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"A8A4344D-45DA-460F-A18F-C0E2355FE864.lic"];
     
     
-    NSString *jzfxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx"];
-//    NSString *jzfxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"A8A4344D-45DA-460F-A18F-C0E2355FE864.lic"];
+    NSString *jzfxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx"];
+    NSString *jzfxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic"];
 
-    NSString *fmfxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx"];
-//    NSString *fmfxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"A8A4344D-45DA-460F-A18F-C0E2355FE864.lic"];
+    NSString *jxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.videofx"];
+    NSString *jxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.lic"];
 
     
     [_context.assetPackageManager installAssetPackage:SoulfxPath license:SoulfxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
     [_context.assetPackageManager installAssetPackage:ScalefxPath license:ScalefxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
-        [_context.assetPackageManager installAssetPackage:jzfxPath license:nil type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
-        [_context.assetPackageManager installAssetPackage:fmfxPath license:nil type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
+    [_context.assetPackageManager installAssetPackage:jzfxPath license:jzfxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
+    [_context.assetPackageManager installAssetPackage:jxPath license:jxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
     
      _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.bounds) - 210)/2.0, 54, 210, CGRectGetHeight(self.view.bounds) - 228 - 54 - 12)];
     [self.view addSubview:_prewidow];
