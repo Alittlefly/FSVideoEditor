@@ -124,7 +124,7 @@ extern int IsArabic;
     NvsVideoClip *videoclip = [_videoTrack getClipWithIndex:0];
     int64_t endTime = _endTime;
     if (endTime == 0) {
-        endTime = _timeLine.duration;
+        endTime = MIN(_timeLine.duration, 15000000.0);
     }
     [videoclip changeTrimInPoint:_startTime affectSibling:YES];
     [videoclip changeTrimOutPoint:endTime affectSibling:YES];
@@ -137,7 +137,7 @@ extern int IsArabic;
     [self.loading loadingViewShow];
     
      _outPutFilePath = [self getCompilePath];
-    [_context compileTimeline:_timeLine startTime:_startTime endTime:endTime outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeLow) flags:0];
+    [_context compileTimeline:_timeLine startTime:_startTime endTime:endTime outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0];
 }
 
 - (NSString *)getCompilePath {
@@ -197,7 +197,7 @@ extern int IsArabic;
     [_timeLine removeVideoTrack:0];
     
     _startTime = 0;
-    _endTime = 0;
+    _endTime = 0.0;
     
     _videoTrack = [_timeLine appendVideoTrack];
     _audioTrack = [_timeLine appendAudioTrack];

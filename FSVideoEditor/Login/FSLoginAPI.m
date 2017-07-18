@@ -45,7 +45,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     __weak typeof(self) weakS = self;
-    NSString *address = [NSString stringWithFormat:@"%@service/user/v3/login/mobile/v4",AddressAPI];
+    NSString *address = [NSString stringWithFormat:@"%@service/user/v3/login/mobile/v4",AddressAPILogin];
     NSURLSessionTask *task = [manager POST:address parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 0) {

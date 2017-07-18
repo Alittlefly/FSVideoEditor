@@ -12,8 +12,8 @@
 #import "FSFileUploadChecker.h"
 
 
-typedef void(^FSUploadProgressBlock)(CGFloat progress,NSString *filePath,id info);
-typedef void(^FSUploadCompleteBlock)(FSFileSlice *file,BOOL success,id info);
+typedef void(^FSUploadProgressBlock)(CGFloat progress,NSString *filePath,NSDictionary *info);
+typedef void(^FSUploadCompleteBlock)(FSFileSlice *file,BOOL success,NSDictionary * info);
 
 @protocol FSFileUploaderProtocol <NSObject>
 // 停止上传

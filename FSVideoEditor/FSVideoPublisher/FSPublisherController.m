@@ -252,7 +252,7 @@
 
     [self deleteCurrentCompileFile:_outPutPath];
 
-    if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_outPutPath videoResolutionGrade:(NvsCompileVideoResolutionGrade2160) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0]){
+    if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_outPutPath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeLow) flags:0]){
         NSLog(@"11111111");
     }
     else {
@@ -485,7 +485,17 @@
 - (void)uploadFile:(NSString *)filePath{
 //    NSLog(@"filePath %@",filePath);
     __block FSPublisherController *weakSelf = self;
-    [_uploader uploadFileWithFilePath:filePath complete:^(CGFloat progress, NSString *filePath, id info) {
+    [_uploader uploadFileWithFilePath:filePath complete:^(CGFloat progress, NSString *filePath, NSDictionary * info) {
+        
+        if(!info){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.loading loadingViewhide];
+                [weakSelf showMessage:NSLocalizedString(@"UploadFailed", nil)];
+            });
+            return ;
+        }
+        
+        
         NSLog(@"uploadFile: %f  %@",progress,filePath);
         if (!_publishServer) {
             _publishServer = [[FSPublisherServer alloc] init];
@@ -497,10 +507,10 @@
         [dic setValue:[NSNumber numberWithInt:4] forKey:@"requestType"];
         [dic setValue:[info objectForKey:@"dataInfo"] forKey:@"vu"];
         [dic setValue:weakSelf.videoDescription forKey:@"vd"];
-        [dic setValue:@"视频图片" forKey:@"vp"];
-        [dic setValue:@"视频动态图" forKey:@"vg"];
-        [dic setValue:[NSNumber numberWithInt:1111] forKey:@"si"]; //歌曲id
-        [dic setValue:[NSNumber numberWithInt:2222] forKey:@"di"];  //挑战ID
+        [dic setValue:@"" forKey:@"vp"];
+        [dic setValue:@"" forKey:@"vg"];
+        [dic setValue:[NSNumber numberWithInt:0] forKey:@"si"]; //歌曲id
+        [dic setValue:[NSNumber numberWithInt:0] forKey:@"di"];  //挑战ID
         [dic setValue:[NSArray array] forKey:@"a"];  //消息[{"ui":12815,"nk":"tttty"},{"ui":90665,"nk":"ytest"}]
 //        [dic setValue:@"被@用户ID" forKey:@"ui"];
 //        [dic setValue:@"用户昵称" forKey:@"nk"];
