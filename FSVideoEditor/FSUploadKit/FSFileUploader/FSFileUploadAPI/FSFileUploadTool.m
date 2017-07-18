@@ -161,7 +161,7 @@
 //    NSLog(@"uploadName %@",name);
 //    http://10.10.32.145:8086/files/shortvideo/upload/file
 //    NSString *url = @"http://10.10.32.157:8086/files/shortvideo/upload/file";
-    NSString *url = [NSString stringWithFormat:@"%@files/shortvideo/upload/file",[[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"]?AddressIP:AddressAPI];
+    NSString *url = [NSString stringWithFormat:@"%@files/shortvideo/upload/file",AddressAPI];
     //[@"http://221.176.30.232:8888/file/" stringByAppendingString:name];
     return url;
 }
