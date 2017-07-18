@@ -295,6 +295,10 @@
 		98F166B51F1A09860084D70D /* FSVideoEditorCommenData.h in Headers */ = {isa = PBXBuildFile; fileRef = 98F166A11F1A04580084D70D /* FSVideoEditorCommenData.h */; };
 		98F6BA1A1F1E00A6006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98F6BA191F1E00A6006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic */; };
 		98F6BA1B1F1E01D1006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98F6BA191F1E00A6006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic */; };
+		98F6BA251F1E1072006C8EA7 /* FSShortVideoLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F6BA241F1E1072006C8EA7 /* FSShortVideoLanguage.m */; };
+		98F6BA261F1E1099006C8EA7 /* FSShortVideoLanguage.h in Headers */ = {isa = PBXBuildFile; fileRef = 98F6BA231F1E1072006C8EA7 /* FSShortVideoLanguage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		98F6BA271F1E10B1006C8EA7 /* FSShortVideoLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F6BA241F1E1072006C8EA7 /* FSShortVideoLanguage.m */; };
+		98F6BA2E1F1E20B6006C8EA7 /* FSShortLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F6BA2D1F1E20B6006C8EA7 /* FSShortLanguage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -637,13 +641,16 @@
 		98F165F71F19F8B20084D70D /* FSVideoEditorSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FSVideoEditorSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		98F166001F19F8B20084D70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98F166A11F1A04580084D70D /* FSVideoEditorCommenData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSVideoEditorCommenData.h; sourceTree = "<group>"; };
-		98F166A21F1A054F0084D70D /* FSEditorHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSEditorHeader.h; sourceTree = "<group>"; };
 		98F166A81F1A088E0084D70D /* FSVideoEditorResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FSVideoEditorResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		98F166AA1F1A088E0084D70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98F6BA191F1E00A6006C8EA7 /* 198-14-4532bd69c375c2bc29936aa8c5af104a.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-4532bd69c375c2bc29936aa8c5af104a.lic"; sourceTree = "<group>"; };
 		98F6BA201F1E0F95006C8EA7 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
 		98F6BA211F1E0F95006C8EA7 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		98F6BA221F1E0F95006C8EA7 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		98F6BA231F1E1072006C8EA7 /* FSShortVideoLanguage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSShortVideoLanguage.h; sourceTree = "<group>"; };
+		98F6BA241F1E1072006C8EA7 /* FSShortVideoLanguage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSShortVideoLanguage.m; sourceTree = "<group>"; };
+		98F6BA2C1F1E20B6006C8EA7 /* FSShortLanguage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSShortLanguage.h; sourceTree = "<group>"; };
+		98F6BA2D1F1E20B6006C8EA7 /* FSShortLanguage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSShortLanguage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -781,7 +788,10 @@
 				563B7A221F0C8FE00035346A /* FSEditorAlertView.h */,
 				563B7A231F0C8FE00035346A /* FSEditorAlertView.m */,
 				98F166A11F1A04580084D70D /* FSVideoEditorCommenData.h */,
-				98F166A21F1A054F0084D70D /* FSEditorHeader.h */,
+				98F6BA2C1F1E20B6006C8EA7 /* FSShortLanguage.h */,
+				98F6BA2D1F1E20B6006C8EA7 /* FSShortLanguage.m */,
+				98F6BA231F1E1072006C8EA7 /* FSShortVideoLanguage.h */,
+				98F6BA241F1E1072006C8EA7 /* FSShortVideoLanguage.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1426,6 +1436,7 @@
 			files = (
 				98F166661F19FA330084D70D /* FSToolController.h in Headers */,
 				98F166671F19FA330084D70D /* FSAnimationNavController.h in Headers */,
+				98F6BA261F1E1099006C8EA7 /* FSShortVideoLanguage.h in Headers */,
 				98F166B51F1A09860084D70D /* FSVideoEditorCommenData.h in Headers */,
 				98F1664B1F19FA330084D70D /* FSDissolveAnimator.h in Headers */,
 				98F1664C1F19FA330084D70D /* FSSpringAnimator.h in Headers */,
@@ -1695,6 +1706,7 @@
 				567A3D481EFB66B60026247E /* FSFileUploadTool.m in Sources */,
 				9880DEB31F171295006E730F /* SDWebImageManager.m in Sources */,
 				9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */,
+				98F6BA251F1E1072006C8EA7 /* FSShortVideoLanguage.m in Sources */,
 				9880DEAF1F171295006E730F /* SDWebImageCompat.m in Sources */,
 				567A3D421EFB66B60026247E /* FSFile.m in Sources */,
 				560142B51F1868FE00A06C70 /* FSCancleController.m in Sources */,
@@ -1798,6 +1810,7 @@
 				563B7A041F0A281C0035346A /* FSToolController.m in Sources */,
 				567A3D491EFB66B60026247E /* FSDBUploadCache.m in Sources */,
 				9871BC3F1F0F861D0065977A /* FSPublisherAPI.m in Sources */,
+				98F6BA2E1F1E20B6006C8EA7 /* FSShortLanguage.m in Sources */,
 				563B7A1A1F0A52080035346A /* FSDismissAnimator.m in Sources */,
 				9871BC3B1F0F85BA0065977A /* FSPublisherServer.m in Sources */,
 				9840603E1EF93F130049B58E /* FSShortVideoRecorderView.m in Sources */,
@@ -1808,6 +1821,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98F6BA271F1E10B1006C8EA7 /* FSShortVideoLanguage.m in Sources */,
 				98F1660C1F19F9B10084D70D /* FSDissolveAnimator.m in Sources */,
 				98F1660D1F19F9B10084D70D /* FSSpringAnimator.m in Sources */,
 				98F1660E1F19F9B10084D70D /* FSPresentAnimator.m in Sources */,

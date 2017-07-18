@@ -8,6 +8,7 @@
 
 #import "FSCancleController.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSShortLanguage.h"
 
 @interface FSCancleController ()
 @end
@@ -24,7 +25,7 @@
         _cancleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 49, CGRectGetWidth(self.view.bounds), 49)];
     }
     
-    [_cancleButton setTitle:NSLocalizedString(@"Cancle", nil) forState:(UIControlStateNormal)];
+    [_cancleButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancle"] forState:(UIControlStateNormal)];
     [_cancleButton setBackgroundColor:FSHexRGB(0xffffff)];
     [_cancleButton setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
     [_cancleButton.layer setShadowOffset:CGSizeMake(0.0, -2.0)];

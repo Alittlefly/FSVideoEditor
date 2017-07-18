@@ -23,6 +23,7 @@
 #import "FSVideoEditorCommenData.h"
 
 #import "NvsFxDescription.h"
+#import "FSShortLanguage.h"
 
 @interface FSVideoFxController ()<NvsStreamingContextDelegate,FSVideoFxViewDelegate,UIViewControllerTransitioningDelegate>
 {
@@ -177,7 +178,7 @@
 - (void)creatSubViews{
     UIButton *cancle = [[UIButton alloc] init];
     [cancle addTarget:self action:@selector(cancle) forControlEvents:(UIControlEventTouchUpInside)];
-    [cancle setTitle:NSLocalizedString(@"Cancel", nil) forState:(UIControlStateNormal)];
+    [cancle setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] forState:(UIControlStateNormal)];
     [cancle sizeToFit];
     cancle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [cancle setFrame:CGRectMake(20, 20, 100, 24)];
@@ -185,7 +186,7 @@
     
     UIButton *save = [[UIButton alloc] init];
     [save addTarget:self action:@selector(save) forControlEvents:(UIControlEventTouchUpInside)];
-    [save setTitle:NSLocalizedString(@"Save", nil) forState:(UIControlStateNormal)];
+    [save setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Save"] forState:(UIControlStateNormal)];
     [save sizeToFit];
     [save setFrame:CGRectMake(self.view.frame.size.width-20-100, 20, 100, 24)];
     save.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;

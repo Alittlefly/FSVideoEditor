@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSShortLanguage.h"
 
 @interface FSShortVideoRecorderController : UIViewController
 

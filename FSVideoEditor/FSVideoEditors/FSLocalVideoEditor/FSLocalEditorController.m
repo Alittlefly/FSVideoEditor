@@ -19,7 +19,7 @@
 #import "FSEditorLoading.h"
 #import "FSShortVideoRecorderManager.h"
 #import "FSVideoEditorCommenData.h"
-
+#import "FSShortLanguage.h"
 
 extern int IsArabic;
 
@@ -101,7 +101,7 @@ extern int IsArabic;
     _timeLine = [_context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
     
     
-    _segmentView = [[FSSegmentView alloc] initWithItems:@[NSLocalizedString(@"VerySlow", nil),NSLocalizedString(@"Slow", nil),NSLocalizedString(@"Normal", nil),NSLocalizedString(@"Fast", nil),NSLocalizedString(@"VeryFast", nil)]];
+    _segmentView = [[FSSegmentView alloc] initWithItems:@[[FSShortLanguage CustomLocalizedStringFromTable:@"VerySlow"],[FSShortLanguage CustomLocalizedStringFromTable:@"Slow"],[FSShortLanguage CustomLocalizedStringFromTable:@"Normal"],[FSShortLanguage CustomLocalizedStringFromTable:@"Fast"],[FSShortLanguage CustomLocalizedStringFromTable:@"VeryFast"]]];
     _segmentView.frame = CGRectMake(32.5, CGRectGetMaxY(_prewidow.frame)+30, CGRectGetWidth(self.view.frame) - 65, 37);
     _segmentView.selectedColor = FSHexRGB(0xFACE15);//[UIColor yellowColor];
     _segmentView.backgroundColor = FSHexRGBAlpha(0x001428, 0.6);[UIColor lightGrayColor];

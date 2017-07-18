@@ -9,6 +9,7 @@
 #import "FSVideoFxView.h"
 #import <objc/runtime.h>
 #import "FSVideoEditorCommenData.h"
+#import "FSShortLanguage.h"
 
 #define FxButtonH 50.0
 #define FxButtonP 30.0
@@ -193,7 +194,7 @@
     [self addSubview:_progress];
     
      _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30-54, 21)];
-    [_tipLabel setText:NSLocalizedString(@"AddFilterTip", nil)];
+    [_tipLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"AddFilterTip"]];
     [_tipLabel setFont:[UIFont systemFontOfSize:15]];
     [_tipLabel setTextColor:FSHexRGB(0xCBCBCB)];
     [_tipLabel setTextAlignment:(NSTextAlignmentLeft)];
@@ -201,7 +202,7 @@
     
     
      _unDoButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sframe)-10-54, CGRectGetMaxY(_progress.frame), 54, 30)];
-    [_unDoButton setTitle:NSLocalizedString(@"Delete", nil) forState:(UIControlStateNormal)];
+    [_unDoButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Delete"] forState:(UIControlStateNormal)];
     [_unDoButton setHidden:YES];
     [_unDoButton addTarget:self action:@selector(unDoFix) forControlEvents:(UIControlEventTouchUpInside)];
     [_contentView addSubview:_unDoButton];
@@ -216,7 +217,7 @@
     [self addSubview:_bottomView];
     
     FSLineButton *fxButton = [[FSLineButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(sframe)/2.0 - 1, 45)];
-    [fxButton setTitle:NSLocalizedString(@"Filters", nil) forState:UIControlStateNormal];
+    [fxButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Filters"] forState:UIControlStateNormal];
     [fxButton addTarget:self action:@selector(showFx:) forControlEvents:(UIControlEventTouchUpInside)];
     fxButton.tag = 1;
     [fxButton setSelected:YES];
@@ -229,7 +230,7 @@
     [_bottomView addSubview:sepLine];
     
     FSLineButton *timefxButton = [[FSLineButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sframe)/2.0+1, 0, CGRectGetWidth(sframe)/2.0 - 1, 45)];
-    [timefxButton setTitle:NSLocalizedString(@"Timeline", nil) forState:UIControlStateNormal];
+    [timefxButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Timeline"] forState:UIControlStateNormal];
     [timefxButton addTarget:self action:@selector(showFx:) forControlEvents:(UIControlEventTouchUpInside)];
     timefxButton.tag = 2;
     [_bottomView addSubview:timefxButton];
@@ -241,7 +242,7 @@
     }
     
     FSFxButton *soulfx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
-    [soulfx setTitle:NSLocalizedString(@"Magic", nil) forState:(UIControlStateNormal)];
+    [soulfx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Magic"] forState:(UIControlStateNormal)];
     [soulfx setBackgroundColor:[UIColor redColor]];
     [soulfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [soulfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -259,7 +260,7 @@
     [shakefx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [shakefx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
 
-    [shakefx setTitle:NSLocalizedString(@"Vibrating", nil) forState:(UIControlStateNormal)];
+    [shakefx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Vibrating"] forState:(UIControlStateNormal)];
 
      objc_setAssociatedObject(shakefx, FxIdKey, @"A8A4344D-45DA-460F-A18F-C0E2355FE864", OBJC_ASSOCIATION_COPY);
 
@@ -279,7 +280,7 @@
     FSFxButton *noneFx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [noneFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [noneFx setBackgroundColor:[UIColor redColor]];
-    [noneFx setTitle:NSLocalizedString(@"NoFilter", nil) forState:(UIControlStateNormal)];
+    [noneFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"NoFilter"] forState:(UIControlStateNormal)];
      noneFx.tag = FSVideoFxTypeNone;
     [noneFx.colorView setBackgroundColor:FSHexRGB(0x000000)];
     [self.fxButtonDict setObject:noneFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeNone]];
@@ -289,7 +290,7 @@
     FSFxButton *revertFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(noneFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [revertFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [revertFx setBackgroundColor:[UIColor yellowColor]];
-    [revertFx setTitle:NSLocalizedString(@"Reverse", nil) forState:(UIControlStateNormal)];
+    [revertFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Reverse"] forState:(UIControlStateNormal)];
     [revertFx.colorView setBackgroundColor:FSHexRGB(0xff39ad)];
      revertFx.tag = FSVideoFxTypeRevert;
     [self.fxButtonDict setObject:revertFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeRevert]];
@@ -299,7 +300,7 @@
     FSFxButton *repeatFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(revertFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [repeatFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [repeatFx setBackgroundColor:[UIColor yellowColor]];
-    [repeatFx setTitle:NSLocalizedString(@"Repeat", nil) forState:(UIControlStateNormal)];
+    [repeatFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Repeat"] forState:(UIControlStateNormal)];
     [repeatFx.colorView setBackgroundColor:FSHexRGB(0x7778ff)];
     repeatFx.tag = FSVideoFxTypeRepeat;
     [self.fxButtonDict setObject:repeatFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeRepeat]];
@@ -311,7 +312,7 @@
     FSFxButton *slowFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(repeatFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [slowFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [slowFx setBackgroundColor:[UIColor yellowColor]];
-    [slowFx setTitle:NSLocalizedString(@"SlowMotion", nil) forState:(UIControlStateNormal)];
+    [slowFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"SlowMotion"] forState:(UIControlStateNormal)];
     [slowFx.colorView setBackgroundColor:FSHexRGB(0xbcff77)];
     slowFx.tag = FSVideoFxTypeSlow;
     [self.fxButtonDict setObject:slowFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeSlow]];
@@ -432,10 +433,10 @@
 }
 -(void)changeContentWithTag:(NSInteger)tag{
     if (tag == 1) {
-        [_tipLabel setText:NSLocalizedString(@"AddFilterTip", nil)];
+        [_tipLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"AddFilterTip"]];
         [self initFilerFxs];
     }else if (tag == 2){
-        [_tipLabel setText:NSLocalizedString(@"ChooseEffectsTip", nil)];
+        [_tipLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"ChooseEffectsTip"]];
         [self initTimeFxs];
     }
     

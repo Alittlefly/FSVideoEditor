@@ -19,7 +19,7 @@
 #import "FSAlertView.h"
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
-
+#import "FSShortLanguage.h"
 
 BOOL IsArabic;
 
@@ -189,7 +189,7 @@ BOOL IsArabic;
     _cutMusicLabel.textColor = [UIColor whiteColor];
     _cutMusicLabel.backgroundColor = [UIColor clearColor];
     _cutMusicLabel.textAlignment = NSTextAlignmentCenter;
-    _cutMusicLabel.text = NSLocalizedString(@"CutMusic", nil);
+    _cutMusicLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"CutMusic"];//NSLocalizedString(@"CutMusic", nil);
     [self addSubview:_cutMusicLabel];
     
     _beautyButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -204,7 +204,7 @@ BOOL IsArabic;
     _beautyLabel.font = [UIFont systemFontOfSize:7];
     _beautyLabel.textColor = [UIColor whiteColor];
     _beautyLabel.textAlignment = NSTextAlignmentCenter;
-    _beautyLabel.text = NSLocalizedString(@"BeautifyOn", nil);
+    _beautyLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOn"];//NSLocalizedString(@"BeautifyOn", nil);
     [self addSubview:_beautyLabel];
     
     _filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -219,7 +219,7 @@ BOOL IsArabic;
     _filterLabel.font = [UIFont systemFontOfSize:7];
     _filterLabel.textColor = [UIColor whiteColor];
     _filterLabel.textAlignment = NSTextAlignmentCenter;// IsArabic ? NSTextAlignmentLeft : NSTextAlignmentRight;
-    _filterLabel.text = NSLocalizedString(@"ColorFilter", nil);
+    _filterLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ColorFilter"];//NSLocalizedString(@"ColorFilter", nil);
     [self addSubview:_filterLabel];
     
     _countdownButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -234,7 +234,7 @@ BOOL IsArabic;
     _countdownLabel.font = [UIFont systemFontOfSize:7];
     _countdownLabel.textColor = [UIColor whiteColor];
     _countdownLabel.textAlignment = NSTextAlignmentCenter;
-    _countdownLabel.text = NSLocalizedString(@"Countdown", nil);
+    _countdownLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Countdown"];//NSLocalizedString(@"Countdown", nil);
     [self addSubview:_countdownLabel];
     
     _imageAutoFocusRect = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
@@ -273,7 +273,7 @@ BOOL IsArabic;
     _faceUButton.hidden = YES;
     [self addSubview:_faceUButton];
     
-    _segmentView = [[FSSegmentView alloc] initWithItems:@[NSLocalizedString(@"VerySlow", nil),NSLocalizedString(@"Slow", nil),NSLocalizedString(@"Normal", nil),NSLocalizedString(@"Fast", nil),NSLocalizedString(@"VeryFast", nil)]];
+    _segmentView = [[FSSegmentView alloc] initWithItems:@[[FSShortLanguage CustomLocalizedStringFromTable:@"VerySlow"],[FSShortLanguage CustomLocalizedStringFromTable:@"Slow"],[FSShortLanguage CustomLocalizedStringFromTable:@"Normal"],[FSShortLanguage CustomLocalizedStringFromTable:@"Fast"],[FSShortLanguage CustomLocalizedStringFromTable:@"VeryFast"]]];
     _segmentView.frame = CGRectMake(30, CGRectGetMinY(_recorderButton.frame)-15-40, CGRectGetWidth(self.frame)-60, 40);
     _segmentView.selectedColor = FSHexRGB(0xFACE15);//[UIColor yellowColor];
     _segmentView.backgroundColor = FSHexRGBAlpha(0x001428, 0.6);[UIColor lightGrayColor];
@@ -307,7 +307,7 @@ BOOL IsArabic;
 
 - (void)backClik {
     if (_deleteButton.hidden == NO) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"CancelEditing", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Confirm", nil), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[FSShortLanguage CustomLocalizedStringFromTable:@"CancelEditing"] delegate:self cancelButtonTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] otherButtonTitles:[FSShortLanguage CustomLocalizedStringFromTable:@"Confirm"], nil];
         alert.tag = 1001;
         [alert show];
     }
@@ -440,16 +440,16 @@ BOOL IsArabic;
     _isBeautyOpened = !_isBeautyOpened;
     if (_isBeautyOpened) {
         [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-on"] forState:UIControlStateNormal];
-        [_beautyLabel setText:NSLocalizedString(@"BeautifyOn", nil)];
-        [self showAlertView:NSLocalizedString(@"BeautifyOnTip", nil)];
+        [_beautyLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOn"]];
+        [self showAlertView:[FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOnTip"]];
 //        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewShowAlertView:)]) {
 //            [self.delegate FSShortVideoRecorderViewShowAlertView:NSLocalizedString(@"BeautifyOnTip", nil)];
 //        }
     }
     else {
         [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-off"] forState:UIControlStateNormal];
-        [_beautyLabel setText:NSLocalizedString(@"BeautifyOff", nil)];
-        [self showAlertView:NSLocalizedString(@"BeautifyOffTip", nil)];
+        [_beautyLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOff"]];
+        [self showAlertView:[FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOffTip"]];
 //        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewShowAlertView:)]) {
 //            [self.delegate FSShortVideoRecorderViewShowAlertView:NSLocalizedString(@"BeautifyOffTip", nil)];
 //        }
@@ -783,7 +783,7 @@ BOOL IsArabic;
 }
 
 - (void)deleteVideo {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"DeleteVideoTip", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Confirm", nil), nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[FSShortLanguage CustomLocalizedStringFromTable:@"DeleteVideoTip"] delegate:self cancelButtonTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] otherButtonTitles:[FSShortLanguage CustomLocalizedStringFromTable:@"Confirm"], nil];
     alert.tag = 1002;
     [alert show];
 }

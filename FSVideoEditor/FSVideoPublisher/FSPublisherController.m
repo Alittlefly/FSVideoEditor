@@ -29,6 +29,8 @@
 #import "FSPublisherServer.h"
 #import "FSAlertView.h"
 
+#import "FSShortLanguage.h"
+
 @interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSPublisherServerDelegate>
 {
     FSUploader *_uploader;
@@ -521,7 +523,7 @@
 - (void)FSPublisherServerSucceed {
     [self.loading loadingViewhide];
 
-    [self showMessage:NSLocalizedString(@"UploadSecceed", nil)];
+    [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadSecceed"]];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -529,7 +531,7 @@
 - (void)FSPublisherServerFailed:(NSError *)error {
     [self.loading loadingViewhide];
 
-    [self showMessage:NSLocalizedString(@"UploadFailed", nil)];
+    [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
 }
 
 - (void)showMessage:(NSString *)message {

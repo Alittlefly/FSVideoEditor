@@ -7,6 +7,7 @@
 //
 
 #import "FSEditorLoading.h"
+#import "FSShortLanguage.h"
 @interface FSEditorLoading()
 
 @property(nonatomic,strong)UILabel *titleLabel;
@@ -42,7 +43,7 @@
         [_titleLabel setTextAlignment:NSTextAlignmentCenter];
         [_titleLabel setBackgroundColor:[UIColor clearColor]];
         [_titleLabel setTextColor:[UIColor whiteColor]];
-        [_titleLabel setText:NSLocalizedString(@"Loading", nil)];
+        [_titleLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"Loading"]];
     }
     return _titleLabel;
 }

@@ -14,7 +14,7 @@
 #import "FSMusicManager.h"
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
-
+#import "FSShortLanguage.h"
 
 @interface FSMusicController ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate,FSMusicSeverDelegate>{
     FSMusic *_music;
@@ -76,7 +76,7 @@
     [self.view addSubview:_tableView];
     
     UILabel *tableHeader = [[UILabel alloc] init];
-    [tableHeader setText:NSLocalizedString(@"HotMusic", nil)];
+    [tableHeader setText:[FSShortLanguage CustomLocalizedStringFromTable:@"HotMusic"]];
     [tableHeader setTextAlignment:(NSTextAlignmentCenter)];
     [tableHeader setFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 52)];
     [_tableView setTableHeaderView:tableHeader];

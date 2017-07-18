@@ -8,6 +8,7 @@
 
 #import "FSControlVolumeView.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSShortLanguage.h"
 
 @interface FSControlVolumeView()
 
@@ -72,7 +73,7 @@
     _soundtrackLabel.backgroundColor = [UIColor clearColor];
     _soundtrackLabel.font = [UIFont systemFontOfSize:15];
     _soundtrackLabel.textColor = [UIColor whiteColor];
-    _soundtrackLabel.text = NSLocalizedString(@"Original", nil);
+    _soundtrackLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Original"];//NSLocalizedString(@"Original", nil);
     [_soundtrackLabel sizeToFit];
     _soundtrackLabel.frame = CGRectMake(15, 23, _soundtrackLabel.frame.size.width, 27);
     [_contentView addSubview:_soundtrackLabel];
@@ -89,7 +90,7 @@
     _scoreLabel.backgroundColor = [UIColor clearColor];
     _scoreLabel.font = [UIFont systemFontOfSize:15];
     _scoreLabel.textColor = [UIColor whiteColor];
-    _scoreLabel.text = NSLocalizedString(@"Music", nil);
+    _scoreLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Music"];//NSLocalizedString(@"Music", nil);
     [_scoreLabel sizeToFit];
     _scoreLabel.frame = CGRectMake(_scoreLabel.frame.origin.x, _scoreLabel.frame.origin.y, _scoreLabel.frame.size.width, _scoreLabel.frame.size.height);
     [_contentView addSubview:_scoreLabel];
@@ -116,7 +117,7 @@
     _titleLabel.font = [UIFont systemFontOfSize:15];
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
-    _titleLabel.text = NSLocalizedString(@"Volume", nil);
+    _titleLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Volume"];//NSLocalizedString(@"Volume", nil);
     _titleLabel.shadowColor = [UIColor blackColor];
     //阴影偏移  x，y为正表示向右下偏移
     _titleLabel.shadowOffset = CGSizeMake(1, 1);

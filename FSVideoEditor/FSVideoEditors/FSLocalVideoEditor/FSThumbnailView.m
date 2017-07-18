@@ -8,7 +8,7 @@
 
 #import "FSThumbnailView.h"
 #import "FSVideoEditorCommenData.h"
-
+#import "FSShortLanguage.h"
 
 @interface FSThumbnailView()<UIScrollViewDelegate>
 {
@@ -297,7 +297,7 @@
     BOOL shouldBeRed = (timeLength == _minLength) || (timeLength == _length) || (timeLength == _allLength);
     
     NSString *time = [NSString stringWithFormat:@"%.2f",timeLength];
-    NSString *orginalText = NSLocalizedString(@"ChoseVideoTime", nil);
+    NSString *orginalText = [FSShortLanguage CustomLocalizedStringFromTable:@"ChoseVideoTime"];//NSLocalizedString(@"ChoseVideoTime", nil);
     NSString *finalSting = [orginalText stringByReplacingOccurrencesOfString:@"(0)" withString:time];
     
     NSDictionary *timeAttrRed = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName,nil];

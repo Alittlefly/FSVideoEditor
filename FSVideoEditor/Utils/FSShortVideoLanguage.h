@@ -10,4 +10,5 @@
 
 @interface FSShortVideoLanguage : NSObject
 
+
 @end

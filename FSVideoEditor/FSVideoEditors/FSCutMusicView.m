@@ -9,7 +9,7 @@
 #import "FSCutMusicView.h"
 #import "FSMusicPlayer.h"
 #import "FSVideoEditorCommenData.h"
-
+#import "FSShortLanguage.h"
 
 @interface FSCutMusicView()<UIScrollViewDelegate>
 
@@ -98,7 +98,7 @@
     _timeLabel.textColor = FSHexRGB(0xF5F5F5);
     _timeLabel.font = [UIFont systemFontOfSize:11];
     _timeLabel.textAlignment = NSTextAlignmentCenter;
-    NSString *timeString = NSLocalizedString(@"MusicStartTime", nil);
+    NSString *timeString = [FSShortLanguage CustomLocalizedStringFromTable:@"MusicStartTime"];//NSLocalizedString(@"MusicStartTime", nil);
     _timeLabel.text = [timeString stringByReplacingOccurrencesOfString:@"(0)" withString:[self getCurrentTimeString:_newTime]];
     [_timeLabel sizeToFit];
     _timeLabel.frame = CGRectMake(20, CGRectGetMinY(_scrollView.frame)-5-25, _timeLabel.frame.size.width, 25);
@@ -111,7 +111,7 @@
     _titleLabel.textColor = FSHexRGB(0xF5F5F5);
     _titleLabel.font = [UIFont systemFontOfSize:13];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
-    _titleLabel.text = NSLocalizedString(@"EditMusicTip", nil);
+    _titleLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"EditMusicTip"];//NSLocalizedString(@"EditMusicTip", nil);
     _titleLabel.shadowColor = [UIColor blackColor];
     //阴影偏移  x，y为正表示向右下偏移
     _titleLabel.shadowOffset = CGSizeMake(1, 1);
@@ -213,7 +213,7 @@
 //    int min = floor(time/60);
 //    int sec = time%60;
 //    NSLog(@"min:%d     sec:%d",min,sec);
-    NSString *timeString = NSLocalizedString(@"MusicStartTime", nil);
+    NSString *timeString = [FSShortLanguage CustomLocalizedStringFromTable:@"MusicStartTime"];//NSLocalizedString(@"MusicStartTime", nil);
     self.timeLabel.text = [timeString stringByReplacingOccurrencesOfString:@"(0)" withString:[self getCurrentTimeString:_newTime]];
     
     _newTime = time;

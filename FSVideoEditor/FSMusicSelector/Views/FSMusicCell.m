@@ -9,7 +9,7 @@
 #import "FSMusicCell.h"
 #import "UIImageView+WebCache.h"
 #import "FSVideoEditorCommenData.h"
-
+#import "FSShortLanguage.h"
 
 @interface FSMusicUseButton : UIButton
 {
@@ -62,7 +62,7 @@ static NSString *identifier = @"FSMusicCell";
          _useButton = [[FSMusicUseButton alloc] init];
         [_useButton setImage:[UIImage imageNamed:@"musicSelectRecoder"] forState:(UIControlStateNormal)];
         _useButton.backgroundColor = FSHexRGB(0x0BC2C6);
-        [_useButton setTitle:NSLocalizedString(@"RecordNow", nil) forState:UIControlStateNormal];
+        [_useButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"RecordNow"] forState:UIControlStateNormal];
         [_useButton setAdjustsImageWhenHighlighted:NO];
         [_useButton addTarget:self action:@selector(useMusic:) forControlEvents:(UIControlEventTouchUpInside)];
     }

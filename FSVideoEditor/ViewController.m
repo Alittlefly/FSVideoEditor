@@ -13,6 +13,7 @@
 #import "FSAlertView.h"
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSShortLanguage.h"
 
 @interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate>
 
@@ -62,7 +63,7 @@
         self.uidTextField.hidden = NO;
         self.passwordTextField.hidden = NO;
         self.loginButton.hidden = NO;
-        [self.loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
+        [self.loginButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Login"] forState:UIControlStateNormal];
 
     }
     else {
@@ -72,7 +73,7 @@
         self.uidTextField.hidden = YES;
         self.passwordTextField.hidden = YES;
         self.loginButton.hidden = YES;
-        [self.logoutButton setTitle:NSLocalizedString(@"logout", nil) forState:UIControlStateNormal];
+        [self.logoutButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"logout"] forState:UIControlStateNormal];
     }
     
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"tr"]) {
@@ -94,7 +95,7 @@
     self.uidTextField.leftView = uidView;
     self.uidTextField.leftViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
     self.uidTextField.delegate = self;
-    self.uidTextField.placeholder = NSLocalizedString(@"Account",nil);
+    self.uidTextField.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"Account"];//NSLocalizedString(@"Account",nil);
     self.uidTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Account",nil) attributes:@{NSForegroundColorAttributeName:FSHexRGBAlpha(0xF5F5F5, 0.5)}];
 
     
@@ -108,8 +109,8 @@
     self.passwordTextField.leftViewMode=UITextFieldViewModeAlways; //此处用来设置leftview现实时机
     self.passwordTextField.delegate = self;
     self.passwordTextField.secureTextEntry = YES;
-    self.passwordTextField.placeholder = NSLocalizedString(@"Password",nil);
-    self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Password",nil) attributes:@{NSForegroundColorAttributeName:FSHexRGBAlpha(0xF5F5F5, 0.5)}];
+    self.passwordTextField.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"Password"];//NSLocalizedString(@"Password",nil);
+    self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:[FSShortLanguage CustomLocalizedStringFromTable:@"Password"] attributes:@{NSForegroundColorAttributeName:FSHexRGBAlpha(0xF5F5F5, 0.5)}];
     
     [self.logoutButton setTitleColor:FSHexRGB(0x00FFEF) forState:UIControlStateNormal];
     
@@ -204,12 +205,12 @@
     }
     
     if (self.uidTextField.text.length == 0) {
-        [self showMessage:NSLocalizedString(@"LoginFailed", nil)];
+        [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"LoginFailed"]];
         return;
     }
     
     if (self.passwordTextField.text.length == 0) {
-        [self showMessage:NSLocalizedString(@"BadPassword", nil)];
+        [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"BadPassword"]];
         return;
     }
     
@@ -253,7 +254,7 @@
 
 - (void)FSLoginServerFaild:(NSError *)error {
     [self.loading loadingViewhide];
-    [self showMessage:NSLocalizedString(@"LoginFailed", nil)];
+    [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"LoginFailed"]];
 }
 
 - (void)showMessage:(NSString *)message {

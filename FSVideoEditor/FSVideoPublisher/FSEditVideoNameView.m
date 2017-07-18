@@ -7,6 +7,7 @@
 //
 
 #import "FSEditVideoNameView.h"
+#import "FSShortLanguage.h"
 
 @interface FSEditVideoNameView()<UITextFieldDelegate>
 
@@ -34,7 +35,7 @@
 - (void)initBaseUI {
     _textFile = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 20)];
     _textFile.backgroundColor = [UIColor clearColor];
-    _textFile.placeholder = NSLocalizedString(@"EnterTitle", nil);
+    _textFile.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"EnterTitle"];//NSLocalizedString(@"EnterTitle", nil);
     _textFile.textColor = [UIColor whiteColor];
     _textFile.returnKeyType = UIReturnKeyDone;
     _textFile.attributedPlaceholder = [[NSAttributedString alloc] initWithString:_textFile.placeholder attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
@@ -52,7 +53,7 @@
     _addChallengeButton.layer.borderColor = [UIColor whiteColor].CGColor;
     _addChallengeButton.layer.borderWidth = 0.5;
     _addChallengeButton.layer.masksToBounds = YES;
-    [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",NSLocalizedString(@"AddHashtag", nil)] forState:UIControlStateNormal];
+    [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
     [_addChallengeButton.titleLabel setFont:[UIFont systemFontOfSize:10]];
     _addChallengeButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [_addChallengeButton addTarget:self action:@selector(addChallenge) forControlEvents:UIControlEventTouchUpInside];
@@ -62,7 +63,7 @@
     _saveToPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _saveToPhotoButton.frame = CGRectMake(self.frame.size.width-100, CGRectGetMaxY(_lineView.frame)+15, 100, 27);
     _saveToPhotoButton.backgroundColor = [UIColor clearColor];
-    [_saveToPhotoButton setTitle:[NSString stringWithFormat:@"#%@",NSLocalizedString(@"SaveInGallery", nil)] forState:UIControlStateNormal];
+    [_saveToPhotoButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"SaveInGallery"]] forState:UIControlStateNormal];
     [_saveToPhotoButton.titleLabel setFont:[UIFont systemFontOfSize:10]];
     [_saveToPhotoButton setTitleColor:_isSave?[UIColor redColor]:[UIColor whiteColor] forState:UIControlStateNormal];
     [_saveToPhotoButton addTarget:self action:@selector(saveToPhoto) forControlEvents:UIControlEventTouchUpInside];

@@ -9,6 +9,7 @@
 #import "FSFilterView.h"
 #import "FSFilterButton.h"
 #import "FSShortVideoRecorderManager.h"
+#import "FSShortLanguage.h"
 
 @interface FSFilterView()
 
@@ -26,7 +27,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         // 初始化视频特效列表
-        _filtersArray = [NSMutableArray arrayWithObject:NSLocalizedString(@"NoFilter", nil)];
+        _filtersArray = [NSMutableArray arrayWithObject:[FSShortLanguage CustomLocalizedStringFromTable:@"NoFilter"]];
         // 获取全部内嵌视频特效的名称
         [_filtersArray addObjectsFromArray:[[FSShortVideoRecorderManager sharedInstance] getAllVideoFilters]];
         [self initBaseUI];
@@ -40,7 +41,7 @@
     _titLabel.textAlignment = NSTextAlignmentCenter;
     _titLabel.backgroundColor = [UIColor clearColor];
     _titLabel.font = [UIFont systemFontOfSize:15];
-    _titLabel.text = NSLocalizedString(@"ColorFilter", nil);
+    _titLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ColorFilter"];//NSLocalizedString(@"ColorFilter", nil);
     _titLabel.shadowColor = [UIColor blackColor];
     //阴影偏移  x，y为正表示向右下偏移
     _titLabel.shadowOffset = CGSizeMake(1, 1);
