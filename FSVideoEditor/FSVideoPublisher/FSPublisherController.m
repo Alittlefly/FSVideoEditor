@@ -507,7 +507,7 @@
         [dic setValue:weakSelf.videoDescription forKey:@"vd"];
         [dic setValue:@"" forKey:@"vp"];
         [dic setValue:@"" forKey:@"vg"];
-        [dic setValue:[NSNumber numberWithInt:0] forKey:@"si"]; //歌曲id
+        [dic setValue:[NSNumber numberWithInt:1] forKey:@"si"]; //歌曲id
         [dic setValue:[NSNumber numberWithInt:0] forKey:@"di"];  //挑战ID
         [dic setValue:[NSArray array] forKey:@"a"];  //消息[{"ui":12815,"nk":"tttty"},{"ui":90665,"nk":"ytest"}]
 //        [dic setValue:@"被@用户ID" forKey:@"ui"];
