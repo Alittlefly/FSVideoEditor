@@ -175,6 +175,7 @@
 //    NSString *url = @"http://10.10.32.157:8086/files/shortvideo/upload/file";
 
     NSString *url = [NSString stringWithFormat:@"%@files/shortvideo/upload/file",AddressUpload];
+    NSLog(@"url---: %@",url);
     //[@"http://221.176.30.232:8888/file/" stringByAppendingString:name];
     return url;
 }
