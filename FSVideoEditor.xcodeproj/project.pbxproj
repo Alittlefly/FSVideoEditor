@@ -84,6 +84,11 @@
 		567A3D8C1EFB6F8E0026247E /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D801EFB6F8E0026247E /* README.md */; };
 		567A3D8E1EFB6FC90026247E /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 567A3D8D1EFB6FC90026247E /* libsqlite3.tbd */; };
 		567A3D911EFB7EC80026247E /* FSFileSliceDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D901EFB7EC80026247E /* FSFileSliceDivider.m */; };
+		567B052F1F21E05C00D09364 /* libNvConvertorLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567B052E1F21E05C00D09364 /* libNvConvertorLib.a */; };
+		567B053B1F21E0D900D09364 /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567B05361F21E0D900D09364 /* libwebp.a */; };
+		567B053C1F21E0D900D09364 /* libwebpmux.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567B05371F21E0D900D09364 /* libwebpmux.a */; };
+		567B053D1F21E0D900D09364 /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567B05391F21E0D900D09364 /* libwebp.a */; };
+		567B053E1F21E0D900D09364 /* libwebpmux.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567B053A1F21E0D900D09364 /* libwebpmux.a */; };
 		567E0B531EF930D100C4C527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B521EF930D100C4C527 /* main.m */; };
 		567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B551EF930D100C4C527 /* AppDelegate.m */; };
 		567E0B591EF930D100C4C527 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B581EF930D100C4C527 /* ViewController.m */; };
@@ -148,7 +153,6 @@
 		988AC6DF1EFE65C2007FBCEF /* FSFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6DD1EFE65C2007FBCEF /* FSFilterView.m */; };
 		988AC6E41EFE6926007FBCEF /* FSFilterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E21EFE6926007FBCEF /* FSFilterButton.m */; };
 		988AC6E91F010B0D007FBCEF /* FSControlVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */; };
-		988E3D121F024562004E837F /* libNvConvertorLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 988E3D111F024562004E837F /* libNvConvertorLib.a */; };
 		988E3D1D1F026D78004E837F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 988E3D1C1F026D78004E837F /* libstdc++.tbd */; };
 		988E3D271F0271A1004E837F /* FSTimeCountsdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */; };
 		98EFA7521F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EFA7501F13817C00CB4DDD /* A8A4344D-45DA-460F-A18F-C0E2355FE864.lic */; };
@@ -322,6 +326,22 @@
 		567A3D8D1EFB6FC90026247E /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		567A3D8F1EFB7EC80026247E /* FSFileSliceDivider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileSliceDivider.h; sourceTree = "<group>"; };
 		567A3D901EFB7EC80026247E /* FSFileSliceDivider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileSliceDivider.m; sourceTree = "<group>"; };
+		567B052E1F21E05C00D09364 /* libNvConvertorLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNvConvertorLib.a; sourceTree = "<group>"; };
+		567B05311F21E09F00D09364 /* NvcConvertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertor.h; sourceTree = "<group>"; };
+		567B05321F21E09F00D09364 /* NvcConvertorBaseDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertorBaseDef.h; sourceTree = "<group>"; };
+		567B05331F21E09F00D09364 /* NvcConvertorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertorDelegate.h; sourceTree = "<group>"; };
+		567B05361F21E0D900D09364 /* libwebp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebp.a; sourceTree = "<group>"; };
+		567B05371F21E0D900D09364 /* libwebpmux.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebpmux.a; sourceTree = "<group>"; };
+		567B05391F21E0D900D09364 /* libwebp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebp.a; sourceTree = "<group>"; };
+		567B053A1F21E0D900D09364 /* libwebpmux.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebpmux.a; sourceTree = "<group>"; };
+		567B05401F21E10B00D09364 /* encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encode.h; sourceTree = "<group>"; };
+		567B05411F21E10B00D09364 /* mux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mux.h; sourceTree = "<group>"; };
+		567B05421F21E10B00D09364 /* mux_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mux_types.h; sourceTree = "<group>"; };
+		567B05431F21E10B00D09364 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		567B05451F21E11400D09364 /* encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encode.h; sourceTree = "<group>"; };
+		567B05461F21E11400D09364 /* mux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mux.h; sourceTree = "<group>"; };
+		567B05471F21E11400D09364 /* mux_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mux_types.h; sourceTree = "<group>"; };
+		567B05481F21E11400D09364 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		567E0B4E1EF930D100C4C527 /* FSVideoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSVideoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		567E0B521EF930D100C4C527 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		567E0B541EF930D100C4C527 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -371,9 +391,6 @@
 		9871BC3E1F0F861D0065977A /* FSPublisherAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPublisherAPI.m; sourceTree = "<group>"; };
 		98725BF01F064F8C00445EF2 /* FSMoveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMoveButton.h; sourceTree = "<group>"; };
 		98725BF11F064F8C00445EF2 /* FSMoveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMoveButton.m; sourceTree = "<group>"; };
-		987700A91F03A6520043394E /* NvcConvertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertor.h; sourceTree = "<group>"; };
-		987700AA1F03A6520043394E /* NvcConvertorBaseDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertorBaseDef.h; sourceTree = "<group>"; };
-		987700AB1F03A6520043394E /* NvcConvertorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertorDelegate.h; sourceTree = "<group>"; };
 		987700AD1F03AFE50043394E /* FSSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSegmentView.h; sourceTree = "<group>"; };
 		987700AE1F03AFE50043394E /* FSSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSegmentView.m; sourceTree = "<group>"; };
 		987B58AC1F0E217800E85A37 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -440,7 +457,6 @@
 		988AC6E21EFE6926007FBCEF /* FSFilterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFilterButton.m; sourceTree = "<group>"; };
 		988AC6E61F010B0D007FBCEF /* FSControlVolumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSControlVolumeView.h; sourceTree = "<group>"; };
 		988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSControlVolumeView.m; sourceTree = "<group>"; };
-		988E3D111F024562004E837F /* libNvConvertorLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvConvertorLib.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios/libNvConvertorLib.a; sourceTree = "<group>"; };
 		988E3D1C1F026D78004E837F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		988E3D211F0271A1004E837F /* FSTimeCountsdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTimeCountsdownView.h; sourceTree = "<group>"; };
 		988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTimeCountsdownView.m; sourceTree = "<group>"; };
@@ -490,21 +506,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567B053C1F21E0D900D09364 /* libwebpmux.a in Frameworks */,
 				987B58AD1F0E217800E85A37 /* UIKit.framework in Frameworks */,
 				988E3D1D1F026D78004E837F /* libstdc++.tbd in Frameworks */,
-				988E3D121F024562004E837F /* libNvConvertorLib.a in Frameworks */,
 				567A3D8E1EFB6FC90026247E /* libsqlite3.tbd in Frameworks */,
+				567B053D1F21E0D900D09364 /* libwebp.a in Frameworks */,
 				984060571EF940810049B58E /* libc++.tbd in Frameworks */,
 				984060551EF9407B0049B58E /* libz.tbd in Frameworks */,
 				984060531EF940730049B58E /* libiconv.tbd in Frameworks */,
+				567B052F1F21E05C00D09364 /* libNvConvertorLib.a in Frameworks */,
 				984060511EF9406A0049B58E /* AssetsLibrary.framework in Frameworks */,
 				9840604F1EF940620049B58E /* MobileCoreServices.framework in Frameworks */,
+				567B053B1F21E0D900D09364 /* libwebp.a in Frameworks */,
 				9840604D1EF940580049B58E /* AudioToolbox.framework in Frameworks */,
 				9840604B1EF940500049B58E /* VideoToolbox.framework in Frameworks */,
 				984060491EF940490049B58E /* Photos.framework in Frameworks */,
 				984060471EF9403F0049B58E /* CoreMedia.framework in Frameworks */,
 				984060451EF940350049B58E /* AVFoundation.framework in Frameworks */,
 				984060421EF9401F0049B58E /* libNvStreamingSdkCore.a in Frameworks */,
+				567B053E1F21E0D900D09364 /* libwebpmux.a in Frameworks */,
 				984060431EF9401F0049B58E /* libNvStreamingSdkDeps.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -938,6 +958,67 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
+		567B05301F21E09200D09364 /* libNvConvertor */ = {
+			isa = PBXGroup;
+			children = (
+				567B05311F21E09F00D09364 /* NvcConvertor.h */,
+				567B05321F21E09F00D09364 /* NvcConvertorBaseDef.h */,
+				567B05331F21E09F00D09364 /* NvcConvertorDelegate.h */,
+			);
+			path = libNvConvertor;
+			sourceTree = "<group>";
+		};
+		567B05341F21E0CE00D09364 /* libWebp */ = {
+			isa = PBXGroup;
+			children = (
+				567B05351F21E0D900D09364 /* aarch64 */,
+				567B05381F21E0D900D09364 /* armv7 */,
+			);
+			path = libWebp;
+			sourceTree = "<group>";
+		};
+		567B05351F21E0D900D09364 /* aarch64 */ = {
+			isa = PBXGroup;
+			children = (
+				567B05441F21E11400D09364 /* aarch64 */,
+				567B05361F21E0D900D09364 /* libwebp.a */,
+				567B05371F21E0D900D09364 /* libwebpmux.a */,
+			);
+			path = aarch64;
+			sourceTree = "<group>";
+		};
+		567B05381F21E0D900D09364 /* armv7 */ = {
+			isa = PBXGroup;
+			children = (
+				567B053F1F21E10B00D09364 /* armv7 */,
+				567B05391F21E0D900D09364 /* libwebp.a */,
+				567B053A1F21E0D900D09364 /* libwebpmux.a */,
+			);
+			path = armv7;
+			sourceTree = "<group>";
+		};
+		567B053F1F21E10B00D09364 /* armv7 */ = {
+			isa = PBXGroup;
+			children = (
+				567B05401F21E10B00D09364 /* encode.h */,
+				567B05411F21E10B00D09364 /* mux.h */,
+				567B05421F21E10B00D09364 /* mux_types.h */,
+				567B05431F21E10B00D09364 /* types.h */,
+			);
+			path = armv7;
+			sourceTree = "<group>";
+		};
+		567B05441F21E11400D09364 /* aarch64 */ = {
+			isa = PBXGroup;
+			children = (
+				567B05451F21E11400D09364 /* encode.h */,
+				567B05461F21E11400D09364 /* mux.h */,
+				567B05471F21E11400D09364 /* mux_types.h */,
+				567B05481F21E11400D09364 /* types.h */,
+			);
+			path = aarch64;
+			sourceTree = "<group>";
+		};
 		567E0B451EF930D100C4C527 = {
 			isa = PBXGroup;
 			children = (
@@ -1061,7 +1142,6 @@
 				9880DE7D1F171295006E730F /* SDWebImage */,
 				987B58AC1F0E217800E85A37 /* UIKit.framework */,
 				988E3D1C1F026D78004E837F /* libstdc++.tbd */,
-				988E3D111F024562004E837F /* libNvConvertorLib.a */,
 				562D40461EFD1DE200BF0E0D /* AFNetworking */,
 				567A3D8D1EFB6FC90026247E /* libsqlite3.tbd */,
 				567A3D681EFB6F8E0026247E /* MJExtension */,
@@ -1161,6 +1241,9 @@
 		98E3C9B81EFA1B9B00A2FDD6 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				567B05341F21E0CE00D09364 /* libWebp */,
+				567B05301F21E09200D09364 /* libNvConvertor */,
+				567B052E1F21E05C00D09364 /* libNvConvertorLib.a */,
 				98E3C9B91EFA1B9B00A2FDD6 /* sdkcore */,
 			);
 			name = include;
@@ -1178,9 +1261,6 @@
 		98E3C9BA1EFA1B9B00A2FDD6 /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				987700A91F03A6520043394E /* NvcConvertor.h */,
-				987700AA1F03A6520043394E /* NvcConvertorBaseDef.h */,
-				987700AB1F03A6520043394E /* NvcConvertorDelegate.h */,
 				98E3C9BB1EFA1B9B00A2FDD6 /* NvsAssetPackageManager.h */,
 				98E3C9BC1EFA1B9B00A2FDD6 /* NvsAudioClip.h */,
 				98E3C9BD1EFA1B9B00A2FDD6 /* NvsAudioFx.h */,
@@ -1579,6 +1659,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libWebp/aarch64",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libWebp/armv7",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1601,6 +1684,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libWebp/aarch64",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libWebp/armv7",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
