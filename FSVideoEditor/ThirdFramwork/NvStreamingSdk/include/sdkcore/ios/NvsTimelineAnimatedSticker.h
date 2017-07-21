@@ -22,6 +22,7 @@
  */
 @interface NvsTimelineAnimatedSticker : NvsFx
 
+@property (readonly) BOOL isPanoramic;  //!< 是否为全景图动画贴纸贴纸 \since 1.6.0
 @property (readonly) int64_t inPoint; //!< \if ENGLISH \else 动画贴纸在时间线上显示的入点 \endif
 @property (readonly) int64_t outPoint; //!< \if ENGLISH \else 动画贴纸在时间线上显示的出点 \endif
 
@@ -136,6 +137,48 @@
     \since 1.4.0
  */
 - (NSArray *)getBoundingRectangleVertices;
+
+/*!
+    \brief 对动画贴纸设置中心点的极角。只对全景图动画贴纸有效
+    \param centerPolarAngle 中心点的极角，单位为角度
+    \since 1.6.0
+ */
+- (void)setCenterPolarAngle:(float)centerPolarAngle;
+
+/*!
+    \brief 获取动画贴纸中心点的极角。只对全景图动画贴纸有效
+    \return 返回动画贴纸中心点的极角，单位为角度
+    \since 1.6.0
+ */
+- (float)getCenterPolarAngle;
+
+/*!
+    \brief 对动画贴纸设置中心点的方位角。只对全景图动画贴纸有效
+    \param centerAzimuthAngle 中心点的极角，单位为角度
+    \since 1.6.0
+ */
+- (void)setCenterAzimuthAngle:(float)centerAzimuthAngle;
+
+/*!
+    \brief 获取动画贴纸中心点的方位角。只对全景图动画贴纸有效
+    \return 返回动画贴纸中心点的方位角，单位为角度
+    \since 1.6.0
+ */
+- (float)getCenterAzimuthAngle;
+
+/*!
+    \brief 对动画贴纸设置极角的张角。只对全景图动画贴纸有效
+    \param polarAngleRange 极角的张角，单位为角度
+    \since 1.6.0
+ */
+- (void)setPolarAngleRange:(float)polarAngleRange;
+
+/*!
+    \brief 获取动画贴纸极角的张角。只对全景图动画贴纸有效
+    \return 返回动画贴纸极角的张角，单位为角度
+    \since 1.6.0
+ */
+- (float)getPolarAngleRange;
 
 @end
 

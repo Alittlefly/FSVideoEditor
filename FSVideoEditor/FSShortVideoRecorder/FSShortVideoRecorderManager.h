@@ -112,5 +112,9 @@
  */
 - (BOOL)beginConvertReverse:(NSString *)filePath;
 
+- (void)beginCreateWebP:(NSString *)filePath;
+
+- (UIImage *)getImageFromFile:(NSString *)filePath atTime:(int64_t)time videoFrameHeightGrade:(NvsVideoFrameHeightGrade)videoFrameHeightGrade;
+
 
 @end

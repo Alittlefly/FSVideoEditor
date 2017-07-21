@@ -31,7 +31,10 @@
 
 #import "FSShortLanguage.h"
 
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSPublisherServerDelegate>
+#import "FSUploadImageServer.h"
+#import "FSShortVideoRecorderManager.h"
+
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSPublisherServerDelegate, FSUploadImageServerDelegate, FSShortVideoRecorderManagerDelegate>
 {
     FSUploader *_uploader;
     NSString *_outPutPath;
@@ -63,6 +66,7 @@
 @property (nonatomic, assign)FSVideoFxType currentFxType;
 
 @property (nonatomic, strong) FSPublisherServer *publishServer;
+@property (nonatomic, strong) FSUploadImageServer *uploadImageServer;
 
 @property (nonatomic, copy) NSString *videoDescription;
 @property (nonatomic, assign) BOOL isSaved;
@@ -105,7 +109,7 @@
     if (!_filePath) {
         return;
     }
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-4532bd69c375c2bc29936aa8c5af104a.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-967dfb58745c59c1c409616af7ca27b3.lic"];
     
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     _context = [NvsStreamingContext sharedInstance];
@@ -274,10 +278,10 @@
 }
 // 生成完成的回调函数
 - (void)didCompileFinished:(NvsTimeline *)timeline{
-    
+    [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
+    [[FSShortVideoRecorderManager sharedInstance] beginCreateWebP:_outPutPath];
     NSLog(@"Compile success!");
-    
-    [self uploadFile:_outPutPath];
+  //  [self uploadFirstImage:[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_outPutPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade360]];
   //  UISaveVideoAtPathToSavedPhotosAlbum(_outPutPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 
 }
@@ -382,12 +386,13 @@
 }
 
 #pragma mark - 
--(void)musicControllerSelectMusic:(NSString *)music{
+-(void)musicControllerSelectMusic:(NSString *)music musicId:(NSInteger)musicId{
     if (music != nil && music.length > 0) {
         _soundtrackVolume = -1;
         [self changeVolume];
         [_toolView canEditMusic:YES];
         _musicPath = music;
+        _musicId = musicId;
         _musicStartTime = 0;
     }
 }
@@ -481,6 +486,75 @@
     _converted = convert;
 }
 
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    
+    NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
+}
+
+- (void)uploadFirstImage:(UIImage *)image {
+    if (!_uploadImageServer) {
+        _uploadImageServer = [[FSUploadImageServer alloc] init];
+        _uploadImageServer.delegate = self;
+    }
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+
+    NSData * imageData = UIImageJPEGRepresentation(image,1);
+    
+    CGFloat length = [imageData length]/1000;
+    CGFloat bit = 1;
+    if (length > 200) {
+        bit = 200/length;
+    }
+    [_uploadImageServer uploadFirstImage:[NSDictionary dictionaryWithObjectsAndKeys:UIImageJPEGRepresentation(image,bit),@"imageData",nil]];
+}
+
+- (void)FSUploadImageServerFirstImageSucceed:(NSString *)filePath {
+    [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
+    [[FSShortVideoRecorderManager sharedInstance] beginConvertReverse:_outPutPath];
+}
+
+- (void)FSUploadImageServerFirstImageFailed:(NSError *)error {
+    [self.loading loadingViewhide];
+    
+    [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
+}
+
+- (void)FSUploadImageServerWebPSucceed:(NSString *)filePath {
+    [self uploadFile:_outPutPath];
+}
+
+- (void)FSUploadImageServerWebPFailed:(NSError *)error {
+    [self.loading loadingViewhide];
+    
+    [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
+}
+
+#pragma mark -
+- (void)FSShortVideoRecorderManagerConvertorFinished:(NSString *)filePath {
+    if (!_uploadImageServer) {
+        _uploadImageServer = [[FSUploadImageServer alloc] init];
+        _uploadImageServer.delegate = self;
+    }
+    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+    
+    NSData * imageData = UIImageJPEGRepresentation(image,1);
+    
+    CGFloat length = [imageData length]/1000;
+    CGFloat bit = 1;
+    if (length > 200) {
+        bit = 200/length;
+    }
+    [_uploadImageServer uploadWebP:[NSDictionary dictionaryWithObjectsAndKeys:UIImageJPEGRepresentation(image,bit),@"imageData",nil]];
+}
+
+- (void)FSShortVideoRecorderManagerConvertorFaild {
+    [self.loading loadingViewhide];
+    
+    [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
+}
+
 #pragma mark -
 - (void)uploadFile:(NSString *)filePath{
 //    NSLog(@"filePath %@",filePath);
@@ -506,10 +580,10 @@
         [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
         [dic setValue:[NSNumber numberWithInt:4] forKey:@"requestType"];
         [dic setValue:[info objectForKey:@"dataInfo"] forKey:@"vu"];
-        [dic setValue:weakSelf.videoDescription forKey:@"vd"];
-        [dic setValue:@"" forKey:@"vp"];
-        [dic setValue:@"" forKey:@"vg"];
-        [dic setValue:[NSNumber numberWithInt:1] forKey:@"si"]; //歌曲id
+        [dic setValue:weakSelf.videoDescription forKey:@"vd"]; //
+        [dic setValue:@"" forKey:@"vp"];    //image
+        [dic setValue:@"" forKey:@"vg"];   //webp
+        [dic setValue:[NSNumber numberWithInteger:_musicId] forKey:@"si"]; //歌曲id
         [dic setValue:[NSNumber numberWithInt:0] forKey:@"di"];  //挑战ID
         [dic setValue:[NSArray array] forKey:@"a"];  //消息[{"ui":12815,"nk":"tttty"},{"ui":90665,"nk":"ytest"}]
 //        [dic setValue:@"被@用户ID" forKey:@"ui"];

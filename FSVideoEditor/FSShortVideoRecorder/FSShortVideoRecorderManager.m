@@ -137,7 +137,7 @@ static FSShortVideoRecorderManager *recorderManager;
         return;
         
     }
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-4532bd69c375c2bc29936aa8c5af104a.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-967dfb58745c59c1c409616af7ca27b3.lic"];
 
     BOOL isOK = [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     
@@ -587,6 +587,12 @@ static FSShortVideoRecorderManager *recorderManager;
     }
 }
 
+- (UIImage *)getImageFromFile:(NSString *)filePath atTime:(int64_t)time videoFrameHeightGrade:(NvsVideoFrameHeightGrade)videoFrameHeightGrade {
+    NvsVideoFrameRetriever *retriever = [_context createVideoFrameRetriever:filePath];
+    
+    return [retriever getFrameAtTime:time videoFrameHeightGrade:videoFrameHeightGrade];
+}
+
 #pragma mark - NVConvertorDelegate
 - (void)convertFinished {
     [self.mConvertor stop];
@@ -636,33 +642,44 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (void)setupConvertor:(NSString *)filePath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *tmpfilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
+    [self convertorWithFile:filePath outPath:tmpfilePath];
+}
+
+- (void)beginCreateWebP:(NSString *)filePath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *tmpfilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.webp",[self getCurrentTimeString]]];
+    [self convertorWithFile:filePath outPath:tmpfilePath];
+}
+
+- (void)convertorWithFile:(NSString *)filePath outPath:(NSString *)outPath {
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"];
     
     NSData *JSONData = [NSData dataWithContentsOfFile:verifySdkLicenseFilePath];
-
+    
     BOOL isCanConver = [NvcConvertor InstallLicense:JSONData];
     NSLog(@"verify:setupConvertor %@  %D",verifySdkLicenseFilePath,isCanConver);
-
+    
     if (!isCanConver) {
         [self convertFaild:nil];
     }
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *tmpfilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
-    _convertorFilePath = tmpfilePath;
+   
+    _convertorFilePath = outPath;
     
     struct SNvcOutputConfig config ;
     config.from = 0;
     config.to = INT_MAX;
     config.dataRate = 0;
-//    config.scale.num = 1;
-//    config.scale.den = 1;
+    //    config.scale.num = 1;
+    //    config.scale.den = 1;
     
     //倒序
     int nTmp = config.from;
     config.from = config.to;
     config.to = nTmp;
     
-    NSInteger ret = [self.mConvertor open:filePath outputFile:tmpfilePath setting:&config];
+    NSInteger ret = [self.mConvertor open:filePath outputFile:outPath setting:&config];
     if (ret != NVC_NOERROR) {
         NSString *error = nil;
         if (ret == NVC_E_INVALID_POINTER) {
