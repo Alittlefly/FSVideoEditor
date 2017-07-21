@@ -70,6 +70,10 @@
 
 @property (nonatomic, copy) NSString *videoDescription;
 @property (nonatomic, assign) BOOL isSaved;
+
+@property (nonatomic, copy) NSString *firstImageUrl;
+@property (nonatomic, copy) NSString *webpUrl;
+
 @end
 
 @implementation FSPublisherController
@@ -278,10 +282,9 @@
 }
 // 生成完成的回调函数
 - (void)didCompileFinished:(NvsTimeline *)timeline{
-    [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
-    [[FSShortVideoRecorderManager sharedInstance] beginCreateWebP:_outPutPath];
+    
     NSLog(@"Compile success!");
-  //  [self uploadFirstImage:[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_outPutPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade360]];
+    [self uploadFirstImage:[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_outPutPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480]];
   //  UISaveVideoAtPathToSavedPhotosAlbum(_outPutPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 
 }
@@ -492,12 +495,19 @@
     NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
 }
 
+- (NSString *)getNameFromPath:(NSString *)path {
+    NSArray *array = [path componentsSeparatedByString:@"/"];
+    NSString *name = [array lastObject];
+    NSArray *nameArray = [name componentsSeparatedByString:@"."];
+    return [nameArray firstObject];
+}
+
 - (void)uploadFirstImage:(UIImage *)image {
     if (!_uploadImageServer) {
         _uploadImageServer = [[FSUploadImageServer alloc] init];
         _uploadImageServer.delegate = self;
     }
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+   // UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
 
     NSData * imageData = UIImageJPEGRepresentation(image,1);
     
@@ -506,12 +516,14 @@
     if (length > 200) {
         bit = 200/length;
     }
-    [_uploadImageServer uploadFirstImage:[NSDictionary dictionaryWithObjectsAndKeys:UIImageJPEGRepresentation(image,bit),@"imageData",nil]];
+    [_uploadImageServer uploadFirstImage:[NSDictionary dictionaryWithObjectsAndKeys:UIImageJPEGRepresentation(image,bit),@"imageData",[self getNameFromPath:_outPutPath],@"imageName",nil]];
 }
 
 - (void)FSUploadImageServerFirstImageSucceed:(NSString *)filePath {
+    _firstImageUrl = filePath;
+    
     [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
-    [[FSShortVideoRecorderManager sharedInstance] beginConvertReverse:_outPutPath];
+    [[FSShortVideoRecorderManager sharedInstance] beginCreateWebP:_outPutPath];
 }
 
 - (void)FSUploadImageServerFirstImageFailed:(NSError *)error {
@@ -521,6 +533,7 @@
 }
 
 - (void)FSUploadImageServerWebPSucceed:(NSString *)filePath {
+    _webpUrl = filePath;
     [self uploadFile:_outPutPath];
 }
 
@@ -536,17 +549,15 @@
         _uploadImageServer = [[FSUploadImageServer alloc] init];
         _uploadImageServer.delegate = self;
     }
-    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
-    
-    NSData * imageData = UIImageJPEGRepresentation(image,1);
-    
-    CGFloat length = [imageData length]/1000;
+    UISaveVideoAtPathToSavedPhotosAlbum(filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+   
+    CGFloat length = [data length]/1000;
     CGFloat bit = 1;
     if (length > 200) {
         bit = 200/length;
     }
-    [_uploadImageServer uploadWebP:[NSDictionary dictionaryWithObjectsAndKeys:UIImageJPEGRepresentation(image,bit),@"imageData",nil]];
+    [_uploadImageServer uploadWebP:[NSDictionary dictionaryWithObjectsAndKeys:data,@"webpData",[self getNameFromPath:_outPutPath],@"webpName",nil]];
 }
 
 - (void)FSShortVideoRecorderManagerConvertorFaild {
@@ -581,8 +592,8 @@
         [dic setValue:[NSNumber numberWithInt:4] forKey:@"requestType"];
         [dic setValue:[info objectForKey:@"dataInfo"] forKey:@"vu"];
         [dic setValue:weakSelf.videoDescription forKey:@"vd"]; //
-        [dic setValue:@"" forKey:@"vp"];    //image
-        [dic setValue:@"" forKey:@"vg"];   //webp
+        [dic setValue:_firstImageUrl forKey:@"vp"];    //image
+        [dic setValue:_webpUrl forKey:@"vg"];   //webp
         [dic setValue:[NSNumber numberWithInteger:_musicId] forKey:@"si"]; //歌曲id
         [dic setValue:[NSNumber numberWithInt:0] forKey:@"di"];  //挑战ID
         [dic setValue:[NSArray array] forKey:@"a"];  //消息[{"ui":12815,"nk":"tttty"},{"ui":90665,"nk":"ytest"}]

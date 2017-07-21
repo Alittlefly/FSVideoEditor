@@ -29,12 +29,9 @@
         [_currentTask cancel];
     }
     
-    NSArray *keys = [param allKeys];
     NSData * imageData = [param objectForKey:@"imageData"];//[UIImage imageWithContentsOfFile:[param objectForKey:@"image"]];//[param objectForKey:[keys firstObject]];
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    NSString *imageName = [param objectForKey:@"imageName"];
     
-    CGFloat length = [imageData length]/1000;
-
     __weak typeof(self) weakS = self;
 
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
@@ -43,14 +40,21 @@
     [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
     [dic setValue:[NSNumber numberWithInteger:4] forKey:@"requestType"];
     NSURLSessionTask *task = (NSURLSessionUploadTask *)[mgr  POST:[NSString stringWithFormat:@"%@files/shortvideo/upload/image",AddressUpload] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithFileData:imageData name:@"image" fileName:[NSString stringWithFormat:@"%@.jpeg",@"test1"] mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imageData name:@"image" fileName:[NSString stringWithFormat:@"%@.jpeg",imageName] mimeType:@"image/jpeg"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIFirstImageSuccess:)]) {
-            [weakS.delegate FSUploadImageAPIFirstImageSuccess:[responseObject objectForKey:@"dataInfo"]];
+        if ([responseObject objectForKey:@"code"] == 0) {
+            if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIFirstImageSuccess:)]) {
+                [weakS.delegate FSUploadImageAPIFirstImageSuccess:[responseObject objectForKey:@"dataInfo"]];
+            }
         }
+        else {
+            if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIFirstImageFaild:)]) {
+                [weakS.delegate FSUploadImageAPIFirstImageFaild:nil];
+            }
+        }
+        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIFirstImageFaild:)]) {
@@ -68,13 +72,33 @@
         [_currentTask cancel];
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSArray *keys = [param allKeys];
+    NSData * imageData = [param objectForKey:@"webpData"];//[UIImage imageWithContentsOfFile:[param objectForKey:@"image"]];//[param objectForKey:[keys firstObject]];
+    NSString *imageName = [param objectForKey:@"webpName"];
+
     __weak typeof(self) weakS = self;
-    //http://10.10.32.145:8088/video/index/publish/video  http://www.7nujoom.com/
-    NSURLSessionTask *task = [manager POST:[NSString stringWithFormat:@"%@video/index/publish/gif",AddressAPI] parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIWebPSuccess:)]) {
-            [weakS.delegate FSUploadImageAPIWebPSuccess:[responseObject objectForKey:@"dataInfo"]];
+    
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    //    NSDictionary *param = @{@"file":data};
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
+    [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
+    [dic setValue:[NSNumber numberWithInteger:4] forKey:@"requestType"];
+    NSURLSessionTask *task = (NSURLSessionUploadTask *)[mgr  POST:[NSString stringWithFormat:@"%@files/shortvideo/upload/gif",AddressUpload] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:imageData name:@"webp" fileName:[NSString stringWithFormat:@"%@.webp",imageName] mimeType:@"image/webp"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject objectForKey:@"code"] == 0) {
+            if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIWebPSuccess:)]) {
+                [weakS.delegate FSUploadImageAPIWebPSuccess:[responseObject objectForKey:@"dataInfo"]];
+            }
         }
+        else {
+            if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIWebPFaild:)]) {
+                [weakS.delegate FSUploadImageAPIWebPFaild:nil];
+            }
+        }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIWebPFaild:)]) {
             [weakS.delegate FSUploadImageAPIWebPFaild:error];
