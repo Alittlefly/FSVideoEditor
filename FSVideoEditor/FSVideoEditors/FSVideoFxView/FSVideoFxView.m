@@ -134,7 +134,7 @@
 @property(nonatomic,strong)FSVideoClipProgress *progress;
 
 @property(nonatomic,strong)UILabel *tipLabel;
-@property(nonatomic,strong)UIView *contentView;
+@property(nonatomic,strong)UIScrollView *contentView;
 @property(nonatomic,strong)UIView *bottomView;
 @property(nonatomic,strong)NSArray *videofxs;
 @property(nonatomic,strong)NSArray *videofuncs;
@@ -185,7 +185,9 @@
     CGRect sframe = self.bounds;
     [self setBackgroundColor:FSHexRGB(0x000f1e)];
     // content
-     _contentView = [[UIView alloc] initWithFrame:sframe];
+     _contentView = [[UIScrollView alloc] initWithFrame:sframe];
+    [_contentView setShowsHorizontalScrollIndicator:NO];
+    [_contentView setAlwaysBounceHorizontal:NO];
     [_contentView setBackgroundColor:FSHexRGB(0x000f1e)];
     [self addSubview:_contentView];
     
@@ -274,8 +276,7 @@
     [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     
-    [jzfx setTitle:NSLocalizedString(@"矩阵", nil) forState:(UIControlStateNormal)];
-    
+    [jzfx setTitle:NSLocalizedString(@"x-signal", nil) forState:(UIControlStateNormal)];
     objc_setAssociatedObject(jzfx, FxIdKey, @"9AC28816-639F-4A9B-B4BA-4060ABD229A2", OBJC_ASSOCIATION_COPY);
     
     [_contentView addSubview:jzfx];
@@ -290,11 +291,25 @@
     [fmfx setTitle:NSLocalizedString(@"镜像", nil) forState:(UIControlStateNormal)];
     
     objc_setAssociatedObject(fmfx, FxIdKey, @"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8", OBJC_ASSOCIATION_COPY);
-    
     [_contentView addSubview:fmfx];
     
+    
+    FSFxButton *bmfx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(fmfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
+    [bmfx setBackgroundColor:[UIColor yellowColor]];
+    [bmfx setTag:5];
+    [bmfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
+    [bmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
+    [bmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
+    
+    [bmfx setTitle:NSLocalizedString(@"黑白", nil) forState:(UIControlStateNormal)];
+    
+    objc_setAssociatedObject(bmfx, FxIdKey, @"33F513E5-5CA2-4C23-A6D4-8466202EE698", OBJC_ASSOCIATION_COPY);
+    [_contentView addSubview:bmfx];
+    
+    [_contentView setContentSize:CGSizeMake(CGRectGetMaxX(bmfx.frame) + 20, 0)];
+    [_contentView setContentOffset:CGPointZero];
     [self.fxButtons removeAllObjects];
-    [self.fxButtons addObjectsFromArray:@[soulfx,shakefx,jzfx,fmfx]];
+    [self.fxButtons addObjectsFromArray:@[soulfx,shakefx,jzfx,fmfx,bmfx]];
 }
 -(void)initTimeFxs{
     
@@ -348,6 +363,9 @@
     
     [self.fxButtons removeAllObjects];
     [self.fxButtons addObjectsFromArray:@[noneFx,revertFx,repeatFx,slowFx]];
+    [_contentView setContentSize:CGSizeMake(CGRectGetMaxX(slowFx.frame) + 20, 0)];
+    [_contentView setContentOffset:CGPointZero];
+
     
     if (!_firstInitTimeFx) {
         [_progress setType:_fxType];

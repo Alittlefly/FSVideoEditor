@@ -17,6 +17,7 @@
 #import "FSMusicPlayer.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
+#import "FSMusicSelectController.h"
 
 @interface FSToolController ()
 {
@@ -99,6 +100,9 @@
     }
 
     [self.view setBackgroundColor:[UIColor clearColor]];
+    
+    
+    
 }
 
 - (void)videoRecorder {

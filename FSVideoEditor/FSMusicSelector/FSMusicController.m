@@ -15,14 +15,17 @@
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
+#import "FSSearchBar.h"
+#import "FSMusicHeaderView.h"
 
-@interface FSMusicController ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate,FSMusicSeverDelegate>{
+@interface FSMusicController ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate,FSMusicSeverDelegate,UISearchBarDelegate>{
     FSMusic *_music;
     FSMusicSever *_sever;
 }
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *musics;
 @property(nonatomic,strong)FSEditorLoading *loading;
+@property(nonatomic,strong)FSSearchBar *searchBar;
 
 @end
 
@@ -37,48 +40,50 @@
 -(NSMutableArray *)musics{
     if (!_musics) {
         
-//        FSMusic *music = [[FSMusic alloc] init];
-//        music.songTitle = @"month";
-//        music.lastSeconds = 15;
-//        music.songPic = @"";
-//        music.songAuthor = @"徐子谦";
-//        
-//        
-//        FSMusic *music1 = [[FSMusic alloc] init];
-//        music1.songTitle = @"wind";
-//        music1.lastSeconds = 15;
-//        music1.songPic = @"";
-//        music1.songAuthor = @"高超";
-//
-//        
-//        FSMusic *music2 = [[FSMusic alloc] init];
-//        music2.songTitle = @"ugly";
-//        music2.lastSeconds = 15;
-//        music2.songPic = @"";
-//        music2.songAuthor = @"王明";
-//
-//        _musics = [NSMutableArray arrayWithObjects:music,music1,music2,nil];
-        
         _musics = [NSMutableArray arrayWithCapacity:0];
-        
-        
     }
     return _musics;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
-     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
+    
+    for(NSInteger index = 0 ;index < 3;index ++){
+        FSMusic *music = [[FSMusic alloc] init];
+        music.songTitle = @"month";
+        music.lastSeconds = 15;
+        music.songPic = @"";
+        music.songAuthor = @"徐子谦";
+        FSMusic *music1 = [[FSMusic alloc] init];
+        music1.songTitle = @"wind";
+        music1.lastSeconds = 15;
+        music1.songPic = @"";
+        music1.songAuthor = @"高超";
+        FSMusic *music2 = [[FSMusic alloc] init];
+        music2.songTitle = @"ugly";
+        music2.lastSeconds = 15;
+        music2.songPic = @"";
+        music2.songAuthor = @"王明";
+        FSMusic *music3 = [[FSMusic alloc] init];
+        music3.songTitle = @"ugly";
+        music3.lastSeconds = 15;
+        music3.songPic = @"";
+        music3.songAuthor = @"王明";
+        [self.musics addObjectsFromArray:@[music,music1,music2,music3]];
+    }
+    
+    
+    _searchBar = [[FSSearchBar alloc] initWithFrame:CGRectMake(10, 8, CGRectGetWidth(self.view.bounds) - 20, 28) delegate:self];
+    [self.view addSubview:_searchBar];
+    
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     [_tableView setDelegate:self];
     [_tableView setDataSource:self];
     
     [self.view addSubview:_tableView];
     
-    UILabel *tableHeader = [[UILabel alloc] init];
-    [tableHeader setText:[FSShortLanguage CustomLocalizedStringFromTable:@"HotMusic"]];
-    [tableHeader setTextAlignment:(NSTextAlignmentCenter)];
-    [tableHeader setFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 52)];
+    FSMusicHeaderView *tableHeader = [[FSMusicHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 228)];
+
     [_tableView setTableHeaderView:tableHeader];
     [_tableView setTableFooterView:[UIView new]];
     
@@ -90,11 +95,38 @@
     [self.loading loadingViewShow];
     
     [self initCancleButton];
+    
+}
+
+#pragma mark -
+-(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
+    NSLog(@"searchBarShouldBeginEditing ");
+    [_searchBar setShowCancle:YES];
+    return YES;
+}
+-(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
+    [_searchBar setShowCancle:NO];
+    return YES;
+}
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    NSLog(@"点击取消");
+}
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    if([searchBar canResignFirstResponder]){
+        [searchBar resignFirstResponder];
+    }
+    [_searchBar setShowCancle:NO];
+    
+    NSString *trimText = [searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSLog(@"要查询的内容是 trimText %@",trimText);
 }
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     
-    [_tableView setFrame:CGRectMake(0,0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 49)];
+    [_searchBar setFrame:CGRectMake(10, 8, CGRectGetWidth(self.view.bounds) - 20, 28)];
+    
+    CGRect tableFrame = CGRectMake(0, CGRectGetMaxY(_searchBar.frame) + 15, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 100);
+    [_tableView setFrame:tableFrame];
     
     [self.cancleButton setFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 49, CGRectGetWidth(self.view.bounds), 49)];
 }

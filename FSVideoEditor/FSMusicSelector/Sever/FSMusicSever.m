@@ -24,6 +24,9 @@
     [_Api setDelegate:self];
     [_Api getMusicWithParam:nil];
 }
+-(void)getMusicTypes{
+
+}
 #pragma mark -
 -(void)musicApiGetMusics:(id)responesObject{
     

@@ -21,4 +21,6 @@
 @property(nonatomic,assign)id<FSMusicSeverDelegate>delegate;
 
 -(void)getMusicList;
+
+-(void)getMusicTypes;
 @end
