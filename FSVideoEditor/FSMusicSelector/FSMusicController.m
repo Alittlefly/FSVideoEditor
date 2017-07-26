@@ -290,8 +290,8 @@
     
     if (_pushed) {
         
-        if ([self.delegate respondsToSelector:@selector(musicControllerSelectMusic:)]) {
-            [self.delegate musicControllerSelectMusic:path];
+        if ([self.delegate respondsToSelector:@selector(musicControllerSelectMusic:musicId:)]) {
+            [self.delegate musicControllerSelectMusic:path musicId:music.songId];
         }
         [self dismissViewControllerAnimated:YES completion:nil];
     }else{

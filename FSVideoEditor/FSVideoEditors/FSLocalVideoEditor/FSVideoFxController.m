@@ -55,7 +55,7 @@
     [_tempFxStack pushVideoFxWithFxManager:_fxOperationStack];
     
     [self creatSubViews];
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-4532bd69c375c2bc29936aa8c5af104a.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-967dfb58745c59c1c409616af7ca27b3.lic"];
     
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
      _context = [NvsStreamingContext sharedInstance];
