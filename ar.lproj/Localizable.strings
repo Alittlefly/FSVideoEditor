@@ -20,6 +20,7 @@ UploadVideo = "تحميل";
 ChooseMusic = "موسيقى";
 Record = "سجل فيديو";
 HotMusic = "أجمل الأغاني";
+likeMusic = "我的收藏";
 RecordNow = "البدء بتسجيل الفيديو";
 Loading = "جاري التحميل";
 Cancel = "إلغاء";

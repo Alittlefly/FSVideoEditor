@@ -164,7 +164,7 @@
 
 /*!
 	\brief 在时间线上添加字幕
-    \param captionText 字幕的文字
+	\param captionText 添加的字幕
 	\param inPoint 字幕在时间线上的起点
 	\param duration 字幕显示时长(微秒)
 	\param captionStylePackageId 字幕样式包Id
@@ -173,18 +173,6 @@
     \sa removeCaption:
  */
 - (NvsTimelineCaption *)addCaption:(NSString *)captionText inPoint:(int64_t)inPoint duration:(int64_t)duration captionStylePackageId:(NSString *)captionStylePackageId;
-
-/*!
-    \brief 在时间线上添加字幕
-    \param captionText 字幕的文字
-    \param inPoint 字幕在时间线上的入点
-    \param duration 字幕的显示时长(微秒)
-    \param captionStylePackageId 字幕样式包Id
-    \return 返回时间线字幕对象
-    \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
-    \sa removeCaption:
- */
-- (NvsTimelineCaption *)addPanoramicCaption:(NSString *)captionText inPoint:(int64_t)inPoint duration:(int64_t)duration captionStylePackageId:(NSString *)captionStylePackageId;
 
 /*!
 	\brief 移除时间上的字幕
@@ -247,18 +235,6 @@
     \sa removeAnimatedSticker:
  */
 - (NvsTimelineAnimatedSticker *)addAnimatedSticker:(int64_t)inPoint duration:(int64_t)duration animatedStickerPackageId:(NSString *)animatedStickerPackageId;
-
-/*!
-    \brief 在时间线上添加全景图动画贴纸
-    \param inPoint 动画贴纸在时间线上的起点(微秒)
-    \param duration 动画贴纸的显示时长(微秒)
-    \param animatedStickerPackageId 动画贴纸资源包ID
-    \return 返回时间线动画贴纸对象
-    \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
-    \since 1.6.0
-    \sa removeAnimatedSticker
- */
-- (NvsTimelineAnimatedSticker *)addPanoramicAnimatedSticker:(int64_t)inPoint duration:(int64_t)duration animatedStickerPackageId:(NSString *)animatedStickerPackageId;
 
 /*!
 	\brief 移除时间上的动画贴纸

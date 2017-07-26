@@ -99,6 +99,9 @@
     }
 
     [self.view setBackgroundColor:[UIColor clearColor]];
+    
+    
+    
 }
 
 - (void)videoRecorder {

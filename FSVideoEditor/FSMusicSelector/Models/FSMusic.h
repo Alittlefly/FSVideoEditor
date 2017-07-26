@@ -35,3 +35,13 @@
 
 + (NSArray *)getDataArrayFromArray:(NSArray *)array;
 @end
+
+@interface FSMusicType : NSObject
+
+@property(nonatomic,assign)NSInteger typeId;
+@property(nonatomic,strong)NSString *typeName;
+@property(nonatomic,strong)NSString *typePic;
+@property(nonatomic,assign)NSInteger sortBy;
++ (NSArray *)getDataArrayFromArray:(NSArray *)array;
+
+@end

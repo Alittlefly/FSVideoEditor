@@ -81,6 +81,7 @@
 @end
 
 @implementation FSPublisherController
+
 -(NSMutableArray *)addedViews{
     if (!_addedViews) {
         _addedViews = [NSMutableArray array];

@@ -20,6 +20,7 @@ UploadVideo = "Upload";
 ChooseMusic = "Music";
 Record = "Record";
 HotMusic = "Hot Music";
+likeMusic = "我的收藏";
 RecordNow = "Record Now";
 Loading = "Loading";
 Cancel = "Cancel";

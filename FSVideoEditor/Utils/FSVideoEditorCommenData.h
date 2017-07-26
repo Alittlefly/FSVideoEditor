@@ -7,9 +7,9 @@
 //
 
 #if DEBUG == 1
-#define AddressAPILogin @"http://10.10.32.145:8888/"
-#define AddressUpload   @"http://10.10.32.145:8086/"
-#define AddressAPI   @"http://10.10.32.145:8088/"
+#define AddressAPILogin  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://www.7nujoom.com/" : @"http://10.10.32.145:8888/"
+#define AddressUpload  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://www.7nujoom.com/" : @"http://10.10.32.145:8086/"
+#define AddressAPI  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://www.7nujoom.com/" : @"http://10.10.32.145:8088/"
 #else
 
 #define AddressAPILogin  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://www.7nujoom.com/" : @"http://www.haahi.com/"

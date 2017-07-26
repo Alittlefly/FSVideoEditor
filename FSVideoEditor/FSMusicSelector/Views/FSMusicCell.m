@@ -166,6 +166,7 @@ static NSString *identifier = @"FSMusicCell";
     [self.pic sd_setImageWithURL:[NSURL URLWithString:songPic] placeholderImage:[UIImage imageNamed:@"musicPlaceHolder"]];
     [self.useButton setHidden:!_music.opend];
     [self.playButton setSelected:_music.isPlaying];
+    [self setIsPlayIng:_music.isPlaying];
 }
 
 - (NSString *)getCurrentTimeString:(NSTimeInterval)time {

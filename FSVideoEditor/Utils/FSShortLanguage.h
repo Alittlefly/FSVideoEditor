@@ -11,7 +11,7 @@
 @interface FSShortLanguage : NSObject
 
 + (NSString *)CustomLocalizedStringFromTable:(NSString *)key;
-+ (void)setLanguageTable:(NSString *)table language:(NSString *)language;
++ (void)setLanguageTable:(NSString *)table;
 
 
 @end
