@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSMusicListView.h"
 
-@interface FSMusicSearchResultView : UIView
-@property(nonatomic,assign)id<UITableViewDelegate>delagate;
-@property(nonatomic,strong)NSArray *musics;
+@interface FSMusicSearchResultView : FSMusicListView
+
 @end

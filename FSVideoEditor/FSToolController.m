@@ -17,7 +17,6 @@
 #import "FSMusicPlayer.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
-#import "FSMusicSelectController.h"
 
 @interface FSToolController ()
 {

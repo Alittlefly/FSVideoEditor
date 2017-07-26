@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSMusic.h"
 
-@interface FSMusicSelectController : UIViewController
-
+@interface FSMusicListController : UIViewController
+@property(nonatomic,strong)FSMusicType *musicType;
+@property(nonatomic,strong)NSMutableArray *musiceList;
 @end

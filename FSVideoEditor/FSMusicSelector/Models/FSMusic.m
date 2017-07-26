@@ -34,5 +34,20 @@
 
 @implementation FSMusicType
 
++ (NSArray *)getDataArrayFromArray:(NSArray *)array
+{
+    NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:0];
+    for (NSDictionary *dic in array) {
+        FSMusicType *music = [[FSMusicType alloc] init];
+        [music setSortBy:[[dic objectForKey:@"i"] integerValue]];
+        [music setTypeName:[dic objectForKey:@"n"]];
+        [music setTypeId:[[dic objectForKey:@"tid"] integerValue]];
+        [music setTypePic:[dic objectForKey:@"p"]];
+        
+        [dataArray addObject:music];
+    }
+    
+    return dataArray;
+}
 
 @end

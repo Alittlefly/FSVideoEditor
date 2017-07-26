@@ -33,11 +33,12 @@
     if ([responesObject isKindOfClass:[NSDictionary class]]) {
         NSDictionary *dataDict = [(NSDictionary *)responesObject valueForKey:@"dataInfo"];
         NSArray *ms = [dataDict valueForKey:@"shl"];
-        
+        NSArray *mtps = [dataDict valueForKey:@"slb"];
         NSArray *musics = [FSMusic getDataArrayFromArray:ms];
+        NSArray *musicTypes = [FSMusicType getDataArrayFromArray:mtps];
         
-        if ([self.delegate respondsToSelector:@selector(musicSeverGetMusics:)]) {
-            [self.delegate musicSeverGetMusics:musics];
+        if ([self.delegate respondsToSelector:@selector(musicSeverGetMusics:musicTypes:)]) {
+            [self.delegate musicSeverGetMusics:musics musicTypes:musicTypes];
         }
     }
     

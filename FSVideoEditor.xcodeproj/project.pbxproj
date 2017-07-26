@@ -82,8 +82,7 @@
 		567A3D8C1EFB6F8E0026247E /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D801EFB6F8E0026247E /* README.md */; };
 		567A3D8E1EFB6FC90026247E /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 567A3D8D1EFB6FC90026247E /* libsqlite3.tbd */; };
 		567A3D911EFB7EC80026247E /* FSFileSliceDivider.m in Sources */ = {isa = PBXBuildFile; fileRef = 567A3D901EFB7EC80026247E /* FSFileSliceDivider.m */; };
-		567B055D1F271CDB00D09364 /* FSMusicSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B055C1F271CDB00D09364 /* FSMusicSelectController.m */; };
-		567B05601F272BC500D09364 /* FSSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B055F1F272BC500D09364 /* FSSearchResultController.m */; };
+		567B055D1F271CDB00D09364 /* FSMusicListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B055C1F271CDB00D09364 /* FSMusicListController.m */; };
 		567B05651F2735F100D09364 /* FSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B05641F2735F100D09364 /* FSSearchBar.m */; };
 		567B05671F27488400D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic in Resources */ = {isa = PBXBuildFile; fileRef = 567B05661F27488400D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic */; };
 		567B05691F2748AB00D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 567B05681F2748AB00D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx */; };
@@ -96,6 +95,7 @@
 		567B05851F283D9400D09364 /* libwebpmux.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567B05811F283D9400D09364 /* libwebpmux.a */; };
 		567B058B1F283DAB00D09364 /* libNvConvertorLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567B058A1F283DAB00D09364 /* libNvConvertorLib.a */; };
 		567B058E1F2840EA00D09364 /* FSMusicSearchResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B058D1F2840EA00D09364 /* FSMusicSearchResultView.m */; };
+		567B05911F28910D00D09364 /* FSMusicListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B05901F28910D00D09364 /* FSMusicListView.m */; };
 		567E0B531EF930D100C4C527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B521EF930D100C4C527 /* main.m */; };
 		567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B551EF930D100C4C527 /* AppDelegate.m */; };
 		567E0B591EF930D100C4C527 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B581EF930D100C4C527 /* ViewController.m */; };
@@ -331,10 +331,8 @@
 		567A3D8D1EFB6FC90026247E /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		567A3D8F1EFB7EC80026247E /* FSFileSliceDivider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFileSliceDivider.h; sourceTree = "<group>"; };
 		567A3D901EFB7EC80026247E /* FSFileSliceDivider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFileSliceDivider.m; sourceTree = "<group>"; };
-		567B055B1F271CDB00D09364 /* FSMusicSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicSelectController.h; sourceTree = "<group>"; };
-		567B055C1F271CDB00D09364 /* FSMusicSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicSelectController.m; sourceTree = "<group>"; };
-		567B055E1F272BC500D09364 /* FSSearchResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSSearchResultController.h; path = FSVideoEditor/FSMusicSelector/FSSearchResultController.h; sourceTree = SOURCE_ROOT; };
-		567B055F1F272BC500D09364 /* FSSearchResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSSearchResultController.m; path = FSVideoEditor/FSMusicSelector/FSSearchResultController.m; sourceTree = SOURCE_ROOT; };
+		567B055B1F271CDB00D09364 /* FSMusicListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicListController.h; sourceTree = "<group>"; };
+		567B055C1F271CDB00D09364 /* FSMusicListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicListController.m; sourceTree = "<group>"; };
 		567B05631F2735F100D09364 /* FSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSearchBar.h; sourceTree = "<group>"; };
 		567B05641F2735F100D09364 /* FSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSearchBar.m; sourceTree = "<group>"; };
 		567B05661F27488400D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic"; sourceTree = "<group>"; };
@@ -361,6 +359,8 @@
 		567B058A1F283DAB00D09364 /* libNvConvertorLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNvConvertorLib.a; sourceTree = "<group>"; };
 		567B058C1F2840EA00D09364 /* FSMusicSearchResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicSearchResultView.h; sourceTree = "<group>"; };
 		567B058D1F2840EA00D09364 /* FSMusicSearchResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicSearchResultView.m; sourceTree = "<group>"; };
+		567B058F1F28910D00D09364 /* FSMusicListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicListView.h; sourceTree = "<group>"; };
+		567B05901F28910D00D09364 /* FSMusicListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicListView.m; sourceTree = "<group>"; };
 		567E0B4E1EF930D100C4C527 /* FSVideoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSVideoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		567E0B521EF930D100C4C527 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		567E0B541EF930D100C4C527 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -687,6 +687,8 @@
 				567B056F1F27767100D09364 /* FSMusicHeaderView.m */,
 				567B058C1F2840EA00D09364 /* FSMusicSearchResultView.h */,
 				567B058D1F2840EA00D09364 /* FSMusicSearchResultView.m */,
+				567B058F1F28910D00D09364 /* FSMusicListView.h */,
+				567B05901F28910D00D09364 /* FSMusicListView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -777,10 +779,8 @@
 				563B79D21F062F5A0035346A /* Views */,
 				5647BC4D1F04E2D80072B618 /* FSMusicController.h */,
 				5647BC4E1F04E2D80072B618 /* FSMusicController.m */,
-				567B055B1F271CDB00D09364 /* FSMusicSelectController.h */,
-				567B055C1F271CDB00D09364 /* FSMusicSelectController.m */,
-				567B055E1F272BC500D09364 /* FSSearchResultController.h */,
-				567B055F1F272BC500D09364 /* FSSearchResultController.m */,
+				567B055B1F271CDB00D09364 /* FSMusicListController.h */,
+				567B055C1F271CDB00D09364 /* FSMusicListController.m */,
 			);
 			path = FSMusicSelector;
 			sourceTree = "<group>";
@@ -1478,6 +1478,7 @@
 				987ECEE81F04F92D00221273 /* FSCutMusicView.m in Sources */,
 				563B7A171F0A4DF50035346A /* FSAnimationNavController.m in Sources */,
 				9880DEBA1F171295006E730F /* UIImageView+WebCache.m in Sources */,
+				567B05911F28910D00D09364 /* FSMusicListView.m in Sources */,
 				98EC1A411F20A273003B71B7 /* FSUploadImageServer.m in Sources */,
 				983445F61F0CE00700A6E977 /* FSLoginServer.m in Sources */,
 				567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */,
@@ -1501,7 +1502,7 @@
 				562D406B1EFE4B4400BF0E0D /* FSVideoFxView.m in Sources */,
 				988AC6CC1EFD3BB7007FBCEF /* FSEditVideoTool.m in Sources */,
 				567A3D501EFB66B60026247E /* FSMD5Utils.m in Sources */,
-				567B055D1F271CDB00D09364 /* FSMusicSelectController.m in Sources */,
+				567B055D1F271CDB00D09364 /* FSMusicListController.m in Sources */,
 				987700AF1F03AFE50043394E /* FSSegmentView.m in Sources */,
 				567A3D891EFB6F8E0026247E /* NSObject+MJKeyValue.m in Sources */,
 				98725BF21F064F8C00445EF2 /* FSMoveButton.m in Sources */,
@@ -1526,7 +1527,6 @@
 				567A3D4A1EFB66B60026247E /* FSFileUploadCache.m in Sources */,
 				9880DEAA1F171295006E730F /* MKAnnotationView+WebCache.m in Sources */,
 				562D40671EFE41CE00BF0E0D /* FSVideoFxController.m in Sources */,
-				567B05601F272BC500D09364 /* FSSearchResultController.m in Sources */,
 				988AC6E91F010B0D007FBCEF /* FSControlVolumeView.m in Sources */,
 				983445F91F0CE01F00A6E977 /* FSLoginAPI.m in Sources */,
 				563B7A041F0A281C0035346A /* FSToolController.m in Sources */,
