@@ -45,7 +45,7 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
-    [FSShortLanguage setLanguageTable:@"Localizable" language:@"ar"];
+//    [FSShortLanguage setLanguageTable:@"Localizable" language:@"ar"];
     
     CAGradientLayer *bgGradientLayer = [CAGradientLayer layer];
     bgGradientLayer.colors = @[(__bridge id)FSHexRGB(0x000000).CGColor, (__bridge id)FSHexRGB(0x2D062D).CGColor];

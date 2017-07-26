@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FSMusicSearchResultView : UIView
-
+@property(nonatomic,assign)id<UITableViewDelegate>delagate;
+@property(nonatomic,strong)NSArray *musics;
 @end

@@ -17,7 +17,7 @@
 #import "FSShortLanguage.h"
 #import "FSSearchBar.h"
 #import "FSMusicHeaderView.h"
-
+#import "FSMusicSearchResultView.h"
 @interface FSMusicController ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate,FSMusicSeverDelegate,UISearchBarDelegate>{
     FSMusic *_music;
     FSMusicSever *_sever;
@@ -26,6 +26,7 @@
 @property(nonatomic,strong)NSMutableArray *musics;
 @property(nonatomic,strong)FSEditorLoading *loading;
 @property(nonatomic,strong)FSSearchBar *searchBar;
+@property(nonatomic,strong)FSMusicSearchResultView *resultView;
 
 @end
 
@@ -87,6 +88,10 @@
     [_tableView setTableHeaderView:tableHeader];
     [_tableView setTableFooterView:[UIView new]];
     
+     _resultView = [[FSMusicSearchResultView alloc] initWithFrame:self.view.bounds];
+    [_resultView setHidden:YES];
+    [self.view addSubview:_resultView];
+    
      _sever = [[FSMusicSever alloc] init];
     [_sever setDelegate:self];
     [_sever getMusicList];
@@ -102,14 +107,18 @@
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     NSLog(@"searchBarShouldBeginEditing ");
     [_searchBar setShowCancle:YES];
+    [_resultView setHidden:NO];
     return YES;
 }
 -(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
     [_searchBar setShowCancle:NO];
+    [_resultView setHidden:YES];
     return YES;
 }
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     NSLog(@"点击取消");
+    [_resultView setHidden:YES];
+
 }
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     if([searchBar canResignFirstResponder]){
@@ -127,6 +136,7 @@
     
     CGRect tableFrame = CGRectMake(0, CGRectGetMaxY(_searchBar.frame) + 15, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 100);
     [_tableView setFrame:tableFrame];
+    [_resultView setFrame:tableFrame];
     
     [self.cancleButton setFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 49, CGRectGetWidth(self.view.bounds), 49)];
 }
