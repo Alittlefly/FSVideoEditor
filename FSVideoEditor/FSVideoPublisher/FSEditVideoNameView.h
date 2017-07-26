@@ -10,7 +10,7 @@
 
 @protocol FSEditVideoNameViewDelegate <NSObject>
 
-- (void)FSEditVideoNameViewAddChallenge:(NSInteger)challengeID;
+- (void)FSEditVideoNameViewAddChallenge;
 - (void)FSEditVideoNameViewSaveToPhotoLibrary:(BOOL)isSave;
 - (void)FSEditVideoNameViewEditVideoTitle:(NSString *)title;
 
@@ -21,5 +21,6 @@
 @property (nonatomic, weak) id<FSEditVideoNameViewDelegate> delegate;
 
 - (void)hiddenKeyBorde;
+- (void)updateChallengeName:(NSString *)name;
 
 @end

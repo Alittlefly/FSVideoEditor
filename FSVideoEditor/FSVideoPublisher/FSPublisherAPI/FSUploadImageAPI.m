@@ -40,7 +40,7 @@
     [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
     [dic setValue:[NSNumber numberWithInteger:4] forKey:@"requestType"];
     NSURLSessionTask *task = (NSURLSessionUploadTask *)[mgr  POST:[NSString stringWithFormat:@"%@files/shortvideo/upload/image",AddressUpload] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithFileData:imageData name:@"image" fileName:[NSString stringWithFormat:@"%@.jpeg",imageName] mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imageData name:@"file" fileName:[NSString stringWithFormat:@"%@.jpg",imageName] mimeType:@"image/*"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -84,7 +84,7 @@
     [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
     [dic setValue:[NSNumber numberWithInteger:4] forKey:@"requestType"];
     NSURLSessionTask *task = (NSURLSessionUploadTask *)[mgr  POST:[NSString stringWithFormat:@"%@files/shortvideo/upload/gif",AddressUpload] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithFileData:imageData name:@"webp" fileName:[NSString stringWithFormat:@"%@.webp",imageName] mimeType:@"image/webp"];
+        [formData appendPartWithFileData:imageData name:@"file" fileName:[NSString stringWithFormat:@"%@.webp",imageName] mimeType:@"image/webp"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

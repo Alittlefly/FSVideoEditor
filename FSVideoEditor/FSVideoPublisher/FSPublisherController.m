@@ -33,8 +33,10 @@
 
 #import "FSUploadImageServer.h"
 #import "FSShortVideoRecorderManager.h"
+#import "FSChallengeController.h"
+#import "FSAnimationNavController.h"
 
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSPublisherServerDelegate, FSUploadImageServerDelegate, FSShortVideoRecorderManagerDelegate>
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSPublisherServerDelegate, FSUploadImageServerDelegate, FSShortVideoRecorderManagerDelegate, FSChallengeControllerDelegate>
 {
     FSUploader *_uploader;
     NSString *_outPutPath;
@@ -73,6 +75,8 @@
 
 @property (nonatomic, copy) NSString *firstImageUrl;
 @property (nonatomic, copy) NSString *webpUrl;
+
+@property (nonatomic, strong) FSChallengeModel *challengeModel;
 
 @end
 
@@ -295,7 +299,20 @@
     [self.loading loadingViewhide];
 
 }
+#pragma mark -
+- (void)FSChallengeControllerChooseChallenge:(FSChallengeModel *)model {
+    _challengeModel = model;
+    [_toolView updateChallengeName:model.name];
+}
+
 #pragma mark - FSPublisherToolViewDelegate
+- (void)FSPublisherToolViewShowChallengeView {
+    FSChallengeController *challengeVC = [[FSChallengeController alloc] init];
+    challengeVC.delegate = self;
+    FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:challengeVC];
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
 - (void)FSPublisherToolViewPublished {
     [self publishFiles];
 }
@@ -595,7 +612,7 @@
         [dic setValue:_firstImageUrl forKey:@"vp"];    //image
         [dic setValue:_webpUrl forKey:@"vg"];   //webp
         [dic setValue:[NSNumber numberWithInteger:_musicId] forKey:@"si"]; //歌曲id
-        [dic setValue:[NSNumber numberWithInt:0] forKey:@"di"];  //挑战ID
+        [dic setValue:[NSNumber numberWithInteger:_challengeModel.challengeId] forKey:@"di"];  //挑战ID
         [dic setValue:[NSArray array] forKey:@"a"];  //消息[{"ui":12815,"nk":"tttty"},{"ui":90665,"nk":"ytest"}]
 //        [dic setValue:@"被@用户ID" forKey:@"ui"];
 //        [dic setValue:@"用户昵称" forKey:@"nk"];

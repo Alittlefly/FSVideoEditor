@@ -94,9 +94,36 @@
 		567E0B9D1EFA20BC00C4C527 /* FSLocalPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B9B1EFA20BC00C4C527 /* FSLocalPhotoManager.m */; };
 		567E0BA21EFA49F500C4C527 /* FSVideoListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA11EFA49F500C4C527 /* FSVideoListView.m */; };
 		567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA41EFA4DB400C4C527 /* FSAlbumVideoCell.m */; };
+		9815CE781F2739AD00DE317C /* FSChallengeDataServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9815CE761F2739AD00DE317C /* FSChallengeDataServer.h */; };
+		9815CE791F2739AD00DE317C /* FSChallengeDataServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9815CE771F2739AD00DE317C /* FSChallengeDataServer.m */; };
+		9815CE7A1F2739AD00DE317C /* FSChallengeDataServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9815CE771F2739AD00DE317C /* FSChallengeDataServer.m */; };
+		9815CE821F273ECE00DE317C /* FSChallengeParam.h in Headers */ = {isa = PBXBuildFile; fileRef = 9815CE801F273ECE00DE317C /* FSChallengeParam.h */; };
+		9815CE831F273ECE00DE317C /* FSChallengeParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 9815CE811F273ECE00DE317C /* FSChallengeParam.m */; };
+		9815CE841F273ECE00DE317C /* FSChallengeParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 9815CE811F273ECE00DE317C /* FSChallengeParam.m */; };
+		9815CE871F273F5F00DE317C /* FSSearchChallengeAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 9815CE851F273F5F00DE317C /* FSSearchChallengeAPI.h */; };
+		9815CE881F273F5F00DE317C /* FSSearchChallengeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9815CE861F273F5F00DE317C /* FSSearchChallengeAPI.m */; };
+		9815CE891F273F5F00DE317C /* FSSearchChallengeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9815CE861F273F5F00DE317C /* FSSearchChallengeAPI.m */; };
 		983445F61F0CE00700A6E977 /* FSLoginServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 983445F51F0CE00700A6E977 /* FSLoginServer.m */; };
 		983445F91F0CE01F00A6E977 /* FSLoginAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 983445F81F0CE01F00A6E977 /* FSLoginAPI.m */; };
 		983445FC1F0CF06C00A6E977 /* FSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 983445FB1F0CF06C00A6E977 /* FSAlertView.m */; };
+		983A47541F25A6E700FB387D /* libNvStreamingSdkCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060401EF9401F0049B58E /* libNvStreamingSdkCore.a */; };
+		983A47551F25A6E700FB387D /* libNvStreamingSdkDeps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060411EF9401F0049B58E /* libNvStreamingSdkDeps.a */; };
+		983A47571F25A77300FB387D /* FSUploadImageAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 98EC1A431F20A3FD003B71B7 /* FSUploadImageAPI.h */; };
+		983A47581F25A77300FB387D /* FSUploadImageServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 98EC1A3F1F20A273003B71B7 /* FSUploadImageServer.h */; };
+		983A47591F25A79300FB387D /* FSUploadImageAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EC1A441F20A3FD003B71B7 /* FSUploadImageAPI.m */; };
+		983A475A1F25A79300FB387D /* FSUploadImageServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EC1A401F20A273003B71B7 /* FSUploadImageServer.m */; };
+		983A47781F261B4800FB387D /* FSChallengeModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 983A47761F261B4800FB387D /* FSChallengeModel.h */; };
+		983A47791F261B4800FB387D /* FSChallengeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A47771F261B4800FB387D /* FSChallengeModel.m */; };
+		983A477A1F261B4800FB387D /* FSChallengeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A47771F261B4800FB387D /* FSChallengeModel.m */; };
+		983A477D1F261E1100FB387D /* FSChallengeController.h in Headers */ = {isa = PBXBuildFile; fileRef = 983A477B1F261E1100FB387D /* FSChallengeController.h */; };
+		983A477E1F261E1100FB387D /* FSChallengeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A477C1F261E1100FB387D /* FSChallengeController.m */; };
+		983A477F1F261E1100FB387D /* FSChallengeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A477C1F261E1100FB387D /* FSChallengeController.m */; };
+		983A47821F2620FD00FB387D /* FSAddChallengeController.h in Headers */ = {isa = PBXBuildFile; fileRef = 983A47801F2620FD00FB387D /* FSAddChallengeController.h */; };
+		983A47831F2620FD00FB387D /* FSAddChallengeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A47811F2620FD00FB387D /* FSAddChallengeController.m */; };
+		983A47841F2620FD00FB387D /* FSAddChallengeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A47811F2620FD00FB387D /* FSAddChallengeController.m */; };
+		983A47871F26215800FB387D /* FSChallengeCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 983A47851F26215800FB387D /* FSChallengeCell.h */; };
+		983A47881F26215800FB387D /* FSChallengeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A47861F26215800FB387D /* FSChallengeCell.m */; };
+		983A47891F26215800FB387D /* FSChallengeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A47861F26215800FB387D /* FSChallengeCell.m */; };
 		9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060371EF93F130049B58E /* FSShortVideoRecorderController.m */; };
 		9840603D1EF93F130049B58E /* FSShortVideoRecorderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060391EF93F130049B58E /* FSShortVideoRecorderManager.m */; };
 		9840603E1EF93F130049B58E /* FSShortVideoRecorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840603B1EF93F130049B58E /* FSShortVideoRecorderView.m */; };
@@ -112,6 +139,9 @@
 		984060531EF940730049B58E /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060521EF940730049B58E /* libiconv.tbd */; };
 		984060551EF9407B0049B58E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060541EF9407B0049B58E /* libz.tbd */; };
 		984060571EF940810049B58E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060561EF940810049B58E /* libc++.tbd */; };
+		986722F11F288E7A00B82CDD /* FSAddChallengeAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 986722EF1F288E7A00B82CDD /* FSAddChallengeAPI.h */; };
+		986722F21F288E7A00B82CDD /* FSAddChallengeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 986722F01F288E7A00B82CDD /* FSAddChallengeAPI.m */; };
+		986722F31F288E7A00B82CDD /* FSAddChallengeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 986722F01F288E7A00B82CDD /* FSAddChallengeAPI.m */; };
 		9871BC371F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */; };
 		9871BC3B1F0F85BA0065977A /* FSPublisherServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9871BC3A1F0F85BA0065977A /* FSPublisherServer.m */; };
 		9871BC3F1F0F861D0065977A /* FSPublisherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9871BC3E1F0F861D0065977A /* FSPublisherAPI.m */; };
@@ -183,7 +213,6 @@
 		98D3C9121F1F3E2A00D2C36B /* FSFileUploadDBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D3E1EFB66B60026247E /* FSFileUploadDBManager.h */; };
 		98D3C9131F1F3E2A00D2C36B /* FSMD5Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 567A3D401EFB66B60026247E /* FSMD5Utils.h */; };
 		98D3C9141F1F3E2A00D2C36B /* FSToolController.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A021F0A281C0035346A /* FSToolController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		98D3C9151F1F3E2A00D2C36B /* FSAnimationNavController.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B7A151F0A4DF50035346A /* FSAnimationNavController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		98D3C9161F1F3E2A00D2C36B /* FSMusicAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79F71F08D3360035346A /* FSMusicAPI.h */; };
 		98D3C9171F1F3E2A00D2C36B /* FSMusicSever.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79F41F08D3290035346A /* FSMusicSever.h */; };
 		98D3C9181F1F3E2A00D2C36B /* FSMusicManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B79FA1F08F3B40035346A /* FSMusicManager.h */; };
@@ -530,12 +559,26 @@
 		567E0BA11EFA49F500C4C527 /* FSVideoListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVideoListView.m; sourceTree = "<group>"; };
 		567E0BA31EFA4DB400C4C527 /* FSAlbumVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAlbumVideoCell.h; sourceTree = "<group>"; };
 		567E0BA41EFA4DB400C4C527 /* FSAlbumVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAlbumVideoCell.m; sourceTree = "<group>"; };
+		9815CE761F2739AD00DE317C /* FSChallengeDataServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSChallengeDataServer.h; sourceTree = "<group>"; };
+		9815CE771F2739AD00DE317C /* FSChallengeDataServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSChallengeDataServer.m; sourceTree = "<group>"; };
+		9815CE801F273ECE00DE317C /* FSChallengeParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSChallengeParam.h; sourceTree = "<group>"; };
+		9815CE811F273ECE00DE317C /* FSChallengeParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSChallengeParam.m; sourceTree = "<group>"; };
+		9815CE851F273F5F00DE317C /* FSSearchChallengeAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSearchChallengeAPI.h; sourceTree = "<group>"; };
+		9815CE861F273F5F00DE317C /* FSSearchChallengeAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSearchChallengeAPI.m; sourceTree = "<group>"; };
 		983445F41F0CE00700A6E977 /* FSLoginServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLoginServer.h; sourceTree = "<group>"; };
 		983445F51F0CE00700A6E977 /* FSLoginServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLoginServer.m; sourceTree = "<group>"; };
 		983445F71F0CE01F00A6E977 /* FSLoginAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLoginAPI.h; sourceTree = "<group>"; };
 		983445F81F0CE01F00A6E977 /* FSLoginAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLoginAPI.m; sourceTree = "<group>"; };
 		983445FA1F0CF06C00A6E977 /* FSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAlertView.h; sourceTree = "<group>"; };
 		983445FB1F0CF06C00A6E977 /* FSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAlertView.m; sourceTree = "<group>"; };
+		983A47761F261B4800FB387D /* FSChallengeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSChallengeModel.h; sourceTree = "<group>"; };
+		983A47771F261B4800FB387D /* FSChallengeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSChallengeModel.m; sourceTree = "<group>"; };
+		983A477B1F261E1100FB387D /* FSChallengeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSChallengeController.h; sourceTree = "<group>"; };
+		983A477C1F261E1100FB387D /* FSChallengeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSChallengeController.m; sourceTree = "<group>"; };
+		983A47801F2620FD00FB387D /* FSAddChallengeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAddChallengeController.h; sourceTree = "<group>"; };
+		983A47811F2620FD00FB387D /* FSAddChallengeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAddChallengeController.m; sourceTree = "<group>"; };
+		983A47851F26215800FB387D /* FSChallengeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSChallengeCell.h; sourceTree = "<group>"; };
+		983A47861F26215800FB387D /* FSChallengeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSChallengeCell.m; sourceTree = "<group>"; };
 		984060361EF93F130049B58E /* FSShortVideoRecorderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSShortVideoRecorderController.h; sourceTree = "<group>"; };
 		984060371EF93F130049B58E /* FSShortVideoRecorderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSShortVideoRecorderController.m; sourceTree = "<group>"; };
 		984060381EF93F130049B58E /* FSShortVideoRecorderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSShortVideoRecorderManager.h; sourceTree = "<group>"; };
@@ -554,6 +597,8 @@
 		984060521EF940730049B58E /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		984060541EF9407B0049B58E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		984060561EF940810049B58E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		986722EF1F288E7A00B82CDD /* FSAddChallengeAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAddChallengeAPI.h; sourceTree = "<group>"; };
+		986722F01F288E7A00B82CDD /* FSAddChallengeAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAddChallengeAPI.m; sourceTree = "<group>"; };
 		9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"; sourceTree = "<group>"; };
 		9871BC391F0F85BA0065977A /* FSPublisherServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPublisherServer.h; sourceTree = "<group>"; };
 		9871BC3A1F0F85BA0065977A /* FSPublisherServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPublisherServer.m; sourceTree = "<group>"; };
@@ -727,6 +772,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				983A47541F25A6E700FB387D /* libNvStreamingSdkCore.a in Frameworks */,
+				983A47551F25A6E700FB387D /* libNvStreamingSdkDeps.a in Frameworks */,
 				98FDD87D1F21E48100597B38 /* libwebpmux.a in Frameworks */,
 				98FDD8881F21E4AA00597B38 /* libwebp.a in Frameworks */,
 				98FDD8731F21E44D00597B38 /* libNvConvertorLib.a in Frameworks */,
@@ -811,6 +858,12 @@
 				988AC6D31EFE4B99007FBCEF /* FSPublisherToolView.m */,
 				988AC6D71EFE560B007FBCEF /* FSEditVideoNameView.h */,
 				988AC6D81EFE560B007FBCEF /* FSEditVideoNameView.m */,
+				983A477B1F261E1100FB387D /* FSChallengeController.h */,
+				983A477C1F261E1100FB387D /* FSChallengeController.m */,
+				983A47851F26215800FB387D /* FSChallengeCell.h */,
+				983A47861F26215800FB387D /* FSChallengeCell.m */,
+				983A47801F2620FD00FB387D /* FSAddChallengeController.h */,
+				983A47811F2620FD00FB387D /* FSAddChallengeController.m */,
 			);
 			path = FSVideoPublisher;
 			sourceTree = "<group>";
@@ -1387,6 +1440,8 @@
 				9871BC3A1F0F85BA0065977A /* FSPublisherServer.m */,
 				98EC1A3F1F20A273003B71B7 /* FSUploadImageServer.h */,
 				98EC1A401F20A273003B71B7 /* FSUploadImageServer.m */,
+				9815CE761F2739AD00DE317C /* FSChallengeDataServer.h */,
+				9815CE771F2739AD00DE317C /* FSChallengeDataServer.m */,
 			);
 			path = FSPublisherServer;
 			sourceTree = "<group>";
@@ -1398,6 +1453,10 @@
 				9871BC3E1F0F861D0065977A /* FSPublisherAPI.m */,
 				98EC1A431F20A3FD003B71B7 /* FSUploadImageAPI.h */,
 				98EC1A441F20A3FD003B71B7 /* FSUploadImageAPI.m */,
+				9815CE851F273F5F00DE317C /* FSSearchChallengeAPI.h */,
+				9815CE861F273F5F00DE317C /* FSSearchChallengeAPI.m */,
+				986722EF1F288E7A00B82CDD /* FSAddChallengeAPI.h */,
+				986722F01F288E7A00B82CDD /* FSAddChallengeAPI.m */,
 			);
 			path = FSPublisherAPI;
 			sourceTree = "<group>";
@@ -1481,6 +1540,10 @@
 		98EC1A421F20A373003B71B7 /* FSPublisherModel */ = {
 			isa = PBXGroup;
 			children = (
+				983A47761F261B4800FB387D /* FSChallengeModel.h */,
+				983A47771F261B4800FB387D /* FSChallengeModel.m */,
+				9815CE801F273ECE00DE317C /* FSChallengeParam.h */,
+				9815CE811F273ECE00DE317C /* FSChallengeParam.m */,
 			);
 			path = FSPublisherModel;
 			sourceTree = "<group>";
@@ -1535,10 +1598,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				98D3C9141F1F3E2A00D2C36B /* FSToolController.h in Headers */,
-				98D3C9151F1F3E2A00D2C36B /* FSAnimationNavController.h in Headers */,
+				983A47571F25A77300FB387D /* FSUploadImageAPI.h in Headers */,
+				983A47581F25A77300FB387D /* FSUploadImageServer.h in Headers */,
 				98D3C8F61F1F3E2A00D2C36B /* FSDissolveAnimator.h in Headers */,
 				98D3C8F71F1F3E2A00D2C36B /* FSSpringAnimator.h in Headers */,
+				9815CE781F2739AD00DE317C /* FSChallengeDataServer.h in Headers */,
 				98D3C8F81F1F3E2A00D2C36B /* FSPresentAnimator.h in Headers */,
+				9815CE871F273F5F00DE317C /* FSSearchChallengeAPI.h in Headers */,
 				98D3C8F91F1F3E2A00D2C36B /* FSDismissAnimator.h in Headers */,
 				98D3C8FA1F1F3E2A00D2C36B /* FSTimeCountsdownView.h in Headers */,
 				98D3C8FB1F1F3E2A00D2C36B /* FSEditorLoading.h in Headers */,
@@ -1546,6 +1612,7 @@
 				98D3C8FD1F1F3E2A00D2C36B /* FSMoveButton.h in Headers */,
 				98FDD8911F21E4B200597B38 /* types.h in Headers */,
 				98FDD88E1F21E4B200597B38 /* encode.h in Headers */,
+				9815CE821F273ECE00DE317C /* FSChallengeParam.h in Headers */,
 				98D3C8FE1F1F3E2A00D2C36B /* FSAlertView.h in Headers */,
 				98D3C8FF1F1F3E2A00D2C36B /* FSEditorAlertView.h in Headers */,
 				98D3C9001F1F3E2A00D2C36B /* FSVideoEditorCommenData.h in Headers */,
@@ -1583,6 +1650,7 @@
 				98FDD8851F21E48F00597B38 /* types.h in Headers */,
 				98D3C91E1F1F3E2A00D2C36B /* FSPublisherServer.h in Headers */,
 				98D3C91F1F1F3E2A00D2C36B /* FSPublisherController.h in Headers */,
+				986722F11F288E7A00B82CDD /* FSAddChallengeAPI.h in Headers */,
 				98D3C9201F1F3E2A00D2C36B /* FSPublisherToolView.h in Headers */,
 				98D3C9211F1F3E2A00D2C36B /* FSEditVideoNameView.h in Headers */,
 				98D3C9221F1F3E2A00D2C36B /* FSShortVideoRecorderController.h in Headers */,
@@ -1593,8 +1661,10 @@
 				98D3C9271F1F3E2A00D2C36B /* FSLocalEditorController.h in Headers */,
 				98D3C9281F1F3E2A00D2C36B /* FSVideoFxController.h in Headers */,
 				98D3C9291F1F3E2A00D2C36B /* FSThumbnailView.h in Headers */,
+				983A47871F26215800FB387D /* FSChallengeCell.h in Headers */,
 				98D3C92A1F1F3E2A00D2C36B /* FSVideoFxOperationStack.h in Headers */,
 				98D3C92B1F1F3E2A00D2C36B /* FSVirtualTimeLine.h in Headers */,
+				983A47821F2620FD00FB387D /* FSAddChallengeController.h in Headers */,
 				98FDD8821F21E48F00597B38 /* encode.h in Headers */,
 				98D3C92C1F1F3E2A00D2C36B /* FSVideoFx.h in Headers */,
 				98D3C92D1F1F3E2A00D2C36B /* FSVideoFxView.h in Headers */,
@@ -1606,10 +1676,12 @@
 				98D3C9331F1F3E2A00D2C36B /* FSLocalPhotoManager.h in Headers */,
 				98FDD8841F21E48F00597B38 /* mux.h in Headers */,
 				98D3C9341F1F3E2A00D2C36B /* FSFilterView.h in Headers */,
+				983A47781F261B4800FB387D /* FSChallengeModel.h in Headers */,
 				98D3C9351F1F3E2A00D2C36B /* FSFilterButton.h in Headers */,
 				98FDD8831F21E48F00597B38 /* mux_types.h in Headers */,
 				98D3C9361F1F3E2A00D2C36B /* FSControlVolumeView.h in Headers */,
 				98D3C9371F1F3E2A00D2C36B /* FSCutMusicView.h in Headers */,
+				983A477D1F261E1100FB387D /* FSChallengeController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1791,6 +1863,7 @@
 				98EC1A451F20A3FD003B71B7 /* FSUploadImageAPI.m in Sources */,
 				567A3D421EFB66B60026247E /* FSFile.m in Sources */,
 				560142B51F1868FE00A06C70 /* FSCancleController.m in Sources */,
+				986722F21F288E7A00B82CDD /* FSAddChallengeAPI.m in Sources */,
 				563B7A2E1F0CE6F50035346A /* FSVideoFxOperationStack.m in Sources */,
 				567A3D8B1EFB6F8E0026247E /* NSString+MJExtension.m in Sources */,
 				563B79F91F08D3360035346A /* FSMusicAPI.m in Sources */,
@@ -1826,6 +1899,7 @@
 				567E0B591EF930D100C4C527 /* ViewController.m in Sources */,
 				567A3D831EFB6F8E0026247E /* MJFoundation.m in Sources */,
 				567A3D671EFB6F830026247E /* FMResultSet.m in Sources */,
+				983A477E1F261E1100FB387D /* FSChallengeController.m in Sources */,
 				567A3D471EFB66B60026247E /* FSFileDownloadCache.m in Sources */,
 				567A3D441EFB66B60026247E /* FSFileDivider.m in Sources */,
 				563B79FC1F08F3B40035346A /* FSMusicManager.m in Sources */,
@@ -1841,8 +1915,10 @@
 				987ECEE81F04F92D00221273 /* FSCutMusicView.m in Sources */,
 				563B7A171F0A4DF50035346A /* FSAnimationNavController.m in Sources */,
 				9880DEBA1F171295006E730F /* UIImageView+WebCache.m in Sources */,
+				9815CE881F273F5F00DE317C /* FSSearchChallengeAPI.m in Sources */,
 				98EC1A411F20A273003B71B7 /* FSUploadImageServer.m in Sources */,
 				983445F61F0CE00700A6E977 /* FSLoginServer.m in Sources */,
+				9815CE791F2739AD00DE317C /* FSChallengeDataServer.m in Sources */,
 				567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */,
 				567A3D431EFB66B60026247E /* FSFileSlice.m in Sources */,
 				562D403F1EFBE8A100BF0E0D /* FSLocalEditorController.m in Sources */,
@@ -1854,11 +1930,14 @@
 				9880DEBB1F171295006E730F /* UIView+WebCache.m in Sources */,
 				9880DEB51F171295006E730F /* UIButton+WebCache.m in Sources */,
 				5647BC3C1F0272110072B618 /* FSControlView.m in Sources */,
+				983A47881F26215800FB387D /* FSChallengeCell.m in Sources */,
+				983A47831F2620FD00FB387D /* FSAddChallengeController.m in Sources */,
 				9880DEB21F171295006E730F /* SDWebImageDownloaderOperation.m in Sources */,
 				567A3D851EFB6F8E0026247E /* MJPropertyKey.m in Sources */,
 				567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */,
 				562D40581EFD1DE200BF0E0D /* AFURLResponseSerialization.m in Sources */,
 				9880DEB11F171295006E730F /* SDWebImageDownloader.m in Sources */,
+				983A47791F261B4800FB387D /* FSChallengeModel.m in Sources */,
 				9840603D1EF93F130049B58E /* FSShortVideoRecorderManager.m in Sources */,
 				562D406B1EFE4B4400BF0E0D /* FSVideoFxView.m in Sources */,
 				988AC6CC1EFD3BB7007FBCEF /* FSEditVideoTool.m in Sources */,
@@ -1879,6 +1958,7 @@
 				567E0BA21EFA49F500C4C527 /* FSVideoListView.m in Sources */,
 				567E0B8F1EF93A1C00C4C527 /* FSLocalVideoController.m in Sources */,
 				567E0B531EF930D100C4C527 /* main.m in Sources */,
+				9815CE831F273ECE00DE317C /* FSChallengeParam.m in Sources */,
 				563B7A0B1F0A42AA0035346A /* FSSpringAnimator.m in Sources */,
 				9880DEAE1F171295006E730F /* SDImageCacheConfig.m in Sources */,
 				563B79F11F08C41D0035346A /* FSMusic.m in Sources */,
@@ -1903,22 +1983,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				983A47591F25A79300FB387D /* FSUploadImageAPI.m in Sources */,
+				983A475A1F25A79300FB387D /* FSUploadImageServer.m in Sources */,
+				983A47891F26215800FB387D /* FSChallengeCell.m in Sources */,
 				98D3C97C1F1F502300D2C36B /* FSShortLanguage.m in Sources */,
 				98D3C9381F1F3FAF00D2C36B /* FSDissolveAnimator.m in Sources */,
 				98D3C9391F1F3FAF00D2C36B /* FSSpringAnimator.m in Sources */,
+				9815CE891F273F5F00DE317C /* FSSearchChallengeAPI.m in Sources */,
 				98D3C93A1F1F3FAF00D2C36B /* FSPresentAnimator.m in Sources */,
 				98D3C93B1F1F3FAF00D2C36B /* FSDismissAnimator.m in Sources */,
 				98D3C93C1F1F3FAF00D2C36B /* FSTimeCountsdownView.m in Sources */,
 				98D3C93D1F1F3FAF00D2C36B /* FSEditorLoading.m in Sources */,
 				98D3C93E1F1F3FAF00D2C36B /* FSSegmentView.m in Sources */,
 				98D3C93F1F1F3FAF00D2C36B /* FSMoveButton.m in Sources */,
+				983A47841F2620FD00FB387D /* FSAddChallengeController.m in Sources */,
 				98D3C9401F1F3FAF00D2C36B /* FSAlertView.m in Sources */,
+				9815CE7A1F2739AD00DE317C /* FSChallengeDataServer.m in Sources */,
 				98D3C9411F1F3FAF00D2C36B /* FSEditorAlertView.m in Sources */,
 				98D3C9431F1F3FAF00D2C36B /* FSCancleController.m in Sources */,
 				98D3C9441F1F3FAF00D2C36B /* FSFile.m in Sources */,
 				98D3C9451F1F3FAF00D2C36B /* FSFileSlice.m in Sources */,
 				98D3C9461F1F3FAF00D2C36B /* FSFileDivider.m in Sources */,
+				983A477F1F261E1100FB387D /* FSChallengeController.m in Sources */,
 				98D3C9471F1F3FAF00D2C36B /* FSFileSizeDivider.m in Sources */,
+				986722F31F288E7A00B82CDD /* FSAddChallengeAPI.m in Sources */,
 				98D3C9481F1F3FAF00D2C36B /* FSFileSliceDivider.m in Sources */,
 				98D3C9491F1F3FAF00D2C36B /* FSFileDownLoadTool.m in Sources */,
 				98D3C94A1F1F3FAF00D2C36B /* FSFileDownloadCache.m in Sources */,
@@ -1926,6 +2014,7 @@
 				98D3C94C1F1F3FAF00D2C36B /* FSDBUploadCache.m in Sources */,
 				98D3C94D1F1F3FAF00D2C36B /* FSFileUploadCache.m in Sources */,
 				98D3C94E1F1F3FAF00D2C36B /* FSUploadCache.m in Sources */,
+				983A477A1F261B4800FB387D /* FSChallengeModel.m in Sources */,
 				98D3C94F1F1F3FAF00D2C36B /* FSFileUploadChecker.m in Sources */,
 				98D3C9501F1F3FAF00D2C36B /* FSFileUploader.m in Sources */,
 				98D3C9511F1F3FAF00D2C36B /* FSUploader.m in Sources */,
@@ -1962,6 +2051,7 @@
 				98D3C9701F1F3FAF00D2C36B /* FSVideoListView.m in Sources */,
 				98D3C9711F1F3FAF00D2C36B /* FSAlbumVideoCell.m in Sources */,
 				98D3C9721F1F3FAF00D2C36B /* FSLocalVideoController.m in Sources */,
+				9815CE841F273ECE00DE317C /* FSChallengeParam.m in Sources */,
 				98D3C9731F1F3FAF00D2C36B /* FSLocalPhotoManager.m in Sources */,
 				98D3C9741F1F3FAF00D2C36B /* FSFilterView.m in Sources */,
 				98D3C9751F1F3FAF00D2C36B /* FSFilterButton.m in Sources */,
@@ -2199,6 +2289,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FSVideoEditorSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2208,6 +2299,7 @@
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include",
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libWebp/armv7",
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libWebp/aarch64",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios",
 				);
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fs.company.FSVideoEditorSDK;
@@ -2237,6 +2329,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FSVideoEditorSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2246,6 +2339,7 @@
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include",
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libWebp/armv7",
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libWebp/aarch64",
+					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/ios",
 				);
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fs.company.FSVideoEditorSDK;

@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
 - (void)FSPublisherToolViewSaveToLibrary:(BOOL)isSave;
 - (void)FSPublisherToolViewPublished;
 - (void)FSPublisherToolViewChangeVideoDescription:(NSString *)description;
+- (void)FSPublisherToolViewShowChallengeView;
 
 @end
 
@@ -33,4 +34,5 @@ typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
 
 -(instancetype)initWithFrame:(CGRect)frame type:(FSPublisherToolViewType)type;
 - (void)canEditMusic:(BOOL)enable;
+- (void)updateChallengeName:(NSString *)challenge;
 @end

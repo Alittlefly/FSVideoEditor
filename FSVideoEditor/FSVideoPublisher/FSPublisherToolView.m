@@ -182,6 +182,10 @@ static BOOL IsArabic = NO;
     self.cutMusicButton.enabled = enable;
 }
 
+- (void)updateChallengeName:(NSString *)challenge {
+    [_videoNameView updateChallengeName:challenge];
+}
+
 - (void)backClik {
     if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewQuit)]) {
         [self.delegate FSPublisherToolViewQuit];
@@ -247,8 +251,10 @@ static BOOL IsArabic = NO;
     }
 }
 
-- (void)FSEditVideoNameViewAddChallenge:(NSInteger)challengeID {
-
+- (void)FSEditVideoNameViewAddChallenge {
+    if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewShowChallengeView)]) {
+        [self.delegate FSPublisherToolViewShowChallengeView];
+    }
 }
 
 -(void)keyBoradShows:(NSNotification *)notification

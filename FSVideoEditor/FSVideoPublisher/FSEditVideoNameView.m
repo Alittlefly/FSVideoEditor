@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UIButton *addFriendsButton;
 @property (nonatomic, strong) UIButton *saveToPhotoButton;
 @property (nonatomic, assign) BOOL isSave;
+@property (nonatomic, assign) BOOL isHasChallenge;
 
 @end
 
@@ -58,7 +59,6 @@
     _addChallengeButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [_addChallengeButton addTarget:self action:@selector(addChallenge) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_addChallengeButton];
-    _addChallengeButton.hidden = YES;
     
     _saveToPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _saveToPhotoButton.frame = CGRectMake(self.frame.size.width-100, CGRectGetMaxY(_lineView.frame)+15, 100, 27);
@@ -72,9 +72,22 @@
 }
 
 - (void)addChallenge {
-    if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewAddChallenge:)]) {
-        [self.delegate FSEditVideoNameViewAddChallenge:123];
+    if (_isHasChallenge) {
+        _isHasChallenge = NO;
+        [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
     }
+    else {
+        if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewAddChallenge)]) {
+            [self.delegate FSEditVideoNameViewAddChallenge];
+        }
+    }
+    
+}
+
+- (void)updateChallengeName:(NSString *)name {
+    _isHasChallenge = YES;
+    [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@ X",name] forState:UIControlStateNormal];
+
 }
 
 - (void)saveToPhoto {
