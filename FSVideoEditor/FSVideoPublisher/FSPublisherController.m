@@ -290,7 +290,9 @@
     
     NSLog(@"Compile success!");
     [self uploadFirstImage:[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_outPutPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480]];
-  //  UISaveVideoAtPathToSavedPhotosAlbum(_outPutPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    if (_isSaved) {
+        UISaveVideoAtPathToSavedPhotosAlbum(_outPutPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    }
 
 }
 // 生成失败的回调函数

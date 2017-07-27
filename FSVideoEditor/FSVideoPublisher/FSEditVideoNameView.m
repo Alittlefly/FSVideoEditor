@@ -9,6 +9,7 @@
 #import "FSEditVideoNameView.h"
 #import "FSShortLanguage.h"
 
+
 @interface FSEditVideoNameView()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *textFile;
@@ -55,20 +56,34 @@
     _addChallengeButton.layer.borderWidth = 0.5;
     _addChallengeButton.layer.masksToBounds = YES;
     [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
-    [_addChallengeButton.titleLabel setFont:[UIFont systemFontOfSize:10]];
-    _addChallengeButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [_addChallengeButton.titleLabel setFont:[UIFont systemFontOfSize:11]];
     [_addChallengeButton addTarget:self action:@selector(addChallenge) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_addChallengeButton];
     
     _saveToPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _saveToPhotoButton.frame = CGRectMake(self.frame.size.width-100, CGRectGetMaxY(_lineView.frame)+15, 100, 27);
     _saveToPhotoButton.backgroundColor = [UIColor clearColor];
-    [_saveToPhotoButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"SaveInGallery"]] forState:UIControlStateNormal];
+    [_saveToPhotoButton setTitle:[NSString stringWithFormat:@"%@",[FSShortLanguage CustomLocalizedStringFromTable:@"SaveInGallery"]] forState:UIControlStateNormal];
     [_saveToPhotoButton.titleLabel setFont:[UIFont systemFontOfSize:10]];
-    [_saveToPhotoButton setTitleColor:_isSave?[UIColor redColor]:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_saveToPhotoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_unselected"] forState:UIControlStateNormal];
     [_saveToPhotoButton addTarget:self action:@selector(saveToPhoto) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_saveToPhotoButton];
     //_saveToPhotoButton.hidden = YES;
+    
+    [self updateChallengeButtonFrame];
+    
+}
+
+- (void)updateChallengeButtonFrame {
+    CGFloat maxWidth = self.frame.size.width - _saveToPhotoButton.frame.size.width-5;
+    CGSize size = [_addChallengeButton.titleLabel.text boundingRectWithSize:CGSizeMake(999, 27) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]} context:nil].size;
+    CGFloat width = size.width;
+    if (width > maxWidth) {
+        width = maxWidth;
+    }
+
+    _addChallengeButton.frame = CGRectMake(_addChallengeButton.frame.origin.x, _addChallengeButton.frame.origin.y, width, _addChallengeButton.frame.size.height);
 }
 
 - (void)addChallenge {
@@ -88,11 +103,19 @@
     _isHasChallenge = YES;
     [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@ X",name] forState:UIControlStateNormal];
 
+    [self updateChallengeButtonFrame];
 }
 
 - (void)saveToPhoto {
+    _isSave = !_isSave;
+    if (_isSave) {
+        [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_selected"] forState:UIControlStateNormal];
+    }
+    else {
+        [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_unselected"] forState:UIControlStateNormal];
+    }
     if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewSaveToPhotoLibrary:)]) {
-        [self.delegate FSEditVideoNameViewSaveToPhotoLibrary:NO];
+        [self.delegate FSEditVideoNameViewSaveToPhotoLibrary:_isSave];
     }
 }
 

@@ -10,7 +10,7 @@
 #import "FSVideoEditorCommenData.h"
 #import "FSChallengeDataServer.h"
 #import "FSEditorLoading.h"
-
+#import "FSShortLanguage.h"
 
 @interface FSAddChallengeController ()<UITextViewDelegate, UITextFieldDelegate, FSChallengeDataServerDelegate>
 
@@ -51,7 +51,7 @@
     titleLabel.textColor = FSHexRGB(0x292929);
     titleLabel.font = [UIFont systemFontOfSize:17];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = @"添加挑战";
+    titleLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"];
     [titleLabel sizeToFit];
     titleLabel.frame = CGRectMake((self.view.frame.size.width-titleLabel.frame.size.width)/2, 30, titleLabel.frame.size.width, 24);
     [self.view addSubview:titleLabel];
@@ -121,7 +121,7 @@
     _commitButton.layer.masksToBounds = YES;
     _commitButton.backgroundColor = FSHexRGB(0x0BC2C6);
     [_commitButton setTitleColor:FSHexRGB(0xFFFFFF) forState:UIControlStateNormal];
-    [_commitButton setTitle:@"确定" forState:UIControlStateNormal];
+    [_commitButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Confirm"] forState:UIControlStateNormal];
     [_commitButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [_commitButton addTarget:self action:@selector(commitNewChallenge) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_commitButton];

@@ -28,7 +28,8 @@
     __weak typeof(self) weakS = self;
     //http://10.10.32.145:8088/video/discover/search?w=
     NSURLSessionTask *task = [manager POST:[NSString stringWithFormat:@"%@video/discover/add",AddressAPI] parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([responseObject objectForKey:@"code"] == 0) {
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        if (code == 0) {
             if ([weakS.delegate respondsToSelector:@selector(FSAddChallengeAPIAddChallengeSucceed:)]) {
                 [weakS.delegate FSAddChallengeAPIAddChallengeSucceed:responseObject];
             }

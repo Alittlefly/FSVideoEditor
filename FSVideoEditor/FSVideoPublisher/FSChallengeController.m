@@ -13,6 +13,7 @@
 #import "FSChallengeDataServer.h"
 #import "FSChallengeParam.h"
 #import "FSAddChallengeController.h"
+#import "FSShortLanguage.h"
 
 @interface FSChallengeController ()<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, FSChallengeDataServerDelegate, FSChallengeCellDelegate, FSAddChallengeControllerDelegate>
 
@@ -69,7 +70,7 @@
     titleLabel.textColor = FSHexRGB(0x292929);
     titleLabel.font = [UIFont systemFontOfSize:17];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = @"添加挑战";
+    titleLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"];
     [titleLabel sizeToFit];
     titleLabel.frame = CGRectMake((self.view.frame.size.width-titleLabel.frame.size.width)/2, 30, titleLabel.frame.size.width, 24);
     [self.view addSubview:titleLabel];
@@ -287,13 +288,20 @@
         model = [_dataArray objectAtIndex:indexPath.row];
     }
     else {
-        model = [_dataArray objectAtIndex:indexPath.row];
+        model = [_searchDataArray objectAtIndex:indexPath.row];
     }
     
-    if ([self.delegate respondsToSelector:@selector(FSChallengeControllerChooseChallenge:)]) {
-        [self.delegate FSChallengeControllerChooseChallenge:model];
+    if (model.challengeId == 0) {
+        [self fsChallengeCellAddNewChallenge:model.name];
     }
-    [self dismissViewControllerAnimated:NO completion:nil];
+    else {
+        if ([self.delegate respondsToSelector:@selector(FSChallengeControllerChooseChallenge:)]) {
+            [self.delegate FSChallengeControllerChooseChallenge:model];
+        }
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

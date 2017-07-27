@@ -44,7 +44,8 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([responseObject objectForKey:@"code"] == 0) {
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        if ( code== 0) {
             if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIFirstImageSuccess:)]) {
                 [weakS.delegate FSUploadImageAPIFirstImageSuccess:[responseObject objectForKey:@"dataInfo"]];
             }
@@ -88,7 +89,8 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([responseObject objectForKey:@"code"] == 0) {
+        int code = [[responseObject objectForKey:@"code"] intValue];
+        if ( code== 0) {
             if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIWebPSuccess:)]) {
                 [weakS.delegate FSUploadImageAPIWebPSuccess:[responseObject objectForKey:@"dataInfo"]];
             }
