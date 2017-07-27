@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "FSMusicCell.h"
+#import "FSMusicCollectSever.h"
+
 @protocol FSMusicListViewDelegate <NSObject>
 
+@optional
 -(void)musicListWouldUseMusic:(FSMusic *)music musicPath:(NSString *)musicPath;
+
+-(void)musicListWouldShowDetail:(FSMusic *)music;
 
 @end
 

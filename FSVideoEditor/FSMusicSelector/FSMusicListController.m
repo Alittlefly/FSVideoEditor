@@ -11,9 +11,11 @@
 #import "FSMusicCell.h"
 #import "FSMusicListView.h"
 #import "FSShortVideoRecorderController.h"
-@interface FSMusicListController ()<FSMusicListViewDelegate>
-{
+#import "FSMusicSever.h"
 
+@interface FSMusicListController ()<FSMusicListViewDelegate,FSMusicSeverDelegate>
+{
+    FSMusicSever *_sever;
 }
 @property(nonatomic,strong)FSMusicListView *musicListView;
 @property(nonatomic,strong)UIView *contentView;
@@ -54,6 +56,11 @@
     [_contentView addSubview:backButton];
     
     [self.view setBackgroundColor:[UIColor clearColor]];
+    
+     _sever = [FSMusicSever new];
+    [_sever setDelegate:self];
+    [_sever getMusicListWithType:3];//musicType.typeId];
+    [_musicListView showLoading:YES];
 }
 -(void)setMusicType:(FSMusicType *)musicType{
      _musicType = musicType;
@@ -64,8 +71,7 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-    [_musicListView setMusics:_musiceList];
+//    [_musicListView setMusics:_musiceList];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -76,6 +82,22 @@
     FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
     recoder.musicFilePath = musicPath;
     [self.navigationController pushViewController:recoder animated:YES];
+}
+-(void)musicListWouldShowDetail:(FSMusic *)music{
+    if ([self.delegate respondsToSelector:@selector(musicListWouldShowDetail:)]) {
+        [self.delegate musicListWouldShowDetail:music];
+    }
+}
+#pragma mark - 
+-(void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics{
+    [_musicListView setMusics:musics];
+    [_musicListView showLoading:NO];
+}
+-(void)musicSeverGetCollectedMusics:(NSArray<FSMusic *> *)musics{
+    [_musicListView setMusics:musics];
+}
+-(void)musicSeverGetFaild{
+    [_musicListView showLoading:NO];
 }
 -(void)outNav{
     [self.navigationController popViewControllerAnimated:YES];

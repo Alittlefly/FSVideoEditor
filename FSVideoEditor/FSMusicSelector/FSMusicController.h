@@ -15,7 +15,11 @@
 
 @protocol FSMusicControllerDelegate <NSObject>
 
+
+@optional
 -(void)musicControllerSelectMusic:(NSString *)musicPath musicId:(NSInteger)musicId;
+
+-(UIViewController *)musicControllerWouldShowMusicDetail:(FSMusic *)music;
 
 @end
 

@@ -11,6 +11,7 @@
 #import "FSShortVideoRecorderController.h"
 #import "FSMusicPlayer.h"
 #import "FSMusicSever.h"
+#import "FSMusicCollectSever.h"
 #import "FSMusicManager.h"
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
@@ -21,9 +22,10 @@
 #import "FSMusicListController.h"
 #import "FSMusicListView.h"
 
-@interface FSMusicController ()<FSMusicListViewDelegate,FSMusicSeverDelegate,UISearchBarDelegate,FSMusicHeaderViewDelegate>{
+@interface FSMusicController ()<FSMusicListViewDelegate,FSMusicSeverDelegate,UISearchBarDelegate,FSMusicHeaderViewDelegate,FSMusicCollectSeverDelegate>{
     FSMusic *_music;
     FSMusicSever *_sever;
+    FSMusicCollectSever *_collectSever;
 }
 @property(nonatomic,strong)FSMusicListView *musicListView;
 @property(nonatomic,strong)NSMutableArray *musics;
@@ -91,6 +93,9 @@
     [_sever setDelegate:self];
     [_sever getMusicList];
     
+    _collectSever = [FSMusicCollectSever new];
+    [_collectSever setDelegate:self];
+    
     [_musicListView showLoading:YES];
     
     [self initCancleButton];
@@ -155,6 +160,14 @@
         [self.navigationController pushViewController:recoder animated:YES];
     }
 }
+-(void)musicListWouldShowDetail:(FSMusic *)music{
+    if ([self.delegate respondsToSelector:@selector(musicControllerWouldShowMusicDetail:)]) {
+        UIViewController *viewController = [self.delegate musicControllerWouldShowMusicDetail:music];
+        if (viewController) {
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+    }
+}
 
 #pragma mark -
 - (void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics musicTypes:(NSArray<FSMusicType *> *)musicTypes{
@@ -174,8 +187,8 @@
 #pragma mark - 
 -(void)musicHeaderViewSelectItem:(FSMusicType *)item{
     FSMusicListController *musicListController = [[FSMusicListController alloc] init];
-    musicListController.musiceList = [self.musics copy];
     musicListController.musicType = item;
+    musicListController.delegate = self;
     [self.navigationController pushViewController:musicListController animated:YES];
 }
 -(void)musicHeaderShouldBeFrame:(CGRect)frame{
@@ -183,7 +196,19 @@
     [_tableHeader setFrame:frame];
     _musicListView.tableHeader = _tableHeader;
 }
-
+-(void)musicHeaderClickTypeButton:(FSMusicButtonType)type{
+    if (type == FSMusicButtonTypeHot) {
+        [_sever getMusicList];
+    }else{
+        [_collectSever getLikedMusicsList:1];
+        [self.musicListView showLoading:YES];
+    }
+}
+#pragma mark -
+-(void)musicSeverGetCollectedMusics:(NSArray<FSMusic *> *)musics{
+    [self.musicListView setMusics:musics];
+    [self.musicListView showLoading:NO];
+}
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
