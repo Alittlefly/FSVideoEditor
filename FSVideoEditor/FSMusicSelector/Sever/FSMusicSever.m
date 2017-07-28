@@ -10,10 +10,12 @@
 #import "FSMusicAPI.h"
 #import "FSTypeMusicAPI.h"
 #import "MJExtension.h"
-@interface FSMusicSever()<FSMusicAPIDelegate,FSTypeMusicAPIDelegate>
+#import "FSMusicSearchAPI.h"
+@interface FSMusicSever()<FSMusicAPIDelegate,FSTypeMusicAPIDelegate,FSMusicSearchAPIDelegate>
 {
     FSMusicAPI *_Api;
     FSTypeMusicAPI *_typeApi;
+    FSMusicSearchAPI *_searchApi;
 }
 @end
 @implementation FSMusicSever
@@ -36,8 +38,15 @@
     }
     [_typeApi getTypeMusics:type];    
 }
-
-#pragma mark - 
+-(void)getMusicListWithSearchKey:(NSString *)searchKey no:(NSInteger)no{
+    if(!_searchApi){
+         _searchApi = [FSMusicSearchAPI new];
+        [_searchApi setDelegate:self];
+    }
+    
+    [_searchApi searchMusicWithText:searchKey no:no];
+}
+#pragma mark -
 -(void)typeMusicApiGetMusics:(NSDictionary *)dictionary{
     if ([dictionary isKindOfClass:[NSDictionary class]]) {
         NSInteger code = [[dictionary valueForKey:@"code"] integerValue];
@@ -83,5 +92,7 @@
         [self.delegate musicSeverGetFaild];
     }
 }
+
+#pragma mark - 
 
 @end

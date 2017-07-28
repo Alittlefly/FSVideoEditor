@@ -131,6 +131,9 @@
     
     NSString *trimText = [searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSLog(@"要查询的内容是 trimText %@",trimText);
+    
+    
+    // 
 }
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];

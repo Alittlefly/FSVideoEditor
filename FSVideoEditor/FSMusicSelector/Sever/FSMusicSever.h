@@ -28,4 +28,6 @@
 
 -(void)getMusicListWithType:(NSInteger)type;
 
+-(void)getMusicListWithSearchKey:(NSString *)searchKey no:(NSInteger)no;
+
 @end

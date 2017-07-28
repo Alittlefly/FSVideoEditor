@@ -111,6 +111,7 @@
 		567E0B9D1EFA20BC00C4C527 /* FSLocalPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B9B1EFA20BC00C4C527 /* FSLocalPhotoManager.m */; };
 		567E0BA21EFA49F500C4C527 /* FSVideoListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA11EFA49F500C4C527 /* FSVideoListView.m */; };
 		567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA41EFA4DB400C4C527 /* FSAlbumVideoCell.m */; };
+		56F502621F2AEF13004AE0A4 /* FSMusicSearchAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 56F502611F2AEF13004AE0A4 /* FSMusicSearchAPI.m */; };
 		980EBCA71F29D45D00B37A9B /* FSPublishSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 980EBCA61F29D45D00B37A9B /* FSPublishSingleton.m */; };
 		980EBCA91F29DA9000B37A9B /* 198-14-967dfb58745c59c1c409616af7ca27b3.lic in Resources */ = {isa = PBXBuildFile; fileRef = 980EBCA81F29DA9000B37A9B /* 198-14-967dfb58745c59c1c409616af7ca27b3.lic */; };
 		9815CE791F2739AD00DE317C /* FSChallengeDataServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9815CE771F2739AD00DE317C /* FSChallengeDataServer.m */; };
@@ -404,6 +405,8 @@
 		567E0BA11EFA49F500C4C527 /* FSVideoListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVideoListView.m; sourceTree = "<group>"; };
 		567E0BA31EFA4DB400C4C527 /* FSAlbumVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAlbumVideoCell.h; sourceTree = "<group>"; };
 		567E0BA41EFA4DB400C4C527 /* FSAlbumVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAlbumVideoCell.m; sourceTree = "<group>"; };
+		56F502601F2AEF13004AE0A4 /* FSMusicSearchAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicSearchAPI.h; sourceTree = "<group>"; };
+		56F502611F2AEF13004AE0A4 /* FSMusicSearchAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicSearchAPI.m; sourceTree = "<group>"; };
 		980EBCA51F29D45D00B37A9B /* FSPublishSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPublishSingleton.h; sourceTree = "<group>"; };
 		980EBCA61F29D45D00B37A9B /* FSPublishSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPublishSingleton.m; sourceTree = "<group>"; };
 		980EBCA81F29DA9000B37A9B /* 198-14-967dfb58745c59c1c409616af7ca27b3.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-967dfb58745c59c1c409616af7ca27b3.lic"; sourceTree = "<group>"; };
@@ -789,6 +792,8 @@
 				567B05961F29C6BF00D09364 /* FSMusicCollectAPI.m */,
 				567B059F1F29F35500D09364 /* FSLikedMusicAPI.h */,
 				567B05A01F29F35500D09364 /* FSLikedMusicAPI.m */,
+				56F502601F2AEF13004AE0A4 /* FSMusicSearchAPI.h */,
+				56F502611F2AEF13004AE0A4 /* FSMusicSearchAPI.m */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -1534,6 +1539,7 @@
 				567A3D821EFB6F8E0026247E /* MJExtensionConst.m in Sources */,
 				563B7A111F0A42FC0035346A /* FSPresentAnimator.m in Sources */,
 				567A3D621EFB6F830026247E /* README.markdown in Sources */,
+				56F502621F2AEF13004AE0A4 /* FSMusicSearchAPI.m in Sources */,
 				567A3D451EFB66B60026247E /* FSFileSizeDivider.m in Sources */,
 				9880DEB71F171295006E730F /* UIImage+MultiFormat.m in Sources */,
 				562D40551EFD1DE200BF0E0D /* AFNetworkReachabilityManager.m in Sources */,

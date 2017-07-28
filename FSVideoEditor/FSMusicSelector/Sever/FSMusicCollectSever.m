@@ -59,6 +59,11 @@
     if (code == 0) {
         NSArray *musicsArray = [responseObjct valueForKey:@"dataInfo"];
         NSArray *musics = [FSMusic getDataArrayFromArray:musicsArray];
+        
+        for (FSMusic *music in musics) {
+            music.collected = YES;
+        }
+        
         if ([self.delegate respondsToSelector:@selector(musicSeverGetCollectedMusics:)]) {
             [self.delegate musicSeverGetCollectedMusics:musics];
         }
