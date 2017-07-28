@@ -115,13 +115,12 @@
 }
 -(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
     [_searchBar setShowCancle:NO];
-    [_resultView setHidden:YES];
     return YES;
 }
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    NSLog(@"点击取消");
+    [_resultView setMusics:[NSArray array]];
     [_resultView setHidden:YES];
-
+    NSLog(@"点击取消");
 }
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     if([searchBar canResignFirstResponder]){
@@ -132,8 +131,8 @@
     NSString *trimText = [searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSLog(@"要查询的内容是 trimText %@",trimText);
     
-    
-    // 
+    //
+    [_sever getMusicListWithSearchKey:trimText no:1];
 }
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
@@ -211,6 +210,9 @@
 -(void)musicSeverGetCollectedMusics:(NSArray<FSMusic *> *)musics{
     [self.musicListView setMusics:musics];
     [self.musicListView showLoading:NO];
+}
+-(void)musicSeverSearched:(NSArray<FSMusic *>*)musics{
+    [_resultView setMusics:musics];
 }
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));

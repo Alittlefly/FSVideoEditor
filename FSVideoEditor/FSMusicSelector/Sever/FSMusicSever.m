@@ -94,5 +94,21 @@
 }
 
 #pragma mark - 
-
+-(void)musicSearchAPISearchSuccess:(NSDictionary *)searchInfo{
+    if ([searchInfo isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *dataDict = [searchInfo valueForKey:@"dataInfo"];
+        NSArray *ms = [dataDict valueForKey:@"shl"];
+        NSArray *mtps = [dataDict valueForKey:@"slb"];
+        NSArray *musics = [FSMusic getDataArrayFromArray:ms];
+        
+        if ([self.delegate respondsToSelector:@selector(musicSeverSearched:)]) {
+            [self.delegate musicSeverSearched:musics];
+        }
+    }
+}
+-(void)musicSearchAPISearchFaild{
+    if ([self.delegate respondsToSelector:@selector(musicSeverGetFaild)]) {
+        [self.delegate musicSeverGetFaild];
+    }
+}
 @end

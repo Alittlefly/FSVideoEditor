@@ -17,7 +17,7 @@
 
 -(void)musicSeverGetFaild;
 
-
+-(void)musicSeverSearched:(NSArray<FSMusic *>*)musics;
 @end
 
 @interface FSMusicSever : NSObject
