@@ -8,10 +8,12 @@
 
 #import "FSMusicSever.h"
 #import "FSMusicAPI.h"
+#import "FSTypeMusicAPI.h"
 #import "MJExtension.h"
-@interface FSMusicSever()<FSMusicAPIDelegate>
+@interface FSMusicSever()<FSMusicAPIDelegate,FSTypeMusicAPIDelegate>
 {
     FSMusicAPI *_Api;
+    FSTypeMusicAPI *_typeApi;
 }
 @end
 @implementation FSMusicSever
@@ -24,9 +26,41 @@
     [_Api setDelegate:self];
     [_Api getMusicWithParam:nil];
 }
--(void)getMusicTypes{
-
+-(void)getMusicListWithType:(NSInteger)type{
+    
+    [_typeApi cancleTask];
+    
+    if (!_typeApi) {
+         _typeApi = [FSTypeMusicAPI new];
+        [_typeApi setDelegate:self];
+    }
+    [_typeApi getTypeMusics:type];    
 }
+
+#pragma mark - 
+-(void)typeMusicApiGetMusics:(NSDictionary *)dictionary{
+    if ([dictionary isKindOfClass:[NSDictionary class]]) {
+        NSInteger code = [[dictionary valueForKey:@"code"] integerValue];
+        if (code == 0) {
+            NSArray *dataArray = [dictionary valueForKey:@"dataInfo"];
+            NSArray *musics = [FSMusic getDataArrayFromArray:dataArray];
+            if ([self.delegate respondsToSelector:@selector(musicSeverGetMusics:)]) {
+                [self.delegate musicSeverGetMusics:musics];
+            }
+            return;
+        }
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(musicSeverGetFaild)]) {
+        [self.delegate musicSeverGetFaild];
+    }
+}
+-(void)typeMusicApiGetFaild{
+    if ([self.delegate respondsToSelector:@selector(musicSeverGetFaild)]) {
+        [self.delegate musicSeverGetFaild];
+    }
+}
+
 #pragma mark -
 -(void)musicApiGetMusics:(id)responesObject{
     
@@ -49,4 +83,5 @@
         [self.delegate musicSeverGetFaild];
     }
 }
+
 @end

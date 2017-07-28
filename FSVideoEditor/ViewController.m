@@ -14,6 +14,8 @@
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
+#import "FSVideoEditorAPIParams.h"
+
 
 @interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate>
 
@@ -76,6 +78,8 @@
         self.passwordTextField.hidden = YES;
         self.loginButton.hidden = YES;
         [self.logoutButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"logout"] forState:UIControlStateNormal];
+        
+        [[FSVideoEditorAPIParams videoEdiorParams].params setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
     }
     
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"tr"]) {
@@ -194,6 +198,8 @@
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"loginKey"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Country"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[FSVideoEditorAPIParams videoEdiorParams].params removeObjectsForKeys:@[@"loginKey"]];
 
     //[self showMessage:NSLocalizedString(@"", nil)];
 }
@@ -252,6 +258,9 @@
     self.uidTextField.hidden = YES;
     self.passwordTextField.hidden = YES;
     self.loginButton.hidden = YES;
+    
+    [[FSVideoEditorAPIParams videoEdiorParams].params setValue:[dataInfo objectForKey:@"loginKey"] forKey:@"loginKey"];
+
 }
 
 - (void)FSLoginServerFaild:(NSError *)error {

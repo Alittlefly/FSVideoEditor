@@ -12,9 +12,10 @@
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
 
-@interface FSMusicListView ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate>
+@interface FSMusicListView ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate,FSMusicCollectSeverDelegate>
 {
     FSMusic *_music;
+    FSMusicCollectSever *_collectSever;
 }
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)FSEditorLoading *loading;
@@ -34,6 +35,8 @@
         [_tableView setDataSource:self];
         [_tableView setTableFooterView:[UIView new]];
         [self addSubview:_tableView];
+         _collectSever = [FSMusicCollectSever new];
+        [_collectSever setDelegate:self];
     }
     return self;
 }
@@ -43,8 +46,7 @@
     [_tableView setFrame:self.bounds];
 }
 -(void)setMusics:(NSArray *)musics{
-    _musics = musics;
-    
+     _musics = musics;
     [_tableView reloadData];
 }
 -(void)setTableHeader:(UIView *)tableHeader{
@@ -80,7 +82,6 @@
     FSMusicCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     [self playMusic:music playViewCell:cell];
-    
 }
 -(void)playMusic:(FSMusic *)music playViewCell:(FSMusicCell *)cell{
     //
@@ -197,6 +198,25 @@
         [self.delegate musicListWouldUseMusic:music musicPath:path];
     }
 }
+-(void)musicCell:(FSMusicCell *)cell wouldShowDetail:(FSMusic *)music{
+    if ([self.delegate respondsToSelector:@selector(musicListWouldShowDetail:)]) {
+        [self.delegate musicListWouldShowDetail:music];
+    }
+}
+-(void)musicCell:(FSMusicCell *)cell wouldCollect:(FSMusic *)music{
+    [_collectSever collectMusic:music collect:music.collected];
+}
+#pragma mark - 
+-(void)musicCollectSeverCollectMusicSuccess:(FSMusic *)music{
+//    [_tableView reloadData];
+    NSLog(@"收藏成功!");
+}
+-(void)musicCollectSeverCollectFaild:(FSMusic *)music{
+    music.collected = !music.collected;
+    [_tableView reloadData];
+}
+#pragma mark -
+
 #pragma mark - 
 -(void)showLoading:(BOOL)show{
     if (show) {

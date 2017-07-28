@@ -32,6 +32,7 @@
 
 @property(nonatomic,assign)BOOL opend;
 @property(nonatomic,assign)BOOL isPlaying;
+@property(nonatomic,assign)BOOL collected;
 
 + (NSArray *)getDataArrayFromArray:(NSArray *)array;
 @end

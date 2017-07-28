@@ -10,9 +10,13 @@
 #import "FSMusic.h"
 @protocol FSMusicSeverDelegate <NSObject>
 
+@optional
 -(void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics musicTypes:(NSArray<FSMusicType *> *)musicTypes;
 
+-(void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics;
+
 -(void)musicSeverGetFaild;
+
 
 @end
 
@@ -22,5 +26,6 @@
 
 -(void)getMusicList;
 
--(void)getMusicTypes;
+-(void)getMusicListWithType:(NSInteger)type;
+
 @end

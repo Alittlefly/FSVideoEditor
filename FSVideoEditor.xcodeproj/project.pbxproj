@@ -96,6 +96,11 @@
 		567B058B1F283DAB00D09364 /* libNvConvertorLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 567B058A1F283DAB00D09364 /* libNvConvertorLib.a */; };
 		567B058E1F2840EA00D09364 /* FSMusicSearchResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B058D1F2840EA00D09364 /* FSMusicSearchResultView.m */; };
 		567B05911F28910D00D09364 /* FSMusicListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B05901F28910D00D09364 /* FSMusicListView.m */; };
+		567B05971F29C6BF00D09364 /* FSMusicCollectAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B05961F29C6BF00D09364 /* FSMusicCollectAPI.m */; };
+		567B059A1F29C93D00D09364 /* FSTypeMusicAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B05991F29C93D00D09364 /* FSTypeMusicAPI.m */; };
+		567B059E1F29E34100D09364 /* FSVideoEditorAPIParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B059D1F29E34100D09364 /* FSVideoEditorAPIParams.m */; };
+		567B05A11F29F35500D09364 /* FSLikedMusicAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B05A01F29F35500D09364 /* FSLikedMusicAPI.m */; };
+		567B05A41F29FBBC00D09364 /* FSMusicCollectSever.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B05A31F29FBBC00D09364 /* FSMusicCollectSever.m */; };
 		567E0B531EF930D100C4C527 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B521EF930D100C4C527 /* main.m */; };
 		567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B551EF930D100C4C527 /* AppDelegate.m */; };
 		567E0B591EF930D100C4C527 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B581EF930D100C4C527 /* ViewController.m */; };
@@ -371,6 +376,16 @@
 		567B058D1F2840EA00D09364 /* FSMusicSearchResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicSearchResultView.m; sourceTree = "<group>"; };
 		567B058F1F28910D00D09364 /* FSMusicListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicListView.h; sourceTree = "<group>"; };
 		567B05901F28910D00D09364 /* FSMusicListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicListView.m; sourceTree = "<group>"; };
+		567B05951F29C6BF00D09364 /* FSMusicCollectAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicCollectAPI.h; sourceTree = "<group>"; };
+		567B05961F29C6BF00D09364 /* FSMusicCollectAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicCollectAPI.m; sourceTree = "<group>"; };
+		567B05981F29C93D00D09364 /* FSTypeMusicAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTypeMusicAPI.h; sourceTree = "<group>"; };
+		567B05991F29C93D00D09364 /* FSTypeMusicAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTypeMusicAPI.m; sourceTree = "<group>"; };
+		567B059C1F29E34100D09364 /* FSVideoEditorAPIParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSVideoEditorAPIParams.h; sourceTree = "<group>"; };
+		567B059D1F29E34100D09364 /* FSVideoEditorAPIParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVideoEditorAPIParams.m; sourceTree = "<group>"; };
+		567B059F1F29F35500D09364 /* FSLikedMusicAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLikedMusicAPI.h; sourceTree = "<group>"; };
+		567B05A01F29F35500D09364 /* FSLikedMusicAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLikedMusicAPI.m; sourceTree = "<group>"; };
+		567B05A21F29FBBC00D09364 /* FSMusicCollectSever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicCollectSever.h; sourceTree = "<group>"; };
+		567B05A31F29FBBC00D09364 /* FSMusicCollectSever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicCollectSever.m; sourceTree = "<group>"; };
 		567E0B4E1EF930D100C4C527 /* FSVideoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FSVideoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		567E0B521EF930D100C4C527 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		567E0B541EF930D100C4C527 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -659,6 +674,7 @@
 		562D405E1EFE3B4600BF0E0D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				567B059B1F29E32700D09364 /* FSAPIParams */,
 				563B7A051F0A42AA0035346A /* FSAnimator */,
 				988E3D211F0271A1004E837F /* FSTimeCountsdownView.h */,
 				988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */,
@@ -756,6 +772,8 @@
 				563B79F51F08D3290035346A /* FSMusicSever.m */,
 				563B79FA1F08F3B40035346A /* FSMusicManager.h */,
 				563B79FB1F08F3B40035346A /* FSMusicManager.m */,
+				567B05A21F29FBBC00D09364 /* FSMusicCollectSever.h */,
+				567B05A31F29FBBC00D09364 /* FSMusicCollectSever.m */,
 			);
 			path = Sever;
 			sourceTree = "<group>";
@@ -765,6 +783,12 @@
 			children = (
 				563B79F71F08D3360035346A /* FSMusicAPI.h */,
 				563B79F81F08D3360035346A /* FSMusicAPI.m */,
+				567B05981F29C93D00D09364 /* FSTypeMusicAPI.h */,
+				567B05991F29C93D00D09364 /* FSTypeMusicAPI.m */,
+				567B05951F29C6BF00D09364 /* FSMusicCollectAPI.h */,
+				567B05961F29C6BF00D09364 /* FSMusicCollectAPI.m */,
+				567B059F1F29F35500D09364 /* FSLikedMusicAPI.h */,
+				567B05A01F29F35500D09364 /* FSLikedMusicAPI.m */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -1084,6 +1108,15 @@
 				567B05891F283DA000D09364 /* NvcConvertorDelegate.h */,
 			);
 			path = libNvConvertor;
+			sourceTree = "<group>";
+		};
+		567B059B1F29E32700D09364 /* FSAPIParams */ = {
+			isa = PBXGroup;
+			children = (
+				567B059C1F29E34100D09364 /* FSVideoEditorAPIParams.h */,
+				567B059D1F29E34100D09364 /* FSVideoEditorAPIParams.m */,
+			);
+			path = FSAPIParams;
 			sourceTree = "<group>";
 		};
 		567E0B451EF930D100C4C527 = {
@@ -1467,6 +1500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				567A3D4C1EFB66B60026247E /* FSFileUploadChecker.m in Sources */,
+				567B05971F29C6BF00D09364 /* FSMusicCollectAPI.m in Sources */,
 				563A37901EFFE43800852642 /* FSThumbnailView.m in Sources */,
 				567A3D481EFB66B60026247E /* FSFileUploadTool.m in Sources */,
 				9880DEB31F171295006E730F /* SDWebImageManager.m in Sources */,
@@ -1491,6 +1525,7 @@
 				9880DEB01F171295006E730F /* SDWebImageDecoder.m in Sources */,
 				563B7A241F0C8FE00035346A /* FSEditorAlertView.m in Sources */,
 				567A3D8A1EFB6F8E0026247E /* NSObject+MJProperty.m in Sources */,
+				567B059E1F29E34100D09364 /* FSVideoEditorAPIParams.m in Sources */,
 				567A3D841EFB6F8E0026247E /* MJProperty.m in Sources */,
 				567B05701F27767100D09364 /* FSMusicHeaderView.m in Sources */,
 				567E0B9D1EFA20BC00C4C527 /* FSLocalPhotoManager.m in Sources */,
@@ -1551,6 +1586,7 @@
 				980EBCA71F29D45D00B37A9B /* FSPublishSingleton.m in Sources */,
 				9880DEB21F171295006E730F /* SDWebImageDownloaderOperation.m in Sources */,
 				567A3D851EFB6F8E0026247E /* MJPropertyKey.m in Sources */,
+				567B059A1F29C93D00D09364 /* FSTypeMusicAPI.m in Sources */,
 				567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */,
 				562D40581EFD1DE200BF0E0D /* AFURLResponseSerialization.m in Sources */,
 				9880DEB11F171295006E730F /* SDWebImageDownloader.m in Sources */,
@@ -1580,6 +1616,8 @@
 				563B7A0B1F0A42AA0035346A /* FSSpringAnimator.m in Sources */,
 				9880DEAE1F171295006E730F /* SDImageCacheConfig.m in Sources */,
 				563B79F11F08C41D0035346A /* FSMusic.m in Sources */,
+				567B05A11F29F35500D09364 /* FSLikedMusicAPI.m in Sources */,
+				567B05A41F29FBBC00D09364 /* FSMusicCollectSever.m in Sources */,
 				567A3D881EFB6F8E0026247E /* NSObject+MJCoding.m in Sources */,
 				9880DEB41F171295006E730F /* SDWebImagePrefetcher.m in Sources */,
 				567A3D4A1EFB66B60026247E /* FSFileUploadCache.m in Sources */,
