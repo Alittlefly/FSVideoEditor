@@ -61,7 +61,7 @@
 
 #pragma mark - FSSearchChallengeAPIDelegate
 -(void)FSSearchChallengeAPISucceed:(NSDictionary *)dic {
-    NSArray *array = [FSChallengeModel getDataArrayFromArray:[dic objectForKey:@"dataInfo"]];
+    NSArray *array = [FSChallengeModel getDataArrayFromArray:[[dic objectForKey:@"dataInfo"] objectForKey:@"list"]];
     if (_isSearch) {
         BOOL isNew = YES;
         for (FSChallengeModel *model in array) {
