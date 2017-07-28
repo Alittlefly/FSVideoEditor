@@ -11,6 +11,7 @@
 #import "FSMusicManager.h"
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
+#import "MJRefresh.h"
 
 @interface FSMusicListView ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate,FSMusicCollectSeverDelegate>
 {
@@ -37,8 +38,14 @@
         [self addSubview:_tableView];
          _collectSever = [FSMusicCollectSever new];
         [_collectSever setDelegate:self];
+        [_tableView setMj_footer:[MJRefreshBackStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(getMoreData)]];
     }
     return self;
+}
+-(void)getMoreData{
+    if ([self.delegate respondsToSelector:@selector(musicListWouldGetMoreData:)]) {
+        [self.delegate musicListWouldGetMoreData:self];
+    }
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
@@ -48,6 +55,15 @@
 -(void)setMusics:(NSArray *)musics{
      _musics = musics;
     [_tableView reloadData];
+    if([_tableView.mj_footer isRefreshing]){
+       [_tableView.mj_footer endRefreshing];
+    }
+}
+-(void)insertMoreMusic:(NSArray *)musics{
+    _music = _music?:[@[] mutableCopy];
+    NSMutableArray *oldMusic = [NSMutableArray arrayWithArray:_musics];
+    [oldMusic addObjectsFromArray:musics];
+    [self setMusics:oldMusic];
 }
 -(void)setTableHeader:(UIView *)tableHeader{
     _tableHeader = tableHeader;
@@ -110,7 +126,7 @@
         if (music.songUrl) {
             
             NSString *url = music.songUrl;
-            if (![url hasPrefix:@"http"]) {
+            if (![url hasPrefix:@"http"] && url) {
                 //@"http://35.158.218.231/"    http://10.10.32.152:20000/
                 url = [AddressIP stringByAppendingString:music.songUrl];
             }

@@ -10,5 +10,5 @@
 #import "FSMusicListView.h"
 
 @interface FSMusicSearchResultView : FSMusicListView
-
+@property(nonatomic,strong)NSString *searchKey;
 @end

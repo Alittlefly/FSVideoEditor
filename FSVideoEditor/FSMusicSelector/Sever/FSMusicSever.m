@@ -19,24 +19,23 @@
 }
 @end
 @implementation FSMusicSever
--(void)getMusicList{
+-(void)getMusicListPage:(NSInteger)page{
     if (_Api) {
         [_Api cancleTask];
     }
     
      _Api = [[FSMusicAPI alloc] init];
     [_Api setDelegate:self];
-    [_Api getMusicWithParam:nil];
+    [_Api getMusicWithPage:page];
 }
--(void)getMusicListWithType:(NSInteger)type{
+-(void)getMusicListWithType:(NSInteger)type page:(NSInteger)page{
     
     [_typeApi cancleTask];
-    
     if (!_typeApi) {
          _typeApi = [FSTypeMusicAPI new];
         [_typeApi setDelegate:self];
     }
-    [_typeApi getTypeMusics:type];    
+    [_typeApi getTypeMusics:type page:page];
 }
 -(void)getMusicListWithSearchKey:(NSString *)searchKey no:(NSInteger)no{
     if(!_searchApi){
@@ -83,8 +82,12 @@
         if ([self.delegate respondsToSelector:@selector(musicSeverGetMusics:musicTypes:)]) {
             [self.delegate musicSeverGetMusics:musics musicTypes:musicTypes];
         }
+        return;
     }
     
+    if ([self.delegate respondsToSelector:@selector(musicSeverGetFaild)]) {
+        [self.delegate musicSeverGetFaild];
+    }
 }
 
 - (void)musicApiGetMusicsFaild:(NSError *)error {
@@ -98,17 +101,15 @@
     if ([searchInfo isKindOfClass:[NSDictionary class]]) {
         NSDictionary *dataDict = [searchInfo valueForKey:@"dataInfo"];
         NSArray *ms = [dataDict valueForKey:@"shl"];
-        NSArray *mtps = [dataDict valueForKey:@"slb"];
         NSArray *musics = [FSMusic getDataArrayFromArray:ms];
-        
         if ([self.delegate respondsToSelector:@selector(musicSeverSearched:)]) {
             [self.delegate musicSeverSearched:musics];
         }
     }
 }
 -(void)musicSearchAPISearchFaild{
-    if ([self.delegate respondsToSelector:@selector(musicSeverGetFaild)]) {
-        [self.delegate musicSeverGetFaild];
+    if ([self.delegate respondsToSelector:@selector(musicSeverSearchFaild)]) {
+        [self.delegate musicSeverSearchFaild];
     }
 }
 @end

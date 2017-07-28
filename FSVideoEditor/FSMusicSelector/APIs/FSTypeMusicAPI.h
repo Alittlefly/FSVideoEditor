@@ -18,6 +18,6 @@
 
 @interface FSTypeMusicAPI : NSObject
 @property(nonatomic,assign)id<FSTypeMusicAPIDelegate>delegate;
--(void)getTypeMusics:(NSInteger)type;
+-(void)getTypeMusics:(NSInteger)type page:(NSInteger)page;
 -(void)cancleTask;
 @end

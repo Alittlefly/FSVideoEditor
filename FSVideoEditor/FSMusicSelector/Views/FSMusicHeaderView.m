@@ -149,6 +149,10 @@
 
 }
 -(void)setItems:(NSArray<FSMusicType *> *)items{
+    
+    if (_items != nil) {
+        return;
+    }
     _items = items;
     
     [self creatItems:_opend items:items];

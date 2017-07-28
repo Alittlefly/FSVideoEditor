@@ -17,7 +17,7 @@
 @end
 
 @implementation FSTypeMusicAPI
--(void)getTypeMusics:(NSInteger)type{
+-(void)getTypeMusics:(NSInteger)type page:(NSInteger)page{
     if (_currentTask) {
         [_currentTask suspend];
         [_currentTask cancel];
@@ -25,7 +25,7 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     __weak typeof(self) weakS = self;
-    NSURLSessionTask *task = [manager GET:[NSString stringWithFormat:@"%@video/song/use/%ld?no=1&size=99",AddressAPI,(long)type] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionTask *task = [manager GET:[NSString stringWithFormat:@"%@video/song/use/%ld?no=%ld&size=3",AddressAPI,page,(long)type] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         
         NSLog(@"response object %@",responseObject);

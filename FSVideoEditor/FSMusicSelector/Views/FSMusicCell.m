@@ -164,8 +164,7 @@ static NSString *identifier = @"FSMusicCell";
     [self.timeLabel setText:[self getCurrentTimeString:music.songTime]];
      _music = music;
     NSString *songPic = music.songPic;
-    if (![songPic hasPrefix:@"http"]) {
-        //http://www.7nujoom.com/    http://10.10.32.152:20000/
+    if (![songPic hasPrefix:@"http"] && songPic) {
         songPic = [@"http://35.158.218.231/" stringByAppendingString:songPic];
     }
     [self.pic sd_setImageWithURL:[NSURL URLWithString:songPic] placeholderImage:[UIImage imageNamed:@"musicPlaceHolder"]];

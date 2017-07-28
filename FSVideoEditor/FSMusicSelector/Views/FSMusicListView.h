@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "FSMusicCell.h"
 #import "FSMusicCollectSever.h"
-
+@class FSMusicListView;
 @protocol FSMusicListViewDelegate <NSObject>
 
 @optional
 -(void)musicListWouldUseMusic:(FSMusic *)music musicPath:(NSString *)musicPath;
 
 -(void)musicListWouldShowDetail:(FSMusic *)music;
+
+-(void)musicListWouldGetMoreData:(FSMusicListView *)listView;
 
 @end
 
@@ -24,6 +26,7 @@
 @property(nonatomic,assign)id<FSMusicListViewDelegate>delegate;
 @property(nonatomic,strong)NSArray *musics;
 
+-(void)insertMoreMusic:(NSArray *)musics;
 -(void)showLoading:(BOOL)show;
 - (void)stopPlayCurrentMusic;
 @end
