@@ -25,7 +25,9 @@
 }
 -(NSMutableDictionary *)params{
     if (!_params) {
-        _params = [NSMutableDictionary dictionary];
+         _params = [NSMutableDictionary dictionary];
+        [_params setValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] forKey:@"_v"];
+        [_params setValue:@"4" forKey:@"requestType"];
     }
     return _params;
 }
