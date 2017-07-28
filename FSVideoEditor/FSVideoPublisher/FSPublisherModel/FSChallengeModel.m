@@ -16,6 +16,7 @@
         FSChallengeModel *model = [[FSChallengeModel alloc] init];
         [model setChallengeId:[[dic objectForKey:@"di"] integerValue]];
         [model setPersonCount:[[dic objectForKey:@"c"] integerValue]];
+        [model setChallengeType:[[dic objectForKey:@"dt"] integerValue]];
         [model setName:[dic objectForKey:@"dn"]];
         [model setContent:[dic objectForKey:@"dd"]];
         
