@@ -11,6 +11,7 @@
 #import "FSChallengeDataServer.h"
 #import "FSEditorLoading.h"
 #import "FSShortLanguage.h"
+#import "FSAlertView.h"
 
 @interface FSAddChallengeController ()<UITextViewDelegate, UITextFieldDelegate, FSChallengeDataServerDelegate>
 
@@ -152,6 +153,11 @@
     [_challengeServer addNewChallenge:model];
 }
 
+- (void)showMessage:(NSString *)message {
+    FSAlertView *alertView = [[FSAlertView alloc] init];
+    [alertView showWithMessage:message];
+}
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -171,6 +177,7 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if (textView.text.length == 140 && text.length > 0) {
+        [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"MaxWordsCount"]];
         return NO;
     }
     else {
