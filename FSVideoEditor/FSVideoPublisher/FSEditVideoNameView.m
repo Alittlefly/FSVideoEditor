@@ -45,6 +45,8 @@
     [self addSubview:_textFile];
     
     _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_textFile.frame), self.frame.size.width, 1)];
+    _lineView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _lineView.layer.shadowOffset = CGSizeMake(1, 1);
     _lineView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_lineView];
     
@@ -55,6 +57,10 @@
     _addChallengeButton.layer.borderColor = [UIColor whiteColor].CGColor;
     _addChallengeButton.layer.borderWidth = 0.5;
     _addChallengeButton.layer.masksToBounds = YES;
+    _addChallengeButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    _addChallengeButton.layer.shadowOffset = CGSizeMake(1, 1);
+    [_addChallengeButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_addChallengeButton.titleLabel setShadowOffset:CGSizeMake(1, 1)];
     [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
     [_addChallengeButton.titleLabel setFont:[UIFont systemFontOfSize:11]];
     [_addChallengeButton addTarget:self action:@selector(addChallenge) forControlEvents:UIControlEventTouchUpInside];
@@ -65,6 +71,8 @@
     _saveToPhotoButton.backgroundColor = [UIColor clearColor];
     [_saveToPhotoButton setTitle:[NSString stringWithFormat:@"%@",[FSShortLanguage CustomLocalizedStringFromTable:@"SaveInGallery"]] forState:UIControlStateNormal];
     [_saveToPhotoButton.titleLabel setFont:[UIFont systemFontOfSize:10]];
+    [_saveToPhotoButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_saveToPhotoButton.titleLabel setShadowOffset:CGSizeMake(1, 1)];
     [_saveToPhotoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_unselected"] forState:UIControlStateNormal];
     [_saveToPhotoButton addTarget:self action:@selector(saveToPhoto) forControlEvents:UIControlEventTouchUpInside];
@@ -90,6 +98,7 @@
     if (_isHasChallenge) {
         _isHasChallenge = NO;
         [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
+        [self updateChallengeButtonFrame];
     }
     else {
         if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewAddChallenge)]) {

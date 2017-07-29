@@ -64,8 +64,8 @@
 -(void)initStyle{
     [self.titleLabel setTextAlignment:(NSTextAlignmentCenter)];
     [self setBackgroundColor:[UIColor clearColor]];
-    [self setTitleColor:FSHexRGB(0xb8b9bd) forState:(UIControlStateSelected)];
-    [self setTitleColor:FSHexRGB(0x0bc2c6) forState:(UIControlStateNormal)];
+    [self setTitleColor:FSHexRGB(0x0bc2c6) forState:(UIControlStateSelected)];
+    [self setTitleColor:FSHexRGB(0xb8b9bd) forState:(UIControlStateNormal)];
 }
 @end
 

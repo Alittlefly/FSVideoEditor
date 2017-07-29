@@ -82,6 +82,8 @@ static BOOL IsArabic = NO;
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.font = [UIFont systemFontOfSize:15];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
+    _titleLabel.shadowColor = [UIColor blackColor];
+    _titleLabel.shadowOffset = CGSizeMake(1, 1);
     _titleLabel.text = [NSString stringWithFormat:@"%@-@%@",[FSShortLanguage CustomLocalizedStringFromTable:@"OriginalVoice"],[[NSUserDefaults standardUserDefaults] valueForKey:@"nickName"]];
     [self addSubview:_titleLabel];
 
@@ -97,6 +99,8 @@ static BOOL IsArabic = NO;
     _cutMusicLabel.textColor = [UIColor whiteColor];
     _cutMusicLabel.backgroundColor = [UIColor clearColor];
     _cutMusicLabel.textAlignment = NSTextAlignmentCenter;
+    _cutMusicLabel.shadowColor = [UIColor blackColor];
+    _cutMusicLabel.shadowOffset = CGSizeMake(1, 1);
     _cutMusicLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Edit"];//NSLocalizedString(@"Edit", nil);
     [self addSubview:_cutMusicLabel];
     
@@ -112,6 +116,8 @@ static BOOL IsArabic = NO;
     _volumeLabel.font = [UIFont systemFontOfSize:7];
     _volumeLabel.textColor = [UIColor whiteColor];
     _volumeLabel.textAlignment = NSTextAlignmentCenter;
+    _volumeLabel.shadowColor = [UIColor blackColor];
+    _volumeLabel.shadowOffset = CGSizeMake(1, 1);
     _volumeLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Volume"];//NSLocalizedString(@"Volume", nil);
     [self addSubview:_volumeLabel];
     
@@ -128,7 +134,10 @@ static BOOL IsArabic = NO;
         _filterLabel.font = [UIFont systemFontOfSize:7];
         _filterLabel.textColor = [UIColor whiteColor];
         _filterLabel.textAlignment = NSTextAlignmentCenter;// IsArabic ? NSTextAlignmentLeft : NSTextAlignmentRight;
-        _filterLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ColorFilter"];//NSLocalizedString(@"ColorFilter", nil);
+        _filterLabel.shadowColor = [UIColor blackColor];
+        _filterLabel.shadowOffset = CGSizeMake(1, 1);
+        _filterLabel.text = [FSShortLanguage
+                             CustomLocalizedStringFromTable:@"ColorFilter"];//NSLocalizedString(@"ColorFilter", nil);
         [self addSubview:_filterLabel];
     }
     
@@ -148,6 +157,8 @@ static BOOL IsArabic = NO;
     _effectsLabel.backgroundColor = [UIColor clearColor];
     _effectsLabel.font = [UIFont systemFontOfSize:7];
     _effectsLabel.textColor = [UIColor whiteColor];
+    _effectsLabel.shadowColor = [UIColor blackColor];
+    _effectsLabel.shadowOffset = CGSizeMake(1, 1);
     _effectsLabel.textAlignment = NSTextAlignmentCenter;// IsArabic ? NSTextAlignmentLeft : NSTextAlignmentRight;
     _effectsLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Effects"];//NSLocalizedString(@"Effects", nil);
     [self addSubview:_effectsLabel];

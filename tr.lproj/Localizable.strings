@@ -96,3 +96,8 @@ Music = "Music";
 ChoseVideoTime = "You chose (0) seconds";
 Processing = "Processing…";
 
+EnterChallenge = "Video konusunu gir";
+HotChallenges = "Önerilen Konular";
+ChallengePeopleCount = "(0) kişi bu konuda video çekti";
+ChallengeDescribe = "Konu içeriğine dair kısaca bilgi ver";
+MaxWordsCount = "(0) kişi bu konuda video çekti ";

@@ -85,7 +85,7 @@
     leftView.image = [UIImage imageNamed:@"#"];
     _nameTextField.leftView = leftView;
     _nameTextField.leftViewMode = UITextFieldViewModeAlways;
-    _nameTextField.placeholder = @"challenge name";
+    _nameTextField.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"EnterChallenge"];
     _nameTextField.text = _challengeName;
     _nameTextField.font = [UIFont systemFontOfSize:14];
     _nameTextField.delegate = self;
@@ -104,7 +104,7 @@
     _placeholderLabel.textAlignment = NSTextAlignmentLeft;
     _placeholderLabel.textColor = FSHexRGB(0x796565);
     _placeholderLabel.font = [UIFont systemFontOfSize:13];
-    _placeholderLabel.text = @"简单描述一下你的挑战";
+    _placeholderLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ChallengeDescribe"];
     [_contentTextView addSubview:_placeholderLabel];
     
     _maxWordsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_contentTextView.frame)+10, CGRectGetWidth(_contentTextView.frame), 16)];
@@ -112,7 +112,9 @@
     _maxWordsLabel.textAlignment = NSTextAlignmentRight;
     _maxWordsLabel.textColor = FSHexRGB(0x796565);
     _maxWordsLabel.font = [UIFont systemFontOfSize:11];
-    _maxWordsLabel.text = @"限定140字";
+    NSString *maxWordsCount = [FSShortLanguage CustomLocalizedStringFromTable:@"MaxWordsCount"];
+    maxWordsCount = [maxWordsCount stringByReplacingOccurrencesOfString:@"(0)" withString:@"140"];
+    _maxWordsLabel.text = maxWordsCount;
     [self.view addSubview:_maxWordsLabel];
     
     _commitButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -157,9 +159,9 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField.text.length == 0) {
-        textField.placeholder = @"challenge name";
-    }
+//    if (textField.text.length == 0) {
+//        textField.placeholder = @"challenge name";
+//    }
 }
 
 #pragma mark - UITextViewDelegate
@@ -172,7 +174,7 @@
         return NO;
     }
     else {
-        if (textView.text.length == 1 && text.length > 0) {
+        if (textView.text.length == 0 && text.length > 0) {
             _placeholderLabel.hidden = YES;
         }
         else if (textView.text.length == 1 && text.length == 0) {

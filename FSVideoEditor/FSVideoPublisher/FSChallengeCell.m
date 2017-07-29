@@ -8,6 +8,7 @@
 
 #import "FSChallengeCell.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSShortLanguage.h"
 
 @interface FSChallengeCell()
 
@@ -43,7 +44,9 @@
     _personNumLabel.textAlignment = NSTextAlignmentRight;
     _personNumLabel.textColor = FSHexRGB(0x000000);
     _personNumLabel.font = [UIFont systemFontOfSize:13];
-    _personNumLabel.text = @"0人参与挑战";
+    NSString *personCount = [FSShortLanguage CustomLocalizedStringFromTable:@"ChallengePeopleCount"];
+    personCount = [personCount stringByReplacingOccurrencesOfString:@"(0)" withString:@"0"];
+    _personNumLabel.text = personCount;
     [self addSubview:_personNumLabel];
     
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_logoImageView.frame)+5, 10, 100, 20)];
@@ -63,7 +66,7 @@
     _addChallengeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _addChallengeButton.frame = CGRectMake(self.frame.size.width-20-100, 10, 100, 16);
     _addChallengeButton.backgroundColor = [UIColor clearColor];
-    [_addChallengeButton setTitle:@"添加挑战" forState:UIControlStateNormal];
+    [_addChallengeButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"] forState:UIControlStateNormal];
     [_addChallengeButton setTitleColor:FSHexRGB(0x292929) forState:UIControlStateNormal];
     _addChallengeButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [_addChallengeButton addTarget:self action:@selector(addNewChallenger) forControlEvents:UIControlEventTouchUpInside];
@@ -85,8 +88,10 @@
         _addChallengeButton.hidden = YES;
         _personNumLabel.hidden = NO;
         _descripLabel.hidden = NO;
-                
-        _personNumLabel.text = [NSString stringWithFormat:@"%ldd人参与挑战",(long) challengeModel.personCount];
+        
+        NSString *personCount = [FSShortLanguage CustomLocalizedStringFromTable:@"ChallengePeopleCount"];
+        personCount = [personCount stringByReplacingOccurrencesOfString:@"(0)" withString:[NSString stringWithFormat:@"%ld",(long)challengeModel.personCount]];
+        _personNumLabel.text = personCount;
         [_personNumLabel sizeToFit];
         _personNumLabel.frame = CGRectMake(self.frame.size.width-20-_personNumLabel.frame.size.width, _personNumLabel.frame.origin.y, _personNumLabel.frame.size.width, 16);
         

@@ -60,7 +60,7 @@
     }
 }
 -(void)insertMoreMusic:(NSArray *)musics{
-    _music = _music?:[@[] mutableCopy];
+    _musics = _musics?:[@[] mutableCopy];
     NSMutableArray *oldMusic = [NSMutableArray arrayWithArray:_musics];
     [oldMusic addObjectsFromArray:musics];
     [self setMusics:oldMusic];
@@ -225,6 +225,13 @@
 #pragma mark - 
 -(void)musicCollectSeverCollectMusicSuccess:(FSMusic *)music{
 //    [_tableView reloadData];
+    if (music.collected == NO) {
+        for (FSMusic *oldMusic in _musics) {
+            if (oldMusic.songId == music.songId) {
+            }
+        }
+    }
+    
     NSLog(@"收藏成功!");
 }
 -(void)musicCollectSeverCollectFaild:(FSMusic *)music{
@@ -243,8 +250,10 @@
     }
 }
 - (void)stopPlayCurrentMusic {
-     _music.isPlaying = NO;
-    [[FSMusicPlayer sharedPlayer] stop];
+    if (_music && _music.isPlaying) {
+        _music.isPlaying = NO;
+        [[FSMusicPlayer sharedPlayer] stop];
+    }
 
     [_tableView reloadData];
 }

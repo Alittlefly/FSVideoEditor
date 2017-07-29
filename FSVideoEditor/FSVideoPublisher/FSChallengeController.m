@@ -85,7 +85,7 @@
     _textField.layer.borderWidth = 1;
     _textField.returnKeyType = UIReturnKeySearch;
     _textField.delegate = self;
-    _textField.placeholder = @"输入挑战";
+    _textField.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"EnterChallenge"];
     [self.view addSubview:_textField];
     
     UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, CGRectGetHeight(_textField.frame))];
@@ -240,7 +240,7 @@
         bgView.backgroundColor = [UIColor clearColor];
         
         UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 20)];
-        headerLabel.text = @"热门挑战";
+        headerLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"HotChallenges"];
         [bgView addSubview:headerLabel];
         
         return bgView;

@@ -96,3 +96,9 @@ Original = "Original";
 Music = "Music";
 ChoseVideoTime = "You chose (0) seconds";
 Processing = "Processing…";
+
+EnterChallenge = "Enter challenge content";
+HotChallenges = "Recommended Challenges";
+ChallengePeopleCount = "(0) people did this challenge ";
+ChallengeDescribe = "Briefly describe your challenge";
+MaxWordsCount = "(0) people did this challenge ";
