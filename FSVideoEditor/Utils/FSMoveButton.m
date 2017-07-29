@@ -21,6 +21,7 @@
     if ([self.delegate respondsToSelector:@selector(FSMoveButtonContinueTrackingWithTouch:withEvent:)]) {
         [self.delegate FSMoveButtonContinueTrackingWithTouch:touch withEvent:event];
     }
+
     return [super continueTrackingWithTouch:touch withEvent:event];
 }
 

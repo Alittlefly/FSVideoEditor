@@ -68,11 +68,12 @@ BOOL IsArabic;
 @property (nonatomic, assign) FSShortVideoPlaySpeed playSpeed;
 
 @property (nonatomic, strong) FSFilterView *filterView;
-@property (nonatomic, strong) UILabel *recorderAniLabel;
 
 @property (nonatomic, strong) FSCutMusicView *cutMusicView;
 
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
+
+@property (nonatomic, strong) NSTimer *timer;
 
 
 @end
@@ -246,18 +247,15 @@ BOOL IsArabic;
     [self addSubview:_imageAutoFocusRect];
     _imageAutoFocusRect.hidden = YES;
     
-    _recorderButton = [FSMoveButton buttonWithType:UIButtonTypeCustom];
-    _recorderButton.frame = CGRectMake((CGRectGetWidth(self.frame)-90)/2, CGRectGetHeight(self.frame)-25-90, 90, 90);
+    _recorderButton = [[FSMoveButton alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.frame)-90)/2, CGRectGetHeight(self.frame)-25-90, 90, 90)];
+    _recorderButton.backgroundColor = [UIColor clearColor];
     [_recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
     [_recorderButton addTarget:self action:@selector(pauseRecorder) forControlEvents:UIControlEventTouchUpInside];
     [_recorderButton addTarget:self action:@selector(startRecorder) forControlEvents:UIControlEventTouchDown];
     _recorderButton.delegate = self;
-//    [_recorderButton addTarget:self action:@selector(moveRecorderButton:) forControlEvents:UIControlEventTouchDragInside];
-//    [_recorderButton addTarget:self action:@selector(moveRecorderButton:) forControlEvents:UIControlEventTouchDragOutside];
-
-
-    [self addSubview:_recorderButton];
     
+    [self addSubview:_recorderButton];
+
     _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _deleteButton.frame = IsArabic ? CGRectMake(CGRectGetMinX(_recorderButton.frame)-50-40, 0, 40, 40) : CGRectMake(CGRectGetMaxX(_recorderButton.frame)+50, 0, 40, 40);
     _deleteButton.center = CGPointMake(_deleteButton.center.x, _recorderButton.center.y);
@@ -615,8 +613,6 @@ BOOL IsArabic;
     _isOpenFilterView = NO;
     
     [self.recorderManager startRecording:nil];
-    [self.recorderButton setBackgroundColor:[UIColor clearColor]];
-    [self.recorderButton setImage:[UIImage imageNamed:@"recorder-auto"] forState:UIControlStateNormal];
     
     if (_musicFilePath != nil && _musicFilePath.length > 0) {
         [[FSMusicPlayer sharedPlayer] setRate:self.recorderManager.recorderSpeed];
@@ -626,36 +622,41 @@ BOOL IsArabic;
     
     if (!_isAutoRecorder) {
         [self.recorderButton setImage:[[UIImage alloc] init] forState:UIControlStateNormal];
-        [self.recorderButton setBackgroundColor:FSHexRGB(0x0BC2C6)];
         self.recorderButton.layer.cornerRadius = self.recorderButton.frame.size.width/2;
         self.recorderButton.layer.masksToBounds =YES;
         
-//        if (!_panGesture) {
-//            _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveRecorderButton:)];
-//            [self addGestureRecognizer:_panGesture];
-//        }
-        
-        if (!_recorderAniLabel) {
-            _recorderAniLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, self.recorderButton.frame.size.width-10, self.recorderButton.frame.size.height-10)];
-            _recorderAniLabel.backgroundColor = [UIColor whiteColor];
-            _recorderAniLabel.layer.cornerRadius = _recorderAniLabel.frame.size.width/2;
-            _recorderAniLabel.layer.masksToBounds = YES;
-            _recorderAniLabel.transform =  CGAffineTransformMakeScale(0.5,0.5);
-            _recorderAniLabel.userInteractionEnabled = NO;
-            [self.recorderButton addSubview:_recorderAniLabel];
-        }
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            self.recorderButton.transform =  CGAffineTransformMakeScale(1.2,1.2);
-            self.recorderAniLabel.transform =  CGAffineTransformMakeScale(1.0,1.0);
+        [UIView animateWithDuration:0.3 animations:^{
+            self.recorderButton.transform =  CGAffineTransformMakeScale(1.5,1.5);
+            
+            [self.recorderButton.layer addAnimation:[self alphaLight:0.3 fromValue:50.0f toValue:10.0f] forKey:@"aAlpha1"];
+            self.recorderButton.layer.borderColor = FSHexRGB(0x0BC2C6).CGColor;
   
         } completion:^(BOOL finished) {
-            [self.recorderAniLabel.layer addAnimation:[self alphaLight:0.5 fromValue:1.0 toValue:0.75 repeat:YES] forKey:@"aAlpha"];
+        
+            [self.recorderButton.layer removeAnimationForKey:@"aAlpha1"];
+            
+            [self.recorderButton.layer addAnimation:[self alphaLight:0.5 fromValue:5.0f toValue:10.0f] forKey:@"aAlpha2"];
+            self.recorderButton.layer.borderColor = FSHexRGB(0x0BC2C6).CGColor;
 
         }];
 
     }
 
+}
+
+#pragma mark - 空心圆动画
+-(CABasicAnimation *)alphaLight:(float)time fromValue:(float)from toValue:(float)to
+{
+    CABasicAnimation *animation =[CABasicAnimation animationWithKeyPath:@"borderWidth"];
+    animation.fromValue = [NSNumber numberWithFloat:from];
+    animation.toValue = [NSNumber numberWithFloat:to];
+    animation.autoreverses = YES;
+    animation.duration = time;
+    animation.repeatCount = MAXFLOAT;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    return animation;
 }
 
 - (void)pauseRecorder {
@@ -689,26 +690,21 @@ BOOL IsArabic;
     }
     
     if (!_isAutoRecorder) {
-        [self.recorderAniLabel.layer removeAnimationForKey:@"aAlpha"];
+            
+        [self.recorderButton.layer removeAnimationForKey:@"aAlpha2"];
         
-
-        [UIView animateWithDuration:0.5 animations:^{
-            self.recorderAniLabel.transform =  CGAffineTransformMakeScale(0.2,0.2);
+        [UIView animateWithDuration:0.3 animations:^{
             self.recorderButton.transform =  CGAffineTransformMakeScale(1.0,1.0);
             
-        } completion:^(BOOL finished) {
-
-            [self.recorderAniLabel removeFromSuperview];
-            self.recorderAniLabel = nil;
-            self.recorderButton.layer.cornerRadius = 0;
+            [self.recorderButton.layer addAnimation:[self alphaLight:0.3 fromValue:10.0f toValue:50.0f] forKey:@"aAlpha3"];
+            self.recorderButton.layer.borderColor = FSHexRGB(0x0BC2C6).CGColor;
             
-
-            self.recorderButton.backgroundColor = [UIColor clearColor];
+        } completion:^(BOOL finished) {
+            
+            [self.recorderButton.layer removeAnimationForKey:@"aAlpha3"];
             [self.recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
-
+            
         }];
-        
-
     }
     else {
         _isAutoRecorder = NO;
@@ -727,14 +723,14 @@ BOOL IsArabic;
 - (void)FSMoveButtonCancelTrackingWithEvent:(UIEvent *)event {
     //self.recorderButton.transform = CGAffineTransformIdentity;
     [UIView animateWithDuration:0.3 animations:^{
-        self.recorderButton.center = CGPointMake(self.frame.size.width/2, self.frame.size.height-25-self.recorderButton.frame.size.height/2);
+        self.recorderButton.center = CGPointMake(self.frame.size.width/2, self.frame.size.height-25-90/2);
     }];
 
 }
 
 - (void)FSMoveButtonEndTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [UIView animateWithDuration:0.3 animations:^{
-        self.recorderButton.center = CGPointMake(self.frame.size.width/2, self.frame.size.height-25-self.recorderButton.frame.size.height/2);
+        self.recorderButton.center = CGPointMake(self.frame.size.width/2, self.frame.size.height-25-90/2);
     }];
 }
 
@@ -767,19 +763,6 @@ BOOL IsArabic;
     self.recorderButton.transform = CGAffineTransformTranslate(self.recorderButton.transform, position.x, position.y);
     //将增量置为零
     [gesture setTranslation:CGPointZero inView:self];
-}
-
-- (CABasicAnimation *)alphaLight:(float)time fromValue:(CGFloat)fromValue toValue:(CGFloat)toValue repeat:(BOOL)repeat {
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    animation.fromValue = [NSNumber numberWithFloat:fromValue];
-    animation.toValue = [NSNumber numberWithFloat:toValue];
-    animation.autoreverses = YES;
-    animation.duration = time;
-    animation.repeatCount = repeat ? MAXFLOAT : 1;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    return animation;
 }
 
 - (void)deleteVideo {
