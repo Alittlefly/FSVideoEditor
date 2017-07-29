@@ -12,9 +12,14 @@
 
 
 @interface FSMusicSearchResultView ()
+
 @end
-
 @implementation FSMusicSearchResultView
-
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        [self setTag:100];
+    }
+    return self;
+}
 
 @end

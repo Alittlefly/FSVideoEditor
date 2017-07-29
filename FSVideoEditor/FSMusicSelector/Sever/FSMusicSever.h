@@ -10,17 +10,26 @@
 #import "FSMusic.h"
 @protocol FSMusicSeverDelegate <NSObject>
 
+@optional
 -(void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics musicTypes:(NSArray<FSMusicType *> *)musicTypes;
+
+-(void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics;
 
 -(void)musicSeverGetFaild;
 
+-(void)musicSeverSearched:(NSArray<FSMusic *>*)musics;
+
+-(void)musicSeverSearchFaild;
 @end
 
 @interface FSMusicSever : NSObject
 
 @property(nonatomic,assign)id<FSMusicSeverDelegate>delegate;
 
--(void)getMusicList;
+-(void)getMusicListPage:(NSInteger)page;
 
--(void)getMusicTypes;
+-(void)getMusicListWithType:(NSInteger)type page:(NSInteger)page;
+
+-(void)getMusicListWithSearchKey:(NSString *)searchKey no:(NSInteger)no;
+
 @end

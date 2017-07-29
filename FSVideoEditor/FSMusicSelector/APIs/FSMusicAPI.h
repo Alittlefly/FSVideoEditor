@@ -17,6 +17,6 @@
 @interface FSMusicAPI : NSObject
 
 @property(nonatomic,assign)id<FSMusicAPIDelegate>delegate;
--(void)getMusicWithParam:(id)param;
+-(void)getMusicWithPage:(NSInteger)page;
 -(void)cancleTask;
 @end

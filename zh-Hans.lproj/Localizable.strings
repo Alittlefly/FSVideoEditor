@@ -24,6 +24,7 @@ likeMusic = "我的收藏";
 RecordNow = "确定使用并开拍";
 Loading = "加载中…";
 Cancel = "取消";
+SearchMusic = "搜索歌曲名称";
 
 VideoLengthTip = "选择的视频不能少于5s";
 Edit = "编辑";

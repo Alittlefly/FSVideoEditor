@@ -20,10 +20,11 @@ UploadVideo = "تحميل";
 ChooseMusic = "موسيقى";
 Record = "سجل فيديو";
 HotMusic = "أجمل الأغاني";
-likeMusic = "我的收藏";
+likeMusic = "مفضلاتي";
 RecordNow = "البدء بتسجيل الفيديو";
 Loading = "جاري التحميل";
 Cancel = "إلغاء";
+SearchMusic = "ابحث عن موسيقى";
 
 VideoLengthTip = "يجب أن تكون مدة الفيديو (0) ثواني على الأقل لتتمكن من النشر";
 Edit = "تعديل";
@@ -94,3 +95,4 @@ Original = "الصوت الأصلي";
 Music = "اضف موسيقى";
 ChoseVideoTime = "تم اختيار (0) ثانية من الفيديو";
 Processing = "جاري المعالجة...";
+

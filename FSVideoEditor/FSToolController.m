@@ -18,7 +18,7 @@
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
 
-@interface FSToolController ()
+@interface FSToolController ()<FSMusicControllerDelegate>
 {
     UIButton *_currentButton;
 }
@@ -92,6 +92,7 @@
     
     if (!_musicView) {
         FSMusicController *music = [[FSMusicController alloc] init];
+        [music setDelegate:self];
         [self addChildViewController:music];
         [music.view setFrame:CGRectMake(0, 55, CGRectGetWidth(self.view.bounds), CGRectGetHeight(_contentView.frame)  - 55 - 20)];
         [_contentView addSubview:music.view];
@@ -99,8 +100,6 @@
     }
 
     [self.view setBackgroundColor:[UIColor clearColor]];
-    
-    
     
 }
 
@@ -162,8 +161,17 @@
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
 }
-- (void)musicList{
+
+#pragma mark -
+-(UIViewController *)musicControllerWouldShowMusicDetail:(FSMusic *)music{
+    UIViewController *deatilController = nil;
     
+    if ([self.delegate respondsToSelector:@selector(musicDetailControllerWithMusic:)]) {
+        deatilController = [self.delegate musicDetailControllerWithMusic:music];
+    }
+    
+    NSAssert(![deatilController isKindOfClass:[UINavigationController class]], @"返回的控制器不能为nav");
+    return deatilController;
 }
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));

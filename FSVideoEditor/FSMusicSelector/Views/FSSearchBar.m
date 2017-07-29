@@ -8,6 +8,7 @@
 
 #import "FSSearchBar.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSShortLanguage.h"
 
 @interface FSSearchBar()
 
@@ -55,7 +56,7 @@
     [self addSubview:_backView];
     
      _searchBar = [[UISearchBar alloc] initWithFrame:self.bounds];
-    [_searchBar setPlaceholder:@"搜索歌曲名称"];
+    [_searchBar setPlaceholder:[FSShortLanguage CustomLocalizedStringFromTable:@"SearchMusic"]];
     [_searchBar setBackgroundImage:[UIImage new] forBarPosition:(UIBarPositionAny) barMetrics:(UIBarMetricsDefault)];
     [_searchBar setBarTintColor:[UIColor clearColor]];
     [_searchBar setDelegate:_delegate];
@@ -66,7 +67,7 @@
     [self addSubview:_searchBar];
     
      _cancleButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    [_cancleButton setTitle:@"取消" forState:(UIControlStateNormal)];
+    [_cancleButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] forState:(UIControlStateNormal)];
     [_cancleButton sizeToFit];
     [_cancleButton setFrame:CGRectMake(CGRectGetWidth(self.bounds) - 20 - CGRectGetWidth(_cancleButton.frame), (CGRectGetHeight(self.bounds) - CGRectGetHeight(_cancleButton.frame))/2.0,  CGRectGetWidth(_cancleButton.frame), CGRectGetHeight(_cancleButton.frame))];
     [_cancleButton setTitleColor:FSHexRGB(0x0bc2c6) forState:(UIControlStateNormal)];

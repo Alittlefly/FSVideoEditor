@@ -11,9 +11,12 @@
 #import "FSMusicCell.h"
 #import "FSMusicListView.h"
 #import "FSShortVideoRecorderController.h"
-@interface FSMusicListController ()<FSMusicListViewDelegate>
-{
+#import "FSMusicSever.h"
 
+@interface FSMusicListController ()<FSMusicListViewDelegate,FSMusicSeverDelegate>
+{
+    FSMusicSever *_sever;
+    NSInteger _page;
 }
 @property(nonatomic,strong)FSMusicListView *musicListView;
 @property(nonatomic,strong)UIView *contentView;
@@ -48,34 +51,53 @@
     
     
     UIButton *backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    [backButton setFrame:CGRectMake(10, 10, 34, 34)];
-    [backButton setBackgroundColor:[UIColor redColor]];
+    [backButton setFrame:CGRectMake(12, 12, 30, 30)];
+    [backButton setImage:[UIImage imageNamed:@"musicBack"] forState:(UIControlStateNormal)];
     [backButton addTarget:self action:@selector(outNav) forControlEvents:(UIControlEventTouchUpInside)];
     [_contentView addSubview:backButton];
     
     [self.view setBackgroundColor:[UIColor clearColor]];
+     _page = 1;
+     _sever = [FSMusicSever new];
+    [_sever setDelegate:self];
+    [_sever getMusicListWithType:_musicType.typeId page:_page];//musicType.typeId];
+    [_musicListView showLoading:YES];
 }
 -(void)setMusicType:(FSMusicType *)musicType{
      _musicType = musicType;
 }
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-//    [_contentView setFrame:self.view.bounds];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-    [_musicListView setMusics:_musiceList];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
     [_musicListView stopPlayCurrentMusic];
 }
 -(void)musicListWouldUseMusic:(FSMusic *)music musicPath:(NSString *)musicPath{
     FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
     recoder.musicFilePath = musicPath;
     [self.navigationController pushViewController:recoder animated:YES];
+}
+-(void)musicListWouldShowDetail:(FSMusic *)music{
+    if ([self.delegate respondsToSelector:@selector(musicListWouldShowDetail:)]) {
+        [self.delegate musicListWouldShowDetail:music];
+    }
+}
+-(void)musicListWouldGetMoreData:(FSMusicListView *)listView{
+     _page ++;
+    [_sever getMusicListWithType:_musicType.typeId page:_page];
+}
+#pragma mark - 
+-(void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics{
+    [_musicListView insertMoreMusic:musics];
+    [_musicListView showLoading:NO];
+}
+-(void)musicSeverGetFaild{
+    [_musicListView insertMoreMusic:nil];
+    [_musicListView showLoading:NO];
 }
 -(void)outNav{
     [self.navigationController popViewControllerAnimated:YES];

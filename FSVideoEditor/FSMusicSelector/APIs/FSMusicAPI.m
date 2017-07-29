@@ -15,7 +15,7 @@
 }
 @end
 @implementation FSMusicAPI
--(void)getMusicWithParam:(id)param{
+-(void)getMusicWithPage:(NSInteger)page{
     if (_currentTask) {
         [_currentTask suspend];
         [_currentTask cancel];
@@ -24,7 +24,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     __weak typeof(self) weakS = self;
     //http://10.10.32.145:8088/   http://www.7nujoom.com/
-    NSURLSessionTask *task = [manager GET:[NSString stringWithFormat:@"%@video/song/list?no=1&size=99",AddressAPI] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionTask *task = [manager GET:[NSString stringWithFormat:@"%@video/song/list?no=%ld&size=5",AddressAPI,page] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([weakS.delegate respondsToSelector:@selector(musicApiGetMusics:)]) {
             [weakS.delegate musicApiGetMusics:responseObject];
         }

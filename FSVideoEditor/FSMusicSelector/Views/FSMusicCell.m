@@ -42,9 +42,9 @@
 @property(nonatomic,strong)UILabel *authorLabel;
 @property(nonatomic,strong)UILabel *timeLabel;
 @property(nonatomic,strong)UIButton *collectButton;
+@property(nonatomic,strong)UIButton *deatilButton;
 
 @property(nonatomic,strong)FSMusicUseButton *useButton;
-@property(nonatomic,strong)UIButton *controlButton;
 
 @end
 @implementation FSMusicCell
@@ -114,17 +114,21 @@ static NSString *identifier = @"FSMusicCell";
 -(UIButton *)collectButton{
     if (!_collectButton) {
          _collectButton = [[UIButton alloc] init];
-        [_collectButton setImage:[UIImage imageNamed:@"musicCollect"] forState:(UIControlStateNormal)];
-        [_controlButton addTarget:self action:@selector(playMusic:) forControlEvents:(UIControlEventTouchUpInside)];
+        [_collectButton setImage:[UIImage imageNamed:@"musicCollectNormal"] forState:(UIControlStateNormal)];
+        [_collectButton setImage:[UIImage imageNamed:@"musicCollectSelect"] forState:(UIControlStateSelected)];
+        [_collectButton addTarget:self action:@selector(collectMusic:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _collectButton;
 }
--(UIButton *)controlButton{
-    if (!_controlButton) {
-         _controlButton = [[UIButton alloc] init];
+-(UIButton *)deatilButton{
+    if (!_deatilButton) {
+         _deatilButton = [[UIButton alloc] init];
+        [_deatilButton setImage:[UIImage imageNamed:@"musicDetailBtn"] forState:(UIControlStateNormal)];
+        [_deatilButton addTarget:self action:@selector(showDetail:) forControlEvents:(UIControlEventTouchUpInside)];
     }
-    return _controlButton;
+    return _deatilButton;
 }
+
 -(void)layoutSubviews{
     [super layoutSubviews];
     
@@ -135,7 +139,7 @@ static NSString *identifier = @"FSMusicCell";
     [self addSubview:self.timeLabel];
     [self addSubview:self.useButton];
     [self addSubview:self.collectButton];
-    [self addSubview:self.controlButton];
+    [self addSubview:self.deatilButton];
     
     [self setClipsToBounds:YES];
     
@@ -150,7 +154,8 @@ static NSString *identifier = @"FSMusicCell";
     [self.timeLabel setFrame:CGRectMake(100.0, CGRectGetMaxY(self.authorLabel.frame) + 8.0, CGRectGetWidth(self.nameLabel.frame), 18)];
     [self.useButton setFrame:CGRectMake(10, 102, CGRectGetWidth(self.bounds) - 20, 40)];
     
-    [self.collectButton setFrame:CGRectMake(CGRectGetWidth(self.bounds) - 40, (107 - 20)/2.0, 20, 20)];
+    [self.deatilButton setFrame:CGRectMake(CGRectGetWidth(self.bounds) - 80, (107 - 30)/2.0, 30, 30)];
+    [self.collectButton setFrame:CGRectMake(CGRectGetWidth(self.bounds) - 40, (107 - 30)/2.0, 30, 30)];
 }
 
 -(void)setMusic:(FSMusic *)music{
@@ -159,13 +164,13 @@ static NSString *identifier = @"FSMusicCell";
     [self.timeLabel setText:[self getCurrentTimeString:music.songTime]];
      _music = music;
     NSString *songPic = music.songPic;
-    if (![songPic hasPrefix:@"http"]) {
-        //http://www.7nujoom.com/    http://10.10.32.152:20000/
+    if (![songPic hasPrefix:@"http"] && songPic) {
         songPic = [@"http://35.158.218.231/" stringByAppendingString:songPic];
     }
     [self.pic sd_setImageWithURL:[NSURL URLWithString:songPic] placeholderImage:[UIImage imageNamed:@"musicPlaceHolder"]];
     [self.useButton setHidden:!_music.opend];
     [self.playButton setSelected:_music.isPlaying];
+    [self.collectButton setSelected:_music.collected];
     [self setIsPlayIng:_music.isPlaying];
 }
 
@@ -191,6 +196,18 @@ static NSString *identifier = @"FSMusicCell";
 -(void)useMusic:(UIButton *)button{
     if ([self.delegate respondsToSelector:@selector(musicCell:wuoldUseMusic:)]) {
         [self.delegate musicCell:self wuoldUseMusic:_music];
+    }
+}
+-(void)collectMusic:(UIButton *)button{
+    _music.collected = !_music.collected;
+    [self.collectButton setSelected:_music.collected];
+    if ([self.delegate respondsToSelector:@selector(musicCell:wouldCollect:)]) {
+        [self.delegate musicCell:self wouldCollect:_music];
+    }
+}
+-(void)showDetail:(UIButton *)button{
+    if ([self.delegate respondsToSelector:@selector(musicCell:wouldShowDetail:)]) {
+        [self.delegate musicCell:self wouldShowDetail:_music];
     }
 }
 

@@ -16,6 +16,9 @@
 
 -(void)musicCell:(FSMusicCell *)cell wuoldUseMusic:(FSMusic *)music;
 
+-(void)musicCell:(FSMusicCell *)cell wouldShowDetail:(FSMusic *)music;
+
+-(void)musicCell:(FSMusicCell *)cell wouldCollect:(FSMusic *)music;
 @end
 
 @interface FSMusicCell : UITableViewCell

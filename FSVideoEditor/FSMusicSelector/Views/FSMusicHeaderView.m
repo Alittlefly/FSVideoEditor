@@ -79,6 +79,7 @@
 @property(nonatomic,strong)UIView *hline;
 @property(nonatomic,strong)UIView *vline;
 @property(nonatomic,strong)NSMutableArray *musicTypeButtons;
+@property(nonatomic,strong)FSMusicItemButton *currentSelected;
 @end
 @implementation FSMusicHeaderView
 -(NSMutableArray *)musicTypeButtons{
@@ -105,6 +106,9 @@
         _hotMusicButton = [[FSMusicItemButton alloc] init];
         [_hotMusicButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"HotMusic"] forState:(UIControlStateNormal)];
         [self addSubview:_hotMusicButton];
+        [_hotMusicButton addTarget:self action:@selector(clickTypeItem:) forControlEvents:(UIControlEventTouchUpInside)];
+        _hotMusicButton.tag = FSMusicButtonTypeHot;
+        [self setCurrentSelected:_hotMusicButton];
     }
     
 
@@ -118,9 +122,18 @@
         _likeMusicButton = [[FSMusicItemButton alloc] init];
         [_likeMusicButton setBackgroundColor:[UIColor clearColor]];
         [_likeMusicButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"likeMusic"] forState:(UIControlStateNormal)];
+        [_likeMusicButton addTarget:self action:@selector(clickTypeItem:) forControlEvents:(UIControlEventTouchUpInside)];
+         _likeMusicButton.tag = FSMusicButtonTypeLike;
         [self addSubview:_likeMusicButton];
     }
 
+}
+-(void)setCurrentSelected:(FSMusicItemButton *)currentSelected{
+    if (_currentSelected) {
+        [_currentSelected setSelected:NO];
+    }
+    _currentSelected = currentSelected;
+    [_currentSelected setSelected:YES];
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
@@ -136,6 +149,10 @@
 
 }
 -(void)setItems:(NSArray<FSMusicType *> *)items{
+    
+    if (_items != nil) {
+        return;
+    }
     _items = items;
     
     [self creatItems:_opend items:items];
@@ -199,6 +216,12 @@
     frame.size.height += addHeight;
     if ([self.delegate respondsToSelector:@selector(musicHeaderShouldBeFrame:)]) {
         [self.delegate musicHeaderShouldBeFrame:frame];
+    }
+}
+-(void)clickTypeItem:(FSMusicItemButton *)button{
+    [self setCurrentSelected:button];
+    if ([self.delegate respondsToSelector:@selector(musicHeaderClickTypeButton:)]) {
+        [self.delegate musicHeaderClickTypeButton:button.tag];
     }
 }
 -(void)clickFashino:(FSMusicTypeButton *)button{

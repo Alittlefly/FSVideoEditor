@@ -11,10 +11,12 @@
 #import "FSMusicManager.h"
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
+#import "MJRefresh.h"
 
-@interface FSMusicListView ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate>
+@interface FSMusicListView ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate,FSMusicCollectSeverDelegate>
 {
     FSMusic *_music;
+    FSMusicCollectSever *_collectSever;
 }
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)FSEditorLoading *loading;
@@ -34,8 +36,16 @@
         [_tableView setDataSource:self];
         [_tableView setTableFooterView:[UIView new]];
         [self addSubview:_tableView];
+         _collectSever = [FSMusicCollectSever new];
+        [_collectSever setDelegate:self];
+        [_tableView setMj_footer:[MJRefreshBackStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(getMoreData)]];
     }
     return self;
+}
+-(void)getMoreData{
+    if ([self.delegate respondsToSelector:@selector(musicListWouldGetMoreData:)]) {
+        [self.delegate musicListWouldGetMoreData:self];
+    }
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
@@ -43,9 +53,17 @@
     [_tableView setFrame:self.bounds];
 }
 -(void)setMusics:(NSArray *)musics{
-    _musics = musics;
-    
+     _musics = musics;
     [_tableView reloadData];
+    if([_tableView.mj_footer isRefreshing]){
+       [_tableView.mj_footer endRefreshing];
+    }
+}
+-(void)insertMoreMusic:(NSArray *)musics{
+    _music = _music?:[@[] mutableCopy];
+    NSMutableArray *oldMusic = [NSMutableArray arrayWithArray:_musics];
+    [oldMusic addObjectsFromArray:musics];
+    [self setMusics:oldMusic];
 }
 -(void)setTableHeader:(UIView *)tableHeader{
     _tableHeader = tableHeader;
@@ -80,7 +98,6 @@
     FSMusicCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     [self playMusic:music playViewCell:cell];
-    
 }
 -(void)playMusic:(FSMusic *)music playViewCell:(FSMusicCell *)cell{
     //
@@ -109,7 +126,7 @@
         if (music.songUrl) {
             
             NSString *url = music.songUrl;
-            if (![url hasPrefix:@"http"]) {
+            if (![url hasPrefix:@"http"] && url) {
                 //@"http://35.158.218.231/"    http://10.10.32.152:20000/
                 url = [AddressIP stringByAppendingString:music.songUrl];
             }
@@ -197,6 +214,25 @@
         [self.delegate musicListWouldUseMusic:music musicPath:path];
     }
 }
+-(void)musicCell:(FSMusicCell *)cell wouldShowDetail:(FSMusic *)music{
+    if ([self.delegate respondsToSelector:@selector(musicListWouldShowDetail:)]) {
+        [self.delegate musicListWouldShowDetail:music];
+    }
+}
+-(void)musicCell:(FSMusicCell *)cell wouldCollect:(FSMusic *)music{
+    [_collectSever collectMusic:music collect:music.collected];
+}
+#pragma mark - 
+-(void)musicCollectSeverCollectMusicSuccess:(FSMusic *)music{
+//    [_tableView reloadData];
+    NSLog(@"收藏成功!");
+}
+-(void)musicCollectSeverCollectFaild:(FSMusic *)music{
+    music.collected = !music.collected;
+    [_tableView reloadData];
+}
+#pragma mark -
+
 #pragma mark - 
 -(void)showLoading:(BOOL)show{
     if (show) {
