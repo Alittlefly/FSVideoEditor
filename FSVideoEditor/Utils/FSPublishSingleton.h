@@ -15,6 +15,15 @@
 @property (nonatomic, strong) FSMusic *chooseMusic;
 @property (nonatomic, strong) FSChallengeModel *chooseChallenge;
 
+@property (nonatomic, copy) NSString *userName;
+@property (nonatomic, copy) NSString *loginKey;
+@property (nonatomic, assign) BOOL isAutoReverse;
+@property (nonatomic, copy) NSString *language;
+
+@property (nonatomic, copy) NSString *addressAPILogin;
+@property (nonatomic, copy) NSString *addressUpload;
+@property (nonatomic, copy) NSString *addressAPI;
+
 + (instancetype)sharedInstance;
 
 - (void)cleanData;

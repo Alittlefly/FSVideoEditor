@@ -10,6 +10,7 @@
 #import "FSEditVideoNameView.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
+#import "FSPublishSingleton.h"
 
 @interface FSPublisherToolView()<FSEditVideoNameViewDelegate>
 
@@ -34,8 +35,6 @@
 @property (nonatomic, assign)FSPublisherToolViewType type;
 
 @end
-
-static BOOL IsArabic = NO;
 
 @implementation FSPublisherToolView
 
@@ -66,18 +65,18 @@ static BOOL IsArabic = NO;
 
 - (void)initBaseUI {
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _backButton.frame = IsArabic ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
+    _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
     [_backButton setImage:[UIImage imageNamed:@"recorder-back"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_backButton];
     
     _chooseMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _chooseMusicButton.frame = IsArabic ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
+    _chooseMusicButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
     [_chooseMusicButton setImage:[UIImage imageNamed:@"choose-music"] forState:UIControlStateNormal];
     [_chooseMusicButton addTarget:self action:@selector(chooseMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_chooseMusicButton];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(IsArabic ? 15+40+5 : 15+20+5, 20, self.frame.size.width-15-15-20-40-10, 40)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 15+40+5 : 15+20+5, 20, self.frame.size.width-15-15-20-40-10, 40)];
     _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.font = [UIFont systemFontOfSize:15];
@@ -88,13 +87,13 @@ static BOOL IsArabic = NO;
     [self addSubview:_titleLabel];
 
     _cutMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _cutMusicButton.frame = IsArabic ? CGRectMake(15, CGRectGetMaxY(_chooseMusicButton.frame)+30, 40, 40) : CGRectMake(CGRectGetWidth(self.frame) - 15 -40, CGRectGetMaxY(_chooseMusicButton.frame)+30, 40, 40);
+    _cutMusicButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, CGRectGetMaxY(_chooseMusicButton.frame)+30, 40, 40) : CGRectMake(CGRectGetWidth(self.frame) - 15 -40, CGRectGetMaxY(_chooseMusicButton.frame)+30, 40, 40);
     [_cutMusicButton setImage:[UIImage imageNamed:@"recorder-cut"] forState:UIControlStateNormal];
     [_cutMusicButton addTarget:self action:@selector(cutMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_cutMusicButton];
     
     _cutMusicLabel = [[UILabel alloc] init];
-    _cutMusicLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
+    _cutMusicLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
     _cutMusicLabel.font = [UIFont systemFontOfSize:7];
     _cutMusicLabel.textColor = [UIColor whiteColor];
     _cutMusicLabel.backgroundColor = [UIColor clearColor];
@@ -111,7 +110,7 @@ static BOOL IsArabic = NO;
     [self addSubview:_volumeButton];
     
     _volumeLabel = [[UILabel alloc] init];
-    _volumeLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_volumeButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_volumeButton.frame), 10) : CGRectMake(CGRectGetMaxX(_volumeButton.frame) - CGRectGetWidth(_volumeButton.frame), CGRectGetMaxY(_volumeButton.frame), CGRectGetWidth(_volumeButton.frame), 10);
+    _volumeLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_volumeButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_volumeButton.frame), 10) : CGRectMake(CGRectGetMaxX(_volumeButton.frame) - CGRectGetWidth(_volumeButton.frame), CGRectGetMaxY(_volumeButton.frame), CGRectGetWidth(_volumeButton.frame), 10);
     _volumeLabel.backgroundColor = [UIColor clearColor];
     _volumeLabel.font = [UIFont systemFontOfSize:7];
     _volumeLabel.textColor = [UIColor whiteColor];
@@ -129,7 +128,7 @@ static BOOL IsArabic = NO;
         [self addSubview:_filterButton];
         
         _filterLabel = [[UILabel alloc] init];
-        _filterLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15) : CGRectMake(CGRectGetMaxX(_filterButton.frame) - CGRectGetWidth(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15);
+        _filterLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15) : CGRectMake(CGRectGetMaxX(_filterButton.frame) - CGRectGetWidth(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15);
         _filterLabel.backgroundColor = [UIColor clearColor];
         _filterLabel.font = [UIFont systemFontOfSize:7];
         _filterLabel.textColor = [UIColor whiteColor];
@@ -153,7 +152,7 @@ static BOOL IsArabic = NO;
     [self addSubview:_effectsButton];
     
     _effectsLabel = [[UILabel alloc] init];
-    _effectsLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_effectsButton.frame), CGRectGetMaxY(_effectsButton.frame), CGRectGetWidth(_effectsButton.frame), 15) : CGRectMake(CGRectGetMaxX(_effectsButton.frame) - CGRectGetWidth(_effectsButton.frame), CGRectGetMaxY(_effectsButton.frame), CGRectGetWidth(_effectsButton.frame), 15);
+    _effectsLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_effectsButton.frame), CGRectGetMaxY(_effectsButton.frame), CGRectGetWidth(_effectsButton.frame), 15) : CGRectMake(CGRectGetMaxX(_effectsButton.frame) - CGRectGetWidth(_effectsButton.frame), CGRectGetMaxY(_effectsButton.frame), CGRectGetWidth(_effectsButton.frame), 15);
     _effectsLabel.backgroundColor = [UIColor clearColor];
     _effectsLabel.font = [UIFont systemFontOfSize:7];
     _effectsLabel.textColor = [UIColor whiteColor];
@@ -164,7 +163,7 @@ static BOOL IsArabic = NO;
     [self addSubview:_effectsLabel];
     
     _draftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _draftButton.frame = IsArabic ? CGRectMake(self.frame.size.width-20-(self.frame.size.width-60)/2, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44) : CGRectMake(20, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44);
+    _draftButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width-20-(self.frame.size.width-60)/2, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44) : CGRectMake(20, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44);
     [_draftButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Draft"] forState:UIControlStateNormal];
     _draftButton.backgroundColor = FSHexRGB(0x0BC2C6);
     _draftButton.layer.cornerRadius = 22;
@@ -174,7 +173,7 @@ static BOOL IsArabic = NO;
     [self addSubview:_draftButton];
     
     _publishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _publishButton.frame = IsArabic ? CGRectMake(20, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44) : CGRectMake(self.frame.size.width-20-(self.frame.size.width-60)/2, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44);
+    _publishButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(20, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44) : CGRectMake(self.frame.size.width-20-(self.frame.size.width-60)/2, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44);
     [_publishButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Upload"] forState:UIControlStateNormal];
     _publishButton.backgroundColor = FSHexRGB(0xFE2C54);
     _publishButton.layer.cornerRadius = 22;

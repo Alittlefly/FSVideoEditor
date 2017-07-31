@@ -100,4 +100,5 @@ EnterChallenge = "Video konusunu gir";
 HotChallenges = "Önerilen Konular";
 ChallengePeopleCount = "(0) kişi bu konuda video çekti";
 ChallengeDescribe = "Konu içeriğine dair kısaca bilgi ver";
-MaxWordsCount = "Kelime limitini aştınız";
+MaxWordsCount = "Maksimum (0) harf";
+MaxLetterLimit = "Kelime limitini aştınız";

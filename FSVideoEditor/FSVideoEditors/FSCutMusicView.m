@@ -10,6 +10,7 @@
 #import "FSMusicPlayer.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
+#import "FSPublishSingleton.h"
 
 @interface FSCutMusicView()<UIScrollViewDelegate>
 
@@ -93,7 +94,7 @@
     
     _currentImageView.maskView = _maskView;
     
-    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(_scrollView.frame)-5-25, 100, 25)];
+    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width-20-100 : 20, CGRectGetMinY(_scrollView.frame)-5-25, 100, 25)];
     _timeLabel.backgroundColor = FSHexRGBAlpha(0x000F1E, 0.5);
     _timeLabel.textColor = FSHexRGB(0xF5F5F5);
     _timeLabel.font = [UIFont systemFontOfSize:11];
@@ -120,7 +121,7 @@
     [self addSubview:_titleLabel];
     
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _finishButton.frame = CGRectMake(self.frame.size.width- 20-54, CGRectGetMinY(_titleLabel.frame), 54, 30);
+    _finishButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width- 20-54, CGRectGetMinY(_titleLabel.frame), 54, 30);
     _finishButton.backgroundColor = [UIColor clearColor];
     [_finishButton setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(finishCutMusic) forControlEvents:UIControlEventTouchUpInside];

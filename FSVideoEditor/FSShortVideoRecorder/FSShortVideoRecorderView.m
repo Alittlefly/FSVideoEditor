@@ -20,8 +20,7 @@
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
-
-BOOL IsArabic;
+#import "FSPublishSingleton.h"
 
 @interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate, FSTimeCountdownViewDelegate,UIAlertViewDelegate, FSSegmentViewDelegate, FSMoveButtonDelegate, FSCutMusicViewDelegate>
 
@@ -147,32 +146,32 @@ BOOL IsArabic;
     
     
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _backButton.frame = IsArabic ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
+    _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
     [_backButton setImage:[UIImage imageNamed:@"recorder-back"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_backButton];
     
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _finishButton.frame = IsArabic ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
+    _finishButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
     _finishButton.enabled = NO;
     [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(finishClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_finishButton];
     
     _recoverCamera = [UIButton buttonWithType:UIButtonTypeCustom];
-    _recoverCamera.frame = IsArabic ? CGRectMake(CGRectGetMaxX(_finishButton.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetMinX(_finishButton.frame) - 30 -40, 20, 40, 40);
+    _recoverCamera.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_finishButton.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetMinX(_finishButton.frame) - 30 -40, 20, 40, 40);
     [_recoverCamera setImage:[UIImage imageNamed:@"recorder-camera"] forState:UIControlStateNormal];
     [_recoverCamera addTarget:self action:@selector(recoverCameraClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_recoverCamera];
     
     _flashButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _flashButton.frame = IsArabic ? CGRectMake(CGRectGetMaxX(_recoverCamera.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetMinX(_recoverCamera.frame) - 30 -40, 20, 40, 40);
+    _flashButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_recoverCamera.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetMinX(_recoverCamera.frame) - 30 -40, 20, 40, 40);
     [_flashButton setImage:[UIImage imageNamed:@"recorder-flash-off"] forState:UIControlStateNormal];
     [_flashButton addTarget:self action:@selector(flashClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_flashButton];
 
     _cutMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _cutMusicButton.frame = IsArabic ? CGRectMake(CGRectGetMaxX(_recoverCamera.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetWidth(self.frame) - 15 -40, CGRectGetMaxY(_finishButton.frame)+30, 40, 40);
+    _cutMusicButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_recoverCamera.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetWidth(self.frame) - 15 -40, CGRectGetMaxY(_finishButton.frame)+30, 40, 40);
     [_cutMusicButton setImage:[UIImage imageNamed:@"recorder-cut"] forState:UIControlStateNormal];
     [_cutMusicButton addTarget:self action:@selector(cutMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_cutMusicButton];
@@ -185,7 +184,7 @@ BOOL IsArabic;
     }
     
     _cutMusicLabel = [[UILabel alloc] init];
-    _cutMusicLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
+    _cutMusicLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
     _cutMusicLabel.font = [UIFont systemFontOfSize:7];
     _cutMusicLabel.textColor = [UIColor whiteColor];
     _cutMusicLabel.backgroundColor = [UIColor clearColor];
@@ -202,7 +201,7 @@ BOOL IsArabic;
     [self addSubview:_beautyButton];
     
     _beautyLabel = [[UILabel alloc] init];
-    _beautyLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_beautyButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_beautyButton.frame), 10) : CGRectMake(CGRectGetMaxX(_beautyButton.frame) - CGRectGetWidth(_beautyButton.frame), CGRectGetMaxY(_beautyButton.frame), CGRectGetWidth(_beautyButton.frame), 10);
+    _beautyLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_beautyButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_beautyButton.frame), 10) : CGRectMake(CGRectGetMaxX(_beautyButton.frame) - CGRectGetWidth(_beautyButton.frame), CGRectGetMaxY(_beautyButton.frame), CGRectGetWidth(_beautyButton.frame), 10);
     _beautyLabel.backgroundColor = [UIColor clearColor];
     _beautyLabel.font = [UIFont systemFontOfSize:7];
     _beautyLabel.textColor = [UIColor whiteColor];
@@ -219,7 +218,7 @@ BOOL IsArabic;
     [self addSubview:_filterButton];
     
     _filterLabel = [[UILabel alloc] init];
-    _filterLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15) : CGRectMake(CGRectGetMaxX(_filterButton.frame) - CGRectGetWidth(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15);
+    _filterLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15) : CGRectMake(CGRectGetMaxX(_filterButton.frame) - CGRectGetWidth(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15);
     _filterLabel.backgroundColor = [UIColor clearColor];
     _filterLabel.font = [UIFont systemFontOfSize:7];
     _filterLabel.textColor = [UIColor whiteColor];
@@ -236,7 +235,7 @@ BOOL IsArabic;
     [self addSubview:_countdownButton];
     
     _countdownLabel = [[UILabel alloc] init];
-    _countdownLabel.frame = IsArabic ? CGRectMake(CGRectGetMinX(_countdownButton.frame), CGRectGetMaxY(_countdownButton.frame), CGRectGetWidth(_countdownButton.frame), 10) : CGRectMake(CGRectGetMaxX(_countdownButton.frame) - CGRectGetWidth(_countdownButton.frame), CGRectGetMaxY(_countdownButton.frame), CGRectGetWidth(_countdownButton.frame), 10);
+    _countdownLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_countdownButton.frame), CGRectGetMaxY(_countdownButton.frame), CGRectGetWidth(_countdownButton.frame), 10) : CGRectMake(CGRectGetMaxX(_countdownButton.frame) - CGRectGetWidth(_countdownButton.frame), CGRectGetMaxY(_countdownButton.frame), CGRectGetWidth(_countdownButton.frame), 10);
     _countdownLabel.backgroundColor = [UIColor clearColor];
     _countdownLabel.font = [UIFont systemFontOfSize:7];
     _countdownLabel.textColor = [UIColor whiteColor];
@@ -265,14 +264,14 @@ BOOL IsArabic;
     [self addSubview:_recorderButton];
 
     _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _deleteButton.frame = IsArabic ? CGRectMake(CGRectGetMinX(_recorderButton.frame)-50-40, 0, 40, 40) : CGRectMake(CGRectGetMaxX(_recorderButton.frame)+50, 0, 40, 40);
+    _deleteButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_recorderButton.frame)-50-40, 0, 40, 40) : CGRectMake(CGRectGetMaxX(_recorderButton.frame)+50, 0, 40, 40);
     _deleteButton.center = CGPointMake(_deleteButton.center.x, _recorderButton.center.y);
     [_deleteButton setImage:[UIImage imageNamed:@"recorder-delete"] forState:UIControlStateNormal];
     [_deleteButton addTarget:self action:@selector(deleteVideo) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_deleteButton];
     
     _faceUButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _faceUButton.frame = IsArabic ? CGRectMake(CGRectGetMaxX(_recorderButton.frame)+50, 0, 40, 40) : CGRectMake(CGRectGetMinX(_recorderButton.frame)-50-40, 0, 40, 40);
+    _faceUButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_recorderButton.frame)+50, 0, 40, 40) : CGRectMake(CGRectGetMinX(_recorderButton.frame)-50-40, 0, 40, 40);
     _faceUButton.center = CGPointMake(_faceUButton.center.x, _recorderButton.center.y);
     [_faceUButton setImage:[UIImage imageNamed:@"recorder-faceu"] forState:UIControlStateNormal];
     [_faceUButton addTarget:self action:@selector(faceuClick) forControlEvents:UIControlEventTouchUpInside];
@@ -390,11 +389,6 @@ BOOL IsArabic;
 
 - (void)recoverCameraClik {
     BOOL isSuccess = [_recorderManager switchCamera];
-//    if (isSuccess) {
-//        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:)]) {
-//            [self.delegate FSShortVideoRecorderViewFinishRecorder:[_recorderManager getVideoPath]];
-//        }
-//    }
 }
 
 - (void)flashClik {
@@ -448,17 +442,11 @@ BOOL IsArabic;
         [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-on"] forState:UIControlStateNormal];
         [_beautyLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOn"]];
         [self showAlertView:[FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOnTip"]];
-//        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewShowAlertView:)]) {
-//            [self.delegate FSShortVideoRecorderViewShowAlertView:NSLocalizedString(@"BeautifyOnTip", nil)];
-//        }
     }
     else {
         [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-off"] forState:UIControlStateNormal];
         [_beautyLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOff"]];
         [self showAlertView:[FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOffTip"]];
-//        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewShowAlertView:)]) {
-//            [self.delegate FSShortVideoRecorderViewShowAlertView:NSLocalizedString(@"BeautifyOffTip", nil)];
-//        }
     }
     [_recorderManager switchBeauty:_isBeautyOpened];
 }
@@ -486,55 +474,7 @@ BOOL IsArabic;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewShowFilterView)]) {
         [self.delegate FSShortVideoRecorderViewShowFilterView];
     }
-    return;
-    if (!_filterView) {
-        _filterView = [[FSFilterView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-120, self.frame.size.width, 120)];
-        _filterView.backgroundColor = [UIColor clearColor];
-        _filterView.hidden = YES;
-        _filterView.delegate =self;
-        [self addSubview:_filterView];
-    }
-    
-    _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
-    _filterView.hidden = NO;
-    [UIView animateWithDuration:0.5 animations:^{
-        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.frame.size.height-_filterView.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
-        
-    }];
 }
-
-#pragma mark - FSFilterViewDelegate
-
-//- (void)FSFilterViewFinishedChooseFilter {
-//    [UIView animateWithDuration:0.5 animations:^{
-//        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
-//        
-//    } completion:^(BOOL finished) {
-//        _filterView.hidden = YES;
-//        
-//        _backButton.hidden= NO;
-//        _recoverCamera.hidden = NO;
-//        _finishButton.hidden = NO;
-//        _flashButton.hidden = NO;
-//        _cutMusicButton.hidden = NO;
-//        _beautyButton.hidden = NO;
-//        _filterButton.hidden = NO;
-//        _countdownButton.hidden = NO;
-//        _cutMusicLabel.hidden = NO;
-//        _filterLabel.hidden = NO;
-//        _beautyLabel.hidden = NO;
-//        _countdownLabel.hidden = NO;
-//        _recorderButton.hidden = NO;
-//        _faceUButton.hidden = YES;
-//        _deleteButton.hidden = NO;
-//        _segmentView.hidden = NO;
-//        _isOpenFilterView = NO;
-//        
-//        [_filterView removeFromSuperview];
-//        _filterView = nil;
-//
-//    }];
-//}
 
 - (void)finishChangeFilter {
     _backButton.hidden= NO;

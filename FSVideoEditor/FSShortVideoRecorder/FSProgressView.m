@@ -7,6 +7,7 @@
 //
 
 #import "FSProgressView.h"
+#import "FSPublishSingleton.h"
 
 @interface FSProgressView()
 
@@ -38,17 +39,32 @@
 
     if (isAnimated) {
         [UIView animateWithDuration:0.1 animations:^{
-            self.progressView.frame = CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, width, self.progressView.frame.size.height);
+            if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+                self.progressView.frame = CGRectMake(self.frame.size.width-width, self.progressView.frame.origin.y, width, self.progressView.frame.size.height);
+
+            }
+            else {
+                self.progressView.frame = CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, width, self.progressView.frame.size.height);
+            }
         }];
     }
     else {
-        self.progressView.frame = CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, width, self.progressView.frame.size.height);
+        if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+            self.progressView.frame = CGRectMake(self.frame.size.width-width, self.progressView.frame.origin.y, width, self.progressView.frame.size.height);
+            
+        }
+        else {
+            self.progressView.frame = CGRectMake(self.progressView.frame.origin.x, self.progressView.frame.origin.y, width, self.progressView.frame.size.height);
+        }
     }
 }
 
 - (void)stopAnimationWithCuttingLine {
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(self.progressView.frame.size.width, 0, 2, self.frame.size.height)];
     line.backgroundColor = [UIColor whiteColor];
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        line.frame = CGRectMake(self.progressView.frame.origin.x, 0, 2, self.frame.size.height);
+    }
     [self addSubview:line];
     
     [_linesArray addObject:line];

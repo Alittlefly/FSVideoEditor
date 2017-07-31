@@ -10,6 +10,7 @@
 #import "FSFilterButton.h"
 #import "FSShortVideoRecorderManager.h"
 #import "FSShortLanguage.h"
+#import "FSPublishSingleton.h"
 
 @interface FSFilterView()
 
@@ -52,7 +53,7 @@
     _chooseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _chooseButton.backgroundColor = [UIColor clearColor];
     [_chooseButton setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
-    _chooseButton.frame = CGRectMake(self.frame.size.width-20-54, (self.frame.size.height/2-30)/2, 54, 30);
+    _chooseButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width-20-54, (self.frame.size.height/2-30)/2, 54, 30);
     [_chooseButton addTarget:self action:@selector(finishChooseFilter) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_chooseButton];
     

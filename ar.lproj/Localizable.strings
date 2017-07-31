@@ -100,4 +100,5 @@ EnterChallenge = "ما هو التحدي الذي ستقدمه؟";
 HotChallenges = "تحديات مقترحة";
 ChallengePeopleCount = "(0)المشاركين في التحدي";
 ChallengeDescribe = "اوصف التحدي الذي ستقدمه باختصار";
-MaxWordsCount = "لقد تجاوزت عدد الحروف المسموح بها";
+MaxWordsCount = "في حدود (0) حرف";
+MaxLetterLimit = "لقد تجاوزت عدد الحروف المسموح بها";

@@ -100,4 +100,6 @@ EnterChallenge = "输入挑战内容";
 HotChallenges = "热门挑战推荐";
 ChallengePeopleCount = "(0)人参与挑战";
 ChallengeDescribe = "简单描述一下你的挑战";
-MaxWordsCount = "已超出最大字数限制";
+MaxWordsCount = "限定(0)字";
+MaxLetterLimit = "已超出最大字数限制";
+
