@@ -20,8 +20,7 @@
 #import "FSShortVideoRecorderManager.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
-
-extern int IsArabic;
+#import "FSPublishSingleton.h"
 
 @interface FSLocalEditorController ()<NvsStreamingContextDelegate,FSThumbnailViewDelegate,FSSegmentViewDelegate,FSShortVideoRecorderManagerDelegate>
 {
@@ -57,14 +56,14 @@ extern int IsArabic;
 }
 - (void)creatButtons{
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _backButton.frame = IsArabic ? CGRectMake(CGRectGetWidth(self.view.bounds) - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
+    _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetWidth(self.view.bounds) - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
     [_backButton setImage:[UIImage imageNamed:@"recorder-back"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backClik) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_backButton];
     
     
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _finishButton.frame = IsArabic ? CGRectMake(15, 20, 40, 40) : CGRectMake(CGRectGetWidth(self.view.bounds)- 15 -40, 20, 40, 40);
+    _finishButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, 20, 40, 40) : CGRectMake(CGRectGetWidth(self.view.bounds)- 15 -40, 20, 40, 40);
     [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-red"] forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(saveVideoFile) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_finishButton];

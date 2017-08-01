@@ -28,8 +28,15 @@
     __weak typeof(self) weakS = self;
     //http://10.10.32.145:8088/video/discover/search?w=
     NSURLSessionTask *task = [manager GET:[NSString stringWithFormat:@"%@video/discover/search",AddressAPI] parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([weakS.delegate respondsToSelector:@selector(FSSearchChallengeAPISucceed:)]) {
-            [weakS.delegate FSSearchChallengeAPISucceed:responseObject];
+        if ([[responseObject objectForKey:@"code"] integerValue] == 0) {
+            if ([weakS.delegate respondsToSelector:@selector(FSSearchChallengeAPISucceed:)]) {
+                [weakS.delegate FSSearchChallengeAPISucceed:responseObject];
+            }
+        }
+        else {
+            if ([weakS.delegate respondsToSelector:@selector(FSSearchChallengeAPIFailed:)]) {
+                [weakS.delegate FSSearchChallengeAPIFailed:nil];
+            }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if ([weakS.delegate respondsToSelector:@selector(FSSearchChallengeAPIFailed:)]) {

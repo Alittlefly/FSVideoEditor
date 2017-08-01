@@ -211,7 +211,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		567E0B791EF939A700C4C527 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -512,6 +512,7 @@
 		984060521EF940730049B58E /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		984060541EF9407B0049B58E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		984060561EF940810049B58E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		986186DA1F30665300CFFD01 /* libNvConvertorLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvConvertorLib.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libNvConvertorLib.a; sourceTree = "<group>"; };
 		986722EF1F288E7A00B82CDD /* FSAddChallengeAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAddChallengeAPI.h; sourceTree = "<group>"; };
 		986722F01F288E7A00B82CDD /* FSAddChallengeAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAddChallengeAPI.m; sourceTree = "<group>"; };
 		9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"; sourceTree = "<group>"; };
@@ -1412,6 +1413,7 @@
 		9840603F1EF9401E0049B58E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				986186DA1F30665300CFFD01 /* libNvConvertorLib.a */,
 				5616CC531F2B40F700028770 /* MJRefresh */,
 				98FDD8401F21B14400597B38 /* sdkcore */,
 				98EC1A3B1F209277003B71B7 /* CoreMotion.framework */,

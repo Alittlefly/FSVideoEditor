@@ -132,11 +132,11 @@
         _filterLabel.backgroundColor = [UIColor clearColor];
         _filterLabel.font = [UIFont systemFontOfSize:7];
         _filterLabel.textColor = [UIColor whiteColor];
-        _filterLabel.textAlignment = NSTextAlignmentCenter;// IsArabic ? NSTextAlignmentLeft : NSTextAlignmentRight;
+        _filterLabel.textAlignment = NSTextAlignmentCenter;
         _filterLabel.shadowColor = [UIColor blackColor];
         _filterLabel.shadowOffset = CGSizeMake(1, 1);
         _filterLabel.text = [FSShortLanguage
-                             CustomLocalizedStringFromTable:@"ColorFilter"];//NSLocalizedString(@"ColorFilter", nil);
+                             CustomLocalizedStringFromTable:@"ColorFilter"];
         [self addSubview:_filterLabel];
     }
     
@@ -158,8 +158,8 @@
     _effectsLabel.textColor = [UIColor whiteColor];
     _effectsLabel.shadowColor = [UIColor blackColor];
     _effectsLabel.shadowOffset = CGSizeMake(1, 1);
-    _effectsLabel.textAlignment = NSTextAlignmentCenter;// IsArabic ? NSTextAlignmentLeft : NSTextAlignmentRight;
-    _effectsLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Effects"];//NSLocalizedString(@"Effects", nil);
+    _effectsLabel.textAlignment = NSTextAlignmentCenter;
+    _effectsLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Effects"];
     [self addSubview:_effectsLabel];
     
     _draftButton = [UIButton buttonWithType:UIButtonTypeCustom];

@@ -224,8 +224,8 @@
     _filterLabel.textColor = [UIColor whiteColor];
     _filterLabel.shadowColor = [UIColor blackColor];
     _filterLabel.shadowOffset = CGSizeMake(1, 1);
-    _filterLabel.textAlignment = NSTextAlignmentCenter;// IsArabic ? NSTextAlignmentLeft : NSTextAlignmentRight;
-    _filterLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ColorFilter"];//NSLocalizedString(@"ColorFilter", nil);
+    _filterLabel.textAlignment = NSTextAlignmentCenter;
+    _filterLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ColorFilter"];
     [self addSubview:_filterLabel];
     
     _countdownButton = [UIButton buttonWithType:UIButtonTypeCustom];

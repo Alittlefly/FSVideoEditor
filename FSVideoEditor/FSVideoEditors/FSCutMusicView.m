@@ -215,7 +215,7 @@
 //    int sec = time%60;
 //    NSLog(@"min:%d     sec:%d",min,sec);
     NSString *timeString = [FSShortLanguage CustomLocalizedStringFromTable:@"MusicStartTime"];//NSLocalizedString(@"MusicStartTime", nil);
-    self.timeLabel.text = [timeString stringByReplacingOccurrencesOfString:@"(0)" withString:[self getCurrentTimeString:_newTime]];
+    self.timeLabel.text = [timeString stringByReplacingOccurrencesOfString:@"(0)" withString:[self getCurrentTimeString:time]];
     
     _newTime = time;
     
