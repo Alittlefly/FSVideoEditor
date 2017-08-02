@@ -30,6 +30,15 @@
 		5616CC981F2B40F700028770 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CC811F2B40F700028770 /* UIScrollView+MJRefresh.m */; };
 		5616CC991F2B40F700028770 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CC831F2B40F700028770 /* UIView+MJExtension.m */; };
 		5616CC9A1F2B40F700028770 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 5616CC841F2B40F700028770 /* README.md */; };
+		5616CCA01F31825F00028770 /* FSDraftManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CC9F1F31825F00028770 /* FSDraftManager.m */; };
+		5616CCA31F31835B00028770 /* FSTimelineConfiger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CCA21F31835B00028770 /* FSTimelineConfiger.m */; };
+		5616CCA61F31837200028770 /* FSDraftInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CCA51F31837200028770 /* FSDraftInfo.m */; };
+		5616CCA91F31838D00028770 /* FSDraftReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CCA81F31838D00028770 /* FSDraftReader.m */; };
+		5616CCAC1F31839B00028770 /* FSDraftWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CCAB1F31839B00028770 /* FSDraftWriter.m */; };
+		5616CCAF1F3183BB00028770 /* FSDraftVideoFx.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CCAE1F3183BB00028770 /* FSDraftVideoFx.m */; };
+		5616CCB21F3183DC00028770 /* FSDraftChallenge.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CCB11F3183DC00028770 /* FSDraftChallenge.m */; };
+		5616CCB51F3183ED00028770 /* FSDraftTimeFx.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CCB41F3183ED00028770 /* FSDraftTimeFx.m */; };
+		5616CCB81F31841100028770 /* FSDraftMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CCB71F31841100028770 /* FSDraftMusic.m */; };
 		562D403F1EFBE8A100BF0E0D /* FSLocalEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D403E1EFBE8A100BF0E0D /* FSLocalEditorController.m */; };
 		562D40541EFD1DE200BF0E0D /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D40481EFD1DE200BF0E0D /* AFHTTPSessionManager.m */; };
 		562D40551EFD1DE200BF0E0D /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 562D404B1EFD1DE200BF0E0D /* AFNetworkReachabilityManager.m */; };
@@ -61,6 +70,8 @@
 		563B7A2B1F0CBC720035346A /* FSVideoFx.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A2A1F0CBC720035346A /* FSVideoFx.m */; };
 		563B7A2E1F0CE6F50035346A /* FSVideoFxOperationStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A2D1F0CE6F50035346A /* FSVideoFxOperationStack.m */; };
 		563B7A311F0CE79A0035346A /* FSVirtualTimeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A301F0CE79A0035346A /* FSVirtualTimeLine.m */; };
+		5640354D1F31E4FC00C5F036 /* FSDraftCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5640354C1F31E4FC00C5F036 /* FSDraftCache.m */; };
+		564035501F31E79A00C5F036 /* FSDraftFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5640354F1F31E79A00C5F036 /* FSDraftFileManager.m */; };
 		5647BC3C1F0272110072B618 /* FSControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC3B1F0272110072B618 /* FSControlView.m */; };
 		5647BC451F04D6A70072B618 /* wind.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5647BC441F04D6A70072B618 /* wind.mp3 */; };
 		5647BC491F04E0040072B618 /* month.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5647BC481F04E0040072B618 /* month.mp3 */; };
@@ -473,6 +484,24 @@
 		5616CC821F2B40F700028770 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		5616CC831F2B40F700028770 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		5616CC841F2B40F700028770 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5616CC9E1F31825F00028770 /* FSDraftManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftManager.h; sourceTree = "<group>"; };
+		5616CC9F1F31825F00028770 /* FSDraftManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftManager.m; sourceTree = "<group>"; };
+		5616CCA11F31835B00028770 /* FSTimelineConfiger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTimelineConfiger.h; sourceTree = "<group>"; };
+		5616CCA21F31835B00028770 /* FSTimelineConfiger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTimelineConfiger.m; sourceTree = "<group>"; };
+		5616CCA41F31837200028770 /* FSDraftInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftInfo.h; sourceTree = "<group>"; };
+		5616CCA51F31837200028770 /* FSDraftInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftInfo.m; sourceTree = "<group>"; };
+		5616CCA71F31838D00028770 /* FSDraftReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftReader.h; sourceTree = "<group>"; };
+		5616CCA81F31838D00028770 /* FSDraftReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftReader.m; sourceTree = "<group>"; };
+		5616CCAA1F31839B00028770 /* FSDraftWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftWriter.h; sourceTree = "<group>"; };
+		5616CCAB1F31839B00028770 /* FSDraftWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftWriter.m; sourceTree = "<group>"; };
+		5616CCAD1F3183BB00028770 /* FSDraftVideoFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftVideoFx.h; sourceTree = "<group>"; };
+		5616CCAE1F3183BB00028770 /* FSDraftVideoFx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftVideoFx.m; sourceTree = "<group>"; };
+		5616CCB01F3183DC00028770 /* FSDraftChallenge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftChallenge.h; sourceTree = "<group>"; };
+		5616CCB11F3183DC00028770 /* FSDraftChallenge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftChallenge.m; sourceTree = "<group>"; };
+		5616CCB31F3183ED00028770 /* FSDraftTimeFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftTimeFx.h; sourceTree = "<group>"; };
+		5616CCB41F3183ED00028770 /* FSDraftTimeFx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftTimeFx.m; sourceTree = "<group>"; };
+		5616CCB61F31841100028770 /* FSDraftMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftMusic.h; sourceTree = "<group>"; };
+		5616CCB71F31841100028770 /* FSDraftMusic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftMusic.m; sourceTree = "<group>"; };
 		562D403D1EFBE8A100BF0E0D /* FSLocalEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLocalEditorController.h; sourceTree = "<group>"; };
 		562D403E1EFBE8A100BF0E0D /* FSLocalEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLocalEditorController.m; sourceTree = "<group>"; };
 		562D40471EFD1DE200BF0E0D /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -539,6 +568,11 @@
 		563B7A2D1F0CE6F50035346A /* FSVideoFxOperationStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVideoFxOperationStack.m; sourceTree = "<group>"; };
 		563B7A2F1F0CE79A0035346A /* FSVirtualTimeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSVirtualTimeLine.h; sourceTree = "<group>"; };
 		563B7A301F0CE79A0035346A /* FSVirtualTimeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVirtualTimeLine.m; sourceTree = "<group>"; };
+		5640354A1F31DD1200C5F036 /* FSDraftCacheProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftCacheProtocol.h; sourceTree = "<group>"; };
+		5640354B1F31E4FC00C5F036 /* FSDraftCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftCache.h; sourceTree = "<group>"; };
+		5640354C1F31E4FC00C5F036 /* FSDraftCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftCache.m; sourceTree = "<group>"; };
+		5640354E1F31E79A00C5F036 /* FSDraftFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftFileManager.h; sourceTree = "<group>"; };
+		5640354F1F31E79A00C5F036 /* FSDraftFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftFileManager.m; sourceTree = "<group>"; };
 		5647BC3A1F0272110072B618 /* FSControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSControlView.h; sourceTree = "<group>"; };
 		5647BC3B1F0272110072B618 /* FSControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSControlView.m; sourceTree = "<group>"; };
 		5647BC441F04D6A70072B618 /* wind.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wind.mp3; sourceTree = "<group>"; };
@@ -1018,6 +1052,36 @@
 				5616CC771F2B40F700028770 /* MJRefreshStateHeader.m */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		5616CC9D1F31824100028770 /* FSDraftManager */ = {
+			isa = PBXGroup;
+			children = (
+				5640354A1F31DD1200C5F036 /* FSDraftCacheProtocol.h */,
+				5616CC9E1F31825F00028770 /* FSDraftManager.h */,
+				5616CC9F1F31825F00028770 /* FSDraftManager.m */,
+				5616CCA11F31835B00028770 /* FSTimelineConfiger.h */,
+				5616CCA21F31835B00028770 /* FSTimelineConfiger.m */,
+				5616CCA41F31837200028770 /* FSDraftInfo.h */,
+				5616CCA51F31837200028770 /* FSDraftInfo.m */,
+				5616CCA71F31838D00028770 /* FSDraftReader.h */,
+				5616CCA81F31838D00028770 /* FSDraftReader.m */,
+				5616CCAA1F31839B00028770 /* FSDraftWriter.h */,
+				5616CCAB1F31839B00028770 /* FSDraftWriter.m */,
+				5616CCB31F3183ED00028770 /* FSDraftTimeFx.h */,
+				5616CCB41F3183ED00028770 /* FSDraftTimeFx.m */,
+				5616CCAD1F3183BB00028770 /* FSDraftVideoFx.h */,
+				5616CCAE1F3183BB00028770 /* FSDraftVideoFx.m */,
+				5616CCB01F3183DC00028770 /* FSDraftChallenge.h */,
+				5616CCB11F3183DC00028770 /* FSDraftChallenge.m */,
+				5616CCB61F31841100028770 /* FSDraftMusic.h */,
+				5616CCB71F31841100028770 /* FSDraftMusic.m */,
+				5640354B1F31E4FC00C5F036 /* FSDraftCache.h */,
+				5640354C1F31E4FC00C5F036 /* FSDraftCache.m */,
+				5640354E1F31E79A00C5F036 /* FSDraftFileManager.h */,
+				5640354F1F31E79A00C5F036 /* FSDraftFileManager.m */,
+			);
+			path = FSDraftManager;
 			sourceTree = "<group>";
 		};
 		562D403C1EFBE87D00BF0E0D /* FSLocalVideoEditor */ = {
@@ -1552,6 +1616,7 @@
 			children = (
 				983445F31F0CDFAC00A6E977 /* Login */,
 				562D405E1EFE3B4600BF0E0D /* Utils */,
+				5616CC9D1F31824100028770 /* FSDraftManager */,
 				560142B21F1868D400A06C70 /* FSCancleController */,
 				567A3D171EFB66B60026247E /* FSUploadKit */,
 				560142B11F18688500A06C70 /* FSCommenController */,
@@ -2112,6 +2177,7 @@
 				5616CC931F2B40F700028770 /* MJRefreshStateHeader.m in Sources */,
 				567B05971F29C6BF00D09364 /* FSMusicCollectAPI.m in Sources */,
 				563A37901EFFE43800852642 /* FSThumbnailView.m in Sources */,
+				5616CCA31F31835B00028770 /* FSTimelineConfiger.m in Sources */,
 				567A3D481EFB66B60026247E /* FSFileUploadTool.m in Sources */,
 				9880DEB31F171295006E730F /* SDWebImageManager.m in Sources */,
 				9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */,
@@ -2127,6 +2193,7 @@
 				563B79F91F08D3360035346A /* FSMusicAPI.m in Sources */,
 				567B05651F2735F100D09364 /* FSSearchBar.m in Sources */,
 				563B7A2B1F0CBC720035346A /* FSVideoFx.m in Sources */,
+				5616CCB81F31841100028770 /* FSDraftMusic.m in Sources */,
 				9880DEB81F171295006E730F /* UIImage+WebP.m in Sources */,
 				567A3D651EFB6F830026247E /* FMDatabasePool.m in Sources */,
 				5616CC8A1F2B40F700028770 /* MJRefreshHeader.m in Sources */,
@@ -2176,6 +2243,7 @@
 				9880DEAB1F171295006E730F /* NSData+ImageContentType.m in Sources */,
 				567A3D4B1EFB66B60026247E /* FSUploadCache.m in Sources */,
 				563B79D91F0656E00035346A /* FSMusicPlayer.m in Sources */,
+				5616CCA01F31825F00028770 /* FSDraftManager.m in Sources */,
 				567A3D631EFB6F830026247E /* FMDatabase.m in Sources */,
 				562D40591EFD1DE200BF0E0D /* AFURLSessionManager.m in Sources */,
 				567A3D4E1EFB66B60026247E /* FSUploader.m in Sources */,
@@ -2184,6 +2252,7 @@
 				988AC6E41EFE6926007FBCEF /* FSFilterButton.m in Sources */,
 				5616CC8F1F2B40F700028770 /* MJRefreshBackNormalFooter.m in Sources */,
 				987ECEE81F04F92D00221273 /* FSCutMusicView.m in Sources */,
+				5640354D1F31E4FC00C5F036 /* FSDraftCache.m in Sources */,
 				563B7A171F0A4DF50035346A /* FSAnimationNavController.m in Sources */,
 				5616CC8E1F2B40F700028770 /* MJRefreshBackGifFooter.m in Sources */,
 				9880DEBA1F171295006E730F /* UIImageView+WebCache.m in Sources */,
@@ -2215,6 +2284,7 @@
 				567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */,
 				562D40581EFD1DE200BF0E0D /* AFURLResponseSerialization.m in Sources */,
 				5616CC951F2B40F700028770 /* MJRefreshConst.m in Sources */,
+				5616CCB21F3183DC00028770 /* FSDraftChallenge.m in Sources */,
 				9880DEB11F171295006E730F /* SDWebImageDownloader.m in Sources */,
 				5616CC9A1F2B40F700028770 /* README.md in Sources */,
 				983A47791F261B4800FB387D /* FSChallengeModel.m in Sources */,
@@ -2231,7 +2301,12 @@
 				567A3D911EFB7EC80026247E /* FSFileSliceDivider.m in Sources */,
 				5647BC4F1F04E2D80072B618 /* FSMusicController.m in Sources */,
 				567A3D641EFB6F830026247E /* FMDatabaseAdditions.m in Sources */,
+				5616CCA91F31838D00028770 /* FSDraftReader.m in Sources */,
 				567A3D461EFB66B60026247E /* FSFileDownLoadTool.m in Sources */,
+				5616CCA61F31837200028770 /* FSDraftInfo.m in Sources */,
+				564035501F31E79A00C5F036 /* FSDraftFileManager.m in Sources */,
+				5616CCB51F3183ED00028770 /* FSDraftTimeFx.m in Sources */,
+				5616CCAC1F31839B00028770 /* FSDraftWriter.m in Sources */,
 				563B79D51F062F6F0035346A /* FSMusicCell.m in Sources */,
 				5616CC911F2B40F700028770 /* MJRefreshGifHeader.m in Sources */,
 				5616CC981F2B40F700028770 /* UIScrollView+MJRefresh.m in Sources */,
@@ -2251,6 +2326,7 @@
 				9880DEB41F171295006E730F /* SDWebImagePrefetcher.m in Sources */,
 				5616CC8B1F2B40F700028770 /* MJRefreshAutoGifFooter.m in Sources */,
 				567A3D4A1EFB66B60026247E /* FSFileUploadCache.m in Sources */,
+				5616CCAF1F3183BB00028770 /* FSDraftVideoFx.m in Sources */,
 				9880DEAA1F171295006E730F /* MKAnnotationView+WebCache.m in Sources */,
 				562D40671EFE41CE00BF0E0D /* FSVideoFxController.m in Sources */,
 				988AC6E91F010B0D007FBCEF /* FSControlVolumeView.m in Sources */,
