@@ -20,6 +20,4 @@
 
 @property(nonatomic,assign)id<FSToolControllerDelegate>delegate;
 
-- (void)setAPI:(NSString *)api resApi:(NSString *)resApi userName:(NSString *)name;
-
 @end

@@ -83,7 +83,7 @@
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.shadowColor = [UIColor blackColor];
     _titleLabel.shadowOffset = CGSizeMake(1, 1);
-    _titleLabel.text = [NSString stringWithFormat:@"%@-@%@",[FSShortLanguage CustomLocalizedStringFromTable:@"OriginalVoice"],[[NSUserDefaults standardUserDefaults] valueForKey:@"nickName"]];
+    _titleLabel.text = [NSString stringWithFormat:@"%@-@%@",[FSShortLanguage CustomLocalizedStringFromTable:@"OriginalVoice"],[FSPublishSingleton sharedInstance].userName];
     [self addSubview:_titleLabel];
 
     _cutMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];

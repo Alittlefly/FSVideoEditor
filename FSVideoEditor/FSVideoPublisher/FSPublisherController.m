@@ -36,6 +36,8 @@
 #import "FSChallengeController.h"
 #import "FSAnimationNavController.h"
 
+#import "FSPublishSingleton.h"
+
 @interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSPublisherServerDelegate, FSUploadImageServerDelegate, FSShortVideoRecorderManagerDelegate, FSChallengeControllerDelegate>
 {
     FSUploader *_uploader;
@@ -305,6 +307,7 @@
 #pragma mark -
 - (void)FSChallengeControllerChooseChallenge:(FSChallengeModel *)model {
     _challengeModel = model;
+    [FSPublishSingleton sharedInstance].chooseChallenge = model;
     [_toolView updateChallengeName:model.name];
 }
 
@@ -541,9 +544,10 @@
 
 - (void)FSUploadImageServerFirstImageSucceed:(NSString *)filePath {
     _firstImageUrl = filePath;
-    
-    [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
-    [[FSShortVideoRecorderManager sharedInstance] beginCreateWebP:_outPutPath];
+    [self uploadFile:_outPutPath];
+
+//    [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
+//    [[FSShortVideoRecorderManager sharedInstance] beginCreateWebP:_outPutPath];
 }
 
 - (void)FSUploadImageServerFirstImageFailed:(NSError *)error {
@@ -637,6 +641,8 @@
 #pragma mark - FSPublisherServerDelegate
 - (void)FSPublisherServerSucceed {
     [self.loading loadingViewhide];
+    
+    [[FSPublishSingleton sharedInstance] cleanData];
 
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadSecceed"]];
     

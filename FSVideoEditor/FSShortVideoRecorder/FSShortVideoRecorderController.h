@@ -12,5 +12,6 @@
 @interface FSShortVideoRecorderController : UIViewController
 
 @property (nonatomic, copy) NSString *musicFilePath;
+@property (nonatomic, assign) BOOL isPresented;
 
 @end

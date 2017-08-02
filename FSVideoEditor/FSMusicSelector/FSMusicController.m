@@ -21,6 +21,7 @@
 #import "FSMusicSearchResultView.h"
 #import "FSMusicListController.h"
 #import "FSMusicListView.h"
+#import "FSPublishSingleton.h"
 
 @interface FSMusicController ()<FSMusicListViewDelegate,FSMusicSeverDelegate,UISearchBarDelegate,FSMusicHeaderViewDelegate,FSMusicCollectSeverDelegate>{
     FSMusic *_music;
@@ -146,6 +147,7 @@
 
 #pragma mark -
 -(void)musicListWouldUseMusic:(FSMusic *)music musicPath:(NSString *)musicPath{
+    [FSPublishSingleton sharedInstance].chooseMusic = music;
     if (_pushed) {
         if ([self.delegate respondsToSelector:@selector(musicControllerSelectMusic:musicId:)]) {
             [self.delegate musicControllerSelectMusic:musicPath musicId:music.songId];
