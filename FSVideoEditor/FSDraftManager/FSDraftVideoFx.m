@@ -10,4 +10,22 @@
 
 @implementation FSDraftVideoFx
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+    
+    if (self = [super init]) {
+        self.vFxId = [[aDecoder decodeObjectForKey:@"vFxId"] intValue];
+        self.vFxInPoint = [[aDecoder decodeObjectForKey:@"vFxInPoint"] longLongValue];
+        self.vFxOutPoint = [[aDecoder decodeObjectForKey:@"vFxOutPoint"] longLongValue];
+    }
+    
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    
+    [aCoder encodeObject:[NSNumber numberWithInt:self.vFxId] forKey:@"vFxId"];
+    [aCoder encodeObject:[NSNumber numberWithLongLong:self.vFxInPoint] forKey:@"vFxInPoint"];
+    [aCoder encodeObject:[NSNumber numberWithLongLong:self.vFxOutPoint] forKey:@"vFxOutPoint"];
+}
+
 @end

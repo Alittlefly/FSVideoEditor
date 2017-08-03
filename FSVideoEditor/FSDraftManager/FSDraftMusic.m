@@ -9,13 +9,25 @@
 #import "FSDraftMusic.h"
 
 @implementation FSDraftMusic
--(void)encodeWithCoder:(NSCoder *)aCoder{
-    [aCoder encodeObject:[NSNumber numberWithLongLong:self.mOutPoint] forKey:@"mOutPoint"];
-}
+
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
-    FSDraftMusic *music = [FSDraftMusic new];
-    music.mOutPoint = [[aDecoder decodeObjectForKey:@"mOutPoint"] longLongValue];
-    return music;
+
+    if (self = [super init]) {
+        self.mPath = [aDecoder decodeObjectForKey:@"mPath"];
+        self.mId = [[aDecoder decodeObjectForKey:@"mId"] intValue];
+        self.mInPoint = [[aDecoder decodeObjectForKey:@"mInPoint"] longLongValue];
+        self.mOutPoint = [[aDecoder decodeObjectForKey:@"mOutPoint"] longLongValue];
+    }
+    
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    
+    [aCoder encodeObject:self.mPath forKey:@"mPath"];
+    [aCoder encodeObject:[NSNumber numberWithInt:self.mId] forKey:@"mId"];
+    [aCoder encodeObject:[NSNumber numberWithLongLong:self.mInPoint] forKey:@"mInPoint"];
+    [aCoder encodeObject:[NSNumber numberWithLongLong:self.mOutPoint] forKey:@"mOutPoint"];
 }
 
 @end
