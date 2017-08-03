@@ -28,4 +28,13 @@
     [aCoder encodeObject:[NSNumber numberWithLongLong:self.vFxOutPoint] forKey:@"vFxOutPoint"];
 }
 
+-(id)copyWithZone:(NSZone *)zone{
+    
+    FSDraftVideoFx *draftVideoFx = [FSDraftVideoFx allocWithZone:zone];
+    draftVideoFx -> _vFxId = self.vFxId;
+    draftVideoFx -> _vFxInPoint = self.vFxInPoint;
+    draftVideoFx -> _vFxOutPoint = self.vFxOutPoint;
+    return draftVideoFx;
+}
+
 @end

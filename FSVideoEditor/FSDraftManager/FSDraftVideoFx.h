@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FSDraftVideoFx : NSObject
+@interface FSDraftVideoFx : NSObject <NSCopying,NSCoding>
 @property(nonatomic,assign)int vFxId;
 @property(nonatomic,assign)int64_t vFxInPoint;
 @property(nonatomic,assign)int64_t vFxOutPoint;

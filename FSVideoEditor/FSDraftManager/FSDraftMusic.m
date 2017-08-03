@@ -30,9 +30,13 @@
     [aCoder encodeObject:[NSNumber numberWithLongLong:self.mOutPoint] forKey:@"mOutPoint"];
 }
 -(id)copyWithZone:(NSZone *)zone{
+    
     FSDraftMusic *music = [FSDraftMusic allocWithZone:zone];
-    music -> _mOutPoint = self.mOutPoint;
+    music -> _mPath = self.mPath;
+    music -> _mId = self.mId;
     music -> _mInPoint = self.mInPoint;
+    music -> _mOutPoint = self.mOutPoint;
     return music;
 }
+
 @end
