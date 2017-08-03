@@ -31,9 +31,9 @@
 -(id)copyWithZone:(NSZone *)zone{
     
     FSDraftTimeFx *draftTimeFx = [FSDraftTimeFx allocWithZone:zone];
-    draftTimeFx -> _tFxType = self.tFxType;
-    draftTimeFx -> _tFxInPoint = self.tFxInPoint;
-    draftTimeFx -> _tFxOutPoint = self.tFxOutPoint;
+    draftTimeFx.tFxType = self.tFxType;
+    draftTimeFx.tFxInPoint = self.tFxInPoint;
+    draftTimeFx.tFxOutPoint = self.tFxOutPoint;
     return draftTimeFx;
 }
 

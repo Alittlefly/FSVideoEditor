@@ -32,10 +32,10 @@
 -(id)copyWithZone:(NSZone *)zone{
     
     FSDraftMusic *music = [FSDraftMusic allocWithZone:zone];
-    music -> _mPath = self.mPath;
-    music -> _mId = self.mId;
-    music -> _mInPoint = self.mInPoint;
-    music -> _mOutPoint = self.mOutPoint;
+    music.mPath = self.mPath;
+    music.mId = self.mId;
+    music.mInPoint = self.mInPoint;
+    music.mOutPoint = self.mOutPoint;
     return music;
 }
 

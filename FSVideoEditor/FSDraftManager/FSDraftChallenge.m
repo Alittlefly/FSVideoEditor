@@ -29,8 +29,8 @@
 -(id)copyWithZone:(NSZone *)zone{
     
     FSDraftChallenge *draftChallenge = [FSDraftChallenge allocWithZone:zone];
-    draftChallenge -> _challengeId = self.challengeId;
-    draftChallenge -> _challengeName = self.challengeName;
+    draftChallenge.challengeId = self.challengeId;
+    draftChallenge.challengeName = self.challengeName;
     return draftChallenge;
 }
 
