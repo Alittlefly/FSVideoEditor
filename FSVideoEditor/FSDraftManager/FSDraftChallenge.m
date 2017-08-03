@@ -26,4 +26,12 @@
     [aCoder encodeObject:self.challengeName forKey:@"challengeName"];
 }
 
+-(id)copyWithZone:(NSZone *)zone{
+    
+    FSDraftChallenge *draftChallenge = [FSDraftChallenge allocWithZone:zone];
+    draftChallenge.challengeId = self.challengeId;
+    draftChallenge.challengeName = self.challengeName;
+    return draftChallenge;
+}
+
 @end

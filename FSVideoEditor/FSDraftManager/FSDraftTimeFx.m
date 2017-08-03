@@ -25,7 +25,16 @@
     
     [aCoder encodeObject:[NSNumber numberWithInteger:self.tFxType] forKey:@"tFxType"];
     [aCoder encodeObject:[NSNumber numberWithLongLong:self.tFxInPoint] forKey:@"tFxInPoint"];
-    [aCoder encodeObject:[NSNumber numberWithLongLong:self.tFxInPoint] forKey:@"tFxOutPoint"];
+    [aCoder encodeObject:[NSNumber numberWithLongLong:self.tFxOutPoint] forKey:@"tFxOutPoint"];
+}
+
+-(id)copyWithZone:(NSZone *)zone{
+    
+    FSDraftTimeFx *draftTimeFx = [FSDraftTimeFx allocWithZone:zone];
+    draftTimeFx.tFxType = self.tFxType;
+    draftTimeFx.tFxInPoint = self.tFxInPoint;
+    draftTimeFx.tFxOutPoint = self.tFxOutPoint;
+    return draftTimeFx;
 }
 
 @end
