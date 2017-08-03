@@ -30,15 +30,6 @@
 
 @implementation FSToolController
 
-- (void)setAPI:(NSString *)api resApi:(NSString *)resApi userName:(NSString *)name {
-    [[NSUserDefaults standardUserDefaults] setValue:name forKey:@"nickName"];
-    [[NSUserDefaults standardUserDefaults] setValue:api forKey:@"AddressAPI"];
-    [[NSUserDefaults standardUserDefaults] setValue:resApi forKey:@"AddressIP"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.

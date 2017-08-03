@@ -8,7 +8,7 @@
 
 #import "FSEditVideoNameView.h"
 #import "FSShortLanguage.h"
-
+#import "FSPublishSingleton.h"
 
 @interface FSEditVideoNameView()<UITextFieldDelegate>
 
@@ -97,6 +97,7 @@
 
 - (void)addChallenge {
     if (_isHasChallenge) {
+        [FSPublishSingleton sharedInstance].chooseChallenge = nil;
         _isHasChallenge = NO;
         [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
         [self updateChallengeButtonFrame];

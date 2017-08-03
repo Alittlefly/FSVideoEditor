@@ -15,7 +15,7 @@
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
 #import "FSVideoEditorAPIParams.h"
-
+#import "FSPublishSingleton.h"
 
 @interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate>
 
@@ -132,6 +132,13 @@
     gradientLayer.frame = self.loginButton.bounds;
     [self.loginButton.layer addSublayer:gradientLayer];
     
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-20, self.view.frame.size.width, 20)];
+    label.backgroundColor = [UIColor clearColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = FSHexRGBAlpha(0xFFFFFF, 0.5);//[UIColor whiteColor];
+    label.text = [NSString stringWithFormat:@"v %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    [self.view addSubview:label];
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
     [self.view addGestureRecognizer:tapGesture];
 }
@@ -177,7 +184,7 @@
 
 - (IBAction)beginCreat:(id)sender {
     FSToolController *toolController = [[FSToolController alloc] init];
-    [toolController setAPI:@"http://www.7nujoom.com/" resApi:@"http://10.10.32.145:8086/" userName:@"name"];
+
     FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:toolController];
     [self presentViewController:nav animated:YES completion:nil];
 }
@@ -194,10 +201,11 @@
     
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"UID"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Password"];
-    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"nickName"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"loginKey"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Country"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [FSPublishSingleton sharedInstance].userName = nil;
     
     [[FSVideoEditorAPIParams videoEdiorParams].params removeObjectsForKeys:@[@"loginKey"]];
 
@@ -247,10 +255,10 @@
     
     [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginName"] forKey:@"UID"];
     [[NSUserDefaults standardUserDefaults] setValue:self.passwordTextField.text forKey:@"Password"];
-    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"nickName"] forKey:@"nickName"];
     [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginKey"] forKey:@"loginKey"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
+    [FSPublishSingleton sharedInstance].userName = [dataInfo objectForKey:@"nickName"];
 
     self.recorderButton.hidden = NO;
     self.logoutButton.hidden = NO;

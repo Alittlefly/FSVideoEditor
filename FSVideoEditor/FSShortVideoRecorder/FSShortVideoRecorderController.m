@@ -70,7 +70,12 @@
 #pragma mark - FSShortVideoRecorderViewDelegate
 
 - (void)FSShortVideoRecorderViewQuitRecorderView {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (_isPresented) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 
 }
 
