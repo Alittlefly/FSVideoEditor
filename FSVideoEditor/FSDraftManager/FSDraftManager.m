@@ -43,7 +43,7 @@
 }
 -(void)delete:(FSDraftInfo *)draftInfo{
     FSDraftWriter *writer = [FSDraftWriter new];
-    [writer deleteLocalDraftInfo:_currentInfo];
+    [writer deleteLocalDraftInfo:draftInfo];
 }
 -(FSDraftInfo *)draftInfoWithPreInfo:(FSDraftInfo *)preDraftInfo{
     _currentInfo = preDraftInfo;

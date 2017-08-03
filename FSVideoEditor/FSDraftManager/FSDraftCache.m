@@ -49,7 +49,10 @@
     
 }
 -(NSArray *)allInfosInLocal{
-    [self.draftInfos removeAllObjects];
+    if ([self.draftInfos count]) {
+        return self.draftInfos;
+    }
+    
     NSString *dataPath = [FSDraftFileManager draftDataPath];
     NSArray *drafts = [NSKeyedUnarchiver unarchiveObjectWithFile:dataPath];
     [self.draftInfos addObjectsFromArray:drafts];
