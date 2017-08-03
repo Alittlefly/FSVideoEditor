@@ -10,4 +10,22 @@
 
 @implementation FSDraftTimeFx
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+    
+    if (self = [super init]) {
+        self.tFxType = [[aDecoder decodeObjectForKey:@"tFxType"] integerValue];
+        self.tFxInPoint = [[aDecoder decodeObjectForKey:@"tFxInPoint"] longLongValue];
+        self.tFxInPoint = [[aDecoder decodeObjectForKey:@"tFxOutPoint"] longLongValue];
+    }
+    
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.tFxType] forKey:@"tFxType"];
+    [aCoder encodeObject:[NSNumber numberWithLongLong:self.tFxInPoint] forKey:@"tFxInPoint"];
+    [aCoder encodeObject:[NSNumber numberWithLongLong:self.tFxInPoint] forKey:@"tFxOutPoint"];
+}
+
 @end

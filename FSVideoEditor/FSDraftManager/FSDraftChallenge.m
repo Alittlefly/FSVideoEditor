@@ -10,4 +10,20 @@
 
 @implementation FSDraftChallenge
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+    
+    if (self = [super init]) {
+        self.challengeId = [[aDecoder decodeObjectForKey:@"challengeId"] integerValue];
+        self.challengeName = [aDecoder decodeObjectForKey:@"challengeName"];
+    }
+    
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.challengeId] forKey:@"challengeId"];
+    [aCoder encodeObject:self.challengeName forKey:@"challengeName"];
+}
+
 @end

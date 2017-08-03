@@ -13,6 +13,20 @@
 
 @implementation FSVideoFxOperationStack
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+    
+    if (self = [super init]) {
+        self.operationQueue = [aDecoder decodeObjectForKey:@"operationQueue"];
+    }
+    
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    
+    [aCoder encodeObject:self.operationQueue forKey:@"operationQueue"];
+}
+
 -(FSVirtualTimeLine *)topVirtualTimeLine{
     if (![self.operationQueue count]) {
         return nil;

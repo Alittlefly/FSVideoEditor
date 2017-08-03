@@ -9,6 +9,23 @@
 #import "FSVirtualTimeLine.h"
 
 @implementation FSVirtualTimeLine
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+    
+    if (self = [super init]) {
+        self.duration = [[aDecoder decodeObjectForKey:@"duration"] longLongValue];
+        self.videoFxs = [aDecoder decodeObjectForKey:@"videoFxs"];
+    }
+    
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    
+    [aCoder encodeObject:[NSNumber numberWithLongLong:self.duration] forKey:@"duration"];
+    [aCoder encodeObject:self.videoFxs forKey:@"videoFxs"];
+}
+
 -(NSMutableArray *)videoFxs{
     if (!_videoFxs) {
         _videoFxs  = [NSMutableArray array];
