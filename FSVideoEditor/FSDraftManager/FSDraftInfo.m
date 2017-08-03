@@ -45,7 +45,6 @@
 }
 
 -(void)encodeWithCoder:(NSCoder *)aCoder{
-    
     [aCoder encodeObject:self.vMusic forKey:@"vMusic"];
     [aCoder encodeObject:self.stack forKey:@"stack"];
     [aCoder encodeObject:self.challenge forKey:@"challenge"];
