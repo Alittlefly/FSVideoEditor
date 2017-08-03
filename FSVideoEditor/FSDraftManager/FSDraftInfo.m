@@ -15,11 +15,34 @@
         self.vMusic = [draftInfo.vMusic copy];
         self.clips = [draftInfo.clips copy];
         self.vTimefx = [draftInfo.vTimefx copy];
+        self.vTitle = draftInfo.vTitle;
+        self.stack = [draftInfo.stack copy];
+        self.vBeautyOn = draftInfo.vBeautyOn;
+        self.vOriginalVolume = draftInfo.vOriginalVolume;
+        self.vMusicVolume = draftInfo.vMusicVolume;
+        self.vFinalPath = draftInfo.vFinalPath;
+        self.vSpeed = draftInfo.vSpeed;
+        self.vFilterid = draftInfo.vFilterid;
+        self.vConvertPath = draftInfo.vConvertPath;
+        self.vFirstFramePath = draftInfo.vFirstFramePath;
     }
     return self;
 }
 -(void)copyValueFromeDraftInfo:(FSDraftInfo *)draftInfo{
-    
+    self.challenge = draftInfo.challenge;
+    self.vMusic = draftInfo.vMusic;
+    self.clips = draftInfo.clips;
+    self.vTimefx = draftInfo.vTimefx;
+    self.vTitle = draftInfo.vTitle;
+    self.stack = draftInfo.stack;
+    self.vBeautyOn = draftInfo.vBeautyOn;
+    self.vOriginalVolume = draftInfo.vOriginalVolume;
+    self.vMusicVolume = draftInfo.vMusicVolume;
+    self.vFinalPath = draftInfo.vFinalPath;
+    self.vSpeed = draftInfo.vSpeed;
+    self.vFilterid = draftInfo.vFilterid;
+    self.vConvertPath = draftInfo.vConvertPath;
+    self.vFirstFramePath = draftInfo.vFirstFramePath;
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{

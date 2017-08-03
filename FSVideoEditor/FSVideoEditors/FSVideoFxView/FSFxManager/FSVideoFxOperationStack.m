@@ -18,15 +18,17 @@
     if (self = [super init]) {
         self.operationQueue = [aDecoder decodeObjectForKey:@"operationQueue"];
     }
-    
     return self;
 }
 
 -(void)encodeWithCoder:(NSCoder *)aCoder{
-    
     [aCoder encodeObject:self.operationQueue forKey:@"operationQueue"];
 }
-
+-(id)copyWithZone:(NSZone *)zone{
+    typeof(self) newObject = [[self class] allocWithZone:zone];
+    newObject.operationQueue = self.operationQueue;
+    return newObject;
+}
 -(FSVirtualTimeLine *)topVirtualTimeLine{
     if (![self.operationQueue count]) {
         return nil;

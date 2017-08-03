@@ -547,7 +547,6 @@
 		984060541EF9407B0049B58E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		984060561EF940810049B58E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		986186DA1F30665300CFFD01 /* libNvConvertorLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvConvertorLib.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libNvConvertorLib.a; sourceTree = "<group>"; };
-		9861875F1F3094ED00CFFD01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		986187C21F30988600CFFD01 /* libwebp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebp.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libWebp/aarch64/libwebp.a; sourceTree = "<group>"; };
 		986187C31F30988600CFFD01 /* libwebpmux.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebpmux.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libWebp/aarch64/libwebpmux.a; sourceTree = "<group>"; };
 		986187C61F30989400CFFD01 /* libwebp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebp.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/include/libWebp/armv7/libwebp.a; sourceTree = "<group>"; };
@@ -1368,7 +1367,6 @@
 			children = (
 				987B58BC1F0E796E00E85A37 /* Localizable.strings */,
 				567E0B501EF930D100C4C527 /* FSVideoEditor */,
-				9861875C1F3094ED00CFFD01 /* FSVideoEditorSDKTests */,
 				567E0B4F1EF930D100C4C527 /* Products */,
 				9840603F1EF9401E0049B58E /* Frameworks */,
 			);
@@ -1513,14 +1511,6 @@
 				984060411EF9401F0049B58E /* libNvStreamingSdkDeps.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9861875C1F3094ED00CFFD01 /* FSVideoEditorSDKTests */ = {
-			isa = PBXGroup;
-			children = (
-				9861875F1F3094ED00CFFD01 /* Info.plist */,
-			);
-			path = FSVideoEditorSDKTests;
 			sourceTree = "<group>";
 		};
 		9871BC381F0F85A10065977A /* FSPublisherServer */ = {
