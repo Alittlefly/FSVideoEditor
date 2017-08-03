@@ -18,20 +18,16 @@
     return newFx;
 }
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder{
-    
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super init]) {
         self.videoFxId = [aDecoder decodeObjectForKey:@"videoFxId"];
         self.startPoint = [[aDecoder decodeObjectForKey:@"startPoint"] longLongValue];
         self.endPoint = [[aDecoder decodeObjectForKey:@"endPoint"] longLongValue];
         self.convert = [[aDecoder decodeObjectForKey:@"convert"] boolValue];
     }
-    
     return self;
 }
-
--(void)encodeWithCoder:(NSCoder *)aCoder{
-    
+- (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.videoFxId forKey:@"videoFxId"];
     [aCoder encodeObject:[NSNumber numberWithLongLong:self.startPoint] forKey:@"startPoint"];
     [aCoder encodeObject:[NSNumber numberWithLongLong:self.endPoint] forKey:@"endPoint"];

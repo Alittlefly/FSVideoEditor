@@ -141,4 +141,11 @@
 -(NSArray *)allVideoFxs{
     return [NSArray arrayWithArray:self.videoFxs];
 }
+-(id)copyWithZone:(NSZone *)zone{
+    FSVirtualTimeLine *timeLine = [[FSVirtualTimeLine alloc] copyWithZone:zone];
+    timeLine.duration = self.duration;
+    timeLine.videoFxs = [self.videoFxs copy];
+    return timeLine;
+}
+
 @end
