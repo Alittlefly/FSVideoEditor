@@ -11,7 +11,6 @@
 @interface FSDraftManager : NSObject
 +(instancetype)sharedDraftManager;
 // 原始数据 与临时数据
--(FSDraftInfo *)tempTimeLineInfoWithPreInfo:(FSDraftInfo *)timeLineInfo;
 -(void)clearInfo;
 -(void)mergeInfo;
 -(void)saveToLocal;

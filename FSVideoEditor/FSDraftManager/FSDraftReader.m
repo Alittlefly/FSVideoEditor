@@ -10,11 +10,18 @@
 #import "FSDraftCache.h"
 
 @interface FSDraftReader ()
-@property(nonatomic,strong)id<FSDraftCacheProtocol> localOperator;
+@property(nonatomic,assign)id<FSDraftCacheProtocol> localOperator;
 @end
 
 @implementation FSDraftReader
+-(instancetype)init{
+    if (self = [super init]) {
+        _localOperator = [FSDraftCache sharedDraftCache];
+    }
+    return self;
+}
+
 -(NSArray<FSDraftInfo *> *)allDraftInfoInLocal{
-    return @[];
+    return [_localOperator allInfosInLocal];
 }
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FSDraftChallenge : NSObject<NSCoding>
+@interface FSDraftChallenge : NSObject<NSCoding,NSCopying>
 @property(nonatomic,assign)NSInteger challengeId;
 @property(nonatomic,strong)NSString *challengeName;
 @end

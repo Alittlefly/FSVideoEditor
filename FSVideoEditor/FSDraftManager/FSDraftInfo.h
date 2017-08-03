@@ -28,4 +28,6 @@
 @property(nonatomic,strong)NSArray<NSString *> *clips;
 @property(nonatomic,strong)NSString *vConvertPath;
 @property(nonatomic,strong)NSString *vFilterid;
+-(instancetype)initWithDraftInfo:(FSDraftInfo *)draftInfo;
+-(void)copyValueFromeDraftInfo:(FSDraftInfo *)draftInfo;
 @end

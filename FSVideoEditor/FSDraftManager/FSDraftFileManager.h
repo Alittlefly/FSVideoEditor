@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface FSDraftFileManager : NSObject
++(NSString *)draftDataPath;
 -(void)deleteFile:(NSString *)filePath;
 @end

@@ -7,8 +7,19 @@
 //
 
 #import "FSDraftCache.h"
+#import "FSDraftFileManager.h"
 
+
+@interface FSDraftCache()
+@property(nonatomic,strong)NSMutableArray *draftInfos;
+@end
 @implementation FSDraftCache
+-(NSMutableArray *)draftInfos{
+    if (!_draftInfos) {
+        _draftInfos = [NSMutableArray array];
+    }
+    return _draftInfos;
+}
 +(instancetype)sharedDraftCache{
     static id object = nil;
     static dispatch_once_t onceToken;
@@ -20,15 +31,28 @@
     return object;
 }
 -(void)insertToLocal:(FSDraftInfo *)draftInfo{
+    if (draftInfo) {
+        [self.draftInfos addObject:draftInfo];
+    }
     
+    NSString *dataPath = [FSDraftFileManager draftDataPath];
+    [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
 }
 -(void)deleteToLocal:(FSDraftInfo *)draftInfo{
-
+    if (draftInfo) {
+        [self.draftInfos removeObject:draftInfo];
+    }
+    NSString *dataPath = [FSDraftFileManager draftDataPath];
+    [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
 }
 -(void)updateToLocal:(FSDraftInfo *)draftInfo{
-
+    
 }
 -(NSArray *)allInfosInLocal{
-    return @[];
+    [self.draftInfos removeAllObjects];
+    NSString *dataPath = [FSDraftFileManager draftDataPath];
+    NSArray *drafts = [NSKeyedUnarchiver unarchiveObjectWithFile:dataPath];
+    [self.draftInfos addObjectsFromArray:drafts];
+    return self.draftInfos;
 }
 @end

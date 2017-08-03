@@ -12,4 +12,7 @@
 -(void)deleteFile:(NSString *)filePath{
     
 }
++(NSString *)draftDataPath{
+    return @"";
+}
 @end
