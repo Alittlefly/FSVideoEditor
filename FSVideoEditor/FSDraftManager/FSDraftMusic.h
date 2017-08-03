@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FSDraftMusic : NSObject
+@interface FSDraftMusic : NSObject<NSCoding>
 @property(nonatomic,strong)NSString *mPath;
 @property(nonatomic,assign)int mId;
 @property(nonatomic,assign)int64_t mInPoint;

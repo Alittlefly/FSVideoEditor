@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger,FSDraftTimeFxType){
     FSDraftTimeFxTypeSlow,
 };
 
-@interface FSDraftTimeFx : NSObject
+@interface FSDraftTimeFx : NSObject<NSCoding>
 
 @property(nonatomic,assign)FSDraftTimeFxType tFxType;
 @property(nonatomic,assign)int64_t tFxInPoint;

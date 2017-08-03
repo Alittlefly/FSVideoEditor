@@ -13,7 +13,7 @@
 #import "FSDraftTimeFx.h"
 #import "FSVideoFxOperationStack.h"
 
-@interface FSDraftInfo : NSObject
+@interface FSDraftInfo : NSObject<NSCoding>
 @property(nonatomic,strong)FSDraftMusic *vMusic;
 @property(nonatomic,strong)FSVideoFxOperationStack *stack;
 @property(nonatomic,strong)FSDraftChallenge *challenge;

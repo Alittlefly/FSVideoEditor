@@ -11,5 +11,5 @@
 #import "FSDraftInfo.h"
 
 @interface FSDraftCache : NSObject<FSDraftCacheProtocol>
-
++(instancetype)sharedDraftCache;
 @end

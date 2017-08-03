@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FSVirtualTimeLine.h"
 
-@interface FSVideoFxOperationStack : NSObject
+@interface FSVideoFxOperationStack : NSObject<NSCoding>
 -(FSVirtualTimeLine *)topVirtualTimeLine;
 -(void)pushObject:(FSVirtualTimeLine *)virtualTimeLine;
 -(FSVirtualTimeLine *)popVirtualTimeLine;
