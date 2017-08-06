@@ -23,8 +23,8 @@
 -(instancetype)init{
     if (self = [super init]) {
         [self setVSpeed:1.0];
-        [self setVMusicVolume:1.0];
-        [self setVOriginalVolume:1.0];
+        [self setVMusicVolume:-1.0];
+        [self setVOriginalVolume:-1.0];
     }
     return self;
 }

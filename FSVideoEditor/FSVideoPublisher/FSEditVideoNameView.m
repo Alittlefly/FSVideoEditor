@@ -20,14 +20,16 @@
 @property (nonatomic, strong) UIButton *saveToPhotoButton;
 @property (nonatomic, assign) BOOL isSave;
 @property (nonatomic, assign) BOOL isHasChallenge;
+@property (nonatomic, strong) FSDraftInfo *draftInfo;
 
 @end
 
 @implementation FSEditVideoNameView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame draftInfo:(FSDraftInfo *)draftInfo {
     if (self = [super initWithFrame:frame]) {
-        _isSave = NO;
+        _draftInfo = draftInfo;
+        _isSave = draftInfo.vSaveToAlbum;
 
         [self initBaseUI];
     }
@@ -38,6 +40,9 @@
     _textFile = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 20)];
     _textFile.backgroundColor = [UIColor clearColor];
     _textFile.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"EnterTitle"];//NSLocalizedString(@"EnterTitle", nil);
+    if (_draftInfo.vTitle) {
+        _textFile.text = _draftInfo.vTitle;
+    }
     _textFile.textColor = [UIColor whiteColor];
     _textFile.returnKeyType = UIReturnKeyDone;
     _textFile.attributedPlaceholder = [[NSAttributedString alloc] initWithString:_textFile.placeholder attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
@@ -75,7 +80,13 @@
     [_saveToPhotoButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_saveToPhotoButton.titleLabel setShadowOffset:CGSizeMake(1, 1)];
     [_saveToPhotoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_unselected"] forState:UIControlStateNormal];
+    if (_isSave) {
+        [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_selected"] forState:UIControlStateNormal];
+
+    }
+    else {
+        [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_unselected"] forState:UIControlStateNormal];
+    }
     [_saveToPhotoButton addTarget:self action:@selector(saveToPhoto) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_saveToPhotoButton];
     //_saveToPhotoButton.hidden = YES;
@@ -119,6 +130,7 @@
 
 - (void)saveToPhoto {
     _isSave = !_isSave;
+    
     if (_isSave) {
         [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_selected"] forState:UIControlStateNormal];
     }

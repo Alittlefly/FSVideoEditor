@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger,FSDraftInfoType){
 
 @interface FSDraftInfo : NSObject<NSCoding>
 
-@property(nonatomic,assign)FSDraftInfoType vType;
+@property(nonatomic,assign)FSDraftInfoType vType;  //视频来源
 @property(nonatomic,strong)FSDraftMusic *vMusic;
 @property(nonatomic,strong)FSVideoFxOperationStack *stack;
 @property(nonatomic,strong)FSDraftChallenge *challenge;

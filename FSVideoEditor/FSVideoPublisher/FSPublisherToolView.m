@@ -32,15 +32,18 @@
 @property (nonatomic, strong) UIButton *draftButton;
 @property (nonatomic, strong) UIButton *publishButton;
 
-@property (nonatomic, assign)FSPublisherToolViewType type;
+@property (nonatomic, assign) FSDraftInfoType type;
+
+@property (nonatomic, strong) FSDraftInfo *draftInfo;
 
 @end
 
 @implementation FSPublisherToolView
 
--(instancetype)initWithFrame:(CGRect)frame type:(FSPublisherToolViewType)type{
+-(instancetype)initWithFrame:(CGRect)frame draftInfo:(FSDraftInfo *)draftInfo{
     if (self = [super initWithFrame:frame]) {
-        _type = type;
+        _type = draftInfo.vType;
+        _draftInfo = draftInfo;
         [self initBaseUI];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick)];
         [self addGestureRecognizer:tapGesture];
@@ -83,7 +86,13 @@
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.shadowColor = [UIColor blackColor];
     _titleLabel.shadowOffset = CGSizeMake(1, 1);
-    _titleLabel.text = [NSString stringWithFormat:@"%@-@%@",[FSShortLanguage CustomLocalizedStringFromTable:@"OriginalVoice"],[FSPublishSingleton sharedInstance].userName];
+    if (_draftInfo.vMusic) {
+        _titleLabel.text = [NSString stringWithFormat:@"%@-@%@",_draftInfo.vMusic.mName,_draftInfo.vMusic.mAutor];
+
+    }
+    else {
+        _titleLabel.text = [NSString stringWithFormat:@"%@-@%@",[FSShortLanguage CustomLocalizedStringFromTable:@"OriginalVoice"],[FSPublishSingleton sharedInstance].userName];
+    }
     [self addSubview:_titleLabel];
 
     _cutMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -120,7 +129,7 @@
     _volumeLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Volume"];//NSLocalizedString(@"Volume", nil);
     [self addSubview:_volumeLabel];
     
-    if (_type == FSPublisherToolViewTypeFromAlbum) {
+    if (_type == FSDraftInfoTypeVideo) {
         _filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _filterButton.frame = CGRectMake(CGRectGetMinX(_volumeLabel.frame), CGRectGetMaxY(_volumeLabel.frame)+20, 40, 40);
         [_filterButton setImage:[UIImage imageNamed:@"recorder-filter"] forState:UIControlStateNormal];
@@ -141,7 +150,7 @@
     }
     
     _effectsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    if (_type == FSPublisherToolViewTypeFromAlbum) {
+    if (_type == FSDraftInfoTypeVideo) {
         _effectsButton.frame = CGRectMake(CGRectGetMinX(_volumeButton.frame), CGRectGetMaxY(_filterLabel.frame)+20, 40, 40);
     }
     else {
@@ -182,7 +191,7 @@
     [_publishButton addTarget:self action:@selector(publishClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_publishButton];
     
-    _videoNameView = [[FSEditVideoNameView alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(_publishButton.frame)-40-55, self.frame.size.width-40, 55)];
+    _videoNameView = [[FSEditVideoNameView alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(_publishButton.frame)-40-55, self.frame.size.width-40, 55) draftInfo:_draftInfo];
     _videoNameView.backgroundColor = [UIColor clearColor];
     _videoNameView.delegate = self;
     [self addSubview:_videoNameView];
@@ -250,12 +259,14 @@
 
 #pragma mark - 
 -(void)FSEditVideoNameViewEditVideoTitle:(NSString *)title {
+    _draftInfo.vTitle = title;
     if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewChangeVideoDescription:)]) {
         [self.delegate FSPublisherToolViewChangeVideoDescription:title];
     }
 }
 
 - (void)FSEditVideoNameViewSaveToPhotoLibrary:(BOOL)isSave {
+    _draftInfo.vSaveToAlbum = isSave;
     if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewSaveToLibrary:)]) {
         [self.delegate FSPublisherToolViewSaveToLibrary:isSave];
     }

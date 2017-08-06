@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSDraftInfo.h"
 
 typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
     FSPublisherToolViewTypeFromAlbum,
@@ -32,7 +33,7 @@ typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
 
 @property (nonatomic, weak) id<FSPublisherToolViewDelegate> delegate;
 
--(instancetype)initWithFrame:(CGRect)frame type:(FSPublisherToolViewType)type;
+-(instancetype)initWithFrame:(CGRect)frame draftInfo:(FSDraftInfo *)draftInfo;
 - (void)canEditMusic:(BOOL)enable;
 - (void)updateChallengeName:(NSString *)challenge;
 @end
