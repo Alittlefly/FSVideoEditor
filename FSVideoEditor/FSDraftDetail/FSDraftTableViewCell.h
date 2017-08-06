@@ -21,5 +21,5 @@
 @interface FSDraftTableViewCell : UITableViewCell
 @property(nonatomic ,strong) FSDraftInfo *info;
 @property(nonatomic ,weak) id<FSDraftTableCellDelegate> delegate;
-
+@property(nonatomic ,strong) NSIndexPath *indexPath;
 @end
