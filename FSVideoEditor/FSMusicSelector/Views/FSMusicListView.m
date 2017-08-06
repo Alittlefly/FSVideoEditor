@@ -214,6 +214,7 @@
     FSDraftMusic *draftMusic = [[FSDraftMusic alloc] initWithMusic:music];
     FSDraftInfo *tempInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:nil];
     tempInfo.vMusic = draftMusic;
+    [[FSDraftManager sharedManager] mergeInfo];
     
     if ([self.delegate respondsToSelector:@selector(musicListWouldUseMusic:musicPath:)]) {
         [self.delegate musicListWouldUseMusic:music musicPath:path];

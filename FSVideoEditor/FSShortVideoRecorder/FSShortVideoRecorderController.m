@@ -84,7 +84,8 @@
     else {
         [self.navigationController popViewControllerAnimated:YES];
     }
-
+    
+    [[FSDraftManager sharedManager] cancleOperate];
 }
 
 - (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath speed:(CGFloat)speed musicStartTime:(NSTimeInterval)time {
@@ -108,6 +109,8 @@
     publish.playSpeed = speed;
     publish.musicPath = _musicFilePath;
     publish.musicStartTime = time;
+    publish.draftInfo = _tempInfo;
+    
     NvsTimeline *timeLine = [[FSShortVideoRecorderManager sharedInstance] createTimeLine];
     NvsVideoTrack *videoTrack = [timeLine appendVideoTrack];
     NvsVideoClip *clip = [videoTrack insertClip:filePath clipIndex:0];
@@ -120,7 +123,6 @@
     
     [[FSDraftManager sharedManager] mergeInfo];
     [[FSDraftManager sharedManager] clearInfo];
-    
     [self.navigationController pushViewController:publish animated:YES];
 }
 
