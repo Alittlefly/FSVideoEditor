@@ -111,15 +111,16 @@
     publish.musicStartTime = time;
     publish.draftInfo = _tempInfo;
     
+    _tempInfo.vType = FSDraftInfoTypeRecoder;
+    _tempInfo.vSpeed = speed;
+    _tempInfo.vOriginalPath = filePath;
+    _tempInfo.vConvertPath = convertFilePath;
+    
     NvsTimeline *timeLine = [[FSShortVideoRecorderManager sharedInstance] createTimeLine];
     NvsVideoTrack *videoTrack = [timeLine appendVideoTrack];
     NvsVideoClip *clip = [videoTrack insertClip:filePath clipIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
     publish.timeLine = timeLine;
-    
-    _tempInfo.vSpeed = speed;
-    _tempInfo.vOriginalPath = filePath;
-    _tempInfo.vConvertPath = convertFilePath;
     
     [[FSDraftManager sharedManager] mergeInfo];
     [[FSDraftManager sharedManager] clearInfo];

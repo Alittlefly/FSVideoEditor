@@ -381,7 +381,6 @@
     _selectType = type;
     int64_t point = _timeLine.duration * progress;
     _position = progress;
-    
     if (type == FSVideoFxTypeSlow) {
         //缓慢
         
@@ -398,9 +397,6 @@
         
     }else if(type == FSVideoFxTypeRepeat){
         // 重复
-        
-        NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
-
         [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
         [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
         [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
@@ -411,6 +407,12 @@
     [_videoFxView startMoveTint];
     [[FSMusicPlayer sharedPlayer] playAtTime:point/1000000.0 + _musicAttime];
     [[FSMusicPlayer sharedPlayer] play];
+    
+    FSDraftTimeFx *draftFx = [FSDraftTimeFx new];
+    draftFx.tFxType = type;
+    draftFx.tFxInPoint = point;
+    draftFx.tFxOutPoint = point + duration;;
+    _draftInfo.vTimefx = draftFx;
     
     videoFxView.duration = _timeLine.duration;
 }

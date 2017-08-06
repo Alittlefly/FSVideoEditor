@@ -296,6 +296,7 @@
     
     _draftInfo.vFinalPath = _outPutFilePath;
     _draftInfo.vConvertPath = filePath;
+    _draftInfo.vType = FSDraftInfoTypeVideo;
     publish.draftInfo = _draftInfo;
     
     [[FSDraftManager sharedManager] mergeInfo];

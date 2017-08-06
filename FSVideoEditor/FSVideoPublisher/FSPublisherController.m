@@ -121,6 +121,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     _prewidow = [[NvsLiveWindow alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_prewidow];
     
+    _toolView = [[FSPublisherToolView alloc] initWithFrame:self.view.bounds];
+    _toolView.backgroundColor = [UIColor clearColor];
+    _toolView.delegate =self;
+    [self.view addSubview:_toolView];
+    
     _isEnterCutMusicView = NO;
     _videoDescription = @"";
     
@@ -144,11 +149,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
     [clip setVolumeGain:_musicPath?0:1 rightVolumeGain:_musicPath?0:1];
     
-    _toolView = [[FSPublisherToolView alloc] initWithFrame:self.view.bounds];
-    _toolView.backgroundColor = [UIColor clearColor];
-    _toolView.delegate =self;
-    [self.view addSubview:_toolView];
-    
+
     FSFileSliceDivider *divider = [[FSFileSliceDivider alloc] initWithSliceCount:1];
      _uploader = [FSUploader uploaderWithDivider:divider];
     [_uploader setDelegate:self];
@@ -197,7 +198,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [self.navigationController.navigationBar setHidden:YES];
+
     [self.toolView setHidden:NO];
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -314,6 +316,15 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [FSDraftManager sharedManager].tempInfo.vFirstFramePath = imagePath;
         [FSDraftManager sharedManager].tempInfo.vSaveToAlbum = _isSaved;
         
+        // test
+        FSDraftChallenge *challenge = [[FSDraftChallenge alloc] init];
+        challenge.challengeDetail = @"challegeDatail";
+        challenge.challengeName = @"challengeName";
+        [FSDraftManager sharedManager].tempInfo.challenge = challenge;
+        [FSDraftManager sharedManager].tempInfo.vTitle = _videoDescription;
+        [FSDraftManager sharedManager].tempInfo.vMusicVolume = _scoreVolume;
+        [FSDraftManager sharedManager].tempInfo.vOriginalVolume = _soundtrackVolume;
+        
         [[FSDraftManager sharedManager] mergeInfo];
         [[FSDraftManager sharedManager] saveToLocal];
         [[FSDraftManager sharedManager] cancleOperate];
@@ -361,11 +372,40 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [self publishFiles];
 }
 - (void)FSPublisherToolViewQuit {
-    if(_draftInfo){
-        [[FSDraftManager sharedManager] clearInfo];
+    
+    if (_draftInfo.vType == FSDraftInfoTypeVideo) {
+        
+        // 弹出提示
+        UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:@"" message:@"旧版本的不可编辑或者使用" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"cancle" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [[FSDraftManager sharedManager] clearInfo];
+        }];
+        
+        [alertControlelr addAction:cancle];
+        [alertControlelr addAction:sure];
+        [self.navigationController presentViewController:alertControlelr animated:YES completion:nil];
     }else{
-        [self.navigationController popViewControllerAnimated:YES];
+        // 弹出提示
+        // 弹出提示
+        UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:@"" message:@"返回编辑界面将清空所有特效信息" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"cancle" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+            [[FSDraftManager sharedManager] clearInfo];
+        }];
+        
+        [alertControlelr addAction:cancle];
+        [alertControlelr addAction:sure];
+        [self.navigationController presentViewController:alertControlelr animated:YES completion:nil];
+        
     }
+    
+
 }
 
 - (void)FSPublisherToolViewEditMusic {
@@ -452,7 +492,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 - (void)FSPublisherToolViewChangeVideoDescription:(NSString *)description {
     _videoDescription = description;
-    _draftInfo.vTitle = description;
 }
 
 #pragma mark - 
@@ -495,7 +534,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
             [videoClip appendBuiltinFx:filter];         // 追加内嵌特效
         }
     }
-    _draftInfo.vFilterid = filter;
+    [FSDraftManager sharedManager].tempInfo.vFilterid = filter;
     [self seekTimeline];
 }
 
@@ -509,9 +548,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 #pragma mark - FSControlVolumeViewDelegate
 - (void)FSControlVolumeViewChangeScore:(CGFloat)value {
     NSLog(@"%f  %u",value,[_timeLine audioTrackCount]);
-//    NvsAudioTrack *audioTrack = [_timeLine getAudioTrackByIndex:0];
-//    NvsAudioClip *audioClip = [audioTrack getClipWithIndex:0];
-//    [audioClip setVolumeGain:value rightVolumeGain:value];
     _scoreVolume = value;
     [self changeVolume];
 }
@@ -519,10 +555,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 - (void)FSControlVolumeViewChangeSoundtrack:(CGFloat)value {
     _soundtrackVolume = value;
     [self changeVolume];
-
-//    NvsVideoTrack *videoTrack = [_timeLine getVideoTrackByIndex:0];
-//    NvsVideoClip *videoClip = [videoTrack getClipWithIndex:0];
-//    [videoClip setVolumeGain:value rightVolumeGain:value];
 }
 
 - (void)FSControlVolumeViewChangeFinished {
