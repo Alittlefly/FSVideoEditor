@@ -8,6 +8,16 @@
 
 #import "FSDraftInfo.h"
 
+@interface FSDraftInfo(){
+    NSString *_vFinalPath;
+    NSString *_vOriginalPath;
+    NSString *_vFirstFramePath;
+    NSString *_vConvertPath;
+    NSArray<NSString *> *_recordVideoPathArray;
+}
+
+@end
+
 @implementation FSDraftInfo
 
 -(instancetype)init{
@@ -117,4 +127,73 @@
     [aCoder encodeObject:self.vOriginalPath forKey:@"vOriginalPath"];
     [aCoder encodeObject:[NSNumber numberWithInteger:self.vType] forKey:@"vType"];
 }
+
+- (void)setVFinalPath:(NSString *)vFinalPath {
+    NSArray *filePathArray = [vFinalPath componentsSeparatedByString:@"Documents/"];
+    _vFinalPath = [filePathArray lastObject];
+}
+
+- (void)setVOriginalPath:(NSString *)vOriginalPath {
+    NSArray *filePathArray = [vOriginalPath componentsSeparatedByString:@"Documents/"];
+    _vOriginalPath = [filePathArray lastObject];
+}
+
+- (void)setVConvertPath:(NSString *)vConvertPath {
+    NSArray *filePathArray = [vConvertPath componentsSeparatedByString:@"Documents/"];
+    _vConvertPath = [filePathArray lastObject];
+
+}
+
+- (void)setVFirstFramePath:(NSString *)vFirstFramePath {
+    NSArray *filePathArray = [vFirstFramePath componentsSeparatedByString:@"Documents/"];
+    _vFirstFramePath = [filePathArray lastObject];
+}
+
+- (NSString *)vFinalPath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+
+    return  [[paths objectAtIndex:0]stringByAppendingPathComponent:_vFinalPath];
+}
+
+- (NSString *)vOriginalPath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    return  [[paths objectAtIndex:0]stringByAppendingPathComponent:_vOriginalPath];
+}
+
+- (NSString *)vConvertPath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    return  [[paths objectAtIndex:0]stringByAppendingPathComponent:_vConvertPath];
+}
+
+- (NSString *)vFirstFramePath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    return  [[paths objectAtIndex:0]stringByAppendingPathComponent:_vFirstFramePath];
+}
+
+- (void)setRecordVideoPathArray:(NSArray<NSString *> *)recordVideoPathArray {
+    NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:0];
+    for (NSString *path in recordVideoPathArray) {
+         NSArray *filePathArray = [path componentsSeparatedByString:@"Documents/"];
+        NSString *newPath = [filePathArray lastObject];
+        [tmpArray addObject:newPath];
+    }
+    _recordVideoPathArray = [NSArray arrayWithArray:tmpArray];
+}
+
+- (NSArray<NSString *> *)recordVideoPathArray {
+    NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:0];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+
+    for (NSString *path in _recordVideoPathArray) {
+        
+        NSString *newPath = [[paths objectAtIndex:0]stringByAppendingPathComponent:path];
+        [tmpArray addObject:newPath];
+    }
+    
+    return tmpArray;
+}
+
 @end
