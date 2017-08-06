@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "FSDraftInfo.h"
+#import "FSDraftFileManager.h"
+
 @interface FSDraftManager : NSObject
 
 @property(nonatomic,strong)FSDraftInfo *tempInfo;
