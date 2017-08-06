@@ -15,10 +15,24 @@
 #import "NvsFx.h"
 
 /*!
+ *  \brief
+ *  时间线视频特效类型
+ */
+typedef enum {
+    NvsTimelineVideoFxType_Builtin = 0,
+    NvsTimelineVideoFxType_Package,
+    NvsTimelineVideoFxType_Custom
+} NvsTimelineVideoFxType;
+
+
+/*!
     \brief 时间线视频特效
  */
 @interface NvsTimelineVideoFx : NvsFx
 
+@property (readonly) NvsTimelineVideoFxType timelineVideoFxType; //!< 时间线视频特效类型
+@property (readonly,retain) NSString *bultinTimelineVideoFxName; //!< 内嵌时间线视频特效名字。如果不是内嵌时间线视频特效返回nil
+@property (readonly,retain) NSString *timelineVideoFxPackageId; //!< 时间线视频特效资源包ID。如果不是资源包时间线视频特效返回nil
 @property (readonly) int64_t inPoint; //!< \if ENGLISH \else 时间线视频特效在时间线上的入点 \endif
 @property (readonly) int64_t outPoint; //!< \if ENGLISH \else 时间线视频特效在时间线上的出点 \endif
 

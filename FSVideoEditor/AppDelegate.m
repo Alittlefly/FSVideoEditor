@@ -17,13 +17,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    self.window.hidden = NO;
-//    UILabel *versionLabel = [[UILabel alloc] init];
-//    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-//    [versionLabel setText:[NSString stringWithFormat:@"current Version:%@",[infoDict valueForKey:@"CFBundleVersion"]]];
-//    [versionLabel setTextColor:[UIColor blueColor]];
-//    [versionLabel setFrame:CGRectMake(0, 0, CGRectGetWidth(self.window.bounds), 40)];
-//    [self.window addSubview:versionLabel];
     return YES;
 }
 
