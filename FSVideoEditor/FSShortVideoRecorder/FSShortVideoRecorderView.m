@@ -21,6 +21,7 @@
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
 #import "FSPublishSingleton.h"
+#import "FSDraftManager.h"
 
 @interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate, FSTimeCountdownViewDelegate,UIAlertViewDelegate, FSSegmentViewDelegate, FSMoveButtonDelegate, FSCutMusicViewDelegate>
 
@@ -97,9 +98,9 @@
     [[FSMusicPlayer sharedPlayer] setFilePath:_musicFilePath];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame draftInfo:(FSDraftInfo *)draftInfo {
     if (self = [super initWithFrame:frame]) {
-        
+        _draftInfo = draftInfo;
         _isFlashOpened = NO;
         _isBeautyOpened = YES;
         _playSpeed = FSShortVideoPlaySpeed_Normal;
@@ -110,9 +111,8 @@
         _recorderManager = [FSShortVideoRecorderManager sharedInstance];
         _recorderManager.delegate = self;
         _recorderView = [_recorderManager getLiveWindow];
-        [_recorderManager initBaseData];
-        _recorderManager.filePathArray = [NSMutableArray arrayWithArray:_draftInfo.recordVideoPathArray];
-        _recorderManager.timeArray = [NSMutableArray arrayWithArray:_draftInfo.recordVideoTimeArray];
+        [_recorderManager initBaseData:_draftInfo];
+       
         _recorderView.frame= CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:_recorderView];
         //[_recorderManager resumeCapturePreview];
@@ -145,6 +145,11 @@
 //    _progressView.maximumTrackTintColor = [UIColor clearColor];
 //    _progressView.value = 0;
     [self addSubview:_progressView];
+    
+    for (NSNumber *time in _draftInfo.recordVideoTimeArray) {
+        [_progressView setProgress:time.floatValue/15.0 animated:NO];
+        [_progressView stopAnimationWithCuttingLine];
+    }
     
     
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -382,6 +387,9 @@
     
     [self addSubview:self.loading];
     [self.loading loadingViewShow];
+    
+    _draftInfo.recordVideoTimeArray = _recorderManager.timeArray;
+    _draftInfo.recordVideoPathArray = _recorderManager.filePathArray;
     
     if (_isRecording) {
         [self pauseRecorder];

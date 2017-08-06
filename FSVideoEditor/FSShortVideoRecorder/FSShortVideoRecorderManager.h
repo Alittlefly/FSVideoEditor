@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NvsStreamingContext.h"
+#import "FSDraftInfo.h"
 
 @protocol FSShortVideoRecorderManagerDelegate <NSObject>
 
@@ -29,6 +30,8 @@
 @property (nonatomic, assign) CGFloat recorderSpeed;
 @property (nonatomic, strong) NSMutableArray *timeArray;
 @property (nonatomic, strong) NSMutableArray *filePathArray;
+@property (nonatomic, strong) NSMutableArray *speedArray;
+
 
 + (instancetype)sharedInstance;
 
@@ -43,7 +46,7 @@
 /**
  初始化预览界面
  */
-- (void)initBaseData;
+- (void)initBaseData:(FSDraftInfo *)draftInfo;
 
 /**
  切换摄像头

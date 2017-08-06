@@ -24,7 +24,6 @@
 @property (nonatomic, assign) CGFloat videoTime;
 @property (nonatomic, strong) NSTimer *timer;
 
-@property (nonatomic, strong) NSMutableArray *speedArray;
 @property (nonatomic, assign) CGFloat perTime;
 
 @property (nonatomic, strong) NvcConvertor *mConvertor;
@@ -105,7 +104,7 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (instancetype)init {
     if (self = [super init]) {
-        [self initBaseData];
+        [self initBaseData:[[FSDraftInfo alloc] init]];
         
         
        // [self resumeCapturePreview];
@@ -113,18 +112,23 @@ static FSShortVideoRecorderManager *recorderManager;
     return self;
 }
 
-- (void)initBaseData {
+- (void)initBaseData:(FSDraftInfo *)draftInfo {
     _currentDeviceIndex = 0;
     _supportAutoFocus = false;
     _supportAutoExposure = false;
     _fxRecord = true;
-    _videoIndex = 0;
+    
+    _filePathArray = [NSMutableArray arrayWithArray:draftInfo.recordVideoPathArray];
+    _timeArray = [NSMutableArray arrayWithArray:draftInfo.recordVideoTimeArray];
+    _speedArray = [NSMutableArray arrayWithArray:draftInfo.recordVideoSpeedArray];
+    
+    _videoIndex = _filePathArray.count;
     _outputFilePath = nil;
     _videoTime = 0;
+    for (NSNumber *time in _timeArray) {
+        _videoTime += time.floatValue;
+    }
     _recorderSpeed = 1;
-    _timeArray = [NSMutableArray arrayWithCapacity:0];
-    _filePathArray = [NSMutableArray arrayWithCapacity:0];
-    _speedArray = [NSMutableArray arrayWithCapacity:0];
     
     [self initContext];
 }
@@ -464,8 +468,6 @@ static FSShortVideoRecorderManager *recorderManager;
     
     //NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSArray *docPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    
-    
     
     [self.videoTrack removeAllClips];
     int i = 0;

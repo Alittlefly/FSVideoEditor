@@ -38,8 +38,10 @@ typedef enum{
 @property (nonatomic, assign) NSTimeInterval musicStartTime;
 @property (nonatomic, strong) FSDraftInfo *draftInfo;
 
+- (instancetype)initWithFrame:(CGRect)frame draftInfo:(FSDraftInfo *)draftInfo;
 - (void)resumeCapturePreview;
 - (void)changeFilter:(NSString *)filterName;
 - (void)finishChangeFilter;
+
 
 @end

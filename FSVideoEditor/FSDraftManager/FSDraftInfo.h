@@ -32,6 +32,8 @@
 @property(nonatomic,assign)BOOL vSaveToAlbum;
 @property(nonatomic,strong)NSArray<NSString *> *recordVideoPathArray;  //录制视频片段地址
 @property(nonatomic,strong)NSArray<NSNumber *> *recordVideoTimeArray;  //录制视频片段时长
+@property(nonatomic,strong)NSArray<NSNumber *> *recordVideoSpeedArray;  //录制视频片段速度
+
 -(instancetype)initWithDraftInfo:(FSDraftInfo *)draftInfo;
 -(void)copyValueFromeDraftInfo:(FSDraftInfo *)draftInfo;
 @end

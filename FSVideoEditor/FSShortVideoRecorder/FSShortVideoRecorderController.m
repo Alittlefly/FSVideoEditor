@@ -33,7 +33,10 @@
     // Do any additional setup after loading the view.
     
     _tempInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
-    _recorderView = [[FSShortVideoRecorderView alloc] initWithFrame:self.view.bounds];
+    _tempInfo.recordVideoTimeArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:3],[NSNumber numberWithFloat:1.5],[NSNumber numberWithFloat:5], nil];
+    _tempInfo.recordVideoSpeedArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:1],[NSNumber numberWithFloat:1],[NSNumber numberWithFloat:1], nil];
+    _tempInfo.recordVideoPathArray = [NSArray arrayWithObjects:@"111",@"222",@"333", nil];
+    _recorderView = [[FSShortVideoRecorderView alloc] initWithFrame:self.view.bounds draftInfo:_tempInfo];
     _recorderView.delegate =self;
     [self.view addSubview:_recorderView];
     
