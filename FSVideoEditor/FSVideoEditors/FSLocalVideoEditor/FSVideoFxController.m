@@ -24,6 +24,7 @@
 
 #import "NvsFxDescription.h"
 #import "FSShortLanguage.h"
+#import "FSDraftManager.h"
 
 @interface FSVideoFxController ()<NvsStreamingContextDelegate,FSVideoFxViewDelegate,UIViewControllerTransitioningDelegate>
 {
@@ -35,6 +36,8 @@
     
     
     FSVideoFxType _selectType;
+    
+    FSDraftInfo *_draftInfo;
 }
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
@@ -53,7 +56,7 @@
     
      _tempFxStack = [FSVideoFxOperationStack new];
     [_tempFxStack pushVideoFxWithFxManager:_fxOperationStack];
-    
+    _draftInfo = [FSDraftManager sharedManager].tempInfo;
     [self creatSubViews];
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-967dfb58745c59c1c409616af7ca27b3.lic"];
     
@@ -219,6 +222,8 @@
     FSVirtualTimeLine *virTimeLine = [_fxOperationStack topVirtualTimeLine];
     //
     [self addVideoFxWithVirtualTimeline:virTimeLine];
+    
+    _draftInfo.stack = _fxOperationStack;
 }
 
 -(void)removeAllFx{
@@ -248,6 +253,9 @@
 
 - (void)save{
     // 保存当前的处理堆栈状态
+     _draftInfo.stack = [_fxOperationStack copy];
+    [[FSDraftManager sharedManager] mergeInfo];
+    
     [_fxOperationStack popAll];
     [_fxOperationStack pushVideoFxWithFxManager:_tempFxStack];
     

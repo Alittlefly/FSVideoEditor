@@ -21,6 +21,7 @@
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
 #import "FSPublishSingleton.h"
+#import "FSDraftManager.h"
 
 @interface FSLocalEditorController ()<NvsStreamingContextDelegate,FSThumbnailViewDelegate,FSSegmentViewDelegate,FSShortVideoRecorderManagerDelegate>
 {
@@ -33,6 +34,8 @@
     
     NSString *_outPutFilePath;
     NSString *_convertOutPutFilePath;
+    
+    FSDraftInfo *_draftInfo;
 
 }
 @property(nonatomic,strong)FSThumbnailView *thumbContent;
@@ -73,14 +76,17 @@
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor blackColor]];
     
-    
-    
     _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds)/2.0 - 210/2.0, CGRectGetWidth(self.view.bounds), 210)];
     [self.view addSubview:_prewidow];
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-967dfb58745c59c1c409616af7ca27b3.lic"];
     
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     _context = [NvsStreamingContext sharedInstance];
+    _draftInfo = [FSDraftManager sharedManager].tempInfo;
+    
+    if (!_draftInfo) {
+        _draftInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:nil];
+    }
     if(!_context){
         return;
     }
@@ -115,6 +121,7 @@
     [self creatButtons];
 }
 - (void)backClik{
+    [[FSDraftManager sharedManager] clearInfo];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -172,6 +179,8 @@
     NSLog(@"sender: %ld",index); //输出当前的索引值
     NvsClip *clip = [_videoTrack getClipWithIndex:0];
     [clip changeSpeed:index/2.0];
+    
+    _draftInfo.vSpeed = index/2.0;
     
     int64_t endTime = _endTime?:_timeLine.duration;
     if (endTime > _timeLine.duration) {
@@ -267,6 +276,8 @@
 }
 -(void)didCompileFinished:(NvsTimeline *)timeline{
     
+    _draftInfo.vOriginalPath = _outPutFilePath;
+
     [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
     [[FSShortVideoRecorderManager sharedInstance] beginConvertReverse:_outPutFilePath];
 }
@@ -282,6 +293,14 @@
     publish.trimIn = _startTime;
     publish.trimOut = _endTime;
     publish.convertFilePath = filePath;
+    
+    _draftInfo.vFinalPath = _outPutFilePath;
+    _draftInfo.vConvertPath = filePath;
+    publish.draftInfo = _draftInfo;
+    
+    [[FSDraftManager sharedManager] mergeInfo];
+    [[FSDraftManager sharedManager] clearInfo];
+
     [self.navigationController pushViewController:publish animated:YES];
 }
 - (void)FSShortVideoRecorderManagerConvertorFaild{

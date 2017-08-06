@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "FSDraftInfo.h"
 @interface FSDraftManager : NSObject
-+(instancetype)sharedDraftManager;
+
+@property(nonatomic,strong)FSDraftInfo *tempInfo;
+
++(instancetype)sharedManager;
 // 原始数据 与临时数据
 -(void)clearInfo;
 -(void)mergeInfo;
@@ -17,4 +20,5 @@
 -(void)cancleOperate;
 -(void)delete:(FSDraftInfo *)draftInfo;
 -(FSDraftInfo *)draftInfoWithPreInfo:(FSDraftInfo *)preDraftInfo;
+-(NSArray *)allDraftInfos;
 @end

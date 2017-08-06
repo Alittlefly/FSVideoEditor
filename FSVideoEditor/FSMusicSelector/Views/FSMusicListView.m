@@ -12,6 +12,7 @@
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
 #import "MJRefresh.h"
+#import "FSDraftManager.h"
 
 @interface FSMusicListView ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate,FSMusicCollectSeverDelegate>
 {
@@ -209,6 +210,10 @@
     }
     [cell setIsPlayIng:NO];
     [[FSMusicPlayer sharedPlayer] stop];
+    
+    FSDraftMusic *draftMusic = [[FSDraftMusic alloc] initWithMusic:music];
+    FSDraftInfo *tempInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:nil];
+    tempInfo.vMusic = draftMusic;
     
     if ([self.delegate respondsToSelector:@selector(musicListWouldUseMusic:musicPath:)]) {
         [self.delegate musicListWouldUseMusic:music musicPath:path];

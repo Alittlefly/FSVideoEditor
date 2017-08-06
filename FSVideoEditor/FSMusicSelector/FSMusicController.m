@@ -158,6 +158,8 @@
         recoder.musicFilePath = musicPath;
         [self.navigationController pushViewController:recoder animated:YES];
     }
+    
+    // 
 }
 -(void)musicListWouldShowDetail:(FSMusic *)music{
     if ([self.delegate respondsToSelector:@selector(musicControllerWouldShowMusicDetail:)]) {

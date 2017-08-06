@@ -72,6 +72,7 @@
 		563B7A311F0CE79A0035346A /* FSVirtualTimeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A301F0CE79A0035346A /* FSVirtualTimeLine.m */; };
 		5640354D1F31E4FC00C5F036 /* FSDraftCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5640354C1F31E4FC00C5F036 /* FSDraftCache.m */; };
 		564035501F31E79A00C5F036 /* FSDraftFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5640354F1F31E79A00C5F036 /* FSDraftFileManager.m */; };
+		564035571F34227F00C5F036 /* FSDraftController.m in Sources */ = {isa = PBXBuildFile; fileRef = 564035561F34227F00C5F036 /* FSDraftController.m */; };
 		5647BC3C1F0272110072B618 /* FSControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC3B1F0272110072B618 /* FSControlView.m */; };
 		5647BC451F04D6A70072B618 /* wind.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5647BC441F04D6A70072B618 /* wind.mp3 */; };
 		5647BC491F04E0040072B618 /* month.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5647BC481F04E0040072B618 /* month.mp3 */; };
@@ -366,6 +367,8 @@
 		5640354C1F31E4FC00C5F036 /* FSDraftCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftCache.m; sourceTree = "<group>"; };
 		5640354E1F31E79A00C5F036 /* FSDraftFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftFileManager.h; sourceTree = "<group>"; };
 		5640354F1F31E79A00C5F036 /* FSDraftFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftFileManager.m; sourceTree = "<group>"; };
+		564035551F34227F00C5F036 /* FSDraftController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftController.h; sourceTree = "<group>"; };
+		564035561F34227F00C5F036 /* FSDraftController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftController.m; sourceTree = "<group>"; };
 		5647BC3A1F0272110072B618 /* FSControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSControlView.h; sourceTree = "<group>"; };
 		5647BC3B1F0272110072B618 /* FSControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSControlView.m; sourceTree = "<group>"; };
 		5647BC441F04D6A70072B618 /* wind.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wind.mp3; sourceTree = "<group>"; };
@@ -1064,6 +1067,15 @@
 			path = FSFxManager;
 			sourceTree = "<group>";
 		};
+		564035541F34226800C5F036 /* FSDraftDetail */ = {
+			isa = PBXGroup;
+			children = (
+				564035551F34227F00C5F036 /* FSDraftController.h */,
+				564035561F34227F00C5F036 /* FSDraftController.m */,
+			);
+			path = FSDraftDetail;
+			sourceTree = "<group>";
+		};
 		5647BC431F04D66F0072B618 /* FSMusicSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -1385,6 +1397,7 @@
 			children = (
 				983445F31F0CDFAC00A6E977 /* Login */,
 				562D405E1EFE3B4600BF0E0D /* Utils */,
+				564035541F34226800C5F036 /* FSDraftDetail */,
 				5616CC9D1F31824100028770 /* FSDraftManager */,
 				560142B21F1868D400A06C70 /* FSCancleController */,
 				567A3D171EFB66B60026247E /* FSUploadKit */,
@@ -1841,6 +1854,7 @@
 				9815CE791F2739AD00DE317C /* FSChallengeDataServer.m in Sources */,
 				567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */,
 				567B058E1F2840EA00D09364 /* FSMusicSearchResultView.m in Sources */,
+				564035571F34227F00C5F036 /* FSDraftController.m in Sources */,
 				567A3D431EFB66B60026247E /* FSFileSlice.m in Sources */,
 				562D403F1EFBE8A100BF0E0D /* FSLocalEditorController.m in Sources */,
 				562D405D1EFD39F100BF0E0D /* FSPublisherController.m in Sources */,

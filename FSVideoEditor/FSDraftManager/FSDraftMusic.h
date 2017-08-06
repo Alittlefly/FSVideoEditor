@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "FSMusic.h"
 @interface FSDraftMusic : NSObject<NSCoding,NSCopying>
 @property(nonatomic,strong)NSString *mPath;
-@property(nonatomic,assign)int mId;
+@property(nonatomic,assign)NSInteger mId;
 @property(nonatomic,assign)int64_t mInPoint;
 @property(nonatomic,assign)int64_t mOutPoint;
+@property(nonatomic,strong)NSString *mAutor;
+@property(nonatomic,strong)NSString *mName;
+@property(nonatomic,strong)NSString *mPic;
+-(instancetype)initWithMusic:(FSMusic *)music;
 @end

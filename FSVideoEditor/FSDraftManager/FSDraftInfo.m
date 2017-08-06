@@ -9,6 +9,13 @@
 #import "FSDraftInfo.h"
 
 @implementation FSDraftInfo
+
+-(instancetype)init{
+    if (self = [super init]) {
+        [self setVSpeed:1.0];
+    }
+    return self;
+}
 -(instancetype)initWithDraftInfo:(FSDraftInfo *)draftInfo{
     if (self = [super init]) {
         self.challenge = [draftInfo.challenge copy];
@@ -25,6 +32,8 @@
         self.vFilterid = draftInfo.vFilterid;
         self.vConvertPath = draftInfo.vConvertPath;
         self.vFirstFramePath = draftInfo.vFirstFramePath;
+        self.vSaveToAlbum = draftInfo.vSaveToAlbum;
+        self.vOriginalPath = draftInfo.vOriginalPath;
     }
     return self;
 }
@@ -43,6 +52,9 @@
     self.vFilterid = draftInfo.vFilterid;
     self.vConvertPath = draftInfo.vConvertPath;
     self.vFirstFramePath = draftInfo.vFirstFramePath;
+    self.vSaveToAlbum = draftInfo.vSaveToAlbum;
+    self.vOriginalPath = draftInfo.vOriginalPath;
+
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -62,6 +74,9 @@
         self.clips = [aDecoder decodeObjectForKey:@"clips"];
         self.vConvertPath = [aDecoder decodeObjectForKey:@"vConvertPath"];
         self.vFilterid = [aDecoder decodeObjectForKey:@"vFilterid"];
+        self.vSaveToAlbum = [[aDecoder decodeObjectForKey:@"vSaveToAlbum"] boolValue];
+        self.vOriginalPath = [aDecoder decodeObjectForKey:@"vOriginalPath"];
+
     }
     
     return self;
@@ -82,5 +97,7 @@
     [aCoder encodeObject:self.clips forKey:@"clips"];
     [aCoder encodeObject:self.vConvertPath forKey:@"vConvertPath"];
     [aCoder encodeObject:self.vFilterid forKey:@"vFilterid"];
+    [aCoder encodeObject:[NSNumber numberWithBool:self.vSaveToAlbum] forKey:@"vSaveToAlbum"];
+    [aCoder encodeObject:self.vOriginalPath forKey:@"vOriginalPath"];
 }
 @end

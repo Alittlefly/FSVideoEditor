@@ -25,7 +25,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (object == nil) {
-            object = [[FSDraftInfo alloc] init];
+            object = [[FSDraftCache alloc] init];
         }
     });
     return object;

@@ -11,6 +11,8 @@
 #import "FSPublisherToolView.h"
 #import "NvsLiveWindow.h"
 
+@class FSDraftInfo;
+
 @interface FSPublisherController : UIViewController
 @property (nonatomic,copy) NSString *filePath;
 @property (nonatomic,copy) NSString *convertFilePath;
@@ -26,5 +28,5 @@
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property (nonatomic, strong) FSPublisherToolView *toolView;
 
-
+@property(nonatomic,strong)FSDraftInfo *draftInfo;
 @end

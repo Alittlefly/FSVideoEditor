@@ -23,11 +23,13 @@
 @property(nonatomic,assign)double vMusicVolume;
 @property(nonatomic,strong)NSString *vTitle;
 @property(nonatomic,strong)NSString *vFinalPath;
+@property(nonatomic,strong)NSString *vOriginalPath;
 @property(nonatomic,strong)NSString *vFirstFramePath;
 @property(nonatomic,assign)double vSpeed;
 @property(nonatomic,strong)NSArray<NSString *> *clips;
 @property(nonatomic,strong)NSString *vConvertPath;
 @property(nonatomic,strong)NSString *vFilterid;
+@property(nonatomic,assign)BOOL vSaveToAlbum;
 -(instancetype)initWithDraftInfo:(FSDraftInfo *)draftInfo;
 -(void)copyValueFromeDraftInfo:(FSDraftInfo *)draftInfo;
 @end

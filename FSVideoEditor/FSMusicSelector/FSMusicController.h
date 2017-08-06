@@ -19,6 +19,8 @@
 @optional
 -(void)musicControllerSelectMusic:(NSString *)musicPath musicId:(NSInteger)musicId;
 
+-(void)musicControllerSelectMusic:(FSMusic *)music;
+
 -(UIViewController *)musicControllerWouldShowMusicDetail:(FSMusic *)music;
 
 @end

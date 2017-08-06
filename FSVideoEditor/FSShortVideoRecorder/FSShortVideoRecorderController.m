@@ -14,8 +14,12 @@
 #import "NvsVideoClip.h"
 #import "FSAlertView.h"
 #import "FSFilterView.h"
+#import "FSDraftManager.h"
 
 @interface FSShortVideoRecorderController ()<FSShortVideoRecorderViewDelegate, FSFilterViewDelegate>
+{
+    FSDraftInfo *_tempInfo;
+}
 
 @property (nonatomic, strong) FSShortVideoRecorderView *recorderView;
 @property (nonatomic, strong) FSFilterView *filterView;
@@ -28,6 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    _tempInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
     _recorderView = [[FSShortVideoRecorderView alloc] initWithFrame:self.view.bounds];
     _recorderView.delegate =self;
     [self.view addSubview:_recorderView];
@@ -105,6 +110,14 @@
     NvsVideoClip *clip = [videoTrack insertClip:filePath clipIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
     publish.timeLine = timeLine;
+    
+    _tempInfo.vSpeed = speed;
+    _tempInfo.vOriginalPath = filePath;
+    _tempInfo.vConvertPath = convertFilePath;
+    
+    [[FSDraftManager sharedManager] mergeInfo];
+    [[FSDraftManager sharedManager] clearInfo];
+    
     [self.navigationController pushViewController:publish animated:YES];
 }
 

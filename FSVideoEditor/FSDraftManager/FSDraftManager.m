@@ -8,13 +8,13 @@
 
 #import "FSDraftManager.h"
 #import "FSDraftWriter.h"
+#import "FSDraftReader.h"
 
 @interface FSDraftManager()
 @property(nonatomic,strong)FSDraftInfo *currentInfo;
-@property(nonatomic,strong)FSDraftInfo *tempInfo;
 @end
 @implementation FSDraftManager
-+(instancetype)sharedDraftManager{
++(instancetype)sharedManager{
     static id object = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -49,7 +49,7 @@
     _currentInfo = preDraftInfo;
     
     if (_currentInfo == nil) {
-        _currentInfo = [FSDraftInfo new];
+        _currentInfo = [[FSDraftInfo alloc] init];
     }
     
     if (!_tempInfo) {
@@ -57,4 +57,10 @@
     }
     return _tempInfo;
 }
+-(NSArray *)allDraftInfos{
+    NSArray *infos = [[FSDraftReader new] allDraftInfoInLocal];
+    
+    return infos;
+}
+
 @end

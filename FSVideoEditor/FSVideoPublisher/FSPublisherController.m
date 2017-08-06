@@ -37,6 +37,12 @@
 #import "FSAnimationNavController.h"
 
 #import "FSPublishSingleton.h"
+#import "FSDraftManager.h"
+
+typedef NS_ENUM(NSInteger,FSPublishOperationType){
+    FSPublishOperationTypeSaveToDraft,
+    FSPublishOperationTypePublishToNet,
+};
 
 @interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSPublisherServerDelegate, FSUploadImageServerDelegate, FSShortVideoRecorderManagerDelegate, FSChallengeControllerDelegate>
 {
@@ -49,6 +55,7 @@
     CGFloat _fxPosition;
     CGFloat _scoreVolume;
     CGFloat _soundtrackVolume;
+    FSPublishOperationType _OperationType;
 }
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
@@ -120,6 +127,9 @@
     if (!_filePath) {
         return;
     }
+    
+    [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
+    
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-967dfb58745c59c1c409616af7ca27b3.lic"];
     
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
@@ -264,7 +274,6 @@
     }
 
     _outPutPath = [self getCompilePath];
-
     [self deleteCurrentCompileFile:_outPutPath];
 
     if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_outPutPath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeLow) flags:0]){
@@ -291,7 +300,21 @@
 - (void)didCompileFinished:(NvsTimeline *)timeline{
     
     NSLog(@"Compile success!");
-    [self uploadFirstImage:[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_outPutPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480]];
+    if (_OperationType == FSPublishOperationTypePublishToNet) {
+            [self uploadFirstImage:[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_outPutPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480]];
+    }else if(_OperationType == FSPublishOperationTypeSaveToDraft){
+        
+        [FSDraftManager sharedManager].tempInfo.vFinalPath = _outPutPath;
+        [FSDraftManager sharedManager].tempInfo.vConvertPath = _convertFilePath;
+        
+        [[FSDraftManager sharedManager] mergeInfo];
+        [[FSDraftManager sharedManager] saveToLocal];
+        [[FSDraftManager sharedManager] cancleOperate];
+        
+        [self.loading loadingViewShow];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+
     if (_isSaved) {
         UISaveVideoAtPathToSavedPhotosAlbum(_outPutPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     }
@@ -320,10 +343,16 @@
 }
 
 - (void)FSPublisherToolViewPublished {
+    _OperationType = FSPublishOperationTypePublishToNet;
+
     [self publishFiles];
 }
 - (void)FSPublisherToolViewQuit {
-    [self.navigationController popViewControllerAnimated:YES];
+    if(_draftInfo){
+        [[FSDraftManager sharedManager] clearInfo];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)FSPublisherToolViewEditMusic {
@@ -342,8 +371,6 @@
         }
         self.toolView.hidden = YES;
         _cutMusicView.hidden = NO;
-        
-        
     }
 }
 
@@ -399,16 +426,21 @@
 }
 
 - (void)FSPublisherToolViewSaveToDraft {
-#warning 区分正序倒序，重复监测
+    //#warning 区分正序倒序，重复监测
     //UISaveVideoAtPathToSavedPhotosAlbum(_filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    _OperationType = FSPublishOperationTypeSaveToDraft;
+    
+    [self publishFiles];
 }
 
 - (void)FSPublisherToolViewSaveToLibrary:(BOOL)isSave {
     _isSaved = isSave;
+    _draftInfo.vSaveToAlbum = isSave;
 }
 
 - (void)FSPublisherToolViewChangeVideoDescription:(NSString *)description {
     _videoDescription = description;
+    _draftInfo.vTitle = description;
 }
 
 #pragma mark - 
@@ -451,6 +483,7 @@
             [videoClip appendBuiltinFx:filter];         // 追加内嵌特效
         }
     }
+    _draftInfo.vFilterid = filter;
     [self seekTimeline];
 }
 
