@@ -11,4 +11,5 @@
 @interface FSDraftChallenge : NSObject<NSCoding,NSCopying>
 @property(nonatomic,assign)NSInteger challengeId;
 @property(nonatomic,strong)NSString *challengeName;
+@property(nonatomic,strong)NSString *challengeDetail;
 @end

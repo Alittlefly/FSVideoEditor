@@ -46,10 +46,9 @@
     [writer deleteLocalDraftInfo:draftInfo];
 }
 -(FSDraftInfo *)draftInfoWithPreInfo:(FSDraftInfo *)preDraftInfo{
-    _currentInfo = preDraftInfo;
-    
+
     if (_currentInfo == nil) {
-        _currentInfo = [[FSDraftInfo alloc] init];
+        _currentInfo = preDraftInfo?:[[FSDraftInfo alloc] init];
     }
     
     if (!_tempInfo) {

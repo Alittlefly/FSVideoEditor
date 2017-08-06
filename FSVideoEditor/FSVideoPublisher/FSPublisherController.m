@@ -39,6 +39,7 @@
 #import "FSPublishSingleton.h"
 #import "FSDraftManager.h"
 
+
 typedef NS_ENUM(NSInteger,FSPublishOperationType){
     FSPublishOperationTypeSaveToDraft,
     FSPublishOperationTypePublishToNet,
@@ -300,12 +301,18 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 - (void)didCompileFinished:(NvsTimeline *)timeline{
     
     NSLog(@"Compile success!");
+    UIImage *image = [[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_outPutPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480];
+    
     if (_OperationType == FSPublishOperationTypePublishToNet) {
-            [self uploadFirstImage:[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_outPutPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480]];
+        [self uploadFirstImage:image];
     }else if(_OperationType == FSPublishOperationTypeSaveToDraft){
+        
+        NSString *imagePath = [FSDraftFileManager saveImageTolocal:image];
         
         [FSDraftManager sharedManager].tempInfo.vFinalPath = _outPutPath;
         [FSDraftManager sharedManager].tempInfo.vConvertPath = _convertFilePath;
+        [FSDraftManager sharedManager].tempInfo.vFirstFramePath = imagePath;
+        [FSDraftManager sharedManager].tempInfo.vSaveToAlbum = _isSaved;
         
         [[FSDraftManager sharedManager] mergeInfo];
         [[FSDraftManager sharedManager] saveToLocal];
@@ -330,6 +337,12 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 #pragma mark -
 - (void)FSChallengeControllerChooseChallenge:(FSChallengeModel *)model {
     _challengeModel = model;
+    FSDraftChallenge *draftChallenge = [[FSDraftChallenge alloc] init];
+    draftChallenge.challengeId = model.challengeId;
+    draftChallenge.challengeName = model.name;
+    draftChallenge.challengeDetail = model.content;
+    _draftInfo.challenge = draftChallenge;
+    
     [FSPublishSingleton sharedInstance].chooseChallenge = model;
     [_toolView updateChallengeName:model.name];
 }
@@ -435,7 +448,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 - (void)FSPublisherToolViewSaveToLibrary:(BOOL)isSave {
     _isSaved = isSave;
-    _draftInfo.vSaveToAlbum = isSave;
 }
 
 - (void)FSPublisherToolViewChangeVideoDescription:(NSString *)description {
@@ -651,8 +663,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [dic setValue:weakSelf.videoDescription forKey:@"vd"]; //
         [dic setValue:_firstImageUrl forKey:@"vp"];    //image
         [dic setValue:_webpUrl forKey:@"vg"];   //webp
-        [dic setValue:[NSNumber numberWithInteger:_musicId] forKey:@"si"]; //歌曲id
-        [dic setValue:[NSNumber numberWithInteger:_challengeModel.challengeId] forKey:@"di"];  //挑战ID
+        [dic setValue:@([[FSDraftManager  sharedManager] tempInfo].vMusic.mId) forKey:@"si"]; //歌曲id
+        [dic setValue:@([[FSDraftManager  sharedManager] tempInfo].challenge.challengeId) forKey:@"di"];  //挑战ID
         [dic setValue:[NSArray array] forKey:@"a"];  //消息[{"ui":12815,"nk":"tttty"},{"ui":90665,"nk":"ytest"}]
 //        [dic setValue:@"被@用户ID" forKey:@"ui"];
 //        [dic setValue:@"用户昵称" forKey:@"nk"];

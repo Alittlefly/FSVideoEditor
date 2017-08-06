@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface FSDraftFileManager : NSObject
 +(NSString *)draftDataPath;
 +(void)deleteFile:(NSString *)filePath;
+
++(NSString *)saveImageTolocal:(UIImage *)image;
 @end
