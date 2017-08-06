@@ -82,12 +82,14 @@
     
     
     if (!_musicView) {
+        
         FSMusicController *music = [[FSMusicController alloc] init];
         [music setDelegate:self];
         [self addChildViewController:music];
         [music.view setFrame:CGRectMake(0, 55, CGRectGetWidth(self.view.bounds), CGRectGetHeight(_contentView.frame)  - 55 - 20)];
         [_contentView addSubview:music.view];
-        _musicView = music;
+         _musicView = music;
+        
     }
 
     [self.view setBackgroundColor:[UIColor clearColor]];

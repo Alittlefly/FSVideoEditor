@@ -16,6 +16,7 @@
 #import "FSShortLanguage.h"
 #import "FSVideoEditorAPIParams.h"
 #import "FSPublishSingleton.h"
+#import "FSMusicController.h"
 
 @interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate>
 
@@ -182,7 +183,19 @@
     }
 }
 
+- (void)FSPublisherToolViewChooseMusic {
+    FSMusicController *music = [FSMusicController new];
+//    music.timeLine = _timeLine;
+    music.pushed = NO;
+    music.needSelfHeader = YES;
+//    [music setDelegate:self];
+    
+    [self presentViewController:music animated:YES completion:nil];
+}
 - (IBAction)beginCreat:(id)sender {
+    
+//    [self FSPublisherToolViewChooseMusic];
+//    return;
     FSToolController *toolController = [[FSToolController alloc] init];
 
     FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:toolController];

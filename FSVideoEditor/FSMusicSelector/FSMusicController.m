@@ -34,6 +34,8 @@
     NSInteger _currentCollectPage;
     NSInteger _searchPage;
 }
+@property(nonatomic,strong)UIView *contentView;
+@property(nonatomic,strong)UIView *contentViewWhenNeedSelfHeader;
 @property(nonatomic,strong)FSMusicListView *musicListView;
 @property(nonatomic,strong)NSMutableArray *musics;
 @property(nonatomic,strong)NSMutableArray *collectedMusics;
@@ -58,39 +60,73 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (_needSelfHeader) {
+        _contentViewWhenNeedSelfHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 20,CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
+        [_contentViewWhenNeedSelfHeader setBackgroundColor:[UIColor whiteColor]];
+        [_contentViewWhenNeedSelfHeader.layer setCornerRadius:5.0];
+        [_contentViewWhenNeedSelfHeader.layer setMasksToBounds:YES];
+        [self.view addSubview:_contentViewWhenNeedSelfHeader];
+        
+        
+        UIButton *selectMusic = [UIButton buttonWithType:UIButtonTypeCustom];
+        selectMusic.frame = CGRectMake((CGRectGetWidth(self.view.frame) - 60)/2.0, 17, 60, 21);
+        [selectMusic setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"ChooseMusic"] forState:UIControlStateNormal];
+        selectMusic.tag = 2;
+        [selectMusic setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
+        [selectMusic setTitleColor:FSHexRGB(0x010A12) forState:(UIControlStateSelected)];
+        [selectMusic.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+        [selectMusic setSelected:YES];
+        [_contentViewWhenNeedSelfHeader addSubview:selectMusic];
+    }
     
-    _currentType = FSMusicButtonTypeHot;
-    _searchBar = [[FSSearchBar alloc] initWithFrame:CGRectMake(10, 8, CGRectGetWidth(self.view.bounds) - 20, 28) delegate:self];
-    [self.view addSubview:_searchBar];
     
-     _tableHeader = [[FSMusicHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 228)];
+     _contentView = [UIView new];
+    [_contentView setFrame:self.view.bounds];
+    [self.view addSubview:_contentView];
+
+    
+     _searchBar = [[FSSearchBar alloc] initWithFrame:CGRectMake(10, 8, CGRectGetWidth(self.view.bounds) - 20, 28) delegate:self];
+    [_contentView addSubview:_searchBar];
+    
+    _tableHeader = [[FSMusicHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 228)];
     [_tableHeader setDelegate:self];
     
     _musicListView = [[FSMusicListView alloc] initWithFrame:self.view.bounds];
     _musicListView.tableHeader = _tableHeader;
     [_musicListView setDelegate:self];
     _musicListView.tag = 10;
-    [self.view addSubview:_musicListView];
-
+    [_contentView addSubview:_musicListView];
     
-     _resultView = [[FSMusicSearchResultView alloc] initWithFrame:self.view.bounds];
+    
+    _resultView = [[FSMusicSearchResultView alloc] initWithFrame:self.view.bounds];
     [_resultView setDelegate:self];
     [_resultView setHidden:YES];
-    [self.view addSubview:_resultView];
+    [_contentView addSubview:_resultView];
     
+//    [self initCancleButton];
+    if (!self.cancleButton) {
+        self.cancleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 49, CGRectGetWidth(self.view.bounds), 49)];
+    }
+    
+    [self.cancleButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancle"] forState:(UIControlStateNormal)];
+    [self.cancleButton setBackgroundColor:FSHexRGB(0xffffff)];
+    [self.cancleButton setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
+    [self.cancleButton.layer setShadowOffset:CGSizeMake(0.0, -2.0)];
+    [self.cancleButton.layer setShadowRadius:3.0];
+    [self.cancleButton.layer setShadowColor:FSHexRGBAlpha(0x000000,1.0).CGColor];
+    [self.cancleButton.layer setShadowOpacity:0.1];
+    [self.cancleButton addTarget:self action:@selector(dissmissController) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:self.cancleButton];
+    
+    _currentType = FSMusicButtonTypeHot;
      _sever = [[FSMusicSever alloc] init];
     [_sever setDelegate:self];
     _currentHotPage = 1;
     _currentCollectPage = 1;
     [_sever getMusicListPage:_currentHotPage];
-    
      _collectSever = [FSMusicCollectSever new];
     [_collectSever setDelegate:self];
-    
     [_musicListView showLoading:YES];
-    
-    [self initCancleButton];
-    
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -133,13 +169,20 @@
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     
-    [_searchBar setFrame:CGRectMake(10, 8, CGRectGetWidth(self.view.bounds) - 20, 28)];
     
-    CGRect tableFrame = CGRectMake(0, CGRectGetMaxY(_searchBar.frame) + 15, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 100);
+    if (_needSelfHeader) {
+        [_contentView setFrame:CGRectMake(0, 55, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.frame)  - 55 - 20)];
+    }else{
+        [_contentView setFrame:self.view.bounds];
+    }
+    
+    [_searchBar setFrame:CGRectMake(10, 8, CGRectGetWidth(_contentView.bounds) - 20, 28)];
+    CGRect tableFrame = CGRectMake(0, CGRectGetMaxY(_searchBar.frame) + 15, CGRectGetWidth(_contentView.bounds), CGRectGetHeight(_contentView.bounds) - 100);
     [_musicListView setFrame:tableFrame];
     [_resultView setFrame:tableFrame];
     
     [self.cancleButton setFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 49, CGRectGetWidth(self.view.bounds), 49)];
+
 }
 - (void)stopPlayCurrentMusic {
     [_musicListView stopPlayCurrentMusic];

@@ -185,11 +185,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         }
     }
     
-    
     [self changeVolume];
     
-    
 }
+
 -(void)playVideoFromHead{
     [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster];
     
@@ -272,6 +271,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         }
     }
 }
+
 - (NSString *)getCompilePath {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMddHHmmss"];
@@ -282,8 +282,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     NSString *final = [documentsDirectory stringByAppendingPathComponent:@"tmp"];
     return [final stringByAppendingFormat:@"/video%@.mov",timeRandom];
 }
-                             
-                             
 
 -(void)publishFiles{
     [self.navigationController.view addSubview:self.loading];
@@ -495,12 +493,18 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 - (void)FSPublisherToolViewChooseMusic {
+    
     FSMusicController *music = [FSMusicController new];
+
+    FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:music];
+    [nav setNavigationBarHidden:YES];
+    
     music.timeLine = _timeLine;
-    music.pushed = YES;
+    music.pushed = NO;
+    music.needSelfHeader = YES;
     [music setDelegate:self];
     
-    [self presentViewController:music animated:YES completion:nil];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)FSPublisherToolViewSaveToDraft {

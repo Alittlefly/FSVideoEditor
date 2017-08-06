@@ -13,4 +13,5 @@
 @property(nonatomic,strong)UIButton *cancleButton;
 
 -(void)initCancleButton;
+- (void)dissmissController;
 @end

@@ -28,6 +28,7 @@
 @interface FSMusicController : FSCancleController
 
 @property(nonatomic,assign)id<FSMusicControllerDelegate>delegate;
+@property(nonatomic,assign)BOOL needSelfHeader;
 
 @property(nonatomic,assign)NvsTimeline *timeLine;
 @property(nonatomic,assign)BOOL pushed;
