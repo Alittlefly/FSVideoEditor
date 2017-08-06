@@ -9,7 +9,7 @@
 #import "FSDraftFileManager.h"
 
 @implementation FSDraftFileManager
--(void)deleteFile:(NSString *)filePath{
++(void)deleteFile:(NSString *)filePath{
     // 如果文件不存在就不继续执行
     BOOL *isDirt = NULL;
     BOOL exist  = [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:isDirt];

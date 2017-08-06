@@ -10,5 +10,5 @@
 
 @interface FSDraftFileManager : NSObject
 +(NSString *)draftDataPath;
--(void)deleteFile:(NSString *)filePath;
++(void)deleteFile:(NSString *)filePath;
 @end

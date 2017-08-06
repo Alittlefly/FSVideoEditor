@@ -39,7 +39,16 @@
     [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
 }
 -(void)deleteToLocal:(FSDraftInfo *)draftInfo{
+    
     if (draftInfo) {
+        [FSDraftFileManager deleteFile:draftInfo.vFinalPath];
+        [FSDraftFileManager deleteFile:draftInfo.vConvertPath];
+        [FSDraftFileManager deleteFile:draftInfo.vFirstFramePath];
+        [FSDraftFileManager deleteFile:draftInfo.vOriginalPath];
+        for (NSString *filePath in draftInfo.recordVideoPathArray) {
+            [FSDraftFileManager deleteFile:filePath];
+        }
+
         [self.draftInfos removeObject:draftInfo];
     }
     NSString *dataPath = [FSDraftFileManager draftDataPath];
