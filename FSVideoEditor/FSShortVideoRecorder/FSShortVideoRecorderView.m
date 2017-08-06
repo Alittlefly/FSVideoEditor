@@ -145,9 +145,10 @@
 //    _progressView.maximumTrackTintColor = [UIColor clearColor];
 //    _progressView.value = 0;
     [self addSubview:_progressView];
-    
+    CGFloat totalTime = 0;
     for (NSNumber *time in _draftInfo.recordVideoTimeArray) {
-        [_progressView setProgress:time.floatValue/15.0 animated:NO];
+        totalTime += time.floatValue;
+        [_progressView setProgress:totalTime/15.0 animated:NO];
         [_progressView stopAnimationWithCuttingLine];
     }
     
@@ -390,6 +391,7 @@
     
     _draftInfo.recordVideoTimeArray = _recorderManager.timeArray;
     _draftInfo.recordVideoPathArray = _recorderManager.filePathArray;
+    
     
     if (_isRecording) {
         [self pauseRecorder];
