@@ -13,7 +13,6 @@
 @protocol FSShortVideoRecorderManagerDelegate <NSObject>
 
 - (void)FSShortVideoRecorderManagerFinishRecorder:(NSString *)filePath;
-- (void)FSShortVideoRecorderManagerFinish:(NvsTimeline *)timeLine;
 - (void)FSShortVideoRecorderManagerFailedRecorder;
 - (void)FSShortVideoRecorderManagerProgress:(CGFloat)time;
 - (void)FSShortVideoRecorderManagerDeleteVideo:(CGFloat)videoTime;

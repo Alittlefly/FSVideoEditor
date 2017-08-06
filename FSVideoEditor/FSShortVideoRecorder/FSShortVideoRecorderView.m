@@ -922,13 +922,4 @@
         [self.delegate FSShortVideoRecorderViewFinishRecorder:normalFilePath convertFilePath:convertFilePath speed:self.recorderManager.recorderSpeed musicStartTime:_musicStartTime] ;
     }
 }
-
-- (void)FSShortVideoRecorderManagerFinish:(NvsTimeline *)timeLine {
-    [self.loading loadingViewhide];
-    
-    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishTimeLine:speed:musicStartTime:)]) {
-        [self.delegate FSShortVideoRecorderViewFinishTimeLine:timeLine speed:self.recorderManager.recorderSpeed musicStartTime:_musicStartTime] ;
-    }
-}
-
 @end

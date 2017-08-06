@@ -89,56 +89,25 @@
 }
 
 - (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath speed:(CGFloat)speed musicStartTime:(NSTimeInterval)time {
-//    FSPublisherController *publish = [[FSPublisherController alloc] init];
-//    publish.filePath = filePath;
-//    publish.playSpeed = speed;
-//    publish.musicPath = _musicFilePath;
-//    publish.musicStartTime = time;
-//    NvsTimeline *timeLine = [[FSShortVideoRecorderManager sharedInstance] createTimeLine];
-//    NvsVideoTrack *videoTrack = [timeLine appendVideoTrack];
-//    NvsVideoClip *clip = [videoTrack insertClip:filePath clipIndex:0];
-//    [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
-//    publish.timeLine = timeLine;
-//    [self.navigationController pushViewController:publish animated:YES];
 }
 
 - (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath convertFilePath:(NSString *)convertFilePath speed:(CGFloat)speed musicStartTime:(NSTimeInterval)time {
     FSPublisherController *publish = [[FSPublisherController alloc] init];
-    publish.filePath = filePath;
-    publish.convertFilePath = convertFilePath;
-    publish.playSpeed = speed;
-    publish.musicPath = _musicFilePath;
-    publish.musicStartTime = time;
-    publish.draftInfo = _tempInfo;
     
-    NvsTimeline *timeLine = [[FSShortVideoRecorderManager sharedInstance] createTimeLine];
-    NvsVideoTrack *videoTrack = [timeLine appendVideoTrack];
-    NvsVideoClip *clip = [videoTrack insertClip:filePath clipIndex:0];
-    [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
-    publish.timeLine = timeLine;
-    
+    _tempInfo.vType = FSDraftInfoTypeRecoder;
     _tempInfo.vSpeed = speed;
     _tempInfo.vOriginalPath = filePath;
+    _tempInfo.vFinalPath = filePath;
     _tempInfo.vConvertPath = convertFilePath;
-    
+    publish.draftInfo = _tempInfo;
+
+    publish.musicPath = _musicFilePath;
+    publish.musicStartTime = time;
+
     [[FSDraftManager sharedManager] mergeInfo];
-    [[FSDraftManager sharedManager] clearInfo];
     [self.navigationController pushViewController:publish animated:YES];
 }
 
-- (void)FSShortVideoRecorderViewFinishTimeLine:(NvsTimeline *)timeLine speed:(CGFloat)speed musicStartTime:(NSTimeInterval)time {
-    FSPublisherController *publish = [[FSPublisherController alloc] init];
-    //publish.filePath = filePath;
-    publish.playSpeed = speed;
-    publish.musicPath = _musicFilePath;
-    publish.musicStartTime = time;
-//    NvsTimeline *timeLine = [[FSShortVideoRecorderManager sharedInstance] createTimeLine];
-//    NvsVideoTrack *videoTrack = [timeLine appendVideoTrack];
-//    NvsVideoClip *clip = [videoTrack insertClip:filePath clipIndex:0];
-//    [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
-    publish.timeLine = timeLine;
-    [self.navigationController pushViewController:publish animated:YES];
-}
 
 - (void)FSShortVideoRecorderViewShowAlertView:(NSString *)message {
     FSAlertView *alet = [[FSAlertView alloc] initWithFrame:self.view.bounds];

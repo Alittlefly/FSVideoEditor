@@ -496,12 +496,6 @@ static FSShortVideoRecorderManager *recorderManager;
     
     _videoFilePath = [final stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];//[docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
     
-//    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinish:)]) {
-//        [self.delegate FSShortVideoRecorderManagerFinish:self.timeLine];
-//    }
-//    
-//    return YES;
-    
     BOOL isSuccess = [_context compileTimeline:self.timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_videoFilePath videoResolutionGrade:NvsCompileVideoResolutionGrade720 videoBitrateGrade:NvsCompileBitrateGradeHigh flags:0];
     if (isSuccess) {
 //        _videoIndex = 0;

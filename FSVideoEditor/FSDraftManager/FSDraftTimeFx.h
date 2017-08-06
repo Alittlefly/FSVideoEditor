@@ -7,17 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef NS_ENUM(NSInteger,FSDraftTimeFxType){
-    FSDraftTimeFxTypeNone = 1,
-    FSDraftTimeFxTypeRevert,
-    FSDraftTimeFxTypeRePlay,
-    FSDraftTimeFxTypeSlow,
-};
+#import "FSVideoClipProgress.h"
 
 @interface FSDraftTimeFx : NSObject<NSCoding,NSCopying>
 
-@property(nonatomic,assign)FSDraftTimeFxType tFxType;
+@property(nonatomic,assign)FSVideoFxType tFxType;
 @property(nonatomic,assign)int64_t tFxInPoint;
 @property(nonatomic,assign)int64_t tFxOutPoint;
 @end

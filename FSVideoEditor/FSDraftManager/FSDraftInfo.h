@@ -13,7 +13,14 @@
 #import "FSDraftTimeFx.h"
 #import "FSVideoFxOperationStack.h"
 
+typedef NS_ENUM(NSInteger,FSDraftInfoType){
+    FSDraftInfoTypeVideo,
+    FSDraftInfoTypeRecoder,
+};
+
 @interface FSDraftInfo : NSObject<NSCoding>
+
+@property(nonatomic,assign)FSDraftInfoType vType;
 @property(nonatomic,strong)FSDraftMusic *vMusic;
 @property(nonatomic,strong)FSVideoFxOperationStack *stack;
 @property(nonatomic,strong)FSDraftChallenge *challenge;

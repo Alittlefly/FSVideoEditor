@@ -23,6 +23,8 @@
 -(instancetype)init{
     if (self = [super init]) {
         [self setVSpeed:1.0];
+        [self setVMusicVolume:1.0];
+        [self setVOriginalVolume:1.0];
     }
     return self;
 }
@@ -47,7 +49,7 @@
         self.recordVideoPathArray = draftInfo.recordVideoPathArray;
         self.recordVideoTimeArray = draftInfo.recordVideoTimeArray;
         self.recordVideoSpeedArray = draftInfo.recordVideoSpeedArray;
-
+        self.vType = draftInfo.vType;
     }
     return self;
 }
@@ -71,7 +73,7 @@
     self.recordVideoPathArray = draftInfo.recordVideoPathArray;
     self.recordVideoTimeArray = draftInfo.recordVideoTimeArray;
     self.recordVideoSpeedArray = draftInfo.recordVideoSpeedArray;
-
+    self.vType = draftInfo.vType;
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -96,6 +98,7 @@
         self.recordVideoTimeArray = [aDecoder decodeObjectForKey:@"recordVideoTimeArray"];
         self.recordVideoPathArray = [aDecoder decodeObjectForKey:@"recordVideoPathArray"];
         self.recordVideoSpeedArray = [aDecoder decodeObjectForKey:@"recordVideoSpeedArray"];
+        self.vType = [[aDecoder decodeObjectForKey:@"vType"] integerValue];
 
     }
     
@@ -122,6 +125,7 @@
     [aCoder encodeObject:self.vFilterid forKey:@"vFilterid"];
     [aCoder encodeObject:[NSNumber numberWithBool:self.vSaveToAlbum] forKey:@"vSaveToAlbum"];
     [aCoder encodeObject:self.vOriginalPath forKey:@"vOriginalPath"];
+    [aCoder encodeObject:[NSNumber numberWithInteger:self.vType] forKey:@"vType"];
 }
 
 - (void)setVFinalPath:(NSString *)vFinalPath {

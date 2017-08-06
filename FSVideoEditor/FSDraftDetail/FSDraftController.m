@@ -9,6 +9,10 @@
 #import "FSDraftController.h"
 #import "FSDraftManager.h"
 #import "FSDraftTableViewCell.h"
+#import "FSPublisherController.h"
+#import "FSShortVideoRecorderController.h"
+#import "FSToolController.h"
+#import "FSAnimationNavController.h"
 
 @interface FSDraftController ()<FSDraftTableCellDelegate>
 @property(nonatomic,strong)NSMutableArray *drafts;
@@ -58,11 +62,31 @@
 {
     return 101;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    FSDraftInfo *info = [_drafts objectAtIndex:indexPath.row]
+    ;
 
-#pragma mark - UITableViewDataSource
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (info.vType == FSDraftInfoTypeRecoder) {
+        
+        FSShortVideoRecorderController *controller = [[FSShortVideoRecorderController alloc] init];
+        FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:controller];
+        controller.draftInfo = info;
+        
+        FSPublisherController *publishController = [[FSPublisherController alloc] init];
+        publishController.draftInfo = info;
+        [nav pushViewController:publishController animated:NO];
+        
+        [self presentViewController:nav animated:YES completion:nil];
+    }else{
+        FSPublisherController *publishController = [[FSPublisherController alloc] init];
+        FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:publishController];
+        publishController.draftInfo = info;
+        [self presentViewController:nav animated:YES completion:nil];
+    }
     
 }
+
+#pragma mark - UITableViewDataSource
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
