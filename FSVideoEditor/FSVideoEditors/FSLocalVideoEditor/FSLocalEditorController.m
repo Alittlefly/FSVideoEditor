@@ -286,22 +286,18 @@
 
 - (void)FSShortVideoRecorderManagerConvertorFinished:(NSString *)filePath{
     [self.loading loadingViewhide];
-
-    FSPublisherController *publish = [[FSPublisherController alloc] init];
-    publish.filePath = _outPutFilePath;
-    publish.timeLine = _timeLine;
-    publish.trimIn = _startTime;
-    publish.trimOut = _endTime;
-    publish.convertFilePath = filePath;
     
+    FSPublisherController *publish = [[FSPublisherController alloc] init];
+    _draftInfo.vType = FSDraftInfoTypeVideo;
     _draftInfo.vFinalPath = _outPutFilePath;
     _draftInfo.vConvertPath = filePath;
-    _draftInfo.vType = FSDraftInfoTypeVideo;
+    
     publish.draftInfo = _draftInfo;
+    publish.timeLine = _timeLine;
     
     [[FSDraftManager sharedManager] mergeInfo];
     [[FSDraftManager sharedManager] clearInfo];
-
+    
     [self.navigationController pushViewController:publish animated:YES];
 }
 - (void)FSShortVideoRecorderManagerConvertorFaild{

@@ -14,19 +14,16 @@
 @class FSDraftInfo;
 
 @interface FSPublisherController : UIViewController
-@property (nonatomic,copy) NSString *filePath;
-@property (nonatomic,copy) NSString *convertFilePath;
+
 @property (nonatomic,assign) NvsTimeline *timeLine;
 @property (nonatomic,assign) CGFloat playSpeed;
 @property (nonatomic,copy)   NSString *musicPath;
 @property (nonatomic, assign) NSInteger musicId;
 @property (nonatomic,assign) NSTimeInterval musicStartTime;
 
-@property(nonatomic,assign)int64_t trimIn;
-@property(nonatomic,assign)int64_t trimOut;
 
+@property(nonatomic,strong)FSDraftInfo *draftInfo;
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property (nonatomic, strong) FSPublisherToolView *toolView;
 
-@property(nonatomic,strong)FSDraftInfo *draftInfo;
 @end
