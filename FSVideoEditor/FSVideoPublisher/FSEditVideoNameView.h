@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSDraftInfo.h"
 
 @protocol FSEditVideoNameViewDelegate <NSObject>
 
@@ -19,6 +20,8 @@
 @interface FSEditVideoNameView : UIView
 
 @property (nonatomic, weak) id<FSEditVideoNameViewDelegate> delegate;
+
+- (instancetype)initWithFrame:(CGRect)frame draftInfo:(FSDraftInfo *)draftInfo;
 
 - (void)hiddenKeyBorde;
 - (void)updateChallengeName:(NSString *)name;

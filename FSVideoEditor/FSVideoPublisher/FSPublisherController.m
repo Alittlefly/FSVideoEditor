@@ -110,7 +110,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     _prewidow = [[NvsLiveWindow alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_prewidow];
     
-    _toolView = [[FSPublisherToolView alloc] initWithFrame:self.view.bounds];
+    _toolView = [[FSPublisherToolView alloc] initWithFrame:self.view.bounds draftInfo:_draftInfo];
     _toolView.backgroundColor = [UIColor clearColor];
     _toolView.delegate =self;
     [self.view addSubview:_toolView];
@@ -153,23 +153,39 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
      _uploader = [FSUploader uploaderWithDivider:divider];
     [_uploader setDelegate:self];
     
-    if (_musicPath != nil && _musicPath.length > 0) {
-        _scoreVolume = 0.5;
-        _soundtrackVolume = -1;
-
-        [[FSMusicPlayer sharedPlayer] setFilePath:_musicPath];
-        [_toolView canEditMusic:YES];
+    if (_draftInfo.vMusicVolume == -1 && _draftInfo.vOriginalVolume == -1) {
+        if (_musicPath != nil && _musicPath.length > 0) {
+            _scoreVolume = 0.5;
+            _soundtrackVolume = -1;
+            
+            [[FSMusicPlayer sharedPlayer] setFilePath:_musicPath];
+            [_toolView canEditMusic:YES];
+        }
+        else {
+            _scoreVolume = 0.5;
+            _soundtrackVolume = 0.5;
+            
+            [_toolView canEditMusic:NO];
+        }
+        
+        _draftInfo.vMusicVolume = _scoreVolume;
+        _draftInfo.vOriginalVolume = _soundtrackVolume;
     }
     else {
-        _scoreVolume = 0.5;
-        _soundtrackVolume = 0.5;
-        
-        [_toolView canEditMusic:NO];
+        _scoreVolume = _draftInfo.vMusicVolume;
+        _soundtrackVolume = _draftInfo.vOriginalVolume;
+        if (_musicPath != nil && _musicPath.length > 0) {
+            [_toolView canEditMusic:YES];
+        }
+        else {
+            [_toolView canEditMusic:NO];
+        }
     }
+    
+    
     [self changeVolume];
     
-    _draftInfo.vMusicVolume = _scoreVolume;
-    _draftInfo.vOriginalVolume = _soundtrackVolume;
+    
 }
 -(void)playVideoFromHead{
     [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster];
@@ -556,11 +572,13 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 - (void)FSControlVolumeViewChangeScore:(CGFloat)value {
     NSLog(@"%f  %u",value,[_timeLine audioTrackCount]);
     _scoreVolume = value;
+    _draftInfo.vMusicVolume = value;
     [self changeVolume];
 }
 
 - (void)FSControlVolumeViewChangeSoundtrack:(CGFloat)value {
     _soundtrackVolume = value;
+    _draftInfo.vOriginalVolume = value;
     [self changeVolume];
 }
 
