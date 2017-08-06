@@ -27,7 +27,7 @@
     _drafts = [[FSDraftManager sharedManager] allDraftInfos];
     
     [self.tableView setTableFooterView:[UIView new]];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[FSDraftTableViewCell class] forCellReuseIdentifier:@"FSDraftTableViewCell"];
 }
 
 - (void)didReceiveMemoryWarning {
