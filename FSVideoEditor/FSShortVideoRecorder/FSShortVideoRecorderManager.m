@@ -312,8 +312,10 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     if ([self getCurrentEngineState] != NvsStreamingEngineState_CaptureRecording) {
         // 获取输出文件路径
-        NSArray *docPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        NSString *outputFilePath = [[docPath objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *final = [documentsDirectory stringByAppendingPathComponent:@"tmp"];
+        NSString *outputFilePath = [final stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
         
        // NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
        // NSString *outputFilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
@@ -467,7 +469,9 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     
     //NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSArray *docPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *final = [documentsDirectory stringByAppendingPathComponent:@"tmp"];
     
     [self.videoTrack removeAllClips];
     int i = 0;
@@ -490,7 +494,7 @@ static FSShortVideoRecorderManager *recorderManager;
         }
     }
     
-    _videoFilePath = [[docPath objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];//[docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
+    _videoFilePath = [final stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];//[docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
     
 //    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinish:)]) {
 //        [self.delegate FSShortVideoRecorderManagerFinish:self.timeLine];
@@ -675,14 +679,19 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (void)setupConvertor:(NSString *)filePath {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *tmpfilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *final = [documentsDirectory stringByAppendingPathComponent:@"tmp"];
+    NSString *tmpfilePath = [final stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
     [self convertorWithFile:filePath outPath:tmpfilePath];
 }
 
 - (void)beginCreateWebP:(NSString *)filePath {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *tmpfilePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.webp",[self getCurrentTimeString]]];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *final = [documentsDirectory stringByAppendingPathComponent:@"tmp"];
+    
+    NSString *tmpfilePath = [final stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.webp",[self getCurrentTimeString]]];
     [self convertorWithFile:filePath outPath:tmpfilePath];
 }
 

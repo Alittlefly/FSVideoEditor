@@ -123,7 +123,7 @@
 
 -(void)setInfo:(FSDraftInfo *)info{
     _info = info;
-    
+
     NSData *data = [NSData dataWithContentsOfFile:info.vFirstFramePath];
     UIImage * currentImage = [UIImage imageWithData:data];
     [self.photo setImage:currentImage];
