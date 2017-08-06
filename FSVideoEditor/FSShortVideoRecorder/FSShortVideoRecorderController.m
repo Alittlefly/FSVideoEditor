@@ -31,50 +31,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     _tempInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
-//    _tempInfo.recordVideoTimeArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:3],[NSNumber numberWithFloat:1.5],[NSNumber numberWithFloat:5], nil];
-//    _tempInfo.recordVideoSpeedArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:1],[NSNumber numberWithFloat:1],[NSNumber numberWithFloat:1], nil];
-//    _tempInfo.recordVideoPathArray = [NSArray arrayWithObjects:@"111",@"222",@"333", nil];
     _recorderView = [[FSShortVideoRecorderView alloc] initWithFrame:self.view.bounds draftInfo:_tempInfo];
+    _recorderView.draftInfo = _tempInfo;
     _recorderView.delegate =self;
     [self.view addSubview:_recorderView];
-    
-    
-}
-
-- (void)backClik {
-}
-
--(void)dealloc{
-    NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     [_recorderView resumeCapturePreview];
-    if (_musicFilePath != nil && _musicFilePath.length > 0) {
-        _recorderView.musicFilePath = _musicFilePath;
+    if (_tempInfo.vMusic != nil && _tempInfo.vMusic.mPath.length > 0) {
+        _recorderView.musicFilePath =  _tempInfo.vMusic.mPath;
     }
 
 }
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    
-//    if([[FSShortVideoRecorderManager sharedInstance] getStreamingEngineState] != NvsStreamingEngineState_Stopped)
-//        [_context stop];
-//    [_context setDelegate:nil];
-
-}
-
 #pragma mark - FSShortVideoRecorderViewDelegate
 
 - (void)FSShortVideoRecorderViewQuitRecorderView {
@@ -82,7 +54,11 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else {
-        [self.navigationController popViewControllerAnimated:YES];
+        if ([[self.navigationController childViewControllers] count] == 1) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
     
     [[FSDraftManager sharedManager] cancleOperate];
@@ -99,11 +75,10 @@
     _tempInfo.vOriginalPath = filePath;
     _tempInfo.vFinalPath = filePath;
     _tempInfo.vConvertPath = convertFilePath;
+    if (_tempInfo.vMusic) {
+        _tempInfo.vMusic.mInPoint = time;
+    }
     publish.draftInfo = _tempInfo;
-
-    publish.musicPath = _musicFilePath;
-    publish.musicStartTime = time;
-
     [[FSDraftManager sharedManager] mergeInfo];
     [self.navigationController pushViewController:publish animated:YES];
 }
@@ -130,11 +105,9 @@
         
     }];
 }
-
 - (void)FSFilterViewChooseFilter:(NSString *)filter {
     [_recorderView changeFilter:filter];
 }
-
 - (void)FSFilterViewFinishedChooseFilter {
     [UIView animateWithDuration:0.5 animations:^{
         _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.view.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
@@ -148,20 +121,8 @@
         
     }];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)dealloc{
+    NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

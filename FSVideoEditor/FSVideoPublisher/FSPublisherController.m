@@ -142,6 +142,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     }
     _videoTrack = [_timeLine getVideoTrackByIndex:0];
     
+    
+    NSString *_musicPath = _draftInfo.vMusic.mPath;
     NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
     [clip setVolumeGain:_musicPath?0:1 rightVolumeGain:_musicPath?0:1];
@@ -178,9 +180,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         }
     }
     
+    NSString *_musicPath = _draftInfo.vMusic.mPath;
 
     if (_musicPath != nil && _musicPath.length > 0 && !_isEnterCutMusicView) {
         [[FSMusicPlayer sharedPlayer] stop];
+        NSTimeInterval _musicStartTime = _draftInfo.vMusic.mInPoint;
         [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
         [[FSMusicPlayer sharedPlayer] play];
     }
@@ -267,10 +271,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [self.loading loadingViewShow];
     
     int64_t length = _timeLine.duration;
-    
+    NSString *_musicPath = _draftInfo.vMusic.mPath;
     if (_musicPath != nil && _musicPath.length > 0) {
         NvsAudioTrack *_audiotrack = [_timeLine appendAudioTrack];
         NvsAudioClip *audio = [_audiotrack appendClip:_musicPath];
+        int64_t _musicStartTime = _draftInfo.vMusic.mInPoint;
         [audio changeTrimInPoint:_musicStartTime affectSibling:YES];
         [audio changeTrimOutPoint:length+_musicStartTime affectSibling:YES];
     }
@@ -380,7 +385,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         }];
         UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             [self dismissViewControllerAnimated:YES completion:nil];
-            [[FSDraftManager sharedManager] clearInfo];
+            [[FSDraftManager sharedManager] cancleOperate];
             [_context removeTimeline:_timeLine];
             [_context stop];
         }];
@@ -396,7 +401,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         }];
         UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             [self.navigationController popViewControllerAnimated:YES];
-            [[FSDraftManager sharedManager] clearInfo];
+            [[FSDraftManager sharedManager] cancleOperate];
             [_context removeTimeline:_timeLine];
             [_context stop];
         }];
@@ -411,6 +416,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 - (void)FSPublisherToolViewEditMusic {
+    
+    NSString *_musicPath = _draftInfo.vMusic.mPath;
     if (_musicPath !=nil && _musicPath.length > 0) {
         _isEnterCutMusicView = YES;
         
@@ -419,6 +426,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         }
         
         if (!_cutMusicView) {
+            NSTimeInterval _musicStartTime = _draftInfo.vMusic.mInPoint;
             _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath startTime:_musicStartTime];
             _cutMusicView.delegate = self;
             [self.view addSubview:_cutMusicView];
@@ -438,8 +446,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
     fxController.timeLine = _timeLine;
     fxController.filePath = _draftInfo.vFinalPath;
-    fxController.musicAttime = _musicStartTime?:0;
-    fxController.musicUrl = _musicPath?:nil;
+    fxController.musicAttime = _draftInfo.vMusic.mInPoint;
+    fxController.musicUrl = _draftInfo.vMusic.mPath;
     fxController.delegate = self;
     fxController.convertFilePath = _draftInfo.vConvertPath;
     
@@ -502,9 +510,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         _soundtrackVolume = -1;
         [self changeVolume];
         [_toolView canEditMusic:YES];
-        _musicPath = music;
-        _musicId = musicId;
-        _musicStartTime = 0;
     }
 }
 
@@ -567,7 +572,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     self.toolView.hidden = NO;
 }
 - (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval)newStartTime {
-    _musicStartTime = newStartTime;
+    _draftInfo.vMusic.mInPoint = newStartTime;
     _isEnterCutMusicView = NO;
     
     [self playVideoFromHead];

@@ -155,7 +155,6 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }else{
         FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
-        recoder.musicFilePath = musicPath;
         [self.navigationController pushViewController:recoder animated:YES];
     }
     

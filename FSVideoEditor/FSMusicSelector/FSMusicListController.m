@@ -78,7 +78,6 @@
 }
 -(void)musicListWouldUseMusic:(FSMusic *)music musicPath:(NSString *)musicPath{
     FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
-    recoder.musicFilePath = musicPath;
     [self.navigationController pushViewController:recoder animated:YES];
 }
 -(void)musicListWouldShowDetail:(FSMusic *)music{
