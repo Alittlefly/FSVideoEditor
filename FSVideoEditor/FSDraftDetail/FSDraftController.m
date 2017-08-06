@@ -8,6 +8,7 @@
 
 #import "FSDraftController.h"
 #import "FSDraftManager.h"
+#import "FSDraftTableViewCell.h"
 
 @interface FSDraftController ()
 @property(nonatomic,strong)NSArray *drafts;
@@ -42,15 +43,19 @@
 
 /**/
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    FSDraftTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FSDraftTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
     FSDraftInfo *info = [_drafts objectAtIndex:indexPath.row];
     NSLog(@"info %@",info.vFinalPath);
+    [cell setInfo:info];
     
     return cell;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 101;
+}
 
 /*
 // Override to support conditional editing of the table view.
