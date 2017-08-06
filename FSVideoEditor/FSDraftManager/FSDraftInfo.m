@@ -50,6 +50,7 @@
         self.recordVideoTimeArray = draftInfo.recordVideoTimeArray;
         self.recordVideoSpeedArray = draftInfo.recordVideoSpeedArray;
         self.vType = draftInfo.vType;
+        self.vAddedFxViews = draftInfo.vAddedFxViews;
     }
     return self;
 }
@@ -74,6 +75,7 @@
     self.recordVideoTimeArray = draftInfo.recordVideoTimeArray;
     self.recordVideoSpeedArray = draftInfo.recordVideoSpeedArray;
     self.vType = draftInfo.vType;
+    self.vAddedFxViews = draftInfo.vAddedFxViews;
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -99,7 +101,7 @@
         self.recordVideoPathArray = [aDecoder decodeObjectForKey:@"recordVideoPathArray"];
         self.recordVideoSpeedArray = [aDecoder decodeObjectForKey:@"recordVideoSpeedArray"];
         self.vType = [[aDecoder decodeObjectForKey:@"vType"] integerValue];
-
+        self.vAddedFxViews = [aDecoder decodeObjectForKey:@"vAddedFxViews"];
     }
     
     return self;
@@ -126,6 +128,8 @@
     [aCoder encodeObject:[NSNumber numberWithBool:self.vSaveToAlbum] forKey:@"vSaveToAlbum"];
     [aCoder encodeObject:self.vOriginalPath forKey:@"vOriginalPath"];
     [aCoder encodeObject:[NSNumber numberWithInteger:self.vType] forKey:@"vType"];
+    [aCoder encodeObject:self.vAddedFxViews forKey:@"vAddedFxViews"];
+
 }
 
 - (void)setVFinalPath:(NSString *)vFinalPath {

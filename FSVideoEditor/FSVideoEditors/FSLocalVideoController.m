@@ -43,22 +43,26 @@
 #pragma mark - 
 -(void)videoListView:(FSVideoListView *)videoListView didSelectedVideo:(PHAsset *)video{
     
-    if (video.duration < 5) {
+    if (video.duration < 3) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"时间太短" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleCancel) handler:nil];
+        [alert addAction:cancle];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        PHVideoRequestOptions *videoOption = [PHVideoRequestOptions new];
         
+        [[PHImageManager defaultManager] requestAVAssetForVideo:video options:videoOption resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+            
+            AVURLAsset *urlAsset = (AVURLAsset *)asset;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                
+                FSLocalEditorController *vc = [[FSLocalEditorController alloc] init];
+                vc.filePath = urlAsset.URL.relativeString;
+                [self.navigationController pushViewController:vc animated:YES];
+            });
+        }];
     }
-    
-    PHVideoRequestOptions *videoOption = [PHVideoRequestOptions new];
-    
-    [[PHImageManager defaultManager] requestAVAssetForVideo:video options:videoOption resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
-
-        AVURLAsset *urlAsset = (AVURLAsset *)asset;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            FSLocalEditorController *vc = [[FSLocalEditorController alloc] init];
-            vc.filePath = urlAsset.URL.relativeString;
-            [self.navigationController pushViewController:vc animated:YES];
-        });
-    }];
-    
 }
 
 -(void)dealloc{

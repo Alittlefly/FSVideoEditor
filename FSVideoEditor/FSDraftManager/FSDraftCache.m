@@ -31,7 +31,8 @@
     return object;
 }
 -(void)insertToLocal:(FSDraftInfo *)draftInfo{
-    if (draftInfo) {
+    BOOL contain = [self.draftInfos containsObject:draftInfo];
+    if (!contain) {
         [self.draftInfos addObject:draftInfo];
     }
     

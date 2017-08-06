@@ -92,6 +92,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 -(NSMutableArray *)addedViews{
     if (!_addedViews) {
         _addedViews = [NSMutableArray array];
+        [_addedViews addObjectsFromArray:_draftInfo.vAddedFxViews];
     }
     return _addedViews;
 }
@@ -327,6 +328,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [FSDraftManager sharedManager].tempInfo.vTitle = _videoDescription;
         [FSDraftManager sharedManager].tempInfo.vMusicVolume = _scoreVolume;
         [FSDraftManager sharedManager].tempInfo.vOriginalVolume = _soundtrackVolume;
+        [FSDraftManager sharedManager].tempInfo.vAddedFxViews = self.addedViews;
         
         [[FSDraftManager sharedManager] mergeInfo];
         [[FSDraftManager sharedManager] saveToLocal];
@@ -453,11 +455,13 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     //
     fxController.addedViews = self.addedViews;
-    fxController.currentFxType = _currentFxType;
-    fxController.convert = _converted;
-    fxController.position = _fxPosition;
+    fxController.currentFxType = _draftInfo.vTimefx.tFxType;
+    fxController.position = _draftInfo.vTimefx.tFxInPoint;
+    fxController.convert = (_draftInfo.vTimefx.tFxType == FSVideoFxTypeRevert);
+
     
-    _fxOperationStack = _fxOperationStack?:[FSVideoFxOperationStack new];
+    _draftInfo.stack = _fxOperationStack?:[FSVideoFxOperationStack new];
+    _fxOperationStack = _draftInfo.stack;
     fxController.fxOperationStack = _fxOperationStack;
     
     [self presentViewController:fxController animated:YES completion:nil];
