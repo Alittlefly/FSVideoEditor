@@ -23,8 +23,7 @@
 @property (nonatomic, assign) NSInteger videoIndex;
 @property (nonatomic, assign) CGFloat videoTime;
 @property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, strong) NSMutableArray *timeArray;
-@property (nonatomic, strong) NSMutableArray *filePathArray;
+
 @property (nonatomic, strong) NSMutableArray *speedArray;
 @property (nonatomic, assign) CGFloat perTime;
 

@@ -30,6 +30,8 @@
 @property(nonatomic,strong)NSString *vConvertPath;
 @property(nonatomic,strong)NSString *vFilterid;
 @property(nonatomic,assign)BOOL vSaveToAlbum;
+@property(nonatomic,strong)NSArray<NSString *> *recordVideoPathArray;  //录制视频片段地址
+@property(nonatomic,strong)NSArray<NSNumber *> *recordVideoTimeArray;  //录制视频片段时长
 -(instancetype)initWithDraftInfo:(FSDraftInfo *)draftInfo;
 -(void)copyValueFromeDraftInfo:(FSDraftInfo *)draftInfo;
 @end

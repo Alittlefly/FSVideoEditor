@@ -27,6 +27,8 @@
 
 @property (nonatomic, weak) id<FSShortVideoRecorderManagerDelegate> delegate;
 @property (nonatomic, assign) CGFloat recorderSpeed;
+@property (nonatomic, strong) NSMutableArray *timeArray;
+@property (nonatomic, strong) NSMutableArray *filePathArray;
 
 + (instancetype)sharedInstance;
 

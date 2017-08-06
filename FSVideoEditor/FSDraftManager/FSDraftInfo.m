@@ -34,6 +34,8 @@
         self.vFirstFramePath = draftInfo.vFirstFramePath;
         self.vSaveToAlbum = draftInfo.vSaveToAlbum;
         self.vOriginalPath = draftInfo.vOriginalPath;
+        self.recordVideoPathArray = draftInfo.recordVideoPathArray;
+        self.recordVideoTimeArray = draftInfo.recordVideoTimeArray;
     }
     return self;
 }
@@ -54,6 +56,8 @@
     self.vFirstFramePath = draftInfo.vFirstFramePath;
     self.vSaveToAlbum = draftInfo.vSaveToAlbum;
     self.vOriginalPath = draftInfo.vOriginalPath;
+    self.recordVideoPathArray = draftInfo.recordVideoPathArray;
+    self.recordVideoTimeArray = draftInfo.recordVideoTimeArray;
 
 }
 
@@ -76,6 +80,8 @@
         self.vFilterid = [aDecoder decodeObjectForKey:@"vFilterid"];
         self.vSaveToAlbum = [[aDecoder decodeObjectForKey:@"vSaveToAlbum"] boolValue];
         self.vOriginalPath = [aDecoder decodeObjectForKey:@"vOriginalPath"];
+        self.recordVideoTimeArray = [aDecoder decodeObjectForKey:@"recordVideoTimeArray"];
+        self.recordVideoPathArray = [aDecoder decodeObjectForKey:@"recordVideoPathArray"];
 
     }
     
@@ -95,6 +101,8 @@
     [aCoder encodeObject:self.vFirstFramePath forKey:@"vFirstFramePath"];
     [aCoder encodeObject:[NSNumber numberWithDouble:self.vSpeed] forKey:@"vSpeed"];
     [aCoder encodeObject:self.clips forKey:@"clips"];
+    [aCoder encodeObject:self.recordVideoPathArray forKey:@"recordVideoPathArray"];
+    [aCoder encodeObject:self.recordVideoTimeArray forKey:@"recordVideoTimeArray"];
     [aCoder encodeObject:self.vConvertPath forKey:@"vConvertPath"];
     [aCoder encodeObject:self.vFilterid forKey:@"vFilterid"];
     [aCoder encodeObject:[NSNumber numberWithBool:self.vSaveToAlbum] forKey:@"vSaveToAlbum"];

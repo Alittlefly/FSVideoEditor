@@ -111,6 +111,8 @@
         _recorderManager.delegate = self;
         _recorderView = [_recorderManager getLiveWindow];
         [_recorderManager initBaseData];
+        _recorderManager.filePathArray = [NSMutableArray arrayWithArray:_draftInfo.recordVideoPathArray];
+        _recorderManager.timeArray = [NSMutableArray arrayWithArray:_draftInfo.recordVideoTimeArray];
         _recorderView.frame= CGRectMake(0, 0, frame.size.width, frame.size.height);
         [self addSubview:_recorderView];
         //[_recorderManager resumeCapturePreview];

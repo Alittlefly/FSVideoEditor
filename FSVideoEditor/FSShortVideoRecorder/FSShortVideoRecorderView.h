@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSDraftInfo.h"
 
 @class NvsTimeline;
 
@@ -35,6 +36,7 @@ typedef enum{
 @property (nonatomic, weak) id<FSShortVideoRecorderViewDelegate> delegate;
 @property (nonatomic, copy) NSString *musicFilePath;
 @property (nonatomic, assign) NSTimeInterval musicStartTime;
+@property (nonatomic, strong) FSDraftInfo *draftInfo;
 
 - (void)resumeCapturePreview;
 - (void)changeFilter:(NSString *)filterName;
