@@ -10,7 +10,7 @@
 #import "FSDraftManager.h"
 #import "FSDraftTableViewCell.h"
 
-@interface FSDraftController ()
+@interface FSDraftController ()<FSDraftTableCellDelegate>
 @property(nonatomic,strong)NSArray *drafts;
 @end
 
@@ -49,6 +49,7 @@
     FSDraftInfo *info = [_drafts objectAtIndex:indexPath.row];
     NSLog(@"info %@",info.vFinalPath);
     [cell setInfo:info];
+    [cell setDelegate:self];
     
     return cell;
 }
@@ -100,5 +101,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - FSDraftTableCellDelegate
+-(void)FSDraftTableCellDelegatePlayIconOnclik:(FSDraftTableViewCell*)cell{
+}
+-(void)FSDraftTableCellDelegateMoreButtonOnclik:(FSDraftTableViewCell*)cell{
+}
+
 
 @end
