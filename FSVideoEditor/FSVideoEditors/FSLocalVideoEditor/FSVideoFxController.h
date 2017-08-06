@@ -12,7 +12,7 @@
 #import "FSVideoFxView.h"
 #import "FSVideoFxOperationStack.h"
 #import "NvsThumbnailSequenceView.h"
-
+#import "FSDraftInfo.h"
 @protocol FSVideoFxControllerDelegate <NSObject>
 
 -(void)videoFxControllerSaved:(NSArray *)addedViews fxType:(FSVideoFxType)type position:(CGFloat)position convert:(BOOL)convert;
@@ -23,21 +23,17 @@
 @interface FSVideoFxController : UIViewController
 
 @property(nonatomic,assign)id<FSVideoFxControllerDelegate>delegate;
-@property(nonatomic,copy)NSString *filePath;
-@property(nonatomic,copy)NSString *convertFilePath;
-@property(nonatomic,assign)NvsTimeline *timeLine;
+
+
 @property(nonatomic,strong)FSControlView *controlView;
 @property(nonatomic,strong)FSVideoFxView *videoFxView;
-@property(nonatomic,strong)NvsLiveWindow *prewidow;
-@property(nonatomic,assign)NSTimeInterval musicAttime;
-@property(nonatomic,strong)NSString *musicUrl;
 
-@property(nonatomic,strong)NSMutableArray *addedViews;
 
 
 @property(nonatomic,strong)FSVideoFxOperationStack *fxOperationStack;
+@property(nonatomic,strong)NvsLiveWindow *prewidow;
+@property(nonatomic,strong)NSMutableArray *addedViews;
+@property(nonatomic,assign)NvsTimeline *timeLine;
+@property(nonatomic,strong)FSDraftInfo *draftInfo;
 @property(nonatomic,strong)NvsThumbnailSequenceView *thumBailView;
-@property(nonatomic,assign)FSVideoFxType currentFxType;
-@property(nonatomic,assign)BOOL convert;
-@property(nonatomic,assign)CGFloat position;
 @end

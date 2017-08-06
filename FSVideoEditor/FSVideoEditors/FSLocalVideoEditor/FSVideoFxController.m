@@ -35,10 +35,18 @@
     FSVideoFxOperationStack *_tempFxStack;
     
     
-    FSVideoFxType _selectType;
     
-    FSDraftInfo *_draftInfo;
+    FSDraftTimeFx *_timeFx;
+    
+    FSDraftInfo *_tempDraftInfo;
 }
+@property(nonatomic,copy)NSString *filePath;
+@property(nonatomic,copy)NSString *convertFilePath;
+@property(nonatomic,assign)NSTimeInterval musicAttime;
+@property(nonatomic,strong)NSString *musicUrl;
+@property(nonatomic,assign)FSVideoFxType selectType;
+@property(nonatomic,assign)BOOL convert;
+@property(nonatomic,assign)CGFloat position;
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
 @end
@@ -56,7 +64,16 @@
     
      _tempFxStack = [FSVideoFxOperationStack new];
     [_tempFxStack pushVideoFxWithFxManager:_fxOperationStack];
-    _draftInfo = [FSDraftManager sharedManager].tempInfo;
+    
+    _filePath = _draftInfo.vFinalPath;
+    _musicAttime = _draftInfo.vMusic.mInPoint;
+    _musicUrl = _draftInfo.vMusic.mPath;
+    _convertFilePath = _draftInfo.vConvertPath;
+    //
+    _selectType = _draftInfo.vTimefx.tFxType;
+    _position = _draftInfo.vTimefx.tFxInPoint;
+    _convert = (_draftInfo.vTimefx.tFxType == FSVideoFxTypeRevert);
+    
     [self creatSubViews];
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-967dfb58745c59c1c409616af7ca27b3.lic"];
     
@@ -107,7 +124,7 @@
     NSMutableArray *newArray = [NSMutableArray arrayWithArray:_addedViews];
     [_videoFxView addFiltterViews:newArray];
     [_videoFxView setNeedCovert:_convert];
-    [_videoFxView setFxType:_currentFxType];
+    [_videoFxView setFxType:_selectType];
     [_videoFxView setTintPositon:_position];
     
      _videoFxView.duration = _timeLine.duration/1000000.0;
@@ -254,13 +271,15 @@
 - (void)save{
     // 保存当前的处理堆栈状态
      _draftInfo.stack = [_fxOperationStack copy];
-    [[FSDraftManager sharedManager] mergeInfo];
+     _draftInfo.vTimefx = _timeFx;
     
     [_fxOperationStack popAll];
     [_fxOperationStack pushVideoFxWithFxManager:_tempFxStack];
     
     [self.addedViews removeAllObjects];
     [self.addedViews addObjectsFromArray:_videoFxView.addedViews];
+    
+    
     
     if ([self.delegate respondsToSelector:@selector(videoFxControllerSaved:fxType:position:convert:)]) {
         [self.delegate videoFxControllerSaved:[self.addedViews copy] fxType:_selectType position:_position convert:_convert];
@@ -302,6 +321,12 @@
     if (convert) {
         [self playVideoFromHead];
     }
+    
+    FSDraftTimeFx *draftFx = [FSDraftTimeFx new];
+    draftFx.tFxType = type;
+    draftFx.tFxInPoint = 0;
+    draftFx.tFxOutPoint = _timeLine.duration;
+    _timeFx = draftFx;
 }
 
 -(void)videoFxSelectTimeLinePosition:(FSVideoFxView *)videoFxView position:(CGFloat)progress shouldPlay:(BOOL)play{
@@ -412,7 +437,7 @@
     draftFx.tFxType = type;
     draftFx.tFxInPoint = point;
     draftFx.tFxOutPoint = point + duration;;
-    _draftInfo.vTimefx = draftFx;
+    _timeFx = draftFx;
     
     videoFxView.duration = _timeLine.duration;
 }
@@ -424,10 +449,6 @@
     [self removeAllFx];
 
     [self addVideoFxWithVirtualTimeline:shouldBe];
-    
-//    if (![_timeLine getLastTimelineVideoFx]) {
-//        [videoFxView hideUndoButton];
-//    }
 }
 // 当前的位置进度
 -(CGFloat)videoFxViewUpdatePosition:(FSVideoFxView *)videoFxView{

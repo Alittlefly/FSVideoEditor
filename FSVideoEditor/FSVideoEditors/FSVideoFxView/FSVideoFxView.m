@@ -207,7 +207,7 @@
     [_unDoButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Delete"] forState:(UIControlStateNormal)];
     [_unDoButton setHidden:YES];
     [_unDoButton addTarget:self action:@selector(unDoFix) forControlEvents:(UIControlEventTouchUpInside)];
-    [_contentView addSubview:_unDoButton];
+    [self addSubview:_unDoButton];
     
     // fx
     [self initFilerFxs];
@@ -378,7 +378,7 @@
     }
     
     NSString *key = [NSString stringWithFormat:@"%ld",(long)_fxType];
-    _currentSelectFxButton = [self.fxButtonDict objectForKey:key];
+     _currentSelectFxButton = [self.fxButtonDict objectForKey:key];
     [_currentSelectFxButton setSelected:YES];
 }
 -(void)setNeedCovert:(BOOL)needCovert{

@@ -54,6 +54,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     CGFloat _scoreVolume;
     CGFloat _soundtrackVolume;
     FSPublishOperationType _OperationType;
+    
+    FSDraftInfo *_tempDraftInfo;
 }
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
@@ -92,7 +94,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 -(NSMutableArray *)addedViews{
     if (!_addedViews) {
         _addedViews = [NSMutableArray array];
-        [_addedViews addObjectsFromArray:_draftInfo.vAddedFxViews];
+        [_addedViews addObjectsFromArray:_tempDraftInfo.vAddedFxViews];
     }
     return _addedViews;
 }
@@ -120,7 +122,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     _videoDescription = @"";
     
     
-    [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
+    _tempDraftInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
     
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-967dfb58745c59c1c409616af7ca27b3.lic"];
     
@@ -138,13 +140,13 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         audioEditRes.sampleFormat = NvsAudSmpFmt_S16;
         _timeLine = [_context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
        NvsVideoTrack *videotrack = [_timeLine appendVideoTrack];
-        [videotrack appendClip:_draftInfo.vFinalPath];
+        [videotrack appendClip:_tempDraftInfo.vFinalPath];
         
     }
     _videoTrack = [_timeLine getVideoTrackByIndex:0];
     
     
-    NSString *_musicPath = _draftInfo.vMusic.mPath;
+    NSString *_musicPath = _tempDraftInfo.vMusic.mPath;
     NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
     [clip setVolumeGain:_musicPath?0:1 rightVolumeGain:_musicPath?0:1];
@@ -154,7 +156,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
      _uploader = [FSUploader uploaderWithDivider:divider];
     [_uploader setDelegate:self];
     
-    if (_draftInfo.vMusicVolume == -1 && _draftInfo.vOriginalVolume == -1) {
+    if (_tempDraftInfo.vMusicVolume == -1 && _tempDraftInfo.vOriginalVolume == -1) {
         if (_musicPath != nil && _musicPath.length > 0) {
             _scoreVolume = 0.5;
             _soundtrackVolume = -1;
@@ -169,12 +171,12 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
             [_toolView canEditMusic:NO];
         }
         
-        _draftInfo.vMusicVolume = _scoreVolume;
-        _draftInfo.vOriginalVolume = _soundtrackVolume;
+        _tempDraftInfo.vMusicVolume = _scoreVolume;
+        _tempDraftInfo.vOriginalVolume = _soundtrackVolume;
     }
     else {
-        _scoreVolume = _draftInfo.vMusicVolume;
-        _soundtrackVolume = _draftInfo.vOriginalVolume;
+        _scoreVolume = _tempDraftInfo.vMusicVolume;
+        _soundtrackVolume = _tempDraftInfo.vOriginalVolume;
         if (_musicPath != nil && _musicPath.length > 0) {
             [_toolView canEditMusic:YES];
         }
@@ -197,11 +199,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         }
     }
     
-    NSString *_musicPath = _draftInfo.vMusic.mPath;
+    NSString *_musicPath = _tempDraftInfo.vMusic.mPath;
 
     if (_musicPath != nil && _musicPath.length > 0 && !_isEnterCutMusicView) {
         [[FSMusicPlayer sharedPlayer] stop];
-        NSTimeInterval _musicStartTime = _draftInfo.vMusic.mInPoint;
+        NSTimeInterval _musicStartTime = _tempDraftInfo.vMusic.mInPoint;
         [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
         [[FSMusicPlayer sharedPlayer] play];
     }
@@ -288,11 +290,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [self.loading loadingViewShow];
     
     int64_t length = _timeLine.duration;
-    NSString *_musicPath = _draftInfo.vMusic.mPath;
+    NSString *_musicPath = _tempDraftInfo.vMusic.mPath;
     if (_musicPath != nil && _musicPath.length > 0) {
         NvsAudioTrack *_audiotrack = [_timeLine appendAudioTrack];
         NvsAudioClip *audio = [_audiotrack appendClip:_musicPath];
-        int64_t _musicStartTime = _draftInfo.vMusic.mInPoint;
+        int64_t _musicStartTime = _tempDraftInfo.vMusic.mInPoint;
         [audio changeTrimInPoint:_musicStartTime affectSibling:YES];
         [audio changeTrimOutPoint:length+_musicStartTime affectSibling:YES];
     }
@@ -332,19 +334,21 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         
         NSString *imagePath = [FSDraftFileManager saveImageTolocal:image];
         
-        [FSDraftManager sharedManager].tempInfo.vFinalPath = _outPutPath;
-        [FSDraftManager sharedManager].tempInfo.vFirstFramePath = imagePath;
-        [FSDraftManager sharedManager].tempInfo.vSaveToAlbum = _isSaved;
+        _tempDraftInfo.vFinalPath = _outPutPath;
+        _tempDraftInfo.vFirstFramePath = imagePath;
+        _tempDraftInfo.vSaveToAlbum = _isSaved;
         
         // test
         FSDraftChallenge *challenge = [[FSDraftChallenge alloc] init];
         challenge.challengeDetail = @"challegeDatail";
         challenge.challengeName = @"challengeName";
-        [FSDraftManager sharedManager].tempInfo.challenge = challenge;
-        [FSDraftManager sharedManager].tempInfo.vTitle = _videoDescription;
-        [FSDraftManager sharedManager].tempInfo.vMusicVolume = _scoreVolume;
-        [FSDraftManager sharedManager].tempInfo.vOriginalVolume = _soundtrackVolume;
-        [FSDraftManager sharedManager].tempInfo.vAddedFxViews = self.addedViews;
+        //
+        
+        _tempDraftInfo.challenge = challenge;
+        _tempDraftInfo.vTitle = _videoDescription;
+        _tempDraftInfo.vMusicVolume = _scoreVolume;
+        _tempDraftInfo.vOriginalVolume = _soundtrackVolume;
+        _tempDraftInfo.vAddedFxViews = self.addedViews;
         
         [[FSDraftManager sharedManager] mergeInfo];
         [[FSDraftManager sharedManager] saveToLocal];
@@ -373,7 +377,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     draftChallenge.challengeId = model.challengeId;
     draftChallenge.challengeName = model.name;
     draftChallenge.challengeDetail = model.content;
-    _draftInfo.challenge = draftChallenge;
+    _tempDraftInfo.challenge = draftChallenge;
     
     [FSPublishSingleton sharedInstance].chooseChallenge = model;
     [_toolView updateChallengeName:model.name];
@@ -394,7 +398,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 - (void)FSPublisherToolViewQuit {
     
-    if (_draftInfo.vType == FSDraftInfoTypeVideo) {
+    if (_tempDraftInfo.vType == FSDraftInfoTypeVideo) {
         
         // 弹出提示
         UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:@"" message:@"旧版本的不可编辑或者使用" preferredStyle:(UIAlertControllerStyleAlert)];
@@ -435,7 +439,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 - (void)FSPublisherToolViewEditMusic {
     
-    NSString *_musicPath = _draftInfo.vMusic.mPath;
+    NSString *_musicPath = _tempDraftInfo.vMusic.mPath;
     if (_musicPath !=nil && _musicPath.length > 0) {
         _isEnterCutMusicView = YES;
         
@@ -444,7 +448,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         }
         
         if (!_cutMusicView) {
-            NSTimeInterval _musicStartTime = _draftInfo.vMusic.mInPoint;
+            NSTimeInterval _musicStartTime = _tempDraftInfo.vMusic.mInPoint;
             _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath startTime:_musicStartTime];
             _cutMusicView.delegate = self;
             [self.view addSubview:_cutMusicView];
@@ -463,21 +467,12 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     FSVideoFxController *fxController = [[FSVideoFxController alloc] init];
     fxController.timeLine = _timeLine;
-    fxController.filePath = _draftInfo.vFinalPath;
-    fxController.musicAttime = _draftInfo.vMusic.mInPoint;
-    fxController.musicUrl = _draftInfo.vMusic.mPath;
+    fxController.draftInfo = _tempDraftInfo;
     fxController.delegate = self;
-    fxController.convertFilePath = _draftInfo.vConvertPath;
-    
-    //
     fxController.addedViews = self.addedViews;
-    fxController.currentFxType = _draftInfo.vTimefx.tFxType;
-    fxController.position = _draftInfo.vTimefx.tFxInPoint;
-    fxController.convert = (_draftInfo.vTimefx.tFxType == FSVideoFxTypeRevert);
 
-    
-    _draftInfo.stack = _fxOperationStack?:[FSVideoFxOperationStack new];
-    _fxOperationStack = _draftInfo.stack;
+    _tempDraftInfo.stack = _fxOperationStack?:[FSVideoFxOperationStack new];
+    _fxOperationStack = _tempDraftInfo.stack;
     fxController.fxOperationStack = _fxOperationStack;
     
     [self presentViewController:fxController animated:YES completion:nil];
@@ -576,13 +571,13 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 - (void)FSControlVolumeViewChangeScore:(CGFloat)value {
     NSLog(@"%f  %u",value,[_timeLine audioTrackCount]);
     _scoreVolume = value;
-    _draftInfo.vMusicVolume = value;
+    _tempDraftInfo.vMusicVolume = value;
     [self changeVolume];
 }
 
 - (void)FSControlVolumeViewChangeSoundtrack:(CGFloat)value {
     _soundtrackVolume = value;
-    _draftInfo.vOriginalVolume = value;
+    _tempDraftInfo.vOriginalVolume = value;
     [self changeVolume];
 }
 
@@ -594,7 +589,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     self.toolView.hidden = NO;
 }
 - (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval)newStartTime {
-    _draftInfo.vMusic.mInPoint = newStartTime;
+    _tempDraftInfo.vMusic.mInPoint = newStartTime;
     _isEnterCutMusicView = NO;
     
     [self playVideoFromHead];
