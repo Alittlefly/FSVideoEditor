@@ -536,6 +536,38 @@ static FSShortVideoRecorderManager *recorderManager;
     return YES;
 }
 
+#pragma mark - Sticker
+- (void)addSticker:(NSMutableString *)sticker {
+    if ([sticker isEqualToString:@""])
+        return;
+    // 添加动画贴纸
+    [self.timeLine addAnimatedSticker:0 duration:self.timeLine.duration animatedStickerPackageId:sticker];
+}
+
+- (void)removeSticker {
+    NvsTimelineAnimatedSticker *sticker = [self.timeLine getFirstAnimatedSticker];
+    // 删除动画贴纸
+    sticker = [self.timeLine removeAnimatedSticker:sticker];
+}
+
+- (NSMutableString *)getSticker {
+    NSMutableString *stickerPackageId = [[NSMutableString alloc] initWithString:@""];
+    
+    NSString *appPath =[[NSBundle mainBundle] bundlePath];
+    NSString *stickerFilePath = [appPath stringByAppendingPathComponent:@"89740AEA-80D6-432A-B6DE-E7F6539C4121.animatedsticker"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:stickerFilePath]) {
+        NSLog(@"Sticker package file is not exist!");
+    } else {
+        // 此处选择同步安装，如果包裹过大或者根据需要，可选择异步安装
+        NvsAssetPackageManagerError error = [_context.assetPackageManager installAssetPackage:stickerFilePath license:nil type:NvsAssetPackageType_AnimatedSticker sync:YES assetPackageId:stickerPackageId];
+        if (error != NvsAssetPackageManagerError_NoError && error != NvsAssetPackageManagerError_AlreadyInstalled) {
+            NSLog(@"Failed to install sticker package!");
+        }
+    }
+
+    return stickerPackageId;
+}
+
 - (BOOL)deleteCacheFile:(NSString *)filePath {
     BOOL deleted = NO;
     BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:filePath];

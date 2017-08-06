@@ -102,7 +102,7 @@
     if (self = [super initWithFrame:frame]) {
         _draftInfo = draftInfo;
         _isFlashOpened = NO;
-        _isBeautyOpened = YES;
+        _isBeautyOpened = draftInfo.vBeautyOn;
         _playSpeed = FSShortVideoPlaySpeed_Normal;
         _isRecording = NO;
         _linesArray = [NSMutableArray arrayWithCapacity:0];
@@ -118,7 +118,7 @@
         //[_recorderManager resumeCapturePreview];
 
         
-        [_recorderManager switchBeauty:YES];
+        [_recorderManager switchBeauty:_isBeautyOpened];
         
         _supportAutoExposure = [_recorderManager isSupportAutoExposure];
         _supportAutoFocus = [_recorderManager isSupportAutoFocus];
@@ -127,6 +127,9 @@
         tapGestureRecognizer.numberOfTapsRequired = 1;
         [self addGestureRecognizer:tapGestureRecognizer];
 
+        if (draftInfo.vFilterid) {
+            [self changeFilter:draftInfo.vFilterid];
+        }
         
         [self initBaseToolView];
         
@@ -391,7 +394,7 @@
     
     _draftInfo.recordVideoTimeArray = _recorderManager.timeArray;
     _draftInfo.recordVideoPathArray = _recorderManager.filePathArray;
-    
+    _draftInfo.recordVideoSpeedArray = _recorderManager.speedArray;
     
     if (_isRecording) {
         [self pauseRecorder];
@@ -450,6 +453,7 @@
 
 - (void)beautyClik {
     _isBeautyOpened = !_isBeautyOpened;
+    _draftInfo.vBeautyOn = _isBeautyOpened;
     if (_isBeautyOpened) {
         [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-on"] forState:UIControlStateNormal];
         [_beautyLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOn"]];
@@ -513,6 +517,7 @@
 }
 
 - (void)changeFilter:(NSString *)filterName {
+    _draftInfo.vFilterid = filterName;
     [_recorderManager addFilter:filterName];
 
 }
