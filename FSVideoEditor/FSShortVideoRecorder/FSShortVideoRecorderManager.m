@@ -124,11 +124,12 @@ static FSShortVideoRecorderManager *recorderManager;
     
     _videoIndex = _filePathArray.count;
     _outputFilePath = nil;
-    _videoTime = 0;
+    _videoTime = 0.0;
+    _perTime = 0.0;
     for (NSNumber *time in _timeArray) {
-        _videoTime += time.floatValue;
+        _videoTime += time.doubleValue;
     }
-    _recorderSpeed = 1;
+    _recorderSpeed = 1.0;
     
     [self initContext];
 }
@@ -140,7 +141,7 @@ static FSShortVideoRecorderManager *recorderManager;
         return;
         
     }
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-967dfb58745c59c1c409616af7ca27b3.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-b5a2105bee06464eebd11f55a77db670.lic"];
 
     BOOL isOK = [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     
@@ -362,8 +363,9 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (void)updateVideoTime {
-    _videoTime= _videoTime+0.1*_recorderSpeed;
-    _perTime = _perTime+0.1*_recorderSpeed;
+    double perAddTime = 0.1;
+    _videoTime= _videoTime+perAddTime*_recorderSpeed;
+    _perTime = _perTime+perAddTime*_recorderSpeed;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerProgress:)]) {
         [self.delegate FSShortVideoRecorderManagerProgress:_videoTime];
     }
@@ -516,7 +518,9 @@ static FSShortVideoRecorderManager *recorderManager;
     CGFloat time = [[_timeArray objectAtIndex:_videoIndex-1] floatValue];
     _videoTime = _videoTime - time;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerDeleteVideo:)]) {
-        [self.delegate FSShortVideoRecorderManagerDeleteVideo:[[NSNumber numberWithFloat:_videoTime] floatValue]];
+        NSString *newTime = [NSString stringWithFormat:@"%.6f",_videoTime];
+        
+        [self.delegate FSShortVideoRecorderManagerDeleteVideo:newTime.floatValue];
     }
     [_timeArray removeLastObject];
     [_speedArray removeLastObject];
