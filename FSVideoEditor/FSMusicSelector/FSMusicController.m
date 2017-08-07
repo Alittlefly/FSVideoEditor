@@ -192,8 +192,8 @@
 -(void)musicListWouldUseMusic:(FSMusic *)music musicPath:(NSString *)musicPath{
     [FSPublishSingleton sharedInstance].chooseMusic = music;
     if (_pushed) {
-        if ([self.delegate respondsToSelector:@selector(musicControllerSelectMusic:musicId:)]) {
-            [self.delegate musicControllerSelectMusic:musicPath musicId:music.songId];
+        if ([self.delegate respondsToSelector:@selector(musicControllerSelectMusic:music:)]) {
+            [self.delegate musicControllerSelectMusic:musicPath music:music];
         }
         [self dismissViewControllerAnimated:YES completion:nil];
     }else{

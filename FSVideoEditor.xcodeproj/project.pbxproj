@@ -75,9 +75,6 @@
 		564035501F31E79A00C5F036 /* FSDraftFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5640354F1F31E79A00C5F036 /* FSDraftFileManager.m */; };
 		564035571F34227F00C5F036 /* FSDraftController.m in Sources */ = {isa = PBXBuildFile; fileRef = 564035561F34227F00C5F036 /* FSDraftController.m */; };
 		5647BC3C1F0272110072B618 /* FSControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC3B1F0272110072B618 /* FSControlView.m */; };
-		5647BC451F04D6A70072B618 /* wind.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5647BC441F04D6A70072B618 /* wind.mp3 */; };
-		5647BC491F04E0040072B618 /* month.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5647BC481F04E0040072B618 /* month.mp3 */; };
-		5647BC4B1F04E0110072B618 /* ugly.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5647BC4A1F04E0110072B618 /* ugly.mp3 */; };
 		5647BC4F1F04E2D80072B618 /* FSMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5647BC4E1F04E2D80072B618 /* FSMusicController.m */; };
 		5648257B1F1E30D200C1889D /* 6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.lic in Resources */ = {isa = PBXBuildFile; fileRef = 564825791F1E30D200C1889D /* 6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.lic */; };
 		5648257D1F1E30F700C1889D /* 6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 5648257C1F1E30F700C1889D /* 6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.videofx */; };
@@ -615,9 +612,6 @@
 		564035561F34227F00C5F036 /* FSDraftController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftController.m; sourceTree = "<group>"; };
 		5647BC3A1F0272110072B618 /* FSControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSControlView.h; sourceTree = "<group>"; };
 		5647BC3B1F0272110072B618 /* FSControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSControlView.m; sourceTree = "<group>"; };
-		5647BC441F04D6A70072B618 /* wind.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wind.mp3; sourceTree = "<group>"; };
-		5647BC481F04E0040072B618 /* month.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = month.mp3; sourceTree = "<group>"; };
-		5647BC4A1F04E0110072B618 /* ugly.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ugly.mp3; sourceTree = "<group>"; };
 		5647BC4D1F04E2D80072B618 /* FSMusicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicController.h; sourceTree = "<group>"; };
 		5647BC4E1F04E2D80072B618 /* FSMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicController.m; sourceTree = "<group>"; };
 		564825791F1E30D200C1889D /* 6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.lic"; sourceTree = "<group>"; };
@@ -1344,16 +1338,6 @@
 			path = FSDraftDetail;
 			sourceTree = "<group>";
 		};
-		5647BC431F04D66F0072B618 /* FSMusicSource */ = {
-			isa = PBXGroup;
-			children = (
-				5647BC4A1F04E0110072B618 /* ugly.mp3 */,
-				5647BC481F04E0040072B618 /* month.mp3 */,
-				5647BC441F04D6A70072B618 /* wind.mp3 */,
-			);
-			path = FSMusicSource;
-			sourceTree = "<group>";
-		};
 		5647BC4C1F04E23D0072B618 /* FSMusicSelector */ = {
 			isa = PBXGroup;
 			children = (
@@ -1676,7 +1660,6 @@
 				560142B11F18688500A06C70 /* FSCommenController */,
 				562D406E1EFE4D2000BF0E0D /* FSVideoFxSource */,
 				5647BC4C1F04E23D0072B618 /* FSMusicSelector */,
-				5647BC431F04D66F0072B618 /* FSMusicSource */,
 				562D405A1EFD38A500BF0E0D /* FSVideoPublisher */,
 				984060351EF93F130049B58E /* FSVideoRecorder */,
 				567E0B8B1EF939F000C4C527 /* FSVideoEditors */,
@@ -2192,7 +2175,6 @@
 				567B056C1F2748B800D09364 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.videofx in Resources */,
 				9871BC371F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */,
 				567E0B611EF930D100C4C527 /* LaunchScreen.storyboard in Resources */,
-				5647BC4B1F04E0110072B618 /* ugly.mp3 in Resources */,
 				567E0B5E1EF930D100C4C527 /* Assets.xcassets in Resources */,
 				9880DEA81F171295006E730F /* LICENSE in Resources */,
 				567E0B5C1EF930D100C4C527 /* Main.storyboard in Resources */,
@@ -2204,9 +2186,7 @@
 				98EFA7531F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */,
 				567B05691F2748AB00D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx in Resources */,
 				567B05671F27488400D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic in Resources */,
-				5647BC491F04E0040072B618 /* month.mp3 in Resources */,
 				567A3D811EFB6F8E0026247E /* LICENSE in Resources */,
-				5647BC451F04D6A70072B618 /* wind.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
