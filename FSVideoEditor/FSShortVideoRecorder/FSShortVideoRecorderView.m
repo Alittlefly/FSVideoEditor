@@ -75,6 +75,8 @@
 
 @property (nonatomic, strong) NSTimer *timer;
 
+@property (nonatomic, assign) BOOL isCanCutMusic;
+
 
 @end
 
@@ -107,6 +109,7 @@
         _isRecording = NO;
         _linesArray = [NSMutableArray arrayWithCapacity:0];
         _isAutoRecorder = NO;
+        _isCanCutMusic = YES;
         
         _recorderManager = [FSShortVideoRecorderManager sharedInstance];
         _recorderManager.delegate = self;
@@ -280,6 +283,7 @@
     [_deleteButton setImage:[UIImage imageNamed:@"recorder-delete"] forState:UIControlStateNormal];
     [_deleteButton addTarget:self action:@selector(deleteVideo) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_deleteButton];
+    _deleteButton.hidden = YES;
     
     _faceUButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _faceUButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_recorderButton.frame)+50, 0, 40, 40) : CGRectMake(CGRectGetMinX(_recorderButton.frame)-50-40, 0, 40, 40);
@@ -581,7 +585,10 @@
     
     if (_musicFilePath != nil && _musicFilePath.length > 0) {
         [[FSMusicPlayer sharedPlayer] setRate:self.recorderManager.recorderSpeed];
-        [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
+        if (_isCanCutMusic) {
+            [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
+            _isCanCutMusic = NO;
+        }
         [[FSMusicPlayer sharedPlayer] play];
     }
     
@@ -895,8 +902,9 @@
         [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
     }
     
-    if (videoTime <= 0) {
+    if (videoTime <= 0.0) {
         _deleteButton.hidden = YES;
+        _isCanCutMusic = YES;
         if (_musicFilePath != nil && _musicFilePath.length > 0) {
             _cutMusicButton.enabled = YES;
         }
