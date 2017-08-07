@@ -367,7 +367,9 @@ static FSShortVideoRecorderManager *recorderManager;
     _videoTime= _videoTime+perAddTime*_recorderSpeed;
     _perTime = _perTime+perAddTime*_recorderSpeed;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerProgress:)]) {
-        [self.delegate FSShortVideoRecorderManagerProgress:_videoTime];
+        NSString *newTime = [NSString stringWithFormat:@"%.6f",_videoTime];
+
+        [self.delegate FSShortVideoRecorderManagerProgress:newTime.floatValue];
     }
     NSLog(@"_videoTime: %f    _perTime: %f",_videoTime,_perTime);
 }

@@ -75,7 +75,7 @@
 
 @property (nonatomic, strong) NSTimer *timer;
 
-@property (nonatomic, assign) BOOL isCanCutMusic;
+@property (nonatomic, assign) CGFloat currentVideoTime;
 
 
 @end
@@ -109,7 +109,7 @@
         _isRecording = NO;
         _linesArray = [NSMutableArray arrayWithCapacity:0];
         _isAutoRecorder = NO;
-        _isCanCutMusic = YES;
+        _currentVideoTime = 0.0;
         
         _recorderManager = [FSShortVideoRecorderManager sharedInstance];
         _recorderManager.delegate = self;
@@ -511,7 +511,12 @@
     _countdownLabel.hidden = NO;
     _recorderButton.hidden = NO;
     _faceUButton.hidden = YES;
-    _deleteButton.hidden = NO;
+    if (_currentVideoTime == 0) {
+        _deleteButton.hidden = YES;
+    }
+    else {
+        _deleteButton.hidden = NO;
+    }
     _segmentView.hidden = NO;
     _isOpenFilterView = NO;
 }
@@ -585,9 +590,8 @@
     
     if (_musicFilePath != nil && _musicFilePath.length > 0) {
         [[FSMusicPlayer sharedPlayer] setRate:self.recorderManager.recorderSpeed];
-        if (_isCanCutMusic) {
+        if (_currentVideoTime==0) {
             [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
-            _isCanCutMusic = NO;
         }
         [[FSMusicPlayer sharedPlayer] play];
     }
@@ -845,6 +849,7 @@
 
 - (void)FSShortVideoRecorderManagerProgress:(CGFloat)time {
     CGFloat speed = 1;
+    _currentVideoTime = time;
     switch (_playSpeed) {
         case FSShortVideoPlaySpeed_Hyperslow:
             speed = 3;
@@ -889,6 +894,7 @@
 
 - (void)FSShortVideoRecorderManagerDeleteVideo:(CGFloat)videoTime {
     NSLog(@"FSShortVideoRecorderManagerDeleteVideo: %f",videoTime);
+    _currentVideoTime = videoTime;
     
     [self.progressView setProgress:videoTime/15.0 animated:NO];
     [self.progressView deleteCuttingLine];
@@ -904,7 +910,6 @@
     
     if (videoTime <= 0.0) {
         _deleteButton.hidden = YES;
-        _isCanCutMusic = YES;
         if (_musicFilePath != nil && _musicFilePath.length > 0) {
             _cutMusicButton.enabled = YES;
         }

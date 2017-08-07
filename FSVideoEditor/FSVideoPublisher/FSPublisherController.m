@@ -529,6 +529,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         _soundtrackVolume = -1;
         [self changeVolume];
         [_toolView canEditMusic:YES];
+        [_toolView updateMusicInfo:music];
     }
 }
 

@@ -205,6 +205,11 @@
     [_videoNameView updateChallengeName:challenge];
 }
 
+- (void)updateMusicInfo:(FSMusic *)music {
+    _titleLabel.text = [NSString stringWithFormat:@"%@-@%@",music.songTitle,music.songAuthor];
+
+}
+
 - (void)backClik {
     if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewQuit)]) {
         [self.delegate FSPublisherToolViewQuit];
