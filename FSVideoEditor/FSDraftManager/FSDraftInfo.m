@@ -37,10 +37,10 @@
         self.vTitle = draftInfo.vTitle;
         self.stack = [draftInfo.stack copy];
         self.vBeautyOn = draftInfo.vBeautyOn;
-        self.vOriginalVolume = draftInfo.vOriginalVolume;
-        self.vMusicVolume = draftInfo.vMusicVolume;
+        self.vOriginalVolume = draftInfo?draftInfo.vOriginalVolume:-1.0;
+        self.vMusicVolume = draftInfo?draftInfo.vMusicVolume:-1.0;
         self.vFinalPath = draftInfo.vFinalPath;
-        self.vSpeed = draftInfo.vSpeed;
+        self.vSpeed = draftInfo?draftInfo.vSpeed:1.0;
         self.vFilterid = draftInfo.vFilterid;
         self.vConvertPath = draftInfo.vConvertPath;
         self.vFirstFramePath = draftInfo.vFirstFramePath;
@@ -55,6 +55,9 @@
     return self;
 }
 -(void)copyValueFromeDraftInfo:(FSDraftInfo *)draftInfo{
+    if (!draftInfo) {
+        return;
+    }
     self.challenge = draftInfo.challenge;
     self.vMusic = draftInfo.vMusic;
     self.clips = draftInfo.clips;
