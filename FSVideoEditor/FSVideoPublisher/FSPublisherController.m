@@ -156,6 +156,16 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
      _uploader = [FSUploader uploaderWithDivider:divider];
     [_uploader setDelegate:self];
     
+    
+    //  有没有没音乐
+    //   1.有音乐
+         // 声音值初值赋值 音乐 0.5  视频是 -1.0;
+         // 设置可编辑音乐
+    //   2.没有音乐
+         // 声音值初值赋值 音乐 0.5  视频是 0.5;
+         // 设置关闭编辑
+    
+    
     if (_tempDraftInfo.vMusicVolume == -1 && _tempDraftInfo.vOriginalVolume == -1) {
         if (_musicPath != nil && _musicPath.length > 0) {
             _scoreVolume = 0.5;

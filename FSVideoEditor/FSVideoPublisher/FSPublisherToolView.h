@@ -35,5 +35,6 @@ typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
 
 -(instancetype)initWithFrame:(CGRect)frame draftInfo:(FSDraftInfo *)draftInfo;
 - (void)canEditMusic:(BOOL)enable;
+
 - (void)updateChallengeName:(NSString *)challenge;
 @end
