@@ -500,7 +500,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [nav setNavigationBarHidden:YES];
     
     music.timeLine = _timeLine;
-    music.pushed = NO;
+    music.pushed = YES;
     music.needSelfHeader = YES;
     [music setDelegate:self];
     
@@ -524,8 +524,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 #pragma mark - 
--(void)musicControllerSelectMusic:(NSString *)music musicId:(NSInteger)musicId{
-    if (music != nil && music.length > 0) {
+-(void)musicControllerSelectMusic:(NSString *)musicPath music:(FSMusic *)music{
+    if (music != nil && musicPath.length > 0) {
         _soundtrackVolume = -1;
         [self changeVolume];
         [_toolView canEditMusic:YES];

@@ -210,8 +210,9 @@
     
     [self creatItems:_opend items:_items];
     NSInteger count = [_items count];
-    NSInteger unshowcount = count - 7;
-    CGFloat addHeight = (unshowcount/4 + 1) * (68 + 10);
+    CGFloat unshowcount = count - 8.0;
+    NSInteger lines = ceil(unshowcount/4.0);
+    CGFloat addHeight = lines * (68 + 10);
     CGRect frame = self.frame;
     frame.size.height += addHeight;
     if ([self.delegate respondsToSelector:@selector(musicHeaderShouldBeFrame:)]) {
