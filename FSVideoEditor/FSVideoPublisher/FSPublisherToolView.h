@@ -37,4 +37,5 @@ typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
 - (void)canEditMusic:(BOOL)enable;
 
 - (void)updateChallengeName:(NSString *)challenge;
+- (void)updateMusicInfo:(FSMusic *)music;
 @end
