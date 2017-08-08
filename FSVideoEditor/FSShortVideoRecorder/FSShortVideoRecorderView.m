@@ -110,6 +110,9 @@
         _linesArray = [NSMutableArray arrayWithCapacity:0];
         _isAutoRecorder = NO;
         _currentVideoTime = 0.0;
+        for (NSNumber *time in _draftInfo.recordVideoTimeArray) {
+            _currentVideoTime += [time floatValue];
+        }
         
         _recorderManager = [FSShortVideoRecorderManager sharedInstance];
         _recorderManager.delegate = self;
@@ -283,7 +286,12 @@
     [_deleteButton setImage:[UIImage imageNamed:@"recorder-delete"] forState:UIControlStateNormal];
     [_deleteButton addTarget:self action:@selector(deleteVideo) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_deleteButton];
-    _deleteButton.hidden = YES;
+    if (_draftInfo.recordVideoPathArray.count > 0) {
+        _deleteButton.hidden = NO;
+    }
+    else {
+        _deleteButton.hidden = YES;
+    }
     
     _faceUButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _faceUButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_recorderButton.frame)+50, 0, 40, 40) : CGRectMake(CGRectGetMinX(_recorderButton.frame)-50-40, 0, 40, 40);

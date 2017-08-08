@@ -70,7 +70,7 @@
     [_addChallengeButton.titleLabel setFont:[UIFont systemFontOfSize:11]];
     [_addChallengeButton addTarget:self action:@selector(addChallenge) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_addChallengeButton];
-    _addChallengeButton.hidden = YES;
+    //_addChallengeButton.hidden = YES;
     
     _saveToPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _saveToPhotoButton.frame = CGRectMake(self.frame.size.width-100, CGRectGetMaxY(_lineView.frame)+15, 100, 27);
