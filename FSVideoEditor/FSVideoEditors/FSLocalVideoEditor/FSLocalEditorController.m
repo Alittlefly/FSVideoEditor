@@ -75,9 +75,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor blackColor]];
-    
-    _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds)/2.0 - 210/2.0, CGRectGetWidth(self.view.bounds), 210)];
+//    
+//    _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds)/2.0 - 210/2.0, CGRectGetWidth(self.view.bounds), 210)];
+    _prewidow = [[NvsLiveWindow alloc] initWithFrame:self.view.bounds];
+    _prewidow.fillMode = NvsLiveWindowFillModePreserveAspectCrop;
     [self.view addSubview:_prewidow];
+    
+    
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-b5a2105bee06464eebd11f55a77db670.lic"];
     
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
@@ -87,12 +91,13 @@
     if (!_draftInfo) {
         _draftInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:nil];
     }
+    
     if(!_context){
         return;
     }
     
     [_context setDelegate:self];
-//
+    
     // 初始化timeline
     NvsVideoResolution videoEditRes;
     videoEditRes.imageWidth = 1200;
@@ -107,7 +112,7 @@
     
     
     _segmentView = [[FSSegmentView alloc] initWithItems:@[[FSShortLanguage CustomLocalizedStringFromTable:@"VerySlow"],[FSShortLanguage CustomLocalizedStringFromTable:@"Slow"],[FSShortLanguage CustomLocalizedStringFromTable:@"Normal"],[FSShortLanguage CustomLocalizedStringFromTable:@"Fast"],[FSShortLanguage CustomLocalizedStringFromTable:@"VeryFast"]]];
-    _segmentView.frame = CGRectMake(32.5, CGRectGetMaxY(_prewidow.frame)+30, CGRectGetWidth(self.view.frame) - 65, 37);
+    _segmentView.frame = CGRectMake(32.5, CGRectGetHeight(self.view.bounds)/2.0 + 210/2.0+30, CGRectGetWidth(self.view.frame) - 65, 37);
     _segmentView.selectedColor = FSHexRGB(0xFACE15);//[UIColor yellowColor];
     _segmentView.backgroundColor = FSHexRGBAlpha(0x001428, 0.6);[UIColor lightGrayColor];
     _segmentView.selectedTextColor = FSHexRGB(0x1A1D20);//[UIColor redColor];
