@@ -190,7 +190,7 @@
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@" scrollViewDidScroll contentOffSet %f",scrollView.contentOffset.x);
+   // NSLog(@" scrollViewDidScroll contentOffSet %f",scrollView.contentOffset.x);
     if (scrollView.contentOffset.x+self.frame.size.width <= self.maskView.frame.size.width) {
         CGRect frame = self.maskView.frame;
         frame.size.width -= self.frame.size.width/2;
@@ -201,6 +201,26 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSLog(@"scrollViewDidEndDecelerating: %f",scrollView.contentOffset.x);
+    [self resetMusicStartTime:scrollView];
+
+
+}
+
+- (NSString *)getCurrentTimeString:(NSTimeInterval)time {
+    int min = floor(time/60);
+    int sec = ((int)time)%60;
+    
+    return [NSString stringWithFormat:@"%.2d:%.2d",min,sec];
+}
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    NSLog(@"scrollViewDidEndDragging: %f",scrollView.contentOffset.x);
+
+    [self resetMusicStartTime:scrollView];
+   }
+
+- (void)resetMusicStartTime:(UIScrollView *)scrollView {
     if ([_timer isValid]) {
         [_timer setFireDate:[NSDate distantFuture]];
     }
@@ -211,9 +231,9 @@
     self.maskView.frame =frame;
     
     int time = ceilf(scrollView.contentOffset.x*_totalTime/scrollView.contentSize.width) ;
-//    int min = floor(time/60);
-//    int sec = time%60;
-//    NSLog(@"min:%d     sec:%d",min,sec);
+    //    int min = floor(time/60);
+    //    int sec = time%60;
+    //    NSLog(@"min:%d     sec:%d",min,sec);
     NSString *timeString = [FSShortLanguage CustomLocalizedStringFromTable:@"MusicStartTime"];//NSLocalizedString(@"MusicStartTime", nil);
     self.timeLabel.text = [timeString stringByReplacingOccurrencesOfString:@"(0)" withString:[self getCurrentTimeString:time]];
     
@@ -230,18 +250,6 @@
     else {
         [_audioClip changeTrimInPoint:time*1000*1000 affectSibling:NO];
     }
-
 }
-
-- (NSString *)getCurrentTimeString:(NSTimeInterval)time {
-    int min = floor(time/60);
-    int sec = ((int)time)%60;
-    
-    return [NSString stringWithFormat:@"%.2d:%.2d",min,sec];
-}
-
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-   }
 
 @end

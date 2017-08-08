@@ -590,9 +590,9 @@
     
     if (_musicFilePath != nil && _musicFilePath.length > 0) {
         [[FSMusicPlayer sharedPlayer] setRate:self.recorderManager.recorderSpeed];
-        if (_currentVideoTime==0) {
-            [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
-        }
+        //if (_currentVideoTime==0) {
+            [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime+_currentVideoTime];
+        //}
         [[FSMusicPlayer sharedPlayer] play];
     }
     
