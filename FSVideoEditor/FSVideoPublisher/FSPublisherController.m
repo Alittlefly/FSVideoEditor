@@ -534,6 +534,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [self changeVolume];
         [_toolView canEditMusic:YES];
         [_toolView updateMusicInfo:music];
+        [[FSMusicPlayer sharedPlayer] setFilePath:musicPath];
+        [self playVideoFromHead];
     }
 }
 
