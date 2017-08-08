@@ -2834,6 +2834,7 @@
 				9833BBD21F384E9400F0D308 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9833BBD31F384E9400F0D308 /* Build configuration list for PBXNativeTarget "FSVideoEditorSDKTests" */ = {
 			isa = XCConfigurationList;
@@ -2842,6 +2843,7 @@
 				9833BBD51F384E9400F0D308 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
