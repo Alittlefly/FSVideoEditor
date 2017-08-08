@@ -65,9 +65,9 @@
      _tempFxStack = [FSVideoFxOperationStack new];
     [_tempFxStack pushVideoFxWithFxManager:_fxOperationStack];
     
-    _filePath = _draftInfo.vFinalPath;
     _musicAttime = _draftInfo.vMusic.mInPoint;
     _musicUrl = _draftInfo.vMusic.mPath;
+    _filePath = _draftInfo.vOriginalPath;
     _convertFilePath = _draftInfo.vConvertPath;
     //
     _selectType = _draftInfo.vTimefx.tFxType;

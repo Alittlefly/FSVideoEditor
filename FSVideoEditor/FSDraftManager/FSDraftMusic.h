@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "FSMusic.h"
+#import "FSMusicManager.h"
+
 @interface FSDraftMusic : NSObject<NSCoding,NSCopying>
+@property(nonatomic,strong)NSString *mUrl;
 @property(nonatomic,strong)NSString *mPath;
 @property(nonatomic,assign)NSInteger mId;
 @property(nonatomic,assign)int64_t mInPoint;

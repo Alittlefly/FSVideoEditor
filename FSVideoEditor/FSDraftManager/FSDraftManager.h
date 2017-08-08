@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FSDraftInfo.h"
 #import "FSDraftFileManager.h"
+#import "FSMusicManager.h"
 
 @interface FSDraftManager : NSObject
 

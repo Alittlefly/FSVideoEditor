@@ -17,6 +17,7 @@
         self.mAutor = music.songAuthor;
         self.mInPoint = 0;
         self.mOutPoint = music.lastSeconds;
+        self.mUrl = music.songUrl;
         
     }
     return self;
@@ -24,7 +25,7 @@
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
 
     if (self = [super init]) {
-        self.mPath = [aDecoder decodeObjectForKey:@"mPath"];
+        self.mUrl = [aDecoder decodeObjectForKey:@"mUrl"];
         self.mId = [[aDecoder decodeObjectForKey:@"mId"] integerValue];
         self.mInPoint = [[aDecoder decodeObjectForKey:@"mInPoint"] longLongValue];
         self.mOutPoint = [[aDecoder decodeObjectForKey:@"mOutPoint"] longLongValue];
@@ -38,7 +39,7 @@
 
 -(void)encodeWithCoder:(NSCoder *)aCoder{
     
-    [aCoder encodeObject:self.mPath forKey:@"mPath"];
+    [aCoder encodeObject:self.mUrl forKey:@"mUrl"];
     [aCoder encodeObject:[NSNumber numberWithInteger:self.mId] forKey:@"mId"];
     [aCoder encodeObject:[NSNumber numberWithLongLong:self.mInPoint] forKey:@"mInPoint"];
     [aCoder encodeObject:[NSNumber numberWithLongLong:self.mOutPoint] forKey:@"mOutPoint"];
@@ -49,11 +50,19 @@
 -(id)copyWithZone:(NSZone *)zone{
     
     FSDraftMusic *music = [FSDraftMusic allocWithZone:zone];
-    music.mPath = self.mPath;
     music.mId = self.mId;
     music.mInPoint = self.mInPoint;
     music.mOutPoint = self.mOutPoint;
+    music.mUrl = self.mUrl;
+    music.mAutor = self.mAutor;
+    music.mName = self.mName;
+    music.mPic = self.mPic;
+    
     return music;
+}
+-(NSString *)mPath{
+    _mPath = [FSMusicManager musicPathWithFileName:self.mUrl];
+    return _mPath;
 }
 
 @end

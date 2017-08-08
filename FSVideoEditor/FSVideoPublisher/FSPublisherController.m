@@ -38,6 +38,7 @@
 
 #import "FSPublishSingleton.h"
 #import "FSDraftManager.h"
+#import "FSTimelineConfiger.h"
 
 
 typedef NS_ENUM(NSInteger,FSPublishOperationType){
@@ -140,60 +141,53 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         audioEditRes.sampleFormat = NvsAudSmpFmt_S16;
         _timeLine = [_context createTimeline:&videoEditRes videoFps:&videoFps audioEditRes:&audioEditRes];
        NvsVideoTrack *videotrack = [_timeLine appendVideoTrack];
-        [videotrack appendClip:_tempDraftInfo.vFinalPath];
-        
+        if (_tempDraftInfo.vTimefx.tFxType == FSVideoFxTypeRevert) {
+            [videotrack appendClip:_tempDraftInfo.vConvertPath];
+        }else{
+            [videotrack appendClip:_tempDraftInfo.vOriginalPath];
+        }
     }
-    _videoTrack = [_timeLine getVideoTrackByIndex:0];
     
+    [FSTimelineConfiger configTimeline:_timeLine timeLineInfo:_tempDraftInfo];
+
+    _videoTrack = [_timeLine getVideoTrackByIndex:0];
     
     NSString *_musicPath = _tempDraftInfo.vMusic.mPath;
     NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
     [clip setVolumeGain:_musicPath?0:1 rightVolumeGain:_musicPath?0:1];
     
-
     FSFileSliceDivider *divider = [[FSFileSliceDivider alloc] initWithSliceCount:1];
      _uploader = [FSUploader uploaderWithDivider:divider];
     [_uploader setDelegate:self];
     
     
     //  有没有没音乐
-    //   1.有音乐
-         // 声音值初值赋值 音乐 0.5  视频是 -1.0;
-         // 设置可编辑音乐
-    //   2.没有音乐
-         // 声音值初值赋值 音乐 0.5  视频是 0.5;
-         // 设置关闭编辑
-    
-    
-    if (_tempDraftInfo.vMusicVolume == -1 && _tempDraftInfo.vOriginalVolume == -1) {
-        if (_musicPath != nil && _musicPath.length > 0) {
-            _scoreVolume = 0.5;
-            _soundtrackVolume = -1;
-            
-            [[FSMusicPlayer sharedPlayer] setFilePath:_musicPath];
-            [_toolView canEditMusic:YES];
-        }
-        else {
-            _scoreVolume = 0.5;
-            _soundtrackVolume = 0.5;
-            
-            [_toolView canEditMusic:NO];
-        }
-        
-        _tempDraftInfo.vMusicVolume = _scoreVolume;
-        _tempDraftInfo.vOriginalVolume = _soundtrackVolume;
-    }
-    else {
-        _scoreVolume = _tempDraftInfo.vMusicVolume;
-        _soundtrackVolume = _tempDraftInfo.vOriginalVolume;
-        if (_musicPath != nil && _musicPath.length > 0) {
-            [_toolView canEditMusic:YES];
-        }
-        else {
-            [_toolView canEditMusic:NO];
+    BOOL haveMusic = _musicPath != nil && _musicPath.length != 0;
+    BOOL musicVolumeChanged = !(_tempDraftInfo.vMusicVolume == -1);
+    BOOL originalVolumChanged = !(_tempDraftInfo.vOriginalVolume == -1);
+
+    if (haveMusic) {
+        // 1.有音乐
+        // 设置可编辑音乐
+        // 声音值初值赋值 音乐 0.5  视频是 -1.0;
+        [[FSMusicPlayer sharedPlayer] setFilePath:_musicPath];
+        [_toolView canEditMusic:YES];
+    }else{
+        //   2.没有音乐
+        // 声音值初值赋值 音乐 0.5  视频是 0.5;
+        // 设置关闭编辑
+        [_toolView canEditMusic:NO];
+        if (!originalVolumChanged) {
+            _tempDraftInfo.vOriginalVolume = 0.5;
         }
     }
+    //
+    if (!musicVolumeChanged) {
+        _tempDraftInfo.vMusicVolume = 0.5;
+    }
+    _scoreVolume = _tempDraftInfo.vMusicVolume;
+    _soundtrackVolume = _tempDraftInfo.vOriginalVolume;
     
     [self changeVolume];
     
@@ -216,7 +210,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
         [[FSMusicPlayer sharedPlayer] play];
     }
-    [self changeVolume];
 }
 
 - (void)changeVolume {
@@ -296,6 +289,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 -(void)publishFiles{
     [self.navigationController.view addSubview:self.loading];
     [self.loading loadingViewShow];
+    [[FSMusicPlayer sharedPlayer] stop];
     
     int64_t length = _timeLine.duration;
     NSString *_musicPath = _tempDraftInfo.vMusic.mPath;
@@ -339,7 +333,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     if (_OperationType == FSPublishOperationTypePublishToNet) {
         [self uploadFirstImage:image];
     }else if(_OperationType == FSPublishOperationTypeSaveToDraft){
-        
+                
         NSString *imagePath = [FSDraftFileManager saveImageTolocal:image];
         
         _tempDraftInfo.vFinalPath = _outPutPath;
@@ -492,7 +486,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 - (void)FSPublisherToolViewEditVolume {
     if (!_volumeView) {
-        _volumeView = [[FSControlVolumeView alloc] initWithFrame:self.view.bounds scroe:_scoreVolume soundtrack:_soundtrackVolume];
+         _volumeView = [[FSControlVolumeView alloc] initWithFrame:self.view.bounds scroe:_scoreVolume soundtrack:_soundtrackVolume];
         _volumeView.delegate = self;
         [self.view addSubview:_volumeView];
         _volumeView.hidden = YES;
