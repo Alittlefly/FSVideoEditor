@@ -644,7 +644,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
     NSData * imageData = UIImageJPEGRepresentation(image,1);
     
-    CGFloat length = [imageData length]/1000;
+    CGFloat length = [imageData length]/1024;
     CGFloat bit = 1;
     if (length > 200) {
         bit = 200/length;
@@ -654,10 +654,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 - (void)FSUploadImageServerFirstImageSucceed:(NSString *)filePath {
     _firstImageUrl = filePath;
-    [self uploadFile:_outPutPath];
+   // [self uploadFile:_outPutPath];
 
-//    [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
-//    [[FSShortVideoRecorderManager sharedInstance] beginCreateWebP:_outPutPath];
+    [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
+    [[FSShortVideoRecorderManager sharedInstance] beginCreateWebP:_outPutPath];
 }
 
 - (void)FSUploadImageServerFirstImageFailed:(NSError *)error {
@@ -685,11 +685,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     }
     UISaveVideoAtPathToSavedPhotosAlbum(filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     NSData *data = [NSData dataWithContentsOfFile:filePath];
-   
-    CGFloat length = [data length]/1000;
+    CGFloat length = [data length]/1024;
+ 
     CGFloat bit = 1;
-    if (length > 200) {
-        bit = 200/length;
+    if (length > 1024) {
+        bit = 1024/length;
     }
     [_uploadImageServer uploadWebP:[NSDictionary dictionaryWithObjectsAndKeys:data,@"webpData",[self getNameFromPath:_outPutPath],@"webpName",nil]];
 }

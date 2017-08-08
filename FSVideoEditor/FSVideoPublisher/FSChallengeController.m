@@ -46,12 +46,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = FSHexRGBAlpha(0xFFFFFF, 0.7);
+    self.view.backgroundColor = [UIColor clearColor];
     
-    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
     _effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
     _effectView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    _effectView.alpha = 0.97;
+    _effectView.alpha = 0.9;
     
     [self.view addSubview:_effectView];
     
