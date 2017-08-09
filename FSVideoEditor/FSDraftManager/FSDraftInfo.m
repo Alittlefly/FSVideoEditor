@@ -168,25 +168,26 @@
 - (NSString *)vFinalPath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 
-    return  [[paths objectAtIndex:0]stringByAppendingPathComponent:_vFinalPath];
+    return  _vFinalPath?[[paths objectAtIndex:0]stringByAppendingPathComponent:_vFinalPath]:_vFinalPath;
 }
 
 - (NSString *)vOriginalPath {
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
-    return  [[paths objectAtIndex:0]stringByAppendingPathComponent:_vOriginalPath];
+    return _vOriginalPath?[[paths objectAtIndex:0] stringByAppendingPathComponent:_vOriginalPath]:_vOriginalPath;
 }
 
 - (NSString *)vConvertPath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
-    return  [[paths objectAtIndex:0]stringByAppendingPathComponent:_vConvertPath];
+    return  _vConvertPath?[[paths objectAtIndex:0]stringByAppendingPathComponent:_vConvertPath]:_vConvertPath;
 }
 
 - (NSString *)vFirstFramePath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
-    return  [[paths objectAtIndex:0]stringByAppendingPathComponent:_vFirstFramePath];
+    return  _vFirstFramePath?[[paths objectAtIndex:0]stringByAppendingPathComponent:_vFirstFramePath]:_vFirstFramePath;
 }
 
 - (void)setRecordVideoPathArray:(NSArray<NSString *> *)recordVideoPathArray {
