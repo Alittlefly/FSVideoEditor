@@ -9,6 +9,7 @@
 #import "FSSearchBar.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
+#import "FSPublishSingleton.h"
 
 @interface FSSearchBar()
 
@@ -35,7 +36,14 @@
     if (showCancle) {
         CGRect cancleRect = _cancleButton.frame;
         CGRect searchFrame = _searchBar.frame;
-        searchFrame.size.width = CGRectGetMinX(cancleRect) - 15;
+        if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+            searchFrame.origin.x = CGRectGetMaxX(cancleRect)+15;
+            searchFrame.size.width = self.bounds.size.width - CGRectGetMaxX(cancleRect) - 15;
+        }
+        else {
+            searchFrame.origin.x = 0;
+            searchFrame.size.width = CGRectGetMinX(cancleRect) - 15;
+        }
         [_searchBar setFrame:searchFrame];
         [_backView setFrame:searchFrame];
     }else{
@@ -69,7 +77,7 @@
      _cancleButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [_cancleButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] forState:(UIControlStateNormal)];
     [_cancleButton sizeToFit];
-    [_cancleButton setFrame:CGRectMake(CGRectGetWidth(self.bounds) - 20 - CGRectGetWidth(_cancleButton.frame), (CGRectGetHeight(self.bounds) - CGRectGetHeight(_cancleButton.frame))/2.0,  CGRectGetWidth(_cancleButton.frame), CGRectGetHeight(_cancleButton.frame))];
+    [_cancleButton setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : CGRectGetWidth(self.bounds) - 20 - CGRectGetWidth(_cancleButton.frame), (CGRectGetHeight(self.bounds) - CGRectGetHeight(_cancleButton.frame))/2.0,  CGRectGetWidth(_cancleButton.frame), CGRectGetHeight(_cancleButton.frame))];
     [_cancleButton setTitleColor:FSHexRGB(0x0bc2c6) forState:(UIControlStateNormal)];
     [_cancleButton addTarget:self action:@selector(cancleSearch) forControlEvents:(UIControlEventTouchUpInside)];
     [_cancleButton setHidden:YES];

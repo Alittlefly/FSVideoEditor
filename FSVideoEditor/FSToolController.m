@@ -17,6 +17,7 @@
 #import "FSMusicPlayer.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
+#import "FSPublishSingleton.h"
 
 @interface FSToolController ()<FSMusicControllerDelegate>
 {
@@ -42,7 +43,7 @@
     
     
     UIButton *videoRecorderButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    videoRecorderButton.frame = CGRectMake(CGRectGetWidth(_contentView.frame) - 80, 17, 75, 21);
+    videoRecorderButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 5 : CGRectGetWidth(_contentView.frame) - 80, 17, 75, 21);
     [videoRecorderButton setTitle:[NSString stringWithFormat:@"%@ >",[FSShortLanguage CustomLocalizedStringFromTable:@"Record"]] forState:UIControlStateNormal];
     [videoRecorderButton setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
     [videoRecorderButton setTitleColor:FSHexRGB(0x010A12) forState:(UIControlStateSelected)];
@@ -66,7 +67,7 @@
     
     
     UIButton *videoListButton = [UIButton buttonWithType:UIButtonTypeCustom];
-     videoListButton.frame = CGRectMake(20, 17, 60, 21);
+    videoListButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-80 : 20, 17, 60, 21);
     [videoListButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadVideo"] forState:UIControlStateNormal];
     [videoListButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     [videoListButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];

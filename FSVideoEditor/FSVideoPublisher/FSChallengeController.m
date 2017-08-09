@@ -14,6 +14,7 @@
 #import "FSChallengeParam.h"
 #import "FSAddChallengeController.h"
 #import "FSShortLanguage.h"
+#import "FSPublishSingleton.h"
 
 @interface FSChallengeController ()<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, FSChallengeDataServerDelegate, FSChallengeCellDelegate, FSAddChallengeControllerDelegate>
 
@@ -60,7 +61,7 @@
     
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     closeButton.backgroundColor =[UIColor clearColor];
-    closeButton.frame = CGRectMake(12, 35, 15, 15);
+    closeButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.view.frame.size.width-12-15 : 12, 35, 15, 15);
     [closeButton setImage:[UIImage imageNamed:@"challenge_close"] forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(backView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
@@ -75,7 +76,7 @@
     titleLabel.frame = CGRectMake((self.view.frame.size.width-titleLabel.frame.size.width)/2, 30, titleLabel.frame.size.width, 24);
     [self.view addSubview:titleLabel];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(titleLabel.frame), 32, 20, 20)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMinX(titleLabel.frame)-20 : CGRectGetMaxX(titleLabel.frame), 32, 20, 20)];
     imageView.image = [UIImage imageNamed:@"#"];
     [self.view addSubview:imageView];
     
@@ -85,12 +86,19 @@
     _textField.layer.borderWidth = 1;
     _textField.returnKeyType = UIReturnKeySearch;
     _textField.delegate = self;
+    _textField.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
     _textField.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"EnterChallenge"];
     [self.view addSubview:_textField];
     
     UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, CGRectGetHeight(_textField.frame))];
-    _textField.leftView = paddingView;
-    _textField.leftViewMode = UITextFieldViewModeAlways;
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        _textField.rightView = paddingView;
+        _textField.rightViewMode = UITextFieldViewModeAlways;
+    }
+    else {
+        _textField.leftView = paddingView;
+        _textField.leftViewMode = UITextFieldViewModeAlways;
+    }
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_textField.frame)+20, self.view.frame.size.width, self.view.frame.size.height-CGRectGetMaxY(_textField.frame)-20) style:(UITableViewStylePlain)];
     _tableView.backgroundColor = [UIColor clearColor];
@@ -189,17 +197,21 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     
-    [self.view addSubview:self.loading];
-    [self.loading loadingViewShow];
-    
     _searchDataArray = nil;
-    
-    FSChallengeParam *param = [[FSChallengeParam alloc] init];
-    param.w = textField.text;
-    param.no = 0;
-    param.size = 10;
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:textField.text, @"w", @"1", @"no", @"10", @"size", nil];
-    [_dataServer requestChallengeDataList:dic isSearch:YES];
+
+    if (textField.text != nil && textField.text.length > 0) {
+        [self.view addSubview:self.loading];
+        [self.loading loadingViewShow];
+        
+        
+        FSChallengeParam *param = [[FSChallengeParam alloc] init];
+        param.w = textField.text;
+        param.no = 0;
+        param.size = 10;
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:textField.text, @"w", @"1", @"no", @"10", @"size", nil];
+        [_dataServer requestChallengeDataList:dic isSearch:YES];
+    }
+
     
     return YES;
 }
@@ -241,6 +253,7 @@
         
         UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 20)];
         headerLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"HotChallenges"];
+        headerLabel.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
         [bgView addSubview:headerLabel];
         
         return bgView;

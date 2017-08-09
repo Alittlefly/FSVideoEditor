@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
+#import "FSPublishSingleton.h"
 
 @interface FSMusicUseButton : UIButton
 {
@@ -89,7 +90,7 @@ static NSString *identifier = @"FSMusicCell";
         _nameLabel = [[UILabel alloc] init];
         [_nameLabel setTextColor:FSHexRGB(0x010a12)];
         [_nameLabel setFont:[UIFont systemFontOfSize:15.0]];
-        [_nameLabel setTextAlignment:(NSTextAlignmentLeft)];
+        [_nameLabel setTextAlignment:[FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : (NSTextAlignmentLeft)];
     }
     return _nameLabel;
 }
@@ -98,7 +99,7 @@ static NSString *identifier = @"FSMusicCell";
         _authorLabel = [[UILabel alloc] init];
         [_authorLabel setTextColor:FSHexRGB(0xb8b9bd)];
         [_authorLabel setFont:[UIFont systemFontOfSize:14.0]];
-        [_authorLabel setTextAlignment:(NSTextAlignmentLeft)];
+        [_authorLabel setTextAlignment:[FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : (NSTextAlignmentLeft)];
     }
     return _authorLabel;
 }
@@ -107,7 +108,7 @@ static NSString *identifier = @"FSMusicCell";
         _timeLabel = [[UILabel alloc] init];
         [_timeLabel setTextColor:FSHexRGB(0xb8b9bd)];
         [_timeLabel setFont:[UIFont systemFontOfSize:15.0]];
-        [_timeLabel setTextAlignment:(NSTextAlignmentLeft)];
+        [_timeLabel setTextAlignment:[FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : (NSTextAlignmentLeft)];
     }
     return _timeLabel;
 }
@@ -143,19 +144,19 @@ static NSString *identifier = @"FSMusicCell";
     
     [self setClipsToBounds:YES];
     
-    [self.pic setFrame:CGRectMake(10, 20, 72, 72)];
+    [self.pic setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width-10-72 : 10, 20, 72, 72)];
     
     [self.pic setImage:[UIImage imageNamed:@"musicPlaceHolder"]];
     [self.playButton setFrame:self.pic.frame];
     
-    [self.nameLabel setFrame:CGRectMake(100.0, 20, CGRectGetWidth(self.bounds) - 38 - 82, 21)];
-    [self.authorLabel setFrame:CGRectMake(100.0, CGRectGetMaxY(self.nameLabel.frame) + 1, CGRectGetWidth(self.nameLabel.frame) - 60, 20)];
+    [self.nameLabel setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width-100.0-(CGRectGetWidth(self.bounds) - 38 - 82) : 100.0, 20, CGRectGetWidth(self.bounds) - 38 - 82, 21)];
+    [self.authorLabel setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width-100.0-(CGRectGetWidth(self.nameLabel.frame) - 60) : 100.0, CGRectGetMaxY(self.nameLabel.frame) + 1, CGRectGetWidth(self.nameLabel.frame) - 60, 20)];
     
-    [self.timeLabel setFrame:CGRectMake(100.0, CGRectGetMaxY(self.authorLabel.frame) + 8.0, CGRectGetWidth(self.nameLabel.frame), 18)];
+    [self.timeLabel setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width-100.0-CGRectGetWidth(self.nameLabel.frame) : 100.0, CGRectGetMaxY(self.authorLabel.frame) + 8.0, CGRectGetWidth(self.nameLabel.frame), 18)];
     [self.useButton setFrame:CGRectMake(10, 102, CGRectGetWidth(self.bounds) - 20, 40)];
     
-    [self.deatilButton setFrame:CGRectMake(CGRectGetWidth(self.bounds) - 80, (107 - 30)/2.0, 30, 30)];
-    [self.collectButton setFrame:CGRectMake(CGRectGetWidth(self.bounds) - 40, (107 - 30)/2.0, 30, 30)];
+    [self.deatilButton setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 50 : CGRectGetWidth(self.bounds) - 80, (107 - 30)/2.0, 30, 30)];
+    [self.collectButton setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 10 : CGRectGetWidth(self.bounds) - 40, (107 - 30)/2.0, 30, 30)];
 }
 
 -(void)setMusic:(FSMusic *)music{
