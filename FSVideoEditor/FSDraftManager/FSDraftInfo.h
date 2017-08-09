@@ -44,4 +44,5 @@ typedef NS_ENUM(NSInteger,FSDraftInfoType){
 
 -(instancetype)initWithDraftInfo:(FSDraftInfo *)draftInfo;
 -(void)copyValueFromeDraftInfo:(FSDraftInfo *)draftInfo;
+-(void)clearFxInfos;
 @end

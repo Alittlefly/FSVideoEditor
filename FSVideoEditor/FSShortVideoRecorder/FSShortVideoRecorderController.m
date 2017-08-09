@@ -31,7 +31,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _tempInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
+     _tempInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
+    [_tempInfo clearFxInfos];
+    
     _recorderView = [[FSShortVideoRecorderView alloc] initWithFrame:self.view.bounds draftInfo:_tempInfo];
     _recorderView.draftInfo = _tempInfo;
     _recorderView.delegate =self;
@@ -72,6 +74,10 @@
     
     _tempInfo.vType = FSDraftInfoTypeRecoder;
     _tempInfo.vSpeed = speed;
+    
+    if (_tempInfo.vOriginalPath != nil) {
+        [FSDraftFileManager deleteFile:_tempInfo.vOriginalPath];
+    }
     _tempInfo.vOriginalPath = filePath;
     _tempInfo.vFinalPath = filePath;
     _tempInfo.vConvertPath = convertFilePath;

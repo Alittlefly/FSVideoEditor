@@ -80,6 +80,15 @@
     self.vType = draftInfo.vType;
     self.vAddedFxViews = draftInfo.vAddedFxViews;
 }
+-(void)clearFxInfos{
+    self.clips = nil;
+    self.stack = nil;
+    self.vSpeed = 1.0;
+    self.vFilterid = 0;
+    self.vFirstFramePath = nil;
+    self.vAddedFxViews = nil;
+    self.vTimefx = nil;
+}
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
     

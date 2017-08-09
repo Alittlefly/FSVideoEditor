@@ -486,7 +486,7 @@ static FSShortVideoRecorderManager *recorderManager;
             CGFloat speed = [[_speedArray objectAtIndex:i] floatValue];
             NvsVideoClip *clip = [self.videoTrack appendClip:path];
             [clip changeSpeed:speed];
-            NSLog(@"----speed:%f  duration:%lld   count:%d ",speed,self.timeLine.duration,[self.timeLine videoTrackCount]);
+//            NSLog(@"----speed:%f  duration:%lld   count:%d ",speed,self.timeLine.duration,[self.timeLine videoTrackCount]);
         }
         i++;
        // UISaveVideoAtPathToSavedPhotosAlbum(path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);

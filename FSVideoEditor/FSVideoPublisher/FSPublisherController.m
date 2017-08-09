@@ -259,7 +259,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         NSError *error;
         if ([[NSFileManager defaultManager] removeItemAtPath:outPutFilePath error:&error] == NO) {
             NSLog(@"removeItemAtPath failed, error: %@", error);
-            return;
         }
     }
 }
@@ -302,7 +301,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [audiotrack setVolumeGain:_tempDraftInfo.vOriginalVolume rightVolumeGain:_tempDraftInfo.vOriginalVolume];
     }
 
-    [self deleteCurrentCompileFile:_tempDraftInfo.vFinalPath];
+    
+    //
+    if (![_tempDraftInfo.vFinalPath isEqualToString:_tempDraftInfo.vOriginalPath]) {
+        [self deleteCurrentCompileFile:_tempDraftInfo.vFinalPath];
+    }
     _tempDraftInfo.vFinalPath = [self getCompilePath];
 
     if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_tempDraftInfo.vFinalPath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeLow) flags:0]){
@@ -336,6 +339,9 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     }else if(_OperationType == FSPublishOperationTypeSaveToDraft){
         if (image) {
             NSString *imagePath = [FSDraftFileManager saveImageTolocal:image];
+            if (_tempDraftInfo.vFirstFramePath) {
+                [FSDraftFileManager deleteFile:_tempDraftInfo.vFirstFramePath];
+            }
             _tempDraftInfo.vFirstFramePath = imagePath;
         }
         // test

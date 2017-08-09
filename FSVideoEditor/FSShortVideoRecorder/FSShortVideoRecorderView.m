@@ -693,7 +693,6 @@
     else {
         _isAutoRecorder = NO;
         [self.recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
-
     }
 }
 
