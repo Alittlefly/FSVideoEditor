@@ -12,6 +12,7 @@
 #import "FSEditorLoading.h"
 #import "FSShortLanguage.h"
 #import "FSAlertView.h"
+#import "FSPublishSingleton.h"
 
 @interface FSAddChallengeController ()<UITextViewDelegate, UITextFieldDelegate, FSChallengeDataServerDelegate>
 
@@ -41,7 +42,7 @@
     self.view.backgroundColor = FSHexRGB(0xFFFFFF);
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = CGRectMake(20, 33, 20, 20);
+    backButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?self.view.frame.size.width-20-20 : 20, 33, 20, 20);
     backButton.backgroundColor = [UIColor clearColor];
     [backButton setImage:[UIImage imageNamed:@"addChallenge_back"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
@@ -57,7 +58,7 @@
     titleLabel.frame = CGRectMake((self.view.frame.size.width-titleLabel.frame.size.width)/2, 30, titleLabel.frame.size.width, 24);
     [self.view addSubview:titleLabel];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(titleLabel.frame), 32, 20, 20)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMinX(titleLabel.frame)-20 : CGRectGetMaxX(titleLabel.frame), 32, 20, 20)];
     imageView.image = [UIImage imageNamed:@"#"];
     [self.view addSubview:imageView];
     
@@ -84,12 +85,20 @@
     _nameTextField.layer.masksToBounds = YES;
     UIImageView *leftView = [[UIImageView alloc]initWithFrame:CGRectMake(18, 18, 14, 14)];
     leftView.image = [UIImage imageNamed:@"#"];
-    _nameTextField.leftView = leftView;
-    _nameTextField.leftViewMode = UITextFieldViewModeAlways;
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        _nameTextField.rightView = leftView;
+        _nameTextField.rightViewMode = UITextFieldViewModeAlways;
+    }
+    else {
+        _nameTextField.leftView = leftView;
+        _nameTextField.leftViewMode = UITextFieldViewModeAlways;
+    }
+    
     _nameTextField.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"EnterChallenge"];
     _nameTextField.text = _challengeName;
     _nameTextField.font = [UIFont systemFontOfSize:14];
     _nameTextField.delegate = self;
+    _nameTextField.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
     [self.view addSubview:_nameTextField];
     
     _contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_nameTextField.frame)+10, self.view.frame.size.width-20, 140)];
@@ -98,11 +107,12 @@
     _contentTextView.layer.masksToBounds = YES;
     _contentTextView.font = [UIFont systemFontOfSize:13];
     _contentTextView.delegate = self;
+    _contentTextView.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
     [self.view addSubview:_contentTextView];
     
     _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, _contentTextView.frame.size.width-20, 18)];
     _placeholderLabel.backgroundColor = [UIColor clearColor];
-    _placeholderLabel.textAlignment = NSTextAlignmentLeft;
+    _placeholderLabel.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
     _placeholderLabel.textColor = FSHexRGB(0x796565);
     _placeholderLabel.font = [UIFont systemFontOfSize:13];
     _placeholderLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ChallengeDescribe"];
@@ -110,7 +120,7 @@
     
     _maxWordsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_contentTextView.frame)+10, CGRectGetWidth(_contentTextView.frame), 16)];
     _maxWordsLabel.backgroundColor = [UIColor clearColor];
-    _maxWordsLabel.textAlignment = NSTextAlignmentRight;
+    _maxWordsLabel.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentLeft : NSTextAlignmentRight;
     _maxWordsLabel.textColor = FSHexRGB(0x796565);
     _maxWordsLabel.font = [UIFont systemFontOfSize:11];
     NSString *maxWordsCount = [FSShortLanguage CustomLocalizedStringFromTable:@"MaxWordsCount"];

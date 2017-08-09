@@ -12,6 +12,7 @@
 #import "FSMusicListView.h"
 #import "FSShortVideoRecorderController.h"
 #import "FSMusicSever.h"
+#import "FSPublishSingleton.h"
 
 @interface FSMusicListController ()<FSMusicListViewDelegate,FSMusicSeverDelegate>
 {
@@ -51,7 +52,7 @@
     
     
     UIButton *backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    [backButton setFrame:CGRectMake(12, 12, 30, 30)];
+    [backButton setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-12-30 : 12, 12, 30, 30)];
     [backButton setImage:[UIImage imageNamed:@"musicBack"] forState:(UIControlStateNormal)];
     [backButton addTarget:self action:@selector(outNav) forControlEvents:(UIControlEventTouchUpInside)];
     [_contentView addSubview:backButton];

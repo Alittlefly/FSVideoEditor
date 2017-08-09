@@ -39,6 +39,7 @@
 - (void)initBaseUI {
     _textFile = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 20)];
     _textFile.backgroundColor = [UIColor clearColor];
+    _textFile.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
     _textFile.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"EnterTitle"];//NSLocalizedString(@"EnterTitle", nil);
     if (_draftInfo.vTitle) {
         _textFile.text = _draftInfo.vTitle;
@@ -56,7 +57,7 @@
     [self addSubview:_lineView];
     
     _addChallengeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _addChallengeButton.frame = CGRectMake(0, CGRectGetMaxY(_lineView.frame)+15, 70, 27);
+    _addChallengeButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width-70 : 0, CGRectGetMaxY(_lineView.frame)+15, 70, 27);
     _addChallengeButton.backgroundColor = [UIColor clearColor];
     _addChallengeButton.layer.cornerRadius = 2;
     _addChallengeButton.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -73,7 +74,7 @@
     //_addChallengeButton.hidden = YES;
     
     _saveToPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _saveToPhotoButton.frame = CGRectMake(self.frame.size.width-100, CGRectGetMaxY(_lineView.frame)+15, 100, 27);
+    _saveToPhotoButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 0 : self.frame.size.width-100, CGRectGetMaxY(_lineView.frame)+15, 100, 27);
     _saveToPhotoButton.backgroundColor = [UIColor clearColor];
     [_saveToPhotoButton setTitle:[NSString stringWithFormat:@"%@",[FSShortLanguage CustomLocalizedStringFromTable:@"SaveInGallery"]] forState:UIControlStateNormal];
     [_saveToPhotoButton.titleLabel setFont:[UIFont systemFontOfSize:10]];
@@ -103,7 +104,7 @@
         width = maxWidth;
     }
 
-    _addChallengeButton.frame = CGRectMake(_addChallengeButton.frame.origin.x, _addChallengeButton.frame.origin.y, width, _addChallengeButton.frame.size.height);
+    _addChallengeButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width - width : _addChallengeButton.frame.origin.x, _addChallengeButton.frame.origin.y, width, _addChallengeButton.frame.size.height);
 }
 
 - (void)addChallenge {
@@ -150,6 +151,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.textFile resignFirstResponder];
+    
     if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewEditVideoTitle:)]) {
         [self.delegate FSEditVideoNameViewEditVideoTitle:textField.text];
     }

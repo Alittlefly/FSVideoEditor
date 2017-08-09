@@ -9,6 +9,7 @@
 #import "FSControlVolumeView.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
+#import "FSPublishSingleton.h"
 
 @interface FSControlVolumeView()
 
@@ -69,16 +70,16 @@
     }
 
     
-    _soundtrackLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 23, 0, 27)];
+    _soundtrackLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-15 : 15, 23, 0, 27)];
     _soundtrackLabel.backgroundColor = [UIColor clearColor];
     _soundtrackLabel.font = [UIFont systemFontOfSize:15];
     _soundtrackLabel.textColor = [UIColor whiteColor];
     _soundtrackLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Original"];//NSLocalizedString(@"Original", nil);
     [_soundtrackLabel sizeToFit];
-    _soundtrackLabel.frame = CGRectMake(15, 23, _soundtrackLabel.frame.size.width, 27);
+    _soundtrackLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-15-_soundtrackLabel.frame.size.width : 15, 23, _soundtrackLabel.frame.size.width, 27);
     [_contentView addSubview:_soundtrackLabel];
     
-    _soundtrackSlider = [[UISlider alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_soundtrackLabel.frame)+15, 23, _contentView.frame.size.width-CGRectGetMaxX(_soundtrackLabel.frame)-15-15, 27)];
+    _soundtrackSlider = [[UISlider alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 15 : CGRectGetMaxX(_soundtrackLabel.frame)+15, 23, _contentView.frame.size.width-CGRectGetWidth(_soundtrackLabel.frame)-15-15-15, 27)];
     _soundtrackSlider.value = _soundtrackVolume;
     _soundtrackSlider.minimumTrackTintColor = [UIColor orangeColor];
     _soundtrackSlider.maximumTrackTintColor = [UIColor blackColor];
@@ -86,16 +87,16 @@
     [_soundtrackSlider addTarget:self action:@selector(changeSoundtrack) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_soundtrackSlider];
     
-    _scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_soundtrackLabel.frame)+30, 0, 27)];
+    _scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-15 : 15, CGRectGetMaxY(_soundtrackLabel.frame)+30, 0, 27)];
     _scoreLabel.backgroundColor = [UIColor clearColor];
     _scoreLabel.font = [UIFont systemFontOfSize:15];
     _scoreLabel.textColor = [UIColor whiteColor];
     _scoreLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Music"];//NSLocalizedString(@"Music", nil);
     [_scoreLabel sizeToFit];
-    _scoreLabel.frame = CGRectMake(_scoreLabel.frame.origin.x, _scoreLabel.frame.origin.y, _scoreLabel.frame.size.width, _scoreLabel.frame.size.height);
+    _scoreLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-15-_scoreLabel.frame.size.width : 15, _scoreLabel.frame.origin.y, _scoreLabel.frame.size.width, _scoreLabel.frame.size.height);
     [_contentView addSubview:_scoreLabel];
     
-    _scoreSlider = [[UISlider alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_scoreLabel.frame)+15, CGRectGetMaxY(_soundtrackLabel.frame)+30, _contentView.frame.size.width-CGRectGetMaxX(_scoreLabel.frame)-15-15, 27)];
+    _scoreSlider = [[UISlider alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 15 : CGRectGetMaxX(_scoreLabel.frame)+15, CGRectGetMaxY(_soundtrackLabel.frame)+30, _contentView.frame.size.width-CGRectGetWidth(_scoreLabel.frame)-15-15-15, 27)];
     _scoreSlider.value = _scroeVolume;
     _scoreSlider.minimumTrackTintColor = [UIColor orangeColor];
     _scoreSlider.maximumTrackTintColor = [UIColor blackColor];
@@ -125,7 +126,7 @@
     
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _finishButton.backgroundColor = [UIColor clearColor];
-    _finishButton.frame = CGRectMake(self.frame.size.width-20-54, CGRectGetMinY(_contentView.frame)-20-30, 54, 30);
+    _finishButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width-20-54, CGRectGetMinY(_contentView.frame)-20-30, 54, 30);
     [_finishButton setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_finishButton];
