@@ -76,7 +76,6 @@
     
     [self creatSubViews];
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-b5a2105bee06464eebd11f55a77db670.lic"];
-    
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
      _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
 
