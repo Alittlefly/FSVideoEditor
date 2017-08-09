@@ -65,9 +65,9 @@
      _tempFxStack = [FSVideoFxOperationStack new];
     [_tempFxStack pushVideoFxWithFxManager:_fxOperationStack];
     
-    _filePath = _draftInfo.vFinalPath;
     _musicAttime = _draftInfo.vMusic.mInPoint;
     _musicUrl = _draftInfo.vMusic.mPath;
+    _filePath = _draftInfo.vOriginalPath;
     _convertFilePath = _draftInfo.vConvertPath;
     //
     _selectType = _draftInfo.vTimefx.tFxType;
@@ -76,9 +76,8 @@
     
     [self creatSubViews];
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-b5a2105bee06464eebd11f55a77db670.lic"];
-    
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
-     _context = [NvsStreamingContext sharedInstance];
+     _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
 
     NSString *SoulfxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx"];
     NSString *SoulfxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"C6273A8F-C899-4765-8BFC-E683EE37AA84.lic"];
@@ -88,8 +87,8 @@
     NSString *ScalefxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"A8A4344D-45DA-460F-A18F-C0E2355FE864.lic"];
     
     
-    NSString *jzfxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx"];
-    NSString *jzfxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic"];
+    NSString *jzfxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"9AC28816-639F-4A9B-B4BA-4060ABD229A2.2.videofx"];
+    NSString *jzfxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"9AC28816-639F-4A9B-B4BA-4060ABD229A2.2.lic"];
 
     NSString *jxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.videofx"];
     NSString *jxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.lic"];

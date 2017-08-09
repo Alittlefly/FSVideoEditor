@@ -212,7 +212,6 @@
     [[FSMusicPlayer sharedPlayer] stop];
     
     FSDraftMusic *draftMusic = [[FSDraftMusic alloc] initWithMusic:music];
-    draftMusic.mPath = path;
     FSDraftInfo *tempInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:nil];
     tempInfo.vMusic = draftMusic;
     [[FSDraftManager sharedManager] mergeInfo];

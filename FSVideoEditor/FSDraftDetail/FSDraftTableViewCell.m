@@ -27,7 +27,9 @@
 
 -(UIImageView *)photo{
     if (!_photo) {
-        _photo = [[UIImageView alloc] init];
+         _photo = [[UIImageView alloc] init];
+        [_photo setContentMode:(UIViewContentModeScaleAspectFill)];
+        [_photo setClipsToBounds:YES];
         [self addSubview:_photo];
     }
     return _photo;

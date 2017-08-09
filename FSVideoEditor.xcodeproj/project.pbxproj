@@ -71,6 +71,7 @@
 		563B7A2B1F0CBC720035346A /* FSVideoFx.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A2A1F0CBC720035346A /* FSVideoFx.m */; };
 		563B7A2E1F0CE6F50035346A /* FSVideoFxOperationStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A2D1F0CE6F50035346A /* FSVideoFxOperationStack.m */; };
 		563B7A311F0CE79A0035346A /* FSVirtualTimeLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A301F0CE79A0035346A /* FSVirtualTimeLine.m */; };
+		563DFDAD1F3AB92A00D05FD0 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.2.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 563DFDAC1F3AB92A00D05FD0 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.2.videofx */; };
 		5640354D1F31E4FC00C5F036 /* FSDraftCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5640354C1F31E4FC00C5F036 /* FSDraftCache.m */; };
 		564035501F31E79A00C5F036 /* FSDraftFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5640354F1F31E79A00C5F036 /* FSDraftFileManager.m */; };
 		564035571F34227F00C5F036 /* FSDraftController.m in Sources */ = {isa = PBXBuildFile; fileRef = 564035561F34227F00C5F036 /* FSDraftController.m */; };
@@ -117,7 +118,6 @@
 		567B055D1F271CDB00D09364 /* FSMusicListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B055C1F271CDB00D09364 /* FSMusicListController.m */; };
 		567B05651F2735F100D09364 /* FSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B05641F2735F100D09364 /* FSSearchBar.m */; };
 		567B05671F27488400D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic in Resources */ = {isa = PBXBuildFile; fileRef = 567B05661F27488400D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic */; };
-		567B05691F2748AB00D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 567B05681F2748AB00D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx */; };
 		567B056C1F2748B800D09364 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 567B056A1F2748B800D09364 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.videofx */; };
 		567B056D1F2748B800D09364 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.lic in Resources */ = {isa = PBXBuildFile; fileRef = 567B056B1F2748B800D09364 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.lic */; };
 		567B05701F27767100D09364 /* FSMusicHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B056F1F27767100D09364 /* FSMusicHeaderView.m */; };
@@ -362,6 +362,7 @@
 		563B7A2D1F0CE6F50035346A /* FSVideoFxOperationStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVideoFxOperationStack.m; sourceTree = "<group>"; };
 		563B7A2F1F0CE79A0035346A /* FSVirtualTimeLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSVirtualTimeLine.h; sourceTree = "<group>"; };
 		563B7A301F0CE79A0035346A /* FSVirtualTimeLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVirtualTimeLine.m; sourceTree = "<group>"; };
+		563DFDAC1F3AB92A00D05FD0 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.2.videofx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "9AC28816-639F-4A9B-B4BA-4060ABD229A2.2.videofx"; sourceTree = "<group>"; };
 		5640354A1F31DD1200C5F036 /* FSDraftCacheProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftCacheProtocol.h; sourceTree = "<group>"; };
 		5640354B1F31E4FC00C5F036 /* FSDraftCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftCache.h; sourceTree = "<group>"; };
 		5640354C1F31E4FC00C5F036 /* FSDraftCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftCache.m; sourceTree = "<group>"; };
@@ -450,7 +451,6 @@
 		567B05631F2735F100D09364 /* FSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSearchBar.h; sourceTree = "<group>"; };
 		567B05641F2735F100D09364 /* FSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSearchBar.m; sourceTree = "<group>"; };
 		567B05661F27488400D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic"; sourceTree = "<group>"; };
-		567B05681F2748AB00D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx"; sourceTree = "<group>"; };
 		567B056A1F2748B800D09364 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.videofx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "33F513E5-5CA2-4C23-A6D4-8466202EE698.videofx"; sourceTree = "<group>"; };
 		567B056B1F2748B800D09364 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "33F513E5-5CA2-4C23-A6D4-8466202EE698.lic"; sourceTree = "<group>"; };
 		567B056E1F27767100D09364 /* FSMusicHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicHeaderView.h; sourceTree = "<group>"; };
@@ -959,10 +959,10 @@
 		562D406E1EFE4D2000BF0E0D /* FSVideoFxSource */ = {
 			isa = PBXGroup;
 			children = (
+				563DFDAC1F3AB92A00D05FD0 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.2.videofx */,
 				9833BCB41F3868FA00F0D308 /* 198-14-b5a2105bee06464eebd11f55a77db670.lic */,
 				567B056A1F2748B800D09364 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.videofx */,
 				567B056B1F2748B800D09364 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.lic */,
-				567B05681F2748AB00D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx */,
 				567B05661F27488400D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic */,
 				5648257C1F1E30F700C1889D /* 6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.videofx */,
 				564825791F1E30D200C1889D /* 6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.lic */,
@@ -1751,6 +1751,7 @@
 				567B056C1F2748B800D09364 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.videofx in Resources */,
 				9871BC371F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */,
 				567E0B611EF930D100C4C527 /* LaunchScreen.storyboard in Resources */,
+				563DFDAD1F3AB92A00D05FD0 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.2.videofx in Resources */,
 				567E0B5E1EF930D100C4C527 /* Assets.xcassets in Resources */,
 				9880DEA81F171295006E730F /* LICENSE in Resources */,
 				567E0B5C1EF930D100C4C527 /* Main.storyboard in Resources */,
@@ -1760,7 +1761,6 @@
 				563B79D11F05F88A0035346A /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */,
 				9833BCB51F3868FA00F0D308 /* 198-14-b5a2105bee06464eebd11f55a77db670.lic in Resources */,
 				98EFA7531F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */,
-				567B05691F2748AB00D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx in Resources */,
 				567B05671F27488400D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic in Resources */,
 				567A3D811EFB6F8E0026247E /* LICENSE in Resources */,
 			);
@@ -2152,24 +2152,6 @@
 			buildConfigurations = (
 				567E0B661EF930D100C4C527 /* Debug */,
 				567E0B671EF930D100C4C527 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9833BBD01F384E9400F0D308 /* Build configuration list for PBXNativeTarget "FSVideoEditorSDK" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9833BBD11F384E9400F0D308 /* Debug */,
-				9833BBD21F384E9400F0D308 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9833BBD31F384E9400F0D308 /* Build configuration list for PBXNativeTarget "FSVideoEditorSDKTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9833BBD41F384E9400F0D308 /* Debug */,
-				9833BBD51F384E9400F0D308 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -46,6 +46,7 @@
         [FSDraftFileManager deleteFile:draftInfo.vConvertPath];
         [FSDraftFileManager deleteFile:draftInfo.vFirstFramePath];
         [FSDraftFileManager deleteFile:draftInfo.vOriginalPath];
+        
         for (NSString *filePath in draftInfo.recordVideoPathArray) {
             [FSDraftFileManager deleteFile:filePath];
         }

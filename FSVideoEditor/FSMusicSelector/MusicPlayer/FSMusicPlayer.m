@@ -10,7 +10,9 @@
 
 
 @interface FSMusicPlayer()
-
+{
+    CGFloat _volume;
+}
 @property(nonatomic,strong)AVAudioPlayer *musicPlayer;
 
 @end
@@ -37,6 +39,12 @@ static id object = nil;
 {
     return object;
 }
+-(instancetype)init{
+    if (self = [super init]) {
+        _volume = 1.0;
+    }
+    return self;
+}
 -(void)setFilePath:(NSString *)filePath{
     _filePath = filePath;
     
@@ -48,13 +56,13 @@ static id object = nil;
     NSData *mp3Data = [NSData dataWithContentsOfFile:filePath];
     
     if (!mp3Data) {
-        NSLog(@"文件地址错误");
+        NSLog(@"文件地址错误filePath:%@",filePath);
         return;
     }
 
-    _musicPlayer = [[AVAudioPlayer alloc] initWithData:mp3Data fileTypeHint:AVFileTypeMPEGLayer3 error:nil];
+     _musicPlayer = [[AVAudioPlayer alloc] initWithData:mp3Data fileTypeHint:AVFileTypeMPEGLayer3 error:nil];
     [_musicPlayer prepareToPlay];
-    [_musicPlayer setVolume:1.0];
+    [_musicPlayer setVolume:_volume];
 }
 -(void)setRate:(CGFloat)rate{
     _rate = rate;
@@ -97,6 +105,7 @@ static id object = nil;
 }
 
 - (void)changeVolume:(CGFloat)value {
+    _volume = value;
     [_musicPlayer setVolume:value];
 }
 

@@ -79,7 +79,7 @@
         [self presentViewController:nav animated:YES completion:nil];
     }else{
         FSPublisherController *publishController = [[FSPublisherController alloc] init];
-        FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:publishController];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:publishController];
         publishController.draftInfo = info;
         [self presentViewController:nav animated:YES completion:nil];
     }
@@ -107,6 +107,7 @@
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你确定删除该消息？" preferredStyle:UIAlertControllerStyleAlert];
         //        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [[FSDraftManager sharedManager] delete:[_drafts objectAtIndex:indexPath.row]];
             [weakSelf.drafts removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         }]];

@@ -147,7 +147,7 @@ static FSShortVideoRecorderManager *recorderManager;
     
     NSLog(@"verify:%@  %D",verifySdkLicenseFilePath,isOK);
     // 初始化NvsStreamingContext
-    _context = [NvsStreamingContext sharedInstance];
+    _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
     
     if (!_context) {
         
@@ -201,8 +201,8 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (NvsTimeline *)createTimeLine {
     NvsVideoResolution videoEditRes;
-    videoEditRes.imageWidth = 1280;
-    videoEditRes.imageHeight = 720;
+    videoEditRes.imageWidth = 720;
+    videoEditRes.imageHeight = 1280;
     videoEditRes.imagePAR = (NvsRational){1,1};
     NvsRational videoFps = {25,1};
     
