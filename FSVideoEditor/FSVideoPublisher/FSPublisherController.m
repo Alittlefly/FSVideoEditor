@@ -313,6 +313,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     }
     else {
         NSLog(@"0000000");
+        [self.loading loadingViewhide];
+
     }
 }
 

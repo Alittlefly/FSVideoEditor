@@ -29,6 +29,8 @@
 @property (nonatomic, strong) NvcConvertor *mConvertor;
 @property (nonatomic, copy) NSString *convertorFilePath;
 
+@property (nonatomic, strong) FSDraftInfo *draftInfo;
+
 @end
 
 static FSShortVideoRecorderManager *recorderManager;
@@ -117,6 +119,7 @@ static FSShortVideoRecorderManager *recorderManager;
     _supportAutoFocus = false;
     _supportAutoExposure = false;
     _fxRecord = true;
+    _draftInfo = draftInfo;
     
     _filePathArray = [NSMutableArray arrayWithArray:draftInfo.recordVideoPathArray];
     _timeArray = [NSMutableArray arrayWithArray:draftInfo.recordVideoTimeArray];
@@ -517,6 +520,22 @@ static FSShortVideoRecorderManager *recorderManager;
     if (_timeArray.count == 0) {
         return NO;
     }
+    
+    //文件名
+    NSString *uniquePath= [_filePathArray lastObject];
+    if ([_draftInfo.recordVideoPathArray containsObject:uniquePath]) {
+        BOOL deleted= [self deleteCacheFile:uniquePath];
+        if (deleted) {
+            [_filePathArray removeLastObject];
+        }
+        else {
+            return NO;
+        }
+    }
+    else {
+        [_filePathArray removeLastObject];
+    }
+    
     CGFloat time = [[_timeArray objectAtIndex:_videoIndex-1] floatValue];
     _videoTime = _videoTime - time;
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerDeleteVideo:)]) {
@@ -526,13 +545,6 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     [_timeArray removeLastObject];
     [_speedArray removeLastObject];
-    
-        //文件名
-    NSString *uniquePath= [_filePathArray lastObject];
-    BOOL deleted= [self deleteCacheFile:uniquePath];
-    if (deleted) {
-        [_filePathArray removeLastObject];
-    }
 
 
         _videoIndex--;

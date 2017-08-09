@@ -22,7 +22,7 @@ static FSPublishSingleton *publishSingleton = nil;
 
 - (instancetype)init {
     if (self = [super init]) {
-        _isAutoReverse = YES;
+        _isAutoReverse = NO;
     }
     return self;
 }
