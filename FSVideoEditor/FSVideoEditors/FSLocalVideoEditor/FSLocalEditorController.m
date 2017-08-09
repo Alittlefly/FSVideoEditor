@@ -85,7 +85,7 @@
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-b5a2105bee06464eebd11f55a77db670.lic"];
     
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
-    _context = [NvsStreamingContext sharedInstance];
+    _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
     _draftInfo = [FSDraftManager sharedManager].tempInfo;
     
     if (!_draftInfo) {
@@ -100,8 +100,8 @@
     
     // 初始化timeline
     NvsVideoResolution videoEditRes;
-    videoEditRes.imageWidth = 1200;
-    videoEditRes.imageHeight = 720;
+    videoEditRes.imageWidth = 720;
+    videoEditRes.imageHeight = 1280;
     videoEditRes.imagePAR = (NvsRational){1, 1};
     NvsRational videoFps = {25, 1};
     NvsAudioResolution audioEditRes;

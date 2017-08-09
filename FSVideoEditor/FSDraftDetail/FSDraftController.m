@@ -79,7 +79,7 @@
         [self presentViewController:nav animated:YES completion:nil];
     }else{
         FSPublisherController *publishController = [[FSPublisherController alloc] init];
-        FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:publishController];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:publishController];
         publishController.draftInfo = info;
         [self presentViewController:nav animated:YES completion:nil];
     }
