@@ -15,7 +15,7 @@
 #import "FSDraftInfo.h"
 @protocol FSVideoFxControllerDelegate <NSObject>
 
--(void)videoFxControllerSaved:(NSArray *)addedViews fxType:(FSVideoFxType)type position:(CGFloat)position convert:(BOOL)convert;
+-(void)videoFxControllerSaved:(NSArray *)addedViews;
 
 
 @end

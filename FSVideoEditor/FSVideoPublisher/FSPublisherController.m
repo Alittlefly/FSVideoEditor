@@ -71,8 +71,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 @property (nonatomic, strong) NSMutableArray *addedViews;
 
-@property (nonatomic, assign)FSVideoFxType currentFxType;
-
 @property (nonatomic, strong) FSPublisherServer *publishServer;
 @property (nonatomic, strong) FSUploadImageServer *uploadImageServer;
 
@@ -615,14 +613,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     self.toolView.hidden = NO;
 }
 #pragma mark - 
--(void)videoFxControllerSaved:(NSArray *)addedViews
-                       fxType:(FSVideoFxType)type
-                     position:(CGFloat)position
-                      convert:(BOOL)convert{
+-(void)videoFxControllerSaved:(NSArray *)addedViews{
     
     [self.addedViews removeAllObjects];
     [self.addedViews addObjectsFromArray:addedViews];
-    _currentFxType = type;
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo

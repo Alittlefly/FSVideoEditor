@@ -70,9 +70,12 @@
     _filePath = _draftInfo.vOriginalPath;
     _convertFilePath = _draftInfo.vConvertPath;
     //
-    _selectType = _draftInfo.vTimefx.tFxType;
-    _position = _draftInfo.vTimefx.tFxInPoint;
-    _convert = (_draftInfo.vTimefx.tFxType == FSVideoFxTypeRevert);
+    FSDraftTimeFx *timeFx = _draftInfo.vTimefx;
+
+    _selectType = timeFx?[timeFx tFxType]:FSVideoFxTypeNone;
+    int64_t currentPoint = timeFx?timeFx.tFxInPoint:_timeLine.duration/2.0;
+    _position = (CGFloat)currentPoint/_timeLine.duration;
+    _convert = (_selectType == FSVideoFxTypeRevert);
     
     [self creatSubViews];
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-b5a2105bee06464eebd11f55a77db670.lic"];
@@ -302,10 +305,9 @@
     [self.addedViews removeAllObjects];
     [self.addedViews addObjectsFromArray:_videoFxView.addedViews];
     
-    
-    
-    if ([self.delegate respondsToSelector:@selector(videoFxControllerSaved:fxType:position:convert:)]) {
-        [self.delegate videoFxControllerSaved:[self.addedViews copy] fxType:_selectType position:_position convert:_convert];
+
+    if ([self.delegate respondsToSelector:@selector(videoFxControllerSaved:)]) {
+        [self.delegate videoFxControllerSaved:[self.addedViews copy]];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
