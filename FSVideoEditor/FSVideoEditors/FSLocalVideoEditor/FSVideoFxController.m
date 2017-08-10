@@ -93,8 +93,8 @@
     NSString *jxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.videofx"];
     NSString *jxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.lic"];
     
-    NSString *blackMagicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.videofx"];
-    NSString *blackMagicLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.lic"];
+    NSString *blackMagicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.2.videofx"];
+    NSString *blackMagicLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.2.lic"];
     
     [_context.assetPackageManager installAssetPackage:SoulfxPath license:SoulfxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
     [_context.assetPackageManager installAssetPackage:ScalefxPath license:ScalefxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
@@ -145,7 +145,9 @@
 
     }
     
-    [[FSMusicPlayer sharedPlayer] setFilePath:_musicUrl];
+    if (_musicUrl != nil) {
+        [[FSMusicPlayer sharedPlayer] setFilePath:_musicUrl];
+    }
 
     
     [self.view setBackgroundColor:FSHexRGB(0x000f1e)];
@@ -161,7 +163,11 @@
 
 -(void)stopVideoForCrrentTime{
     [_videoFxView stopMoveTint];
-    [[FSMusicPlayer sharedPlayer] stop];
+    
+    if (_musicUrl) {
+        [[FSMusicPlayer sharedPlayer] stop];
+    }
+    
     [_controlView setState:NO];
     int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
     [_context seekTimeline:_timeLine timestamp:startTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster];
@@ -177,15 +183,20 @@
         // 只有自动播放 修改光标位置
         [_videoFxView startMoveTint];
         [_controlView setState:YES];
-        [[FSMusicPlayer sharedPlayer] playAtTime:startTime/1000000.0+_musicAttime];
-        [[FSMusicPlayer sharedPlayer] play];
+        
+        
+        if (_musicUrl) {
+            [[FSMusicPlayer sharedPlayer] playAtTime:startTime/1000000.0+_musicAttime];
+            [[FSMusicPlayer sharedPlayer] play];
+        }
+
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    NvsAudioTrack *audiotrack = [_timeLine getAudioTrackByIndex:0];
-    [audiotrack setVolumeGain:_musicUrl?0:1 rightVolumeGain:_musicUrl?0:1];
+//    NvsAudioTrack *audiotrack = [_timeLine getAudioTrackByIndex:0];
+//    [audiotrack setVolumeGain:_musicUrl?0:1 rightVolumeGain:_musicUrl?0:1];
     
     if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
         NSLog(@"Failed to seek timeline!");
@@ -194,7 +205,9 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [_videoFxView stopMoveTint];
-    [[FSMusicPlayer sharedPlayer] stop];
+    if (_musicUrl) {
+        [[FSMusicPlayer sharedPlayer] stop];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -228,18 +241,29 @@
 }
 - (void)cancle{
     
-    [self restTimeLineFx];
+    [self rsetTimeLineFx];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
--(void)restTimeLineFx{
+-(void)rsetTimeLineFx{
     [self removeAllFx];
-    // 回归到之前的状态
+
     FSVirtualTimeLine *virTimeLine = [_fxOperationStack topVirtualTimeLine];
     //
     [self addVideoFxWithVirtualTimeline:virTimeLine];
-    
     _draftInfo.stack = _fxOperationStack;
+    // 回归到之前的状态
+    
+    FSDraftTimeFx *timeFx = _draftInfo.vTimefx;
+    [_videoTrack removeAllClips];
+    
+    if(timeFx.tFxType == FSVideoFxTypeRevert){
+        [_videoTrack appendClip:_draftInfo.vConvertPath];
+    }else{
+        [_videoTrack appendClip:_draftInfo.vOriginalPath];
+    }
+    
+    [self addTimeFxWithFx:timeFx];
 }
 
 -(void)removeAllFx{
@@ -291,14 +315,18 @@
     if (![_context seekTimeline:timeline timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
         NSLog(@"Failed to seek timeline!");
     }
-    [[FSMusicPlayer sharedPlayer] stop];
+    if (_musicUrl) {
+        [[FSMusicPlayer sharedPlayer] stop];
+    }
     [self playVideoFromHead];
 }
 -(void)didPlaybackStopped:(NvsTimeline *)timeline{
     
     [_controlView setState:NO];
     [_videoFxView stopMoveTint];
-    [[FSMusicPlayer sharedPlayer] stop];
+    if (_musicUrl){
+        [[FSMusicPlayer sharedPlayer] stop];
+    }
 }
 #pragma mark -
 -(void)videoFxViewNeedConvertView:(BOOL)convert type:(FSVideoFxType)type{
@@ -306,12 +334,11 @@
     _convert = convert;
     _selectType = type;
     
-    [self removeAllFx];
-    
     NSString *newPath = convert?_convertFilePath:_filePath;
-    [_timeLine removeVideoTrack:0];
-     _videoTrack = [_timeLine appendVideoTrack];
-    [_videoTrack insertClip:newPath clipIndex:0];
+    [_videoTrack removeAllClips];
+    [_videoTrack appendClip:newPath];
+    [_videoTrack setVolumeGain:0 rightVolumeGain:0];
+
     [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     //
     FSVirtualTimeLine *vtimelin = [_tempFxStack topVirtualTimeLine];
@@ -332,13 +359,17 @@
     int64_t startPoint = _timeLine.duration * progress;
     [_context seekTimeline:_timeLine timestamp:startPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     [_controlView setState:NO];
-    [[FSMusicPlayer sharedPlayer] stop];
+    if (_musicUrl) {
+        [[FSMusicPlayer sharedPlayer] stop];
+    }
     
     if (play) {
         [_context playbackTimeline:_timeLine startTime:startPoint endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
         [_controlView setState:YES];
-        [[FSMusicPlayer sharedPlayer] playAtTime:startPoint/1000000.0 + _musicAttime];
-        [[FSMusicPlayer sharedPlayer] play];
+        if (_musicUrl) {
+            [[FSMusicPlayer sharedPlayer] playAtTime:startPoint/1000000.0 + _musicAttime];
+            [[FSMusicPlayer sharedPlayer] play];
+        }
     }
 }
 
@@ -354,8 +385,12 @@
         [_context seekTimeline:_timeLine timestamp:startPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
         [_context playbackTimeline:_timeLine startTime:startPoint endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
         [_controlView setState:YES];
-        [[FSMusicPlayer sharedPlayer] playAtTime:startPoint/1000000.0 + _musicAttime];
-        [[FSMusicPlayer sharedPlayer] play];
+        
+        if (_musicUrl) {
+            [[FSMusicPlayer sharedPlayer] playAtTime:startPoint/1000000.0 + _musicAttime];
+            [[FSMusicPlayer sharedPlayer] play];
+        }
+
     }
 }
 // 选择结束的节点
@@ -398,47 +433,93 @@
     
     [videoFxView stopMoveTint];
     [_controlView setState:NO];
-    [[FSMusicPlayer sharedPlayer] stop];
+    if (_musicUrl) {
+        [[FSMusicPlayer sharedPlayer] stop];
+    }
     [videoFxView showUndoButton];
 }
 -(void)videoFxViewSelectTimeFx:(FSVideoFxView *)videoFxView type:(FSVideoFxType)type duration:(int64_t)duration progress:(CGFloat)progress{
     _selectType = type;
     int64_t point = _timeLine.duration * progress;
     _position = progress;
-    if (type == FSVideoFxTypeSlow) {
-        //缓慢
-        
-        NvsVideoClip *orginalClip = [_videoTrack getClipWithTimelinePosition:point];
-        BOOL splited = [_videoTrack splitClip:orginalClip.index splitPoint:(point - duration/2.0)];
-        if (splited) {
-            NvsVideoClip *dealClip = [_videoTrack getClipWithTimelinePosition:point];
-            splited = [_videoTrack splitClip:dealClip.index splitPoint:(point + duration/2.0)];
-        }
-        if (splited) {
-            NvsVideoClip *videoClip = [_videoTrack getClipWithTimelinePosition:point];
-            [videoClip changeSpeed:0.5];
-        }
-        
-    }else if(type == FSVideoFxTypeRepeat){
-        // 重复
-        [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
-        [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
-        [_videoTrack addClip:_filePath inPoint:point trimIn:(point - duration/2.0) trimOut:(point + duration/2.0)];
-    }
-    
-    [_context playbackTimeline:_timeLine startTime:point endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
-    [_controlView setState:YES];
-    [_videoFxView startMoveTint];
-    [[FSMusicPlayer sharedPlayer] playAtTime:point/1000000.0 + _musicAttime];
-    [[FSMusicPlayer sharedPlayer] play];
-    
+    // 清除
+    [_videoTrack removeAllClips];
+    [_videoTrack appendClip:_filePath];
+
     FSDraftTimeFx *draftFx = [FSDraftTimeFx new];
     draftFx.tFxType = type;
     draftFx.tFxInPoint = point;
     draftFx.tFxOutPoint = point + duration;;
     _timeFx = draftFx;
     
+    [self addTimeFxWithFx:draftFx];
+    //
+    [_context playbackTimeline:_timeLine startTime:point endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
+    [_controlView setState:YES];
+    [_videoFxView startMoveTint];
+    
+    if (_musicUrl) {
+        [[FSMusicPlayer sharedPlayer] playAtTime:point/1000000.0 + _musicAttime];
+        [[FSMusicPlayer sharedPlayer] play];
+    }
+   
     videoFxView.duration = _timeLine.duration;
+}
+
+-(void)addTimeFxWithFx:(FSDraftTimeFx *)timeFx{
+    //
+    FSVideoFxType type = timeFx.tFxType;
+    
+    int64_t fxPos = timeFx.tFxInPoint;
+    int64_t duration = timeFx.tFxOutPoint - timeFx.tFxInPoint;
+    int64_t originalDuration = _timeLine.duration;
+
+    if (type == FSVideoFxTypeSlow) {
+        //缓慢
+        NvsVideoClip* newClip = [self splitClip:fxPos duration:duration];
+        [newClip changeSpeed:0.5*newClip.getSpeed];
+        
+    }else if(type == FSVideoFxTypeRepeat){
+        
+        // 重复
+        NvsVideoClip* newClip = [self splitClip:fxPos duration:duration];
+        
+        for (int i=0; i<2; i++) {
+            NvsVideoClip* clip = [_videoTrack insertClip:newClip.filePath trimIn:newClip.trimIn trimOut:newClip.trimOut clipIndex:newClip.index];
+            if (clip != nil)
+                [clip changeSpeed:newClip.getSpeed];
+        }
+        
+        for (int i=0; i<_videoTrack.clipCount-1; i++)
+            [_videoTrack setBuiltinTransition:i withName:nil];
+    }
+    
+    int64_t currentDuration = _timeLine.duration;
+    if (currentDuration > originalDuration) {
+        NvsVideoClip *trailClip = [_videoTrack getClipWithTimelinePosition:originalDuration];
+        int64_t shouldBeTrimOut = trailClip.trimOut - (currentDuration - originalDuration);
+        [trailClip changeTrimOutPoint:shouldBeTrimOut affectSibling:YES];
+        
+    }
+    [_videoTrack setVolumeGain:0 rightVolumeGain:0];
+
+}
+
+- (NvsVideoClip*) splitClip:(int64_t)fxPoint duration:(int64_t)duration{
+    bool tailer = false;
+    int64_t fxPos = fxPoint;
+    if (_timeLine.duration - fxPos <= duration) {
+        fxPos = _timeLine.duration - duration;
+        tailer = true;
+    }
+    if (![_videoTrack splitClip:[_videoTrack getClipWithTimelinePosition:fxPos].index splitPoint:fxPos])
+        return nil;
+    if (!tailer) {
+        if (![_videoTrack splitClip:[_videoTrack getClipWithTimelinePosition:fxPos+duration].index splitPoint:fxPos+duration])
+            return nil;
+    }
+    NvsVideoClip* newClip = [_videoTrack getClipWithTimelinePosition:fxPos];
+    return newClip;
 }
 -(void)videoFxUndoPackageFx:(FSVideoFxView *)videoFxView{
     
@@ -463,8 +544,8 @@
 -(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed{
     return [FSSpringAnimator initWithSourceVc:dismissed];
 }
-
 -(void)dealloc{
+    [_videoFxView stopMoveTint];
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));
 }
 

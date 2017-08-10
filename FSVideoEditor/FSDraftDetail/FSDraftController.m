@@ -69,7 +69,7 @@
     if (info.vType == FSDraftInfoTypeRecoder) {
         
         FSShortVideoRecorderController *controller = [[FSShortVideoRecorderController alloc] init];
-        FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:controller];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
         controller.draftInfo = info;
         
         FSPublisherController *publishController = [[FSPublisherController alloc] init];

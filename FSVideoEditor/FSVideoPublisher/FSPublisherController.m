@@ -50,7 +50,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 {
     FSUploader *_uploader;
     
-    CGFloat _fxPosition;
     CGFloat _scoreVolume;
     FSPublishOperationType _OperationType;
     
@@ -72,7 +71,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 @property (nonatomic, strong) NSMutableArray *addedViews;
 
-@property (nonatomic, assign)BOOL converted;
 @property (nonatomic, assign)FSVideoFxType currentFxType;
 
 @property (nonatomic, strong) FSPublisherServer *publishServer;
@@ -157,8 +155,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
     [clip setVolumeGain:0 rightVolumeGain:0];
     
+    // 填好clip了
     [FSTimelineConfiger configTimeline:_timeLine timeLineInfo:_tempDraftInfo];
-
 
     FSFileSliceDivider *divider = [[FSFileSliceDivider alloc] initWithSliceCount:1];
      _uploader = [FSUploader uploaderWithDivider:divider];
@@ -561,7 +559,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         for (unsigned int i = 0; i < _videoTrack.clipCount; i++) {
             NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:i];
             [videoClip removeAllFx];
-            //[videoClip appendPackagedFx:_videoFxPackageId];     // 追加包裹特效
+            [videoClip appendPackagedFx:filter];     // 追加包裹特效
         }
     } else {
         for (unsigned int i = 0; i < _videoTrack.clipCount; i++) {
@@ -625,8 +623,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [self.addedViews removeAllObjects];
     [self.addedViews addObjectsFromArray:addedViews];
     _currentFxType = type;
-    _fxPosition = position;
-    _converted = convert;
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo

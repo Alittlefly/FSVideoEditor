@@ -35,6 +35,9 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self setClipsToBounds:NO];
+        
+        [[UIView new] snapshotViewAfterScreenUpdates:NO];
+        
         [self.titleLabel setFont:[UIFont systemFontOfSize:11.0]];
         [self.titleLabel setTextAlignment:(NSTextAlignmentCenter)];
         [self setTitleColor:FSHexRGB(0xf5f5f5) forState:(UIControlStateNormal)];
@@ -303,7 +306,7 @@
     
     [bmfx setTitle:NSLocalizedString(@"黑白", nil) forState:(UIControlStateNormal)];
     
-    objc_setAssociatedObject(bmfx, FxIdKey, @"33F513E5-5CA2-4C23-A6D4-8466202EE698", OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(bmfx, FxIdKey, @"33F513E5-5CA2-4C23-A6D4-8466202EE698.2", OBJC_ASSOCIATION_COPY);
     [_contentView addSubview:bmfx];
     
     [_contentView setContentSize:CGSizeMake(CGRectGetMaxX(bmfx.frame) + 20, 0)];
@@ -425,16 +428,15 @@
     [_progress setNeedConvert:newValue];
 
     if (_needCovert != newValue) {
-        _needCovert = newValue;
         if ([self.delegate respondsToSelector:@selector(videoFxViewNeedConvertView:type:)]) {
             [self.delegate videoFxViewNeedConvertView:newValue type:_fxType];
         }
-        
+        _needCovert = newValue;
     }
 
     if (button.tag != FSVideoFxTypeRevert) {
         if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
-            [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:1000000.0 progress:_progress.selectProgress];
+            [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:200000 progress:_progress.selectProgress];
         }
     }
 }
@@ -446,7 +448,7 @@
 }
 - (void)videoClipProgressMoveSlideSelectPoint:(CGFloat)progress{
     if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
-        [self.delegate videoFxViewSelectTimeFx:self type:_fxType duration:1000000.0 progress:_progress.selectProgress];
+        [self.delegate videoFxViewSelectTimeFx:self type:_fxType duration:200000 progress:_progress.selectProgress];
     }
 }
 -(void)videoClipProgressStartSelect:(CGFloat)progress{

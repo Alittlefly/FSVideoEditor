@@ -11,7 +11,6 @@
 #import "FSPublisherController.h"
 #import "FSShortVideoRecorderManager.h"
 #import "NvsVideoTrack.h"
-#import "NvsVideoClip.h"
 #import "FSAlertView.h"
 #import "FSFilterView.h"
 #import "FSDraftManager.h"
