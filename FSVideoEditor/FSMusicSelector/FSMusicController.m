@@ -226,6 +226,47 @@
     }
 
 }
+
+- (void)musicListUpdateCollectState:(FSMusic *)music {
+    
+    for (FSMusic *oldMusic in self.musics) {
+        if (oldMusic.songId == music.songId) {
+            oldMusic.collected = music.collected;
+        }
+    }
+    
+    if (music.collected) {
+        if (_currentType == FSMusicButtonTypeHot) {
+            BOOL isCollected = NO;
+            for (FSMusic *oldMusic in self.collectedMusics) {
+                if (oldMusic.songId == music.songId) {
+                    isCollected = YES;
+                    break;
+                }
+            }
+            if (!isCollected) {
+                [self.collectedMusics addObject:music];
+            }
+        }
+        else if (_currentType == FSMusicButtonTypeLike) {
+            for (FSMusic *oldMusic in self.collectedMusics) {
+                if (oldMusic.songId == music.songId) {
+                    oldMusic.collected = music.collected;
+                }
+            }
+        }
+        
+    }
+    else {
+        for (FSMusic *oldMusic in self.collectedMusics) {
+            if (oldMusic.songId == music.songId) {
+                [self.collectedMusics removeObject:oldMusic];
+                break;
+            }
+        }
+    }
+}
+
 #pragma mark -
 - (void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics musicTypes:(NSArray<FSMusicType *> *)musicTypes{
     
@@ -235,7 +276,22 @@
     
     [_tableHeader setItems:musicTypes];
     [self.musicListView showLoading:NO];
-    [self.musics addObjectsFromArray:musics];
+    
+    for (FSMusic *music in musics) {
+        BOOL isNew = YES;
+        for (FSMusic *oldMusic in self.musics) {
+            if (music.songId == oldMusic.songId) {
+                isNew = NO;
+                break;
+            }
+        }
+        
+        if (isNew) {
+            [self.musics addObject:music];
+        }
+    }
+    
+//    [self.musics addObjectsFromArray:musics];
     [self.musicListView setMusics:[self.musics copy]];
 }
 -(void)musicSeverGetFaild{
@@ -280,7 +336,20 @@
     if([musics count] == 0){
         _currentCollectPage --;
     }
-    [self.collectedMusics addObjectsFromArray:musics];
+    for (FSMusic *music in musics) {
+        BOOL isNew = YES;
+        for (FSMusic *oldMusic in self.collectedMusics) {
+            if (music.songId == oldMusic.songId) {
+                isNew = NO;
+                break;
+            }
+        }
+        
+        if (isNew) {
+            [self.collectedMusics addObject:music];
+        }
+    }
+//    [self.collectedMusics addObjectsFromArray:musics];
     [self.musicListView setMusics:[self.collectedMusics copy]];
     [self.musicListView showLoading:NO];
 }
