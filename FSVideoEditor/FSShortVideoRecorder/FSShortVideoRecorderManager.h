@@ -119,6 +119,9 @@
 - (void)beginCreateWebP:(NSString *)filePath;
 
 - (UIImage *)getImageFromFile:(NSString *)filePath atTime:(int64_t)time videoFrameHeightGrade:(NvsVideoFrameHeightGrade)videoFrameHeightGrade;
+- (UIImage *)getImageFromTimeLine:(NvsTimeline *)timeline atTime:(int64_t)time proxyScale:(const NvsRational *)proxyScale;
 
+- (void)addSticker:(NSMutableString *)sticker timeLine:(NvsTimeline *)timeline;
+- (void)removeSticker:(NvsTimeline *)timeline;
 
 @end

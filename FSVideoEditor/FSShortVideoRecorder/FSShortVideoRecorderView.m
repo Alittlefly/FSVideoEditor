@@ -213,7 +213,6 @@
     
     _beautyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _beautyButton.frame = CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicLabel.frame)+20, 40, 40);
-    [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-on"] forState:UIControlStateNormal];
     [_beautyButton addTarget:self action:@selector(beautyClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_beautyButton];
     
@@ -225,8 +224,19 @@
     _beautyLabel.shadowColor = [UIColor blackColor];
     _beautyLabel.shadowOffset = CGSizeMake(1, 1);
     _beautyLabel.textAlignment = NSTextAlignmentCenter;
-    _beautyLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOn"];//NSLocalizedString(@"BeautifyOn", nil);
     [self addSubview:_beautyLabel];
+    
+    if (_draftInfo.vBeautyOn) {
+        [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-on"] forState:UIControlStateNormal];
+        _beautyLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOn"];//NSLocalizedString(@"BeautifyOn", nil);
+
+    }
+    else {
+        [_beautyButton setImage:[UIImage imageNamed:@"recorder-beauty-off"] forState:UIControlStateNormal];
+        _beautyLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOff"];//NSLocalizedString(@"BeautifyOn", nil);
+
+    }
+    
     
     _filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _filterButton.frame = CGRectMake(CGRectGetMinX(_beautyButton.frame), CGRectGetMaxY(_beautyLabel.frame)+20, 40, 40);
@@ -527,6 +537,13 @@
     }
     _segmentView.hidden = NO;
     _isOpenFilterView = NO;
+    
+    if ([_draftInfo.vFilterid isEqualToString:[FSShortLanguage CustomLocalizedStringFromTable:@"NoFilter"]]) {
+        _filterLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ColorFilter"];
+    }
+    else {
+        _filterLabel.text = _draftInfo.vFilterid;
+    }
 }
 
 - (void)FSFilterViewChooseFilter:(NSString *)filter {
@@ -536,7 +553,6 @@
 - (void)changeFilter:(NSString *)filterName {
     _draftInfo.vFilterid = filterName;
     [_recorderManager addFilter:filterName];
-
 }
 
 

@@ -6,23 +6,15 @@
 	<dict>
 		<key>FSVideoEditor.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
-		</dict>
-		<key>FSVideoEditorKit.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>FSVideoEditorResources.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>FSVideoEditorSDK.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -53,6 +45,16 @@
 			<true/>
 		</dict>
 		<key>9814ABE51F161FE000ECC93F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9833BBB81F384E9400F0D308</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9833BBC01F384E9400F0D308</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -83,6 +83,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 @property (nonatomic, strong) FSChallengeModel *challengeModel;
 
+@property (nonatomic, copy) NSString *stickerVideoPath;
+
+@property (nonatomic, assign) BOOL isStickerVideoFinished;
+@property (nonatomic, copy) NSString *uploadVideoPath;
+
 @end
 
 @implementation FSPublisherController
@@ -334,37 +339,18 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 - (void)didCompileFinished:(NvsTimeline *)timeline{
     
     NSLog(@"Compile success!");
-    UIImage *image = [[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_tempDraftInfo.vFinalPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480];
-    
-    if (_OperationType == FSPublishOperationTypePublishToNet) {
-        [self uploadFirstImage:image];
-    }else if(_OperationType == FSPublishOperationTypeSaveToDraft){
-        if (image) {
-            NSString *imagePath = [FSDraftFileManager saveImageTolocal:image];
-            if (_tempDraftInfo.vFirstFramePath) {
-                [FSDraftFileManager deleteFile:_tempDraftInfo.vFirstFramePath];
-            }
-            _tempDraftInfo.vFirstFramePath = imagePath;
+    if (_isStickerVideoFinished) {
+        [self uploadFile:_stickerVideoPath];
+        
+        if (_tempDraftInfo.vSaveToAlbum) {
+            UISaveVideoAtPathToSavedPhotosAlbum(_stickerVideoPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
         }
-        // test
-        FSDraftChallenge *challenge = [[FSDraftChallenge alloc] init];
-        challenge.challengeDetail = @"challegeDatail";
-        challenge.challengeName = @"challengeName";
-        //
-        _tempDraftInfo.challenge = challenge;
-        _tempDraftInfo.vAddedFxViews = self.addedViews;
-        
-        [[FSDraftManager sharedManager] mergeInfo];
-        [[FSDraftManager sharedManager] saveToLocal];
-        [[FSDraftManager sharedManager] cancleOperate];
-        
-        [self.loading loadingViewShow];
-        [self dismissViewControllerAnimated:YES completion:nil];
     }
-
-    if (_tempDraftInfo.vSaveToAlbum) {
-        UISaveVideoAtPathToSavedPhotosAlbum(_tempDraftInfo.vFinalPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    else {
+        UIImage *image = [[FSShortVideoRecorderManager sharedInstance] getImageFromTimeLine:timeline atTime:0 proxyScale:nil];//[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_tempDraftInfo.vFinalPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480];
+        [self uploadFirstImage:image];
     }
+    
 
 }
 // 生成失败的回调函数
@@ -518,7 +504,29 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     //UISaveVideoAtPathToSavedPhotosAlbum(_filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     _OperationType = FSPublishOperationTypeSaveToDraft;
     
-    [self publishFiles];
+     UIImage *image = [[FSShortVideoRecorderManager sharedInstance] getImageFromTimeLine:_timeLine atTime:0 proxyScale:nil];
+    
+    if (image) {
+        NSString *imagePath = [FSDraftFileManager saveImageTolocal:image];
+        if (_tempDraftInfo.vFirstFramePath) {
+            [FSDraftFileManager deleteFile:_tempDraftInfo.vFirstFramePath];
+        }
+        _tempDraftInfo.vFirstFramePath = imagePath;
+    }
+    // test
+    FSDraftChallenge *challenge = [[FSDraftChallenge alloc] init];
+    challenge.challengeDetail = @"challegeDatail";
+    challenge.challengeName = @"challengeName";
+    //
+    _tempDraftInfo.challenge = challenge;
+    _tempDraftInfo.vAddedFxViews = self.addedViews;
+    
+    [[FSDraftManager sharedManager] mergeInfo];
+    [[FSDraftManager sharedManager] saveToLocal];
+    [[FSDraftManager sharedManager] cancleOperate];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 - (void)FSPublisherToolViewSaveToLibrary:(BOOL)isSave {
@@ -645,7 +653,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         _uploadImageServer = [[FSUploadImageServer alloc] init];
         _uploadImageServer.delegate = self;
     }
-   // UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
 
     NSData * imageData = UIImageJPEGRepresentation(image,1);
     
@@ -704,40 +712,101 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
 }
 
+- (void)addSticker:(NSString *)filePath {
+    [[FSShortVideoRecorderManager sharedInstance] addSticker:nil timeLine:_timeLine];
+    _stickerVideoPath = [self getCompilePath];
+    [self compileFile:_stickerVideoPath];
+}
+
+- (void)compileFile:(NSString *)outputPath {
+    int64_t length = _timeLine.duration;
+    NSString *_musicPath = _tempDraftInfo.vMusic.mPath;
+    
+    if (_musicPath != nil && _musicPath.length > 0) {
+        NvsAudioTrack *_audiotrack = [_timeLine getAudioTrackByIndex:0];
+        if (!_audiotrack) {
+            _audiotrack = [_timeLine appendAudioTrack];
+        }else{
+            [_audiotrack removeAllClips];
+        }
+        NvsAudioClip *audio = [_audiotrack appendClip:_musicPath];
+        int64_t _musicStartTime = _tempDraftInfo.vMusic.mInPoint;
+        [audio changeTrimInPoint:_musicStartTime affectSibling:YES];
+        [audio changeTrimOutPoint:length+_musicStartTime affectSibling:YES];
+        [_audiotrack setVolumeGain:_tempDraftInfo.vMusicVolume rightVolumeGain:_tempDraftInfo.vMusicVolume];
+    }else{
+        // 原音
+        [_videoTrack setVolumeGain:_tempDraftInfo.vOriginalVolume rightVolumeGain:_tempDraftInfo.vOriginalVolume];
+        NvsAudioTrack *audiotrack = [_timeLine getAudioTrackByIndex:0];
+        [audiotrack setVolumeGain:_tempDraftInfo.vOriginalVolume rightVolumeGain:_tempDraftInfo.vOriginalVolume];
+    }
+    
+    
+    
+    if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:outputPath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeLow) flags:0]){
+        NSLog(@"11111111");
+    }
+    else {
+        NSLog(@"0000000");
+        [self.loading loadingViewhide];
+        
+    }
+}
+
 #pragma mark -
 - (void)uploadFile:(NSString *)filePath{
     __block FSPublisherController *weakSelf = self;
     [_uploader uploadFileWithFilePath:filePath complete:^(CGFloat progress, NSString *filePath, NSDictionary * info) {
         
-        if(!info){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.loading loadingViewhide];
-                [weakSelf showMessage:NSLocalizedString(@"UploadFailed", nil)];
-            });
-            return ;
+        if (weakSelf.isStickerVideoFinished) {
+            if (!info) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.loading loadingViewhide];
+                    [weakSelf showMessage:NSLocalizedString(@"UploadFailed", nil)];
+                });
+            }
+            else {
+                NSLog(@"uploadFile: %f  %@",progress,filePath);
+                if (!_publishServer) {
+                    _publishServer = [[FSPublisherServer alloc] init];
+                    _publishServer.delegate = weakSelf;
+                }
+                
+                NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
+                [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
+                [dic setValue:[NSNumber numberWithInt:4] forKey:@"requestType"];
+                [dic setValue:[info objectForKey:@"dataInfo"] forKey:@"lvu"];
+                [dic setValue:weakSelf.uploadVideoPath forKey:@"vu"];
+                [dic setValue:_tempDraftInfo.vTitle?:@"" forKey:@"vd"]; //
+                [dic setValue:_firstImageUrl?:@"" forKey:@"vp"];    //image
+                [dic setValue:_webpUrl?:@"" forKey:@"vg"];   //webp
+                [dic setValue:@([[FSDraftManager  sharedManager] tempInfo].vMusic.mId) forKey:@"si"]; //歌曲id
+                [dic setValue:@([[FSDraftManager  sharedManager] tempInfo].challenge.challengeId) forKey:@"di"];  //挑战ID
+                [dic setValue:[NSArray array] forKey:@"a"];  //消息[{"ui":12815,"nk":"tttty"},{"ui":90665,"nk":"ytest"}]
+                //        [dic setValue:@"被@用户ID" forKey:@"ui"];
+                //        [dic setValue:@"用户昵称" forKey:@"nk"];
+                
+                [_publishServer publisherVideo:dic];
+            }
+            weakSelf.isStickerVideoFinished = NO;
+
+        }
+        else {
+            if(!info){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.loading loadingViewhide];
+                    [weakSelf showMessage:NSLocalizedString(@"UploadFailed", nil)];
+                });
+            }
+            else {
+                weakSelf.uploadVideoPath = [info objectForKey:@"dataInfo"];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    weakSelf.isStickerVideoFinished = YES;
+                    [weakSelf addSticker:filePath];
+                });
+            }
         }
         
-        
-        NSLog(@"uploadFile: %f  %@",progress,filePath);
-        if (!_publishServer) {
-            _publishServer = [[FSPublisherServer alloc] init];
-            _publishServer.delegate = weakSelf;
-        }
-        
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
-        [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
-        [dic setValue:[NSNumber numberWithInt:4] forKey:@"requestType"];
-        [dic setValue:[info objectForKey:@"dataInfo"] forKey:@"vu"];
-        [dic setValue:_tempDraftInfo.vTitle?:@"" forKey:@"vd"]; //
-        [dic setValue:_firstImageUrl?:@"" forKey:@"vp"];    //image
-        [dic setValue:_webpUrl?:@"" forKey:@"vg"];   //webp
-        [dic setValue:@([[FSDraftManager  sharedManager] tempInfo].vMusic.mId) forKey:@"si"]; //歌曲id
-        [dic setValue:@([[FSDraftManager  sharedManager] tempInfo].challenge.challengeId) forKey:@"di"];  //挑战ID
-        [dic setValue:[NSArray array] forKey:@"a"];  //消息[{"ui":12815,"nk":"tttty"},{"ui":90665,"nk":"ytest"}]
-//        [dic setValue:@"被@用户ID" forKey:@"ui"];
-//        [dic setValue:@"用户昵称" forKey:@"nk"];
-        
-        [_publishServer publisherVideo:dic];
     }];
 //    [_uploader uploadFileProgressWithFilePath:filePath complete:^(float progress, NSString *filePath) {
 //        
@@ -756,6 +825,9 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [self.loading loadingViewhide];
     
     [[FSPublishSingleton sharedInstance] cleanData];
+    [[FSDraftManager sharedManager] delete:_draftInfo];
+    [[FSDraftManager sharedManager] clearInfo];
+    [[FSDraftManager sharedManager] saveToLocal];
 
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadSecceed"]];
     

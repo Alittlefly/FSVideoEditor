@@ -25,6 +25,7 @@
         [self setVSpeed:1.0];
         [self setVMusicVolume:-1.0];
         [self setVOriginalVolume:-1.0];
+        [self setVBeautyOn:YES];
     }
     return self;
 }
@@ -36,7 +37,7 @@
         self.vTimefx = [draftInfo.vTimefx copy];
         self.vTitle = draftInfo.vTitle;
         self.stack = [draftInfo.stack copy];
-        self.vBeautyOn = draftInfo.vBeautyOn;
+        self.vBeautyOn = draftInfo?draftInfo.vBeautyOn:YES;
         self.vOriginalVolume = draftInfo?draftInfo.vOriginalVolume:-1.0;
         self.vMusicVolume = draftInfo?draftInfo.vMusicVolume:-1.0;
         self.vFinalPath = draftInfo.vFinalPath;
@@ -88,6 +89,7 @@
     self.vFirstFramePath = nil;
     self.vAddedFxViews = nil;
     self.vTimefx = nil;
+    self.vBeautyOn = YES;
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{

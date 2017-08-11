@@ -10,6 +10,7 @@
 #import "NvsVideoTrack.h"
 #import "NvcConvertor.h"
 #import "NvsVideoClip.h"
+#import "NvsTimelineAnimatedSticker.h"
 
 #define MaxVideoTime 15
 
@@ -43,6 +44,9 @@ static FSShortVideoRecorderManager *recorderManager;
     bool _supportAutoFocus;
     bool _supportAutoExposure;
     bool _fxRecord;
+    
+    NSMutableString* _stickerPackageId;
+
 }
 
 
@@ -172,6 +176,25 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     
     _context.delegate = self;
+    
+    [self initStickerData];
+}
+
+- (void)initStickerData {
+    NSString *appPath =[[NSBundle mainBundle] bundlePath];
+    NSString *stickerFilePath = [appPath stringByAppendingPathComponent:@"07D3BBED-1276-42A6-577A-04A36100FA1A.animatedsticker"];
+    NSString *stickerLicFilePath = [appPath stringByAppendingPathComponent:@"07D3BBED-1276-42A6-577A-04A36100FA1A.lic"];
+    _stickerPackageId = [[NSMutableString alloc] initWithString:@""];
+
+    if (![[NSFileManager defaultManager] fileExistsAtPath:stickerFilePath]) {
+        NSLog(@"Sticker package file is not exist!");
+    } else {
+        // 此处选择同步安装，如果包裹过大或者根据需要，可选择异步安装
+        NvsAssetPackageManagerError error = [_context.assetPackageManager installAssetPackage:stickerFilePath license:stickerLicFilePath type:NvsAssetPackageType_AnimatedSticker sync:YES assetPackageId:_stickerPackageId];
+        if (error != NvsAssetPackageManagerError_NoError && error != NvsAssetPackageManagerError_AlreadyInstalled) {
+            NSLog(@"Failed to install sticker package!");
+        }
+    }
 }
 
 - (void)clearData {
@@ -553,17 +576,25 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 #pragma mark - Sticker
-- (void)addSticker:(NSMutableString *)sticker {
+- (void)addSticker:(NSMutableString *)sticker timeLine:(NvsTimeline *)timeline {
     if ([sticker isEqualToString:@""])
-        return;
+        sticker = _stickerPackageId;
     // 添加动画贴纸
-    [self.timeLine addAnimatedSticker:0 duration:self.timeLine.duration animatedStickerPackageId:sticker];
+    NvsTimelineAnimatedSticker *stickers = [timeline addAnimatedSticker:0 duration:timeline.duration animatedStickerPackageId:_stickerPackageId];
+    NvsRect rect = [stickers getOriginalBoundingRect];
+    NSArray *array = [stickers getBoundingRectangleVertices];
+    CGPoint point = [stickers getTransltion];
+    CGPoint newPoint = [_liveWindow mapViewToCanonical:CGPointMake(rect.left, rect.top)];
+
+    [stickers setTranslation:newPoint];
+
+    
 }
 
-- (void)removeSticker {
-    NvsTimelineAnimatedSticker *sticker = [self.timeLine getFirstAnimatedSticker];
+- (void)removeSticker:(NvsTimeline *)timeline {
+    NvsTimelineAnimatedSticker *sticker = [timeline getFirstAnimatedSticker];
     // 删除动画贴纸
-    sticker = [self.timeLine removeAnimatedSticker:sticker];
+    sticker = [timeline removeAnimatedSticker:sticker];
 }
 
 - (NSMutableString *)getSticker {
@@ -642,6 +673,10 @@ static FSShortVideoRecorderManager *recorderManager;
     return [retriever getFrameAtTime:time videoFrameHeightGrade:videoFrameHeightGrade];
 }
 
+- (UIImage *)getImageFromTimeLine:(NvsTimeline *)timeline atTime:(int64_t)time proxyScale:(const NvsRational *)proxyScale {
+    return [_context grabImageFromTimeline:timeline timestamp:time proxyScale:proxyScale];
+}
+
 #pragma mark - NVConvertorDelegate
 - (void)convertFinished {
     [self.mConvertor stop];
@@ -695,7 +730,7 @@ static FSShortVideoRecorderManager *recorderManager;
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *final = [documentsDirectory stringByAppendingPathComponent:@"tmp"];
     NSString *tmpfilePath = [final stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
-    [self convertorWithFile:filePath outPath:tmpfilePath];
+    [self convertorWithFile:filePath outPath:tmpfilePath isWebp:NO];
 }
 
 - (void)beginCreateWebP:(NSString *)filePath {
@@ -704,10 +739,10 @@ static FSShortVideoRecorderManager *recorderManager;
     NSString *final = [documentsDirectory stringByAppendingPathComponent:@"tmp"];
     
     NSString *tmpfilePath = [final stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.webp",[self getCurrentTimeString]]];
-    [self convertorWithFile:filePath outPath:tmpfilePath];
+    [self convertorWithFile:filePath outPath:tmpfilePath isWebp:YES];
 }
 
-- (void)convertorWithFile:(NSString *)filePath outPath:(NSString *)outPath {
+- (void)convertorWithFile:(NSString *)filePath outPath:(NSString *)outPath isWebp:(BOOL)isWebp{
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"];
     
     NSData *JSONData = [NSData dataWithContentsOfFile:verifySdkLicenseFilePath];
@@ -725,13 +760,16 @@ static FSShortVideoRecorderManager *recorderManager;
     config.from = 0;
     config.to = INT_MAX;
     config.dataRate = 0;
-    //    config.scale.num = 1;
-    //    config.scale.den = 1;
+    config.videoResolution = NvcOutputVideoResolution_NotResize;
+    config.fpsForWebp = 2;
     
     //倒序
-    int nTmp = config.from;
-    config.from = config.to;
-    config.to = nTmp;
+    if (!isWebp) {
+        int nTmp = config.from;
+        config.from = config.to;
+        config.to = nTmp;
+    }
+    
     
     NSInteger ret = [self.mConvertor open:filePath outputFile:outPath setting:&config];
     if (ret != NVC_NOERROR) {
