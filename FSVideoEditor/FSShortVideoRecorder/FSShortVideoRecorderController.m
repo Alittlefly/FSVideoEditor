@@ -34,7 +34,6 @@
     [_tempInfo clearFxInfos];
     
     _recorderView = [[FSShortVideoRecorderView alloc] initWithFrame:self.view.bounds draftInfo:_tempInfo];
-    _recorderView.draftInfo = _tempInfo;
     _recorderView.delegate =self;
     [self.view addSubview:_recorderView];
 }
@@ -81,7 +80,7 @@
     _tempInfo.vFinalPath = filePath;
     _tempInfo.vConvertPath = convertFilePath;
     if (_tempInfo.vMusic) {
-        _tempInfo.vMusic.mInPoint = time;
+        _tempInfo.vMusic.mInPoint = time * 1000000.0;
     }
     publish.draftInfo = _tempInfo;
     [[FSDraftManager sharedManager] mergeInfo];

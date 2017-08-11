@@ -148,11 +148,6 @@
 
     }
     
-    if (_musicUrl != nil) {
-        [[FSMusicPlayer sharedPlayer] setFilePath:_musicUrl];
-    }
-
-    
     [self.view setBackgroundColor:FSHexRGB(0x000f1e)];
 }
 -(void)controlVideo{
@@ -166,10 +161,6 @@
 
 -(void)stopVideoForCrrentTime{
     [_videoFxView stopMoveTint];
-    
-    if (_musicUrl) {
-        [[FSMusicPlayer sharedPlayer] stop];
-    }
     
     [_controlView setState:NO];
     int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
@@ -187,12 +178,6 @@
         [_videoFxView startMoveTint];
         [_controlView setState:YES];
         
-        
-        if (_musicUrl) {
-            [[FSMusicPlayer sharedPlayer] playAtTime:startTime/1000000.0+_musicAttime];
-            [[FSMusicPlayer sharedPlayer] play];
-        }
-
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -205,9 +190,6 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [_videoFxView stopMoveTint];
-    if (_musicUrl) {
-        [[FSMusicPlayer sharedPlayer] stop];
-    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -314,18 +296,14 @@
     if (![_context seekTimeline:timeline timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
         NSLog(@"Failed to seek timeline!");
     }
-    if (_musicUrl) {
-        [[FSMusicPlayer sharedPlayer] stop];
-    }
+
     [self playVideoFromHead];
 }
 -(void)didPlaybackStopped:(NvsTimeline *)timeline{
     
     [_controlView setState:NO];
     [_videoFxView stopMoveTint];
-    if (_musicUrl){
-        [[FSMusicPlayer sharedPlayer] stop];
-    }
+
 }
 #pragma mark -
 -(void)videoFxViewNeedConvertView:(BOOL)convert type:(FSVideoFxType)type{
@@ -358,17 +336,12 @@
     int64_t startPoint = _timeLine.duration * progress;
     [_context seekTimeline:_timeLine timestamp:startPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     [_controlView setState:NO];
-    if (_musicUrl) {
-        [[FSMusicPlayer sharedPlayer] stop];
-    }
+
     
     if (play) {
         [_context playbackTimeline:_timeLine startTime:startPoint endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
         [_controlView setState:YES];
-        if (_musicUrl) {
-            [[FSMusicPlayer sharedPlayer] playAtTime:startPoint/1000000.0 + _musicAttime];
-            [[FSMusicPlayer sharedPlayer] play];
-        }
+
     }
 }
 
@@ -384,12 +357,6 @@
         [_context seekTimeline:_timeLine timestamp:startPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
         [_context playbackTimeline:_timeLine startTime:startPoint endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
         [_controlView setState:YES];
-        
-        if (_musicUrl) {
-            [[FSMusicPlayer sharedPlayer] playAtTime:startPoint/1000000.0 + _musicAttime];
-            [[FSMusicPlayer sharedPlayer] play];
-        }
-
     }
 }
 // 选择结束的节点
@@ -432,9 +399,6 @@
     
     [videoFxView stopMoveTint];
     [_controlView setState:NO];
-    if (_musicUrl) {
-        [[FSMusicPlayer sharedPlayer] stop];
-    }
     [videoFxView showUndoButton];
 }
 -(void)videoFxViewSelectTimeFx:(FSVideoFxView *)videoFxView type:(FSVideoFxType)type duration:(int64_t)duration progress:(CGFloat)progress{
@@ -456,11 +420,6 @@
     [_context playbackTimeline:_timeLine startTime:point endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
     [_controlView setState:YES];
     [_videoFxView startMoveTint];
-    
-    if (_musicUrl) {
-        [[FSMusicPlayer sharedPlayer] playAtTime:point/1000000.0 + _musicAttime];
-        [[FSMusicPlayer sharedPlayer] play];
-    }
    
     videoFxView.duration = _timeLine.duration;
 }
