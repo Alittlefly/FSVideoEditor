@@ -581,12 +581,12 @@ static FSShortVideoRecorderManager *recorderManager;
         sticker = _stickerPackageId;
     // 添加动画贴纸
     NvsTimelineAnimatedSticker *stickers = [timeline addAnimatedSticker:0 duration:timeline.duration animatedStickerPackageId:_stickerPackageId];
-    NvsRect rect = [stickers getOriginalBoundingRect];
-    NSArray *array = [stickers getBoundingRectangleVertices];
-    CGPoint point = [stickers getTransltion];
-    CGPoint newPoint = [_liveWindow mapViewToCanonical:CGPointMake(rect.left, rect.top)];
-
-    [stickers setTranslation:newPoint];
+//    NvsRect rect = [stickers getOriginalBoundingRect];
+//    NSArray *array = [stickers getBoundingRectangleVertices];
+//    CGPoint point = [stickers getTransltion];
+//    CGPoint newPoint = [_liveWindow mapViewToCanonical:CGPointMake(rect.left, rect.top)];
+//
+//    [stickers setTranslation:newPoint];
 
     
 }

@@ -354,6 +354,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     else {
         UIImage *image = [[FSShortVideoRecorderManager sharedInstance] getImageFromTimeLine:timeline atTime:0 proxyScale:nil];//[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_tempDraftInfo.vFinalPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480];
         [self uploadFirstImage:image];
+        UISaveVideoAtPathToSavedPhotosAlbum(_tempDraftInfo.vFinalPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+
     }
     
 
@@ -827,6 +829,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [[FSDraftManager sharedManager] delete:_draftInfo];
     [[FSDraftManager sharedManager] clearInfo];
     [[FSDraftManager sharedManager] saveToLocal];
+    [self deleteCurrentCompileFile:_stickerVideoPath];
+
 
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadSecceed"]];
     
@@ -835,6 +839,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 - (void)FSPublisherServerFailed:(NSError *)error {
     [self.loading loadingViewhide];
+
+    [self deleteCurrentCompileFile:_stickerVideoPath];
 
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
 }
