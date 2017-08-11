@@ -145,17 +145,25 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
             [audioTrack appendClip:_tempDraftInfo.vOriginalPath];
             NvsAudioClip *audioClip = [audioTrack getClipWithIndex:0];
             [audioClip changeTrimInPoint:_tempDraftInfo.vMusic.mInPoint affectSibling:YES];
+        }else{
+            // test
+            
+//            NvsAudioTrack *audioTrack = [_timeLine appendAudioTrack];
+//            [audioTrack appendClip:_musicPath];
+//            NvsAudioClip *audioClip = [audioTrack getClipWithIndex:0];
+//            [audioClip changeTrimInPoint:_tempDraftInfo.vMusic.mInPoint affectSibling:YES];
         }
     }
     
     _videoTrack = [_timeLine getVideoTrackByIndex:0];
     NvsVideoClip *clip = [_videoTrack getClipWithIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
-    [clip setVolumeGain:0 rightVolumeGain:0];
     
     // 填好clip了
     [FSTimelineConfiger configTimeline:_timeLine timeLineInfo:_tempDraftInfo];
-
+    [_videoTrack setVolumeGain:1.0 rightVolumeGain:1.0];
+    
+    
     FSFileSliceDivider *divider = [[FSFileSliceDivider alloc] initWithSliceCount:1];
      _uploader = [FSUploader uploaderWithDivider:divider];
     [_uploader setDelegate:self];
@@ -187,11 +195,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 -(void)playVideoFromHead{
-    [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster];
+    [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowAnimatedStickerPoster];
     
     if([_context getStreamingEngineState] != NvsStreamingEngineState_Playback){
         int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
-        if(![_context playbackTimeline:_timeLine startTime:startTime endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:NO flags:0]) {
+        if(![_context playbackTimeline:_timeLine startTime:startTime endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
         }
     }
     
@@ -200,6 +208,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     if (_musicPath != nil && _musicPath.length > 0 && !_isEnterCutMusicView) {
         [[FSMusicPlayer sharedPlayer] stop];
         NSTimeInterval _musicStartTime = _tempDraftInfo.vMusic.mInPoint;
+        
         [[FSMusicPlayer sharedPlayer] playAtTime:_musicStartTime];
         [[FSMusicPlayer sharedPlayer] play];
     }
@@ -348,6 +357,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         challenge.challengeName = @"challengeName";
         //
         _tempDraftInfo.challenge = challenge;
+        //
+        
         _tempDraftInfo.vAddedFxViews = self.addedViews;
         
         [[FSDraftManager sharedManager] mergeInfo];
@@ -532,7 +543,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [_toolView canEditMusic:YES];
         [_toolView updateMusicInfo:music];
         NvsAudioTrack *audioTrack = [_timeLine getAudioTrackByIndex:0];
-        [audioTrack setVolumeGain:0 rightVolumeGain:0];
+        [audioTrack setVolumeGain:1.0 rightVolumeGain:1.0];
         [[FSMusicPlayer sharedPlayer] setFilePath:musicPath];
         [self playVideoFromHead];
     }
