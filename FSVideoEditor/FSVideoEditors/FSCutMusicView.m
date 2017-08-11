@@ -22,8 +22,6 @@
 @property (nonatomic, strong) UIImageView *currentImageView;
 @property (nonatomic, strong) UIImageView *maskView;
 
-@property (nonatomic, strong) NvsAudioClip *audioClip;
-
 @property (nonatomic, strong) NSTimer *timer;
 
 @property (nonatomic, copy) NSString *filePath;
@@ -38,7 +36,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame audioClip:(NvsAudioClip *)audioClip{
     if (self = [super initWithFrame:frame]) {
-        _audioClip = audioClip;
         _playTime = 0;
         _totalTime = 0;
         [self createBaseUI];
@@ -63,9 +60,6 @@
 - (void)createBaseUI {
     if (_filePath) {
         _totalTime = [[FSMusicPlayer sharedPlayer] soundTotalTime];
-    }
-    else {
-        _totalTime = (_audioClip.outPoint-_audioClip.inPoint)/(1000*1000);
     }
     CGFloat totalWidth = self.frame.size.width*_totalTime/15;
 
@@ -145,11 +139,6 @@
             [self.delegate FSCutMusicViewFinishCutMusicWithTime:_newTime];
         }
     }
-    else {
-        if ([self.delegate respondsToSelector:@selector(FSCutMusicViewFinishCutMusic:)]) {
-            [self.delegate FSCutMusicViewFinishCutMusic:_audioClip];
-        }
-    }
     
 }
 
@@ -165,9 +154,6 @@
             [[FSMusicPlayer sharedPlayer] stop];
             [[FSMusicPlayer sharedPlayer] playAtTime:_newTime];
             [[FSMusicPlayer sharedPlayer] play];
-        }
-        else {
-            [_audioClip changeTrimInPoint:_newTime*1000*1000 affectSibling:NO];
         }
     }
     else {
@@ -246,9 +232,6 @@
         [[FSMusicPlayer sharedPlayer] stop];
         [[FSMusicPlayer sharedPlayer] playAtTime:time];
         [[FSMusicPlayer sharedPlayer] play];
-    }
-    else {
-        [_audioClip changeTrimInPoint:time*1000*1000 affectSibling:NO];
     }
 }
 

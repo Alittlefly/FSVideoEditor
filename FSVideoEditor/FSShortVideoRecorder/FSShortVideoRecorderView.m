@@ -97,7 +97,6 @@
 - (void)setMusicFilePath:(NSString *)musicFilePath {
     _musicFilePath = musicFilePath;
     self.cutMusicButton.enabled = YES;
-    [[FSMusicPlayer sharedPlayer] setFilePath:_musicFilePath];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame draftInfo:(FSDraftInfo *)draftInfo {
@@ -110,6 +109,9 @@
         _linesArray = [NSMutableArray arrayWithCapacity:0];
         _isAutoRecorder = NO;
         _currentVideoTime = 0.0;
+
+        self.draftInfo = draftInfo;
+
         for (NSNumber *time in _draftInfo.recordVideoTimeArray) {
             _currentVideoTime += [time floatValue];
         }
@@ -462,7 +464,7 @@
 
     if (!_cutMusicView) {
 //        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds audioClip:audio];
-        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds filePath:_musicFilePath startTime:_musicStartTime];
+        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds filePath:_draftInfo.vMusic.mPath startTime:_musicStartTime];
         _cutMusicView.delegate = self;
         [self addSubview:_cutMusicView];
         _cutMusicView.hidden = YES;
@@ -590,6 +592,8 @@
 
 - (void)startRecorder {
     NSLog(@"startRecorder");
+
+    [[FSMusicPlayer sharedPlayer] setFilePath:_draftInfo.vMusic.mPath];
 
     _isRecording = YES;
     
