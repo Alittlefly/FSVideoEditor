@@ -610,8 +610,6 @@
     
     _isOpenFilterView = NO;
     
-    [self.recorderManager startRecording:nil];
-    
     if (_musicFilePath != nil && _musicFilePath.length > 0) {
         [[FSMusicPlayer sharedPlayer] setRate:self.recorderManager.recorderSpeed];
         //if (_currentVideoTime==0) {
@@ -641,6 +639,8 @@
         }];
 
     }
+    
+    [self.recorderManager startRecording:nil];
 
 }
 

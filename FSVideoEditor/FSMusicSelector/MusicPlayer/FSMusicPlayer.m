@@ -59,7 +59,7 @@ static id object = nil;
         NSLog(@"文件地址错误filePath:%@",filePath);
         return;
     }
-
+    
      _musicPlayer = [[AVAudioPlayer alloc] initWithData:mp3Data fileTypeHint:AVFileTypeMPEGLayer3 error:nil];
     [_musicPlayer prepareToPlay];
     [_musicPlayer setVolume:_volume];
@@ -75,6 +75,7 @@ static id object = nil;
         return;
     }
     
+    [_musicPlayer prepareToPlay];
     [_musicPlayer play];
 }
 
