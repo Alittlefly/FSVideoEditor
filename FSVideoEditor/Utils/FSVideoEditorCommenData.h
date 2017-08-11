@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Fission. All rights reserved.
 //
 
-#if DEBUG == 1
+#if DEBUG == 0
 #define AddressAPILogin  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://10.10.32.145:8888/" : @"http://10.10.32.145:8888/"
 #define AddressUpload  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://10.10.32.145:8086/" : @"http://10.10.32.145:8086/"
 #define AddressAPI  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://10.10.32.145:8088/" : @"http://10.10.32.145:8088/"

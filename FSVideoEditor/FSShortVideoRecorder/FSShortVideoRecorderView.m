@@ -172,7 +172,13 @@
     
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _finishButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
-    _finishButton.enabled = NO;
+    if (totalTime > 0) {
+        _finishButton.enabled = YES;
+
+    }
+    else {
+        _finishButton.enabled = NO;
+    }
     [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(finishClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_finishButton];
