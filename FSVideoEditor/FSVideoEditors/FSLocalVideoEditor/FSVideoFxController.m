@@ -155,7 +155,6 @@
         [self playVideoFromHead];
     }else{
         [self stopVideoForCrrentTime];
-        
     }
 }
 
@@ -163,6 +162,7 @@
     [_videoFxView stopMoveTint];
     
     [_controlView setState:NO];
+    [_videoFxView setIsPlaying:NO];
     int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
     [_context seekTimeline:_timeLine timestamp:startTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster];
 }
@@ -177,7 +177,7 @@
         // 只有自动播放 修改光标位置
         [_videoFxView startMoveTint];
         [_controlView setState:YES];
-        
+        [_videoFxView setIsPlaying:YES];
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -302,6 +302,7 @@
 -(void)didPlaybackStopped:(NvsTimeline *)timeline{
     
     [_controlView setState:NO];
+    [_videoFxView setIsPlaying:NO];
     [_videoFxView stopMoveTint];
 
 }
@@ -336,12 +337,12 @@
     int64_t startPoint = _timeLine.duration * progress;
     [_context seekTimeline:_timeLine timestamp:startPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     [_controlView setState:NO];
-
+    [_videoFxView setIsPlaying:NO];
     
     if (play) {
         [_context playbackTimeline:_timeLine startTime:startPoint endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
         [_controlView setState:YES];
-
+        [_videoFxView setIsPlaying:YES];
     }
 }
 
@@ -357,6 +358,7 @@
         [_context seekTimeline:_timeLine timestamp:startPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
         [_context playbackTimeline:_timeLine startTime:startPoint endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
         [_controlView setState:YES];
+        [videoFxView setIsPlaying:YES];
     }
 }
 // 选择结束的节点
@@ -399,6 +401,7 @@
     
     [videoFxView stopMoveTint];
     [_controlView setState:NO];
+    [videoFxView setIsPlaying:NO];
     [videoFxView showUndoButton];
 }
 -(void)videoFxViewSelectTimeFx:(FSVideoFxView *)videoFxView type:(FSVideoFxType)type duration:(int64_t)duration progress:(CGFloat)progress{
@@ -419,6 +422,7 @@
     //
     [_context playbackTimeline:_timeLine startTime:point endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
     [_controlView setState:YES];
+    [_videoFxView setIsPlaying:YES];
     [_videoFxView startMoveTint];
    
     videoFxView.duration = _timeLine.duration;
@@ -487,6 +491,11 @@
     [self removeAllFx];
 
     [self addVideoFxWithVirtualTimeline:shouldBe];
+}
+-(void)videoFxViewChangeFilter{
+    [_controlView setState:NO];
+    [_context stop];
+    [_videoFxView setIsPlaying:NO];
 }
 // 当前的位置进度
 -(CGFloat)videoFxViewUpdatePosition:(FSVideoFxView *)videoFxView{

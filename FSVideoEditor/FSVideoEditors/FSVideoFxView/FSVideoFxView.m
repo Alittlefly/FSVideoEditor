@@ -177,6 +177,11 @@
 -(void)setTintPositon:(CGFloat)tintPositon{
     _tintPositon = tintPositon;
 }
+-(void)setIsPlaying:(BOOL)isPlaying{
+    
+    _isPlaying = isPlaying;
+    [_progress setIsPlaying:isPlaying];
+}
 
 -(NSMutableArray *)fxButtons{
     if (!_fxButtons) {
@@ -491,6 +496,9 @@
     }else if (tag == 2){
         [_tipLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"ChooseEffectsTip"]];
         [self initTimeFxs];
+    }
+    if ([self.delegate respondsToSelector:@selector(videoFxViewChangeFilter)]) {
+        [self.delegate videoFxViewChangeFilter];
     }
     
     [_unDoButton setHidden:(tag == 2)|| _progress.fiterCout == 0];

@@ -46,6 +46,7 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 @property(nonatomic,strong)UIView *backGroundView;
 @property(nonatomic,assign)FSVideoFxType type;
 @property(nonatomic,assign)FSFilterType ftype;
+@property(nonatomic,assign)BOOL isPlaying;
 @property(nonatomic,assign)BOOL needConvert;
 
 @property(nonatomic,weak) id<FSVideoClipProgressDelegate> delegate;

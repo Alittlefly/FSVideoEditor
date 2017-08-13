@@ -21,6 +21,7 @@
 -(CGFloat)videoFxViewUpdatePosition:(FSVideoFxView *)videoFxView;
 @optional
 
+-(void)videoFxViewChangeFilter;
 //  撤销
 -(void)videoFxUndoPackageFx:(FSVideoFxView *)videoFxView;
 //  选择时间点
@@ -40,6 +41,7 @@
 @property(nonatomic,assign)CGFloat duration;
 
 @property(nonatomic,assign)BOOL needCovert;
+@property(nonatomic,assign)BOOL isPlaying;
 @property(nonatomic,assign)FSVideoFxType fxType;
 @property(nonatomic,strong)NSArray *addedViews;
 @property(nonatomic,assign)CGFloat tintPositon;

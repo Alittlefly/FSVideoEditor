@@ -28,8 +28,6 @@
 @property(nonatomic,strong)FSControlView *controlView;
 @property(nonatomic,strong)FSVideoFxView *videoFxView;
 
-
-
 @property(nonatomic,strong)FSVideoFxOperationStack *fxOperationStack;
 @property(nonatomic,strong)NvsLiveWindow *prewidow;
 @property(nonatomic,strong)NSMutableArray *addedViews;

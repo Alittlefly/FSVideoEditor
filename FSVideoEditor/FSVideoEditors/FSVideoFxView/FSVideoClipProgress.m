@@ -89,6 +89,14 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 -(void)setNeedConvert:(BOOL)needConvert{
     _needConvert = needConvert;
 }
+-(void)setIsPlaying:(BOOL)isPlaying{
+    _isPlaying = isPlaying;
+    if (isPlaying && _ftype == FSFilterTypeTime) {
+        [_line setBackgroundColor:FSHexRGBAlpha(0xFACE15,0.5)];
+    }else{
+        [_line setBackgroundColor:FSHexRGBAlpha(0xFACE15,1.0)];
+    }
+}
 -(void)updateLineFrame{
     CGRect lFrame = _line.frame;
     CGFloat currentBe = _progress;
@@ -113,7 +121,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
         if (_ftype == FSFilterTypeFx) {
             _moveType = FSProgressMoveTypeLine;
         }else{
-            if(_type != FSVideoFxTypeRevert && _type !=  FSVideoFxTypeSlow && _type !=  FSVideoFxTypeRepeat){
+            if(!_isPlaying){
                 _moveType = FSProgressMoveTypeLine;
             }else{
                 _moveType = FSProgressMoveTypeNone;
