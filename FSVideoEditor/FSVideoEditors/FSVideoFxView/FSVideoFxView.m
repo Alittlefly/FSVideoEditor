@@ -132,6 +132,9 @@
     NSInteger _currentTime;
     NSString *_currentFxId;
     
+    CGFloat _repeatPoint;
+    CGFloat _slowPoint;
+    
     BOOL _firstInitTimeFx;
 }
 @property(nonatomic,strong)FSVideoClipProgress *progress;
@@ -160,6 +163,8 @@
        
          self.videofxs = fxs;
         _firstInitTimeFx = NO;
+        _repeatPoint = 0.5;
+        _slowPoint = 0.5;
         [self creatSubiviews];
 
     }
@@ -167,6 +172,17 @@
 }
 -(void)setFxType:(FSVideoFxType)fxType{
     _fxType = fxType;
+    
+    if (_fxType == FSVideoFxTypeRepeat) {
+        _repeatPoint = _tintPositon;
+        _slowPoint = 0.5;
+    }else if(_fxType == FSVideoFxTypeSlow){
+        _slowPoint = _tintPositon;
+        _repeatPoint = 0.5;
+    }else{
+        _repeatPoint = 0.5;
+        _slowPoint = 0.5;
+    }
 }
 -(void)setProgressBackView:(UIView *)progressBackView{
     if (!progressBackView) {
@@ -424,13 +440,20 @@
      _currentSelectFxButton = button;
     [_currentSelectFxButton setSelected:YES];
 
-    _progress.type = button.tag;
+     _progress.type = button.tag;
+
     _fxType = button.tag;
-    [_progress setProgress:1];
-    
-    
     // 切换资源
-    
+    if (button.tag == FSVideoFxTypeRevert) {
+        [_progress setProgress:1];
+    }else if(button.tag == FSVideoFxTypeSlow){
+        [_progress setProgress:_slowPoint];
+    }else if (button.tag == FSVideoFxTypeRepeat){
+        [_progress setProgress:_repeatPoint];
+    }else if (button.tag == FSVideoFxTypeNone){
+        [_progress setProgress:0.0];
+    }
+
     BOOL newValue = (button.tag == FSVideoFxTypeRevert);
     [_progress setNeedConvert:newValue];
 
@@ -440,8 +463,10 @@
         }
         _needCovert = newValue;
     }
-
     if (button.tag != FSVideoFxTypeRevert) {
+        // 修改选中点
+        [_progress setSelectProgress:_progress.progress];
+        
         if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
             [self.delegate videoFxViewSelectTimeFx:self type:button.tag duration:200000 progress:_progress.selectProgress];
         }
@@ -454,6 +479,12 @@
     }
 }
 - (void)videoClipProgressMoveSlideSelectPoint:(CGFloat)progress{
+    
+    if (_fxType == FSVideoFxTypeRepeat) {
+        _repeatPoint = progress;
+    }else if (_fxType == FSVideoFxTypeSlow){
+        _slowPoint = progress;
+    }
     if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
         [self.delegate videoFxViewSelectTimeFx:self type:_fxType duration:200000 progress:_progress.selectProgress];
     }

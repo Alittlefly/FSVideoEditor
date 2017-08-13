@@ -188,15 +188,24 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     [super touchesEnded:touches withEvent:event];
     
     if (_moveType == FSProgressMoveTypeTint && _ftype != FSFilterTypeFx) {
-        self.selectProgress = CGRectGetMidX(_tintImage.frame)/CGRectGetWidth(self.bounds);
+        _selectProgress = CGRectGetMidX(_tintImage.frame)/CGRectGetWidth(self.bounds);
         
-        [self setProgress:self.selectProgress];
+        [self setProgress:_selectProgress];
         
         if ([self.delegate respondsToSelector:@selector(videoClipProgressMoveSlideSelectPoint:)]) {
-            [self.delegate videoClipProgressMoveSlideSelectPoint:self.selectProgress];
+            [self.delegate videoClipProgressMoveSlideSelectPoint:_selectProgress];
         }
     }
     _moveType = FSProgressMoveTypeNone;
+}
+-(void)setSelectProgress:(CGFloat)selectProgress{
+    _selectProgress = selectProgress;
+    
+    if (_ftype == FSFilterTypeTime && !_tintImage.hidden) {
+        CGRect tintFrame = _tintImage.frame;
+        tintFrame.origin.x = CGRectGetWidth(self.bounds) * selectProgress - CGRectGetWidth(tintFrame)/2.0;
+        [_tintImage setFrame:tintFrame];
+    }
 }
 -(void)setType:(FSVideoFxType)type{
     _type = type;
