@@ -338,7 +338,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     else {
         UIImage *image = [[FSShortVideoRecorderManager sharedInstance] getImageFromTimeLine:timeline atTime:0 proxyScale:nil];//[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_tempDraftInfo.vFinalPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480];
         [self uploadFirstImage:image];
-        UISaveVideoAtPathToSavedPhotosAlbum(_tempDraftInfo.vFinalPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+        //UISaveVideoAtPathToSavedPhotosAlbum(_tempDraftInfo.vFinalPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 
     }
     
@@ -518,11 +518,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         _tempDraftInfo.vFirstFramePath = imagePath;
     }
     // test
-    FSDraftChallenge *challenge = [[FSDraftChallenge alloc] init];
-    challenge.challengeDetail = @"challegeDatail";
-    challenge.challengeName = @"challengeName";
-    //
-    _tempDraftInfo.challenge = challenge;
+//    FSDraftChallenge *challenge = [[FSDraftChallenge alloc] init];
+//    challenge.challengeDetail = @"challegeDatail";
+//    challenge.challengeName = @"challengeName";
+//    //
+//    _tempDraftInfo.challenge = challenge;
     _tempDraftInfo.vAddedFxViews = self.addedViews;
     
     [[FSDraftManager sharedManager] mergeInfo];
@@ -706,7 +706,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         _uploadImageServer = [[FSUploadImageServer alloc] init];
         _uploadImageServer.delegate = self;
     }
-    UISaveVideoAtPathToSavedPhotosAlbum(filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+  //  UISaveVideoAtPathToSavedPhotosAlbum(filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     NSData *data = [NSData dataWithContentsOfFile:filePath];
     CGFloat length = [data length]/1024;
  
