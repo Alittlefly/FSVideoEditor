@@ -761,7 +761,7 @@ static FSShortVideoRecorderManager *recorderManager;
     config.to = INT_MAX;
     config.dataRate = 0;
     config.videoResolution = NvcOutputVideoResolution_NotResize;
-    config.fpsForWebp = 2;
+    config.fpsForWebp = 5;
     
     //倒序
     if (!isWebp) {
