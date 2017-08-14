@@ -15,6 +15,7 @@
 
 @property(nonatomic,strong)FSDraftInfo *tempInfo;
 
+
 +(instancetype)sharedManager;
 // 原始数据 与临时数据
 -(void)clearInfo;
@@ -24,4 +25,5 @@
 -(void)delete:(FSDraftInfo *)draftInfo;
 -(FSDraftInfo *)draftInfoWithPreInfo:(FSDraftInfo *)preDraftInfo;
 -(NSArray *)allDraftInfos;
+-(void)setCacheKey:(NSString *)cacheKey;
 @end

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @interface FSDraftFileManager : NSObject
-+(NSString *)draftDataPath;
++(NSString *)draftDataPathKey:(NSString *)key;
 +(void)deleteFile:(NSString *)filePath;
 
 +(NSString *)saveImageTolocal:(UIImage *)image;

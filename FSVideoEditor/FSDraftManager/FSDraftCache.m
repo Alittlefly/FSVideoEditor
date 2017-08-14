@@ -36,7 +36,7 @@
         [self.draftInfos addObject:draftInfo];
     }
     
-    NSString *dataPath = [FSDraftFileManager draftDataPath];
+    NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
     [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
 }
 -(void)deleteToLocal:(FSDraftInfo *)draftInfo{
@@ -53,7 +53,7 @@
 
         [self.draftInfos removeObject:draftInfo];
     }
-    NSString *dataPath = [FSDraftFileManager draftDataPath];
+    NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
     [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
 }
 -(void)updateToLocal:(FSDraftInfo *)draftInfo{
@@ -64,7 +64,7 @@
         return self.draftInfos;
     }
     
-    NSString *dataPath = [FSDraftFileManager draftDataPath];
+    NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
     NSArray *drafts = [NSKeyedUnarchiver unarchiveObjectWithFile:dataPath];
     [self.draftInfos addObjectsFromArray:drafts];
     return self.draftInfos;

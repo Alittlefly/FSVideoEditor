@@ -16,6 +16,7 @@
 #import "FSShortLanguage.h"
 #import "FSVideoEditorAPIParams.h"
 #import "FSPublishSingleton.h"
+#import "FSDraftManager.h"
 #import "FSMusicController.h"
 
 @interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate>
@@ -80,6 +81,7 @@
         self.loginButton.hidden = YES;
         [self.logoutButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"logout"] forState:UIControlStateNormal];
         
+        [[FSDraftManager sharedManager] setCacheKey:_uid];
         [[FSVideoEditorAPIParams videoEdiorParams].params setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
     }
     
@@ -219,7 +221,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [FSPublishSingleton sharedInstance].userName = nil;
-    
+    [[FSDraftManager sharedManager] setCacheKey:@""];
     [[FSVideoEditorAPIParams videoEdiorParams].params removeObjectsForKeys:@[@"loginKey"]];
 
     //[self showMessage:NSLocalizedString(@"", nil)];
@@ -272,6 +274,9 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     [FSPublishSingleton sharedInstance].userName = [dataInfo objectForKey:@"nickName"];
+    
+    [[FSDraftManager sharedManager] setCacheKey:[dataInfo objectForKey:@"loginName"]];
+
 
     self.recorderButton.hidden = NO;
     self.logoutButton.hidden = NO;
