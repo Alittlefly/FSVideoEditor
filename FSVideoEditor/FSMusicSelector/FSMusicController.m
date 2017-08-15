@@ -312,7 +312,20 @@
     _musicListView.tableHeader = _tableHeader;
 }
 -(void)musicHeaderClickTypeButton:(FSMusicButtonType)type{
+
+    if (_currentType == type) {
+        return;
+    }
+
+    if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+        [[FSMusicPlayer sharedPlayer] stop];
+        
+        [_musicListView stopPlayCurrentMusic];
+    }
+    
     _currentType = type;
+
+    
     if (type == FSMusicButtonTypeHot) {
         
         if ([self.musics count] == 0) {
