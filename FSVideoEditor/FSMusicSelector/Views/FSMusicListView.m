@@ -123,7 +123,8 @@
         [self addSubview:self.loading];
         [self.loading loadingViewShow];
         [cell setIsPlayIng:YES];
-        
+        [[FSMusicPlayer sharedPlayer] stop];
+
         if (music.songUrl) {
             
             NSString *url = music.songUrl;
@@ -144,27 +145,13 @@
                 
                 if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
                     [[FSMusicPlayer sharedPlayer] pause];
+                    [cell setIsPlayIng:NO];
                 }else{
                     [[FSMusicPlayer sharedPlayer] play];
+                    [cell setIsPlayIng:YES];
+
                 }
             }];
-        }else{
-            // 测试数据
-            if (![_music isEqual:music]) {
-                NSString *filePath = [[NSBundle mainBundle] pathForResource:music.songTitle ofType:@"mp3"];
-                [[FSMusicPlayer sharedPlayer] stop];
-                [[FSMusicPlayer sharedPlayer] setFilePath:filePath];
-                
-            }
-            
-            if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
-                [[FSMusicPlayer sharedPlayer] pause];
-            }else{
-                [[FSMusicPlayer sharedPlayer] play];
-            }
-            
-            [self.loading loadingViewhide];
-            
         }
     }
     // 更新当前选中的音乐
