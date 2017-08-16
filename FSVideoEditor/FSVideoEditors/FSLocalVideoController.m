@@ -9,6 +9,7 @@
 #import "FSLocalVideoController.h"
 #import "FSLocalPhotoManager.h"
 #import "FSLocalEditorController.h"
+#import "FSShortLanguage.h"
 
 @interface FSLocalVideoController ()
 {
@@ -44,8 +45,8 @@
 -(void)videoListView:(FSVideoListView *)videoListView didSelectedVideo:(PHAsset *)video{
     
     if (video.duration < 3) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"时间太短" preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleCancel) handler:nil];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"leastTime"] preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Confirm"] style:(UIAlertActionStyleCancel) handler:nil];
         [alert addAction:cancle];
         [self presentViewController:alert animated:YES completion:nil];
     }else{

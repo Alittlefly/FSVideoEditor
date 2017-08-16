@@ -16,6 +16,8 @@ BadPassword = "كلمة السر غير صحيحة";
 LoginFailed = "فشل في تسجيل الدخول";
 logout = "خروج";
 
+leastTime = "يجب أن تكون مدة الفيديو 3 ثواني على الأقل لتتمكن من النشر";
+
 UploadVideo = "تحميل";
 ChooseMusic = "موسيقى";
 Record = "سجل فيديو";
@@ -33,6 +35,8 @@ Effects = "مؤثرات خاصة";
 EnterTitle = "اكتب عنوان";
 AddHashtag = "ضع هاشتاج";
 SaveInGallery = "حفظ في الأستوديو";
+CanlceVideo = "旧版本的不可编辑或者使用";
+
 Draft = "حفظ في الذاكرة";
 Upload = "نشر";
 UploadFailed = "فشل النشر";
@@ -56,7 +60,9 @@ NoFilter = "بدون فلتر";
 ChooseEffectsTip = "اضغط لاختيار فلاتر الزمن";
 SlowMotion = "حركة بطيئة";
 Delete = "مسح";
+
 AddFilterTip = "استمر بالضغط لتحدد المكان الذي تريد إضافة فلتر له";
+
 EraseEffectsTip = "متأكد أنك تريد مسح التأثيرات السابقة؟";
 Erase = "مسح";
 LongPress = "اضغط مطولاً للتسجيل";

@@ -39,6 +39,8 @@
     FSDraftTimeFx *_timeFx;
     
     FSDraftInfo *_tempDraftInfo;
+    
+    BOOL _Willchanged;
 }
 @property(nonatomic,copy)NSString *filePath;
 @property(nonatomic,copy)NSString *convertFilePath;
@@ -64,6 +66,7 @@
     
      _tempFxStack = [FSVideoFxOperationStack new];
     [_tempFxStack pushVideoFxWithFxManager:_fxOperationStack];
+    _Willchanged = NO;
     
     _musicAttime = _draftInfo.vMusic.mInPoint;
     _musicUrl = _draftInfo.vMusic.mPath;
@@ -223,9 +226,23 @@
 }
 - (void)cancle{
     
-    [self rsetTimeLineFx];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (_Willchanged) {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"EraseEffectsTip"] preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancle"] style:(UIAlertActionStyleCancel) handler:nil];
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Erase"] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            [self rsetTimeLineFx];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+        
+        [alertController addAction:cancle];
+        [alertController addAction:sure];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+    }else{
+        [self rsetTimeLineFx];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 -(void)rsetTimeLineFx{
     [self removeAllFx];
@@ -348,6 +365,8 @@
 
 // 选择开始的节点
 -(void)videoFxSelectStart:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId{
+    
+    _Willchanged = YES;
     
     [videoFxView stopMoveTint];
     if (fxId != nil) {

@@ -24,6 +24,8 @@ Effects = "مؤثرات خاصة";
 EnterTitle = "اكتب عنوان";
 AddHashtag = "ضع هاشتاج";
 SaveInGallery = "حفظ في الأستوديو";
+CanlceVideo = "旧版本的不可编辑或者使用";
+
 Draft = "حفظ في الذاكرة";
 Upload = "نشر";
 UploadFailed = "فشل النشر";

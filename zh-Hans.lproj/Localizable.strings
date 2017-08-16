@@ -16,6 +16,8 @@ BadPassword = "密码错误";
 LoginFailed = "登录失败";
 logout = "退出登录";
 
+leastTime = "选择的视频不能少于3s";
+
 UploadVideo = "上传视频";
 ChooseMusic = "选择音乐";
 Record = "直接开拍";
@@ -33,6 +35,9 @@ Effects = "特效";
 EnterTitle = "输入标题";
 AddHashtag = "添加挑战";
 SaveInGallery = "同时保存到相册";
+CanlceVideo = "旧版本的不可编辑或者使用";
+
+
 Draft = "草稿";
 Upload = "发布";
 UploadFailed = "发布失败";
@@ -60,6 +65,7 @@ AddFilterTip = "选择位置后,按住使用特效";
 EraseEffectsTip = "是否清除已添加的特效？";
 Erase = "清除";
 LongPress = "按住开始拍摄,松开暂停";
+ContinueRecord = "";
 
 VerySlow = "极慢";
 Slow = "慢";

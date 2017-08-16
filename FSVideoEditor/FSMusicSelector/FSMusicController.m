@@ -325,7 +325,6 @@
     
     _currentType = type;
 
-    
     if (type == FSMusicButtonTypeHot) {
         
         if ([self.musics count] == 0) {
