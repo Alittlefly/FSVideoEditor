@@ -25,6 +25,7 @@
 #import "NvsFxDescription.h"
 #import "FSShortLanguage.h"
 #import "FSDraftManager.h"
+#import "FSPublishSingleton.h"
 
 @interface FSVideoFxController ()<NvsStreamingContextDelegate,FSVideoFxViewDelegate,UIViewControllerTransitioningDelegate>
 {
@@ -213,14 +214,16 @@
     [cancle setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] forState:(UIControlStateNormal)];
     [cancle sizeToFit];
     cancle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [cancle setFrame:CGRectMake(20, 20, 100, 24)];
+    CGFloat cancleX = [FSPublishSingleton sharedInstance].isAutoReverse?20:(CGRectGetWidth(self.view.bounds) - 120);
+    [cancle setFrame:CGRectMake(cancleX, 20, 100, 24)];
     [self.view addSubview:cancle];
     
     UIButton *save = [[UIButton alloc] init];
     [save addTarget:self action:@selector(save) forControlEvents:(UIControlEventTouchUpInside)];
     [save setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Save"] forState:(UIControlStateNormal)];
     [save sizeToFit];
-    [save setFrame:CGRectMake(self.view.frame.size.width-20-100, 20, 100, 24)];
+    CGFloat saveX = [FSPublishSingleton sharedInstance].isAutoReverse?(CGRectGetWidth(self.view.bounds) - 120):20;
+    [save setFrame:CGRectMake(saveX, 20, 100, 24)];
     save.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [self.view addSubview:save];
 }
