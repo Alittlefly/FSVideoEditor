@@ -619,6 +619,44 @@
 		988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTimeCountsdownView.m; sourceTree = "<group>"; };
 		989DF6401F418E6E00D8EEBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		989DF64E1F418E6E00D8EEBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98C1E5241F419D4400AA48A0 /* encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encode.h; sourceTree = "<group>"; };
+		98C1E5251F419D4400AA48A0 /* mux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mux.h; sourceTree = "<group>"; };
+		98C1E5261F419D4400AA48A0 /* mux_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mux_types.h; sourceTree = "<group>"; };
+		98C1E5271F419D4400AA48A0 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		98C1E5291F419D4400AA48A0 /* encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encode.h; sourceTree = "<group>"; };
+		98C1E52A1F419D4400AA48A0 /* mux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mux.h; sourceTree = "<group>"; };
+		98C1E52B1F419D4400AA48A0 /* mux_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mux_types.h; sourceTree = "<group>"; };
+		98C1E52C1F419D4400AA48A0 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		98C1E52D1F419D4400AA48A0 /* NvcConvertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertor.h; sourceTree = "<group>"; };
+		98C1E52E1F419D4400AA48A0 /* NvcConvertorBaseDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertorBaseDef.h; sourceTree = "<group>"; };
+		98C1E52F1F419D4400AA48A0 /* NvcConvertorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvcConvertorDelegate.h; sourceTree = "<group>"; };
+		98C1E5321F419D4400AA48A0 /* NvsAssetPackageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAssetPackageManager.h; sourceTree = "<group>"; };
+		98C1E5331F419D4400AA48A0 /* NvsAudioClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioClip.h; sourceTree = "<group>"; };
+		98C1E5341F419D4400AA48A0 /* NvsAudioFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioFx.h; sourceTree = "<group>"; };
+		98C1E5351F419D4400AA48A0 /* NvsAudioTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioTrack.h; sourceTree = "<group>"; };
+		98C1E5361F419D4400AA48A0 /* NvsAudioTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAudioTransition.h; sourceTree = "<group>"; };
+		98C1E5371F419D4400AA48A0 /* NvsAVFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsAVFileInfo.h; sourceTree = "<group>"; };
+		98C1E5381F419D4400AA48A0 /* NvsCaptureVideoFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsCaptureVideoFx.h; sourceTree = "<group>"; };
+		98C1E5391F419D4400AA48A0 /* NvsClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsClip.h; sourceTree = "<group>"; };
+		98C1E53A1F419D4400AA48A0 /* NvsCommonDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsCommonDef.h; sourceTree = "<group>"; };
+		98C1E53B1F419D4400AA48A0 /* NvsCustomVideoFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsCustomVideoFx.h; sourceTree = "<group>"; };
+		98C1E53C1F419D4400AA48A0 /* NvsFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsFx.h; sourceTree = "<group>"; };
+		98C1E53D1F419D4400AA48A0 /* NvsFxDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsFxDescription.h; sourceTree = "<group>"; };
+		98C1E53E1F419D4400AA48A0 /* NvsLiveWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsLiveWindow.h; sourceTree = "<group>"; };
+		98C1E53F1F419D4400AA48A0 /* NvsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsObject.h; sourceTree = "<group>"; };
+		98C1E5401F419D4400AA48A0 /* NvsStreamingContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsStreamingContext.h; sourceTree = "<group>"; };
+		98C1E5411F419D4400AA48A0 /* NvsThumbnailSequenceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsThumbnailSequenceView.h; sourceTree = "<group>"; };
+		98C1E5421F419D4400AA48A0 /* NvsTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsTimeline.h; sourceTree = "<group>"; };
+		98C1E5431F419D4400AA48A0 /* NvsTimelineAnimatedSticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsTimelineAnimatedSticker.h; sourceTree = "<group>"; };
+		98C1E5441F419D4400AA48A0 /* NvsTimelineCaption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsTimelineCaption.h; sourceTree = "<group>"; };
+		98C1E5451F419D4400AA48A0 /* NvsTimelineVideoFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsTimelineVideoFx.h; sourceTree = "<group>"; };
+		98C1E5461F419D4400AA48A0 /* NvsTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsTrack.h; sourceTree = "<group>"; };
+		98C1E5471F419D4400AA48A0 /* NvsVideoClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoClip.h; sourceTree = "<group>"; };
+		98C1E5481F419D4400AA48A0 /* NvsVideoFrameReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoFrameReceiver.h; sourceTree = "<group>"; };
+		98C1E5491F419D4400AA48A0 /* NvsVideoFrameRetriever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoFrameRetriever.h; sourceTree = "<group>"; };
+		98C1E54A1F419D4400AA48A0 /* NvsVideoFx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoFx.h; sourceTree = "<group>"; };
+		98C1E54B1F419D4400AA48A0 /* NvsVideoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoTrack.h; sourceTree = "<group>"; };
+		98C1E54C1F419D4400AA48A0 /* NvsVideoTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsVideoTransition.h; sourceTree = "<group>"; };
 		98EC1A3B1F209277003B71B7 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		98EC1A3F1F20A273003B71B7 /* FSUploadImageServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSUploadImageServer.h; sourceTree = "<group>"; };
 		98EC1A401F20A273003B71B7 /* FSUploadImageServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSUploadImageServer.m; sourceTree = "<group>"; };
@@ -1390,6 +1428,7 @@
 		9840603F1EF9401E0049B58E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				98C1E5221F419D4400AA48A0 /* include */,
 				98500A121F3C9C6900DC2B89 /* libwebp.a */,
 				98500A131F3C9C6900DC2B89 /* libwebpmux.a */,
 				98500A0E1F3C9C5A00DC2B89 /* libwebp.a */,
@@ -1522,6 +1561,84 @@
 			path = FSVideoEditorSDKTests;
 			sourceTree = "<group>";
 		};
+		98C1E5221F419D4400AA48A0 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				98C1E5231F419D4400AA48A0 /* aarch64 */,
+				98C1E5281F419D4400AA48A0 /* armv7 */,
+				98C1E52D1F419D4400AA48A0 /* NvcConvertor.h */,
+				98C1E52E1F419D4400AA48A0 /* NvcConvertorBaseDef.h */,
+				98C1E52F1F419D4400AA48A0 /* NvcConvertorDelegate.h */,
+				98C1E5301F419D4400AA48A0 /* sdkcore */,
+			);
+			name = include;
+			path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/include;
+			sourceTree = "<group>";
+		};
+		98C1E5231F419D4400AA48A0 /* aarch64 */ = {
+			isa = PBXGroup;
+			children = (
+				98C1E5241F419D4400AA48A0 /* encode.h */,
+				98C1E5251F419D4400AA48A0 /* mux.h */,
+				98C1E5261F419D4400AA48A0 /* mux_types.h */,
+				98C1E5271F419D4400AA48A0 /* types.h */,
+			);
+			path = aarch64;
+			sourceTree = "<group>";
+		};
+		98C1E5281F419D4400AA48A0 /* armv7 */ = {
+			isa = PBXGroup;
+			children = (
+				98C1E5291F419D4400AA48A0 /* encode.h */,
+				98C1E52A1F419D4400AA48A0 /* mux.h */,
+				98C1E52B1F419D4400AA48A0 /* mux_types.h */,
+				98C1E52C1F419D4400AA48A0 /* types.h */,
+			);
+			path = armv7;
+			sourceTree = "<group>";
+		};
+		98C1E5301F419D4400AA48A0 /* sdkcore */ = {
+			isa = PBXGroup;
+			children = (
+				98C1E5311F419D4400AA48A0 /* ios */,
+			);
+			path = sdkcore;
+			sourceTree = "<group>";
+		};
+		98C1E5311F419D4400AA48A0 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				98C1E5321F419D4400AA48A0 /* NvsAssetPackageManager.h */,
+				98C1E5331F419D4400AA48A0 /* NvsAudioClip.h */,
+				98C1E5341F419D4400AA48A0 /* NvsAudioFx.h */,
+				98C1E5351F419D4400AA48A0 /* NvsAudioTrack.h */,
+				98C1E5361F419D4400AA48A0 /* NvsAudioTransition.h */,
+				98C1E5371F419D4400AA48A0 /* NvsAVFileInfo.h */,
+				98C1E5381F419D4400AA48A0 /* NvsCaptureVideoFx.h */,
+				98C1E5391F419D4400AA48A0 /* NvsClip.h */,
+				98C1E53A1F419D4400AA48A0 /* NvsCommonDef.h */,
+				98C1E53B1F419D4400AA48A0 /* NvsCustomVideoFx.h */,
+				98C1E53C1F419D4400AA48A0 /* NvsFx.h */,
+				98C1E53D1F419D4400AA48A0 /* NvsFxDescription.h */,
+				98C1E53E1F419D4400AA48A0 /* NvsLiveWindow.h */,
+				98C1E53F1F419D4400AA48A0 /* NvsObject.h */,
+				98C1E5401F419D4400AA48A0 /* NvsStreamingContext.h */,
+				98C1E5411F419D4400AA48A0 /* NvsThumbnailSequenceView.h */,
+				98C1E5421F419D4400AA48A0 /* NvsTimeline.h */,
+				98C1E5431F419D4400AA48A0 /* NvsTimelineAnimatedSticker.h */,
+				98C1E5441F419D4400AA48A0 /* NvsTimelineCaption.h */,
+				98C1E5451F419D4400AA48A0 /* NvsTimelineVideoFx.h */,
+				98C1E5461F419D4400AA48A0 /* NvsTrack.h */,
+				98C1E5471F419D4400AA48A0 /* NvsVideoClip.h */,
+				98C1E5481F419D4400AA48A0 /* NvsVideoFrameReceiver.h */,
+				98C1E5491F419D4400AA48A0 /* NvsVideoFrameRetriever.h */,
+				98C1E54A1F419D4400AA48A0 /* NvsVideoFx.h */,
+				98C1E54B1F419D4400AA48A0 /* NvsVideoTrack.h */,
+				98C1E54C1F419D4400AA48A0 /* NvsVideoTransition.h */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
 		98EC1A421F20A373003B71B7 /* FSPublisherModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1565,8 +1682,8 @@
 				TargetAttributes = {
 					567E0B4D1EF930D100C4C527 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 3PSN5E79R7;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = MJM378DMQH;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1938,8 +2055,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3PSN5E79R7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = MJM378DMQH;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include",
@@ -1965,8 +2082,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "5c7ff3f3-ae54-43a2-9936-4718bd4242c8";
+				PROVISIONING_PROFILE_SPECIFIER = teamShortVideo;
 			};
 			name = Debug;
 		};
@@ -1974,8 +2091,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3PSN5E79R7;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = MJM378DMQH;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/include",
@@ -2001,8 +2118,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "5c7ff3f3-ae54-43a2-9936-4718bd4242c8";
+				PROVISIONING_PROFILE_SPECIFIER = teamShortVideo;
 			};
 			name = Release;
 		};
