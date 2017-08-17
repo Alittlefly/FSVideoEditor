@@ -17,8 +17,8 @@
         [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
     }
 }
-+(NSString *)draftDataPath{
-    NSString *name = @"draft.archiver";
++(NSString *)draftDataPathKey:(NSString *)key{
+    NSString *name = [NSString stringWithFormat:@"%@_draft.archiver",key] ;
     NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *path = [documents stringByAppendingPathComponent:name];
     return path;

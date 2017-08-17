@@ -24,6 +24,8 @@ Effects = "特效";
 EnterTitle = "输入标题";
 AddHashtag = "添加挑战";
 SaveInGallery = "同时保存到相册";
+CanlceVideo = "旧版本的不可编辑或者使用";
+
 Draft = "草稿";
 Upload = "发布";
 UploadFailed = "发布失败";

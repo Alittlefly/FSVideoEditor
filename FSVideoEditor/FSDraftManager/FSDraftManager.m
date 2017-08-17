@@ -9,6 +9,7 @@
 #import "FSDraftManager.h"
 #import "FSDraftWriter.h"
 #import "FSDraftReader.h"
+#import "FSDraftCache.h"
 
 @interface FSDraftManager()
 @property(nonatomic,strong)FSDraftInfo *currentInfo;
@@ -23,6 +24,9 @@
         }
     });
     return object;
+}
+-(void)setCacheKey:(NSString *)cacheKey{
+    [[FSDraftCache sharedDraftCache] setCacheKey:cacheKey];
 }
 -(void)clearInfo{
     _tempInfo = nil;

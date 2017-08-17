@@ -55,6 +55,7 @@
 }
 -(void)setMusics:(NSArray *)musics{
      _musics = musics;
+
     [_tableView reloadData];
     if([_tableView.mj_footer isRefreshing]){
        [_tableView.mj_footer endRefreshing];
@@ -123,7 +124,8 @@
         [self addSubview:self.loading];
         [self.loading loadingViewShow];
         [cell setIsPlayIng:YES];
-        
+        [[FSMusicPlayer sharedPlayer] stop];
+
         if (music.songUrl) {
             
             NSString *url = music.songUrl;
@@ -144,27 +146,13 @@
                 
                 if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
                     [[FSMusicPlayer sharedPlayer] pause];
+                    [cell setIsPlayIng:NO];
                 }else{
                     [[FSMusicPlayer sharedPlayer] play];
+                    [cell setIsPlayIng:YES];
+
                 }
             }];
-        }else{
-            // 测试数据
-            if (![_music isEqual:music]) {
-                NSString *filePath = [[NSBundle mainBundle] pathForResource:music.songTitle ofType:@"mp3"];
-                [[FSMusicPlayer sharedPlayer] stop];
-                [[FSMusicPlayer sharedPlayer] setFilePath:filePath];
-                
-            }
-            
-            if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
-                [[FSMusicPlayer sharedPlayer] pause];
-            }else{
-                [[FSMusicPlayer sharedPlayer] play];
-            }
-            
-            [self.loading loadingViewhide];
-            
         }
     }
     // 更新当前选中的音乐
@@ -173,6 +161,7 @@
 #pragma mark -
 -(void)tableView:(UITableView *)tableView updateTableWithMusic:(FSMusic *)music selectIndexPath:(NSIndexPath *)indexPath{
     
+    NSMutableArray *paths = [NSMutableArray array];
     if (![_music isEqual:music]) {
         NSIndexPath *selectedPath = nil;
         if (_music) {
@@ -181,15 +170,24 @@
             _music.opend =  NO;
         }
         music.opend = YES;
-        NSMutableArray *paths = [NSMutableArray array];
         if (selectedPath) {
             [paths addObject:selectedPath];
         }
         [paths addObject:indexPath];
-        [tableView beginUpdates];
-        [tableView reloadRowsAtIndexPaths:paths withRowAnimation:(UITableViewRowAnimationFade)];
-        [tableView endUpdates];
+
+    }else{
+        _music.opend = YES;
+        NSMutableArray *paths = [NSMutableArray array];
+        [paths addObject:indexPath];
+        
+        FSMusicCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell setMusic:_music];
     }
+    
+    [tableView beginUpdates];
+    [tableView reloadRowsAtIndexPaths:paths withRowAnimation:(UITableViewRowAnimationFade)];
+    [tableView endUpdates];
+
 }
 -(void)musicCell:(FSMusicCell *)cell wouldPlay:(FSMusic *)music{
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -261,6 +259,7 @@
 - (void)stopPlayCurrentMusic {
     if (_music && _music.isPlaying) {
         _music.isPlaying = NO;
+        _music.opend = NO;
         [[FSMusicPlayer sharedPlayer] stop];
     }
 

@@ -16,6 +16,9 @@ BadPassword = "Incorrect Password";
 LoginFailed = "Login Failed";
 logout = "Log Out";
 
+leastTime = "Video length should be 3 seconds at least";
+
+
 UploadVideo = "Upload";
 ChooseMusic = "Music";
 Record = "Record";
@@ -34,6 +37,9 @@ Effects = "Special Effects";
 EnterTitle = "Write Something";
 AddHashtag = "Add a Hashtag";
 SaveInGallery = "Save in Gallery";
+CanlceVideo = "旧版本的不可编辑或者使用";
+
+
 Draft = "Draft Box";
 Upload = "Upload";
 UploadFailed = "Uploading Failed";

@@ -164,6 +164,7 @@ static NSString *identifier = @"FSMusicCell";
     [self.authorLabel setText:music.songAuthor];
     [self.timeLabel setText:[self getCurrentTimeString:music.songTime]];
      _music = music;
+    
     NSString *songPic = music.songPic;
     if (![songPic hasPrefix:@"http"] && songPic) {
         songPic = [@"http://35.158.218.231/" stringByAppendingString:songPic];

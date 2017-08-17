@@ -382,11 +382,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     if (_tempDraftInfo.vType == FSDraftInfoTypeVideo) {
         
         // 弹出提示
-        UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:@"" message:@"旧版本的不可编辑或者使用" preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"cancle" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"CanlceVideo"] preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
             
         }];
-        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Confirm"] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             [self dismissViewControllerAnimated:YES completion:nil];
             [[FSDraftManager sharedManager] cancleOperate];
             [_context removeTimeline:_timeLine];
@@ -399,10 +399,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     }else{
         // 弹出提示
         // 弹出提示
-        UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:@"" message:@"返回编辑界面将清空所有特效信息" preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"cancle" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"CancelEditWarning"] preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
         }];
-        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Confirm"]  style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             [self.navigationController popViewControllerAnimated:YES];
             [[FSDraftManager sharedManager] cancleOperate];
             [_context removeTimeline:_timeLine];
