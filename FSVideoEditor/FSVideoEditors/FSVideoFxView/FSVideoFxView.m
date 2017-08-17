@@ -435,6 +435,8 @@
         _progress.fxViewColor = [UIColor blackColor];
     }else if (tag == 5){
         _progress.fxViewColor = [UIColor purpleColor];
+    }else if (tag == 6){
+        _progress.fxViewColor = [UIColor yellowColor];
     }
     
      _currentFxId = objc_getAssociatedObject(button, FxIdKey);
