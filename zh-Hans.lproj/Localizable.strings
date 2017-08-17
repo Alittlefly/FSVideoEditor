@@ -35,8 +35,8 @@ Effects = "特效";
 EnterTitle = "输入标题";
 AddHashtag = "添加挑战";
 SaveInGallery = "同时保存到相册";
-CanlceVideo = "旧版本的不可编辑或者使用";
-
+CanlceVideo = "本地上传或旧版本的视频不支持继续拍摄";
+GiveUpEdit = "是否放弃编辑?";
 
 Draft = "草稿";
 Upload = "发布";
@@ -66,6 +66,7 @@ EraseEffectsTip = "是否清除已添加的特效？";
 Erase = "清除";
 LongPress = "按住开始拍摄,松开暂停";
 ContinueRecord = "";
+
 
 VerySlow = "极慢";
 Slow = "慢";

@@ -148,7 +148,7 @@ static FSShortVideoRecorderManager *recorderManager;
         return;
         
     }
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-b5a2105bee06464eebd11f55a77db670.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-f6192de5110aed067060b4010c648cac.lic"];
 
     BOOL isOK = [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     

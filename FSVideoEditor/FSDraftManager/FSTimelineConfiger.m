@@ -27,7 +27,13 @@
                 // 不能对应当前轨道的特效 那就翻转
                 startTime = timeLine.duration - fx.endPoint;
             }
-            [timeLine addPackagedTimelineVideoFx:startTime duration:duration videoFxPackageId:fx.videoFxId];
+            
+            if ([fx.videoFxId isEqualToString:@"Video Echo"])
+                [timeLine addBuiltinTimelineVideoFx:startTime duration:duration videoFxName:fx.videoFxId];
+            else{
+                [timeLine addPackagedTimelineVideoFx:startTime duration:duration videoFxPackageId:fx.videoFxId];
+                
+            }
         }
     }
     [FSTimelineConfiger addTimeFxWithFx:timeLineInfo.vTimefx timeLine:timeLine];
