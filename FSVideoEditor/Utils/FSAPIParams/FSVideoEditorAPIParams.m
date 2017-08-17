@@ -28,6 +28,7 @@
          _params = [NSMutableDictionary dictionary];
         [_params setValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] forKey:@"_v"];
         [_params setValue:@"4" forKey:@"requestType"];
+        [_params setValue:@"" forKey:@"LoginKey"];
     }
     return _params;
 }
