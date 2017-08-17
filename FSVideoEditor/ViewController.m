@@ -81,7 +81,8 @@
         self.loginButton.hidden = YES;
         [self.logoutButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"logout"] forState:UIControlStateNormal];
         
-        [[FSDraftManager sharedManager] setCacheKey:_uid];
+        [[FSDraftManager sharedManager] setCacheKey:[[NSUserDefaults standardUserDefaults] valueForKey:@"UID"]];
+        [FSPublishSingleton sharedInstance].userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"nickName"];
         [[FSVideoEditorAPIParams videoEdiorParams].params setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
     }
     
@@ -271,6 +272,8 @@
     [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginName"] forKey:@"UID"];
     [[NSUserDefaults standardUserDefaults] setValue:self.passwordTextField.text forKey:@"Password"];
     [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginKey"] forKey:@"loginKey"];
+    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"nickName"] forKey:@"nickName"];
+
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     [FSPublishSingleton sharedInstance].userName = [dataInfo objectForKey:@"nickName"];
