@@ -36,8 +36,8 @@ Effects = "Special Effects";
 EnterTitle = "Write Something";
 AddHashtag = "Add a Hashtag";
 SaveInGallery = "Save in Gallery";
-CanlceVideo = "本地上传或旧版本的视频不支持继续拍摄";
-GiveUpEdit = "是否放弃编辑?";
+CanlceVideo = "The current uploded video or old one doesn't support continue shooting";
+GiveUpEdit = "Do you want to delete edits?";
 
 Draft = "Draft Box";
 Upload = "Upload";

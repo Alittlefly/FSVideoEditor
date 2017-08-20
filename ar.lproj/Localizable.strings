@@ -35,8 +35,8 @@ Effects = "مؤثرات خاصة";
 EnterTitle = "اكتب عنوان";
 AddHashtag = "ضع هاشتاج";
 SaveInGallery = "حفظ في الأستوديو";
-CanlceVideo = "本地上传或旧版本的视频不支持继续拍摄";
-GiveUpEdit = "是否放弃编辑?";
+CanlceVideo = "الفيديو المحمل أو الفيديو القديم لا يدعم استمرار التصوير";
+GiveUpEdit = "هل تريد حذف التعديلات?";
 
 Draft = "حفظ في الذاكرة";
 Upload = "نشر";
