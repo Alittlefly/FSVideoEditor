@@ -52,23 +52,21 @@
     self.navigationItem.titleView = titleLabel;
 }
 
--(void)creatSaveBtn{
+-(void)creatDeleteBtn{
     
     NSString * saveTitle = [FSShortLanguage CustomLocalizedStringFromTable:@"deletaAll"];
-    UIButton *saveButton = [[UIButton alloc] init];
-    [saveButton setTitle:saveTitle forState:UIControlStateNormal];
-    [saveButton setTitleColor:FSHexRGB(0xD50000) forState:UIControlStateNormal];
-    [saveButton addTarget:self action:@selector(clickSaveButton) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *deleteButton = [[UIButton alloc] init];
+    [deleteButton setTitle:saveTitle forState:UIControlStateNormal];
+    [deleteButton setTitleColor:FSHexRGB(0xD50000) forState:UIControlStateNormal];
+    [deleteButton addTarget:self action:@selector(clickDeleteButton) forControlEvents:UIControlEventTouchUpInside];
     
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:21]};
     CGRect newSize = [saveTitle boundingRectWithSize:CGSizeMake(0, 10000) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
     
-    [saveButton setFrame:CGRectMake(0, 0, newSize.size.width, 21)];
+    [deleteButton setFrame:CGRectMake(0, 0, newSize.size.width, 21)];
     
-    UIBarButtonItem *roghtBar = [[UIBarButtonItem alloc] initWithCustomView:saveButton];
+    UIBarButtonItem *roghtBar = [[UIBarButtonItem alloc] initWithCustomView:deleteButton];
     [self.navigationItem setRightBarButtonItem:roghtBar];
-    [self.navigationItem.rightBarButtonItem setEnabled:NO];
-    
 }
 
 - (void)viewDidLoad {
@@ -77,7 +75,7 @@
     [self.view setBackgroundColor:FSHexRGB(0xEFEFF4)];
     
     [self TheTitleLabel];
-    [self creatSaveBtn];
+    [self creatDeleteBtn];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -340,7 +338,7 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
--(void)clickSaveButton{
+-(void)clickDeleteButton{
     
 }
 
