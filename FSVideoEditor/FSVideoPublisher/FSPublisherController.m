@@ -397,21 +397,23 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [self.navigationController presentViewController:alertControlelr animated:YES completion:nil];
     }else{
         // 弹出提示
-        // 弹出提示
-        UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"CancelEditWarning"] preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *cancle = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        UIAlertAction *sure = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Confirm"]  style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        if (_tempDraftInfo.vTimefx != nil || _tempDraftInfo.stack != nil) {
+            UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"CancelEditWarning"] preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction *cancle = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+            }];
+            UIAlertAction *sure = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Confirm"]  style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                [self.navigationController popViewControllerAnimated:YES];
+                [[FSDraftManager sharedManager] cancleOperate];
+                [_context removeTimeline:_timeLine];
+                [_context stop];
+            }];
+            
+            [alertControlelr addAction:cancle];
+            [alertControlelr addAction:sure];
+            [self.navigationController presentViewController:alertControlelr animated:YES completion:nil];
+        }else{
             [self.navigationController popViewControllerAnimated:YES];
-            [[FSDraftManager sharedManager] cancleOperate];
-            [_context removeTimeline:_timeLine];
-            [_context stop];
-        }];
-        
-        [alertControlelr addAction:cancle];
-        [alertControlelr addAction:sure];
-        [self.navigationController presentViewController:alertControlelr animated:YES completion:nil];
-        
+        }
     }
     
 

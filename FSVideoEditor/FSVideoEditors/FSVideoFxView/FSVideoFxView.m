@@ -141,11 +141,11 @@
 
 @property(nonatomic,strong)UILabel *tipLabel;
 @property(nonatomic,strong)UIScrollView *contentView;
+@property(nonatomic,strong)UIScrollView *contentTimeView;
 @property(nonatomic,strong)UIView *bottomView;
 @property(nonatomic,strong)NSArray *videofxs;
 @property(nonatomic,strong)NSArray *videofuncs;
 
-@property(nonatomic,strong)NSMutableArray *fxButtons;
 @property(nonatomic,strong)UIButton *unDoButton;
 @property(nonatomic,strong)NSMutableDictionary *fxButtonDict;
 @end
@@ -199,12 +199,6 @@
     [_progress setIsPlaying:isPlaying];
 }
 
--(NSMutableArray *)fxButtons{
-    if (!_fxButtons) {
-        _fxButtons = [NSMutableArray array];
-    }
-    return _fxButtons;
-}
 -(void)creatSubiviews{
     CGRect sframe = self.bounds;
     [self setBackgroundColor:FSHexRGB(0x000f1e)];
@@ -214,6 +208,13 @@
     [_contentView setAlwaysBounceHorizontal:NO];
     [_contentView setBackgroundColor:FSHexRGB(0x000f1e)];
     [self addSubview:_contentView];
+    
+     _contentTimeView = [[UIScrollView alloc] initWithFrame:sframe];
+    [_contentTimeView setShowsHorizontalScrollIndicator:NO];
+    [_contentTimeView setAlwaysBounceHorizontal:NO];
+    [_contentTimeView setBackgroundColor:FSHexRGB(0x000f1e)];
+    [_contentTimeView setHidden:YES];
+    [self addSubview:_contentTimeView];
     
     _progress = [[FSVideoClipProgress alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(sframe), 40)];
     _progress.delegate = self;
@@ -235,6 +236,8 @@
     
     // fx
     [self initFilerFxs];
+    // time
+    [self initTimeFxs];
 
     // bottom
     CGFloat bottomH = 45.0;
@@ -263,9 +266,6 @@
     
 }
 -(void)initFilerFxs{
-    for (UIView *button in self.fxButtons) {
-        [button removeFromSuperview];
-    }
     
     FSFxButton *soulfx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [soulfx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Magic"] forState:(UIControlStateNormal)];
@@ -346,14 +346,8 @@
     
     [_contentView setContentSize:CGSizeMake(CGRectGetMaxX(bmfx.frame) + 20, 0)];
     [_contentView setContentOffset:CGPointZero];
-    [self.fxButtons removeAllObjects];
-    [self.fxButtons addObjectsFromArray:@[soulfx,shakefx,jzfx,fmfx,bmfx]];
 }
 -(void)initTimeFxs{
-    
-    for (UIView *button in self.fxButtons) {
-        [button removeFromSuperview];
-    }
     
     [self.fxButtonDict removeAllObjects];
     
@@ -365,7 +359,7 @@
     [noneFx.colorView setBackgroundColor:FSHexRGB(0x000000)];
     [self.fxButtonDict setObject:noneFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeNone]];
     
-    [_contentView addSubview:noneFx];
+    [_contentTimeView addSubview:noneFx];
     
     FSFxButton *revertFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(noneFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [revertFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -374,7 +368,7 @@
     [revertFx.colorView setBackgroundColor:FSHexRGB(0xff39ad)];
      revertFx.tag = FSVideoFxTypeRevert;
     [self.fxButtonDict setObject:revertFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeRevert]];
-    [_contentView addSubview:revertFx];
+    [_contentTimeView addSubview:revertFx];
     
     
     FSFxButton *repeatFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(revertFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
@@ -387,7 +381,7 @@
 
     repeatFx.selected = (_fxType == FSVideoFxTypeRepeat);
 
-    [_contentView addSubview:repeatFx];
+    [_contentTimeView addSubview:repeatFx];
     
     FSFxButton *slowFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(repeatFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [slowFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -397,12 +391,10 @@
     slowFx.tag = FSVideoFxTypeSlow;
     [self.fxButtonDict setObject:slowFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeSlow]];
 
-    [_contentView addSubview:slowFx];
+    [_contentTimeView addSubview:slowFx];
     
-    [self.fxButtons removeAllObjects];
-    [self.fxButtons addObjectsFromArray:@[noneFx,revertFx,repeatFx,slowFx]];
-    [_contentView setContentSize:CGSizeMake(CGRectGetMaxX(slowFx.frame) + 20, 0)];
-    [_contentView setContentOffset:CGPointZero];
+    [_contentTimeView setContentSize:CGSizeMake(CGRectGetMaxX(slowFx.frame) + 20, 0)];
+    [_contentTimeView setContentOffset:CGPointZero];
 
     
     if (!_firstInitTimeFx) {
@@ -539,10 +531,14 @@
 -(void)changeContentWithTag:(NSInteger)tag{
     if (tag == 1) {
         [_tipLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"AddFilterTip"]];
-        [self initFilerFxs];
+//        [self initFilerFxs];
+        [_contentView setHidden:NO];
+        [_contentTimeView setHidden:YES];
     }else if (tag == 2){
         [_tipLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"ChooseEffectsTip"]];
-        [self initTimeFxs];
+//        [self initTimeFxs];
+        [_contentView setHidden:YES];
+        [_contentTimeView setHidden:NO];
     }
     if ([self.delegate respondsToSelector:@selector(videoFxViewChangeFilter)]) {
         [self.delegate videoFxViewChangeFilter];
