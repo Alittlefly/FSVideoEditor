@@ -14,11 +14,23 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGGeometry.h>
+#import <CoreVideo/CVPixelBuffer.h>
+
+
+/*!
+ *  \brief 视频帧接收器模式
+ */
+typedef enum
+{
+    NvsVideoFrameReceiverMode_Texture,          //!< 接收纹理ID模式
+    NvsVideoFrameReceiverMode_CVPixelBuffer     //!< 接收CVPixelBuffer对象模式
+} NvsVideoFrameReceiverMode;
 
 
 @class NvsVideoFrameReceiver;
 
 @protocol NvsVideoFrameReceiverDelegate <NSObject>
+@optional
 
 /*!
  *  \brief 通知接收者一个视频帧已经渲染完成
@@ -40,6 +52,19 @@
                     videoSize:(CGSize)videoSize
                   timelinePos:(int64_t)timelinePos;
 
+/*!
+ *  \brief 通知接收者一个视频帧已经渲染完成
+    注意：这个回调函数是在引擎的某个线程调用的，并非主线程！
+ *  \param receiver 该回调接口对应的NvsVideoFrameReceiver对象
+ *  \param pixelBuffer 视频帧的CVPixelBuffer对象
+ *  \param videoSize 视频帧的尺寸，单位为像素
+ *  \param timelinePos 视频帧的时间戳，单位为微秒
+ */
+- (void)didVideoFrameReceived:(NvsVideoFrameReceiver *)receiver
+                  pixelBuffer:(CVPixelBufferRef)pixelBuffer
+                    videoSize:(CGSize)videoSize
+                  timelinePos:(int64_t)timelinePos;
+
 @end
 
 
@@ -50,10 +75,14 @@
  */
 @interface NvsVideoFrameReceiver : NSObject
 
+@property (nonatomic, readonly) NvsVideoFrameReceiverMode mode;
 @property (nonatomic, retain) id<NvsVideoFrameReceiverDelegate> delegate;
 
 
 - (instancetype)init;
+
+- (instancetype)initWithMode:(NvsVideoFrameReceiverMode)type;
+
 
 /*!
  *  \brief 回收一个已经获取到使用权的视频帧

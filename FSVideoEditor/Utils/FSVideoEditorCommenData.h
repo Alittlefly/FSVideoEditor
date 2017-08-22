@@ -7,10 +7,11 @@
 //
 
 #if DEBUG == 1
-#define AddressAPILogin  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://www.7najm.com/" : @"http://10.10.32.145:8888/"
-#define AddressUpload  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://www.7najm.com/" : @"http://10.10.32.145:8086/"
-#define AddressAPI  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://www.7najm.com/" : @"http://10.10.32.145:8088/"
-#define AddressIP  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://www.7najm.com/" : @"http://10.10.32.152:20000/"
+
+#define AddressAPILogin  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://10.10.32.145:8888/" : @"http://10.10.32.145:8888/"
+#define AddressUpload  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://10.10.32.145:8086/" : @"http://10.10.32.145:8086/"
+#define AddressAPI  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://10.10.32.145:8088/" : @"http://10.10.32.145:8088/"
+#define AddressIP  [[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"ar"] ? @"http://10.10.32.152:20000/" : @"http://10.10.32.152:20000/"
 
 #else
 

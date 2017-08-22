@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     _tempDraftInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
     
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-b5a2105bee06464eebd11f55a77db670.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-f6192de5110aed067060b4010c648cac.lic"];
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
     
@@ -382,9 +382,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     if (_tempDraftInfo.vType == FSDraftInfoTypeVideo) {
         
         // 弹出提示
-        UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"CanlceVideo"] preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"CanlceVideo"] message:[FSShortLanguage CustomLocalizedStringFromTable:@"GiveUpEdit"] preferredStyle:(UIAlertControllerStyleAlert)];
         UIAlertAction *cancle = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
-            
         }];
         UIAlertAction *sure = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Confirm"] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             [self dismissViewControllerAnimated:YES completion:nil];

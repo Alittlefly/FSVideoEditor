@@ -17,5 +17,6 @@
 -(void)insertToLocal:(FSDraftInfo *)draftInfo;
 -(void)deleteToLocal:(FSDraftInfo *)draftInfo;
 -(void)updateToLocal:(FSDraftInfo *)draftInfo;
+-(void)deleteAllLocal;
 -(NSArray *)allInfosInLocal;
 @end

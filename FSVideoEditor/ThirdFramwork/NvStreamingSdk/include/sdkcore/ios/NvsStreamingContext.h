@@ -86,7 +86,10 @@ typedef enum {
  */
 typedef enum
 {
-    NvsStreamingEngineCaptureFlag_GrabCapturedVideoFrame = 1,      //!< \if ENGLISH \else 获取采集视频的帧内容（打开这个标志会降低性能，只有在必要的时候开启这个标志） \endif
+    NvsStreamingEngineCaptureFlag_GrabCapturedVideoFrame = 1,       //!< \if ENGLISH \else 获取采集视频的帧内容（打开这个标志会降低性能，只有在必要的时候开启这个标志） \endif
+    NvsStreamingEngineCaptureFlag_StrictPreviewVideoSize = 8,       //!< 限定预览视频尺寸只能是系统自带的预览视频尺寸
+    NvsStreamingEngineCaptureFlag_DontCaptureAudio = 16,            //!< 不采集音频
+    NvsStreamingEngineCaptureFlag_CaptureBuddyHostVideoFrame = 32   //!< 采集伴侣视频帧
 } NvsStreamingEngineCaptureFlag;
 
 /*!
@@ -105,6 +108,8 @@ typedef enum {
     NvsStreamingEngineSeekFlag_ShowAnimatedStickerPoster = 4,  //!< \if ENGLISH \else 整体展示动画贴纸效果 \endif
 } NvsStreamingEngineSeekFlag;
 
+#define NVS_COMPILE_BITRATE        @"bitrate"
+#define NVS_COMPILE_GOP_SIZE       @"gopsize"
 
 @class NvsCaptureDeviceCapability;
 @class NvsCaptureVideoFx;
@@ -257,8 +262,10 @@ typedef enum {
 
 @property (nonatomic, retain) id<NvsStreamingContextDelegate> delegate;
 @property (readonly) NvsAssetPackageManager *assetPackageManager;
-@property (nonatomic, assign) float compileVideoBitrateMultiplier;  //!< 生成视频码率倍乘系数 \since 1.5.0
-@property (nonatomic, assign) float recordVideoBitrateMultiplier;   //!< 录制视频码率倍乘系数 \since 1.5.0
+@property (nonatomic, assign) float compileVideoBitrateMultiplier;              //!< 生成视频码率倍乘系数 \since 1.5.0
+@property (nonatomic, assign) float recordVideoBitrateMultiplier;               //!< 录制视频码率倍乘系数 \since 1.5.0
+@property (nonatomic, assign) BOOL defaultCaptionFade;                          //!< 默认字幕是否为淡入淡出 \since 1.8.0
+@property (nonatomic, retain) NSMutableDictionary *compileConfigurations;       //!< 生成时间线配置 \since 1.8.0
 
 /*!
  *  \brief 获取美摄SDK的版本信息

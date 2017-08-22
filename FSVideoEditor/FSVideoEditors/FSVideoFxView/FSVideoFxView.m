@@ -301,7 +301,7 @@
     [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     
     [jzfx setTitle:NSLocalizedString(@"x-signal", nil) forState:(UIControlStateNormal)];
-    objc_setAssociatedObject(jzfx, FxIdKey, @"9AC28816-639F-4A9B-B4BA-4060ABD229A2.2", OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(jzfx, FxIdKey, @"9AC28816-639F-4A9B-B4BA-4060ABD229A2", OBJC_ASSOCIATION_COPY);
     
     [_contentView addSubview:jzfx];
     
@@ -318,7 +318,21 @@
     [_contentView addSubview:fmfx];
     
     
-    FSFxButton *bmfx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(fmfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
+    FSFxButton *hjfx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(fmfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
+    [hjfx setBackgroundColor:[UIColor yellowColor]];
+    [hjfx setTag:6];
+    [hjfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
+    [hjfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
+    [hjfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
+    
+    [hjfx setTitle:NSLocalizedString(@"幻觉", nil) forState:(UIControlStateNormal)];
+    
+    objc_setAssociatedObject(hjfx, FxIdKey, @"Video Echo", OBJC_ASSOCIATION_COPY);
+    [_contentView addSubview:hjfx];
+    
+    
+    
+    FSFxButton *bmfx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(hjfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [bmfx setBackgroundColor:[UIColor yellowColor]];
     [bmfx setTag:5];
     [bmfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
@@ -327,7 +341,7 @@
     
     [bmfx setTitle:NSLocalizedString(@"黑白", nil) forState:(UIControlStateNormal)];
     
-    objc_setAssociatedObject(bmfx, FxIdKey, @"33F513E5-5CA2-4C23-A6D4-8466202EE698.2", OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(bmfx, FxIdKey, @"33F513E5-5CA2-4C23-A6D4-8466202EE698", OBJC_ASSOCIATION_COPY);
     [_contentView addSubview:bmfx];
     
     [_contentView setContentSize:CGSizeMake(CGRectGetMaxX(bmfx.frame) + 20, 0)];
@@ -421,6 +435,8 @@
         _progress.fxViewColor = [UIColor blackColor];
     }else if (tag == 5){
         _progress.fxViewColor = [UIColor purpleColor];
+    }else if (tag == 6){
+        _progress.fxViewColor = [UIColor yellowColor];
     }
     
      _currentFxId = objc_getAssociatedObject(button, FxIdKey);

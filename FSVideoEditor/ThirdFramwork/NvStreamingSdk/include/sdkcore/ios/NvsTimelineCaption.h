@@ -241,6 +241,7 @@
      \brief 设置字幕的平移量
      \param translation 字幕平移的水平和垂直的绝对平移值
      \sa getCaptionTranslation
+     \sa translateCaption:
  */
 - (void)setCaptionTranslation:(CGPoint)translation;
 
@@ -255,16 +256,48 @@
      \brief 平移字幕
      \param translationOffset 字幕平移的水平和垂直的偏移值
      \since 1.7.0
-     \sa setCaptionTranslation
+     \sa setCaptionTranslation:
      \sa getCaptionTranslation
  */
 - (void)translateCaption:(CGPoint)translationOffset;
+
+/*!
+     \brief 缩放字幕
+     \param scaleFactor 字幕缩放的因子
+     \param anchor 字幕缩放的锚点
+     \since 1.8.1
+ */
+- (void)scaleCaption:(float)scaleFactor anchor:(CGPoint)anchor;
+
+/*!
+     \brief 旋转字幕
+     \param angle 字幕旋转的角度
+     \param anchor 字幕旋转的锚点
+     \since 1.8.1
+     \sa rotateCaption:
+ */
+- (void)rotateCaption:(float)angle anchor:(CGPoint)anchor;
+
+/*!
+     \brief 以字幕中心点为锚点旋转字幕
+     \param angle 字幕旋转的角度
+     \since 1.8.1
+     \sa rotateCaption:anchor:
+ */
+- (void)rotateCaption:(float)angle;
 
 /*!
      \brief 获取字幕文本矩形框
      \return 返回NvsRect对象，表示获得的字幕文本矩形框
  */
 - (NvsRect)getTextBoundingRect;
+
+/*!
+    \brief 获取字幕的原始包围矩形框变换后的顶点位置
+    \return 返回NSArray对象，里面的对象类型为NSValue，而实际包含的数据类型为CGPoint，包含四个顶点位置，依次分别对应原始包围矩形框的左上，左下，右下，右上顶点
+    \since 1.8.1
+ */
+- (NSArray *)getBoundingRectangleVertices;
 
 /*!
     \brief 对字幕设置中心点的极角。只对全景图字幕有效

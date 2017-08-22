@@ -123,6 +123,7 @@
      \brief 设置平移
      \param translation 平移位置
      \sa getTransltion
+     \sa translateAnimatedSticker:
  */
 - (void)setTranslation:(CGPoint)translation;
 
@@ -134,6 +135,40 @@
 - (CGPoint)getTransltion;
 
 /*!
+     \brief 平移动画贴纸
+     \param translationOffset 动画贴纸平移的水平和垂直的偏移值
+     \since 1.8.1
+     \sa setTranslation:
+     \sa getTranslation
+ */
+- (void)translateAnimatedSticker:(CGPoint)translationOffset;
+
+/*!
+     \brief 缩放动画贴纸
+     \param scaleFactor 动画贴纸缩放的因子
+     \param anchor 动画贴纸缩放的锚点
+     \since 1.8.1
+ */
+- (void)scaleAnimatedSticker:(float)scaleFactor anchor:(CGPoint)anchor;
+
+/*!
+     \brief 旋转动画贴纸
+     \param angle 动画贴纸旋转的角度
+     \param anchor 动画贴纸旋转的锚点
+     \since 1.8.1
+     \sa rotateAnimatedSticker:
+ */
+- (void)rotateAnimatedSticker:(float)angle anchor:(CGPoint)anchor;
+
+/*!
+     \brief 以动画贴纸中心点为锚点旋转动画贴纸
+     \param angle 动画贴纸旋转的角度
+     \since 1.8.1
+     \sa rotateAnimatedSticker:anchor:
+ */
+- (void)rotateAnimatedSticker:(float)angle;
+
+/*!
      \brief 获取原始包围矩形框
      \return 返回NvsRect对象，表示获取的原始包围矩形框
  */
@@ -141,7 +176,7 @@
 
 /*!
     \brief 获取动画贴纸的原始包围矩形框变换后的顶点位置
-    \return 返回NSArray对象，里面的对象类型为NSValue，而实际包含的数据类型为CGPoint，包含四个顶点位置，依次分对应原始包围矩形框的左上，左下，右下，右上顶点
+    \return 返回NSArray对象，里面的对象类型为NSValue，而实际包含的数据类型为CGPoint，包含四个顶点位置，依次分别对应原始包围矩形框的左上，左下，右下，右上顶点
     \since 1.4.0
  */
 - (NSArray *)getBoundingRectangleVertices;

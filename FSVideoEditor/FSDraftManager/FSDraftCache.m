@@ -56,6 +56,13 @@
     NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
     [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
 }
+-(void)deleteAllLocal{
+    NSFileManager *defaultManager = [NSFileManager defaultManager];
+    NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
+    if ([defaultManager fileExistsAtPath:dataPath]) {
+        [defaultManager removeItemAtPath:dataPath error:nil];
+    }
+}
 -(void)updateToLocal:(FSDraftInfo *)draftInfo{
     
 }

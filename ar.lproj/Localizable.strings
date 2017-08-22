@@ -35,7 +35,8 @@ Effects = "مؤثرات خاصة";
 EnterTitle = "اكتب عنوان";
 AddHashtag = "ضع هاشتاج";
 SaveInGallery = "حفظ في الأستوديو";
-CanlceVideo = "旧版本的不可编辑或者使用";
+CanlceVideo = "الفيديو المحمل أو الفيديو القديم لا يدعم استمرار التصوير";
+GiveUpEdit = "هل تريد حذف التعديلات?";
 
 Draft = "حفظ في الذاكرة";
 Upload = "نشر";
@@ -108,3 +109,22 @@ ChallengePeopleCount = "(0)المشاركين في التحدي";
 ChallengeDescribe = "اوصف التحدي الذي ستقدمه باختصار";
 MaxWordsCount = "في حدود (0) حرف";
 MaxLetterLimit = "لقد تجاوزت عدد الحروف المسموح بها";
+
+
+TakePhotoAgain = "صور فيديو آخر";
+OnlyYouCanSee = "لا يمكن لغيرك رؤية صندوق الحفظ";
+
+NoTitle = "لا يوجد عنوان";
+NoTopic = "لا يوجد موضوع";
+
+DraftTitle = "حفظ في المسودة";
+
+deletaAll = "حذف الكل";
+deleteAlert = "هل تريد الحذف؟";
+
+deleteAllAlert = "هل تريد أن تترك هذا الجزء بلا محتوى؟";
+
+emptyDraft = "空数据";
+
+MessageCancel = "إلغاء";
+MessageOK = "تأكيد";

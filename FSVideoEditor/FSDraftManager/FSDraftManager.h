@@ -26,4 +26,6 @@
 -(FSDraftInfo *)draftInfoWithPreInfo:(FSDraftInfo *)preDraftInfo;
 -(NSArray *)allDraftInfos;
 -(void)setCacheKey:(NSString *)cacheKey;
+
+-(void)deleteAllDrafts;
 @end

@@ -35,8 +35,8 @@ Effects = "特效";
 EnterTitle = "输入标题";
 AddHashtag = "添加挑战";
 SaveInGallery = "同时保存到相册";
-CanlceVideo = "旧版本的不可编辑或者使用";
-
+CanlceVideo = "本地上传或旧版本的视频不支持继续拍摄";
+GiveUpEdit = "是否放弃编辑?";
 
 Draft = "草稿";
 Upload = "发布";
@@ -66,6 +66,7 @@ EraseEffectsTip = "是否清除已添加的特效？";
 Erase = "清除";
 LongPress = "按住开始拍摄,松开暂停";
 ContinueRecord = "";
+
 
 VerySlow = "极慢";
 Slow = "慢";
@@ -108,4 +109,22 @@ ChallengePeopleCount = "(0)人参与挑战";
 ChallengeDescribe = "简单描述一下你的挑战";
 MaxWordsCount = "限定(0)字";
 MaxLetterLimit = "已超出最大字数限制";
+
+TakePhotoAgain = "再拍一张";
+OnlyYouCanSee = "只有你自己可见";
+NoTitle = "暂时无标题";
+NoTopic = "暂时无话题";
+
+DraftTitle = "草稿箱";
+
+deletaAll = "清空";
+
+deleteAlert = "你确定删除该信息";
+
+emptyDraft = "空数据";
+
+deleteAllAlert = "你确认删除所有信息吗";
+
+MessageCancel = "取消";
+MessageOK = "确认";
 
