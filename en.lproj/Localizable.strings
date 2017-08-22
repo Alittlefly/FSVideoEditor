@@ -111,15 +111,22 @@ ChallengeDescribe = "Briefly describe your challenge";
 MaxWordsCount = "Max (0) letters";
 MaxLetterLimit = "You have exceeded the maximum letter limit";
 
-TakePhotoAgain = "再拍一张";
-OnlyYouCanSee = "只有你自己可见";
+TakePhotoAgain = "Take another video";
+OnlyYouCanSee = "Drafts are only visible to you";
 
-NoTitle = "暂时无标题";
-NoTopic = "暂时无话题";
+NoTitle = "No title added";
+NoTopic = "No topic added";
 
 DraftTitle = "Draft Box";
 
-deletaAll = "清空";
-deleteAlert = "你确定删除该信息";
+deletaAll = "Delete all";
+deleteAlert = "Do you want to delete it?";
 
+deleteAllAlert = "Do you want to delete all of them?";
+
+
+emptyDraft = "空数据";
+
+MessageCancel = "Cancel";
+MessageOK = "Yes";
 

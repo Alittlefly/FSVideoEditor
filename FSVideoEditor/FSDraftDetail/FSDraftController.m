@@ -15,6 +15,7 @@
 #import "FSAnimationNavController.h"
 #import "FSPublishSingleton.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSDraftEmptyView.h"
 
 @interface FSDraftController ()<FSDraftTableCellDelegate>
 @property(nonatomic,strong)NSMutableArray *drafts;
@@ -23,9 +24,23 @@
 
 @property(nonatomic,strong)NSMutableDictionary *draftsMisicDict;
 
+@property(nonatomic,strong)FSDraftEmptyView *emptyView;
+
 @end
 
 @implementation FSDraftController
+
+
+-(FSDraftEmptyView *)emptyView{
+    if (!_emptyView) {
+        _emptyView = [[FSDraftEmptyView alloc] initWithFrame:self.view.bounds];
+        [_emptyView setBackgroundColor:FSHexRGB(0xEFEFF4)];
+        [_emptyView.imageIcon setImage:[UIImage imageNamed:@"draft_empty_image"]];
+        [_emptyView.message setText:[FSShortLanguage CustomLocalizedStringFromTable:@"emptyDraft"]];
+        [self.view addSubview:_emptyView];
+    }
+    return _emptyView;
+}
 
 -(NSMutableArray *)draftsMisic{
     if (!_draftsMisic) {
@@ -121,6 +136,13 @@
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if ([self.draftsMisic count] == 0) {
+        [self.emptyView setHidden:NO];
+        [self.tableView.tableFooterView setHidden:YES];
+    }else{
+        [self.emptyView setHidden:YES];
+        [self.tableView.tableFooterView setHidden:NO];
+    }
     return [self.draftsMisic count];
 }
 
@@ -247,7 +269,7 @@
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"deleteAlert"] preferredStyle:UIAlertControllerStyleAlert];
         //        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageOK"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [tableView beginUpdates];
 
             NSMutableArray* tempArray = [weakSelf.draftsMisic objectAtIndex:indexPath.section];
@@ -263,6 +285,10 @@
                 [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
             }
             [tableView endUpdates];
+        }]];
+        
+        [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageCancel"] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
         }]];
         
         [self presentViewController:alertController animated:YES completion:nil];
@@ -337,9 +363,20 @@
     
     [self presentViewController:nav animated:YES completion:nil];
 }
-
 -(void)clickDeleteButton{
+    __weak FSDraftController *weakSelf = self;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"deleteAllAlert"] preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageOK"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[FSDraftManager sharedManager] deleteAllDrafts];
+        [weakSelf.draftsMisic removeAllObjects];
+        [weakSelf.draftsMisicDict removeAllObjects];
+        [weakSelf.tableView reloadData];
+    }]];
     
+    [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageCancel"] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - FSDraftTableCellDelegate

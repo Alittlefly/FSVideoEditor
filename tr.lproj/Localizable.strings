@@ -109,14 +109,20 @@ ChallengeDescribe = "Konu içeriğine dair kısaca bilgi ver";
 MaxWordsCount = "Maksimum (0) harf";
 MaxLetterLimit = "Kelime limitini aştınız";
 
-TakePhotoAgain = "再拍一张";
-OnlyYouCanSee = "只有你自己可见";
+TakePhotoAgain = "Bir tane daha çek ";
+OnlyYouCanSee = "Taslakları sadece sen görebilirsin";
 
-NoTitle = "暂时无标题";
-NoTopic = "暂时无话题";
+NoTitle = "Başlık yok";
+NoTopic = "Konu yok ";
 
 DraftTitle = "Taslaklar";
 
-deletaAll = "清空";
-deleteAlert = "你确定删除该信息";
+deletaAll = "Tümünü sil";
+deleteAlert = "Silmek istediğine emin misin?";
 
+deleteAllAlert = "Tümünü silmek istiyor musun?";
+
+emptyDraft = "空数据";
+
+MessageCancel = "İptal";
+MessageOK = "Evet";

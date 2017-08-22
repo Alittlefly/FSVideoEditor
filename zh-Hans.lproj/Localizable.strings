@@ -121,3 +121,10 @@ deletaAll = "清空";
 
 deleteAlert = "你确定删除该信息";
 
+emptyDraft = "空数据";
+
+deleteAllAlert = "你确认删除所有信息吗";
+
+MessageCancel = "取消";
+MessageOK = "确认";
+
