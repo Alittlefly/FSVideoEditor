@@ -9,6 +9,7 @@
 #import "FSDraftTableViewCell.h"
 #import "FSPublishSingleton.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSShortLanguage.h"
 
 @interface FSDraftTableViewCell ()
 
@@ -19,6 +20,8 @@
 @property(nonatomic ,strong) UILabel *tagLabel;
 
 @property(nonatomic ,strong) UIButton *moreButton;
+
+@property(nonatomic ,strong) UIView *deleteView;
 
 @end
 
@@ -87,6 +90,14 @@
         [self setSelected:NO];
         [self setSelectedBackgroundView:[[UIView alloc] init]];
         [self setSelectionStyle:(UITableViewCellSelectionStyleNone)];
+        
+        self.deleteView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds), 0, 200, 101)];
+        self.deleteView.backgroundColor = FSHexRGB(0xD50000);
+        [self.contentView addSubview:self.deleteView];
+        
+        UIImageView *deleteImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 36, 30, 30)];
+        [self.deleteView addSubview:deleteImage];
+        [deleteImage setImage:[UIImage imageNamed:@"list_btn_delete"]];
     }
     return self;
 }
@@ -128,11 +139,21 @@
 
     NSData *data = [NSData dataWithContentsOfFile:info.vFirstFramePath];
     UIImage * currentImage = [UIImage imageWithData:data];
-    [self.photo setImage:currentImage];
-    
-    [self.topic setText:info.vTitle];
-    
-    [self.tagLabel setText:info.challenge.challengeName];
+    if(currentImage){
+        [self.photo setImage:currentImage];
+    }else{
+        [self.photo setImage:[UIImage imageNamed:@"draft_default_image"]];
+    }
+    if (info.vTitle) {
+        [self.topic setText:info.vTitle];
+    }else{
+        [self.topic setText:[FSShortLanguage CustomLocalizedStringFromTable:@"NoTitle"]];
+    }
+    if (info.challenge.challengeName) {
+        [self.tagLabel setText:info.challenge.challengeName];
+    }else{
+        [self.tagLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"NoTopic"]];
+    }
     
     [self setNeedsLayout];
     [self layoutIfNeeded];
