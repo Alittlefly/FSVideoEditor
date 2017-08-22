@@ -29,17 +29,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor blackColor];
     // Do any additional setup after loading the view.
      _tempInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
     [_tempInfo clearFxInfos];
     
-    _recorderView = [[FSShortVideoRecorderView alloc] initWithFrame:self.view.bounds draftInfo:_tempInfo];
-    _recorderView.delegate =self;
-    [self.view addSubview:_recorderView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    
+    if (!_recorderView) {
+        _recorderView = [[FSShortVideoRecorderView alloc] initWithFrame:self.view.bounds draftInfo:_tempInfo];
+        _recorderView.delegate =self;
+        [self.view addSubview:_recorderView];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    
     
     [_recorderView resumeCapturePreview];
     if (_tempInfo.vMusic != nil && _tempInfo.vMusic.mPath.length > 0) {
@@ -47,6 +66,11 @@
     }
 
 }
+
+- (void)showNoviceGuideView:(UIView *)guideView {
+    
+}
+
 #pragma mark - FSShortVideoRecorderViewDelegate
 
 - (void)FSShortVideoRecorderViewQuitRecorderView {

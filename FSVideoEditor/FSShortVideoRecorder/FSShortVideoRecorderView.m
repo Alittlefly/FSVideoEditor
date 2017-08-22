@@ -116,34 +116,38 @@
             _currentVideoTime += [time floatValue];
         }
         
-        _recorderManager = [FSShortVideoRecorderManager sharedInstance];
-        _recorderManager.delegate = self;
-        _recorderView = [_recorderManager getLiveWindow];
-        [_recorderManager initBaseData:_draftInfo];
-       
-        _recorderView.frame= CGRectMake(0, 0, frame.size.width, frame.size.height);
-        [self addSubview:_recorderView];
-        //[_recorderManager resumeCapturePreview];
-
-        
-        [_recorderManager switchBeauty:_isBeautyOpened];
-        
-        _supportAutoExposure = [_recorderManager isSupportAutoExposure];
-        _supportAutoFocus = [_recorderManager isSupportAutoFocus];
-        
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToFocus:)];
-        tapGestureRecognizer.numberOfTapsRequired = 1;
-        [self addGestureRecognizer:tapGestureRecognizer];
-
-        if (draftInfo.vFilterid) {
-            [self changeFilter:draftInfo.vFilterid];
-        }
-        
-        [self initBaseToolView];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeCapturePreview) name:@"ResumeCapturePreview" object:nil];
+        [self initCameraView];
     }
     return self;
+}
+
+- (void)initCameraView {
+    _recorderManager = [FSShortVideoRecorderManager sharedInstance];
+    _recorderManager.delegate = self;
+    _recorderView = [_recorderManager getLiveWindow];
+    [_recorderManager initBaseData:_draftInfo];
+    
+    _recorderView.frame= CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    [self addSubview:_recorderView];
+    //[_recorderManager resumeCapturePreview];
+    
+    
+    [_recorderManager switchBeauty:_isBeautyOpened];
+    
+    _supportAutoExposure = [_recorderManager isSupportAutoExposure];
+    _supportAutoFocus = [_recorderManager isSupportAutoFocus];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToFocus:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [self addGestureRecognizer:tapGestureRecognizer];
+    
+    if (self.draftInfo.vFilterid) {
+        [self changeFilter:self.draftInfo.vFilterid];
+    }
+    
+    [self initBaseToolView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeCapturePreview) name:@"ResumeCapturePreview" object:nil];
 }
 
 - (void)initBaseToolView {
@@ -649,6 +653,9 @@
         }];
 
     }
+    else {
+        [self.recorderButton setImage:[UIImage imageNamed:@"recorder-auto"] forState:UIControlStateNormal];
+    }
     
     [self.recorderManager startRecording:nil];
 
@@ -872,6 +879,7 @@
     _isAutoRecorder = YES;
     
     [self startRecorder];
+    
     
     //_finishButton.enabled = YES;
     _recorderButton.enabled = YES;

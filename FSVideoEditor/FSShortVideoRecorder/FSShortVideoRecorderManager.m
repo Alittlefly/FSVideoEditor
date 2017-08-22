@@ -110,7 +110,7 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (instancetype)init {
     if (self = [super init]) {
-        [self initBaseData:[[FSDraftInfo alloc] init]];
+       // [self initBaseData:[[FSDraftInfo alloc] init]];
         
         
        // [self resumeCapturePreview];

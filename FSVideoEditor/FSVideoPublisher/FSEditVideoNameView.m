@@ -77,7 +77,7 @@
     _saveToPhotoButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 0 : self.frame.size.width-100, CGRectGetMaxY(_lineView.frame)+15, 100, 27);
     _saveToPhotoButton.backgroundColor = [UIColor clearColor];
     [_saveToPhotoButton setTitle:[NSString stringWithFormat:@"%@",[FSShortLanguage CustomLocalizedStringFromTable:@"SaveInGallery"]] forState:UIControlStateNormal];
-    [_saveToPhotoButton.titleLabel setFont:[UIFont systemFontOfSize:10]];
+    [_saveToPhotoButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
     [_saveToPhotoButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_saveToPhotoButton.titleLabel setShadowOffset:CGSizeMake(1, 1)];
     [_saveToPhotoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

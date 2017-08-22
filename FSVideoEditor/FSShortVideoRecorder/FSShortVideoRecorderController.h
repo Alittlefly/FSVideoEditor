@@ -16,4 +16,6 @@
 
 @property (nonatomic, strong) FSDraftInfo *draftInfo;
 
+- (void)showNoviceGuideView:(UIView *)guideView;
+
 @end
