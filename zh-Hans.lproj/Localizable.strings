@@ -110,3 +110,21 @@ ChallengeDescribe = "简单描述一下你的挑战";
 MaxWordsCount = "限定(0)字";
 MaxLetterLimit = "已超出最大字数限制";
 
+TakePhotoAgain = "再拍一张";
+OnlyYouCanSee = "只有你自己可见";
+NoTitle = "暂时无标题";
+NoTopic = "暂时无话题";
+
+DraftTitle = "草稿箱";
+
+deletaAll = "清空";
+
+deleteAlert = "你确定删除该信息";
+
+emptyDraft = "空数据";
+
+deleteAllAlert = "你确认删除所有信息吗";
+
+MessageCancel = "取消";
+MessageOK = "确认";
+

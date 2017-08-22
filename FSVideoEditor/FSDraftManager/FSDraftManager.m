@@ -28,6 +28,10 @@
 -(void)setCacheKey:(NSString *)cacheKey{
     [[FSDraftCache sharedDraftCache] setCacheKey:cacheKey];
 }
+
+-(void)deleteAllDrafts{
+    [[FSDraftCache sharedDraftCache] deleteAllLocal];
+}
 -(void)clearInfo{
     _tempInfo = nil;
 }

@@ -42,6 +42,6 @@ typedef enum{
 - (void)resumeCapturePreview;
 - (void)changeFilter:(NSString *)filterName;
 - (void)finishChangeFilter;
-
+- (void)initCameraView;
 
 @end

@@ -108,3 +108,21 @@ ChallengePeopleCount = "(0) kişi bu konuda video çekti";
 ChallengeDescribe = "Konu içeriğine dair kısaca bilgi ver";
 MaxWordsCount = "Maksimum (0) harf";
 MaxLetterLimit = "Kelime limitini aştınız";
+
+TakePhotoAgain = "Bir tane daha çek ";
+OnlyYouCanSee = "Taslakları sadece sen görebilirsin";
+
+NoTitle = "Başlık yok";
+NoTopic = "Konu yok ";
+
+DraftTitle = "Taslaklar";
+
+deletaAll = "Tümünü sil";
+deleteAlert = "Silmek istediğine emin misin?";
+
+deleteAllAlert = "Tümünü silmek istiyor musun?";
+
+emptyDraft = "空数据";
+
+MessageCancel = "İptal";
+MessageOK = "Evet";

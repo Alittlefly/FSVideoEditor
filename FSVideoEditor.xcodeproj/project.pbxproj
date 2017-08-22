@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		207781721F4C592A00499996 /* FSDraftEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 207781711F4C592A00499996 /* FSDraftEmptyView.m */; };
 		2095F7B01F370C7700230464 /* FSDraftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095F7AF1F370C7700230464 /* FSDraftTableViewCell.m */; };
 		560142B51F1868FE00A06C70 /* FSCancleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 560142B41F1868FE00A06C70 /* FSCancleController.m */; };
 		5616CC851F2B40F700028770 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 5616CC541F2B40F700028770 /* LICENSE */; };
@@ -233,6 +234,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		207781701F4C592A00499996 /* FSDraftEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftEmptyView.h; sourceTree = "<group>"; };
+		207781711F4C592A00499996 /* FSDraftEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftEmptyView.m; sourceTree = "<group>"; };
 		2095F7AE1F370C7700230464 /* FSDraftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftTableViewCell.h; sourceTree = "<group>"; };
 		2095F7AF1F370C7700230464 /* FSDraftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftTableViewCell.m; sourceTree = "<group>"; };
 		560142B31F1868FE00A06C70 /* FSCancleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCancleController.h; sourceTree = "<group>"; };
@@ -1075,6 +1078,8 @@
 				564035561F34227F00C5F036 /* FSDraftController.m */,
 				2095F7AE1F370C7700230464 /* FSDraftTableViewCell.h */,
 				2095F7AF1F370C7700230464 /* FSDraftTableViewCell.m */,
+				207781701F4C592A00499996 /* FSDraftEmptyView.h */,
+				207781711F4C592A00499996 /* FSDraftEmptyView.m */,
 			);
 			path = FSDraftDetail;
 			sourceTree = "<group>";
@@ -1895,6 +1900,7 @@
 				9880DEAE1F171295006E730F /* SDImageCacheConfig.m in Sources */,
 				563B79F11F08C41D0035346A /* FSMusic.m in Sources */,
 				567B05A11F29F35500D09364 /* FSLikedMusicAPI.m in Sources */,
+				207781721F4C592A00499996 /* FSDraftEmptyView.m in Sources */,
 				567B05A41F29FBBC00D09364 /* FSMusicCollectSever.m in Sources */,
 				567A3D881EFB6F8E0026247E /* NSObject+MJCoding.m in Sources */,
 				9880DEB41F171295006E730F /* SDWebImagePrefetcher.m in Sources */,

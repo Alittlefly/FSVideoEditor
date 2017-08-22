@@ -110,3 +110,23 @@ ChallengePeopleCount = "(0) people did this challenge";
 ChallengeDescribe = "Briefly describe your challenge";
 MaxWordsCount = "Max (0) letters";
 MaxLetterLimit = "You have exceeded the maximum letter limit";
+
+TakePhotoAgain = "Take another video";
+OnlyYouCanSee = "Drafts are only visible to you";
+
+NoTitle = "No title added";
+NoTopic = "No topic added";
+
+DraftTitle = "Draft Box";
+
+deletaAll = "Delete all";
+deleteAlert = "Do you want to delete it?";
+
+deleteAllAlert = "Do you want to delete all of them?";
+
+
+emptyDraft = "空数据";
+
+MessageCancel = "Cancel";
+MessageOK = "Yes";
+
