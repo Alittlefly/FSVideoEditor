@@ -266,7 +266,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *final = [documentsDirectory stringByAppendingPathComponent:@"tmp"];
-    return [final stringByAppendingFormat:@"/video%@.mov",timeRandom];
+    return [final stringByAppendingFormat:@"/video%@.mp4",timeRandom];
 }
 
 -(void)publishFiles{
