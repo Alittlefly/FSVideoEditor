@@ -31,10 +31,10 @@
 }
 -(CGRect)imageRectForContentRect:(CGRect)contentRect{
     CGRect imageRect = CGRectZero;
-    imageRect.size.width = 35;
-    imageRect.size.height = 35;
-    imageRect.origin.x = 16.0;
-    imageRect.origin.y = 5.0;
+    imageRect.size.width = 42;
+    imageRect.size.height = 42;
+    imageRect.origin.x = (CGRectGetWidth(contentRect) - 42)/2.0;
+    imageRect.origin.y = 0;
     return imageRect;
 }
 -(CGRect)titleRectForContentRect:(CGRect)contentRect{
