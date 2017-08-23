@@ -785,7 +785,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
                 }
                 
                 NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
-                [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
+                [dic setValue:[FSPublishSingleton sharedInstance].loginKey forKey:@"loginKey"];
                 [dic setValue:[NSNumber numberWithInt:4] forKey:@"requestType"];
                 [dic setValue:[info objectForKey:@"dataInfo"] forKey:@"lvu"];
                 [dic setValue:weakSelf.uploadVideoPath forKey:@"vu"];

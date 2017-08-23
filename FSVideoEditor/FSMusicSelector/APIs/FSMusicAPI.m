@@ -9,6 +9,8 @@
 #import "FSMusicAPI.h"
 #import "AFNetworking.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSPublishSingleton.h"
+
 @interface FSMusicAPI()
 {
     NSURLSessionTask *_currentTask;

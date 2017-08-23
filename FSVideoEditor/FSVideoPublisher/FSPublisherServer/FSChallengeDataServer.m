@@ -9,6 +9,7 @@
 #import "FSChallengeDataServer.h"
 #import "FSSearchChallengeAPI.h"
 #import "FSAddChallengeAPI.h"
+#import "FSPublishSingleton.h"
 
 @interface FSChallengeDataServer()<FSSearchChallengeAPIDelegate, FSAddChallengeAPIDelegate>
 
@@ -55,7 +56,7 @@
         _addChallengeApi.delegate = self;
     }
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:model.name, @"dn", model.content, @"dd", [[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"], @"loginKey", nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:model.name, @"dn", model.content, @"dd", [FSPublishSingleton sharedInstance].loginKey, @"loginKey", nil];
     [_addChallengeApi addNewChallenge:dic];
 }
 

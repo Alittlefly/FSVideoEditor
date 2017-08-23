@@ -8,6 +8,7 @@
 
 #import "FSLikedMusicAPI.h"
 #import "FSVideoEditorAPIParams.h"
+#import "FSPublishSingleton.h"
 
 @implementation FSLikedMusicAPI
 -(void)getCollectedMusics:(NSInteger)no{

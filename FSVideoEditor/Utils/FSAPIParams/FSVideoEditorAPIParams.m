@@ -7,6 +7,7 @@
 //
 
 #import "FSVideoEditorAPIParams.h"
+#import "FSPublishSingleton.h"
 
 @implementation FSVideoEditorAPIParams
 +(instancetype)videoEdiorParams{
@@ -28,7 +29,7 @@
          _params = [NSMutableDictionary dictionary];
         [_params setValue:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] forKey:@"_v"];
         [_params setValue:@"4" forKey:@"requestType"];
-        [_params setValue:@"" forKey:@"LoginKey"];
+        [_params setValue:[FSPublishSingleton sharedInstance].loginKey forKey:@"LoginKey"];
     }
     return _params;
 }

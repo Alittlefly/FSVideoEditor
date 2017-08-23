@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #import "FSVideoEditorCommenData.h"
 #import "FSVideoEditorAPIParams.h"
+#import "FSPublishSingleton.h"
 
 @interface FSMusicCollectAPI()
 {
