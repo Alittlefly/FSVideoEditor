@@ -22,7 +22,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSDictionary *params = [NSDictionary dictionaryWithDictionary:[FSVideoEditorAPIParams videoEdiorParams].params];
     __weak typeof(self) weakS = self;
-    NSString *url = [NSString stringWithFormat:@"%@video/song/search?no=%ld&size=3&w=%@",AddressAPI,(long)no,text];
+    NSString *url = [NSString stringWithFormat:@"%@video/song/search?no=%ld&size=20&w=%@",AddressAPI,(long)no,text];
     NSURLSessionTask *task = [manager GET:[url stringByAddingPercentEscapesUsingEncoding:(NSUTF8StringEncoding)] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"search %@",responseObject);
         if ([weakS.delegate respondsToSelector:@selector(musicSearchAPISearchSuccess:)]) {
