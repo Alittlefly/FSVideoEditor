@@ -10,6 +10,7 @@
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
 #import "UIButton+WebCache.h"
+#import "FSPublishSingleton.h"
 
 @interface FSMusicTypeButton : UIButton
 @property(nonatomic,strong)FSMusicType *musicType;

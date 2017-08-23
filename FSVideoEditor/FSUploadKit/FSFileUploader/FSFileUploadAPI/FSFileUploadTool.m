@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #import "MJExtension.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSPublishSingleton.h"
 
 @interface FSFileUploadTool ()
 {
@@ -56,7 +57,7 @@
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
 //    NSDictionary *param = @{@"file":data};
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
-    [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
+    [dic setValue:[FSPublishSingleton sharedInstance].loginKey forKey:@"loginKey"];
     [dic setValue:[NSNumber numberWithInteger:4] forKey:@"requestType"];
 
     _uploadTask = (NSURLSessionUploadTask *)[mgr  POST:[self requestUrl] parameters:@{} constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {

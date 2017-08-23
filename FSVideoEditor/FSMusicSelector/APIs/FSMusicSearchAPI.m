@@ -10,7 +10,7 @@
 #import "FSVideoEditorCommenData.h"
 #import "AFNetworking.h"
 #import "FSVideoEditorAPIParams.h"
-
+#import "FSPublishSingleton.h"
 
 @implementation FSMusicSearchAPI
 -(void)searchMusicWithText:(NSString *)text no:(NSInteger)no{

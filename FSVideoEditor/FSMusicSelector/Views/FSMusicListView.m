@@ -13,6 +13,7 @@
 #import "FSVideoEditorCommenData.h"
 #import "MJRefresh.h"
 #import "FSDraftManager.h"
+#import "FSPublishSingleton.h"
 
 @interface FSMusicListView ()<UITableViewDelegate,UITableViewDataSource,FSMusicCellDelegate,FSMusicCollectSeverDelegate>
 {

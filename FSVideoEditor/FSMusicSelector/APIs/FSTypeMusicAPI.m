@@ -9,6 +9,7 @@
 #import "FSTypeMusicAPI.h"
 #import "AFNetworking.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSPublishSingleton.h"
 
 @interface FSTypeMusicAPI ()
 {
