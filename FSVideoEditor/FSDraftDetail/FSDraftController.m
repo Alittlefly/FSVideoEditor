@@ -36,7 +36,7 @@
         _emptyView = [[FSDraftEmptyView alloc] initWithFrame:self.view.bounds];
         [_emptyView setBackgroundColor:FSHexRGB(0xEFEFF4)];
         [_emptyView.imageIcon setImage:[UIImage imageNamed:@"draft_empty_image"]];
-        [_emptyView.message setText:[FSShortLanguage CustomLocalizedStringFromTable:@"emptyDraft"]];
+//        [_emptyView.message setText:[FSShortLanguage CustomLocalizedStringFromTable:@"emptyDraft"]];
         [self.view addSubview:_emptyView];
     }
     return _emptyView;
