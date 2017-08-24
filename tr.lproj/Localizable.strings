@@ -122,7 +122,5 @@ deleteAlert = "Silmek istediğine emin misin?";
 
 deleteAllAlert = "Tümünü silmek istiyor musun?";
 
-emptyDraft = "空数据";
-
 MessageCancel = "İptal";
 MessageOK = "Evet";

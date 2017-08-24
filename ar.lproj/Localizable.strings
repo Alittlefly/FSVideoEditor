@@ -124,7 +124,5 @@ deleteAlert = "هل تريد الحذف؟";
 
 deleteAllAlert = "هل تريد أن تترك هذا الجزء بلا محتوى؟";
 
-emptyDraft = "空数据";
-
 MessageCancel = "إلغاء";
 MessageOK = "تأكيد";
