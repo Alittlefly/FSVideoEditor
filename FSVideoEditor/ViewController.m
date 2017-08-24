@@ -147,8 +147,17 @@
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
     [self.view addGestureRecognizer:tapGesture];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shi:) name:kNSNotificationVideoEditToolWillShow object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hei:) name:kNSNotificationVideoEditToolDidHide object:nil];
 }
-
+- (void)shi:(NSNotification *)no{
+    NSLog(@"NSNotification ");
+}
+-(void)hei:(NSNotification *)no{
+    NSLog(@"NSNotification ");
+}
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
