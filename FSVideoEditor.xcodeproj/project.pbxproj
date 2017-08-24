@@ -2738,7 +2738,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = FSVideoEditorSDK/Info.plist;
+				INFOPLIST_FILE = FSVideoEditor/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2772,7 +2772,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = FSVideoEditorSDK/Info.plist;
+				INFOPLIST_FILE = FSVideoEditor/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2791,7 +2791,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 3PSN5E79R7;
-				INFOPLIST_FILE = FSVideoEditorSDKTests/Info.plist;
+				INFOPLIST_FILE = FSVideoEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fs.company.FSVideoEditorSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2803,7 +2803,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 3PSN5E79R7;
-				INFOPLIST_FILE = FSVideoEditorSDKTests/Info.plist;
+				INFOPLIST_FILE = FSVideoEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fs.company.FSVideoEditorSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2839,6 +2839,7 @@
 				98D9F4791F4D874300ED841F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		98D9F47A1F4D874300ED841F /* Build configuration list for PBXNativeTarget "FSVideoEditorSDKTests" */ = {
 			isa = XCConfigurationList;
@@ -2847,6 +2848,7 @@
 				98D9F47C1F4D874300ED841F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
