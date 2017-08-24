@@ -155,6 +155,7 @@
 }
 -(void)hei:(NSNotification *)no{
     NSLog(@"NSNotification ");
+
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
