@@ -9,10 +9,25 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>FSVideoEditorSDK.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>567E0B4D1EF930D100C4C527</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>98D9F45F1F4D874200ED841F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>98D9F4671F4D874300ED841F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

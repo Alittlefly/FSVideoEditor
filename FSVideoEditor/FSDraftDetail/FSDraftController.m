@@ -73,6 +73,7 @@
     UIButton *deleteButton = [[UIButton alloc] init];
     [deleteButton setTitle:saveTitle forState:UIControlStateNormal];
     [deleteButton setTitleColor:FSHexRGB(0xD50000) forState:UIControlStateNormal];
+    [deleteButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [deleteButton addTarget:self action:@selector(clickDeleteButton) forControlEvents:UIControlEventTouchUpInside];
     
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:21]};
@@ -139,9 +140,11 @@
     if ([self.draftsMisic count] == 0) {
         [self.emptyView setHidden:NO];
         [self.tableView.tableFooterView setHidden:YES];
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
     }else{
         [self.emptyView setHidden:YES];
         [self.tableView.tableFooterView setHidden:NO];
+        [self.navigationItem.rightBarButtonItem setEnabled:YES];
     }
     return [self.draftsMisic count];
 }
