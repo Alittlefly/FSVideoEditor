@@ -174,6 +174,10 @@
     [_backButton addTarget:self action:@selector(backClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_backButton];
     
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        _backButton.transform = CGAffineTransformMakeScale(-1, 1);
+    }
+    
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _finishButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
     if (totalTime > 0) {

@@ -59,6 +59,7 @@
 -(void)deleteAllLocal{
     NSFileManager *defaultManager = [NSFileManager defaultManager];
     NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
+    [self.draftInfos removeAllObjects];
     if ([defaultManager fileExistsAtPath:dataPath]) {
         [defaultManager removeItemAtPath:dataPath error:nil];
     }

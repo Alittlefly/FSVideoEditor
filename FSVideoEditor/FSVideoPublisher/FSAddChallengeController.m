@@ -48,6 +48,10 @@
     [backButton addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        backButton.transform = CGAffineTransformMakeScale(-1, 1);
+    }
+    
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width-100)/2, 30, 100, 24)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = FSHexRGB(0x292929);

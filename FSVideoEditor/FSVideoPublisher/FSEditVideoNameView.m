@@ -9,6 +9,7 @@
 #import "FSEditVideoNameView.h"
 #import "FSShortLanguage.h"
 #import "FSPublishSingleton.h"
+#import "FSAlertView.h"
 
 @interface FSEditVideoNameView()<UITextFieldDelegate>
 
@@ -154,6 +155,15 @@
     
     if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewEditVideoTitle:)]) {
         [self.delegate FSEditVideoNameViewEditVideoTitle:textField.text];
+    }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField.text.length == 40 && string.length > 0) {
+        FSAlertView *alert = [[FSAlertView alloc] init];
+        [alert showWithMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"MaxLetterLimit"]];
+        return NO;
     }
     return YES;
 }
