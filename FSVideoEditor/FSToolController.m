@@ -44,7 +44,12 @@
     
     UIButton *videoRecorderButton = [UIButton buttonWithType:UIButtonTypeCustom];
     videoRecorderButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 5 : CGRectGetWidth(_contentView.frame) - 80, 17, 75, 21);
-    [videoRecorderButton setTitle:[NSString stringWithFormat:@"%@ >",[FSShortLanguage CustomLocalizedStringFromTable:@"Record"]] forState:UIControlStateNormal];
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        [videoRecorderButton setTitle:[NSString stringWithFormat:@"< %@",[FSShortLanguage CustomLocalizedStringFromTable:@"Record"]] forState:UIControlStateNormal];
+    }
+    else {
+        [videoRecorderButton setTitle:[NSString stringWithFormat:@"%@ >",[FSShortLanguage CustomLocalizedStringFromTable:@"Record"]] forState:UIControlStateNormal];
+    }
     [videoRecorderButton setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
     [videoRecorderButton setTitleColor:FSHexRGB(0x010A12) forState:(UIControlStateSelected)];
     [videoRecorderButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
