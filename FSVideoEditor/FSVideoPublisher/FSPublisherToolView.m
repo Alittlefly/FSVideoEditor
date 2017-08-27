@@ -68,7 +68,7 @@
 
 - (void)initBaseUI {
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
+    _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 30, 20, 20);
     [_backButton setImage:[UIImage imageNamed:@"recorder-back"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_backButton];
@@ -118,7 +118,7 @@
     
     _volumeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _volumeButton.frame = CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicLabel.frame)+20, 40, 40);
-    [_volumeButton setImage:[UIImage imageNamed:@"recorder-beauty-on"] forState:UIControlStateNormal];
+    [_volumeButton setImage:[UIImage imageNamed:@"recorder-volume"] forState:UIControlStateNormal];
     [_volumeButton addTarget:self action:@selector(volumeClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_volumeButton];
     

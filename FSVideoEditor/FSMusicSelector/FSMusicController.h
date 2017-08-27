@@ -23,6 +23,8 @@
 
 -(UIViewController *)musicControllerWouldShowMusicDetail:(FSMusic *)music;
 
+- (void)musicControllerHideen;
+
 @end
 
 @interface FSMusicController : FSCancleController

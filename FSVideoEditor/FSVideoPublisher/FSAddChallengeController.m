@@ -209,6 +209,9 @@
 - (void)FSChallengeDataServerAddChallengeFailed:(NSError *)error {
     [self.loading loadingViewhide];
     
+    FSAlertView *alert = [[FSAlertView alloc] init];
+    [alert showWithMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
+    
 }
 
 - (void)FSChallengeDataServerAddChallengeSucceed:(FSChallengeModel *)model {

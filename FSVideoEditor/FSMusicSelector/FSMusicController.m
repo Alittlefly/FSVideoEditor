@@ -132,6 +132,9 @@
     [super viewWillDisappear:animated];
     
     [_musicListView stopPlayCurrentMusic];
+    if ([self.delegate respondsToSelector:@selector(musicControllerHideen)]) {
+        [self.delegate musicControllerHideen];
+    }
 }
 #pragma mark -
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{

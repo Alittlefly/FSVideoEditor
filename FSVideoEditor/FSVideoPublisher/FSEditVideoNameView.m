@@ -10,6 +10,8 @@
 #import "FSShortLanguage.h"
 #import "FSPublishSingleton.h"
 #import "FSAlertView.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface FSEditVideoNameView()<UITextFieldDelegate>
 
@@ -131,6 +133,15 @@
 }
 
 - (void)saveToPhoto {
+    if (!_isSave) {
+        if (!([self canUserPickVideosFromPhotoLibrary] && [self canUserPickPhotosFromPhotoLibrary])) {
+            NSString *message = [FSShortLanguage CustomLocalizedStringFromTable:@"MessageNoAccess"];
+
+            FSAlertView *alert = [[FSAlertView alloc] init];
+            [alert showWithMessage:message];
+            return;
+        }
+    }
     _isSave = !_isSave;
     
     if (_isSave) {
@@ -173,6 +184,42 @@
     if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewEditVideoTitle:)]) {
         [self.delegate FSEditVideoNameViewEditVideoTitle:self.textFile.text];
     }
+}
+
+#pragma mark - 相册文件选取相关
+// 相册是否可用
+- (BOOL) isPhotoLibraryAvailable{
+    return [UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+
+// 是否可以在相册中选择视频
+- (BOOL) canUserPickVideosFromPhotoLibrary{
+    return [self cameraSupportsMedia:( NSString *)kUTTypeMovie sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+
+// 是否可以在相册中选择视频
+- (BOOL) canUserPickPhotosFromPhotoLibrary{
+    return [self cameraSupportsMedia:( NSString *)kUTTypeImage sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+// 判断是否支持某种多媒体类型：拍照，视频
+- (BOOL) cameraSupportsMedia:(NSString *)paramMediaType sourceType:(UIImagePickerControllerSourceType)paramSourceType{
+    __block BOOL result = NO;
+    if ([paramMediaType length] == 0){
+        NSLog(@"Media type is empty.");
+        return NO;
+    }
+    NSArray *availableMediaTypes =[UIImagePickerController availableMediaTypesForSourceType:paramSourceType];
+    [availableMediaTypes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL*stop) {
+        NSString *mediaType = (NSString *)obj;
+        if ([mediaType isEqualToString:paramMediaType]){
+            result = YES;
+            *stop= YES;
+        }
+    }];
+    return result;
 }
 
 @end

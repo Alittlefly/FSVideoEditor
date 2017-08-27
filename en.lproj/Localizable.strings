@@ -49,7 +49,7 @@ UploadSecceed = "Uploaded";
 CancelRecording = "Do you want to cancel recording?";
 CancelRecorded = "Yes";
 OriginalVoice = "Original Voice";
-CancelEditing = "Do you want to cancel recording?";
+CancelEditing = "Do you want to cancel editing?";
 CancelEditWarning = "If continue all effects will be deleted, continue?";
 Done = "Done";
 Save = "Save";
@@ -127,3 +127,4 @@ deleteAllAlert = "Do you want to delete all of them?";
 MessageCancel = "Cancel";
 MessageOK = "Yes";
 
+emptyDraft = "Oops! No data found";

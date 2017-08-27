@@ -21,25 +21,25 @@
     NSString *PathString = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",RecoursePath] ofType:@"lproj"];
 
     if (PathString.length == 0) { //没有这种语言 默认取系统偏好
-        
-        NSString *perferredLanguage =  @"ar"; //[[NSLocale preferredLanguages] objectAtIndex:0];
-        if ([perferredLanguage isEqualToString:@"zh-Hans"]) {
-            perferredLanguage = @"ar";
+        if (!table) {
+            return NSLocalizedString(key, nil);
         }
-        PathString = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",perferredLanguage] ofType:@"lproj"];
+        else {
+            return NSLocalizedStringFromTable(key, table, nil);
+        }
+
+//        NSString *perferredLanguage =  @"ar"; //[[NSLocale preferredLanguages] objectAtIndex:0];
+//        if ([perferredLanguage isEqualToString:@"zh-Hans"]) {
+//            perferredLanguage = @"ar";
+//        }
+//        PathString = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",perferredLanguage] ofType:@"lproj"];
     }
-    
-    NSBundle * currentBundle = [NSBundle bundleWithPath:PathString];
-    NSString * LoaclizedString = [currentBundle localizedStringForKey:key value:nil table:table];
-    
-    return LoaclizedString;
-    
-//    if (!table) {
-//        return NSLocalizedString(key, nil);
-//    }
-//    else {
-//        return NSLocalizedStringFromTable(key, table, nil);
-//    }
+    else {
+        NSBundle * currentBundle = [NSBundle bundleWithPath:PathString];
+        NSString * LoaclizedString = [currentBundle localizedStringForKey:key value:nil table:table];
+        
+        return LoaclizedString;
+    }
 }
 
 + (void)setLanguageTable:(NSString *)table {

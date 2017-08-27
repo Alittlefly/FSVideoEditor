@@ -565,6 +565,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     }
 }
 
+- (void)musicControllerHideen {
+    [self playVideoFromHead];
+}
+
 #pragma mark -
 - (void)FSFilterViewFinishedChooseFilter {
     [UIView animateWithDuration:1 animations:^{
@@ -835,18 +839,17 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 #pragma mark - FSPublisherServerDelegate
 - (void)FSPublisherServerSucceed {
     
-        [self.loading loadingViewhide];
-        
-        [[FSPublishSingleton sharedInstance] cleanData];
-        [[FSDraftManager sharedManager] delete:_draftInfo];
-        [[FSDraftManager sharedManager] clearInfo];
-        [[FSDraftManager sharedManager] saveToLocal];
-        [self deleteCurrentCompileFile:_stickerVideoPath];
-        
-        
-        [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadSecceed"]];
-        
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.loading loadingViewhide];
+    
+    [[FSPublishSingleton sharedInstance] cleanData];
+    [[FSDraftManager sharedManager] delete:_draftInfo];
+    [[FSDraftManager sharedManager] clearInfo];
+    [self deleteCurrentCompileFile:_stickerVideoPath];
+    [[FSDraftManager sharedManager] cancleOperate];
+    
+    [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadSecceed"]];
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)FSPublisherServerFailed:(NSError *)error {
