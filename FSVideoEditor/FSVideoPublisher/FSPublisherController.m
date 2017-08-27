@@ -565,6 +565,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     }
 }
 
+- (void)musicControllerHideen {
+    [self playVideoFromHead];
+}
+
 #pragma mark -
 - (void)FSFilterViewFinishedChooseFilter {
     [UIView animateWithDuration:1 animations:^{

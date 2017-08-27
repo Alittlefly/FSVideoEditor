@@ -118,7 +118,7 @@
     
     _volumeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _volumeButton.frame = CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicLabel.frame)+20, 40, 40);
-    [_volumeButton setImage:[UIImage imageNamed:@"recorder-beauty-on"] forState:UIControlStateNormal];
+    [_volumeButton setImage:[UIImage imageNamed:@"recorder-volume"] forState:UIControlStateNormal];
     [_volumeButton addTarget:self action:@selector(volumeClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_volumeButton];
     

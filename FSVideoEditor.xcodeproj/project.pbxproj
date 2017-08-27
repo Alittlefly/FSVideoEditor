@@ -212,9 +212,9 @@
 		988AC6E91F010B0D007FBCEF /* FSControlVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */; };
 		988E3D1D1F026D78004E837F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 988E3D1C1F026D78004E837F /* libstdc++.tbd */; };
 		988E3D271F0271A1004E837F /* FSTimeCountsdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */; };
+		98D107081F52A08300E76D55 /* FSVideoEditorSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 98D9F4601F4D874200ED841F /* FSVideoEditorSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		98D9F4691F4D874300ED841F /* FSVideoEditorSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D9F4601F4D874200ED841F /* FSVideoEditorSDK.framework */; };
 		98D9F4751F4D874300ED841F /* FSVideoEditorSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98D9F4601F4D874200ED841F /* FSVideoEditorSDK.framework */; };
-		98D9F4761F4D874300ED841F /* FSVideoEditorSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 98D9F4601F4D874200ED841F /* FSVideoEditorSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		98D9F47D1F4D888900ED841F /* FSVideoEditorAPIParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B059D1F29E34100D09364 /* FSVideoEditorAPIParams.m */; };
 		98D9F47E1F4D888900ED841F /* FSDissolveAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A071F0A42AA0035346A /* FSDissolveAnimator.m */; };
 		98D9F47F1F4D888900ED841F /* FSSpringAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 563B7A091F0A42AA0035346A /* FSSpringAnimator.m */; };
@@ -442,6 +442,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		98D107061F52A07C00E76D55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 567E0B461EF930D100C4C527 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 98D9F45F1F4D874200ED841F;
+			remoteInfo = FSVideoEditorSDK;
+		};
 		98D9F46A1F4D874300ED841F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 567E0B461EF930D100C4C527 /* Project object */;
@@ -456,13 +463,6 @@
 			remoteGlobalIDString = 567E0B4D1EF930D100C4C527;
 			remoteInfo = FSVideoEditor;
 		};
-		98D9F4731F4D874300ED841F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 567E0B461EF930D100C4C527 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 98D9F45F1F4D874200ED841F;
-			remoteInfo = FSVideoEditorSDK;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -472,7 +472,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				98D9F4761F4D874300ED841F /* FSVideoEditorSDK.framework in Embed Frameworks */,
+				98D107081F52A08300E76D55 /* FSVideoEditorSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2049,7 +2049,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				98D9F4741F4D874300ED841F /* PBXTargetDependency */,
+				98D107071F52A07C00E76D55 /* PBXTargetDependency */,
 			);
 			name = FSVideoEditor;
 			productName = FSVideoEditor;
@@ -2497,6 +2497,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		98D107071F52A07C00E76D55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 98D9F45F1F4D874200ED841F /* FSVideoEditorSDK */;
+			targetProxy = 98D107061F52A07C00E76D55 /* PBXContainerItemProxy */;
+		};
 		98D9F46B1F4D874300ED841F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 98D9F45F1F4D874200ED841F /* FSVideoEditorSDK */;
@@ -2506,11 +2511,6 @@
 			isa = PBXTargetDependency;
 			target = 567E0B4D1EF930D100C4C527 /* FSVideoEditor */;
 			targetProxy = 98D9F46C1F4D874300ED841F /* PBXContainerItemProxy */;
-		};
-		98D9F4741F4D874300ED841F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 98D9F45F1F4D874200ED841F /* FSVideoEditorSDK */;
-			targetProxy = 98D9F4731F4D874300ED841F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
