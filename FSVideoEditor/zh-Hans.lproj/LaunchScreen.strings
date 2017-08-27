@@ -17,7 +17,7 @@ RecordNow = "确定使用并开拍";
 Loading = "加载中…";
 Cancel = "取消";
 
-VideoLengthTip = "选择的视频不能少于5s";
+VideoLengthTip = "选择的视频不能少于(0)s";
 Edit = "编辑";
 Volume = "音量";
 Effects = "特效";
