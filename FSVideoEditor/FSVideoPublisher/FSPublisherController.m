@@ -846,9 +846,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [[FSPublishSingleton sharedInstance] cleanData];
     [[FSDraftManager sharedManager] delete:_draftInfo];
     [[FSDraftManager sharedManager] clearInfo];
-    [[FSDraftManager sharedManager] saveToLocal];
     [self deleteCurrentCompileFile:_stickerVideoPath];
-
+    [[FSDraftManager sharedManager] cancleOperate];
 
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadSecceed"]];
     
