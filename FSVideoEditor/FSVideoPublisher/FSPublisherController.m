@@ -266,7 +266,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *final = [documentsDirectory stringByAppendingPathComponent:@"tmp"];
-    return [final stringByAppendingFormat:@"/video%@.mp4",timeRandom];
+    return [final stringByAppendingFormat:@"/video%@.mov",timeRandom];
 }
 
 -(void)publishFiles{
@@ -535,6 +535,9 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 - (void)FSPublisherToolViewSaveToLibrary:(BOOL)isSave {
+    
+    // 权限检测
+    
     _tempDraftInfo.vSaveToAlbum = isSave;
 }
 
