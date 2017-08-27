@@ -68,7 +68,7 @@
 
 - (void)initBaseUI {
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
+    _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 30, 20, 20);
     [_backButton setImage:[UIImage imageNamed:@"recorder-back"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_backButton];
