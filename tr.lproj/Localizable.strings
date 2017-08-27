@@ -124,3 +124,5 @@ deleteAllAlert = "Tümünü silmek istiyor musun?";
 
 MessageCancel = "İptal";
 MessageOK = "Evet";
+
+emptyDraft = "Eyvah! Hiç bir veri bulunamadı";

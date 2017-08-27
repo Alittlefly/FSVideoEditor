@@ -127,3 +127,4 @@ deleteAllAlert = "Do you want to delete all of them?";
 MessageCancel = "Cancel";
 MessageOK = "Yes";
 
+emptyDraft = "Oops! No data found";

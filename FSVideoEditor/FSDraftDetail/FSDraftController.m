@@ -34,9 +34,9 @@
 -(FSDraftEmptyView *)emptyView{
     if (!_emptyView) {
         _emptyView = [[FSDraftEmptyView alloc] initWithFrame:self.view.bounds];
-//        [_emptyView setBackgroundColor:FSHexRGB(0xEFEFF4)];
-//        [_emptyView.imageIcon setImage:[UIImage imageNamed:@"draft_empty_image"]];
-//        [_emptyView.message setText:[FSShortLanguage CustomLocalizedStringFromTable:@"emptyDraft"]];
+        [_emptyView setBackgroundColor:FSHexRGB(0xEFEFF4)];
+        [_emptyView.imageIcon setImage:[UIImage imageNamed:@"draft_empty_image"]];
+        [_emptyView.message setText:[FSShortLanguage CustomLocalizedStringFromTable:@"emptyDraft"]];
         [self.view addSubview:_emptyView];
     }
     return _emptyView;
@@ -157,7 +157,7 @@
     
     
     UIImageView *musicPic = [[UIImageView alloc] init];
-    [musicPic setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?:15.8, 12.8, 18.4, 18.4)];
+    [musicPic setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?cellW - 15.8 - 18.4:15.8, 12.8, 18.4, 18.4)];
     [musicPic setImage:[UIImage imageNamed:@"pic_music"]];
     [view addSubview:musicPic];
     
@@ -185,6 +185,9 @@
     UIImageView *arrowPic = [[UIImageView alloc] init];
     [arrowPic setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?0:cellW - 20, 12, 20, 20)];
     [arrowPic setImage:[UIImage imageNamed:@"paly_icon_image"]];
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        arrowPic.transform = CGAffineTransformMakeRotation(M_PI);
+    }
     [view addSubview:arrowPic];
     
     UIView* line = [[UIView alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?0:30, 43, cellW - 30, 1)];
@@ -355,14 +358,12 @@
 -(void)photoAgain:(UIButton*)sender{
     NSMutableArray* tempArray = [self.draftsMisic objectAtIndex:sender.tag];
     FSDraftInfo *info = [tempArray objectAtIndex:0];
+    FSDraftInfo* newInfo =  [[FSDraftInfo alloc] init];
+    newInfo.vMusic = [info.vMusic copy];
     
     FSShortVideoRecorderController *controller = [[FSShortVideoRecorderController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
-    controller.draftInfo = info;
-    
-    FSPublisherController *publishController = [[FSPublisherController alloc] init];
-    publishController.draftInfo = info;
-    [nav pushViewController:publishController animated:NO];
+    controller.draftInfo = newInfo;
     
     [self presentViewController:nav animated:YES completion:nil];
 }
