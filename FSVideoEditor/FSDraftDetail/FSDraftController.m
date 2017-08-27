@@ -98,10 +98,10 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    _drafts =  [NSMutableArray arrayWithArray:[[FSDraftManager sharedManager] allDraftInfos]];
     
-    [self dealWithDraftData:_drafts];
-    
+//    _drafts =  [NSMutableArray arrayWithArray:[[FSDraftManager sharedManager] allDraftInfos]];
+//    [self dealWithDraftData:_drafts];
+//    
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 47)];
     
     UILabel *label = [[UILabel alloc] init];
@@ -114,6 +114,16 @@
     
     [self.tableView setTableFooterView:view];
     [self.tableView registerClass:[FSDraftTableViewCell class] forCellReuseIdentifier:@"FSDraftTableViewCell"];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [_drafts removeAllObjects];
+    [self.draftsMisic removeAllObjects];
+    [self.draftsMisicDict removeAllObjects];
+    _drafts =  [NSMutableArray arrayWithArray:[[FSDraftManager sharedManager] allDraftInfos]];
+    [self dealWithDraftData:_drafts];
+    [self.tableView reloadData];
 }
 
 -(void)dealWithDraftData:(NSMutableArray*)drafts{
@@ -232,8 +242,8 @@
     return 101;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FSDraftInfo *info = [_drafts objectAtIndex:indexPath.row]
-    ;
+    NSMutableArray* tempArray = [self.draftsMisic objectAtIndex:indexPath.section];
+    FSDraftInfo *info = [tempArray objectAtIndex:indexPath.row];
 
     if (info.vType == FSDraftInfoTypeRecoder) {
         
