@@ -418,19 +418,19 @@
 -(void)beginFx:(UIButton *)button{
     NSInteger tag = button.tag;
     if (tag == 1) {
-        _progress.fxViewColor = [UIColor redColor];
+        
+        _progress.fxViewColor =  FSHexRGBAlpha(0x01feff, 0.95);//[UIColor redColor];
     }else if(tag == 2){
-        _progress.fxViewColor = [UIColor whiteColor];
+        _progress.fxViewColor = FSHexRGBAlpha(0x9c01ff, 0.95);//[UIColor whiteColor];
     }else if (tag == 3){
-        _progress.fxViewColor = [UIColor blueColor];
+        _progress.fxViewColor = FSHexRGBAlpha(0xff39ad, 0.95);//[UIColor blueColor];
     }else if (tag == 4){
-        _progress.fxViewColor = [UIColor blackColor];
+        _progress.fxViewColor = FSHexRGBAlpha(0xffe139, 0.95);//[UIColor blackColor];
     }else if (tag == 5){
-        _progress.fxViewColor = [UIColor purpleColor];
+        _progress.fxViewColor = FSHexRGBAlpha(0x6339ff, 0.95);// [UIColor purpleColor];
     }else if (tag == 6){
-        _progress.fxViewColor = [UIColor yellowColor];
+        _progress.fxViewColor = FSHexRGBAlpha(0x39ff9f, 0.95);//[UIColor yellowColor];
     }
-    
      _currentFxId = objc_getAssociatedObject(button, FxIdKey);
     
     [_progress beginFxView];
