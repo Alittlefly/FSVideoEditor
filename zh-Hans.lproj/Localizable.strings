@@ -128,3 +128,5 @@ deleteAllAlert = "你确认删除所有信息吗";
 MessageCancel = "取消";
 MessageOK = "确认";
 
+xsignal = "X信号";
+

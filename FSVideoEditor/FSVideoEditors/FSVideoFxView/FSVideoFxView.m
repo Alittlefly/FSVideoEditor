@@ -309,7 +309,7 @@
     [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     
-    [jzfx setTitle:NSLocalizedString(@"x-signal", nil) forState:(UIControlStateNormal)];
+    [jzfx setTitle:NSLocalizedString(@"xsignal", nil) forState:(UIControlStateNormal)];
     objc_setAssociatedObject(jzfx, FxIdKey, @"9AC28816-639F-4A9B-B4BA-4060ABD229A2", OBJC_ASSOCIATION_COPY);
     
     [_contentView addSubview:jzfx];
