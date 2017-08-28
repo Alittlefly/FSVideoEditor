@@ -58,6 +58,8 @@
         [self.selectedImage setCenter:CGPointMake(CGRectGetWidth(frame)/2.0, CGRectGetHeight(frame)/2.0)];
         [self.selectedImage setHidden:YES];
         [self addSubview:self.selectedImage];
+        
+        [self setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentCenter)];
     }
     return self;
 }
@@ -72,9 +74,9 @@
 }
 -(CGRect)titleRectForContentRect:(CGRect)contentRect{
     CGRect titleRect;
-    titleRect.size.width = CGRectGetWidth(contentRect);
+    titleRect.size.width = CGRectGetWidth(contentRect)*2;
     titleRect.size.height = 16.0;
-    titleRect.origin.x = 0;
+    titleRect.origin.x = -CGRectGetWidth(contentRect)/2.0;
     titleRect.origin.y = CGRectGetHeight(contentRect) + 11.0;
     return titleRect;
 }
@@ -366,6 +368,7 @@
     [noneFx setBackgroundColor:[UIColor redColor]];
     [noneFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"NoFilter"] forState:(UIControlStateNormal)];
      noneFx.tag = FSVideoFxTypeNone;
+    [noneFx setImage:[UIImage sd_animatedGIFNamed:@"Origin"] forState:(UIControlStateNormal)];
     [noneFx.colorView setBackgroundColor:FSHexRGB(0x000000)];
     [self.fxButtonDict setObject:noneFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeNone]];
     
@@ -376,6 +379,7 @@
     [revertFx setBackgroundColor:[UIColor yellowColor]];
     [revertFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Reverse"] forState:(UIControlStateNormal)];
     [revertFx.colorView setBackgroundColor:FSHexRGB(0xff39ad)];
+    [revertFx setImage:[UIImage sd_animatedGIFNamed:@"revert"] forState:(UIControlStateNormal)];
      revertFx.tag = FSVideoFxTypeRevert;
     [self.fxButtonDict setObject:revertFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeRevert]];
     [_contentTimeView addSubview:revertFx];
@@ -387,6 +391,8 @@
     [repeatFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Repeat"] forState:(UIControlStateNormal)];
     [repeatFx.colorView setBackgroundColor:FSHexRGB(0x7778ff)];
     repeatFx.tag = FSVideoFxTypeRepeat;
+    [repeatFx setImage:[UIImage sd_animatedGIFNamed:@"repeat"] forState:(UIControlStateNormal)];
+
     [self.fxButtonDict setObject:repeatFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeRepeat]];
 
     repeatFx.selected = (_fxType == FSVideoFxTypeRepeat);
@@ -398,7 +404,8 @@
     [slowFx setBackgroundColor:[UIColor yellowColor]];
     [slowFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"SlowMotion"] forState:(UIControlStateNormal)];
     [slowFx.colorView setBackgroundColor:FSHexRGB(0xbcff77)];
-    slowFx.tag = FSVideoFxTypeSlow;
+     slowFx.tag = FSVideoFxTypeSlow;
+    [slowFx setImage:[UIImage sd_animatedGIFNamed:@"slow"] forState:(UIControlStateNormal)];
     [self.fxButtonDict setObject:slowFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeSlow]];
 
     [_contentTimeView addSubview:slowFx];
