@@ -53,6 +53,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     FSPublishOperationType _OperationType;
     
     FSDraftInfo *_tempDraftInfo;
+    
+    UIImage *_firstFrame;
 }
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
@@ -302,6 +304,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     }
     _tempDraftInfo.vFinalPath = [self getCompilePath];
 
+    _firstFrame  = [_context grabImageFromTimeline:_timeLine timestamp:0 proxyScale:nil];
+    
     if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_tempDraftInfo.vFinalPath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeLow) flags:0]){
         NSLog(@"11111111");
     }
@@ -336,13 +340,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         }
     }
     else {
-        UIImage *image = [[FSShortVideoRecorderManager sharedInstance] getImageFromTimeLine:timeline atTime:0 proxyScale:nil];//[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_tempDraftInfo.vFinalPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480];
-        [self uploadFirstImage:image];
-        //UISaveVideoAtPathToSavedPhotosAlbum(_tempDraftInfo.vFinalPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
-
+//        UIImage *image = [[FSShortVideoRecorderManager sharedInstance] getImageFromTimeLine:timeline atTime:0 proxyScale:nil];//[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_tempDraftInfo.vFinalPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480];
+        if(_firstFrame){
+            [self uploadFirstImage:_firstFrame];
+        }
     }
-    
-
 }
 // 生成失败的回调函数
 - (void)didCompileFailed:(NvsTimeline *)timeline {
@@ -509,7 +511,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     //UISaveVideoAtPathToSavedPhotosAlbum(_filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     _OperationType = FSPublishOperationTypeSaveToDraft;
     
-     UIImage *image = [[FSShortVideoRecorderManager sharedInstance] getImageFromTimeLine:_timeLine atTime:0 proxyScale:nil];
+    UIImage *image = [_context grabImageFromTimeline:_timeLine timestamp:0 proxyScale:nil];
     
     if (image) {
         NSString *imagePath = [FSDraftFileManager saveImageTolocal:image];
