@@ -518,17 +518,14 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         }
         _tempDraftInfo.vFirstFramePath = imagePath;
     }
-    // test
-//    FSDraftChallenge *challenge = [[FSDraftChallenge alloc] init];
-//    challenge.challengeDetail = @"challegeDatail";
-//    challenge.challengeName = @"challengeName";
-//    //
-//    _tempDraftInfo.challenge = challenge;
     _tempDraftInfo.vAddedFxViews = self.addedViews;
     
     [[FSDraftManager sharedManager] mergeInfo];
     [[FSDraftManager sharedManager] saveToLocal];
     [[FSDraftManager sharedManager] cancleOperate];
+    
+    [_context stop];
+    [_context clearCachedResources:YES];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 
@@ -841,18 +838,18 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 #pragma mark - FSPublisherServerDelegate
 - (void)FSPublisherServerSucceed {
+    
     [self.loading loadingViewhide];
     
     [[FSPublishSingleton sharedInstance] cleanData];
     [[FSDraftManager sharedManager] delete:_draftInfo];
     [[FSDraftManager sharedManager] clearInfo];
-    [[FSDraftManager sharedManager] saveToLocal];
     [self deleteCurrentCompileFile:_stickerVideoPath];
-
-
+    [[FSDraftManager sharedManager] cancleOperate];
+    
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadSecceed"]];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)FSPublisherServerFailed:(NSError *)error {

@@ -67,13 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FSVideoEditor/FSDraftManager/FSDraftManager.m"
-            timestampString = "525518215.304037"
+            filePath = "FSVideoEditor/FSDraftDetail/FSDraftController.m"
+            timestampString = "525526109.19028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "-mergeInfo"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "-viewWillAppear:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

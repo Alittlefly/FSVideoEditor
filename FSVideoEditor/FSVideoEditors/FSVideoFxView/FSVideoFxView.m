@@ -10,6 +10,7 @@
 #import <objc/runtime.h>
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
+#import "UIImage+GIF.h"
 
 #define FxButtonH 50.0
 #define FxButtonP 30.0
@@ -57,20 +58,25 @@
         [self.selectedImage setCenter:CGPointMake(CGRectGetWidth(frame)/2.0, CGRectGetHeight(frame)/2.0)];
         [self.selectedImage setHidden:YES];
         [self addSubview:self.selectedImage];
+        
+        [self setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentCenter)];
     }
     return self;
 }
 -(void)setBackgroundColor:(UIColor *)backgroundColor{
     [self.backImage setBackgroundColor:backgroundColor];
 }
+-(void)setImage:(UIImage *)image forState:(UIControlState)state{
+    [self.backImage setImage:image];
+}
 -(CGRect)imageRectForContentRect:(CGRect)contentRect{
     return self.bounds;
 }
 -(CGRect)titleRectForContentRect:(CGRect)contentRect{
     CGRect titleRect;
-    titleRect.size.width = CGRectGetWidth(contentRect);
+    titleRect.size.width = CGRectGetWidth(contentRect)*2;
     titleRect.size.height = 16.0;
-    titleRect.origin.x = 0;
+    titleRect.origin.x = -CGRectGetWidth(contentRect)/2.0;
     titleRect.origin.y = CGRectGetHeight(contentRect) + 11.0;
     return titleRect;
 }
@@ -270,6 +276,7 @@
     FSFxButton *soulfx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [soulfx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Magic"] forState:(UIControlStateNormal)];
     [soulfx setBackgroundColor:[UIColor redColor]];
+    [soulfx setImage:[UIImage sd_animatedGIFNamed:@"soul"] forState:(UIControlStateNormal)];
     [soulfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [soulfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [soulfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
@@ -282,6 +289,7 @@
     FSFxButton *shakefx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(soulfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [shakefx setBackgroundColor:[UIColor yellowColor]];
     [shakefx setTag:2];
+    [shakefx setImage:[UIImage sd_animatedGIFNamed:@"shake"] forState:(UIControlStateNormal)];
     [shakefx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [shakefx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [shakefx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
@@ -296,11 +304,12 @@
     FSFxButton *jzfx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(shakefx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [jzfx setBackgroundColor:[UIColor yellowColor]];
     [jzfx setTag:3];
+    [jzfx setImage:[UIImage sd_animatedGIFNamed:@"x_signal"] forState:(UIControlStateNormal)];
     [jzfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     
-    [jzfx setTitle:NSLocalizedString(@"x-signal", nil) forState:(UIControlStateNormal)];
+    [jzfx setTitle:NSLocalizedString(@"xsignal", nil) forState:(UIControlStateNormal)];
     objc_setAssociatedObject(jzfx, FxIdKey, @"9AC28816-639F-4A9B-B4BA-4060ABD229A2", OBJC_ASSOCIATION_COPY);
     
     [_contentView addSubview:jzfx];
@@ -308,11 +317,12 @@
     FSFxButton *fmfx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(jzfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [fmfx setBackgroundColor:[UIColor yellowColor]];
     [fmfx setTag:4];
+    [fmfx setImage:[UIImage sd_animatedGIFNamed:@"mirror"] forState:(UIControlStateNormal)];
     [fmfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [fmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [fmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     
-    [fmfx setTitle:NSLocalizedString(@"镜像", nil) forState:(UIControlStateNormal)];
+    [fmfx setTitle:NSLocalizedString(@"mirror", nil) forState:(UIControlStateNormal)];
     
     objc_setAssociatedObject(fmfx, FxIdKey, @"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8", OBJC_ASSOCIATION_COPY);
     [_contentView addSubview:fmfx];
@@ -321,11 +331,12 @@
     FSFxButton *hjfx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(fmfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [hjfx setBackgroundColor:[UIColor yellowColor]];
     [hjfx setTag:6];
+    [hjfx setImage:[UIImage sd_animatedGIFNamed:@"huanjue"] forState:(UIControlStateNormal)];
     [hjfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [hjfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [hjfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     
-    [hjfx setTitle:NSLocalizedString(@"幻觉", nil) forState:(UIControlStateNormal)];
+    [hjfx setTitle:NSLocalizedString(@"huanjue", nil) forState:(UIControlStateNormal)];
     
     objc_setAssociatedObject(hjfx, FxIdKey, @"Video Echo", OBJC_ASSOCIATION_COPY);
     [_contentView addSubview:hjfx];
@@ -335,6 +346,7 @@
     FSFxButton *bmfx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(hjfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [bmfx setBackgroundColor:[UIColor yellowColor]];
     [bmfx setTag:5];
+    [bmfx setImage:[UIImage sd_animatedGIFNamed:@"black_magic"] forState:(UIControlStateNormal)];
     [bmfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [bmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [bmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
@@ -356,6 +368,7 @@
     [noneFx setBackgroundColor:[UIColor redColor]];
     [noneFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"NoFilter"] forState:(UIControlStateNormal)];
      noneFx.tag = FSVideoFxTypeNone;
+    [noneFx setImage:[UIImage sd_animatedGIFNamed:@"Origin"] forState:(UIControlStateNormal)];
     [noneFx.colorView setBackgroundColor:FSHexRGB(0x000000)];
     [self.fxButtonDict setObject:noneFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeNone]];
     
@@ -366,6 +379,7 @@
     [revertFx setBackgroundColor:[UIColor yellowColor]];
     [revertFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Reverse"] forState:(UIControlStateNormal)];
     [revertFx.colorView setBackgroundColor:FSHexRGB(0xff39ad)];
+    [revertFx setImage:[UIImage sd_animatedGIFNamed:@"revert"] forState:(UIControlStateNormal)];
      revertFx.tag = FSVideoFxTypeRevert;
     [self.fxButtonDict setObject:revertFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeRevert]];
     [_contentTimeView addSubview:revertFx];
@@ -377,6 +391,8 @@
     [repeatFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Repeat"] forState:(UIControlStateNormal)];
     [repeatFx.colorView setBackgroundColor:FSHexRGB(0x7778ff)];
     repeatFx.tag = FSVideoFxTypeRepeat;
+    [repeatFx setImage:[UIImage sd_animatedGIFNamed:@"repeat"] forState:(UIControlStateNormal)];
+
     [self.fxButtonDict setObject:repeatFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeRepeat]];
 
     repeatFx.selected = (_fxType == FSVideoFxTypeRepeat);
@@ -388,7 +404,8 @@
     [slowFx setBackgroundColor:[UIColor yellowColor]];
     [slowFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"SlowMotion"] forState:(UIControlStateNormal)];
     [slowFx.colorView setBackgroundColor:FSHexRGB(0xbcff77)];
-    slowFx.tag = FSVideoFxTypeSlow;
+     slowFx.tag = FSVideoFxTypeSlow;
+    [slowFx setImage:[UIImage sd_animatedGIFNamed:@"slow"] forState:(UIControlStateNormal)];
     [self.fxButtonDict setObject:slowFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeSlow]];
 
     [_contentTimeView addSubview:slowFx];
@@ -418,19 +435,19 @@
 -(void)beginFx:(UIButton *)button{
     NSInteger tag = button.tag;
     if (tag == 1) {
-        _progress.fxViewColor = [UIColor redColor];
+        
+        _progress.fxViewColor =  FSHexRGBAlpha(0x01feff, 0.95);//[UIColor redColor];
     }else if(tag == 2){
-        _progress.fxViewColor = [UIColor whiteColor];
+        _progress.fxViewColor = FSHexRGBAlpha(0x9c01ff, 0.95);//[UIColor whiteColor];
     }else if (tag == 3){
-        _progress.fxViewColor = [UIColor blueColor];
+        _progress.fxViewColor = FSHexRGBAlpha(0xff39ad, 0.95);//[UIColor blueColor];
     }else if (tag == 4){
-        _progress.fxViewColor = [UIColor blackColor];
+        _progress.fxViewColor = FSHexRGBAlpha(0xffe139, 0.95);//[UIColor blackColor];
     }else if (tag == 5){
-        _progress.fxViewColor = [UIColor purpleColor];
+        _progress.fxViewColor = FSHexRGBAlpha(0x6339ff, 0.95);// [UIColor purpleColor];
     }else if (tag == 6){
-        _progress.fxViewColor = [UIColor yellowColor];
+        _progress.fxViewColor = FSHexRGBAlpha(0x39ff9f, 0.95);//[UIColor yellowColor];
     }
-    
      _currentFxId = objc_getAssociatedObject(button, FxIdKey);
     
     [_progress beginFxView];

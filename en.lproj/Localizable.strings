@@ -7,7 +7,7 @@
 */
 
 NoNetWork = "Connection failed! Please check your internet settings";
-NotWifi = "You are not connected to Wifi, are you sure you want to continue?";
+NotWifi = "No wifi connection, continue using mobile network?";
 
 Account = "Account";
 Password = "Password";
@@ -21,21 +21,21 @@ leastTime = "Video length should be 3 seconds at least";
 
 UploadVideo = "Upload";
 ChooseMusic = "Music";
-Record = "Record";
+Record = "Record Now";
 HotMusic = "Hot Music";
 likeMusic = "My favorites";
-RecordNow = "Record Now";
-Loading = "Loading";
+RecordNow = "Use the music and record";
+Loading = "Loading...";
 Cancel = "Cancel";
 SearchMusic = "Search music";
 
 
-VideoLengthTip = "Video length should be (0) seconds at least";
+VideoLengthTip = "Video should be more than (0)s";
 Edit = "Edit";
 Volume = "Volume";
 Effects = "Special Effects";
 EnterTitle = "Write Something";
-AddHashtag = "Add a Hashtag";
+AddHashtag = "Start Challenge";
 SaveInGallery = "Save in Gallery";
 CanlceVideo = "The current uploded video or old one doesn't support continue shooting";
 GiveUpEdit = "Do you want to delete edits?";
@@ -56,18 +56,18 @@ Save = "Save";
 
 Filters = "Filters";
 Timeline = "Timeline";
-Magic = "Magic";
+Magic = "Soul";
 Vibrating = "Vibrating";
 Repeat = "Repeat";
 Reverse = "Reverse";
-NoFilter = "No Filter";
+NoFilter = "Normal";
 ChooseEffectsTip = "Press to choose timeline effects";
 SlowMotion = "Slow Motion";
-Delete = "Delete";
+Delete = "Undo";
 AddFilterTip = "Press and hold to choose where to add filter";
-EraseEffectsTip = "Do you want to erase all saved effects?";
-Erase = "Erase";
-LongPress = "Long press to record";
+EraseEffectsTip = "Do you want to clear all saved effects?";
+Erase = "Clear";
+LongPress = "Long press to record, release to pause ";
 
 VerySlow = "Very Slow";
 Slow = "Slow";
@@ -79,7 +79,7 @@ ColorFilter = "Color Filter";
 
 BlackWhite = "Black & White";
 Sweet = "Sweet";
-Dim = "Dim";
+Dim = "Lomo";
 Classic = "Classic";
 Blueish = "Blueish";
 Light = "Light";
@@ -93,7 +93,7 @@ BeautifyOff = "Beautify Off";
 CutMusic = "Cut Music";
 BeautifyOnTip = "Beautify Mode On";
 BeautifyOffTip = "Beautify Mode Off";
-PressToRecord = "Press long on the green button to record";
+PressToRecord = "Long press on the green button to record";
 DeleteVideoTip = "Do you want to delete the previouse video?";
 Confirm = "Confirm";
 EditMusicTip = "Slide left and right to edit music";
@@ -128,3 +128,6 @@ MessageCancel = "Cancel";
 MessageOK = "Yes";
 
 emptyDraft = "Oops! No data found";
+
+xsignal = "X signal";
+

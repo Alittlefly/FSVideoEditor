@@ -399,6 +399,9 @@
     CGFloat endProgress = progress;
     int64_t endPoint = _timeLine.duration * endProgress;
     if (startPoint >= endPoint) {
+        [self removeAllFx];
+        FSVirtualTimeLine *lastVTimeLine = [_tempFxStack topVirtualTimeLine];
+        [self addVideoFxWithVirtualTimeline:lastVTimeLine];
         return;
     }
     

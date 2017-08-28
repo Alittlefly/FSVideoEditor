@@ -34,7 +34,7 @@ Edit = "Değiştir";
 Volume = "Ses";
 Effects = "Özel Efektler";
 EnterTitle = "Bir şeyler yaz...";
-AddHashtag = "Hashtag ekle";
+AddHashtag = "Challenge ekle";
 SaveInGallery = "Galeriye kaydet";
 CanlceVideo = "The current uploded video or old one doesn't support continue shooting";
 GiveUpEdit = "Do you want to delete edits?";
@@ -54,7 +54,7 @@ Save = "Kaydet";
 
 Filters = "Filtreler";
 Timeline = "Zaman Tüneli";
-Magic = "Sihir";
+Magic = "Ruh";
 Vibrating = "Titreşim";
 Repeat = "Tekrar";
 Reverse = "Geri Sar";
@@ -100,7 +100,7 @@ MusicStartTime = "Müzik (0)'da başlar ";
 Original = "Orijinal";
 Music = "Müzik";
 ChoseVideoTime = "(0) saniye seçtin";
-Processing = "Şu anda hallediliyor...";
+Processing = "Şu anda halloluyor...";
 
 EnterChallenge = "Video konusunu gir";
 HotChallenges = "Önerilen Konular";
@@ -126,3 +126,7 @@ MessageCancel = "İptal";
 MessageOK = "Evet";
 
 emptyDraft = "Eyvah! Hiç bir veri bulunamadı";
+
+xsignal = "Karıncalı";
+
+
