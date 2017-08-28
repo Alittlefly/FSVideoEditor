@@ -69,6 +69,7 @@
         button.backgroundColor = [UIColor redColor];
         button.tag = i;
         button.title = filter;
+        button.image = [UIImage imageNamed:filter];
         [button addTarget:self action:@selector(chooseFilter:) forControlEvents:UIControlEventTouchUpInside];
         [_contentScrollView addSubview:button];
     }
