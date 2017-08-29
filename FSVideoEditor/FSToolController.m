@@ -158,6 +158,13 @@
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoEditToolWillShow object:nil];
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController.navigationBar setHidden:NO];
+
+}
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
 }

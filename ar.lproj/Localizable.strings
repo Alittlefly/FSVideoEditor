@@ -76,16 +76,16 @@ VeryFast = "سريع جداً";
 Countdown = "العد التنازلي";
 ColorFilter = "فلتر اللون";
 
-BlackWhite = "ظل";
-Sweet = "رومنسي";
-Dim = "كوول";
+BW = "ظل";
+Sweetie = "رومنسي";
+LOMO = "كوول";
 Classic = "كلاسيكي";
-Blueish = "سماوي";
-Light = "فاتح";
-Milky = "خافت";
-Warm = "مشع";
-OldTimes = "باهت";
-Nostalgia = "لأمع";
+IceBlue = "سماوي";
+Classical = "فاتح";
+RisingSun = "Rising Sun";
+WarmTea = "مشع";
+TheGoldenTimes = "باهت";
+Yummy = "خافت";
 
 BeautifyOn = "فتح تحسينات الصورة";
 BeautifyOff = "غلق تحسينات الصورة";

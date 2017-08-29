@@ -28,7 +28,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         // 初始化视频特效列表
-        _filtersArray = [NSMutableArray arrayWithObject:[FSShortLanguage CustomLocalizedStringFromTable:@"NoFilter"]];
+        _filtersArray = [NSMutableArray arrayWithObject:@"NoFilter"];
         // 获取全部内嵌视频特效的名称
         [_filtersArray addObjectsFromArray:[[FSShortVideoRecorderManager sharedInstance] getAllVideoFilters]];
         [self initBaseUI];
@@ -66,9 +66,9 @@
     for (int i = 0; i < _filtersArray.count; i++) {
         NSString *filter = _filtersArray[i];
         FSFilterButton *button = [[FSFilterButton alloc] initWithFrame:CGRectMake((_contentScrollView.frame.size.height-4+5)*i, 2, _contentScrollView.frame.size.height-4, _contentScrollView.frame.size.height-4)];
-        button.backgroundColor = [UIColor redColor];
+        button.backgroundColor = [UIColor clearColor];
         button.tag = i;
-        button.title = filter;
+        button.title = [FSShortLanguage CustomLocalizedStringFromTable:filter];
         button.image = [UIImage imageNamed:filter];
         [button addTarget:self action:@selector(chooseFilter:) forControlEvents:UIControlEventTouchUpInside];
         [_contentScrollView addSubview:button];

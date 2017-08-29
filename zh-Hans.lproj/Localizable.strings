@@ -76,16 +76,16 @@ VeryFast = "极快";
 Countdown = "倒计时";
 ColorFilter = "滤镜";
 
-BlackWhite = "黑白";
-Sweet = "甜美";
-Dim = "LOMO";
+BW = "黑白";
+Sweetie = "甜美";
+LOMO = "LOMO";
 Classic = "经典";
-Blueish = "蓝调";
-Light = "紫霞";
-Milky = "奶茶";
-Warm = "暖茶";
-OldTimes = "岁月";
-Nostalgia = "复古";
+IceBlue = "蓝调";
+Classical = "紫霞";
+RisingSun = "朝阳";
+WarmTea = "暖茶";
+TheGoldenTimes = "流金岁月";
+Yummy = "焦糖奶茶";
 
 BeautifyOn = "美颜开";
 BeautifyOff = "美颜关";

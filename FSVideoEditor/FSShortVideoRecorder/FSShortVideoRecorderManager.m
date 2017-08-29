@@ -11,6 +11,7 @@
 #import "NvcConvertor.h"
 #import "NvsVideoClip.h"
 #import "NvsTimelineAnimatedSticker.h"
+#import "FSShortLanguage.h"
 
 #define MaxVideoTime 15
 
@@ -31,6 +32,8 @@
 @property (nonatomic, copy) NSString *convertorFilePath;
 
 @property (nonatomic, strong) FSDraftInfo *draftInfo;
+
+@property (nonatomic, strong) NSMutableDictionary *filtersDic;
 
 @end
 
@@ -124,6 +127,7 @@ static FSShortVideoRecorderManager *recorderManager;
     _supportAutoExposure = false;
     _fxRecord = true;
     _draftInfo = draftInfo;
+    _filtersDic = [NSMutableDictionary dictionaryWithCapacity:0];
     
     _filePathArray = [NSMutableArray arrayWithArray:draftInfo.recordVideoPathArray];
     _timeArray = [NSMutableArray arrayWithArray:draftInfo.recordVideoTimeArray];
@@ -298,10 +302,15 @@ static FSShortVideoRecorderManager *recorderManager;
 - (void)addFilter:(NSString *)filter {
     [_context removeAllCaptureVideoFx];
 
-    if ([filter isEqualToString:@"None"]) {
+    if ([filter isEqualToString:@"NoFilter"]) {
     }
     else {
-        [_context appendBuiltinCaptureVideoFx:filter];
+        if ([[self.filtersDic allKeys] containsObject:filter]) {
+            [_context appendPackagedCaptureVideoFx:[self.filtersDic objectForKey:filter]];
+        }
+        else {
+            [_context appendBuiltinCaptureVideoFx:[self.filtersDic objectForKey:filter]];
+        }
     }
 }
 
@@ -326,7 +335,82 @@ static FSShortVideoRecorderManager *recorderManager;
     return [_context getStreamingEngineState];
 }
 
+- (void)addFilter:(NSString *)filterName filterPath:(NSString *)filterPath license:(NSString *)license {
+    NSMutableString *filterId = [[NSMutableString alloc] initWithString:@""];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filterPath]) {
+        NSLog(@"包裹1不存在");
+    } else {
+        // 此处采用同步安装方式，如果包裹过大可采用异步方式
+        NvsAssetPackageManagerError error = [_context.assetPackageManager installAssetPackage:filterPath license:license type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:filterId];
+        if (error != NvsAssetPackageManagerError_NoError && error != NvsAssetPackageManagerError_AlreadyInstalled) {
+            NSLog(@"包裹1安装失败");
+        }
+        else {
+            [self.filtersDic setObject:filterId forKey:filterName];
+        }
+    }
+}
+
+- (void)initFilters {
+   NSString *fxPackageId1 = [NSString stringWithFormat:@"BW"];
+    NSString *appPath =[[NSBundle mainBundle] bundlePath];
+    NSString *package1Path = [appPath stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.2.videofx"];
+    NSString *license1Path = [appPath stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.lic"];
+    [self addFilter:fxPackageId1 filterPath:package1Path license:license1Path];
+    
+    NSString *fxPackageId2 = [NSString stringWithFormat:@"Classic"];
+    NSString *package2Path = [appPath stringByAppendingPathComponent:@"707EB4BC-2FD0-46FA-B607-ABA3F6CE7250.1.videofx"];
+    NSString *license2Path = [appPath stringByAppendingPathComponent:@"707EB4BC-2FD0-46FA-B607-ABA3F6CE7250.lic"];
+    [self addFilter:fxPackageId2 filterPath:package2Path license:license2Path];
+
+    NSString *fxPackageId3 = [NSString stringWithFormat:@"Classical"];
+    NSString *package3Path = [appPath stringByAppendingPathComponent:@"34897DAA-8F41-4862-84CD-5573F8D6787B.1.videofx"];
+    NSString *license3Path = [appPath stringByAppendingPathComponent:@"34897DAA-8F41-4862-84CD-5573F8D6787B.lic"];
+    [self addFilter:fxPackageId3 filterPath:package3Path license:license3Path];
+
+    NSString *fxPackageId4 = [NSString stringWithFormat:@"IceBlue"];
+    NSString *package4Path = [appPath stringByAppendingPathComponent:@"B3E53F0E-BE67-4A2D-AEC8-CF5F8E064EF1.1.videofx"];
+    NSString *license4Path = [appPath stringByAppendingPathComponent:@"B3E53F0E-BE67-4A2D-AEC8-CF5F8E064EF1.lic"];
+    [self addFilter:fxPackageId4 filterPath:package4Path license:license4Path];
+    
+    NSString *fxPackageId5 = [NSString stringWithFormat:@"LOMO"];
+    NSString *package5Path = [appPath stringByAppendingPathComponent:@"51986EDA-1D6F-4C6C-961C-1891ECB83E30.1.videofx"];
+    NSString *license5Path = [appPath stringByAppendingPathComponent:@"51986EDA-1D6F-4C6C-961C-1891ECB83E30.lic"];
+    [self addFilter:fxPackageId5 filterPath:package5Path license:license5Path];
+    
+    NSString *fxPackageId6 = [NSString stringWithFormat:@"RisingSun"];
+    NSString *package6Path = [appPath stringByAppendingPathComponent:@"9547C6E5-18DA-4C31-97B6-40B934BA0CD6.1.videofx"];
+    NSString *license6Path = [appPath stringByAppendingPathComponent:@"9547C6E5-18DA-4C31-97B6-40B934BA0CD6.lic"];
+    [self addFilter:fxPackageId6 filterPath:package6Path license:license6Path];
+
+    NSString *fxPackageId7 = [NSString stringWithFormat:@"Sweetie"];
+    NSString *package7Path = [appPath stringByAppendingPathComponent:@"D61B2771-819A-44EB-8C6B-D86803714429.1.videofx"];
+    NSString *license7Path = [appPath stringByAppendingPathComponent:@"D61B2771-819A-44EB-8C6B-D86803714429.lic"];
+    [self addFilter:fxPackageId7 filterPath:package7Path license:license7Path];
+
+    NSString *fxPackageId8 = [NSString stringWithFormat:@"TheGolden"];
+    NSString *package8Path = [appPath stringByAppendingPathComponent:@"6A226E39-A423-4F4F-92EF-9275D0CDD2EF.2.videofx"];
+    NSString *license8Path = [appPath stringByAppendingPathComponent:@"6A226E39-A423-4F4F-92EF-9275D0CDD2EF.lic"];
+    [self addFilter:fxPackageId8 filterPath:package8Path license:license8Path];
+
+    NSString *fxPackageId9 = [NSString stringWithFormat:@"WarmTea"];
+    NSString *package9Path = [appPath stringByAppendingPathComponent:@"83350933-EBA9-4947-A226-BE1DDA953902.1.videofx"];
+    NSString *license9Path = [appPath stringByAppendingPathComponent:@"83350933-EBA9-4947-A226-BE1DDA953902.lic"];
+    [self addFilter:fxPackageId9 filterPath:package9Path license:license9Path];
+
+    NSString *fxPackageId10 = [NSString stringWithFormat:@"Yummy"];
+    NSString *package10Path = [appPath stringByAppendingPathComponent:@"02B33530-8663-4A01-A6F1-C9DAB3322590.2.videofx"];
+    NSString *license10Path = [appPath stringByAppendingPathComponent:@"02B33530-8663-4A01-A6F1-C9DAB3322590.lic"];
+    [self addFilter:fxPackageId10 filterPath:package10Path license:license10Path];
+}
+
 - (NSArray *)getAllVideoFilters {
+    if (self.filtersDic.count == 0) {
+        [self initFilters];
+    }
+    if (self.filtersDic.count > 0) {
+        return [self.filtersDic allKeys];
+    }
     return [_context getAllBuiltinVideoFxNames];
 }
 

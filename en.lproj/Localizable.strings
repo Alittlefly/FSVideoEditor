@@ -77,16 +77,16 @@ VeryFast = "Very Fast";
 Countdown = "Countdown";
 ColorFilter = "Color Filter";
 
-BlackWhite = "Black & White";
-Sweet = "Sweet";
-Dim = "Lomo";
+BW = "Black & White";
+Sweetie = "Sweet";
+LOMO = "Dim";
 Classic = "Classic";
-Blueish = "Blueish";
-Light = "Light";
-Milky = "Milky";
-Warm = "Warm";
-OldTimes = "Old Times";
-Nostalgia = "Nostalgia";
+IceBlue = "Blueish";
+Classical = "Light";
+RisingSun = "Rising Sun";
+WarmTea = "Warm";
+TheGoldenTimes = "Old Times";
+Yummy = "Milky";
 
 BeautifyOn = "Beautify On";
 BeautifyOff = "Beautify Off";

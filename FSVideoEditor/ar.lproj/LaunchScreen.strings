@@ -62,16 +62,16 @@ VeryFast = "سريع جداً";
 Countdown = "العد التنازلي";
 ColorFilter = "فلتر اللون";
 
-BlackWhite = "ظل";
-Sweet = "رومنسي";
-Dim = "كوول";
-Classic = "كلاسيكي";
-Blueish = "سماوي";
-Light = "فاتح";
-Milky = "خافت";
-Warm = "مشع";
-OldTimes = "باهت";
-Nostalgia = "لأمع";
+B&W = "黑白";
+Sweetie = "甜美";
+LOMO = "LOMO";
+Classic = "经典";
+Ice Blue = "蓝调";
+Classical = "紫霞";
+Rising Sun = "朝阳";
+Warm Tea = "暖茶";
+The Golden Times = "流金岁月";
+Yummy = "焦糖奶茶";
 
 BeautifyOn = "فتح تحسينات الصورة";
 BeautifyOff = "غلق تحسينات الصورة";
