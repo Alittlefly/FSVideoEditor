@@ -381,16 +381,20 @@
     __weak FSDraftController *weakSelf = self;
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"deleteAllAlert"] preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageOK"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[FSDraftManager sharedManager] deleteAllDrafts];
-        [weakSelf.draftsMisic removeAllObjects];
-        [weakSelf.draftsMisicDict removeAllObjects];
-        [weakSelf.tableView reloadData];
+        [weakSelf deleteAllDrafts];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageCancel"] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
 
     }]];
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+-(void)deleteAllDrafts{
+    [[FSDraftManager sharedManager] deleteAllDrafts];
+    [self.draftsMisic removeAllObjects];
+    [self.draftsMisicDict removeAllObjects];
+    [self.tableView reloadData];
 }
 
 #pragma mark - FSDraftTableCellDelegate

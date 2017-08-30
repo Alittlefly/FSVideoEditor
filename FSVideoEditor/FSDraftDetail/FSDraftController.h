@@ -10,4 +10,6 @@
 
 @interface FSDraftController : UITableViewController
 
+-(void)deleteAllDrafts;//删除所有草稿
+
 @end
