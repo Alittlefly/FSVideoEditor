@@ -655,12 +655,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [self.addedViews addObjectsFromArray:addedViews];
 }
 
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    
-    NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
-}
-
 - (NSString *)getNameFromPath:(NSString *)path {
     NSString *lastName = [path lastPathComponent];
     return [lastName stringByDeletingLastPathComponent];
@@ -671,16 +665,17 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         _uploadImageServer = [[FSUploadImageServer alloc] init];
         _uploadImageServer.delegate = self;
     }
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
-
-    NSData * imageData = UIImageJPEGRepresentation(image,1);
     
+    NSData * imageData = UIImageJPEGRepresentation(image,1);
     CGFloat length = [imageData length]/1024;
     CGFloat bit = 1;
     if (length > 200) {
         bit = 200/length;
     }
-    [_uploadImageServer uploadFirstImage:[NSDictionary dictionaryWithObjectsAndKeys:UIImageJPEGRepresentation(image,bit),@"imageData",[self getNameFromPath:_tempDraftInfo.vFinalPath],@"imageName",nil]];
+    
+    NSString *lastPath = [_tempDraftInfo.vFinalPath lastPathComponent];
+    NSString *imageName = [[lastPath stringByDeletingPathExtension] stringByAppendingString:@".jpg"];
+    [_uploadImageServer uploadFirstImage:[NSDictionary dictionaryWithObjectsAndKeys:UIImageJPEGRepresentation(image,bit),@"imageData",imageName,@"imageName",nil]];
 }
 
 - (void)FSUploadImageServerFirstImageSucceed:(NSString *)filePath {
@@ -721,7 +716,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     if (length > 1024) {
         bit = 1024/length;
     }
-    [_uploadImageServer uploadWebP:[NSDictionary dictionaryWithObjectsAndKeys:data,@"webpData",[self getNameFromPath:_tempDraftInfo.vFinalPath],@"webpName",nil]];
+    
+    NSString *name = [[_tempDraftInfo.vFinalPath lastPathComponent] stringByDeletingPathExtension];
+    NSString *webpName = [name stringByAppendingString:@".webp"];
+    [_uploadImageServer uploadWebP:[NSDictionary dictionaryWithObjectsAndKeys:data,@"webpData",webpName,@"webpName",nil]];
 }
 
 - (void)FSShortVideoRecorderManagerConvertorFaild {

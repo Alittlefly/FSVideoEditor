@@ -28,7 +28,7 @@
     _musicType = musicType;
     
     [self setTitle:musicType.typeName forState:(UIControlStateNormal)];
-    [self sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",AddressIP,musicType.typePic]] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"musicBtnPlaceHolder"]];
+    [self sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",AddressResource,musicType.typePic]] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"musicBtnPlaceHolder"]];
 }
 -(CGRect)imageRectForContentRect:(CGRect)contentRect{
     CGRect imageRect = CGRectZero;

@@ -48,9 +48,10 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    
-    [FSPublishSingleton sharedInstance].addressAPI = @"http://www.7najm.com/";
+//    @"http://haahi.7najm.com:10000/";
+    [FSPublishSingleton sharedInstance].addressAPI = @"http://haahi.7najm.com:10000/";
     [FSPublishSingleton sharedInstance].language =@"en";
+    [FSPublishSingleton sharedInstance].isAutoReverse = NO;
     
     CAGradientLayer *bgGradientLayer = [CAGradientLayer layer];
     bgGradientLayer.colors = @[(__bridge id)FSHexRGB(0x000000).CGColor, (__bridge id)FSHexRGB(0x2D062D).CGColor];
@@ -85,6 +86,8 @@
         [[FSDraftManager sharedManager] setCacheKey:[[NSUserDefaults standardUserDefaults] valueForKey:@"UID"]];
         [FSPublishSingleton sharedInstance].userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"nickName"];
         [[FSVideoEditorAPIParams videoEdiorParams].params setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
+        
+        [FSPublishSingleton sharedInstance].loginKey = [[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"];
     }
     
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"tr"]) {
@@ -296,7 +299,8 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     [FSPublishSingleton sharedInstance].userName = [dataInfo objectForKey:@"nickName"];
-    
+    [FSPublishSingleton sharedInstance].loginKey = [dataInfo objectForKey:@"loginKey"] ;
+
     [[FSDraftManager sharedManager] setCacheKey:[dataInfo objectForKey:@"loginName"]];
 
 

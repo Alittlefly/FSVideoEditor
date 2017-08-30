@@ -146,7 +146,6 @@ static NSString *identifier = @"FSMusicCell";
     
     [self.pic setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width-10-72 : 10, 20, 72, 72)];
     
-    [self.pic setImage:[UIImage imageNamed:@"musicPlaceHolder"]];
     [self.playButton setFrame:self.pic.frame];
     
     [self.nameLabel setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width-100.0-(CGRectGetWidth(self.bounds) - 38 - 82) : 100.0, 20, CGRectGetWidth(self.bounds) - 38 - 82, 21)];
@@ -157,6 +156,9 @@ static NSString *identifier = @"FSMusicCell";
     
     [self.deatilButton setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 50 : CGRectGetWidth(self.bounds) - 80, (107 - 30)/2.0, 30, 30)];
     [self.collectButton setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 10 : CGRectGetWidth(self.bounds) - 40, (107 - 30)/2.0, 30, 30)];
+    
+    
+
 }
 
 -(void)setMusic:(FSMusic *)music{
@@ -167,7 +169,7 @@ static NSString *identifier = @"FSMusicCell";
     
     NSString *songPic = music.songPic;
     if (![songPic hasPrefix:@"http"] && songPic) {
-        songPic = [@"http://35.158.218.231/" stringByAppendingString:songPic];
+        songPic = [AddressResource stringByAppendingString:songPic];
     }
     [self.pic sd_setImageWithURL:[NSURL URLWithString:songPic] placeholderImage:[UIImage imageNamed:@"musicPlaceHolder"]];
     [self.useButton setHidden:!_music.opend];

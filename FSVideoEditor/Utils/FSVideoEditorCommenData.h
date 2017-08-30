@@ -27,6 +27,7 @@
 #define AddressUpload  [FSPublishSingleton sharedInstance].addressAPI
 #define AddressAPI  [FSPublishSingleton sharedInstance].addressAPI
 #define AddressIP  [FSPublishSingleton sharedInstance].addressAPI
+#define AddressResource  [AddressIP stringByAppendingString:@"resource/"]
 
 
 #ifndef FSVideoEditorCommenData_h
