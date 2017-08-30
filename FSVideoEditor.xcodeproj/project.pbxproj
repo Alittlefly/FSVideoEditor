@@ -474,6 +474,8 @@
 		98D8A63B1F55433400003EB2 /* 83350933-EBA9-4947-A226-BE1DDA953902.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98D8A6261F55433400003EB2 /* 83350933-EBA9-4947-A226-BE1DDA953902.lic */; };
 		98D8A63C1F55433400003EB2 /* 02B33530-8663-4A01-A6F1-C9DAB3322590.2.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 98D8A6281F55433400003EB2 /* 02B33530-8663-4A01-A6F1-C9DAB3322590.2.videofx */; };
 		98D8A63D1F55433400003EB2 /* 02B33530-8663-4A01-A6F1-C9DAB3322590.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98D8A6291F55433400003EB2 /* 02B33530-8663-4A01-A6F1-C9DAB3322590.lic */; };
+		98EA628E1F56D0920086FD62 /* 198-14-967dfb58745c59c1c409616af7ca27b3.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EA628C1F56D0920086FD62 /* 198-14-967dfb58745c59c1c409616af7ca27b3.lic */; };
+		98EA628F1F56D0920086FD62 /* 198-14-ec294b7a1c8bbc37aaf8586dcc7cfbf0.lic in Resources */ = {isa = PBXBuildFile; fileRef = 98EA628D1F56D0920086FD62 /* 198-14-ec294b7a1c8bbc37aaf8586dcc7cfbf0.lic */; };
 		98EC1A3C1F209277003B71B7 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98EC1A3B1F209277003B71B7 /* CoreMotion.framework */; };
 		98EC1A411F20A273003B71B7 /* FSUploadImageServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EC1A401F20A273003B71B7 /* FSUploadImageServer.m */; };
 		98EC1A451F20A3FD003B71B7 /* FSUploadImageAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EC1A441F20A3FD003B71B7 /* FSUploadImageAPI.m */; };
@@ -987,6 +989,8 @@
 		98D8A6261F55433400003EB2 /* 83350933-EBA9-4947-A226-BE1DDA953902.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "83350933-EBA9-4947-A226-BE1DDA953902.lic"; sourceTree = "<group>"; };
 		98D8A6281F55433400003EB2 /* 02B33530-8663-4A01-A6F1-C9DAB3322590.2.videofx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "02B33530-8663-4A01-A6F1-C9DAB3322590.2.videofx"; sourceTree = "<group>"; };
 		98D8A6291F55433400003EB2 /* 02B33530-8663-4A01-A6F1-C9DAB3322590.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "02B33530-8663-4A01-A6F1-C9DAB3322590.lic"; sourceTree = "<group>"; };
+		98EA628C1F56D0920086FD62 /* 198-14-967dfb58745c59c1c409616af7ca27b3.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-967dfb58745c59c1c409616af7ca27b3.lic"; sourceTree = "<group>"; };
+		98EA628D1F56D0920086FD62 /* 198-14-ec294b7a1c8bbc37aaf8586dcc7cfbf0.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-ec294b7a1c8bbc37aaf8586dcc7cfbf0.lic"; sourceTree = "<group>"; };
 		98EC1A3B1F209277003B71B7 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		98EC1A3F1F20A273003B71B7 /* FSUploadImageServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSUploadImageServer.h; sourceTree = "<group>"; };
 		98EC1A401F20A273003B71B7 /* FSUploadImageServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSUploadImageServer.m; sourceTree = "<group>"; };
@@ -1303,6 +1307,8 @@
 		562D406E1EFE4D2000BF0E0D /* FSVideoFxSource */ = {
 			isa = PBXGroup;
 			children = (
+				98EA628C1F56D0920086FD62 /* 198-14-967dfb58745c59c1c409616af7ca27b3.lic */,
+				98EA628D1F56D0920086FD62 /* 198-14-ec294b7a1c8bbc37aaf8586dcc7cfbf0.lic */,
 				98D8A60B1F55433400003EB2 /* filtesr */,
 				56933EA01F45912C00AEF683 /* 198-14-f6192de5110aed067060b4010c648cac.lic */,
 				9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */,
@@ -2387,6 +2393,7 @@
 				563E66AB1F53C80B00EE2298 /* huanjue.gif in Resources */,
 				567E0B5C1EF930D100C4C527 /* Main.storyboard in Resources */,
 				98D8A62C1F55433400003EB2 /* 707EB4BC-2FD0-46FA-B607-ABA3F6CE7250.1.videofx in Resources */,
+				98EA628E1F56D0920086FD62 /* 198-14-967dfb58745c59c1c409616af7ca27b3.lic in Resources */,
 				98D8A63D1F55433400003EB2 /* 02B33530-8663-4A01-A6F1-C9DAB3322590.lic in Resources */,
 				98D8A6341F55433400003EB2 /* 9547C6E5-18DA-4C31-97B6-40B934BA0CD6.1.videofx in Resources */,
 				5616CC851F2B40F700028770 /* LICENSE in Resources */,
@@ -2402,6 +2409,7 @@
 				98EFA7531F13817C00CB4DDD /* C6273A8F-C899-4765-8BFC-E683EE37AA84.lic in Resources */,
 				567B05671F27488400D09364 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic in Resources */,
 				563E66B71F540A7800EE2298 /* Origin.gif in Resources */,
+				98EA628F1F56D0920086FD62 /* 198-14-ec294b7a1c8bbc37aaf8586dcc7cfbf0.lic in Resources */,
 				98D8A6331F55433400003EB2 /* 51986EDA-1D6F-4C6C-961C-1891ECB83E30.lic in Resources */,
 				567A3D811EFB6F8E0026247E /* LICENSE in Resources */,
 				563E66B31F53F13400EE2298 /* repeat.gif in Resources */,

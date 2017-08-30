@@ -836,7 +836,8 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (void)convertorWithFile:(NSString *)filePath outPath:(NSString *)outPath isWebp:(BOOL)isWebp{
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic"];
+    // 198-14-fecf5c838a33c8b7a27de9790aa3fa96
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-ec294b7a1c8bbc37aaf8586dcc7cfbf0.lic"];
     
     NSData *JSONData = [NSData dataWithContentsOfFile:verifySdkLicenseFilePath];
     
