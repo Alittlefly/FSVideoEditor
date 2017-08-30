@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "98F165F61F19F8B20084D70D"
+               BlueprintIdentifier = "985E86B11F5446AA00292FEF"
                BuildableName = "FSVideoEditorSDKTests.xctest"
                BlueprintName = "FSVideoEditorSDKTests"
                ReferencedContainer = "container:FSVideoEditor.xcodeproj">
@@ -60,8 +60,7 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES"
-      language = "en">
+      allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference

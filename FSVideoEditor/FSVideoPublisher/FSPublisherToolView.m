@@ -11,6 +11,7 @@
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
 #import "FSPublishSingleton.h"
+#import "UIButton+WebCache.h"
 
 @interface FSPublisherToolView()<FSEditVideoNameViewDelegate>
 
@@ -80,6 +81,8 @@
     _chooseMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _chooseMusicButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
     [_chooseMusicButton setImage:[UIImage imageNamed:@"choose-music"] forState:UIControlStateNormal];
+    [_chooseMusicButton.layer setCornerRadius:20.0];
+    [_chooseMusicButton.layer setMasksToBounds:YES];
     [_chooseMusicButton addTarget:self action:@selector(chooseMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_chooseMusicButton];
     
@@ -210,7 +213,9 @@
 }
 
 - (void)updateMusicInfo:(FSMusic *)music {
-    _titleLabel.text = [NSString stringWithFormat:@"%@-@%@",music.songTitle,music.songAuthor];
+     _titleLabel.text = [NSString stringWithFormat:@"%@-@%@",music.songTitle,music.songAuthor];
+    NSString *songPic = [NSString stringWithFormat:@"%@%@",AddressResource,music.songPic];
+    [_chooseMusicButton sd_setImageWithURL:[NSURL URLWithString:songPic] forState:(UIControlStateNormal)];
 
 }
 
