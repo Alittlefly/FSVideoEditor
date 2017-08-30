@@ -73,6 +73,13 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setHidden:YES];
+}
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [_musicListView stopPlayCurrentMusic];

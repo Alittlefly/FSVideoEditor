@@ -49,9 +49,8 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
-//    [FSShortLanguage setLanguageTable:@"Localizable" language:@"ar"];
-//    [FSPublishSingleton sharedInstance].addressAPI = @"http://www.7najm.com/";
-//    [FSPublishSingleton sharedInstance].language =@"en";
+    [FSPublishSingleton sharedInstance].addressAPI = @"http://www.7najm.com/";
+    [FSPublishSingleton sharedInstance].language =@"en";
     
     CAGradientLayer *bgGradientLayer = [CAGradientLayer layer];
     bgGradientLayer.colors = @[(__bridge id)FSHexRGB(0x000000).CGColor, (__bridge id)FSHexRGB(0x2D062D).CGColor];

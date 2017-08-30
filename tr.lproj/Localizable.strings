@@ -75,16 +75,16 @@ VeryFast = "Çok Hızlı";
 Countdown = "Geri Sayım";
 ColorFilter = "Renkli Filtre";
 
-BlackWhite = "Siyah & Beyaz";
-Sweet = "Sempatik";
-Dim = "Lomo";
+BW = "Siyah & Beyaz";
+Sweetie = "Sempatik";
+LOMO = "Lomo";
 Classic = "Klasik";
-Blueish = "Maviş";
-Light = "Morumtrak";
-Milky = "Sütlü Çay";
-Warm = "Ilık";
-OldTimes = "Yıllar";
-Nostalgia = "Nostalji";
+IceBlue = "Maviş";
+Classical = "Morumtrak";
+RisingSun = "Rising Sun";
+WarmTea = "Ilık";
+TheGoldenTimes = "Yıllar";
+Yummy = "Sütlü Çay";
 
 BeautifyOn = "Güzellik Modunu Aç";
 BeautifyOff = "Güzellik Modunu Kapat";

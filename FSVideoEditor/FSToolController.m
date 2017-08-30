@@ -43,7 +43,7 @@
     
     
     UIButton *videoRecorderButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    videoRecorderButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 5 : CGRectGetWidth(_contentView.frame) - 80, 17, 75, 21);
+    videoRecorderButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 5 : CGRectGetWidth(_contentView.frame) - 105, 17, 100, 21);
     if ([FSPublishSingleton sharedInstance].isAutoReverse) {
         [videoRecorderButton setTitle:[NSString stringWithFormat:@"< %@",[FSShortLanguage CustomLocalizedStringFromTable:@"Record"]] forState:UIControlStateNormal];
     }
@@ -157,6 +157,13 @@
         
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoEditToolWillShow object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController.navigationBar setHidden:NO];
+
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
