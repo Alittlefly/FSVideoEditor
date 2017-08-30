@@ -213,7 +213,7 @@
     [cancle addTarget:self action:@selector(cancle) forControlEvents:(UIControlEventTouchUpInside)];
     [cancle setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] forState:(UIControlStateNormal)];
     [cancle sizeToFit];
-    cancle.contentHorizontalAlignment = [FSPublishSingleton sharedInstance].isAutoReverse?UIControlContentHorizontalAlignmentLeft:UIControlContentHorizontalAlignmentRight;
+    cancle.contentHorizontalAlignment = ![FSPublishSingleton sharedInstance].isAutoReverse?UIControlContentHorizontalAlignmentLeft:UIControlContentHorizontalAlignmentRight;
     CGFloat cancleX = [FSPublishSingleton sharedInstance].isAutoReverse?(CGRectGetWidth(self.view.bounds) - 120):20;
     [cancle setFrame:CGRectMake(cancleX, 20, 100, 24)];
     [self.view addSubview:cancle];
@@ -224,7 +224,7 @@
     [save sizeToFit];
     CGFloat saveX = [FSPublishSingleton sharedInstance].isAutoReverse?20:(CGRectGetWidth(self.view.bounds) - 120);
     [save setFrame:CGRectMake(saveX, 20, 100, 24)];
-    save.contentHorizontalAlignment = [FSPublishSingleton sharedInstance].isAutoReverse?UIControlContentHorizontalAlignmentRight:UIControlContentHorizontalAlignmentLeft;;
+    save.contentHorizontalAlignment = ![FSPublishSingleton sharedInstance].isAutoReverse?UIControlContentHorizontalAlignmentRight:UIControlContentHorizontalAlignmentLeft;;
     [self.view addSubview:save];
 }
 - (void)cancle{
