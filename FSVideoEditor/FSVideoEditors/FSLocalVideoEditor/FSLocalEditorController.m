@@ -125,6 +125,7 @@
     
     [self creatButtons];
 }
+
 - (void)backClik{
     [[FSDraftManager sharedManager] clearInfo];
     [self.navigationController popViewControllerAnimated:YES];
@@ -248,6 +249,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [self.navigationController setNavigationBarHidden:YES];
+
     [self reselectTrack];
     
     [_context setDelegate:self];
