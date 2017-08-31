@@ -152,8 +152,8 @@
 
 - (void)initBaseToolView {
     _progressView = [[FSProgressView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 5)];
-    _progressView.backgroundColor = [UIColor clearColor];
-    _progressView.progressViewColor = [UIColor yellowColor];
+    _progressView.backgroundColor = FSHexRGB(0x000B17);
+    _progressView.progressViewColor = FSHexRGB(0xFACE15);
 //    _progressView = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 5)];
 //    _progressView.thumbTintColor = [UIColor clearColor];
 //    _progressView.minimumTrackTintColor = [UIColor yellowColor];
@@ -217,14 +217,16 @@
     }
     
     _cutMusicLabel = [[UILabel alloc] init];
-    _cutMusicLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
-    _cutMusicLabel.font = [UIFont systemFontOfSize:7];
+    //_cutMusicLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
+    _cutMusicLabel.font = [UIFont systemFontOfSize:10];
     _cutMusicLabel.textColor = [UIColor whiteColor];
     _cutMusicLabel.backgroundColor = [UIColor clearColor];
     _cutMusicLabel.textAlignment = NSTextAlignmentCenter;
     _cutMusicLabel.shadowColor = [UIColor blackColor];
     _cutMusicLabel.shadowOffset = CGSizeMake(1, 1);
     _cutMusicLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"CutMusic"];//NSLocalizedString(@"CutMusic", nil);
+    [_cutMusicLabel sizeToFit];
+    _cutMusicLabel.center = CGPointMake(_cutMusicButton.center.x, CGRectGetMaxY(_cutMusicButton.frame)+_cutMusicLabel.frame.size.height/2);
     [self addSubview:_cutMusicLabel];
     
     _beautyButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -233,9 +235,9 @@
     [self addSubview:_beautyButton];
     
     _beautyLabel = [[UILabel alloc] init];
-    _beautyLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_beautyButton.frame), CGRectGetMaxY(_beautyButton.frame), CGRectGetWidth(_beautyButton.frame), 10) : CGRectMake(CGRectGetMaxX(_beautyButton.frame) - CGRectGetWidth(_beautyButton.frame), CGRectGetMaxY(_beautyButton.frame), CGRectGetWidth(_beautyButton.frame), 10);
+    //_beautyLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_beautyButton.frame), CGRectGetMaxY(_beautyButton.frame), CGRectGetWidth(_beautyButton.frame), 10) : CGRectMake(CGRectGetMaxX(_beautyButton.frame) - CGRectGetWidth(_beautyButton.frame), CGRectGetMaxY(_beautyButton.frame), CGRectGetWidth(_beautyButton.frame), 10);
     _beautyLabel.backgroundColor = [UIColor clearColor];
-    _beautyLabel.font = [UIFont systemFontOfSize:7];
+    _beautyLabel.font = [UIFont systemFontOfSize:10];
     _beautyLabel.textColor = [UIColor whiteColor];
     _beautyLabel.shadowColor = [UIColor blackColor];
     _beautyLabel.shadowOffset = CGSizeMake(1, 1);
@@ -252,7 +254,8 @@
         _beautyLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOff"];//NSLocalizedString(@"BeautifyOn", nil);
 
     }
-    
+    [_beautyLabel sizeToFit];
+    _beautyLabel.center = CGPointMake(_beautyButton.center.x, CGRectGetMaxY(_beautyButton.frame)+_beautyLabel.frame.size.height/2);
     
     _filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _filterButton.frame = CGRectMake(CGRectGetMinX(_beautyButton.frame), CGRectGetMaxY(_beautyLabel.frame)+20, 40, 40);
@@ -261,14 +264,16 @@
     [self addSubview:_filterButton];
     
     _filterLabel = [[UILabel alloc] init];
-    _filterLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15) : CGRectMake(CGRectGetMaxX(_filterButton.frame) - CGRectGetWidth(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15);
+    //_filterLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15) : CGRectMake(CGRectGetMaxX(_filterButton.frame) - CGRectGetWidth(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15);
     _filterLabel.backgroundColor = [UIColor clearColor];
-    _filterLabel.font = [UIFont systemFontOfSize:7];
+    _filterLabel.font = [UIFont systemFontOfSize:10];
     _filterLabel.textColor = [UIColor whiteColor];
     _filterLabel.shadowColor = [UIColor blackColor];
     _filterLabel.shadowOffset = CGSizeMake(1, 1);
     _filterLabel.textAlignment = NSTextAlignmentCenter;
     _filterLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ColorFilter"];
+    [_filterLabel sizeToFit];
+    _filterLabel.center = CGPointMake(_filterButton.center.x, CGRectGetMaxY(_filterButton.frame)+_filterLabel.frame.size.height/2);
     [self addSubview:_filterLabel];
     
     _countdownButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -278,14 +283,16 @@
     [self addSubview:_countdownButton];
     
     _countdownLabel = [[UILabel alloc] init];
-    _countdownLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_countdownButton.frame), CGRectGetMaxY(_countdownButton.frame), CGRectGetWidth(_countdownButton.frame), 10) : CGRectMake(CGRectGetMaxX(_countdownButton.frame) - CGRectGetWidth(_countdownButton.frame), CGRectGetMaxY(_countdownButton.frame), CGRectGetWidth(_countdownButton.frame), 10);
+   // _countdownLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_countdownButton.frame), CGRectGetMaxY(_countdownButton.frame), CGRectGetWidth(_countdownButton.frame), 10) : CGRectMake(CGRectGetMaxX(_countdownButton.frame) - CGRectGetWidth(_countdownButton.frame), CGRectGetMaxY(_countdownButton.frame), CGRectGetWidth(_countdownButton.frame), 10);
     _countdownLabel.backgroundColor = [UIColor clearColor];
-    _countdownLabel.font = [UIFont systemFontOfSize:7];
+    _countdownLabel.font = [UIFont systemFontOfSize:10];
     _countdownLabel.textColor = [UIColor whiteColor];
     _countdownLabel.shadowColor = [UIColor blackColor];
     _countdownLabel.shadowOffset = CGSizeMake(1, 1);
     _countdownLabel.textAlignment = NSTextAlignmentCenter;
     _countdownLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Countdown"];//NSLocalizedString(@"Countdown", nil);
+    [_countdownLabel sizeToFit];
+    _countdownLabel.center = CGPointMake(_countdownButton.center.x, CGRectGetMaxY(_countdownButton.frame)+_countdownLabel.frame.size.height/2);
     [self addSubview:_countdownLabel];
     
     _imageAutoFocusRect = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
@@ -334,7 +341,7 @@
     _segmentView.selectedTextColor = FSHexRGB(0x1A1D20);//[UIColor redColor];
     _segmentView.unSelectedTextColor = FSHexRGB(0xF5F5F5);
     _segmentView.selectedSegmentIndex = 2;
-    _segmentView.layer.cornerRadius = 20;
+    _segmentView.layer.cornerRadius = 5;
     _segmentView.layer.masksToBounds = YES;
     _segmentView.delegate = self;
     [self addSubview:_segmentView];
@@ -505,6 +512,8 @@
         [_beautyLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOff"]];
         [self showAlertView:[FSShortLanguage CustomLocalizedStringFromTable:@"BeautifyOffTip"]];
     }
+    [_beautyLabel sizeToFit];
+    _beautyLabel.center = CGPointMake(_beautyButton.center.x, CGRectGetMaxY(_beautyButton.frame)+_beautyLabel.frame.size.height/2);
     [_recorderManager switchBeauty:_isBeautyOpened];
 }
 
@@ -647,14 +656,14 @@
         [UIView animateWithDuration:0.3 animations:^{
             self.recorderButton.transform =  CGAffineTransformMakeScale(1.5,1.5);
             
-            [self.recorderButton.layer addAnimation:[self alphaLight:0.3 fromValue:50.0f toValue:10.0f] forKey:@"aAlpha1"];
+            [self.recorderButton.layer addAnimation:[self alphaLight:0.5 fromValue:50.0f toValue:10.0f] forKey:@"aAlpha1"];
             self.recorderButton.layer.borderColor = FSHexRGB(0x0BC2C6).CGColor;
   
         } completion:^(BOOL finished) {
         
             [self.recorderButton.layer removeAnimationForKey:@"aAlpha1"];
             
-            [self.recorderButton.layer addAnimation:[self alphaLight:0.5 fromValue:5.0f toValue:10.0f] forKey:@"aAlpha2"];
+            [self.recorderButton.layer addAnimation:[self alphaLight:0.7 fromValue:5.0f toValue:10.0f] forKey:@"aAlpha2"];
             self.recorderButton.layer.borderColor = FSHexRGB(0x0BC2C6).CGColor;
 
         }];

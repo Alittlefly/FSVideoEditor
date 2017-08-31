@@ -164,6 +164,9 @@
 		983A477E1F261E1100FB387D /* FSChallengeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A477C1F261E1100FB387D /* FSChallengeController.m */; };
 		983A47831F2620FD00FB387D /* FSAddChallengeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A47811F2620FD00FB387D /* FSAddChallengeController.m */; };
 		983A47881F26215800FB387D /* FSChallengeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 983A47861F26215800FB387D /* FSChallengeCell.m */; };
+		983AC5D01F5813EE00349992 /* FSAddChallengeControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 983AC5CE1F5813EE00349992 /* FSAddChallengeControl.h */; };
+		983AC5D11F5813EE00349992 /* FSAddChallengeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AC5CF1F5813EE00349992 /* FSAddChallengeControl.m */; };
+		983AC5D21F5813EE00349992 /* FSAddChallengeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 983AC5CF1F5813EE00349992 /* FSAddChallengeControl.m */; };
 		9840603C1EF93F130049B58E /* FSShortVideoRecorderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060371EF93F130049B58E /* FSShortVideoRecorderController.m */; };
 		9840603D1EF93F130049B58E /* FSShortVideoRecorderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 984060391EF93F130049B58E /* FSShortVideoRecorderManager.m */; };
 		9840603E1EF93F130049B58E /* FSShortVideoRecorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9840603B1EF93F130049B58E /* FSShortVideoRecorderView.m */; };
@@ -825,6 +828,8 @@
 		983A47811F2620FD00FB387D /* FSAddChallengeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAddChallengeController.m; sourceTree = "<group>"; };
 		983A47851F26215800FB387D /* FSChallengeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSChallengeCell.h; sourceTree = "<group>"; };
 		983A47861F26215800FB387D /* FSChallengeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSChallengeCell.m; sourceTree = "<group>"; };
+		983AC5CE1F5813EE00349992 /* FSAddChallengeControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAddChallengeControl.h; sourceTree = "<group>"; };
+		983AC5CF1F5813EE00349992 /* FSAddChallengeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAddChallengeControl.m; sourceTree = "<group>"; };
 		984060361EF93F130049B58E /* FSShortVideoRecorderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSShortVideoRecorderController.h; sourceTree = "<group>"; };
 		984060371EF93F130049B58E /* FSShortVideoRecorderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSShortVideoRecorderController.m; sourceTree = "<group>"; };
 		984060381EF93F130049B58E /* FSShortVideoRecorderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSShortVideoRecorderManager.h; sourceTree = "<group>"; };
@@ -1286,6 +1291,8 @@
 				98F6BA2D1F1E20B6006C8EA7 /* FSShortLanguage.m */,
 				980EBCA51F29D45D00B37A9B /* FSPublishSingleton.h */,
 				980EBCA61F29D45D00B37A9B /* FSPublishSingleton.m */,
+				983AC5CE1F5813EE00349992 /* FSAddChallengeControl.h */,
+				983AC5CF1F5813EE00349992 /* FSAddChallengeControl.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2214,6 +2221,7 @@
 				985E87731F54481300292FEF /* FSPublisherServer.h in Headers */,
 				985E87741F54481300292FEF /* FSUploadImageServer.h in Headers */,
 				985E87751F54481300292FEF /* FSChallengeDataServer.h in Headers */,
+				983AC5D01F5813EE00349992 /* FSAddChallengeControl.h in Headers */,
 				985E87761F54481300292FEF /* FSPublisherController.h in Headers */,
 				985E87771F54481300292FEF /* FSPublisherToolView.h in Headers */,
 				985E87781F54481300292FEF /* FSEditVideoNameView.h in Headers */,
@@ -2616,6 +2624,7 @@
 				207781721F4C592A00499996 /* FSDraftEmptyView.m in Sources */,
 				567B05A41F29FBBC00D09364 /* FSMusicCollectSever.m in Sources */,
 				567A3D881EFB6F8E0026247E /* NSObject+MJCoding.m in Sources */,
+				983AC5D11F5813EE00349992 /* FSAddChallengeControl.m in Sources */,
 				9880DEB41F171295006E730F /* SDWebImagePrefetcher.m in Sources */,
 				5616CC8B1F2B40F700028770 /* MJRefreshAutoGifFooter.m in Sources */,
 				567A3D4A1EFB66B60026247E /* FSFileUploadCache.m in Sources */,
@@ -2689,6 +2698,7 @@
 				985E86F71F54479F00292FEF /* FSMusicCollectAPI.m in Sources */,
 				985E86F81F54479F00292FEF /* FSLikedMusicAPI.m in Sources */,
 				985E86F91F54479F00292FEF /* FSMusicSearchAPI.m in Sources */,
+				983AC5D21F5813EE00349992 /* FSAddChallengeControl.m in Sources */,
 				985E86FA1F54479F00292FEF /* FSMusicSever.m in Sources */,
 				985E86FB1F54479F00292FEF /* FSMusicManager.m in Sources */,
 				985E86FC1F54479F00292FEF /* FSMusicCollectSever.m in Sources */,

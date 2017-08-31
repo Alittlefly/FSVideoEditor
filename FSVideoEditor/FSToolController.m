@@ -35,6 +35,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+
+    
     _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 20,CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     [_contentView setBackgroundColor:[UIColor whiteColor]];
     [_contentView.layer setCornerRadius:5.0];

@@ -96,8 +96,8 @@
     NSString *timeString = [FSShortLanguage CustomLocalizedStringFromTable:@"MusicStartTime"];//NSLocalizedString(@"MusicStartTime", nil);
     _timeLabel.text = [timeString stringByReplacingOccurrencesOfString:@"(0)" withString:[self getCurrentTimeString:_newTime]];
     [_timeLabel sizeToFit];
-    _timeLabel.frame = CGRectMake(20, CGRectGetMinY(_scrollView.frame)-5-25, _timeLabel.frame.size.width, 25);
-    _timeLabel.layer.cornerRadius = 25/2;
+    _timeLabel.frame = CGRectMake(20, CGRectGetMinY(_scrollView.frame)-5-25, _timeLabel.frame.size.width+20, 25);
+    _timeLabel.layer.cornerRadius = 5;
     _timeLabel.layer.masksToBounds = YES;
     [self addSubview:_timeLabel];
     

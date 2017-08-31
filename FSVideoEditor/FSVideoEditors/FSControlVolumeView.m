@@ -55,7 +55,7 @@
          UIBlurEffectStyleLight,
          UIBlurEffectStyleDark
          */
-        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         _effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
         _effectView.frame = CGRectMake(0, 0, _contentView.frame.size.width, _contentView.frame.size.height);
         _effectView.alpha = 0.7;
@@ -73,7 +73,7 @@
     _soundtrackLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-15 : 15, 23, 0, 27)];
     _soundtrackLabel.backgroundColor = [UIColor clearColor];
     _soundtrackLabel.font = [UIFont systemFontOfSize:15];
-    _soundtrackLabel.textColor = [UIColor whiteColor];
+    _soundtrackLabel.textColor = FSHexRGB(0x292929);
     _soundtrackLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Original"];//NSLocalizedString(@"Original", nil);
     [_soundtrackLabel sizeToFit];
     _soundtrackLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-15-_soundtrackLabel.frame.size.width : 15, 23, _soundtrackLabel.frame.size.width, 27);
@@ -81,16 +81,16 @@
     
     _soundtrackSlider = [[UISlider alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 15 : CGRectGetMaxX(_soundtrackLabel.frame)+15, 23, _contentView.frame.size.width-CGRectGetWidth(_soundtrackLabel.frame)-15-15-15, 27)];
     _soundtrackSlider.value = _soundtrackVolume;
-    _soundtrackSlider.minimumTrackTintColor = [UIColor orangeColor];
-    _soundtrackSlider.maximumTrackTintColor = [UIColor blackColor];
-    _soundtrackSlider.thumbTintColor = FSHexRGB(0x0BC2C6);
+    _soundtrackSlider.minimumTrackTintColor = FSHexRGB(0xFACE15);
+    _soundtrackSlider.maximumTrackTintColor = FSHexRGB(0x000000);
+    _soundtrackSlider.thumbTintColor = FSHexRGB(0x92908D);
     [_soundtrackSlider addTarget:self action:@selector(changeSoundtrack) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_soundtrackSlider];
     
     _scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-15 : 15, CGRectGetMaxY(_soundtrackLabel.frame)+30, 0, 27)];
     _scoreLabel.backgroundColor = [UIColor clearColor];
     _scoreLabel.font = [UIFont systemFontOfSize:15];
-    _scoreLabel.textColor = [UIColor whiteColor];
+    _scoreLabel.textColor = FSHexRGB(0x292929);
     _scoreLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Music"];//NSLocalizedString(@"Music", nil);
     [_scoreLabel sizeToFit];
     _scoreLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-15-_scoreLabel.frame.size.width : 15, _scoreLabel.frame.origin.y, _scoreLabel.frame.size.width, _scoreLabel.frame.size.height);
@@ -98,9 +98,9 @@
     
     _scoreSlider = [[UISlider alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 15 : CGRectGetMaxX(_scoreLabel.frame)+15, CGRectGetMaxY(_soundtrackLabel.frame)+30, _contentView.frame.size.width-CGRectGetWidth(_scoreLabel.frame)-15-15-15, 27)];
     _scoreSlider.value = _scroeVolume;
-    _scoreSlider.minimumTrackTintColor = [UIColor orangeColor];
-    _scoreSlider.maximumTrackTintColor = [UIColor blackColor];
-    _scoreSlider.thumbTintColor = FSHexRGB(0x0BC2C6);
+    _scoreSlider.minimumTrackTintColor = FSHexRGB(0xFACE15);
+    _scoreSlider.maximumTrackTintColor = FSHexRGB(0x000000);
+    _scoreSlider.thumbTintColor = FSHexRGB(0x92908D);
     [_scoreSlider addTarget:self action:@selector(changeScore) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_scoreSlider];
     
