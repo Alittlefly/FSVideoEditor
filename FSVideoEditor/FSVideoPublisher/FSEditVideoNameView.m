@@ -124,13 +124,15 @@
 
 - (void)addChallenge {
     if (_isHasChallenge) {
-        [FSPublishSingleton sharedInstance].chooseChallenge = nil;
         _draftInfo.challenge = nil;
         _isHasChallenge = NO;
         [_addChallengeControl setLeftImage:[FSPublishSingleton sharedInstance].isAutoReverse ? nil:[UIImage imageNamed:@"white#"] title:[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"] rightImage:[FSPublishSingleton sharedInstance].isAutoReverse ? [UIImage imageNamed:@"white#"]:nil];
 
        // [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
         [self updateChallengeButtonFrame];
+        if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewRemoveChallenge)]) {
+            [self.delegate FSEditVideoNameViewRemoveChallenge];
+        }
     }
     else {
         if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewAddChallenge)]) {

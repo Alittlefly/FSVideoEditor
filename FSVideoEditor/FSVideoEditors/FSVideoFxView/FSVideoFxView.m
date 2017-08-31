@@ -15,6 +15,36 @@
 #define FxButtonH 50.0
 #define FxButtonP 30.0
 
+@interface FSUndoButton : UIButton
+
+@end
+@implementation FSUndoButton
+
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        [self.layer setCornerRadius:CGRectGetHeight(frame)/2.0];
+        [self.layer setMasksToBounds:YES];
+        [self setBackgroundColor:FSHexRGB(0x2f323e)];
+        [self setTitleColor:FSHexRGB(0xb8b9bd) forState:(UIControlStateNormal)];
+    }
+    return self;
+}
+-(CGRect)imageRectForContentRect:(CGRect)contentRect{
+    CGFloat imagex = 5.0;
+    CGFloat imagey = 5.0;
+    CGFloat imagew = 19.0;
+    return CGRectMake(imagex, imagey, imagew, imagew);
+}
+
+-(CGRect)titleRectForContentRect:(CGRect)contentRect{
+    CGFloat titleX = CGRectGetMaxX([self imageRectForContentRect:contentRect]) + 2.0;
+    CGFloat titleH = 16.0;
+    CGFloat titleY = (CGRectGetHeight(contentRect) - titleH)/2.0;
+    CGFloat titleW = CGRectGetWidth(contentRect) - 19.0 - 7.0 - 5.0;
+    return CGRectMake(titleX, titleY, titleW, titleH);
+}
+@end
+
 @interface FSFxButton : UIButton
 @property(nonatomic,strong)UIView *colorView;
 @property(nonatomic,strong)UIImageView *selectedImage;
@@ -43,7 +73,7 @@
         [self.titleLabel setTextAlignment:(NSTextAlignmentCenter)];
         [self setTitleColor:FSHexRGB(0xf5f5f5) forState:(UIControlStateNormal)];
         
-        [self.backImage setFrame:self.bounds];
+        [self.backImage setFrame:CGRectMake(0.5, 0.5, CGRectGetWidth(self.bounds) - 1.0, CGRectGetHeight(self.bounds) - 1.0)];
         [self.backImage.layer setCornerRadius:CGRectGetHeight(frame)/2.0];
         [self.backImage.layer setMasksToBounds:YES];
         [self addSubview:self.backImage];
@@ -52,6 +82,7 @@
         [_colorView.layer setCornerRadius:CGRectGetHeight(frame)/2.0];
         [_colorView.layer setMasksToBounds:YES];
         [_colorView setUserInteractionEnabled:NO];
+//        [_colorView setAlpha:0.8];
         [self addSubview:_colorView];
         
         [self.selectedImage setFrame:CGRectMake(0, 0, 22, 17)];
@@ -152,7 +183,7 @@
 @property(nonatomic,strong)NSArray *videofxs;
 @property(nonatomic,strong)NSArray *videofuncs;
 
-@property(nonatomic,strong)UIButton *unDoButton;
+@property(nonatomic,strong)FSUndoButton *unDoButton;
 @property(nonatomic,strong)NSMutableDictionary *fxButtonDict;
 @end
 
@@ -226,16 +257,24 @@
     _progress.delegate = self;
     [self addSubview:_progress];
     
-     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30-54, 21)];
+    
+    NSString *undoText = [FSShortLanguage CustomLocalizedStringFromTable:@"Delete"];
+    // new code
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:11.0]};
+    CGRect newSize = [undoText boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
+    CGFloat buttonWidth = CGRectGetWidth(newSize) + 19.0 + 7.0 + 5.0;
+    
+     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30 - buttonWidth, 21)];
     [_tipLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"AddFilterTip"]];
     [_tipLabel setFont:[UIFont systemFontOfSize:15]];
     [_tipLabel setTextColor:FSHexRGB(0xCBCBCB)];
     [_tipLabel setTextAlignment:(NSTextAlignmentLeft)];
     [self addSubview:_tipLabel];
     
-    
-     _unDoButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sframe)-10-54, CGRectGetMaxY(_progress.frame), 54, 30)];
-    [_unDoButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Delete"] forState:(UIControlStateNormal)];
+     _unDoButton = [[FSUndoButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sframe)-10-buttonWidth, CGRectGetMaxY(_progress.frame),buttonWidth, 30)];
+    [_unDoButton setTitle:undoText forState:(UIControlStateNormal)];
+    [_unDoButton.titleLabel setFont:[UIFont systemFontOfSize:11.0]];
+    [_unDoButton setImage:[UIImage imageNamed:@"fxUndo"] forState:(UIControlStateNormal)];
     [_unDoButton setHidden:YES];
     [_unDoButton addTarget:self action:@selector(unDoFix) forControlEvents:(UIControlEventTouchUpInside)];
     [self addSubview:_unDoButton];
@@ -368,20 +407,22 @@
     [noneFx setBackgroundColor:[UIColor redColor]];
     [noneFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"NoFilter"] forState:(UIControlStateNormal)];
      noneFx.tag = FSVideoFxTypeNone;
+    [noneFx.colorView setBackgroundColor:FSHexRGBAlpha(0x000000, 0.95)];
     [noneFx setImage:[UIImage sd_animatedGIFNamed:@"Origin"] forState:(UIControlStateNormal)];
-    [noneFx.colorView setBackgroundColor:FSHexRGB(0x000000)];
     [self.fxButtonDict setObject:noneFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeNone]];
-    
+    noneFx.selected = (_fxType == FSVideoFxTypeNone);
+
     [_contentTimeView addSubview:noneFx];
     
     FSFxButton *revertFx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(noneFx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [revertFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [revertFx setBackgroundColor:[UIColor yellowColor]];
     [revertFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Reverse"] forState:(UIControlStateNormal)];
-    [revertFx.colorView setBackgroundColor:FSHexRGB(0xff39ad)];
-    [revertFx setImage:[UIImage sd_animatedGIFNamed:@"revert"] forState:(UIControlStateNormal)];
+    [revertFx.colorView setBackgroundColor:FSHexRGBAlpha(0xff39ad, 0.95)];
      revertFx.tag = FSVideoFxTypeRevert;
+    [revertFx setImage:[UIImage sd_animatedGIFNamed:@"revert"] forState:(UIControlStateNormal)];
     [self.fxButtonDict setObject:revertFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeRevert]];
+    revertFx.selected = (_fxType == FSVideoFxTypeRevert);
     [_contentTimeView addSubview:revertFx];
     
     
@@ -389,12 +430,10 @@
     [repeatFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [repeatFx setBackgroundColor:[UIColor yellowColor]];
     [repeatFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Repeat"] forState:(UIControlStateNormal)];
-    [repeatFx.colorView setBackgroundColor:FSHexRGB(0x7778ff)];
-    repeatFx.tag = FSVideoFxTypeRepeat;
+    [repeatFx.colorView setBackgroundColor:FSHexRGBAlpha(0x7778ff, 0.95)];
+     repeatFx.tag = FSVideoFxTypeRepeat;
     [repeatFx setImage:[UIImage sd_animatedGIFNamed:@"repeat"] forState:(UIControlStateNormal)];
-
     [self.fxButtonDict setObject:repeatFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeRepeat]];
-
     repeatFx.selected = (_fxType == FSVideoFxTypeRepeat);
 
     [_contentTimeView addSubview:repeatFx];
@@ -403,13 +442,13 @@
     [slowFx addTarget:self action:@selector(clickTimeFxButtion:) forControlEvents:(UIControlEventTouchUpInside)];
     [slowFx setBackgroundColor:[UIColor yellowColor]];
     [slowFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"SlowMotion"] forState:(UIControlStateNormal)];
-    [slowFx.colorView setBackgroundColor:FSHexRGB(0xbcff77)];
+    [slowFx.colorView setBackgroundColor:FSHexRGBAlpha(0xbcff77, 0.95)];
      slowFx.tag = FSVideoFxTypeSlow;
     [slowFx setImage:[UIImage sd_animatedGIFNamed:@"slow"] forState:(UIControlStateNormal)];
     [self.fxButtonDict setObject:slowFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeSlow]];
+    slowFx.selected = (_fxType == FSVideoFxTypeSlow);
 
     [_contentTimeView addSubview:slowFx];
-    
     [_contentTimeView setContentSize:CGSizeMake(CGRectGetMaxX(slowFx.frame) + 20, 0)];
     [_contentTimeView setContentOffset:CGPointZero];
 
@@ -435,7 +474,6 @@
 -(void)beginFx:(UIButton *)button{
     NSInteger tag = button.tag;
     if (tag == 1) {
-        
         _progress.fxViewColor =  FSHexRGBAlpha(0x01feff, 0.95);//[UIColor redColor];
     }else if(tag == 2){
         _progress.fxViewColor = FSHexRGBAlpha(0x9c01ff, 0.95);//[UIColor whiteColor];
@@ -608,7 +646,6 @@
     }
 }
 #pragma mark - 翻转
-
 -(void)dealloc{
     NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
