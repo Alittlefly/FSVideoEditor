@@ -70,7 +70,14 @@
     _addChallengeButton.layer.shadowOffset = CGSizeMake(1, 1);
     [_addChallengeButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_addChallengeButton.titleLabel setShadowOffset:CGSizeMake(1, 1)];
-    [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
+    if (_draftInfo.challenge) {
+        _isHasChallenge = YES;
+        [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@ X",_draftInfo.challenge.challengeName] forState:UIControlStateNormal];
+    }
+    else {
+        _isHasChallenge = NO;
+        [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
+    }
     [_addChallengeButton.titleLabel setFont:[UIFont systemFontOfSize:11]];
     [_addChallengeButton addTarget:self action:@selector(addChallenge) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_addChallengeButton];
@@ -113,6 +120,7 @@
 - (void)addChallenge {
     if (_isHasChallenge) {
         [FSPublishSingleton sharedInstance].chooseChallenge = nil;
+        _draftInfo.challenge = nil;
         _isHasChallenge = NO;
         [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
         [self updateChallengeButtonFrame];
