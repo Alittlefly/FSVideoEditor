@@ -29,6 +29,9 @@
 //        _glayer.colors = @[(__bridge id)FSHexRGB(0x3023AE).CGColor,(__bridge id)FSHexRGB(0xC96DD8).CGColor];
 //        _glayer.startPoint = CGPointMake(0, 0);
 //        _glayer.endPoint = CGPointMake(0, 1);
+        
+        [self setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 4)];
+        [self setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentCenter)];
     }
     return self;
 }
@@ -156,9 +159,6 @@ static NSString *identifier = @"FSMusicCell";
     
     [self.deatilButton setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 50 : CGRectGetWidth(self.bounds) - 80, (107 - 30)/2.0, 30, 30)];
     [self.collectButton setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 10 : CGRectGetWidth(self.bounds) - 40, (107 - 30)/2.0, 30, 30)];
-    
-    
-
 }
 
 -(void)setMusic:(FSMusic *)music{
