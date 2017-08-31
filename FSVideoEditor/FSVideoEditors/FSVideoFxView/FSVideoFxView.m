@@ -15,6 +15,36 @@
 #define FxButtonH 50.0
 #define FxButtonP 30.0
 
+@interface FSUndoButton : UIButton
+
+@end
+@implementation FSUndoButton
+
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        [self.layer setCornerRadius:CGRectGetHeight(frame)/2.0];
+        [self.layer setMasksToBounds:YES];
+        [self setBackgroundColor:FSHexRGB(0x2f323e)];
+        [self setTitleColor:FSHexRGB(0xb8b9bd) forState:(UIControlStateNormal)];
+    }
+    return self;
+}
+-(CGRect)imageRectForContentRect:(CGRect)contentRect{
+    CGFloat imagex = 5.0;
+    CGFloat imagey = 5.0;
+    CGFloat imagew = 19.0;
+    return CGRectMake(imagex, imagey, imagew, imagew);
+}
+
+-(CGRect)titleRectForContentRect:(CGRect)contentRect{
+    CGFloat titleX = CGRectGetMaxX([self imageRectForContentRect:contentRect]) + 2.0;
+    CGFloat titleH = 16.0;
+    CGFloat titleY = (CGRectGetHeight(contentRect) - titleH)/2.0;
+    CGFloat titleW = CGRectGetWidth(contentRect) - 19.0 - 7.0 - 5.0;
+    return CGRectMake(titleX, titleY, titleW, titleH);
+}
+@end
+
 @interface FSFxButton : UIButton
 @property(nonatomic,strong)UIView *colorView;
 @property(nonatomic,strong)UIImageView *selectedImage;
@@ -152,7 +182,7 @@
 @property(nonatomic,strong)NSArray *videofxs;
 @property(nonatomic,strong)NSArray *videofuncs;
 
-@property(nonatomic,strong)UIButton *unDoButton;
+@property(nonatomic,strong)FSUndoButton *unDoButton;
 @property(nonatomic,strong)NSMutableDictionary *fxButtonDict;
 @end
 
@@ -226,16 +256,24 @@
     _progress.delegate = self;
     [self addSubview:_progress];
     
-     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30-54, 21)];
+    
+    NSString *undoText = [FSShortLanguage CustomLocalizedStringFromTable:@"Delete"];
+    // new code
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:11.0]};
+    CGRect newSize = [undoText boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
+    CGFloat buttonWidth = CGRectGetWidth(newSize) + 19.0 + 7.0 + 5.0;
+    
+     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30 - buttonWidth, 21)];
     [_tipLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"AddFilterTip"]];
     [_tipLabel setFont:[UIFont systemFontOfSize:15]];
     [_tipLabel setTextColor:FSHexRGB(0xCBCBCB)];
     [_tipLabel setTextAlignment:(NSTextAlignmentLeft)];
     [self addSubview:_tipLabel];
     
-    
-     _unDoButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sframe)-10-54, CGRectGetMaxY(_progress.frame), 54, 30)];
-    [_unDoButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Delete"] forState:(UIControlStateNormal)];
+     _unDoButton = [[FSUndoButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sframe)-10-buttonWidth, CGRectGetMaxY(_progress.frame),buttonWidth, 30)];
+    [_unDoButton setTitle:undoText forState:(UIControlStateNormal)];
+    [_unDoButton.titleLabel setFont:[UIFont systemFontOfSize:11.0]];
+    [_unDoButton setImage:[UIImage imageNamed:@"fxUndo"] forState:(UIControlStateNormal)];
     [_unDoButton setHidden:YES];
     [_unDoButton addTarget:self action:@selector(unDoFix) forControlEvents:(UIControlEventTouchUpInside)];
     [self addSubview:_unDoButton];
@@ -435,7 +473,6 @@
 -(void)beginFx:(UIButton *)button{
     NSInteger tag = button.tag;
     if (tag == 1) {
-        
         _progress.fxViewColor =  FSHexRGBAlpha(0x01feff, 0.95);//[UIColor redColor];
     }else if(tag == 2){
         _progress.fxViewColor = FSHexRGBAlpha(0x9c01ff, 0.95);//[UIColor whiteColor];
@@ -608,7 +645,6 @@
     }
 }
 #pragma mark - 翻转
-
 -(void)dealloc{
     NSLog(@"%@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }

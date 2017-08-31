@@ -232,7 +232,7 @@
     if (_Willchanged) {
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"EraseEffectsTip"] preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *cancle = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancle"] style:(UIAlertActionStyleCancel) handler:nil];
+        UIAlertAction *cancle = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] style:(UIAlertActionStyleCancel) handler:nil];
         UIAlertAction *sure = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Erase"] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             [self rsetTimeLineFx];
             [self dismissViewControllerAnimated:YES completion:nil];
