@@ -285,7 +285,11 @@
         [self.delegate FSPublisherToolViewSaveToLibrary:isSave];
     }
 }
-
+- (void)FSEditVideoNameViewRemoveChallenge{
+    if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewRemovechallenge)]) {
+        [self.delegate FSPublisherToolViewRemovechallenge];
+    }
+}
 - (void)FSEditVideoNameViewAddChallenge {
     if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewShowChallengeView)]) {
         [self.delegate FSPublisherToolViewShowChallengeView];

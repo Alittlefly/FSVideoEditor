@@ -12,6 +12,7 @@
 @protocol FSEditVideoNameViewDelegate <NSObject>
 
 - (void)FSEditVideoNameViewAddChallenge;
+- (void)FSEditVideoNameViewRemoveChallenge;
 - (void)FSEditVideoNameViewSaveToPhotoLibrary:(BOOL)isSave;
 - (void)FSEditVideoNameViewEditVideoTitle:(NSString *)title;
 

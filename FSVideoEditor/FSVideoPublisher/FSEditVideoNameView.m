@@ -119,11 +119,13 @@
 
 - (void)addChallenge {
     if (_isHasChallenge) {
-        [FSPublishSingleton sharedInstance].chooseChallenge = nil;
         _draftInfo.challenge = nil;
         _isHasChallenge = NO;
         [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
         [self updateChallengeButtonFrame];
+        if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewRemoveChallenge)]) {
+            [self.delegate FSEditVideoNameViewRemoveChallenge];
+        }
     }
     else {
         if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewAddChallenge)]) {

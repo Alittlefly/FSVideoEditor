@@ -362,11 +362,13 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     draftChallenge.challengeDetail = model.content;
     _tempDraftInfo.challenge = draftChallenge;
     
-    [FSPublishSingleton sharedInstance].chooseChallenge = model;
     [_toolView updateChallengeName:model.name];
 }
 
 #pragma mark - FSPublisherToolViewDelegate
+- (void)FSPublisherToolViewRemovechallenge{
+    _tempDraftInfo.challenge = nil;
+}
 - (void)FSPublisherToolViewShowChallengeView {
     FSChallengeController *challengeVC = [[FSChallengeController alloc] init];
     challengeVC.delegate = self;
