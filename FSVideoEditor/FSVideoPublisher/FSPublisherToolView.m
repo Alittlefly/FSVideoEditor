@@ -86,11 +86,11 @@
     [_chooseMusicButton addTarget:self action:@selector(chooseMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_chooseMusicButton];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 15+40+5 : 15+20+5, 20, self.frame.size.width-15-15-20-40-10, 40)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 15+40+15 : 15+20+15, 20, self.frame.size.width-15-15-20-40-30, 40)];
     _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.font = [UIFont systemFontOfSize:15];
-    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    _titleLabel.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentLeft : NSTextAlignmentRight;
     _titleLabel.shadowColor = [UIColor blackColor];
     _titleLabel.shadowOffset = CGSizeMake(1, 1);
     if (_draftInfo.vMusic) {
@@ -109,14 +109,16 @@
     [self addSubview:_cutMusicButton];
     
     _cutMusicLabel = [[UILabel alloc] init];
-    _cutMusicLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
-    _cutMusicLabel.font = [UIFont systemFontOfSize:7];
+    //_cutMusicLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
+    _cutMusicLabel.font = [UIFont systemFontOfSize:10];
     _cutMusicLabel.textColor = [UIColor whiteColor];
     _cutMusicLabel.backgroundColor = [UIColor clearColor];
     _cutMusicLabel.textAlignment = NSTextAlignmentCenter;
     _cutMusicLabel.shadowColor = [UIColor blackColor];
     _cutMusicLabel.shadowOffset = CGSizeMake(1, 1);
     _cutMusicLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Edit"];//NSLocalizedString(@"Edit", nil);
+    [_cutMusicLabel sizeToFit];
+    _cutMusicLabel.center = CGPointMake(_cutMusicButton.center.x, CGRectGetMaxY(_cutMusicButton.frame)+_cutMusicLabel.frame.size.height/2);
     [self addSubview:_cutMusicLabel];
     
     _volumeButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -126,14 +128,16 @@
     [self addSubview:_volumeButton];
     
     _volumeLabel = [[UILabel alloc] init];
-    _volumeLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_volumeButton.frame), CGRectGetMaxY(_volumeButton.frame), CGRectGetWidth(_volumeButton.frame), 10) : CGRectMake(CGRectGetMaxX(_volumeButton.frame) - CGRectGetWidth(_volumeButton.frame), CGRectGetMaxY(_volumeButton.frame), CGRectGetWidth(_volumeButton.frame), 10);
+    //_volumeLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_volumeButton.frame), CGRectGetMaxY(_volumeButton.frame), CGRectGetWidth(_volumeButton.frame), 10) : CGRectMake(CGRectGetMaxX(_volumeButton.frame) - CGRectGetWidth(_volumeButton.frame), CGRectGetMaxY(_volumeButton.frame), CGRectGetWidth(_volumeButton.frame), 10);
     _volumeLabel.backgroundColor = [UIColor clearColor];
-    _volumeLabel.font = [UIFont systemFontOfSize:7];
+    _volumeLabel.font = [UIFont systemFontOfSize:10];
     _volumeLabel.textColor = [UIColor whiteColor];
     _volumeLabel.textAlignment = NSTextAlignmentCenter;
     _volumeLabel.shadowColor = [UIColor blackColor];
     _volumeLabel.shadowOffset = CGSizeMake(1, 1);
     _volumeLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Volume"];//NSLocalizedString(@"Volume", nil);
+    [_volumeLabel sizeToFit];
+    _volumeLabel.center = CGPointMake(_volumeButton.center.x, CGRectGetMaxY(_volumeButton.frame)+_volumeLabel.frame.size.height/2);
     [self addSubview:_volumeLabel];
     
     if (_type == FSDraftInfoTypeVideo) {
@@ -144,15 +148,17 @@
         [self addSubview:_filterButton];
         
         _filterLabel = [[UILabel alloc] init];
-        _filterLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15) : CGRectMake(CGRectGetMaxX(_filterButton.frame) - CGRectGetWidth(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15);
+        //_filterLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15) : CGRectMake(CGRectGetMaxX(_filterButton.frame) - CGRectGetWidth(_filterButton.frame), CGRectGetMaxY(_filterButton.frame), CGRectGetWidth(_filterButton.frame), 15);
         _filterLabel.backgroundColor = [UIColor clearColor];
-        _filterLabel.font = [UIFont systemFontOfSize:7];
+        _filterLabel.font = [UIFont systemFontOfSize:10];
         _filterLabel.textColor = [UIColor whiteColor];
         _filterLabel.textAlignment = NSTextAlignmentCenter;
         _filterLabel.shadowColor = [UIColor blackColor];
         _filterLabel.shadowOffset = CGSizeMake(1, 1);
         _filterLabel.text = [FSShortLanguage
                              CustomLocalizedStringFromTable:@"ColorFilter"];
+        [_filterLabel sizeToFit];
+        _filterLabel.center = CGPointMake(_filterButton.center.x, CGRectGetMaxY(_filterButton.frame)+_filterLabel.frame.size.height/2);
         [self addSubview:_filterLabel];
     }
     
@@ -168,21 +174,23 @@
     [self addSubview:_effectsButton];
     
     _effectsLabel = [[UILabel alloc] init];
-    _effectsLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_effectsButton.frame), CGRectGetMaxY(_effectsButton.frame), CGRectGetWidth(_effectsButton.frame), 15) : CGRectMake(CGRectGetMaxX(_effectsButton.frame) - CGRectGetWidth(_effectsButton.frame), CGRectGetMaxY(_effectsButton.frame), CGRectGetWidth(_effectsButton.frame), 15);
+    //_effectsLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_effectsButton.frame), CGRectGetMaxY(_effectsButton.frame), CGRectGetWidth(_effectsButton.frame), 15) : CGRectMake(CGRectGetMaxX(_effectsButton.frame) - CGRectGetWidth(_effectsButton.frame), CGRectGetMaxY(_effectsButton.frame), CGRectGetWidth(_effectsButton.frame), 15);
     _effectsLabel.backgroundColor = [UIColor clearColor];
-    _effectsLabel.font = [UIFont systemFontOfSize:7];
+    _effectsLabel.font = [UIFont systemFontOfSize:10];
     _effectsLabel.textColor = [UIColor whiteColor];
     _effectsLabel.shadowColor = [UIColor blackColor];
     _effectsLabel.shadowOffset = CGSizeMake(1, 1);
     _effectsLabel.textAlignment = NSTextAlignmentCenter;
     _effectsLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Effects"];
+    [_effectsLabel sizeToFit];
+    _effectsLabel.center = CGPointMake(_effectsButton.center.x, CGRectGetMaxY(_effectsButton.frame)+_effectsLabel.frame.size.height/2);
     [self addSubview:_effectsLabel];
     
     _draftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _draftButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width-20-(self.frame.size.width-60)/2, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44) : CGRectMake(20, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44);
     [_draftButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Draft"] forState:UIControlStateNormal];
-    _draftButton.backgroundColor = FSHexRGB(0x0BC2C6);
-    _draftButton.layer.cornerRadius = 22;
+    _draftButton.backgroundColor = FSHexRGBAlpha(0xD8D8D8, 0.8);
+    _draftButton.layer.cornerRadius = 5;
     _draftButton.layer.masksToBounds = YES;
     [_draftButton setImage:[UIImage imageNamed:@"draft"] forState:UIControlStateNormal];
     [_draftButton addTarget:self action:@selector(draftClik) forControlEvents:UIControlEventTouchUpInside];
@@ -191,8 +199,8 @@
     _publishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _publishButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(20, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44) : CGRectMake(self.frame.size.width-20-(self.frame.size.width-60)/2, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44);
     [_publishButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Upload"] forState:UIControlStateNormal];
-    _publishButton.backgroundColor = FSHexRGB(0xFE2C54);
-    _publishButton.layer.cornerRadius = 22;
+    _publishButton.backgroundColor = FSHexRGB(0x0BC2C6);
+    _publishButton.layer.cornerRadius = 5;
     _publishButton.layer.masksToBounds = YES;
      [_publishButton setImage:[UIImage imageNamed:@"publish"] forState:UIControlStateNormal];
     [_publishButton addTarget:self action:@selector(publishClik) forControlEvents:UIControlEventTouchUpInside];

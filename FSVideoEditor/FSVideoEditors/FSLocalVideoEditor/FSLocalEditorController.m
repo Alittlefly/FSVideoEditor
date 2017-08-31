@@ -118,7 +118,7 @@
     _segmentView.selectedTextColor = FSHexRGB(0x1A1D20);//[UIColor redColor];
     _segmentView.unSelectedTextColor = FSHexRGB(0xF5F5F5);
     _segmentView.selectedSegmentIndex = 2;
-    _segmentView.layer.cornerRadius = 20;
+    _segmentView.layer.cornerRadius = 5;
     _segmentView.layer.masksToBounds = YES;
     _segmentView.delegate = self;
     [self.view addSubview:_segmentView];

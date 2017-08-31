@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "98D9F4671F4D874300ED841F"
+               BlueprintIdentifier = "985E86B11F5446AA00292FEF"
                BuildableName = "FSVideoEditorSDKTests.xctest"
                BlueprintName = "FSVideoEditorSDKTests"
                ReferencedContainer = "container:FSVideoEditor.xcodeproj">
