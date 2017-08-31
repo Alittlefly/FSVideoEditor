@@ -15,6 +15,7 @@
 @interface FSMusicUseButton : UIButton
 {
     CAGradientLayer *_glayer;
+    NSString *_text;
 }
 @end
 @implementation FSMusicUseButton
@@ -29,12 +30,55 @@
 //        _glayer.colors = @[(__bridge id)FSHexRGB(0x3023AE).CGColor,(__bridge id)FSHexRGB(0xC96DD8).CGColor];
 //        _glayer.startPoint = CGPointMake(0, 0);
 //        _glayer.endPoint = CGPointMake(0, 1);
-        
-        [self setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 4)];
+        [self.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
         [self setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentCenter)];
+        [self.layer setCornerRadius:5.0];
+        [self.layer setMasksToBounds:YES];
     }
     return self;
 }
+-(void)setTitle:(NSString *)title forState:(UIControlState)state{
+    [super setTitle:title forState:state];
+    
+    _text = title;
+}
+-(CGRect)imageRectForContentRect:(CGRect)contentRect{
+    NSString *title = _text;
+    CGFloat imageWidth = 18.0;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0]};
+    CGRect newSize = [title boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
+    CGFloat textW = CGRectGetWidth(newSize);
+    CGFloat startX = (CGRectGetWidth(contentRect) - (textW + imageWidth + 4.0))/2.0 ;
+    
+    CGFloat imageX = 0;
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        imageX = startX + textW + 4.0;
+    }else{
+        imageX = startX;
+    }
+    
+    CGFloat imageH = 12.0;
+    CGFloat imageY = (CGRectGetHeight(contentRect)  - imageH)/2.0;
+    return CGRectMake(imageX, imageY, imageWidth, imageH);
+}
+-(CGRect)titleRectForContentRect:(CGRect)contentRect{
+    NSString *title = _text;
+    CGFloat imageWidth = 18.0;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0]};
+    CGRect newSize = [title boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
+    CGFloat textW = CGRectGetWidth(newSize);
+    CGFloat startX = (CGRectGetWidth(contentRect) - (textW + imageWidth + 4.0))/2.0;
+    CGFloat textX = 0.0;
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        textX = startX;
+    }else{
+        textX = startX + imageWidth + 4.0;
+    }
+    CGFloat textH = 21.0;
+    CGFloat textY = (CGRectGetHeight(contentRect)  - textH)/2.0;
+    return CGRectMake(textX, textY, textW, textH);
+}
+
 @end
 
 

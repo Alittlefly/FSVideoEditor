@@ -19,6 +19,58 @@
 #import "FSShortLanguage.h"
 #import "FSPublishSingleton.h"
 
+@interface FSRecordNowButton : UIButton
+{
+    NSString *_text;
+}
+@end
+@implementation FSRecordNowButton
+
+-(void)setTitle:(NSString *)title forState:(UIControlState)state{
+    [super setTitle:title forState:state];
+    
+    _text = title;
+}
+-(CGRect)imageRectForContentRect:(CGRect)contentRect{
+    NSString *title = _text;
+    CGFloat imageWidth = 20.0;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0]};
+    CGRect newSize = [title boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
+    CGFloat textW = CGRectGetWidth(newSize);
+    CGFloat startX = (CGRectGetWidth(contentRect) - (textW + imageWidth + 6.0))/2.0 ;
+    
+    CGFloat imageX = 0;
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        imageX = startX;
+    }else{
+        imageX = startX + textW + 6.0;
+    }
+    
+    CGFloat imageH = 20.0;
+    CGFloat imageY = (CGRectGetHeight(contentRect)  - imageH)/2.0;
+    return CGRectMake(imageX, imageY, imageWidth, imageH);
+}
+-(CGRect)titleRectForContentRect:(CGRect)contentRect{
+    NSString *title = _text;
+    CGFloat imageWidth = 20.0;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0]};
+    CGRect newSize = [title boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
+    CGFloat textW = CGRectGetWidth(newSize);
+    CGFloat startX = (CGRectGetWidth(contentRect) - (textW + imageWidth + 6.0))/2.0;
+    CGFloat textX = 0.0;
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        textX = startX + imageWidth + 6.0;
+    }else{
+        textX = startX;
+
+    }
+    CGFloat textH = 21.0;
+    CGFloat textY = (CGRectGetHeight(contentRect)  - textH)/2.0;
+    return CGRectMake(textX, textY, textW, textH);
+}
+
+@end
+
 @interface FSToolController ()<FSMusicControllerDelegate>
 {
     UIButton *_currentButton;
@@ -42,17 +94,23 @@
     [self.view addSubview:_contentView];
     
     
-    UIButton *videoRecorderButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    videoRecorderButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 5 : CGRectGetWidth(_contentView.frame) - 125, 17, 100, 21);
+    NSString *recordText = [FSShortLanguage CustomLocalizedStringFromTable:@"Record"];
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0]};
+    CGRect newSize = [recordText boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
+    CGFloat textW = CGRectGetWidth(newSize);
+    CGFloat buttonW = textW + 6.0 + 20.0;
+    FSRecordNowButton *videoRecorderButton = [FSRecordNowButton buttonWithType:UIButtonTypeCustom];
+    [videoRecorderButton setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentCenter)];
+     videoRecorderButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20: CGRectGetWidth(_contentView.frame) - buttonW - 20, 17, buttonW, 21);
+    [videoRecorderButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+    [videoRecorderButton setTitle:recordText forState:UIControlStateNormal];
     if ([FSPublishSingleton sharedInstance].isAutoReverse) {
-        [videoRecorderButton setTitle:[NSString stringWithFormat:@"< %@",[FSShortLanguage CustomLocalizedStringFromTable:@"Record"]] forState:UIControlStateNormal];
-    }
-    else {
-        [videoRecorderButton setTitle:[NSString stringWithFormat:@"%@ >",[FSShortLanguage CustomLocalizedStringFromTable:@"Record"]] forState:UIControlStateNormal];
+        [videoRecorderButton setImage:[UIImage imageNamed:@"startRecord_ar"] forState:(UIControlStateNormal)];
+    }else {
+        [videoRecorderButton setImage:[UIImage imageNamed:@"startRecord_en"] forState:(UIControlStateNormal)];
     }
     [videoRecorderButton setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
     [videoRecorderButton setTitleColor:FSHexRGB(0x010A12) forState:(UIControlStateSelected)];
-    [videoRecorderButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
     [videoRecorderButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     videoRecorderButton.tag = 1;
     [_contentView addSubview:videoRecorderButton];
