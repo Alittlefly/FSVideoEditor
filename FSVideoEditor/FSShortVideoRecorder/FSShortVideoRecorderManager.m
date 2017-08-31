@@ -122,7 +122,7 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (void)initBaseData:(FSDraftInfo *)draftInfo {
-    _currentDeviceIndex = 0;
+    _currentDeviceIndex = draftInfo.isFrontCamera ? 1 : 0;
     _supportAutoFocus = false;
     _supportAutoExposure = false;
     _fxRecord = true;
@@ -175,7 +175,7 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     
     // 此样例使用高质量、横纵比为1:1的设置启动采集预览
-    if (![_context startCapturePreview:0 videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
+    if (![_context startCapturePreview:_currentDeviceIndex videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
         NSLog(@"启动预览失败");
     }
     

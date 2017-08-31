@@ -442,6 +442,9 @@
 
 - (void)recoverCameraClik {
     BOOL isSuccess = [_recorderManager switchCamera];
+    if (isSuccess) {
+        _draftInfo.isFrontCamera = !_draftInfo.isFrontCamera;
+    }
 }
 
 - (void)flashClik {

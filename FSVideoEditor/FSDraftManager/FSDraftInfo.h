@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger,FSDraftInfoType){
 @property(nonatomic,strong)FSDraftChallenge *challenge;
 @property(nonatomic,strong)FSDraftTimeFx *vTimefx;
 @property(nonatomic,assign)BOOL vBeautyOn;
+@property(nonatomic,assign)BOOL isFrontCamera;                        //是否前置
 @property(nonatomic,assign)double vOriginalVolume;
 @property(nonatomic,assign)double vMusicVolume;
 @property(nonatomic,strong)NSString *vTitle;

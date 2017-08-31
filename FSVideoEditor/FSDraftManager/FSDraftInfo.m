@@ -26,6 +26,7 @@
         [self setVMusicVolume:-1.0];
         [self setVOriginalVolume:-1.0];
         [self setVBeautyOn:YES];
+        [self setIsFrontCamera:YES];
     }
     return self;
 }
@@ -52,6 +53,7 @@
         self.recordVideoSpeedArray = draftInfo.recordVideoSpeedArray;
         self.vType = draftInfo.vType;
         self.vAddedFxViews = draftInfo.vAddedFxViews;
+        self.isFrontCamera = draftInfo.isFrontCamera;
     }
     return self;
 }
@@ -80,6 +82,7 @@
     self.recordVideoSpeedArray = draftInfo.recordVideoSpeedArray;
     self.vType = draftInfo.vType;
     self.vAddedFxViews = draftInfo.vAddedFxViews;
+    self.isFrontCamera= draftInfo.isFrontCamera;
 }
 -(void)clearFxInfos{
     self.clips = nil;
@@ -90,6 +93,7 @@
     self.vAddedFxViews = nil;
     self.vTimefx = nil;
     self.vBeautyOn = YES;
+    self.isFrontCamera = YES;
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -116,6 +120,8 @@
         self.recordVideoSpeedArray = [aDecoder decodeObjectForKey:@"recordVideoSpeedArray"];
         self.vType = [[aDecoder decodeObjectForKey:@"vType"] integerValue];
         self.vAddedFxViews = [aDecoder decodeObjectForKey:@"vAddedFxViews"];
+        self.isFrontCamera = [[aDecoder decodeObjectForKey:@"isFrontCamera"] boolValue];
+
     }
     
     return self;
@@ -143,6 +149,7 @@
     [aCoder encodeObject:self.vOriginalPath forKey:@"vOriginalPath"];
     [aCoder encodeObject:[NSNumber numberWithInteger:self.vType] forKey:@"vType"];
     [aCoder encodeObject:self.vAddedFxViews forKey:@"vAddedFxViews"];
+    [aCoder encodeObject:[NSNumber numberWithBool:self.isFrontCamera] forKey:@"isFrontCamera"];
 
 }
 
