@@ -51,7 +51,7 @@
 
 //    @"http://haahi.7najm.com:10000/";
     [FSPublishSingleton sharedInstance].addressAPI = @"http://haahi.7najm.com:10000/";
-    [FSPublishSingleton sharedInstance].language =@"ar";
+    [FSPublishSingleton sharedInstance].language =@"en";
     [FSPublishSingleton sharedInstance].isAutoReverse = NO;
     
     CAGradientLayer *bgGradientLayer = [CAGradientLayer layer];
