@@ -130,3 +130,5 @@ MessageOK = "تأكيد";
 emptyDraft = "خطأ فى التحميل";
 
 xsignal = "إشارة X";
+
+VideoTimeMaxTip = "拍满了，请删除一段视频后再拍";

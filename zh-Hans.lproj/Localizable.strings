@@ -130,3 +130,4 @@ MessageOK = "确认";
 
 xsignal = "X信号";
 
+VideoTimeMaxTip = "拍满了，请删除一段视频后再拍";

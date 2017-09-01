@@ -96,7 +96,12 @@
 
 - (void)setMusicFilePath:(NSString *)musicFilePath {
     _musicFilePath = musicFilePath;
-    self.cutMusicButton.enabled = YES;
+    if (_currentVideoTime > 0) {
+        self.cutMusicButton.enabled = NO;
+    }
+    else {
+        self.cutMusicButton.enabled = YES;
+    }
 }
 
 - (instancetype)initWithFrame:(CGRect)frame draftInfo:(FSDraftInfo *)draftInfo {
@@ -202,6 +207,12 @@
     [_flashButton setImage:[UIImage imageNamed:@"recorder-flash-off"] forState:UIControlStateNormal];
     [_flashButton addTarget:self action:@selector(flashClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_flashButton];
+    if (_draftInfo.isFrontCamera) {
+        _flashButton.hidden = YES;
+    }
+    else {
+        _flashButton.hidden = NO;
+    }
 
     _cutMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _cutMusicButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, CGRectGetMaxY(_finishButton.frame)+30, 40, 40) : CGRectMake(CGRectGetWidth(self.frame) - 15 -40, CGRectGetMaxY(_finishButton.frame)+30, 40, 40);
@@ -452,6 +463,13 @@
     if (isSuccess) {
         _draftInfo.isFrontCamera = !_draftInfo.isFrontCamera;
     }
+    
+    if (_draftInfo.isFrontCamera) {
+        _flashButton.hidden = YES;
+    }
+    else {
+        _flashButton.hidden = NO;
+    }
 }
 
 - (void)flashClik {
@@ -546,7 +564,12 @@
     _backButton.hidden= NO;
     _recoverCamera.hidden = NO;
     _finishButton.hidden = NO;
-    _flashButton.hidden = NO;
+    if (_draftInfo.isFrontCamera) {
+        _flashButton.hidden = YES;
+    }
+    else {
+        _flashButton.hidden = NO;
+    }
     _cutMusicButton.hidden = NO;
     _beautyButton.hidden = NO;
     _filterButton.hidden = NO;
@@ -570,7 +593,7 @@
         _filterLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ColorFilter"];
     }
     else {
-        _filterLabel.text = _draftInfo.vFilterid;
+        _filterLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:_draftInfo.vFilterid];
     }
 }
 
@@ -581,6 +604,9 @@
 - (void)changeFilter:(NSString *)filterName {
     _draftInfo.vFilterid = filterName;
     [_recorderManager addFilter:filterName];
+    if ([filterName isEqualToString:@"NoFilter"] && _draftInfo.vBeautyOn) {
+        [_recorderManager switchBeauty:YES];
+    }
 }
 
 
@@ -618,6 +644,11 @@
 
 - (void)startRecorder {
     NSLog(@"startRecorder");
+    
+    if (_currentVideoTime >= 15) {
+        [self showAlertView:[FSShortLanguage CustomLocalizedStringFromTable:@"VideoTimeMaxTip"]];
+        return;
+    }
 
     [[FSMusicPlayer sharedPlayer] setFilePath:_draftInfo.vMusic.mPath];
 
@@ -698,7 +729,12 @@
     
     _backButton.hidden= NO;
     _recoverCamera.hidden = NO;
-    _flashButton.hidden = NO;
+    if (_draftInfo.isFrontCamera) {
+        _flashButton.hidden = YES;
+    }
+    else {
+        _flashButton.hidden = NO;
+    }
     _cutMusicButton.hidden = NO;
     _beautyButton.hidden = NO;
     _filterButton.hidden = NO;
@@ -845,7 +881,12 @@
     _backButton.hidden= NO;
     _recoverCamera.hidden = NO;
     _finishButton.hidden = NO;
-    _flashButton.hidden = NO;
+    if (_draftInfo.isFrontCamera) {
+        _flashButton.hidden = YES;
+    }
+    else {
+        _flashButton.hidden = NO;
+    }
     _cutMusicButton.hidden = NO;
     _beautyButton.hidden = NO;
     _filterButton.hidden = NO;
@@ -871,7 +912,12 @@
     _backButton.hidden= NO;
     _recoverCamera.hidden = NO;
     _finishButton.hidden = NO;
-    _flashButton.hidden = NO;
+    if (_draftInfo.isFrontCamera) {
+        _flashButton.hidden = YES;
+    }
+    else {
+        _flashButton.hidden = NO;
+    }
     _cutMusicButton.hidden = NO;
     _beautyButton.hidden = NO;
     _filterButton.hidden = NO;
