@@ -193,6 +193,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+
     [_videoFxView stopMoveTint];
 }
 
