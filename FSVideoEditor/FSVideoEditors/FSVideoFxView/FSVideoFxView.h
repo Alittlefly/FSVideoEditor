@@ -45,6 +45,9 @@
 @property(nonatomic,assign)FSVideoFxType fxType;
 @property(nonatomic,strong)NSArray *addedViews;
 @property(nonatomic,assign)CGFloat tintPositon;
+
+-(void)creatFxFiltterButtons;
+
 -(void)addFiltterViews:(NSArray *)filterViews;
 // 特效
 -(instancetype)initWithFrame:(CGRect)frame fxs:(NSArray *)fxs;

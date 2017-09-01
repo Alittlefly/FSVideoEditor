@@ -194,7 +194,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [musicTrack setVolumeGain:_tempDraftInfo.vMusicVolume rightVolumeGain:_tempDraftInfo.vMusicVolume];
     }else{
         // 本地视频初始化
-        if (!originalVolumChanged && _tempDraftInfo.vType == FSDraftInfoTypeVideo) {
+        if (!originalVolumChanged) {
             _tempDraftInfo.vOriginalVolume = 0.5;
             [audioTrack setVolumeGain:_tempDraftInfo.vOriginalVolume rightVolumeGain:_tempDraftInfo.vOriginalVolume];
         }

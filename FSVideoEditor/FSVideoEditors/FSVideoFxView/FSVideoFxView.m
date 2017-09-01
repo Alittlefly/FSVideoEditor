@@ -279,10 +279,10 @@
     [_unDoButton addTarget:self action:@selector(unDoFix) forControlEvents:(UIControlEventTouchUpInside)];
     [self addSubview:_unDoButton];
     
-    // fx
-    [self initFilerFxs];
-    // time
-    [self initTimeFxs];
+//    // fx
+//    [self initFilerFxs];
+//    // time
+//    [self initTimeFxs];
 
     // bottom
     CGFloat bottomH = 45.0;
@@ -397,6 +397,10 @@
     
     [_contentView setContentSize:CGSizeMake(CGRectGetMaxX(bmfx.frame) + 20, 0)];
     [_contentView setContentOffset:CGPointZero];
+}
+-(void)creatFxFiltterButtons{
+    [self initFilerFxs];
+    [self initTimeFxs];
 }
 -(void)initTimeFxs{
     

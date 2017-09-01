@@ -42,6 +42,7 @@
     if (!_playIcon) {
         _playIcon = [[UIButton alloc] init];
         [_playIcon addTarget:self action:@selector(palyIconOnclick) forControlEvents:UIControlEventTouchUpInside];
+        [_playIcon setUserInteractionEnabled:NO];
         [_playIcon setImage:[UIImage imageNamed:@"paly_video_image"] forState:UIControlStateNormal];
         [_playIcon setImageEdgeInsets:UIEdgeInsetsMake(20, 23, 20, 17)];
         [self addSubview:_playIcon];
