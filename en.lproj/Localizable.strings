@@ -79,7 +79,7 @@ ColorFilter = "Color Filter";
 
 BW = "Black & White";
 Sweetie = "Sweet";
-LOMO = "Dim";
+LOMO = "Lomo";
 Classic = "Classic";
 IceBlue = "Blueish";
 Classical = "Light";
@@ -131,3 +131,4 @@ emptyDraft = "Oops! No data found";
 
 xsignal = "X signal";
 
+VideoTimeMaxTip = "拍满了，请删除一段视频后再拍";

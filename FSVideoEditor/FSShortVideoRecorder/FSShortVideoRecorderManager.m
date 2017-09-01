@@ -388,7 +388,7 @@ static FSShortVideoRecorderManager *recorderManager;
     NSString *license7Path = [appPath stringByAppendingPathComponent:@"D61B2771-819A-44EB-8C6B-D86803714429.lic"];
     [self addFilter:fxPackageId7 filterPath:package7Path license:license7Path];
 
-    NSString *fxPackageId8 = [NSString stringWithFormat:@"TheGolden"];
+    NSString *fxPackageId8 = [NSString stringWithFormat:@"TheGoldenTimes"];
     NSString *package8Path = [appPath stringByAppendingPathComponent:@"6A226E39-A423-4F4F-92EF-9275D0CDD2EF.2.videofx"];
     NSString *license8Path = [appPath stringByAppendingPathComponent:@"6A226E39-A423-4F4F-92EF-9275D0CDD2EF.lic"];
     [self addFilter:fxPackageId8 filterPath:package8Path license:license8Path];
