@@ -149,6 +149,9 @@
 		567E0B9D1EFA20BC00C4C527 /* FSLocalPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0B9B1EFA20BC00C4C527 /* FSLocalPhotoManager.m */; };
 		567E0BA21EFA49F500C4C527 /* FSVideoListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA11EFA49F500C4C527 /* FSVideoListView.m */; };
 		567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 567E0BA41EFA4DB400C4C527 /* FSAlbumVideoCell.m */; };
+		568709FA1F59B4C500E89B68 /* FSGlobalRefreshFooter.h in Headers */ = {isa = PBXBuildFile; fileRef = 568709F81F59B4C500E89B68 /* FSGlobalRefreshFooter.h */; };
+		568709FB1F59B4C500E89B68 /* FSGlobalRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 568709F91F59B4C500E89B68 /* FSGlobalRefreshFooter.m */; };
+		568709FF1F59B51000E89B68 /* UIView+AniMation.m in Sources */ = {isa = PBXBuildFile; fileRef = 568709FE1F59B51000E89B68 /* UIView+AniMation.m */; };
 		56933EA11F45912C00AEF683 /* 198-14-f6192de5110aed067060b4010c648cac.lic in Resources */ = {isa = PBXBuildFile; fileRef = 56933EA01F45912C00AEF683 /* 198-14-f6192de5110aed067060b4010c648cac.lic */; };
 		56F502621F2AEF13004AE0A4 /* FSMusicSearchAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 56F502611F2AEF13004AE0A4 /* FSMusicSearchAPI.m */; };
 		980808C71F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.animatedsticker in Resources */ = {isa = PBXBuildFile; fileRef = 980808C51F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.animatedsticker */; };
@@ -801,6 +804,10 @@
 		567E0BA11EFA49F500C4C527 /* FSVideoListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVideoListView.m; sourceTree = "<group>"; };
 		567E0BA31EFA4DB400C4C527 /* FSAlbumVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAlbumVideoCell.h; sourceTree = "<group>"; };
 		567E0BA41EFA4DB400C4C527 /* FSAlbumVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAlbumVideoCell.m; sourceTree = "<group>"; };
+		568709F81F59B4C500E89B68 /* FSGlobalRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSGlobalRefreshFooter.h; sourceTree = "<group>"; };
+		568709F91F59B4C500E89B68 /* FSGlobalRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSGlobalRefreshFooter.m; sourceTree = "<group>"; };
+		568709FD1F59B51000E89B68 /* UIView+AniMation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AniMation.h"; sourceTree = "<group>"; };
+		568709FE1F59B51000E89B68 /* UIView+AniMation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AniMation.m"; sourceTree = "<group>"; };
 		56933EA01F45912C00AEF683 /* 198-14-f6192de5110aed067060b4010c648cac.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-f6192de5110aed067060b4010c648cac.lic"; sourceTree = "<group>"; };
 		56F502601F2AEF13004AE0A4 /* FSMusicSearchAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicSearchAPI.h; sourceTree = "<group>"; };
 		56F502611F2AEF13004AE0A4 /* FSMusicSearchAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicSearchAPI.m; sourceTree = "<group>"; };
@@ -1781,6 +1788,10 @@
 		983445F31F0CDFAC00A6E977 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				568709FD1F59B51000E89B68 /* UIView+AniMation.h */,
+				568709FE1F59B51000E89B68 /* UIView+AniMation.m */,
+				568709F81F59B4C500E89B68 /* FSGlobalRefreshFooter.h */,
+				568709F91F59B4C500E89B68 /* FSGlobalRefreshFooter.m */,
 				983445F41F0CE00700A6E977 /* FSLoginServer.h */,
 				983445F51F0CE00700A6E977 /* FSLoginServer.m */,
 				983445F71F0CE01F00A6E977 /* FSLoginAPI.h */,
@@ -2196,6 +2207,7 @@
 				985E875A1F54481300292FEF /* FSToolController.h in Headers */,
 				985E875B1F54481300292FEF /* FSAnimationNavController.h in Headers */,
 				985E875C1F54481300292FEF /* FSMusicAPI.h in Headers */,
+				568709FA1F59B4C500E89B68 /* FSGlobalRefreshFooter.h in Headers */,
 				985E875D1F54481300292FEF /* FSTypeMusicAPI.h in Headers */,
 				985E875E1F54481300292FEF /* FSMusicCollectAPI.h in Headers */,
 				985E875F1F54481300292FEF /* FSLikedMusicAPI.h in Headers */,
@@ -2528,6 +2540,7 @@
 				9880DEB61F171295006E730F /* UIImage+GIF.m in Sources */,
 				5616CC871F2B40F700028770 /* MJRefreshBackFooter.m in Sources */,
 				5616CC891F2B40F700028770 /* MJRefreshFooter.m in Sources */,
+				568709FB1F59B4C500E89B68 /* FSGlobalRefreshFooter.m in Sources */,
 				563B79F61F08D3290035346A /* FSMusicSever.m in Sources */,
 				988AC6D51EFE4B99007FBCEF /* FSPublisherToolView.m in Sources */,
 				567E0B591EF930D100C4C527 /* ViewController.m in Sources */,
@@ -2552,6 +2565,7 @@
 				5616CC8F1F2B40F700028770 /* MJRefreshBackNormalFooter.m in Sources */,
 				987ECEE81F04F92D00221273 /* FSCutMusicView.m in Sources */,
 				5640354D1F31E4FC00C5F036 /* FSDraftCache.m in Sources */,
+				568709FF1F59B51000E89B68 /* UIView+AniMation.m in Sources */,
 				563B7A171F0A4DF50035346A /* FSAnimationNavController.m in Sources */,
 				5616CC8E1F2B40F700028770 /* MJRefreshBackGifFooter.m in Sources */,
 				9880DEBA1F171295006E730F /* UIImageView+WebCache.m in Sources */,

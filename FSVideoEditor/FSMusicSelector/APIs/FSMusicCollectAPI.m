@@ -28,8 +28,9 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     __weak typeof(self) weakS = self;
     NSDictionary *params = [NSDictionary dictionaryWithDictionary:[FSVideoEditorAPIParams videoEdiorParams].params];
-
+    NSLog(@"collectMusic:%@",params);
     NSURLSessionTask *task = [manager GET:[NSString stringWithFormat:@"%@video/song/%ld/%d",AddressAPI,musicId,collect] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"collectMusic:%@",responseObject);
         NSInteger code = [[responseObject valueForKey:@"code"] integerValue];
         if (code == 0) {
             if ([weakS.delegate respondsToSelector:@selector(collectMusicSuccess:)]) {

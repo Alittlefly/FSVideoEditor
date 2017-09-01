@@ -11,7 +11,7 @@
 #import "FSMusicManager.h"
 #import "FSEditorLoading.h"
 #import "FSVideoEditorCommenData.h"
-#import "MJRefresh.h"
+#import "FSGlobalRefreshFooter.h"
 #import "FSDraftManager.h"
 #import "FSPublishSingleton.h"
 
@@ -40,7 +40,7 @@
         [self addSubview:_tableView];
          _collectSever = [FSMusicCollectSever new];
         [_collectSever setDelegate:self];
-        [_tableView setMj_footer:[MJRefreshBackStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(getMoreData)]];
+        [_tableView setMj_footer:[FSGlobalRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(getMoreData)]];
     }
     return self;
 }

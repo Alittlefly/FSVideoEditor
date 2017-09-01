@@ -73,22 +73,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FSVideoEditor/FSMusicSelector/APIs/FSMusicCollectAPI.m"
-            timestampString = "525165349.439805"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "-collectMusic:collect:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
             timestampString = "525960758.164682"
             startingColumnNumber = "9223372036854775807"
@@ -202,7 +186,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherAPI/FSPublisherAPI.m"
-                  timestampString = "525965258.447063"
+                  timestampString = "525968272.469123"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
@@ -217,7 +201,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherAPI/FSPublisherAPI.m"
-                  timestampString = "525965258.4488"
+                  timestampString = "525968272.470561"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
