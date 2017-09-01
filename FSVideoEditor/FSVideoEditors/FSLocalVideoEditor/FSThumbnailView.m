@@ -72,8 +72,8 @@
 }
 -(void)creatSubviews:(CGRect)frame{
     CGFloat padding = 30;
-     _backContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(padding, 0, CGRectGetWidth(frame) - padding * 2, CGRectGetHeight(frame))];
-    [_backContentView setBackgroundColor:[UIColor redColor]];
+     _backContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame))];
+    [_backContentView setBackgroundColor:FSHexRGBAlpha(0x000000, 0.4)];
     [_backContentView setDelegate:self];
     [_backContentView setClipsToBounds:NO];
     [_backContentView setShowsHorizontalScrollIndicator:NO];

@@ -197,7 +197,6 @@
     if(![_context playbackTimeline:_timeLine startTime:_startTime endTime:endTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
     }
     
-    
     [self initThubnaiView];
 }
 
@@ -249,6 +248,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playVideoFromHead) name:UIApplicationDidBecomeActiveNotification object:nil];
+
     [self.navigationController setNavigationBarHidden:YES];
 
     [self reselectTrack];
@@ -258,10 +259,18 @@
     [_context connectTimeline:_timeLine withLiveWindow:_prewidow];
 
     [self playVideoFromHead];
+    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     
+
     if ([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped) {
         [_context stop];
     }
