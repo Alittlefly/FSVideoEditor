@@ -141,7 +141,6 @@
     NSLog(@"searchBarShouldBeginEditing ");
     [_searchBar setShowCancle:YES];
     [_resultView setHidden:NO];
-    _searchPage = 0;
     return YES;
 }
 -(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
@@ -165,8 +164,9 @@
     NSString *trimText = [searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSLog(@"要查询的内容是 trimText %@",trimText);
     //
-     _searchPage +=1;
      _resultView.searchKey = trimText;
+    [_resultView setMusics:nil];
+    _searchPage = 1;
     [_sever getMusicListWithSearchKey:trimText no:_searchPage];
 }
 -(void)viewWillLayoutSubviews{
@@ -215,6 +215,7 @@
     }
 }
 -(void)musicListWouldGetMoreData:(FSMusicListView *)listView{
+    [_searchBar endEditing:YES];
     if (listView.tag == 10) {
         if (_currentType == FSMusicButtonTypeHot) {
             _currentHotPage ++;

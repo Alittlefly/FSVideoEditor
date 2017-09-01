@@ -42,7 +42,7 @@
     if (!_playIcon) {
         _playIcon = [[UIButton alloc] init];
         [_playIcon addTarget:self action:@selector(palyIconOnclick) forControlEvents:UIControlEventTouchUpInside];
-        [_playIcon setImage:[UIImage imageNamed:@"paly_icon_image"] forState:UIControlStateNormal];
+        [_playIcon setImage:[UIImage imageNamed:@"paly_video_image"] forState:UIControlStateNormal];
         [_playIcon setImageEdgeInsets:UIEdgeInsetsMake(20, 23, 20, 17)];
         [self addSubview:_playIcon];
     }
@@ -53,7 +53,7 @@
     if (!_topic) {
         _topic = [[UILabel alloc] init];
         [_topic setFont:[UIFont systemFontOfSize:16]];
-        [_topic setTextColor:FSHexRGB(0x999999)];
+        [_topic setTextColor:FSHexRGB(0x292929)];
         [_topic setTextAlignment:[FSPublishSingleton sharedInstance].isAutoReverse?NSTextAlignmentRight:NSTextAlignmentLeft];
         [self addSubview:_topic];
     }
@@ -144,15 +144,15 @@
     }else{
         [self.photo setImage:[UIImage imageNamed:@"draft_default_image"]];
     }
-    if (info.vTitle) {
+    if (info.vTitle && info.vTitle.length) {
         [self.topic setText:info.vTitle];
     }else{
         [self.topic setText:[FSShortLanguage CustomLocalizedStringFromTable:@"NoTitle"]];
     }
-    if (info.challenge.challengeName) {
-        [self.tagLabel setText:info.challenge.challengeName];
+    if (info.challenge.challengeName && info.challenge.challengeName.length) {
+        [self.tagLabel setText:[NSString stringWithFormat:@"# %@",info.challenge.challengeName]];
     }else{
-        [self.tagLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"NoTopic"]];
+        [self.tagLabel setText:[NSString stringWithFormat:@"# %@",[FSShortLanguage CustomLocalizedStringFromTable:@"NoTopic"]]];
     }
     
     [self setNeedsLayout];

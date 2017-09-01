@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "98D9F45F1F4D874200ED841F"
+               BlueprintIdentifier = "985E86A91F5446AA00292FEF"
                BuildableName = "FSVideoEditorSDK.framework"
                BlueprintName = "FSVideoEditorSDK"
                ReferencedContainer = "container:FSVideoEditor.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "98D9F45F1F4D874200ED841F"
+            BlueprintIdentifier = "985E86A91F5446AA00292FEF"
             BuildableName = "FSVideoEditorSDK.framework"
             BlueprintName = "FSVideoEditorSDK"
             ReferencedContainer = "container:FSVideoEditor.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "98D9F45F1F4D874200ED841F"
+            BlueprintIdentifier = "985E86A91F5446AA00292FEF"
             BuildableName = "FSVideoEditorSDK.framework"
             BlueprintName = "FSVideoEditorSDK"
             ReferencedContainer = "container:FSVideoEditor.xcodeproj">

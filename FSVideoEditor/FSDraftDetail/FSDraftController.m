@@ -213,7 +213,12 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 44;
+    NSMutableArray* tempArray = [self.draftsMisic objectAtIndex:section];
+    FSDraftInfo *info = [tempArray objectAtIndex:0];
+    if (info.vMusic) {
+        return 44;
+    }
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -267,49 +272,49 @@
 
 #pragma mark - UITableViewDataSource
 
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return   UITableViewCellEditingStyleDelete;
-}
-//先要设Cell可编辑
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
+//-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return   UITableViewCellEditingStyleDelete;
+//}
+////先要设Cell可编辑
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return YES;
+//}
 //进入编辑模式，按下出现的编辑按钮后
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    __weak FSDraftController *weakSelf = self;
-    [tableView setEditing:NO animated:YES];
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"deleteAlert"] preferredStyle:UIAlertControllerStyleAlert];
-        //        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageOK"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [tableView beginUpdates];
-
-            NSMutableArray* tempArray = [weakSelf.draftsMisic objectAtIndex:indexPath.section];
-            FSDraftInfo *info = [tempArray objectAtIndex:indexPath.row];
-            [[FSDraftManager sharedManager] delete:info];
-            
-            [tempArray removeObject:info];
-            if ([tempArray count]) {
-                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }else{
-                [weakSelf.draftsMisic removeObjectAtIndex:indexPath.section];
-                [weakSelf.draftsMisicDict removeObjectForKey:[NSNumber numberWithInteger:info.vMusic.mId]];
-                [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-            [tableView endUpdates];
-        }]];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageCancel"] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
-}
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    __weak FSDraftController *weakSelf = self;
+//    [tableView setEditing:NO animated:YES];
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"deleteAlert"] preferredStyle:UIAlertControllerStyleAlert];
+//        //        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+//        [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageOK"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            [tableView beginUpdates];
+//
+//            NSMutableArray* tempArray = [weakSelf.draftsMisic objectAtIndex:indexPath.section];
+//            FSDraftInfo *info = [tempArray objectAtIndex:indexPath.row];
+//            [[FSDraftManager sharedManager] delete:info];
+//            
+//            [tempArray removeObject:info];
+//            if ([tempArray count]) {
+//                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            }else{
+//                [weakSelf.draftsMisic removeObjectAtIndex:indexPath.section];
+//                [weakSelf.draftsMisicDict removeObjectForKey:[NSNumber numberWithInteger:info.vMusic.mId]];
+//                [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            }
+//            [tableView endUpdates];
+//        }]];
+//        
+//        [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageCancel"] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//            
+//        }]];
+//        
+//        [self presentViewController:alertController animated:YES completion:nil];
+//    }
+//}
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -401,7 +406,33 @@
 -(void)FSDraftTableCellDelegatePlayIconOnclik:(FSDraftTableViewCell*)cell{
 }
 -(void)FSDraftTableCellDelegateMoreButtonOnclik:(FSDraftTableViewCell*)cell{
-
+        __weak FSDraftController *weakSelf = self;
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"deleteAlert"] preferredStyle:UIAlertControllerStyleAlert];
+    //        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageOK"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [weakSelf.tableView beginUpdates];
+        
+        NSMutableArray* tempArray = [weakSelf.draftsMisic objectAtIndex:indexPath.section];
+        FSDraftInfo *info = [tempArray objectAtIndex:indexPath.row];
+        [[FSDraftManager sharedManager] delete:info];
+        
+        [tempArray removeObject:info];
+        if ([tempArray count]) {
+            [weakSelf.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }else{
+            [weakSelf.draftsMisic removeObjectAtIndex:indexPath.section];
+            [weakSelf.draftsMisicDict removeObjectForKey:[NSNumber numberWithInteger:info.vMusic.mId]];
+            [weakSelf.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        [weakSelf.tableView endUpdates];
+    }]];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageCancel"] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 
