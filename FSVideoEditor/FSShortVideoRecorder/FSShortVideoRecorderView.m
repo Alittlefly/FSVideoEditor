@@ -114,8 +114,9 @@
         _linesArray = [NSMutableArray arrayWithCapacity:0];
         _isAutoRecorder = NO;
         _currentVideoTime = 0.0;
-
-        self.draftInfo = draftInfo;
+        if (draftInfo.vMusic) {
+            _musicFilePath = _draftInfo.vMusic.mPath;
+        }
 
         for (NSNumber *time in _draftInfo.recordVideoTimeArray) {
             _currentVideoTime += [time floatValue];
@@ -1021,12 +1022,14 @@
     [self.progressView stopAnimationWithCuttingLine];
 }
 
-- (void)FSShortVideoRecorderManagerFinishRecorder:(NSString *)filePath {
-//    [_activityView stopAnimating];
-//    
-//    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:speed:musicStartTime:)]) {
-//        [self.delegate FSShortVideoRecorderViewFinishRecorder:filePath speed:self.recorderManager.recorderSpeed musicStartTime:_musicStartTime] ;
-//    }
+- (void)FSShortVideoRecorderManagerFailedRecorder {
+    [self.loading loadingViewhide];
+
+}
+
+- (void)FSShortVideoRecorderManagerConvertorFaild {
+    [self.loading loadingViewhide];
+
 }
 
 - (void)FSShortVideoRecorderManagerFinishedRecorder:(NSString *)normalFilePath convertFilePath:(NSString *)convertFilePath {

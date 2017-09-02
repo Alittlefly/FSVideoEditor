@@ -3039,7 +3039,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = staticlib;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fs.company.FSVideoEditorSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";

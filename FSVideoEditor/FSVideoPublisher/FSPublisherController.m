@@ -861,6 +861,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [self.loading loadingViewhide];
 
     [self deleteCurrentCompileFile:_stickerVideoPath];
+    
+    [[FSShortVideoRecorderManager sharedInstance] removeSticker:_timeLine];
 
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
 }
