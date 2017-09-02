@@ -134,22 +134,28 @@
 - (void)saveVideoFile{
     
     NvsVideoClip *videoclip = [_videoTrack getClipWithIndex:0];
-    int64_t endTime = _endTime;
+    
+    int64_t origalDuration = _timeLine.duration * _draftInfo.vSpeed;
+    int64_t startTime = _startTime * _draftInfo.vSpeed;
+    int64_t endTime = _endTime*_draftInfo.vSpeed;
     if (endTime == 0) {
-        endTime = MIN(_timeLine.duration, 15000000.0);
+        // 截取原视频的15秒
+        // timeline保持了原始时间长度
+        endTime = MIN(origalDuration, 15000000.0);
     }
-    [videoclip changeTrimInPoint:_startTime affectSibling:YES];
+    
+    [videoclip changeTrimInPoint:startTime affectSibling:YES];
     [videoclip changeTrimOutPoint:endTime affectSibling:YES];
     
     NvsAudioClip *audioClip = [_audioTrack getClipWithIndex:0];
-    [audioClip changeTrimInPoint:_startTime affectSibling:YES];
+    [audioClip changeTrimInPoint:startTime affectSibling:YES];
     [audioClip changeTrimOutPoint:endTime affectSibling:YES];
-    
+
     [self.view addSubview:self.loading];
     [self.loading loadingViewShow];
     
      _outPutFilePath = [self getCompilePath];
-    [_context compileTimeline:_timeLine startTime:_startTime endTime:endTime outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0];
+    [_context compileTimeline:_timeLine startTime:startTime endTime:endTime outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0];
 }
 
 - (NSString *)getCompilePath {
@@ -182,11 +188,31 @@
 
 - (void)FSSegmentView:(FSSegmentView *)segmentView selected:(NSInteger)index {
     
-    NSLog(@"sender: %ld",index); //输出当前的索引值
+//    NSLog(@"sender: %ld",index); //输出当前的索引值
     NvsClip *clip = [_videoTrack getClipWithIndex:0];
-    [clip changeSpeed:index/2.0];
+    CGFloat vSpeed = 1.0;
+    switch (index) {
+        case 0:
+            vSpeed = 1.0/3.0;
+            break;
+        case 1:
+            vSpeed = 0.5;
+            break;
+        case 2:
+            vSpeed = 1.0;
+            break;
+        case 3:
+            vSpeed = 1.5;
+            break;
+        case 4:
+            vSpeed = 2.0;
+            break;
+        default:
+            break;
+    }
     
-    _draftInfo.vSpeed = index/2.0;
+    [clip changeSpeed:vSpeed];
+    _draftInfo.vSpeed = vSpeed;
     
     int64_t endTime = _endTime?:_timeLine.duration;
     if (endTime > _timeLine.duration) {
