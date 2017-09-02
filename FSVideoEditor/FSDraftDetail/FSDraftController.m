@@ -121,7 +121,7 @@
     [_drafts removeAllObjects];
     [self.draftsMisic removeAllObjects];
     [self.draftsMisicDict removeAllObjects];
-    _drafts =  [NSMutableArray arrayWithArray:[[FSDraftManager sharedManager] allDraftInfos]];
+    _drafts = [NSMutableArray arrayWithArray:[[[[FSDraftManager sharedManager] allDraftInfos] reverseObjectEnumerator] allObjects]];
     [self dealWithDraftData:_drafts];
     [self.tableView reloadData];
 }
