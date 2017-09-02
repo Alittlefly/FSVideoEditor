@@ -855,7 +855,7 @@ static FSShortVideoRecorderManager *recorderManager;
     config.to = INT_MAX;
     config.dataRate = 0;
     config.videoResolution = NvcOutputVideoResolution_NotResize;
-    config.fpsForWebp = 5;
+    config.fpsForWebp = 3;
     
     //倒序
     if (!isWebp) {
@@ -863,7 +863,9 @@ static FSShortVideoRecorderManager *recorderManager;
         config.from = config.to;
         config.to = nTmp;
     }
-    
+    else {
+        config.to = 1;
+    }
     
     NSInteger ret = [self.mConvertor open:filePath outputFile:outPath setting:&config];
     if (ret != NVC_NOERROR) {
