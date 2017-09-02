@@ -17,7 +17,7 @@
 
 @interface FSMusicCollectAPI : NSObject
 @property(nonatomic,strong)NSString *taskId;
-@property(nonatomic,copy)FSMusic *music;
+@property(nonatomic,strong)FSMusic *music;
 
 @property(nonatomic,assign)id<FSMusicCollectAPIDelegate>delegate;
 -(void)collectMusic:(NSInteger)musicId collect:(BOOL)collect;
