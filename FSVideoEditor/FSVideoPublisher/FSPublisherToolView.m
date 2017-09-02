@@ -37,6 +37,8 @@
 
 @property (nonatomic, strong) FSDraftInfo *draftInfo;
 
+@property (nonatomic, assign) CGFloat oriEditNameY;
+
 @end
 
 @implementation FSPublisherToolView
@@ -49,7 +51,7 @@
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick)];
         [self addGestureRecognizer:tapGesture];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoradShows:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoradShows:) name:UIKeyboardWillChangeFrameNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoradHides:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
@@ -209,6 +211,7 @@
     _videoNameView = [[FSEditVideoNameView alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(_publishButton.frame)-40-55, self.frame.size.width-40, 55) draftInfo:_draftInfo];
     _videoNameView.backgroundColor = [UIColor clearColor];
     _videoNameView.delegate = self;
+    self.oriEditNameY =  CGRectGetMaxY(self.videoNameView.frame);
     [self addSubview:_videoNameView];
 }
 
@@ -306,7 +309,7 @@
 
 -(void)keyBoradShows:(NSNotification *)notification
 {
-    CGFloat editNameViewMaxY = CGRectGetMaxY(self.videoNameView.frame);
+    CGFloat editNameViewMaxY = self.oriEditNameY;
 
     NSDictionary *userInfo = [notification userInfo];
     NSNumber *duration = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
@@ -323,7 +326,6 @@
         [self.videoNameView setTransform:CGAffineTransformMakeTranslation(0, keyboardMinY-editNameViewMaxY)];
         [UIView commitAnimations];
     }
-    
 }
 -(void)keyBoradHides:(NSNotification *)notification
 {
