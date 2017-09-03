@@ -229,17 +229,9 @@
 }
 #pragma mark - 
 -(void)musicCollectSeverCollectMusicSuccess:(FSMusic *)music{
-    [self.delegate musicListUpdateCollectState:music];
-
-//    [_tableView reloadData];
-    //if (music.collected == NO) {
-//        for (FSMusic *oldMusic in _musics) {
-//            if (oldMusic.songId == music.songId) {
-//                oldMusic.collected = music.collected;
-//            }
-//        }
-  //  }
-    
+    if([self.delegate respondsToSelector:@selector(musicListUpdateCollectState:)]){
+        [self.delegate musicListUpdateCollectState:music];
+    }
     NSLog(@"收藏成功!");
 }
 -(void)musicCollectSeverCollectFaild:(FSMusic *)music{
