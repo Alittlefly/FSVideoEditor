@@ -28,4 +28,5 @@
 -(void)setCacheKey:(NSString *)cacheKey;
 
 -(void)deleteAllDrafts;
+-(void)logoutDraftWithCacheKey;
 @end

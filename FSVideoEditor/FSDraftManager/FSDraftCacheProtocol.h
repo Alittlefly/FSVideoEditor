@@ -19,4 +19,6 @@
 -(void)updateToLocal:(FSDraftInfo *)draftInfo;
 -(void)deleteAllLocal;
 -(NSArray *)allInfosInLocal;
+
+-(void)clearMermoryLocal;
 @end

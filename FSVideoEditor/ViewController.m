@@ -244,10 +244,12 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [FSPublishSingleton sharedInstance].userName = nil;
-    [[FSDraftManager sharedManager] setCacheKey:@""];
+    [[FSDraftManager sharedManager] logoutDraftWithCacheKey];
     [[FSVideoEditorAPIParams videoEdiorParams].params removeObjectsForKeys:@[@"loginKey"]];
 
     //[self showMessage:NSLocalizedString(@"", nil)];
+    
+    
 }
 
 - (IBAction)loginClick:(id)sender {

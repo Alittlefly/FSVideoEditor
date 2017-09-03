@@ -10,4 +10,5 @@
 #import "FSDraftInfo.h"
 @interface FSDraftReader : NSObject
 -(NSArray<FSDraftInfo *> *)allDraftInfoInLocal;
+-(void)clearMemoryDrafts;
 @end

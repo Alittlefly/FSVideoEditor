@@ -24,4 +24,7 @@
 -(NSArray<FSDraftInfo *> *)allDraftInfoInLocal{
     return [_localOperator allInfosInLocal];
 }
+-(void)clearMemoryDrafts{
+    [_localOperator clearMermoryLocal];
+}
 @end

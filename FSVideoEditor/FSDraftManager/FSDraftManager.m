@@ -69,5 +69,9 @@
     
     return infos;
 }
+-(void)logoutDraftWithCacheKey{
+    [self setCacheKey:@""];
+    [[FSDraftReader new] clearMemoryDrafts];
+}
 
 @end

@@ -18,6 +18,9 @@
     }
 }
 +(NSString *)draftDataPathKey:(NSString *)key{
+    if (key == nil || key.length == 0) {
+        key = @"iOS_Default";
+    }
     NSString *name = [NSString stringWithFormat:@"%@_draft.archiver",key] ;
     NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *path = [documents stringByAppendingPathComponent:name];
