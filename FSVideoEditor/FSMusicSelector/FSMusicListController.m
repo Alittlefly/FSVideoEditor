@@ -28,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.view setBackgroundColor:[UIColor clearColor]];
     // Do any additional setup after loading the view.
     _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 20,CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     [_contentView setBackgroundColor:[UIColor whiteColor]];
@@ -76,8 +78,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self.navigationController.navigationBar setHidden:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

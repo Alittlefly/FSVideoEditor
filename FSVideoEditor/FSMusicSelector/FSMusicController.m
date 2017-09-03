@@ -384,6 +384,10 @@
 -(void)musicSeverSearchFaild{
     [_resultView insertMoreMusic:nil];
 }
+-(void)dissmissController{
+    [[FSMusicPlayer sharedPlayer] stop];
+    [super dissmissController];
+}
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
