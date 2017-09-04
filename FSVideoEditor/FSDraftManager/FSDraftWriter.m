@@ -9,7 +9,7 @@
 #import "FSDraftWriter.h"
 #import "FSDraftCache.h"
 @interface FSDraftWriter()
-@property(nonatomic,assign)id<FSDraftCacheProtocol> localOperator;
+@property(nonatomic,strong)id<FSDraftCacheProtocol> localOperator;
 @end
 
 @implementation FSDraftWriter

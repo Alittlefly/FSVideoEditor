@@ -13,6 +13,8 @@
 
 @interface FSDraftManager()
 @property(nonatomic,strong)FSDraftInfo *currentInfo;
+@property(nonatomic,strong)FSDraftReader *reader;
+@property(nonatomic,strong)FSDraftWriter *writer;
 @end
 @implementation FSDraftManager
 +(instancetype)sharedManager{
@@ -24,6 +26,13 @@
         }
     });
     return object;
+}
+-(instancetype)init{
+    if (self = [super init]) {
+        self.reader = [[FSDraftReader alloc] init];
+        self.writer = [[FSDraftWriter alloc] init];
+    }
+    return self;
 }
 -(void)setCacheKey:(NSString *)cacheKey{
     [[FSDraftCache sharedDraftCache] setCacheKey:cacheKey];
@@ -42,16 +51,14 @@
     [_currentInfo copyValueFromeDraftInfo:_tempInfo];
 }
 -(void)saveToLocal{
-    FSDraftWriter *writer = [FSDraftWriter new];
-    [writer insertLocalDraftInfo:_currentInfo];
+    [self.writer insertLocalDraftInfo:_currentInfo];
 }
 -(void)cancleOperate{
     _tempInfo = nil;
     _currentInfo = nil;
 }
 -(void)delete:(FSDraftInfo *)draftInfo{
-    FSDraftWriter *writer = [FSDraftWriter new];
-    [writer deleteLocalDraftInfo:draftInfo];
+    [self.writer deleteLocalDraftInfo:draftInfo];
 }
 -(FSDraftInfo *)draftInfoWithPreInfo:(FSDraftInfo *)preDraftInfo{
 
@@ -65,13 +72,12 @@
     return _tempInfo;
 }
 -(NSArray *)allDraftInfos{
-    NSArray *infos = [[FSDraftReader new] allDraftInfoInLocal];
-    
+    NSArray *infos = [self.reader allDraftInfoInLocal];
     return infos;
 }
 -(void)logoutDraftWithCacheKey{
     [self setCacheKey:@""];
-    [[FSDraftReader new] clearMemoryDrafts];
+    [self.reader clearMemoryDrafts];
 }
 
 @end

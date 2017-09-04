@@ -18,10 +18,12 @@
     }
 }
 +(NSString *)draftDataPathKey:(NSString *)key{
-    if (key == nil || key.length == 0) {
-        key = @"iOS_Default";
+    
+    NSString *formateKey = [NSString stringWithFormat:@"%@",key];
+    if (formateKey.length == 0 || formateKey == nil) {
+        formateKey = @"iOS_Default";
     }
-    NSString *name = [NSString stringWithFormat:@"%@_draft.archiver",key] ;
+    NSString *name = [NSString stringWithFormat:@"%@_draft.archiver",formateKey] ;
     NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *path = [documents stringByAppendingPathComponent:name];
     return path;

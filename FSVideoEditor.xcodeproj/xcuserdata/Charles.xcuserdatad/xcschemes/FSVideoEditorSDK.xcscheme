@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "98D3C8D81F1F3CFD00D2C36B"
+               BlueprintIdentifier = "985E86A91F5446AA00292FEF"
                BuildableName = "FSVideoEditorSDK.framework"
                BlueprintName = "FSVideoEditorSDK"
                ReferencedContainer = "container:FSVideoEditor.xcodeproj">
@@ -33,7 +33,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "98D3C8D81F1F3CFD00D2C36B"
+            BlueprintIdentifier = "985E86A91F5446AA00292FEF"
             BuildableName = "FSVideoEditorSDK.framework"
             BlueprintName = "FSVideoEditorSDK"
             ReferencedContainer = "container:FSVideoEditor.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "98D3C8D81F1F3CFD00D2C36B"
+            BlueprintIdentifier = "985E86A91F5446AA00292FEF"
             BuildableName = "FSVideoEditorSDK.framework"
             BlueprintName = "FSVideoEditorSDK"
             ReferencedContainer = "container:FSVideoEditor.xcodeproj">
