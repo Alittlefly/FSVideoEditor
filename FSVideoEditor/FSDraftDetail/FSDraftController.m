@@ -409,34 +409,37 @@
     [self.tableView reloadData];
 }
 
+-(void)deleteDraftCell:(FSDraftTableViewCell*)cell{
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+
+    [self.tableView beginUpdates];
+    
+    NSMutableArray* tempArray = [self.draftsMisic objectAtIndex:indexPath.section];
+    FSDraftInfo *info = [tempArray objectAtIndex:indexPath.row];
+    [[FSDraftManager sharedManager] delete:info];
+    
+    [tempArray removeObject:info];
+    if ([tempArray count]) {
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else{
+        [self.draftsMisic removeObjectAtIndex:indexPath.section];
+        [self.draftsMisicDict removeObjectForKey:[NSNumber numberWithInteger:info.vMusic.mId]];
+        [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    [self.tableView endUpdates];
+}
+
 #pragma mark - FSDraftTableCellDelegate
 -(void)FSDraftTableCellDelegatePlayIconOnclik:(FSDraftTableViewCell*)cell{
 }
 -(void)FSDraftTableCellDelegateMoreButtonOnclik:(FSDraftTableViewCell*)cell{
         __weak FSDraftController *weakSelf = self;
-    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"deleteAlert"] preferredStyle:UIAlertControllerStyleAlert];
-    //        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageOK"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [weakSelf.tableView beginUpdates];
-        
-        NSMutableArray* tempArray = [weakSelf.draftsMisic objectAtIndex:indexPath.section];
-        FSDraftInfo *info = [tempArray objectAtIndex:indexPath.row];
-        [[FSDraftManager sharedManager] delete:info];
-        
-        [tempArray removeObject:info];
-        if ([tempArray count]) {
-            [weakSelf.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }else{
-            [weakSelf.draftsMisic removeObjectAtIndex:indexPath.section];
-            [weakSelf.draftsMisicDict removeObjectForKey:[NSNumber numberWithInteger:info.vMusic.mId]];
-            [weakSelf.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-        [weakSelf.tableView endUpdates];
+        [weakSelf deleteDraftCell:cell];
     }]];
     
     [alertController addAction:[UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageCancel"] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
     }]];
     
     [self presentViewController:alertController animated:YES completion:nil];
