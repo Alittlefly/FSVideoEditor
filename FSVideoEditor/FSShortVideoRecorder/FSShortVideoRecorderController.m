@@ -14,6 +14,7 @@
 #import "FSAlertView.h"
 #import "FSFilterView.h"
 #import "FSDraftManager.h"
+#import "FSMusicPlayer.h"
 
 @interface FSShortVideoRecorderController ()<FSShortVideoRecorderViewDelegate, FSFilterViewDelegate>
 {
@@ -53,7 +54,8 @@
     [super viewWillDisappear:animated];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-
+    
+    [[FSMusicPlayer sharedPlayer] setRate:1.0];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
