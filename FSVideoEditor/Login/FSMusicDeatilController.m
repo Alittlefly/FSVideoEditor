@@ -26,13 +26,13 @@
     [backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view setBackgroundColor:[UIColor blackColor]];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
     [self.navigationItem setHidesBackButton:YES];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
 }
