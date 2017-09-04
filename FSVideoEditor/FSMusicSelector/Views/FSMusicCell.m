@@ -11,6 +11,8 @@
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
 #import "FSPublishSingleton.h"
+#import "FSPublishSingleton.h"
+
 
 @interface FSMusicUseButton : UIButton
 {
@@ -218,6 +220,8 @@ static NSString *identifier = @"FSMusicCell";
     [self.pic sd_setImageWithURL:[NSURL URLWithString:songPic] placeholderImage:[UIImage imageNamed:@"musicPlaceHolder"]];
     [self.useButton setHidden:!_music.opend];
     [self.playButton setSelected:_music.isPlaying];
+    BOOL colleted = [[FSPublishSingleton sharedInstance].likeMusicArray containsObject:[NSString stringWithFormat:@"%ld",(long)music.songId]];
+    _music.collected = colleted;
     [self.collectButton setSelected:_music.collected];
     [self setIsPlayIng:_music.isPlaying];
 }
