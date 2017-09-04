@@ -9,6 +9,7 @@
 #import "FSMusicCollectSever.h"
 #import "FSMusicCollectAPI.h"
 #import "FSLikedMusicAPI.h"
+#import "FSPublishSingleton.h"
 @interface FSMusicCollectSever ()<FSMusicCollectAPIDelegate,FSLikedMusicAPIDelegate>
 {
     FSLikedMusicAPI *_likedApi;
@@ -41,6 +42,13 @@
 -(void)collectMusicSuccess:(NSString *)taskId{
     FSMusicCollectAPI *api = [self.taskSets valueForKey:taskId];
     [self.taskSets removeObjectForKey:taskId];
+
+    if ([[FSPublishSingleton sharedInstance].likeMusicArray containsObject:[NSString stringWithFormat:@"%ld",api.music.songId]]) {
+        [[FSPublishSingleton sharedInstance].likeMusicArray removeObject:[NSString stringWithFormat:@"%ld",api.music.songId]];
+    }
+    else {
+        [[FSPublishSingleton sharedInstance].likeMusicArray addObject:[NSString stringWithFormat:@"%ld",api.music.songId]];
+    }
     if([self.delegate respondsToSelector:@selector(musicCollectSeverCollectMusicSuccess:)]){
         [self.delegate musicCollectSeverCollectMusicSuccess:api.music];
     }
