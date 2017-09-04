@@ -65,6 +65,8 @@
     [_sever setDelegate:self];
     [_sever getMusicListWithType:_musicType.typeId page:_page];//musicType.typeId];
     [_musicListView showLoading:YES];
+    
+    [self.navigationItem setHidesBackButton:YES];
 }
 -(void)setMusicType:(FSMusicType *)musicType{
      _musicType = musicType;
@@ -78,6 +80,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
