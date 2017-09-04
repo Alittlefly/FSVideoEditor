@@ -44,31 +44,14 @@
 - (void)initBaseUI {
     
     _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 145, self.frame.size.width, 145)];
-    _contentView.backgroundColor = FSHexRGB(0xFFFFFF);//[UIColor whiteColor];
-    _contentView.alpha = 0.7;
+    _contentView.backgroundColor = [UIColor clearColor];
+    //_contentView.alpha = 0.7;
     [self addSubview:_contentView];
     
-    if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)) {
-        /*
-         毛玻璃的样式(枚举)
-         UIBlurEffectStyleExtraLight,
-         UIBlurEffectStyleLight,
-         UIBlurEffectStyleDark
-         */
-        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        _effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-        _effectView.frame = CGRectMake(0, 0, _contentView.frame.size.width, _contentView.frame.size.height);
-        _effectView.alpha = 0.7;
-        
-        [_contentView addSubview:_effectView];
-    }else{
-//        [self setBlurView:[AMBlurView new]];
-//        [[self blurView] setFrame:_bgView.bounds];
-//        [[self blurView] setAlpha:1];
-//        [[self blurView] setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-//        [_bgView addSubview:[self blurView]];
-    }
-
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:(UIBlurEffectStyleLight)];
+    _effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    [_effectView setFrame:_contentView.bounds];
+    [_contentView addSubview:_effectView];
     
     _soundtrackLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-15 : 15, 23, 0, 27)];
     _soundtrackLabel.backgroundColor = [UIColor clearColor];
@@ -83,7 +66,7 @@
     _soundtrackSlider.value = _soundtrackVolume;
     _soundtrackSlider.minimumTrackTintColor = FSHexRGB(0xFACE15);
     _soundtrackSlider.maximumTrackTintColor = FSHexRGB(0x000000);
-    _soundtrackSlider.thumbTintColor = FSHexRGB(0x92908D);
+    _soundtrackSlider.thumbTintColor = FSHexRGB(0xFFFFFF);
     [_soundtrackSlider addTarget:self action:@selector(changeSoundtrack) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_soundtrackSlider];
     
@@ -125,9 +108,12 @@
     [self addSubview:_titleLabel];
     
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _finishButton.backgroundColor = [UIColor clearColor];
+    _finishButton.backgroundColor = FSHexRGB(0x0BC2C6);//[UIColor clearColor];
+    _finishButton.layer.cornerRadius = 5;
+    [_finishButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageOK"] forState:UIControlStateNormal];
+    _finishButton.layer.masksToBounds = YES;
     _finishButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width-20-54, CGRectGetMinY(_contentView.frame)-20-30, 54, 30);
-    [_finishButton setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
+    //[_finishButton setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_finishButton];
     

@@ -12,6 +12,7 @@
 #import "NvsVideoClip.h"
 #import "NvsTimelineAnimatedSticker.h"
 #import "FSShortLanguage.h"
+#import "FSPublishSingleton.h"
 
 #define MaxVideoTime 15
 
@@ -181,7 +182,7 @@ static FSShortVideoRecorderManager *recorderManager;
     
     _context.delegate = self;
     
-    [self initStickerData];
+    [self getSticker];
 }
 
 - (void)initStickerData {
@@ -676,7 +677,7 @@ static FSShortVideoRecorderManager *recorderManager;
     rect.size.width = rightBottomCorner.x - topLeftCorner.x;
     rect.size.height = rightBottomCorner.y - topLeftCorner.y;
     
-    CGPoint newPoint = [_liveWindow mapViewToCanonical:CGPointMake(_liveWindow.frame.size.width - rect.size.width/2, _liveWindow.frame.size.height - rect.size.height/2)];
+    CGPoint newPoint = [_liveWindow mapViewToCanonical:CGPointMake(_liveWindow.frame.size.width - rect.size.width/2+50, _liveWindow.frame.size.height - rect.size.height/2+20)];
 
 
     [stickers setTranslation:newPoint];
@@ -691,21 +692,39 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (NSMutableString *)getSticker {
-    NSMutableString *stickerPackageId = [[NSMutableString alloc] initWithString:@""];
     
     NSString *appPath =[[NSBundle mainBundle] bundlePath];
-    NSString *stickerFilePath = [appPath stringByAppendingPathComponent:@"89740AEA-80D6-432A-B6DE-E7F6539C4121.animatedsticker"];
+    
+    NSString *stickerFilePath = nil;
+    NSString *stickerLicense = nil;
+    if ([FSPublishSingleton sharedInstance].isAR) {
+        stickerFilePath = [appPath stringByAppendingPathComponent:@"E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker"];
+        stickerLicense = [appPath stringByAppendingPathComponent:@"E7A12520-4A53-427E-9E73-986E4635B57C.lic"];
+    }
+    else {
+        stickerFilePath = [appPath stringByAppendingPathComponent:@"A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker"];
+        stickerLicense = [appPath stringByAppendingPathComponent:@"A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic"];
+    }
+    _stickerPackageId = (NSMutableString *)[_context.assetPackageManager getAssetPackageIdFromAssetPackageFilePath:stickerFilePath];
+    if (_stickerPackageId) {
+        if ([stickerFilePath containsString:_stickerPackageId]) {
+            return _stickerPackageId;
+        }
+        else {
+            [_context.assetPackageManager uninstallAssetPackage:_stickerPackageId type:NvsAssetPackageType_AnimatedSticker];
+        }
+    }
     if (![[NSFileManager defaultManager] fileExistsAtPath:stickerFilePath]) {
         NSLog(@"Sticker package file is not exist!");
     } else {
         // 此处选择同步安装，如果包裹过大或者根据需要，可选择异步安装
-        NvsAssetPackageManagerError error = [_context.assetPackageManager installAssetPackage:stickerFilePath license:nil type:NvsAssetPackageType_AnimatedSticker sync:YES assetPackageId:stickerPackageId];
+        NvsAssetPackageManagerError error = [_context.assetPackageManager installAssetPackage:stickerFilePath license:stickerLicense type:NvsAssetPackageType_AnimatedSticker sync:YES assetPackageId:_stickerPackageId];
         if (error != NvsAssetPackageManagerError_NoError && error != NvsAssetPackageManagerError_AlreadyInstalled) {
             NSLog(@"Failed to install sticker package!");
         }
     }
 
-    return stickerPackageId;
+    return _stickerPackageId;
 }
 
 - (BOOL)deleteCacheFile:(NSString *)filePath {

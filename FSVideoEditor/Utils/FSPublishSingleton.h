@@ -24,6 +24,9 @@
 @property (nonatomic, copy) NSString *addressUpload;
 @property (nonatomic, copy) NSString *addressAPI;
 
+@property (nonatomic, assign) BOOL isAR; //项目分支，yes是7nujoom，no是haahi
+@property (nonatomic, strong) NSMutableArray *likeMusicArray; //收藏音乐列表
+
 + (instancetype)sharedInstance;
 
 - (void)cleanData;

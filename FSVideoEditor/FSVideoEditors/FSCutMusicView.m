@@ -116,8 +116,11 @@
     
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _finishButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width- 20-54, CGRectGetMinY(_titleLabel.frame), 54, 30);
-    _finishButton.backgroundColor = [UIColor clearColor];
-    [_finishButton setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
+    _finishButton.backgroundColor = FSHexRGB(0x0BC2C6);//[UIColor clearColor];
+    _finishButton.layer.cornerRadius = 5;
+    _finishButton.layer.masksToBounds = YES;
+    [_finishButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"MessageOK"] forState:UIControlStateNormal];
+   // [_finishButton setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(finishCutMusic) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_finishButton];
     
