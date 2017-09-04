@@ -128,14 +128,21 @@
 
 -(void)dealWithDraftData:(NSMutableArray*)drafts{
     for (FSDraftInfo* info in drafts) {
-        NSMutableArray* tempArray = [self.draftsMisicDict objectForKey:[NSNumber numberWithInteger:info.vMusic.mId]];
-        if (tempArray) {
-            [tempArray addObject:info];
+        if(info.vMusic){
+            NSMutableArray* tempArray = [self.draftsMisicDict objectForKey:[NSNumber numberWithInteger:info.vMusic.mId]];
+            if (tempArray) {
+                [tempArray addObject:info];
+            }else{
+                NSMutableArray *array = [NSMutableArray array];
+                [array addObject:info];
+                [self.draftsMisic addObject:array];
+                [self.draftsMisicDict setObject:array forKey:[NSNumber numberWithInteger:info.vMusic.mId]];
+            }
         }else{
             NSMutableArray *array = [NSMutableArray array];
             [array addObject:info];
             [self.draftsMisic addObject:array];
-            [self.draftsMisicDict setObject:array forKey:[NSNumber numberWithInteger:info.vMusic.mId]];
+            [self.draftsMisicDict setObject:array forKey:info.vFinalPath];
         }
     }
 }

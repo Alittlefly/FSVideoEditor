@@ -147,7 +147,9 @@
     }
     if (info.vTitle && info.vTitle.length) {
         [self.topic setText:info.vTitle];
+        [self.topic setTextColor:FSHexRGB(0x292929)];
     }else{
+        [self.topic setTextColor:FSHexRGB(0x999999)];
         [self.topic setText:[FSShortLanguage CustomLocalizedStringFromTable:@"NoTitle"]];
     }
     if (info.challenge.challengeName && info.challenge.challengeName.length) {
