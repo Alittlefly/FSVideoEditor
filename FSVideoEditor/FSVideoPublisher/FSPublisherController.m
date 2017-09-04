@@ -213,7 +213,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playVideoFromHead) name:UIApplicationDidBecomeActiveNotification object:nil];
 
     [self.toolView setHidden:NO];

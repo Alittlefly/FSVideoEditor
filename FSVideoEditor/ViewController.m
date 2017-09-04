@@ -18,8 +18,9 @@
 #import "FSPublishSingleton.h"
 #import "FSDraftManager.h"
 #import "FSMusicController.h"
+#import "FSMusicDeatilController.h"
 
-@interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate>
+@interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate,FSToolControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *recorderButton;
 @property (weak, nonatomic) IBOutlet UITextField *uidTextField;
@@ -222,7 +223,7 @@
 //    [self FSPublisherToolViewChooseMusic];
 //    return;
     FSToolController *toolController = [[FSToolController alloc] init];
-
+    [toolController setDelegate:self];
     FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:toolController];
     [self presentViewController:nav animated:YES completion:nil];
 }
@@ -316,7 +317,10 @@
     [[FSVideoEditorAPIParams videoEdiorParams].params setValue:[dataInfo objectForKey:@"loginKey"] forKey:@"loginKey"];
 
 }
-
+-(UIViewController *)musicDetailControllerWithMusic:(FSMusic *)music{
+    FSMusicDeatilController *view = [[FSMusicDeatilController alloc] init];
+    return view;
+}
 - (void)FSLoginServerFaild:(NSError *)error {
     [self.loading loadingViewhide];
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"LoginFailed"]];
