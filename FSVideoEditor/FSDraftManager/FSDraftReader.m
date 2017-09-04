@@ -10,7 +10,7 @@
 #import "FSDraftCache.h"
 
 @interface FSDraftReader ()
-@property(nonatomic,assign)id<FSDraftCacheProtocol> localOperator;
+@property(nonatomic,strong)id<FSDraftCacheProtocol> localOperator;
 @end
 
 @implementation FSDraftReader

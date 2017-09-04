@@ -12,7 +12,6 @@
 
 @interface FSDraftCache()
 @property(nonatomic,strong)NSMutableArray *draftInfos;
-@property(nonatomic,strong)NSMutableDictionary *mapInfo;
 @end
 @implementation FSDraftCache
 -(NSMutableArray *)draftInfos{
