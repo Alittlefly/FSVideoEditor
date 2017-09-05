@@ -10,8 +10,10 @@
 #import "FSLocalPhotoManager.h"
 #import "FSLocalEditorController.h"
 #import "FSShortLanguage.h"
+#import "FSVideoEditorCommenData.h"
+#import "FSShortLanguage.h"
 
-@interface FSLocalVideoController ()
+@interface FSLocalVideoController ()<FSLocalPhotoManagerDelegate>
 {
     FSLocalPhotoManager *_manager;
 }
@@ -24,14 +26,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
      _manager = [FSLocalPhotoManager new];
+    [_manager setDelegate:self];
     NSArray *assets = [_manager photosWithType:(PHAssetMediaTypeVideo)];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-     _videoListView = [[FSVideoListView alloc] init];
-    [_videoListView setDelegate:self];
-    [_videoListView setVideos:assets];
-    [self.view addSubview:_videoListView];
     
+    if ([assets count] != 0) {
+        _videoListView = [[FSVideoListView alloc] init];
+        [_videoListView setDelegate:self];
+        [_videoListView setVideos:assets];
+        [self.view addSubview:_videoListView];
+    }
     [self initCancleButton];
 }
 
@@ -66,6 +71,25 @@
     }
 }
 
+-(void)localPhotoManager:(FSLocalPhotoManager *)manager authorizedStatus:(PHAuthorizationStatus)status{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (status != PHAuthorizationStatusAuthorized) {
+            UILabel *notAuthoredLabel = [[UILabel alloc] init];
+            [notAuthoredLabel setTextColor:FSHexRGB(0x999999)];
+            [notAuthoredLabel setNumberOfLines:0];
+            [notAuthoredLabel setFont:[UIFont systemFontOfSize:13.0]];
+            [notAuthoredLabel setPreferredMaxLayoutWidth:255];
+            NSString *text = [FSShortLanguage CustomLocalizedStringFromTable:@"notAuthored"];
+            notAuthoredLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            [notAuthoredLabel setTextAlignment:(NSTextAlignmentCenter)];
+            [notAuthoredLabel setText:text];
+            [notAuthoredLabel setBackgroundColor:[UIColor clearColor]];
+            CGRect labelSize = [text boundingRectWithSize:CGSizeMake(255, MAXFLOAT) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0]} context:nil];
+            [notAuthoredLabel setFrame:CGRectMake((CGRectGetWidth(self.view.bounds) - CGRectGetWidth(labelSize))/2.0, (CGRectGetHeight(self.view.bounds) - CGRectGetHeight(labelSize))/2.0,CGRectGetWidth(labelSize), CGRectGetHeight(labelSize))];
+            [self.view addSubview:notAuthoredLabel];
+        }
+    });
+}
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }

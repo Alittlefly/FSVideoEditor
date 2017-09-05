@@ -192,9 +192,12 @@
     if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
         NSLog(@"Failed to seek timeline!");
     }
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationFade)];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
 
     [_videoFxView stopMoveTint];
 }

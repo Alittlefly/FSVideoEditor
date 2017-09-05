@@ -132,3 +132,5 @@ emptyDraft = "خطأ فى التحميل";
 xsignal = "إشارة X";
 
 VideoTimeMaxTip = "قم بحذف مقطع من الفيديو أولاً إذا أردت الإستمرار في التصوير.";
+
+notAuthored = "notAuthored 哈哈哈 这么明显的bug";
