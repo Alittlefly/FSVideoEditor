@@ -47,8 +47,10 @@
 
 @interface FSFxButton : UIButton
 @property(nonatomic,strong)UIView *colorView;
+@property(nonatomic,strong)UIColor *fxColor;
 @property(nonatomic,strong)UIImageView *selectedImage;
 @property(nonatomic,strong)UIImageView *backImage;
+@property(nonatomic,assign)BOOL showMask;
 @end
 @implementation FSFxButton
 -(UIImageView *)selectedImage{
@@ -62,6 +64,15 @@
         _backImage = [[UIImageView alloc] init];
     }
     return _backImage;
+}
+-(void)setShowMask:(BOOL)showMask{
+    _showMask = showMask;
+    [self.colorView setHidden:!showMask];
+}
+-(void)setFxColor:(UIColor *)fxColor{
+    _fxColor = fxColor;
+    
+    [self.colorView setBackgroundColor:fxColor];
 }
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -82,7 +93,7 @@
         [_colorView.layer setCornerRadius:CGRectGetHeight(frame)/2.0];
         [_colorView.layer setMasksToBounds:YES];
         [_colorView setUserInteractionEnabled:NO];
-//        [_colorView setAlpha:0.8];
+        [_colorView setHidden:YES];
         [self addSubview:_colorView];
         
         [self.selectedImage setFrame:CGRectMake(0, 0, 22, 17)];
@@ -139,8 +150,8 @@
         _lineSelectColor = FSHexRGB(0xface15);
         [self addSubview:self.line];
         
-        [self setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected)];
-        [self setTitleColor:FSHexRGBAlpha(0xffffff, 0.8) forState:(UIControlStateNormal)];
+        [self setTitleColor:FSHexRGBAlpha(0xffffff, 1.0) forState:(UIControlStateSelected)];
+        [self setTitleColor:FSHexRGBAlpha(0xffffff, 0.6) forState:(UIControlStateNormal)];
         
     }
     return self;
@@ -311,7 +322,7 @@
     
 }
 -(void)initFilerFxs{
-    
+
     FSFxButton *soulfx = [[FSFxButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
     [soulfx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Magic"] forState:(UIControlStateNormal)];
     [soulfx setBackgroundColor:[UIColor redColor]];
@@ -319,7 +330,7 @@
     [soulfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [soulfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [soulfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
-
+    [soulfx setFxColor:FSHexRGBAlpha(0x01feff, 0.95)];
     [soulfx setTag:1];
     objc_setAssociatedObject(soulfx, FxIdKey, @"C6273A8F-C899-4765-8BFC-E683EE37AA84", OBJC_ASSOCIATION_COPY);
     
@@ -332,6 +343,7 @@
     [shakefx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [shakefx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [shakefx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
+    [shakefx setFxColor:FSHexRGBAlpha(0x9c01ff, 0.95)];
 
     [shakefx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Vibrating"] forState:(UIControlStateNormal)];
 
@@ -347,7 +359,8 @@
     [jzfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
-    
+    [jzfx setFxColor:FSHexRGBAlpha(0xff39ad, 0.95)];
+
     [jzfx setTitle:NSLocalizedString(@"xsignal", nil) forState:(UIControlStateNormal)];
     objc_setAssociatedObject(jzfx, FxIdKey, @"9AC28816-639F-4A9B-B4BA-4060ABD229A2", OBJC_ASSOCIATION_COPY);
     
@@ -360,7 +373,8 @@
     [fmfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [fmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [fmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
-    
+    [fmfx setFxColor:FSHexRGBAlpha(0xffe139, 0.95)];
+
     [fmfx setTitle:NSLocalizedString(@"mirror", nil) forState:(UIControlStateNormal)];
     
     objc_setAssociatedObject(fmfx, FxIdKey, @"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8", OBJC_ASSOCIATION_COPY);
@@ -374,7 +388,8 @@
     [hjfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [hjfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [hjfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
-    
+    [hjfx setFxColor:FSHexRGBAlpha(0x6339ff, 0.95)];
+
     [hjfx setTitle:NSLocalizedString(@"huanjue", nil) forState:(UIControlStateNormal)];
     
     objc_setAssociatedObject(hjfx, FxIdKey, @"Video Echo", OBJC_ASSOCIATION_COPY);
@@ -389,7 +404,8 @@
     [bmfx addTarget:self action:@selector(beginFx:) forControlEvents:(UIControlEventTouchDown)];
     [bmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpInside)];
     [bmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
-    
+    [bmfx setFxColor:FSHexRGBAlpha(0x39ff9f, 0.95)];
+
     [bmfx setTitle:NSLocalizedString(@"黑白", nil) forState:(UIControlStateNormal)];
     
     objc_setAssociatedObject(bmfx, FxIdKey, @"33F513E5-5CA2-4C23-A6D4-8466202EE698", OBJC_ASSOCIATION_COPY);
@@ -475,26 +491,28 @@
      _needCovert = needCovert;
 }
 #pragma mark - 动作
--(void)beginFx:(UIButton *)button{
-    NSInteger tag = button.tag;
-    if (tag == 1) {
-        _progress.fxViewColor =  FSHexRGBAlpha(0x01feff, 0.95);//[UIColor redColor];
-    }else if(tag == 2){
-        _progress.fxViewColor = FSHexRGBAlpha(0x9c01ff, 0.95);//[UIColor whiteColor];
-    }else if (tag == 3){
-        _progress.fxViewColor = FSHexRGBAlpha(0xff39ad, 0.95);//[UIColor blueColor];
-    }else if (tag == 4){
-        _progress.fxViewColor = FSHexRGBAlpha(0xffe139, 0.95);//[UIColor blackColor];
-    }else if (tag == 5){
-        _progress.fxViewColor = FSHexRGBAlpha(0x6339ff, 0.95);// [UIColor purpleColor];
-    }else if (tag == 6){
-        _progress.fxViewColor = FSHexRGBAlpha(0x39ff9f, 0.95);//[UIColor yellowColor];
-    }
-     _currentFxId = objc_getAssociatedObject(button, FxIdKey);
-    
+-(void)beginFx:(FSFxButton *)button{
+//    NSInteger tag = button.tag;
+//    if (tag == 1) {
+//        _progress.fxViewColor =  FSHexRGBAlpha(0x01feff, 0.95);//[UIColor redColor];
+//    }else if(tag == 2){
+//        _progress.fxViewColor = FSHexRGBAlpha(0x9c01ff, 0.95);//[UIColor whiteColor];
+//    }else if (tag == 3){
+//        _progress.fxViewColor = FSHexRGBAlpha(0xff39ad, 0.95);//[UIColor blueColor];
+//    }else if (tag == 4){
+//        _progress.fxViewColor = FSHexRGBAlpha(0xffe139, 0.95);//[UIColor blackColor];
+//    }else if (tag == 5){
+//        _progress.fxViewColor = FSHexRGBAlpha(0x6339ff, 0.95);// [UIColor purpleColor];
+//    }else if (tag == 6){
+//        _progress.fxViewColor = FSHexRGBAlpha(0x39ff9f, 0.95);//[UIColor yellowColor];
+//    }
+    _progress.fxViewColor = button.fxColor;
+    _currentFxId = objc_getAssociatedObject(button, FxIdKey);
+    [button setShowMask:YES];
     [_progress beginFxView];
 }
--(void)endFx:(UIButton *)button{
+-(void)endFx:(FSFxButton *)button{
+    [button setShowMask:NO];
     [_progress endFxView];
      _currentFxId = nil;
 }
