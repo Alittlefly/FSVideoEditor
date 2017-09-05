@@ -112,7 +112,7 @@
         _gradientlayer = [CAGradientLayer layer];
         _gradientlayer.colors = @[(__bridge id)FSHexRGBAlpha(0x000000, 0.3).CGColor,
                                   
-                                  (__bridge id)FSHexRGBAlpha(0xffffff, 0.0).CGColor];
+                                  (__bridge id)FSHexRGBAlpha(0x000000, 0.0).CGColor];
         
         _gradientlayer.locations = @[@(0.0),@(1)];
         [_gradientlayer setStartPoint:CGPointMake(0, 0)];
