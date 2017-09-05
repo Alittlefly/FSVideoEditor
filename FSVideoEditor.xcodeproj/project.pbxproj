@@ -162,10 +162,10 @@
 		9815CE791F2739AD00DE317C /* FSChallengeDataServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9815CE771F2739AD00DE317C /* FSChallengeDataServer.m */; };
 		9815CE831F273ECE00DE317C /* FSChallengeParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 9815CE811F273ECE00DE317C /* FSChallengeParam.m */; };
 		9815CE881F273F5F00DE317C /* FSSearchChallengeAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9815CE861F273F5F00DE317C /* FSSearchChallengeAPI.m */; };
-		9828E0111F5D659C00BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker in Resources */ = {isa = PBXBuildFile; fileRef = 9828E00D1F5D659C00BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker */; };
-		9828E0121F5D659C00BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9828E00E1F5D659C00BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic */; };
-		9828E0131F5D659C00BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker in Resources */ = {isa = PBXBuildFile; fileRef = 9828E00F1F5D659C00BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker */; };
-		9828E0141F5D659C00BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9828E0101F5D659C00BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.lic */; };
+		9828E0211F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker in Resources */ = {isa = PBXBuildFile; fileRef = 9828E01D1F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker */; };
+		9828E0221F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9828E01E1F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic */; };
+		9828E0231F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker in Resources */ = {isa = PBXBuildFile; fileRef = 9828E01F1F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker */; };
+		9828E0241F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9828E0201F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.lic */; };
 		983445F61F0CE00700A6E977 /* FSLoginServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 983445F51F0CE00700A6E977 /* FSLoginServer.m */; };
 		983445F91F0CE01F00A6E977 /* FSLoginAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 983445F81F0CE01F00A6E977 /* FSLoginAPI.m */; };
 		983445FC1F0CF06C00A6E977 /* FSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 983445FB1F0CF06C00A6E977 /* FSAlertView.m */; };
@@ -831,10 +831,10 @@
 		9815CE811F273ECE00DE317C /* FSChallengeParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSChallengeParam.m; sourceTree = "<group>"; };
 		9815CE851F273F5F00DE317C /* FSSearchChallengeAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSearchChallengeAPI.h; sourceTree = "<group>"; };
 		9815CE861F273F5F00DE317C /* FSSearchChallengeAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSearchChallengeAPI.m; sourceTree = "<group>"; };
-		9828E00D1F5D659C00BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker */ = {isa = PBXFileReference; lastKnownFileType = file; name = "A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker"; path = "../../../../Downloads/A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker"; sourceTree = "<group>"; };
-		9828E00E1F5D659C00BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic */ = {isa = PBXFileReference; lastKnownFileType = file; name = "A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic"; path = "../../../../Downloads/A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic"; sourceTree = "<group>"; };
-		9828E00F1F5D659C00BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker */ = {isa = PBXFileReference; lastKnownFileType = file; name = "E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker"; path = "../../../../Downloads/E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker"; sourceTree = "<group>"; };
-		9828E0101F5D659C00BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.lic */ = {isa = PBXFileReference; lastKnownFileType = file; name = "E7A12520-4A53-427E-9E73-986E4635B57C.lic"; path = "../../../../Downloads/E7A12520-4A53-427E-9E73-986E4635B57C.lic"; sourceTree = "<group>"; };
+		9828E01D1F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker */ = {isa = PBXFileReference; lastKnownFileType = file; path = "A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker"; sourceTree = "<group>"; };
+		9828E01E1F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic"; sourceTree = "<group>"; };
+		9828E01F1F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker */ = {isa = PBXFileReference; lastKnownFileType = file; path = "E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker"; sourceTree = "<group>"; };
+		9828E0201F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "E7A12520-4A53-427E-9E73-986E4635B57C.lic"; sourceTree = "<group>"; };
 		983445F41F0CE00700A6E977 /* FSLoginServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLoginServer.h; sourceTree = "<group>"; };
 		983445F51F0CE00700A6E977 /* FSLoginServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLoginServer.m; sourceTree = "<group>"; };
 		983445F71F0CE01F00A6E977 /* FSLoginAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLoginAPI.h; sourceTree = "<group>"; };
@@ -1335,10 +1335,10 @@
 		562D406E1EFE4D2000BF0E0D /* FSVideoFxSource */ = {
 			isa = PBXGroup;
 			children = (
-				9828E00D1F5D659C00BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker */,
-				9828E00E1F5D659C00BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic */,
-				9828E00F1F5D659C00BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker */,
-				9828E0101F5D659C00BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.lic */,
+				9828E01D1F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker */,
+				9828E01E1F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic */,
+				9828E01F1F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker */,
+				9828E0201F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.lic */,
 				98EA628C1F56D0920086FD62 /* 198-14-967dfb58745c59c1c409616af7ca27b3.lic */,
 				98EA628D1F56D0920086FD62 /* 198-14-ec294b7a1c8bbc37aaf8586dcc7cfbf0.lic */,
 				98D8A60B1F55433400003EB2 /* filtesr */,
@@ -2425,12 +2425,12 @@
 				98D8A6321F55433400003EB2 /* 51986EDA-1D6F-4C6C-961C-1891ECB83E30.1.videofx in Resources */,
 				98D8A62B1F55433400003EB2 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.lic in Resources */,
 				98D8A6301F55433400003EB2 /* B3E53F0E-BE67-4A2D-AEC8-CF5F8E064EF1.1.videofx in Resources */,
-				9828E0121F5D659C00BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic in Resources */,
+				9828E0221F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic in Resources */,
 				563E66AF1F53C80B00EE2298 /* x_signal.gif in Resources */,
 				567E0B611EF930D100C4C527 /* LaunchScreen.storyboard in Resources */,
 				563DFDAD1F3AB92A00D05FD0 /* 9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx in Resources */,
 				563E66B51F53F13400EE2298 /* slow.gif in Resources */,
-				9828E0131F5D659C00BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker in Resources */,
+				9828E0231F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker in Resources */,
 				567E0B5E1EF930D100C4C527 /* Assets.xcassets in Resources */,
 				9880DEA81F171295006E730F /* LICENSE in Resources */,
 				98D8A63A1F55433400003EB2 /* 83350933-EBA9-4947-A226-BE1DDA953902.1.videofx in Resources */,
@@ -2446,7 +2446,7 @@
 				98D8A62A1F55433400003EB2 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.2.videofx in Resources */,
 				98D8A62E1F55433400003EB2 /* 34897DAA-8F41-4862-84CD-5573F8D6787B.1.videofx in Resources */,
 				5616CC941F2B40F700028770 /* MJRefresh.bundle in Resources */,
-				9828E0141F5D659C00BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.lic in Resources */,
+				9828E0241F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.lic in Resources */,
 				567B056D1F2748B800D09364 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.lic in Resources */,
 				98D8A6391F55433400003EB2 /* 6A226E39-A423-4F4F-92EF-9275D0CDD2EF.lic in Resources */,
 				563B79D11F05F88A0035346A /* C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx in Resources */,
@@ -2458,7 +2458,7 @@
 				98D8A6331F55433400003EB2 /* 51986EDA-1D6F-4C6C-961C-1891ECB83E30.lic in Resources */,
 				567A3D811EFB6F8E0026247E /* LICENSE in Resources */,
 				563E66B31F53F13400EE2298 /* repeat.gif in Resources */,
-				9828E0111F5D659C00BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker in Resources */,
+				9828E0211F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker in Resources */,
 				98D8A6381F55433400003EB2 /* 6A226E39-A423-4F4F-92EF-9275D0CDD2EF.2.videofx in Resources */,
 				98D8A6311F55433400003EB2 /* B3E53F0E-BE67-4A2D-AEC8-CF5F8E064EF1.lic in Resources */,
 			);
