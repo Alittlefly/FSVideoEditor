@@ -72,17 +72,23 @@
 }
 
 -(void)localPhotoManager:(FSLocalPhotoManager *)manager authorizedStatus:(PHAuthorizationStatus)status{
-    if (status != PHAuthorizationStatusAuthorized) {
-        UILabel *notAuthoredLabel = [[UILabel alloc] init];
-        [notAuthoredLabel setTextColor:FSHexRGB(0x999999)];
-        [notAuthoredLabel setNumberOfLines:0];
-        [notAuthoredLabel setFont:[UIFont systemFontOfSize:13.0]];
-        [notAuthoredLabel setPreferredMaxLayoutWidth:255];
-        [notAuthoredLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"没有授权没有授权没有授权没有授权没有授权没有授权没有授权没有授权没有授权没有授权"]];
-        [notAuthoredLabel sizeToFit];
-        [self.view addSubview:notAuthoredLabel];
-        [notAuthoredLabel setCenter:self.view.center];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (status != PHAuthorizationStatusAuthorized) {
+            UILabel *notAuthoredLabel = [[UILabel alloc] init];
+            [notAuthoredLabel setTextColor:FSHexRGB(0x999999)];
+            [notAuthoredLabel setNumberOfLines:0];
+            [notAuthoredLabel setFont:[UIFont systemFontOfSize:13.0]];
+            [notAuthoredLabel setPreferredMaxLayoutWidth:255];
+            NSString *text = [FSShortLanguage CustomLocalizedStringFromTable:@"notAuthored"];
+            notAuthoredLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            [notAuthoredLabel setTextAlignment:(NSTextAlignmentCenter)];
+            [notAuthoredLabel setText:text];
+            [notAuthoredLabel setBackgroundColor:[UIColor clearColor]];
+            CGRect labelSize = [text boundingRectWithSize:CGSizeMake(255, MAXFLOAT) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0]} context:nil];
+            [notAuthoredLabel setFrame:CGRectMake((CGRectGetWidth(self.view.bounds) - CGRectGetWidth(labelSize))/2.0, (CGRectGetHeight(self.view.bounds) - CGRectGetHeight(labelSize))/2.0,CGRectGetWidth(labelSize), CGRectGetHeight(labelSize))];
+            [self.view addSubview:notAuthoredLabel];
+        }
+    });
 }
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
