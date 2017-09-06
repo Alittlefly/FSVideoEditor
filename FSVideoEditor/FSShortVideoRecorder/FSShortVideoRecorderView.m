@@ -175,13 +175,11 @@
     }
     
     [self initBaseToolView];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeCapturePreview) name:@"ResumeCapturePreview" object:nil];
 }
 
 - (void)initBaseToolView {
     _progressView = [[FSProgressView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 5)];
-    _progressView.backgroundColor = FSHexRGB(0x000B17);
+    _progressView.backgroundColor = FSHexRGBAlpha(0x000B17, 0.7);
     _progressView.progressViewColor = FSHexRGB(0xFACE15);
 //    _progressView = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 5)];
 //    _progressView.thumbTintColor = [UIColor clearColor];
@@ -342,8 +340,8 @@
     _recorderButton = [[FSMoveButton alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.frame)-90)/2, CGRectGetHeight(self.frame)-25-90, 90, 90)];
     _recorderButton.backgroundColor = [UIColor clearColor];
     [_recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
-    [_recorderButton addTarget:self action:@selector(pauseRecorder) forControlEvents:UIControlEventTouchUpInside];
-    [_recorderButton addTarget:self action:@selector(startRecorder) forControlEvents:UIControlEventTouchDown];
+//    [_recorderButton addTarget:self action:@selector(pauseRecorder) forControlEvents:UIControlEventTouchUpInside];
+//    [_recorderButton addTarget:self action:@selector(startRecorder) forControlEvents:UIControlEventTouchDown];
     _recorderButton.delegate = self;
     
     [self addSubview:_recorderButton];
@@ -667,8 +665,6 @@
 }
 
 - (void)startRecorder {
-    NSLog(@"startRecorder");
-    
     if (_currentVideoTime >= 15) {
         [self showAlertView:[FSShortLanguage CustomLocalizedStringFromTable:@"VideoTimeMaxTip"]];
         return;
@@ -748,7 +744,6 @@
 }
 
 - (void)pauseRecorder {
-    NSLog(@"pauseRecorder");
     _isRecording = NO;
     
     _backButton.hidden= NO;
@@ -814,6 +809,7 @@
 #pragma mark - FSMoveButtonDelegate
 - (void)FSMoveButtonCancelTrackingWithEvent:(UIEvent *)event {
     //self.recorderButton.transform = CGAffineTransformIdentity;
+    [self pauseRecorder];
     [UIView animateWithDuration:0.3 animations:^{
         self.recorderButton.center = CGPointMake(self.frame.size.width/2, self.frame.size.height-25-90/2);
     }];
@@ -821,6 +817,8 @@
 }
 
 - (void)FSMoveButtonEndTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    [self pauseRecorder];
+
     [UIView animateWithDuration:0.3 animations:^{
         self.recorderButton.center = CGPointMake(self.frame.size.width/2, self.frame.size.height-25-90/2);
     }];
@@ -836,6 +834,8 @@
 }
 
 - (void)FSMoveButtonBeginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    [self startRecorder];
+
     CGPoint tpoint = [touch locationInView:self];
     
     if (CGRectContainsPoint(_recorderButton.frame, tpoint)) {
@@ -843,18 +843,6 @@
         self.recorderButton.center = tpoint;
 
     }
-}
-
-- (void)moveRecorderButton:(UIPanGestureRecognizer *)gesture {
-    
-    //获取手势的位置
-    CGPoint position =[gesture translationInView:self];
-    
-    
-    //通过stransform 进行平移交换
-    self.recorderButton.transform = CGAffineTransformTranslate(self.recorderButton.transform, position.x, position.y);
-    //将增量置为零
-    [gesture setTranslation:CGPointZero inView:self];
 }
 
 - (void)deleteVideo {

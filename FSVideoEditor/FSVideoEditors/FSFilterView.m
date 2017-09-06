@@ -32,6 +32,7 @@
         _filtersArray = [NSMutableArray arrayWithObject:@"NoFilter"];
         // 获取全部内嵌视频特效的名称
         [_filtersArray addObjectsFromArray:[[FSShortVideoRecorderManager sharedInstance] getAllVideoFilters]];
+        
         [self initBaseUI];
     }
     return self;
@@ -59,7 +60,7 @@
     [self addSubview:_chooseButton];
     
     _contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.frame.size.height/2, self.frame.size.width, self.frame.size.height/2)];
-    [_contentScrollView setBackgroundColor:[UIColor blackColor]];
+    [_contentScrollView setBackgroundColor:FSHexRGBAlpha(0x000000, 0.7)];
     _contentScrollView.showsHorizontalScrollIndicator = YES;
     [_contentScrollView setContentSize:CGSizeMake((_contentScrollView.frame.size.height-4+5)*_filtersArray.count-5, 0)];
     [self addSubview:_contentScrollView];

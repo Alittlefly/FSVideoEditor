@@ -214,6 +214,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playVideoFromHead) name:UIApplicationDidBecomeActiveNotification object:nil];
 
     [self.toolView setHidden:NO];
@@ -227,6 +228,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 
     [_context setDelegate:nil];
@@ -594,14 +597,15 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     } else if ([filter isEqualToString:@"Package1"]) {
         for (unsigned int i = 0; i < _videoTrack.clipCount; i++) {
             NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:i];
-            [videoClip removeAllFx];
-            [videoClip appendPackagedFx:filter];     // 追加包裹特效
+//            [videoClip removeAllFx];
+//            [videoClip appendPackagedFx:filter];     // 追加包裹特效
+            [[FSShortVideoRecorderManager sharedInstance] addFilter:filter toVideoClip:videoClip];
+
         }
     } else {
         for (unsigned int i = 0; i < _videoTrack.clipCount; i++) {
             NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:i];
-            [videoClip removeAllFx];
-            [videoClip appendBuiltinFx:filter];         // 追加内嵌特效
+            [[FSShortVideoRecorderManager sharedInstance] addFilter:filter toVideoClip:videoClip];
         }
     }
     [FSDraftManager sharedManager].tempInfo.vFilterid = filter;

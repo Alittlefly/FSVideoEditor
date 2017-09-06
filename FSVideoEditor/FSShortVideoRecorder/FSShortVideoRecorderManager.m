@@ -114,7 +114,7 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (instancetype)init {
     if (self = [super init]) {
-       // [self initBaseData:[[FSDraftInfo alloc] init]];
+        [self initBaseData:[[FSDraftInfo alloc] init]];
         
         
        // [self resumeCapturePreview];
@@ -310,7 +310,22 @@ static FSShortVideoRecorderManager *recorderManager;
             [_context appendPackagedCaptureVideoFx:[self.filtersDic objectForKey:filter]];
         }
         else {
-            [_context appendBuiltinCaptureVideoFx:[self.filtersDic objectForKey:filter]];
+            [_context appendBuiltinCaptureVideoFx:filter];
+        }
+    }
+}
+
+- (void)addFilter:(NSString *)filterId toVideoClip:(NvsVideoClip *)clip {
+    [clip removeAllFx];
+    
+    if ([filterId isEqualToString:@"NoFilter"]) {
+    }
+    else {
+        if ([[self.filtersDic allKeys] containsObject:filterId]) {
+            [clip appendPackagedFx:[self.filtersDic objectForKey:filterId]];
+        }
+        else {
+            [clip appendBuiltinFx:filterId];
         }
     }
 }

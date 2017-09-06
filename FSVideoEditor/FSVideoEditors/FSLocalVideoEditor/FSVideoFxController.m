@@ -186,7 +186,8 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
     [self.videoFxView creatFxFiltterButtons];
     
     if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
@@ -198,6 +199,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
+     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 
     [_videoFxView stopMoveTint];
 }
