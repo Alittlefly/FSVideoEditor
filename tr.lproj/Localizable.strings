@@ -129,5 +129,6 @@ emptyDraft = "Eyvah! Hiç bir veri bulunamadı";
 
 xsignal = "Karıncalı";
 
-VideoTimeMaxTip = "拍满了，请删除一段视频后再拍";
+VideoTimeMaxTip = "Hafıza dolu, lütfen bir video silip yeniden deneyin!";
+
 notAuthored = "notAuthored 哈哈哈 这么明显的bug";

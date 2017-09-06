@@ -14,7 +14,7 @@
 #import "FSVideoFxOperationStack.h"
 
 typedef NS_ENUM(NSInteger,FSDraftInfoType){
-    FSDraftInfoTypeVideo,
+    FSDraftInfoTypeVideo = 1,
     FSDraftInfoTypeRecoder,
 };
 

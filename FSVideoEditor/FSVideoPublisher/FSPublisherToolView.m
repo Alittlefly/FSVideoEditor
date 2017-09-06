@@ -144,7 +144,7 @@
     
     if (_type == FSDraftInfoTypeVideo) {
         _filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _filterButton.frame = CGRectMake(CGRectGetMinX(_volumeLabel.frame), CGRectGetMaxY(_volumeLabel.frame)+20, 40, 40);
+        _filterButton.frame = CGRectMake(CGRectGetMinX(_volumeButton.frame), CGRectGetMaxY(_volumeLabel.frame)+20, 40, 40);
         [_filterButton setImage:[UIImage imageNamed:@"recorder-filter"] forState:UIControlStateNormal];
         [_filterButton addTarget:self action:@selector(filterClik) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_filterButton];
@@ -171,7 +171,7 @@
     else {
         _effectsButton.frame = CGRectMake(CGRectGetMinX(_volumeButton.frame), CGRectGetMaxY(_volumeLabel.frame)+20, 40, 40);
     }
-    [_effectsButton setImage:[UIImage imageNamed:@"recorder-filter"] forState:UIControlStateNormal];
+    [_effectsButton setImage:[UIImage imageNamed:@"recorder-effects"] forState:UIControlStateNormal];
     [_effectsButton addTarget:self action:@selector(effectsClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_effectsButton];
     

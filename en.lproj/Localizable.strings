@@ -131,5 +131,6 @@ emptyDraft = "Oops! No data found";
 
 xsignal = "X signal";
 
-VideoTimeMaxTip = "拍满了，请删除一段视频后再拍";
+VideoTimeMaxTip = "You can't add more clips unless you delete one firs";
+
 notAuthored = "notAuthored 哈哈哈 这么明显的bug";

@@ -666,21 +666,42 @@ static FSShortVideoRecorderManager *recorderManager;
         sticker = _stickerPackageId;
     // 添加动画贴纸
     NvsTimelineAnimatedSticker *stickers = [timeline addAnimatedSticker:0 duration:timeline.duration animatedStickerPackageId:_stickerPackageId];
-    NvsRect stickerRect = [stickers getOriginalBoundingRect];
-    CGPoint topLeftCorner = CGPointMake(stickerRect.left, stickerRect.top);
-    CGPoint rightBottomCorner = CGPointMake(stickerRect.right, stickerRect.bottom);
+//    NvsRect stickerRect = [stickers getOriginalBoundingRect];
+//    CGPoint topLeftCorner = CGPointMake(stickerRect.left, stickerRect.top);
+//    CGPoint rightBottomCorner = CGPointMake(stickerRect.right, stickerRect.bottom);
+//    
+//    topLeftCorner = [_liveWindow mapCanonicalToView:topLeftCorner];
+//    rightBottomCorner = [_liveWindow mapCanonicalToView:rightBottomCorner];
+    NSArray *array = [stickers getBoundingRectangleVertices];
+    NSValue *leftTopValue = array[0];
+    NSValue *leftBottomValue = array[1];
+    NSValue *rightBottomValue = array[2];
+    NSValue *rightTopValue = array[3];
+    CGPoint topLeftCorner = [leftTopValue CGPointValue];
+    CGPoint bottomLeftCorner = [leftBottomValue CGPointValue];
+    CGPoint rightBottomCorner = [rightBottomValue CGPointValue];
+    CGPoint rightTopCorner = [rightTopValue CGPointValue];
     
     topLeftCorner = [_liveWindow mapCanonicalToView:topLeftCorner];
     rightBottomCorner = [_liveWindow mapCanonicalToView:rightBottomCorner];
+    bottomLeftCorner = [_liveWindow mapCanonicalToView:bottomLeftCorner];
+    rightTopCorner = [_liveWindow mapCanonicalToView:rightTopCorner];
+    
     CGRect rect;
     rect.origin = topLeftCorner;
-    rect.size.width = rightBottomCorner.x - topLeftCorner.x;
-    rect.size.height = rightBottomCorner.y - topLeftCorner.y;
+    rect.size.width = rightBottomCorner.x - bottomLeftCorner.x;
+    rect.size.height = rightBottomCorner.y - rightTopCorner.y;
     
-    CGPoint newPoint = [_liveWindow mapViewToCanonical:CGPointMake(_liveWindow.frame.size.width - rect.size.width/2+50, _liveWindow.frame.size.height - rect.size.height/2+20)];
+    CGPoint lastP = _liveWindow.center;
+    CGPoint curP = CGPointMake(_liveWindow.frame.size.width-rect.size.width/2, _liveWindow.frame.size.height-rect.size.height/2);
+    
+    CGPoint p1 = [_liveWindow mapViewToCanonical:lastP];
+    CGPoint p2 = [_liveWindow mapViewToCanonical:curP];
+    
+ //   CGPoint newPoint = CGPointMake(p2.x-p1.x, p2.y-p1.y);
 
 
-    [stickers setTranslation:newPoint];
+   // [stickers setTranslation:newPoint];
 
     
 }
@@ -705,15 +726,24 @@ static FSShortVideoRecorderManager *recorderManager;
         stickerFilePath = [appPath stringByAppendingPathComponent:@"A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker"];
         stickerLicense = [appPath stringByAppendingPathComponent:@"A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic"];
     }
+
     _stickerPackageId = (NSMutableString *)[_context.assetPackageManager getAssetPackageIdFromAssetPackageFilePath:stickerFilePath];
-    if (_stickerPackageId) {
-        if ([stickerFilePath containsString:_stickerPackageId]) {
+    
+    NvsAssetPackageStatus state = [_context.assetPackageManager getAssetPackageStatus:_stickerPackageId type:NvsAssetPackageType_AnimatedSticker];
+    
+    if (state == NvsAssetPackageStatus_NotInstalled) {
+        _stickerPackageId = [[NSMutableString alloc] initWithString:@""];
+    }
+    else {
+        NSArray *assetArray = [_context.assetPackageManager getAssetPackageListOfType:NvsAssetPackageType_AnimatedSticker];
+        if ([assetArray containsObject:_stickerPackageId]) {
             return _stickerPackageId;
         }
         else {
-            [_context.assetPackageManager uninstallAssetPackage:_stickerPackageId type:NvsAssetPackageType_AnimatedSticker];
+            _stickerPackageId = [[NSMutableString alloc] initWithString:@""];
         }
     }
+    
     if (![[NSFileManager defaultManager] fileExistsAtPath:stickerFilePath]) {
         NSLog(@"Sticker package file is not exist!");
     } else {
