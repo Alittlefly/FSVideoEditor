@@ -62,6 +62,9 @@
        [_tableView.mj_footer endRefreshing];
     }
 }
+-(void)reload{
+    [_tableView reloadData];
+}
 -(void)insertMoreMusic:(NSArray *)musics{
     _musics = _musics?:[@[] mutableCopy];
     NSMutableArray *oldMusic = [NSMutableArray arrayWithArray:_musics];

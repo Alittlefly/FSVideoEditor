@@ -128,6 +128,10 @@
     [_collectSever setDelegate:self];
     [_musicListView showLoading:YES];
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [_musicListView reload];
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
@@ -141,6 +145,8 @@
     NSLog(@"searchBarShouldBeginEditing ");
     [_searchBar setShowCancle:YES];
     [_resultView setHidden:NO];
+    
+    [_musicListView stopPlayCurrentMusic];
     return YES;
 }
 -(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
@@ -153,6 +159,10 @@
     NSLog(@"点击取消");
     _searchPage = 0;
     _resultView.searchKey = @"";
+    if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+        [[FSMusicPlayer sharedPlayer] stop];
+    }
+    [_musicListView stopPlayCurrentMusic];
 
 }
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
