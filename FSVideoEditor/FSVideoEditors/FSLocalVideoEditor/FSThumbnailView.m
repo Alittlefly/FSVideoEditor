@@ -77,6 +77,7 @@
     [_backContentView setDelegate:self];
     [_backContentView setClipsToBounds:NO];
     [_backContentView setShowsHorizontalScrollIndicator:NO];
+    [_backContentView setBounces:NO];
     [self addSubview:_backContentView];
     
     _contentBorder = [[UIView alloc] initWithFrame:CGRectMake(padding, 0, CGRectGetWidth(frame) - padding * 2, CGRectGetHeight(frame))];
@@ -115,10 +116,12 @@
     }
     _backGroundView = backGroundView;
     
-    CGFloat width = _allLength/_length * CGRectGetWidth(_backContentView.frame);
-     backGroundView.frame = CGRectMake(0, 0,width, CGRectGetHeight(self.bounds));
-    [_backContentView setContentSize:CGSizeMake(width, 0)];
+    CGFloat width = _allLength/_length * (CGRectGetWidth(_backContentView.frame) - 30);
+     backGroundView.frame = CGRectMake(15,0,width, CGRectGetHeight(self.bounds));
+    [_backContentView setContentSize:CGSizeMake(width + 15,0)];
     [_backContentView addSubview:backGroundView];
+    
+//    [self resetBoundry:(SliderTypeRightSlider)];
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -169,11 +172,9 @@
 }
 -(void)updateNvsStreamContent{
     
-    _endValue = _startOffSet + (CGRectGetMinX(_rightSlide.frame) - 30)/CGRectGetWidth(_backContentView.frame)  *_length;
-    _startValue = _startOffSet + (CGRectGetMaxX(_leftSlide.frame) - 30)/CGRectGetWidth(_backContentView.frame) *_length;
-    
+    _startValue = _startOffSet + (CGRectGetMinX(_leftSlide.frame) - 15.0)/(CGRectGetWidth(_backContentView.frame) - 30.0)*_length;
+    _endValue = _startOffSet + (CGRectGetMaxX(_rightSlide.frame) - 15.0)/(CGRectGetWidth(_backContentView.frame) - 30.0) *_length;
     NSLog(@"_startValue %f _endValue %f",_startValue,_endValue);
-    
     if ([self.delegate respondsToSelector:@selector(thumbnailViewSelectValue:type:)]) {
         double value = 0;
         if (_sliderType == SliderTypeRightSlider) {
@@ -219,9 +220,10 @@
         }
     }else if(type == SliderTypeRightSlider){
         
-        CGFloat maxX = MAX(_minLength/_length, MIN(_allLength/_length, 1)) * (CGRectGetWidth(self.bounds) - 60) + CGRectGetMinX(_backContentView.frame);
+        CGFloat sliderMaxX = MAX(_minLength/_length, MIN(_allLength/_length, 1.0));
+        CGFloat maxX = sliderMaxX * (CGRectGetWidth(_backContentView.frame) - 15 * 2);
         
-        if (CGRectGetMaxX(_rightSlide.frame) > maxX) {
+        if (CGRectGetMaxX(_rightSlide.frame) >= maxX) {
             CGRect rframe = _rightSlide.frame;
             rframe.origin.x = maxX ;
             _rightSlide.frame = rframe;
@@ -233,12 +235,12 @@
         if (_sliderType == SliderTypeRightSlider) {
             // 修正右边
             CGRect rFrame = _rightSlide.frame;
-            rFrame.origin.x = CGRectGetMaxX(_leftSlide.frame) + _minWidth;
+            rFrame.origin.x = CGRectGetMinX(_leftSlide.frame) + _minWidth;
             _rightSlide.frame = rFrame;
         }else{
             // 修正左边
             CGRect lFrame = _leftSlide.frame;
-            lFrame.origin.x = CGRectGetMinX(_rightSlide.frame) - _minWidth - CGRectGetWidth(_leftSlide.frame);
+            lFrame.origin.x = CGRectGetMaxX(_rightSlide.frame) - _minWidth - CGRectGetWidth(_leftSlide.frame);
             _leftSlide.frame = lFrame;
         }
     }
@@ -268,7 +270,7 @@
     }
     _sliderType = SliderTypeNone;
 }
-#pragma mark - 
+#pragma mark -
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     NSLog(@" scrollViewDidEndDragging contentOffSet %f",scrollView.contentOffset.x);
     
@@ -278,8 +280,9 @@
     }
     
     _startOffSet = offSetx/scrollView.contentSize.width;
-    _startValue = _startOffSet + (CGRectGetMaxX(_leftSlide.frame) - 30)/CGRectGetWidth(_backContentView.frame) *_length;
-    _endValue = _startOffSet + (CGRectGetMinX(_rightSlide.frame) - 30)/CGRectGetWidth(_backContentView.frame) *_length;
+    CGFloat allWidth = (CGRectGetWidth(_backContentView.frame)-30);
+    _startValue = _startOffSet + (CGRectGetMinX(_leftSlide.frame) - 30)/allWidth *_length;
+    _endValue = _startOffSet + (CGRectGetMaxX(_rightSlide.frame) - 30)/allWidth *_length;
     
     if ([self.delegate respondsToSelector:@selector(thumbnailViewSelectStartValue:endValue:)]) {
         [self.delegate thumbnailViewSelectStartValue:_startValue endValue:_endValue];
@@ -296,7 +299,7 @@
     double timeLength = _endValue - _startValue;
     BOOL shouldBeRed = (timeLength == _minLength) || (timeLength == _length) || (timeLength == _allLength);
     
-    NSString *time = [NSString stringWithFormat:@"%.2f",timeLength];
+    NSString *time = [NSString stringWithFormat:@"%.0f",timeLength];
     NSString *orginalText = [FSShortLanguage CustomLocalizedStringFromTable:@"ChoseVideoTime"];//NSLocalizedString(@"ChoseVideoTime", nil);
     NSString *finalSting = [orginalText stringByReplacingOccurrencesOfString:@"(0)" withString:time];
     

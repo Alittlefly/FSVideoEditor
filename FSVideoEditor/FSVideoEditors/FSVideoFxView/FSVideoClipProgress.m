@@ -272,7 +272,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     }
     
     if (!_fxTimer) {
-        _fxTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(addFxView) userInfo:nil repeats:YES];
+         _fxTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(addFxView) userInfo:nil repeats:YES];
     }
     [_fxTimer setFireDate:[NSDate distantPast]];
 }

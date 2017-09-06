@@ -26,7 +26,7 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     __weak typeof(self) weakS = self;
-    NSURLSessionTask *task = [manager GET:[NSString stringWithFormat:@"%@video/song/use/%ld?no=%ld&size=20",AddressAPI,(long)type,page] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionTask *task = [manager GET:[NSString stringWithFormat:@"%@video/song/use/%ld?no=%ld&size=20",AddressAPI,(long)type,(long)page] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"response object %@",responseObject);
         
         if ([weakS.delegate respondsToSelector:@selector(typeMusicApiGetMusics:)]) {

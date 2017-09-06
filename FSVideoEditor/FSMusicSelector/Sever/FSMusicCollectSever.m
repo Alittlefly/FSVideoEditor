@@ -43,11 +43,11 @@
     FSMusicCollectAPI *api = [self.taskSets valueForKey:taskId];
     [self.taskSets removeObjectForKey:taskId];
 
-    if ([[FSPublishSingleton sharedInstance].likeMusicArray containsObject:[NSString stringWithFormat:@"%ld",api.music.songId]]) {
-        [[FSPublishSingleton sharedInstance].likeMusicArray removeObject:[NSString stringWithFormat:@"%ld",api.music.songId]];
+    if ([[FSPublishSingleton sharedInstance].likeMusicArray containsObject:[NSString stringWithFormat:@"%ld",(long)api.music.songId]]) {
+        [[FSPublishSingleton sharedInstance].likeMusicArray removeObject:[NSString stringWithFormat:@"%ld",(long)api.music.songId]];
     }
     else {
-        [[FSPublishSingleton sharedInstance].likeMusicArray addObject:[NSString stringWithFormat:@"%ld",api.music.songId]];
+        [[FSPublishSingleton sharedInstance].likeMusicArray addObject:[NSString stringWithFormat:@"%ld",(long)api.music.songId]];
     }
     if([self.delegate respondsToSelector:@selector(musicCollectSeverCollectMusicSuccess:)]){
         [self.delegate musicCollectSeverCollectMusicSuccess:api.music];
