@@ -62,7 +62,6 @@
     NSMutableArray *copyArray = [NSMutableArray arrayWithArray:dealedArray];
     NSMutableArray *before = [NSMutableArray array];
     NSMutableArray *after = [NSMutableArray array];
-    
     // 处理前边 和 后边的
     for (NSInteger index = 0; index < [self.videoFxs count]; index ++) {
         FSVideoFx *sFx = [self.videoFxs objectAtIndex:index];

@@ -82,6 +82,7 @@
     _convert = (_selectType == FSVideoFxTypeRevert);
     
     [self creatSubViews];
+
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-f6192de5110aed067060b4010c648cac.lic"];
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
      _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
@@ -383,7 +384,7 @@
 -(void)videoFxSelectStart:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId{
     
     _Willchanged = YES;
-    
+
     [videoFxView stopMoveTint];
     if (fxId != nil) {
         _startProgress = progress;
@@ -477,7 +478,7 @@
     
     int64_t fxPos = timeFx.tFxInPoint;
     int64_t duration = timeFx.tFxOutPoint - timeFx.tFxInPoint;
-    int64_t originalDuration = _timeLine.duration;
+    int64_t originalDuration = MIN(_timeLine.duration, 15000000.0) ;
 
     if (type == FSVideoFxTypeSlow) {
         //缓慢

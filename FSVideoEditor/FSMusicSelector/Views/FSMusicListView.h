@@ -31,4 +31,5 @@
 -(void)insertMoreMusic:(NSArray *)musics;
 -(void)showLoading:(BOOL)show;
 - (void)stopPlayCurrentMusic;
+-(void)reload;
 @end

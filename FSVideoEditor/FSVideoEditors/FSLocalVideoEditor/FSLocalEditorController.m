@@ -244,9 +244,10 @@
     NvsVideoClip* clip = [_videoTrack insertClip:_filePath clipIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
     [clip setVolumeGain:0 rightVolumeGain:0];
-    
+    [clip changeTrimInPoint:0 affectSibling:YES];
+    [clip changeTrimOutPoint:_timeLine.duration affectSibling:YES];
     [_audioTrack insertClip:_filePath clipIndex:0];
-
+    
     [self initThubnaiView];
 }
 -(void)initThubnaiView{
@@ -258,7 +259,7 @@
     }
     
     if (!_thumbContent) {
-        _thumbContent = [[FSThumbnailView alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds) - 70, CGRectGetWidth(self.view.bounds),60) length:15.0 allLength:_timeLine.duration/1000000 minLength:5.0f];
+        _thumbContent = [[FSThumbnailView alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds) - 70, CGRectGetWidth(self.view.bounds),60) length:15.0 allLength:(CGFloat)(_timeLine.duration/1000000.0) minLength:5.0f];
         _thumbContent.delegate = self;
          NvsThumbnailSequenceView *thumbnailSequence = [[NvsThumbnailSequenceView alloc] init];
         _thumbContent.backGroundView = thumbnailSequence;
@@ -269,7 +270,6 @@
         thumbnailSequence.thumbnailAspectRatio = 1.0;
         [self.view addSubview:_thumbContent];
     }
-
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

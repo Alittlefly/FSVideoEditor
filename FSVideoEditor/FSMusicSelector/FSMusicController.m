@@ -60,6 +60,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     if (_needSelfHeader) {
         _contentViewWhenNeedSelfHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 20,CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
         [_contentViewWhenNeedSelfHeader setBackgroundColor:[UIColor whiteColor]];
@@ -128,10 +129,15 @@
     [_collectSever setDelegate:self];
     [_musicListView showLoading:YES];
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [_musicListView reload];
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
     [_musicListView stopPlayCurrentMusic];
+    
     if ([self.delegate respondsToSelector:@selector(musicControllerHideen)]) {
         [self.delegate musicControllerHideen];
     }
@@ -141,6 +147,8 @@
     NSLog(@"searchBarShouldBeginEditing ");
     [_searchBar setShowCancle:YES];
     [_resultView setHidden:NO];
+    
+    [_musicListView stopPlayCurrentMusic];
     return YES;
 }
 -(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
@@ -153,14 +161,15 @@
     NSLog(@"点击取消");
     _searchPage = 0;
     _resultView.searchKey = @"";
-
+    [_musicListView stopPlayCurrentMusic];
 }
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     if([searchBar canResignFirstResponder]){
         [searchBar resignFirstResponder];
     }
     [_searchBar setShowCancle:NO];
-    
+    [_musicListView stopPlayCurrentMusic];
+
     NSString *trimText = [searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSLog(@"要查询的内容是 trimText %@",trimText);
     //
@@ -193,7 +202,9 @@
 
 #pragma mark -
 -(void)musicListWouldUseMusic:(FSMusic *)music musicPath:(NSString *)musicPath{
+    
     [FSPublishSingleton sharedInstance].chooseMusic = music;
+    
     if (_pushed) {
         if ([self.delegate respondsToSelector:@selector(musicControllerSelectMusic:music:)]) {
             [self.delegate musicControllerSelectMusic:musicPath music:music];
@@ -299,6 +310,7 @@
     [self.musicListView setMusics:[self.musics copy]];
 }
 -(void)musicSeverGetFaild{
+    _currentHotPage --;
     [self.musicListView setMusics:[self.musics copy]];
     [self.musicListView showLoading:NO];
 }
@@ -370,6 +382,7 @@
     [self.musicListView showLoading:NO];
 }
 -(void)musicSeverGetCollectedFaild{
+    _currentCollectPage --;
     [self.collectedMusics addObjectsFromArray:[NSArray array]];
     [self.musicListView setMusics:[self.collectedMusics copy]];
     [self.musicListView showLoading:NO];
@@ -382,6 +395,7 @@
     [_resultView insertMoreMusic:musics];
 }
 -(void)musicSeverSearchFaild{
+     _searchPage --;
     [_resultView insertMoreMusic:nil];
 }
 -(void)dissmissController{

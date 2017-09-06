@@ -30,12 +30,12 @@ typedef NS_ENUM(NSInteger,FSDraftInfoType){
 @property(nonatomic,assign)double vOriginalVolume;
 @property(nonatomic,assign)double vMusicVolume;
 @property(nonatomic,strong)NSString *vTitle;
-@property(nonatomic,strong)NSString *vFinalPath;
-@property(nonatomic,strong)NSString *vOriginalPath;
+@property(nonatomic,strong)NSString *vFinalPath;           //最终生成的视频路径
+@property(nonatomic,strong)NSString *vOriginalPath;        //本地上传或录制生成的原视频路径
 @property(nonatomic,strong)NSString *vFirstFramePath;
 @property(nonatomic,assign)double vSpeed;
 @property(nonatomic,strong)NSArray<NSString *> *clips;
-@property(nonatomic,strong)NSString *vConvertPath;
+@property(nonatomic,strong)NSString *vConvertPath;        //倒序视频路径
 @property(nonatomic,strong)NSString *vFilterid;
 @property(nonatomic,assign)BOOL vSaveToAlbum;
 @property(nonatomic,strong)NSArray<NSString *> *recordVideoPathArray;  //录制视频片段地址

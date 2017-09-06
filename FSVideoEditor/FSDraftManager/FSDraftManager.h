@@ -13,7 +13,7 @@
 
 @interface FSDraftManager : NSObject
 
-@property(nonatomic,strong)FSDraftInfo *tempInfo;
+@property(nonatomic,strong,readonly)FSDraftInfo *tempInfo;
 
 
 +(instancetype)sharedManager;
@@ -25,6 +25,7 @@
 -(void)delete:(FSDraftInfo *)draftInfo;
 -(FSDraftInfo *)draftInfoWithPreInfo:(FSDraftInfo *)preDraftInfo;
 -(NSArray *)allDraftInfos;
+//
 -(void)setCacheKey:(NSString *)cacheKey;
 
 -(void)deleteAllDrafts;

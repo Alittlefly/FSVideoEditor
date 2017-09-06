@@ -58,9 +58,13 @@
      _musics = musics;
 
     [_tableView reloadData];
+    
     if([_tableView.mj_footer isRefreshing]){
        [_tableView.mj_footer endRefreshing];
     }
+}
+-(void)reload{
+    [_tableView reloadData];
 }
 -(void)insertMoreMusic:(NSArray *)musics{
     _musics = _musics?:[@[] mutableCopy];
@@ -131,27 +135,16 @@
             
             NSString *url = music.songUrl;
             if (![url hasPrefix:@"http"] && url) {
-                //@"http://35.158.218.231/"    http://10.10.32.152:20000/
                 url = [AddressIP stringByAppendingString:music.songUrl];
             }
             __weak typeof(self) weakS = self;
             [FSMusicManager downLoadMusic:url complete:^(NSString *localPath, NSError *error) {
                 [weakS.loading loadingViewhide];
-                
                 if (!error) {
                     [[FSMusicPlayer sharedPlayer] stop];
                     [[FSMusicPlayer sharedPlayer] setFilePath:localPath];
-                }else{
-                    return ;
-                }
-                
-                if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
-                    [[FSMusicPlayer sharedPlayer] pause];
-                    [cell setIsPlayIng:NO];
-                }else{
                     [[FSMusicPlayer sharedPlayer] play];
                     [cell setIsPlayIng:YES];
-
                 }
             }];
         }
@@ -162,7 +155,7 @@
 #pragma mark -
 -(void)tableView:(UITableView *)tableView updateTableWithMusic:(FSMusic *)music selectIndexPath:(NSIndexPath *)indexPath{
     
-    NSMutableArray *paths = [NSMutableArray array];
+    NSMutableArray *reloadPaths = [NSMutableArray array];
     if (![_music isEqual:music]) {
         NSIndexPath *selectedPath = nil;
         if (_music) {
@@ -172,21 +165,19 @@
         }
         music.opend = YES;
         if (selectedPath) {
-            [paths addObject:selectedPath];
+            [reloadPaths addObject:selectedPath];
         }
-        [paths addObject:indexPath];
+        [reloadPaths addObject:indexPath];
 
     }else{
         _music.opend = YES;
-        NSMutableArray *paths = [NSMutableArray array];
-        [paths addObject:indexPath];
-        
+        [reloadPaths addObject:indexPath];
         FSMusicCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         [cell setMusic:_music];
     }
     
     [tableView beginUpdates];
-    [tableView reloadRowsAtIndexPaths:paths withRowAnimation:(UITableViewRowAnimationFade)];
+    [tableView reloadRowsAtIndexPaths:reloadPaths withRowAnimation:(UITableViewRowAnimationFade)];
     [tableView endUpdates];
 
 }
@@ -204,8 +195,11 @@
         NSString *localPath = [FSMusicManager musicPathWithFileName:music.songUrl];
         path = localPath;
     }else{
+        /*本地测试代码
         NSString *bundlePath = [[NSBundle mainBundle] pathForResource:music.songTitle ofType:@"mp3"];
         path = bundlePath;
+         */
+        return;
     }
     [cell setIsPlayIng:NO];
     [[FSMusicPlayer sharedPlayer] stop];

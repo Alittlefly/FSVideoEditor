@@ -161,9 +161,6 @@ static FSShortVideoRecorderManager *recorderManager;
     // 初始化NvsStreamingContext
     _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
     
-    if (!_context) {
-        
-    }
     
     // 可用采集设备的数量
     if ([_context captureDeviceCount] == 0) {

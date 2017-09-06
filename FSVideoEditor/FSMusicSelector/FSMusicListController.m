@@ -102,10 +102,14 @@
 }
 #pragma mark - 
 -(void)musicSeverGetMusics:(NSArray<FSMusic *> *)musics{
+    if ([musics count] == 0) {
+        _page --;
+    }
     [_musicListView insertMoreMusic:musics];
     [_musicListView showLoading:NO];
 }
 -(void)musicSeverGetFaild{
+    _page --;
     [_musicListView insertMoreMusic:nil];
     [_musicListView showLoading:NO];
 }

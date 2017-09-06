@@ -333,7 +333,6 @@
     [soulfx setFxColor:FSHexRGBAlpha(0x01feff, 0.95)];
     [soulfx setTag:1];
     objc_setAssociatedObject(soulfx, FxIdKey, @"C6273A8F-C899-4765-8BFC-E683EE37AA84", OBJC_ASSOCIATION_COPY);
-    
     [_contentView addSubview:soulfx];
     
     FSFxButton *shakefx = [[FSFxButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(soulfx.frame) + FxButtonP, CGRectGetMaxY(_tipLabel.frame) + 24, FxButtonH, FxButtonH)];
@@ -361,7 +360,7 @@
     [jzfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     [jzfx setFxColor:FSHexRGBAlpha(0xff39ad, 0.95)];
 
-    [jzfx setTitle:NSLocalizedString(@"xsignal", nil) forState:(UIControlStateNormal)];
+    [jzfx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"xsignal"] forState:(UIControlStateNormal)];
     objc_setAssociatedObject(jzfx, FxIdKey, @"9AC28816-639F-4A9B-B4BA-4060ABD229A2", OBJC_ASSOCIATION_COPY);
     
     [_contentView addSubview:jzfx];
@@ -375,7 +374,7 @@
     [fmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     [fmfx setFxColor:FSHexRGBAlpha(0xffe139, 0.95)];
 
-    [fmfx setTitle:NSLocalizedString(@"mirror", nil) forState:(UIControlStateNormal)];
+    [fmfx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"mirror"] forState:(UIControlStateNormal)];
     
     objc_setAssociatedObject(fmfx, FxIdKey, @"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8", OBJC_ASSOCIATION_COPY);
     [_contentView addSubview:fmfx];
@@ -390,7 +389,7 @@
     [hjfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     [hjfx setFxColor:FSHexRGBAlpha(0x6339ff, 0.95)];
 
-    [hjfx setTitle:NSLocalizedString(@"huanjue", nil) forState:(UIControlStateNormal)];
+    [hjfx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"huanjue"] forState:(UIControlStateNormal)];
     
     objc_setAssociatedObject(hjfx, FxIdKey, @"Video Echo", OBJC_ASSOCIATION_COPY);
     [_contentView addSubview:hjfx];
@@ -406,7 +405,7 @@
     [bmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     [bmfx setFxColor:FSHexRGBAlpha(0x39ff9f, 0.95)];
 
-    [bmfx setTitle:NSLocalizedString(@"黑白", nil) forState:(UIControlStateNormal)];
+    [bmfx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"black"]  forState:(UIControlStateNormal)];
     
     objc_setAssociatedObject(bmfx, FxIdKey, @"33F513E5-5CA2-4C23-A6D4-8466202EE698", OBJC_ASSOCIATION_COPY);
     [_contentView addSubview:bmfx];
@@ -492,20 +491,6 @@
 }
 #pragma mark - 动作
 -(void)beginFx:(FSFxButton *)button{
-//    NSInteger tag = button.tag;
-//    if (tag == 1) {
-//        _progress.fxViewColor =  FSHexRGBAlpha(0x01feff, 0.95);//[UIColor redColor];
-//    }else if(tag == 2){
-//        _progress.fxViewColor = FSHexRGBAlpha(0x9c01ff, 0.95);//[UIColor whiteColor];
-//    }else if (tag == 3){
-//        _progress.fxViewColor = FSHexRGBAlpha(0xff39ad, 0.95);//[UIColor blueColor];
-//    }else if (tag == 4){
-//        _progress.fxViewColor = FSHexRGBAlpha(0xffe139, 0.95);//[UIColor blackColor];
-//    }else if (tag == 5){
-//        _progress.fxViewColor = FSHexRGBAlpha(0x6339ff, 0.95);// [UIColor purpleColor];
-//    }else if (tag == 6){
-//        _progress.fxViewColor = FSHexRGBAlpha(0x39ff9f, 0.95);//[UIColor yellowColor];
-//    }
     _progress.fxViewColor = button.fxColor;
     _currentFxId = objc_getAssociatedObject(button, FxIdKey);
     [button setShowMask:YES];
@@ -627,7 +612,7 @@
 #pragma mark - 更新progress 上的进度
 -(void)startMoveTint{
     if (!_progressTimer) {
-        _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(moveProgressBarTint) userInfo:nil repeats:YES];
+         _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(moveProgressBarTint) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_progressTimer forMode:NSRunLoopCommonModes];
     }
     [_progressTimer setFireDate:[NSDate distantPast]];
