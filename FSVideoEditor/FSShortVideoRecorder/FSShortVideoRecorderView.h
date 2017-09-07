@@ -43,5 +43,6 @@ typedef enum{
 - (void)changeFilter:(NSString *)filterName;
 - (void)finishChangeFilter;
 - (void)initCameraView;
-
+- (void)startRecorder;
+- (void)finishClik;
 @end

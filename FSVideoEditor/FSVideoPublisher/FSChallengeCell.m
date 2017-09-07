@@ -27,7 +27,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if(self) {
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor greenColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
         [self createBaseUI];

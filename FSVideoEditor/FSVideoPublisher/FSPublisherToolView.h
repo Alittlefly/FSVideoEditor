@@ -40,4 +40,7 @@ typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
 
 - (void)updateChallengeName:(NSString *)challenge;
 - (void)updateMusicInfo:(FSMusic *)music;
+
+- (void)backClik;
+- (void)publishClik;
 @end

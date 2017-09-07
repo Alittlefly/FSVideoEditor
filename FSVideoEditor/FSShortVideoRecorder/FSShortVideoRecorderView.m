@@ -818,7 +818,7 @@
 
 - (void)FSMoveButtonEndTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [self pauseRecorder];
-
+    
     [UIView animateWithDuration:0.3 animations:^{
         self.recorderButton.center = CGPointMake(self.frame.size.width/2, self.frame.size.height-25-90/2);
     }];
@@ -826,7 +826,9 @@
 
 - (void)FSMoveButtonContinueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint tpoint = [touch locationInView:self];
-    
+    if (_isAutoRecorder) {
+        return;
+    }
     if (CGRectContainsPoint(_recorderButton.frame, tpoint)) {
         //self.recorderButton.transform = CGAffineTransformTranslate(self.recorderButton.transform, tpoint.x, tpoint.y);
         self.recorderButton.center = tpoint;
@@ -835,7 +837,10 @@
 
 - (void)FSMoveButtonBeginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [self startRecorder];
-
+    
+    if (_isAutoRecorder) {
+        return;
+    }
     CGPoint tpoint = [touch locationInView:self];
     
     if (CGRectContainsPoint(_recorderButton.frame, tpoint)) {

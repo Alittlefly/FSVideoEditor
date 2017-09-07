@@ -101,7 +101,7 @@
     }
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_textField.frame)+20, self.view.frame.size.width, self.view.frame.size.height-CGRectGetMaxY(_textField.frame)-20) style:(UITableViewStylePlain)];
-    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.backgroundColor = [UIColor redColor];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -197,23 +197,38 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     
-    _searchDataArray = nil;
-
-    if (textField.text != nil && textField.text.length > 0) {
+    NSString *trimText = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if (trimText != nil && trimText.length > 0) {
         [self.view addSubview:self.loading];
         [self.loading loadingViewShow];
         
         
         FSChallengeParam *param = [[FSChallengeParam alloc] init];
-        param.w = textField.text;
-        param.no = 0;
-        param.size = 10;
+        param.w = trimText;
+        param.no = 1;
+        param.size = 20;
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:textField.text, @"w", @"1", @"no", @"10", @"size", nil];
         [_dataServer requestChallengeDataList:dic isSearch:YES];
     }
+    else {
+        textField.text = trimText;
+        _searchDataArray = nil;
+        _isSearched = NO;
+        [_tableView reloadData];
 
+    }
     
     return YES;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat sectionHeaderHeight = 20;
+    if(scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0,0);
+    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+    }
 }
 
 #pragma mark - tableView
@@ -249,7 +264,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (_isSearched == NO) {
         UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 20)];
-        bgView.backgroundColor = [UIColor clearColor];
+        bgView.backgroundColor = FSHexRGBAlpha(0xFFFFFF, 1.0);//[UIColor clearColor];
         
         UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 20)];
         headerLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"HotChallenges"];

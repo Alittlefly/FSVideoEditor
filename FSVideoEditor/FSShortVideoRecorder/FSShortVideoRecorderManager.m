@@ -459,6 +459,7 @@ static FSShortVideoRecorderManager *recorderManager;
                                                     selector:@selector(updateVideoTime)
                                                     userInfo:nil
                                                      repeats:YES];
+            [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
         }
         else {
             [_timer setFireDate:[NSDate date]];
@@ -678,6 +679,7 @@ static FSShortVideoRecorderManager *recorderManager;
         sticker = _stickerPackageId;
     // 添加动画贴纸
     NvsTimelineAnimatedSticker *stickers = [timeline addAnimatedSticker:0 duration:timeline.duration animatedStickerPackageId:_stickerPackageId];
+    [stickers setScale:0.4];
 //    NvsRect stickerRect = [stickers getOriginalBoundingRect];
 //    CGPoint topLeftCorner = CGPointMake(stickerRect.left, stickerRect.top);
 //    CGPoint rightBottomCorner = CGPointMake(stickerRect.right, stickerRect.bottom);
@@ -710,10 +712,12 @@ static FSShortVideoRecorderManager *recorderManager;
     CGPoint p1 = [_liveWindow mapViewToCanonical:lastP];
     CGPoint p2 = [_liveWindow mapViewToCanonical:curP];
     
- //   CGPoint newPoint = CGPointMake(p2.x-p1.x, p2.y-p1.y);
+    CGPoint newPoint = CGPointMake(_liveWindow.frame.size.width-30, -_liveWindow.frame.size.height/2);
 
+    [stickers translateAnimatedSticker:newPoint];
+    
 
-   // [stickers setTranslation:newPoint];
+    NSArray *arrayaa = [stickers getBoundingRectangleVertices];
 
     
 }
@@ -916,7 +920,7 @@ static FSShortVideoRecorderManager *recorderManager;
     config.to = INT_MAX;
     config.dataRate = 0;
     config.videoResolution = NvcOutputVideoResolution_NotResize;
-    config.fpsForWebp = 3;
+    config.fpsForWebp = 10;
     
     //倒序
     if (!isWebp) {
