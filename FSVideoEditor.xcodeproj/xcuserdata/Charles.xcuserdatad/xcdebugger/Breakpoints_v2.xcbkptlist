@@ -154,7 +154,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherAPI/FSPublisherAPI.m"
-                  timestampString = "526477559.996376"
+                  timestampString = "526480525.454643"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
@@ -169,7 +169,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherAPI/FSPublisherAPI.m"
-                  timestampString = "526477559.997967"
+                  timestampString = "526480525.45613"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
@@ -224,6 +224,22 @@
             startingLineNumber = "160"
             endingLineNumber = "160"
             landmarkName = "-saveVideoFile"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FSVideoEditor/FSVideoEditors/FSVideoFxView/FSVideoClipProgress.m"
+            timestampString = "526480409.226861"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "-updateLineFrame"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

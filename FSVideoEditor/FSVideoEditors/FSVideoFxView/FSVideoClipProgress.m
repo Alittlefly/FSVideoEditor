@@ -295,6 +295,16 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 }
 -(void)undoFxView{
     UIView *fxView = [self.renderRangeViews lastObject];
+    
+    CGFloat willBePoint = !_needConvert?CGRectGetMinX(fxView.frame):CGRectGetMaxX(fxView.frame);
+    
+    CGFloat progress = willBePoint/CGRectGetWidth(self.bounds);
+    [self setProgress:progress];
+    
+    if ([self.delegate respondsToSelector:@selector(videoClipProgressSelectPoint:)]) {
+        [self.delegate videoClipProgressSelectPoint:progress];
+    }
+    
     [fxView removeFromSuperview];
     [self.renderRangeViews removeLastObject];
     fxView = nil;

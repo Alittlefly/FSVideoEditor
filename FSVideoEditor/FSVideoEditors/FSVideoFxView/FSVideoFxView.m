@@ -426,7 +426,7 @@
     [noneFx setBackgroundColor:[UIColor redColor]];
     [noneFx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"NoFilter"] forState:(UIControlStateNormal)];
      noneFx.tag = FSVideoFxTypeNone;
-    [noneFx.colorView setBackgroundColor:FSHexRGBAlpha(0x000000, 0.95)];
+    [noneFx.colorView setBackgroundColor:FSHexRGBAlpha(0x000000, 0.5)];
     [noneFx setImage:[UIImage sd_animatedGIFNamed:@"Origin"] forState:(UIControlStateNormal)];
     [self.fxButtonDict setObject:noneFx forKey:[NSString stringWithFormat:@"%ld",(long)FSVideoFxTypeNone]];
     noneFx.selected = (_fxType == FSVideoFxTypeNone);
