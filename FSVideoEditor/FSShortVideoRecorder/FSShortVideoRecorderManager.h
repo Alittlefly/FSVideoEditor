@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NvsStreamingContext.h"
 #import "FSDraftInfo.h"
+#import "NvsVideoClip.h"
 
 @protocol FSShortVideoRecorderManagerDelegate <NSObject>
 
@@ -123,5 +124,7 @@
 
 - (void)addSticker:(NSMutableString *)sticker timeLine:(NvsTimeline *)timeline;
 - (void)removeSticker:(NvsTimeline *)timeline;
+
+- (void)addFilter:(NSString *)filterId toVideoClip:(NvsVideoClip *)clip;
 
 @end

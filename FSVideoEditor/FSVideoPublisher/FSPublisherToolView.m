@@ -39,6 +39,9 @@
 
 @property (nonatomic, assign) CGFloat oriEditNameY;
 
+@property (nonatomic, strong) CAGradientLayer *gradientlayer;
+
+
 @end
 
 @implementation FSPublisherToolView
@@ -69,7 +72,40 @@
     return self;
 }
 
+-(CAGradientLayer *)gradientlayer
+{
+    if (!_gradientlayer) {
+        _gradientlayer = [CAGradientLayer layer];
+        _gradientlayer.colors = @[(__bridge id)FSHexRGBAlpha(0x000000, 0.3).CGColor,
+                                  
+                                  (__bridge id)FSHexRGBAlpha(0x000000, 0.0).CGColor];
+        
+        _gradientlayer.locations = @[@(0.0),@(1)];
+        [_gradientlayer setStartPoint:CGPointMake(0, 0)];
+        [_gradientlayer setEndPoint:CGPointMake(0, 1)];
+    }
+    
+    
+    return _gradientlayer;
+}
+
 - (void)initBaseUI {
+    self.gradientlayer.frame = CGRectMake(0, 0, self.frame.size.width, 110);
+    [self.layer addSublayer:self.gradientlayer];
+    
+    
+    CAGradientLayer *btmGradientlayer = [CAGradientLayer layer];
+    btmGradientlayer.colors = @[(__bridge id)FSHexRGBAlpha(0x000000, 0.0).CGColor,
+                              
+                              (__bridge id)FSHexRGBAlpha(0x000000, 0.3).CGColor];
+    
+    btmGradientlayer.locations = @[@(0.0),@(1)];
+    [btmGradientlayer setStartPoint:CGPointMake(0, 0)];
+    [btmGradientlayer setEndPoint:CGPointMake(0, 1)];
+    btmGradientlayer.frame = CGRectMake(0, self.frame.size.height/2, self.frame.size.width, self.frame.size.height/2);
+    [self.layer addSublayer:btmGradientlayer];
+
+    
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 30, 20, 20);
     [_backButton setImage:[UIImage imageNamed:@"recorder-back"] forState:UIControlStateNormal];

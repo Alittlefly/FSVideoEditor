@@ -48,7 +48,7 @@
     //_contentView.alpha = 0.7;
     [self addSubview:_contentView];
     
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:(UIBlurEffectStyleLight)];
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:(UIBlurEffectStyleExtraLight)];
     _effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     [_effectView setFrame:_contentView.bounds];
     [_contentView addSubview:_effectView];

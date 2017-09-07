@@ -27,7 +27,7 @@
         _titleLabel.backgroundColor = [UIColor blackColor];
         _titleLabel.alpha = 0.3;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.font = [UIFont systemFontOfSize:self.frame.size.height/3-2];
+        _titleLabel.font = [UIFont systemFontOfSize:11];
         _titleLabel.textColor = [UIColor whiteColor];
         [self addSubview:_titleLabel];
     }

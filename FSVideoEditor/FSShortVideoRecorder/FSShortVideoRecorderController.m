@@ -35,6 +35,15 @@
      _tempInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
     [_tempInfo clearFxInfos];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:@"kNSNotificationInhoneDidBecomeActive" object:nil];
+
+    
+}
+
+- (void)becomeActive {
+    if (_recorderView) {
+        [_recorderView resumeCapturePreview];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -154,6 +163,7 @@
 }
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNSNotificationInhoneDidBecomeActive" object:nil];
 }
 
 @end
