@@ -39,7 +39,6 @@
 #import "FSDraftManager.h"
 #import "FSTimelineConfiger.h"
 
-
 typedef NS_ENUM(NSInteger,FSPublishOperationType){
     FSPublishOperationTypeSaveToDraft,
     FSPublishOperationTypePublishToNet,
