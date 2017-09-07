@@ -13,10 +13,11 @@
 #import "FSShortLanguage.h"
 #import "FSAlertView.h"
 #import "FSPublishSingleton.h"
+#import "FSAddChallengeTextField.h"
 
 @interface FSAddChallengeController ()<UITextViewDelegate, UITextFieldDelegate, FSChallengeDataServerDelegate>
 
-@property (nonatomic, strong) UITextField *nameTextField;
+@property (nonatomic, strong) FSAddChallengeTextField *nameTextField;
 @property (nonatomic, strong) UITextView *contentTextView;
 @property (nonatomic, strong) UILabel *maxWordsLabel;
 @property (nonatomic, strong) UIButton *commitButton;
@@ -42,7 +43,7 @@
     self.view.backgroundColor = FSHexRGB(0xFFFFFF);
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?self.view.frame.size.width-20-20 : 20, 33, 20, 20);
+    backButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?self.view.frame.size.width-20-15 : 15, 33, 20, 20);
     backButton.backgroundColor = [UIColor clearColor];
     [backButton setImage:[UIImage imageNamed:@"addChallenge_back"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
@@ -83,11 +84,11 @@
 }
 
 - (void)createBaseUI {
-    _nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 88, self.view.frame.size.width-20, 50)];
+    _nameTextField = [[FSAddChallengeTextField alloc] initWithFrame:CGRectMake(15, 88, self.view.frame.size.width-30, 50)];
     _nameTextField.backgroundColor = FSHexRGB(0xF1F1F2);
     _nameTextField.layer.cornerRadius = 2;
     _nameTextField.layer.masksToBounds = YES;
-    UIImageView *leftView = [[UIImageView alloc]initWithFrame:CGRectMake(18, 18, 14, 14)];
+    UIImageView *leftView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 20, 14, 14)];
     leftView.image = [UIImage imageNamed:@"#"];
     if ([FSPublishSingleton sharedInstance].isAutoReverse) {
         _nameTextField.rightView = leftView;
@@ -105,7 +106,7 @@
     _nameTextField.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
     [self.view addSubview:_nameTextField];
     
-    _contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_nameTextField.frame)+10, self.view.frame.size.width-20, 140)];
+    _contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_nameTextField.frame)+10, self.view.frame.size.width-30, 140)];
     _contentTextView.backgroundColor = FSHexRGB(0xF1F1F2);
     _contentTextView.layer.cornerRadius = 2;
     _contentTextView.layer.masksToBounds = YES;
@@ -134,7 +135,7 @@
     
     _commitButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _commitButton.frame = CGRectMake(60, CGRectGetMaxY(_contentTextView.frame)+56, self.view.frame.size.width-120, 44);
-    _commitButton.layer.cornerRadius = 22;
+    _commitButton.layer.cornerRadius = 5;
     _commitButton.layer.masksToBounds = YES;
     _commitButton.backgroundColor = FSHexRGB(0x0BC2C6);
     [_commitButton setTitleColor:FSHexRGB(0xFFFFFF) forState:UIControlStateNormal];
@@ -154,6 +155,12 @@
 }
 
 - (void)commitNewChallenge {
+    NSString *nameText = [_nameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+    if (nameText.length == 0) {
+        return;
+    }
+
     [self.view addSubview:self.loading];
     [self.loading loadingViewShow];
     
@@ -190,6 +197,7 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
     if (textView.text.length == 140 && text.length > 0) {
         [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"MaxWordsCount"]];
         return NO;

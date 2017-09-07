@@ -33,14 +33,14 @@
 
 - (void)createBaseUI {
     _contentView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width-270)/2, self.frame.size.height/2, 270, 0)];
-    _contentView.backgroundColor = FSHexRGBAlpha(0xffffff, 1.0);
+    _contentView.backgroundColor = FSHexRGBAlpha(0x000000, 0.5);
     _contentView.layer.cornerRadius = 5;
     [self addSubview:_contentView];
     
     _messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, _contentView.frame.size.width-20, 0)];
     _messageLabel.backgroundColor = [UIColor clearColor];
     _messageLabel.font = [UIFont systemFontOfSize:15];
-    _messageLabel.textColor = [UIColor blackColor];
+    _messageLabel.textColor = [UIColor whiteColor];
     _messageLabel.textAlignment = NSTextAlignmentCenter;
     _messageLabel.numberOfLines = 0;
     [_contentView addSubview:_messageLabel];

@@ -465,6 +465,9 @@
 		988AC6E91F010B0D007FBCEF /* FSControlVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */; };
 		988E3D1D1F026D78004E837F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 988E3D1C1F026D78004E837F /* libstdc++.tbd */; };
 		988E3D271F0271A1004E837F /* FSTimeCountsdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */; };
+		9892AF421F613579000C44A5 /* FSAddChallengeTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 9892AF401F613579000C44A5 /* FSAddChallengeTextField.h */; };
+		9892AF431F613579000C44A5 /* FSAddChallengeTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9892AF411F613579000C44A5 /* FSAddChallengeTextField.m */; };
+		9892AF441F613579000C44A5 /* FSAddChallengeTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9892AF411F613579000C44A5 /* FSAddChallengeTextField.m */; };
 		98AC84751F5E815F000B289B /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker in Resources */ = {isa = PBXBuildFile; fileRef = 9828E01D1F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker */; };
 		98AC84761F5E8162000B289B /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9828E01E1F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic */; };
 		98AC84771F5E8165000B289B /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker in Resources */ = {isa = PBXBuildFile; fileRef = 9828E01F1F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker */; };
@@ -961,6 +964,8 @@
 		988E3D1C1F026D78004E837F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		988E3D211F0271A1004E837F /* FSTimeCountsdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTimeCountsdownView.h; sourceTree = "<group>"; };
 		988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTimeCountsdownView.m; sourceTree = "<group>"; };
+		9892AF401F613579000C44A5 /* FSAddChallengeTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAddChallengeTextField.h; sourceTree = "<group>"; };
+		9892AF411F613579000C44A5 /* FSAddChallengeTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAddChallengeTextField.m; sourceTree = "<group>"; };
 		98C1E5241F419D4400AA48A0 /* encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encode.h; sourceTree = "<group>"; };
 		98C1E5251F419D4400AA48A0 /* mux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mux.h; sourceTree = "<group>"; };
 		98C1E5261F419D4400AA48A0 /* mux_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mux_types.h; sourceTree = "<group>"; };
@@ -1318,6 +1323,8 @@
 				980EBCA61F29D45D00B37A9B /* FSPublishSingleton.m */,
 				983AC5CE1F5813EE00349992 /* FSAddChallengeControl.h */,
 				983AC5CF1F5813EE00349992 /* FSAddChallengeControl.m */,
+				9892AF401F613579000C44A5 /* FSAddChallengeTextField.h */,
+				9892AF411F613579000C44A5 /* FSAddChallengeTextField.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2220,6 +2227,7 @@
 				985E874D1F54481300292FEF /* FSFileSliceDivider.h in Headers */,
 				985E874E1F54481300292FEF /* FSFileDownLoadTool.h in Headers */,
 				985E874F1F54481300292FEF /* FSFileDownloadCache.h in Headers */,
+				9892AF421F613579000C44A5 /* FSAddChallengeTextField.h in Headers */,
 				985E87501F54481300292FEF /* FSFileUploadTool.h in Headers */,
 				985E87511F54481300292FEF /* FSDBUploadCache.h in Headers */,
 				985E87521F54481300292FEF /* FSFileCacheProtocol.h in Headers */,
@@ -2553,6 +2561,7 @@
 				563B7A241F0C8FE00035346A /* FSEditorAlertView.m in Sources */,
 				5616CC8C1F2B40F700028770 /* MJRefreshAutoNormalFooter.m in Sources */,
 				5616CC861F2B40F700028770 /* MJRefreshAutoFooter.m in Sources */,
+				9892AF431F613579000C44A5 /* FSAddChallengeTextField.m in Sources */,
 				567A3D8A1EFB6F8E0026247E /* NSObject+MJProperty.m in Sources */,
 				567B059E1F29E34100D09364 /* FSVideoEditorAPIParams.m in Sources */,
 				567A3D841EFB6F8E0026247E /* MJProperty.m in Sources */,
@@ -2755,6 +2764,7 @@
 				985E86FD1F54479F00292FEF /* FSMusic.m in Sources */,
 				985E86FE1F54479F00292FEF /* FSMusicPlayer.m in Sources */,
 				985E86FF1F54479F00292FEF /* FSMusicCell.m in Sources */,
+				9892AF441F613579000C44A5 /* FSAddChallengeTextField.m in Sources */,
 				985E87001F54479F00292FEF /* FSSearchBar.m in Sources */,
 				985E87011F54479F00292FEF /* FSMusicHeaderView.m in Sources */,
 				985E87021F54479F00292FEF /* FSMusicSearchResultView.m in Sources */,
