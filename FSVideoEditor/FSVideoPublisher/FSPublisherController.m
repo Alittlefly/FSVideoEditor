@@ -38,6 +38,7 @@
 #import "FSPublishSingleton.h"
 #import "FSDraftManager.h"
 #import "FSTimelineConfiger.h"
+#import "FSPublisherMaskView.h"
 
 typedef NS_ENUM(NSInteger,FSPublishOperationType){
     FSPublishOperationTypeSaveToDraft,
@@ -65,6 +66,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 @property (nonatomic, strong) FSControlVolumeView *volumeView;
 @property (nonatomic, strong) FSCutMusicView *cutMusicView;
+@property (nonatomic, strong) FSPublisherMaskView *maskView;
 
 @property (nonatomic, assign) BOOL isEnterCutMusicView;
 @property (nonatomic, strong) FSVideoFxOperationStack *fxOperationStack;
@@ -109,6 +111,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     // Do any additional setup after loading the view.
     _prewidow = [[NvsLiveWindow alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_prewidow];
+    
+    _maskView = [[FSPublisherMaskView alloc] init];
+    [_maskView setFrame:self.view.bounds];
+    [self.view addSubview:_maskView];
     
     _toolView = [[FSPublisherToolView alloc] initWithFrame:self.view.bounds draftInfo:_draftInfo];
     _toolView.backgroundColor = [UIColor clearColor];
