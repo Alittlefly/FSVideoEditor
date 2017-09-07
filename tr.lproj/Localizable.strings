@@ -16,7 +16,7 @@ BadPassword = "Şifre hatalı";
 LoginFailed = "Giriş yapılamadı";
 logout = "Çıkış";
 
-leastTime = "Video length should be 3 seconds at least";
+leastTime = "Video length should be 5 seconds at least";
 clearToContinue = "";
 
 UploadVideo = "Video yükle";

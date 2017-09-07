@@ -16,7 +16,7 @@ BadPassword = "Incorrect Password";
 LoginFailed = "Login Failed";
 logout = "Log Out";
 
-leastTime = "Video length should be 3 seconds at least";
+leastTime = "Video length should be 5 seconds at least";
 
 
 UploadVideo = "Upload";
