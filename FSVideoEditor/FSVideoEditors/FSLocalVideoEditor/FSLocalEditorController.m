@@ -22,12 +22,16 @@
 #import "FSShortLanguage.h"
 #import "FSPublishSingleton.h"
 #import "FSDraftManager.h"
+#import "FSAlertView.h"
 
 @interface FSLocalEditorController ()<NvsStreamingContextDelegate,FSThumbnailViewDelegate,FSSegmentViewDelegate,FSShortVideoRecorderManagerDelegate>
 {
     FSSegmentView *_segmentView;
     int64_t _startTime;
     int64_t _endTime;
+    
+    int64_t _originalStartTime;
+    int64_t _originalEndTime;
     
     UIButton *_backButton;
     UIButton *_finishButton;
@@ -36,6 +40,8 @@
     NSString *_convertOutPutFilePath;
     
     FSDraftInfo *_draftInfo;
+    
+    NSInteger _currentSpeedIndex;
 
 }
 @property(nonatomic,strong)FSThumbnailView *thumbContent;
@@ -121,6 +127,7 @@
     _segmentView.layer.cornerRadius = 5;
     _segmentView.layer.masksToBounds = YES;
     _segmentView.delegate = self;
+    _currentSpeedIndex = _segmentView.selectedSegmentIndex;
     [self.view addSubview:_segmentView];
     
     [self creatButtons];
@@ -134,15 +141,8 @@
 - (void)saveVideoFile{
     
     NvsVideoClip *videoclip = [_videoTrack getClipWithIndex:0];
-    
-    int64_t origalDuration = _timeLine.duration * _draftInfo.vSpeed;
-    int64_t startTime = _startTime * _draftInfo.vSpeed;
-    int64_t endTime = _endTime*_draftInfo.vSpeed;
-    if (endTime == 0) {
-        // 截取原视频的15秒
-        // timeline保持了原始时间长度
-        endTime = MIN(origalDuration, 15000000.0);
-    }
+    int64_t startTime = _originalStartTime;
+    int64_t endTime = _originalEndTime;
     
     [videoclip changeTrimInPoint:startTime affectSibling:YES];
     [videoclip changeTrimOutPoint:endTime affectSibling:YES];
@@ -155,7 +155,10 @@
     [self.loading loadingViewShow];
     
      _outPutFilePath = [self getCompilePath];
-    [_context compileTimeline:_timeLine startTime:startTime endTime:endTime outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0];
+   BOOL success = [_context compileTimeline:_timeLine startTime:0 endTime:_timeLine.duration outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0];
+    if (!success) {
+        [self.loading loadingViewhide];
+    }
 }
 
 - (NSString *)getCompilePath {
@@ -187,9 +190,8 @@
 }
 
 - (void)FSSegmentView:(FSSegmentView *)segmentView selected:(NSInteger)index {
-    
-//    NSLog(@"sender: %ld",index); //输出当前的索引值
-    NvsClip *clip = [_videoTrack getClipWithIndex:0];
+
+
     CGFloat vSpeed = 1.0;
     switch (index) {
         case 0:
@@ -210,17 +212,27 @@
         default:
             break;
     }
-    
-    [clip changeSpeed:vSpeed];
-    _draftInfo.vSpeed = vSpeed;
-    
-    int64_t endTime = _endTime?:_timeLine.duration;
-    if (endTime > _timeLine.duration) {
-        endTime = _timeLine.duration;
-        _endTime = _timeLine.duration;
+    int64_t Originalduration = _timeLine.duration * _draftInfo.vSpeed;
+    int64_t willBeduration = Originalduration/vSpeed;
+    if (willBeduration < 5000000.0) {
+        FSAlertView *alert = [[FSAlertView alloc] init];
+        [alert showWithMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"leastTime"]];
+        [segmentView setSelectedSegmentIndex:_currentSpeedIndex];
+        return;
     }
+    if (_currentSpeedIndex == index) {
+        return;
+    }
+    _currentSpeedIndex = index;
     
-    if(![_context playbackTimeline:_timeLine startTime:_startTime endTime:endTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
+    NvsClip *clip = [_videoTrack getClipWithIndex:0];
+    [clip changeSpeed:vSpeed];
+    
+    _draftInfo.vSpeed = vSpeed;
+    _startTime = _originalStartTime / vSpeed;
+    _endTime = _originalEndTime / vSpeed;
+    
+    if(![_context playbackTimeline:_timeLine startTime:_startTime endTime:_endTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
     }
     
     [self initThubnaiView];
@@ -235,9 +247,6 @@
     [_timeLine removeAudioTrack:0];
     [_timeLine removeVideoTrack:0];
     
-    _startTime = 0;
-    _endTime = 0.0;
-    
     _videoTrack = [_timeLine appendVideoTrack];
     _audioTrack = [_timeLine appendAudioTrack];
     
@@ -247,6 +256,12 @@
     [clip changeTrimInPoint:0 affectSibling:YES];
     [clip changeTrimOutPoint:_timeLine.duration affectSibling:YES];
     [_audioTrack insertClip:_filePath clipIndex:0];
+    
+    _startTime = 0.0;
+    _endTime  = _timeLine.duration;
+    
+    _originalStartTime = 0.0;
+    _originalEndTime = _timeLine.duration;
     
     [self initThubnaiView];
 }
@@ -354,9 +369,11 @@
 -(void)thumbnailViewSelectValue:(double)value type:(SliderType)type{
     if (type == SliderTypeLeftSlider) {
         // startValue
-         _startTime = value * 1000000.0;
+         _originalStartTime = value * 1000000.0 / _draftInfo.vSpeed;
+         _startTime = value * 1000000.0 ;
         [_context seekTimeline:_timeLine timestamp:_startTime videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     }else if(type == SliderTypeRightSlider){
+         _originalEndTime = value * 1000000.0 / _draftInfo.vSpeed;
          _endTime = value * 1000000.0;
         [_context seekTimeline:_timeLine timestamp:_endTime videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     }
@@ -364,11 +381,12 @@
 -(void)thumbnailViewSelectStartValue:(double)startValue endValue:(double)endvalue{
      _startTime = startValue * 1000000.0;
      _endTime = endvalue * 1000000.0;
+    _originalStartTime = startValue * 1000000.0 / _draftInfo.vSpeed;
+    _originalEndTime = endvalue * 1000000.0 / _draftInfo.vSpeed;
     [_context seekTimeline:_timeLine timestamp:_startTime videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
 }
 -(void)thumbnailViewEndSelect{
-    int64_t endTime = _endTime?:_timeLine.duration;
-    [_context playbackTimeline:_timeLine startTime:_startTime endTime:endTime videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
+    [_context playbackTimeline:_timeLine startTime:_startTime endTime:_endTime videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
 }
 -(void)dealloc{
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));

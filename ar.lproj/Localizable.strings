@@ -16,7 +16,7 @@ BadPassword = "كلمة السر غير صحيحة";
 LoginFailed = "فشل في تسجيل الدخول";
 logout = "خروج";
 
-leastTime = "يجب أن تكون مدة الفيديو 3 ثواني على الأقل لتتمكن من النشر";
+leastTime = "يجب أن تكون مدة الفيديو 5 ثواني على الأقل لتتمكن من النشر";
 
 UploadVideo = "تحميل";
 ChooseMusic = "موسيقى";
@@ -76,7 +76,7 @@ VeryFast = "سريع جداً";
 Countdown = "العد التنازلي";
 ColorFilter = "فلتر اللون";
 
-BW = "ظل";
+black = "ظل";
 Sweetie = "رومنسي";
 LOMO = "كوول";
 Classic = "كلاسيكي";
@@ -134,3 +134,7 @@ xsignal = "إشارة X";
 VideoTimeMaxTip = "قم بحذف مقطع من الفيديو أولاً إذا أردت الإستمرار في التصوير.";
 
 notAuthored = "notAuthored 哈哈哈 这么明显的bug";
+
+mirror = "Mirror";
+
+huanjue = "Illusion";

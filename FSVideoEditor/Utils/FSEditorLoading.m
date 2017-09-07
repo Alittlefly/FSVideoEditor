@@ -8,6 +8,7 @@
 
 #import "FSEditorLoading.h"
 #import "FSShortLanguage.h"
+#import "FSVideoEditorCommenData.h"
 @interface FSEditorLoading()
 
 @property(nonatomic,strong)UILabel *titleLabel;
@@ -53,7 +54,7 @@
 {
     if (!_loadingBack) {
         _loadingBack = [[UIView alloc] init];
-        [_loadingBack setBackgroundColor:[UIColor blackColor]];
+        [_loadingBack setBackgroundColor:FSHexRGBAlpha(0x000000, 0.8)];
         [self addSubview:_loadingBack];
     }
     return _loadingBack;

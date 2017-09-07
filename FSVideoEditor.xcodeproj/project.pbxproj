@@ -156,6 +156,9 @@
 		56F502621F2AEF13004AE0A4 /* FSMusicSearchAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 56F502611F2AEF13004AE0A4 /* FSMusicSearchAPI.m */; };
 		56FC377F1F5D060900EF9799 /* FSMusicDeatilController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56FC377E1F5D060900EF9799 /* FSMusicDeatilController.m */; };
 		56FC37821F5D07B800EF9799 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 56FC37811F5D07B800EF9799 /* UINavigationBar+Awesome.m */; };
+		84332CCB1F614D990084D364 /* FSPublisherMaskView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84332CC91F614D990084D364 /* FSPublisherMaskView.h */; };
+		84332CCC1F614D990084D364 /* FSPublisherMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84332CCA1F614D990084D364 /* FSPublisherMaskView.m */; };
+		84332CCD1F614D990084D364 /* FSPublisherMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84332CCA1F614D990084D364 /* FSPublisherMaskView.m */; };
 		980808C71F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.animatedsticker in Resources */ = {isa = PBXBuildFile; fileRef = 980808C51F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.animatedsticker */; };
 		980808C81F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.lic in Resources */ = {isa = PBXBuildFile; fileRef = 980808C61F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.lic */; };
 		980EBCA71F29D45D00B37A9B /* FSPublishSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 980EBCA61F29D45D00B37A9B /* FSPublishSingleton.m */; };
@@ -828,6 +831,8 @@
 		56FC377E1F5D060900EF9799 /* FSMusicDeatilController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicDeatilController.m; sourceTree = "<group>"; };
 		56FC37801F5D07B800EF9799 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		56FC37811F5D07B800EF9799 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
+		84332CC91F614D990084D364 /* FSPublisherMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPublisherMaskView.h; sourceTree = "<group>"; };
+		84332CCA1F614D990084D364 /* FSPublisherMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSPublisherMaskView.m; sourceTree = "<group>"; };
 		980808C51F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.animatedsticker */ = {isa = PBXFileReference; lastKnownFileType = file; path = "07D3BBED-1276-42A6-577A-04A36100FA1A.animatedsticker"; sourceTree = "<group>"; };
 		980808C61F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "07D3BBED-1276-42A6-577A-04A36100FA1A.lic"; sourceTree = "<group>"; };
 		980EBCA51F29D45D00B37A9B /* FSPublishSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSPublishSingleton.h; sourceTree = "<group>"; };
@@ -1295,6 +1300,8 @@
 				983A47861F26215800FB387D /* FSChallengeCell.m */,
 				983A47801F2620FD00FB387D /* FSAddChallengeController.h */,
 				983A47811F2620FD00FB387D /* FSAddChallengeController.m */,
+				84332CC91F614D990084D364 /* FSPublisherMaskView.h */,
+				84332CCA1F614D990084D364 /* FSPublisherMaskView.m */,
 			);
 			path = FSVideoPublisher;
 			sourceTree = "<group>";
@@ -2211,6 +2218,7 @@
 				985E873D1F54481300292FEF /* FSDraftManager.h in Headers */,
 				985E873E1F54481300292FEF /* FSTimelineConfiger.h in Headers */,
 				985E873F1F54481300292FEF /* FSDraftInfo.h in Headers */,
+				84332CCB1F614D990084D364 /* FSPublisherMaskView.h in Headers */,
 				985E87401F54481300292FEF /* FSDraftReader.h in Headers */,
 				985E87411F54481300292FEF /* FSDraftWriter.h in Headers */,
 				985E87421F54481300292FEF /* FSDraftTimeFx.h in Headers */,
@@ -2641,6 +2649,7 @@
 				567B059A1F29C93D00D09364 /* FSTypeMusicAPI.m in Sources */,
 				567E0BA51EFA4DB400C4C527 /* FSAlbumVideoCell.m in Sources */,
 				562D40581EFD1DE200BF0E0D /* AFURLResponseSerialization.m in Sources */,
+				84332CCC1F614D990084D364 /* FSPublisherMaskView.m in Sources */,
 				5616CC951F2B40F700028770 /* MJRefreshConst.m in Sources */,
 				5616CCB21F3183DC00028770 /* FSDraftChallenge.m in Sources */,
 				9880DEB11F171295006E730F /* SDWebImageDownloader.m in Sources */,
@@ -2708,6 +2717,7 @@
 			files = (
 				985E86C71F54479F00292FEF /* FSVideoEditorAPIParams.m in Sources */,
 				985E86C81F54479F00292FEF /* FSDissolveAnimator.m in Sources */,
+				84332CCD1F614D990084D364 /* FSPublisherMaskView.m in Sources */,
 				985E86C91F54479F00292FEF /* FSSpringAnimator.m in Sources */,
 				985E86CA1F54479F00292FEF /* FSPresentAnimator.m in Sources */,
 				985E86CB1F54479F00292FEF /* FSDismissAnimator.m in Sources */,

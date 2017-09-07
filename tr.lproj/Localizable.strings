@@ -16,7 +16,7 @@ BadPassword = "Şifre hatalı";
 LoginFailed = "Giriş yapılamadı";
 logout = "Çıkış";
 
-leastTime = "Video length should be 3 seconds at least";
+leastTime = "Video length should be 5 seconds at least";
 clearToContinue = "";
 
 UploadVideo = "Video yükle";
@@ -54,7 +54,7 @@ Save = "Kaydet";
 
 Filters = "Filtreler";
 Timeline = "Zaman Tüneli";
-Magic = "Ruh";
+Magic = "Ruhsal";
 Vibrating = "Titreşim";
 Repeat = "Tekrar";
 Reverse = "Geri Sar";
@@ -75,7 +75,7 @@ VeryFast = "Çok Hızlı";
 Countdown = "Geri Sayım";
 ColorFilter = "Renkli Filtre";
 
-BW = "Siyah & Beyaz";
+black = "Siyah & Beyaz";
 Sweetie = "Sempatik";
 LOMO = "Lomo";
 Classic = "Klasik";
@@ -113,7 +113,7 @@ TakePhotoAgain = "Bir tane daha çek ";
 OnlyYouCanSee = "Taslakları sadece sen görebilirsin";
 
 NoTitle = "Başlık yok";
-NoTopic = "Konu yok ";
+NoTopic = "Henüz bir challange başlatmadın ";
 
 DraftTitle = "Taslaklar";
 
@@ -127,8 +127,12 @@ MessageOK = "Evet";
 
 emptyDraft = "Eyvah! Hiç bir veri bulunamadı";
 
-xsignal = "Karıncalı";
+xsignal = "X Ray";
 
 VideoTimeMaxTip = "Hafıza dolu, lütfen bir video silip yeniden deneyin!";
 
 notAuthored = "notAuthored 哈哈哈 这么明显的bug";
+
+mirror = "Ayna";
+
+huanjue = "İllüzyon";

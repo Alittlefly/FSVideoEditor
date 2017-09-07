@@ -127,9 +127,11 @@
     
     [self.playIcon setFrame:self.photo.frame];
     
-    [self.topic setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?cellW - 110 - 160:110, 20, 160, 18)];
+    CGFloat lebelW = cellW - 110 - 44;
     
-    [self.tagLabel setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?cellW - 110 - 160:110, 53, 160, 15)];
+    [self.topic setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?cellW - 110 - lebelW:110, 20, lebelW, 18)];
+    
+    [self.tagLabel setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?cellW - 110 - lebelW:110, 53, lebelW, 15)];
     
     [self.moreButton setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?0:cellW - 44, 28, 44, 44)];
 }

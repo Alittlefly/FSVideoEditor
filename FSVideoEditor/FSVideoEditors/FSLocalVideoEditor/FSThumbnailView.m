@@ -50,8 +50,8 @@
         
         
         if (_length != 0) {
-            _minWidth = _minLength/_length * (CGRectGetWidth(frame) - 60);
-            _maxWidth = MAX(_minLength/_length, MIN(_allLength/_length, 1)) *(CGRectGetWidth(frame) - 60);
+            _minWidth = _minLength/_length * (CGRectGetWidth(frame) - 30);
+            _maxWidth = MAX(_minLength/_length, MIN(_allLength/_length, 1)) *(CGRectGetWidth(frame) - 30);
         }
         [self creatSubviews:frame];
         [self setClipsToBounds:NO];
@@ -72,7 +72,7 @@
 }
 -(void)creatSubviews:(CGRect)frame{
     CGFloat padding = 30;
-     _backContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame))];
+     _backContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(15, 0, CGRectGetWidth(frame) - 30, CGRectGetHeight(frame))];
     [_backContentView setBackgroundColor:FSHexRGBAlpha(0x000000, 0.4)];
     [_backContentView setDelegate:self];
     [_backContentView setClipsToBounds:NO];
@@ -116,9 +116,9 @@
     }
     _backGroundView = backGroundView;
     
-    CGFloat width = _allLength/_length * (CGRectGetWidth(_backContentView.frame) - 30);
-     backGroundView.frame = CGRectMake(15,0,width, CGRectGetHeight(self.bounds));
-    [_backContentView setContentSize:CGSizeMake(width + 15,0)];
+    CGFloat width = _allLength/_length * (CGRectGetWidth(_backContentView.frame));
+     backGroundView.frame = CGRectMake(0,0,width, CGRectGetHeight(self.bounds));
+    [_backContentView setContentSize:CGSizeMake(width,0)];
     [_backContentView addSubview:backGroundView];
     
 //    [self resetBoundry:(SliderTypeRightSlider)];
@@ -172,8 +172,8 @@
 }
 -(void)updateNvsStreamContent{
     
-    _startValue = _startOffSet + (CGRectGetMinX(_leftSlide.frame) - 15.0)/(CGRectGetWidth(_backContentView.frame) - 30.0)*_length;
-    _endValue = _startOffSet + (CGRectGetMaxX(_rightSlide.frame) - 15.0)/(CGRectGetWidth(_backContentView.frame) - 30.0) *_length;
+    _startValue = _startOffSet + (CGRectGetMinX(_leftSlide.frame) - 15.0)/(CGRectGetWidth(_backContentView.frame))*_length;
+    _endValue = _startOffSet + (CGRectGetMaxX(_rightSlide.frame) - 15.0)/(CGRectGetWidth(_backContentView.frame)) *_length;
     NSLog(@"_startValue %f _endValue %f",_startValue,_endValue);
     if ([self.delegate respondsToSelector:@selector(thumbnailViewSelectValue:type:)]) {
         double value = 0;
@@ -221,7 +221,7 @@
     }else if(type == SliderTypeRightSlider){
         
         CGFloat sliderMaxX = MAX(_minLength/_length, MIN(_allLength/_length, 1.0));
-        CGFloat maxX = sliderMaxX * (CGRectGetWidth(_backContentView.frame) - 15 * 2);
+        CGFloat maxX = sliderMaxX * (CGRectGetWidth(_backContentView.frame));
         
         if (CGRectGetMaxX(_rightSlide.frame) >= maxX) {
             CGRect rframe = _rightSlide.frame;
@@ -235,12 +235,14 @@
         if (_sliderType == SliderTypeRightSlider) {
             // 修正右边
             CGRect rFrame = _rightSlide.frame;
-            rFrame.origin.x = CGRectGetMinX(_leftSlide.frame) + _minWidth;
+            // 外部计算
+            rFrame.origin.x = CGRectGetMinX(_leftSlide.frame) + _minWidth - CGRectGetWidth(rFrame);
             _rightSlide.frame = rFrame;
         }else{
             // 修正左边
             CGRect lFrame = _leftSlide.frame;
-            lFrame.origin.x = CGRectGetMaxX(_rightSlide.frame) - _minWidth - CGRectGetWidth(_leftSlide.frame);
+            // 外部计算
+            lFrame.origin.x = CGRectGetMaxX(_rightSlide.frame) - _minWidth;
             _leftSlide.frame = lFrame;
         }
     }
@@ -251,7 +253,7 @@
         return NO;
     }
     
-    CGFloat currentGap = CGRectGetMinX(_rightSlide.frame) - CGRectGetMaxX(_leftSlide.frame);
+    CGFloat currentGap = CGRectGetMaxX(_rightSlide.frame) - CGRectGetMinX(_leftSlide.frame);
     if (currentGap < _minWidth) {
         return YES;
     }
@@ -280,9 +282,9 @@
     }
     
     _startOffSet = offSetx/scrollView.contentSize.width;
-    CGFloat allWidth = (CGRectGetWidth(_backContentView.frame)-30);
-    _startValue = _startOffSet + (CGRectGetMinX(_leftSlide.frame) - 30)/allWidth *_length;
-    _endValue = _startOffSet + (CGRectGetMaxX(_rightSlide.frame) - 30)/allWidth *_length;
+    CGFloat allWidth = (CGRectGetWidth(_backContentView.frame));
+    _startValue = _startOffSet + (CGRectGetMinX(_leftSlide.frame) - 15)/allWidth *_length;
+    _endValue = _startOffSet + (CGRectGetMaxX(_rightSlide.frame) - 15)/allWidth *_length;
     
     if ([self.delegate respondsToSelector:@selector(thumbnailViewSelectStartValue:endValue:)]) {
         [self.delegate thumbnailViewSelectStartValue:_startValue endValue:_endValue];
@@ -297,9 +299,13 @@
 
 -(void)updateTipText{
     double timeLength = _endValue - _startValue;
-    BOOL shouldBeRed = (timeLength == _minLength) || (timeLength == _length) || (timeLength == _allLength);
-    
+    NSString *minStr = [NSString stringWithFormat:@"%.0f",_minLength];
+    NSString *lengthStr = [NSString stringWithFormat:@"%.0f",_length];
+    NSString *allStr = [NSString stringWithFormat:@"%.0f",_allLength];
     NSString *time = [NSString stringWithFormat:@"%.0f",timeLength];
+
+    BOOL shouldBeRed = [time isEqualToString:minStr] || [time isEqualToString:lengthStr] || [time isEqualToString:allStr];
+
     NSString *orginalText = [FSShortLanguage CustomLocalizedStringFromTable:@"ChoseVideoTime"];//NSLocalizedString(@"ChoseVideoTime", nil);
     NSString *finalSting = [orginalText stringByReplacingOccurrencesOfString:@"(0)" withString:time];
     
