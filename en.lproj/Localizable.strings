@@ -56,8 +56,8 @@ Save = "Save";
 
 Filters = "Filters";
 Timeline = "Timeline";
-Magic = "Soul";
-Vibrating = "Vibrating";
+Magic = "Ghost";
+Vibrating = "Tremble";
 Repeat = "Repeat";
 Reverse = "Reverse";
 NoFilter = "Normal";
@@ -77,7 +77,7 @@ VeryFast = "Very Fast";
 Countdown = "Countdown";
 ColorFilter = "Color Filter";
 
-BW = "Black & White";
+black = "Black & White";
 Sweetie = "Sweet";
 LOMO = "Lomo";
 Classic = "Classic";
@@ -114,8 +114,8 @@ MaxLetterLimit = "You have exceeded the maximum letter limit";
 TakePhotoAgain = "Take another video";
 OnlyYouCanSee = "Drafts are only visible to you";
 
-NoTitle = "No title added";
-NoTopic = "No topic added";
+NoTitle = "Empty title";
+NoTopic = "You haven't started a challenge yet";
 
 DraftTitle = "Draft Box";
 
@@ -129,8 +129,12 @@ MessageOK = "Yes";
 
 emptyDraft = "Oops! No data found";
 
-xsignal = "X signal";
+xsignal = "X Ray";
 
 VideoTimeMaxTip = "You can't add more clips unless you delete one firs";
 
 notAuthored = "notAuthored 哈哈哈 这么明显的bug";
+
+mirror = "Mirror";
+
+huanjue = "Illusion";

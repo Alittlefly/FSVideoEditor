@@ -76,7 +76,7 @@ VeryFast = "极快";
 Countdown = "倒计时";
 ColorFilter = "滤镜";
 
-BW = "黑白";
+black = "黑白";
 Sweetie = "甜美";
 LOMO = "LOMO";
 Classic = "经典";
@@ -132,3 +132,8 @@ xsignal = "X信号";
 
 VideoTimeMaxTip = "拍满了，请删除一段视频后再拍";
 notAuthored = "notAuthored 哈哈哈 这么明显的bug";
+
+
+mirror = "Mirror";
+
+huanjue = "Illusion";
