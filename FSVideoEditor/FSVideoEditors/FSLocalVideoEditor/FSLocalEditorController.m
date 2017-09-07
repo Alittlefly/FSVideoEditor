@@ -33,6 +33,9 @@
     int64_t _originalStartTime;
     int64_t _originalEndTime;
     
+    int64_t _originalDuration;
+    int64_t _maxDurationLength;
+    
     UIButton *_backButton;
     UIButton *_finishButton;
     
@@ -131,6 +134,8 @@
     [self.view addSubview:_segmentView];
     
     [self creatButtons];
+    
+    _maxDurationLength = 15000000.0;
 }
 
 - (void)backClik{
@@ -143,6 +148,10 @@
     NvsVideoClip *videoclip = [_videoTrack getClipWithIndex:0];
     int64_t startTime = _originalStartTime;
     int64_t endTime = _originalEndTime;
+    
+    if (endTime - startTime > _maxDurationLength) {
+        endTime = startTime + _maxDurationLength;
+    }
     
     [videoclip changeTrimInPoint:startTime affectSibling:YES];
     [videoclip changeTrimOutPoint:endTime affectSibling:YES];
@@ -232,6 +241,8 @@
     _startTime = _originalStartTime / vSpeed;
     _endTime = _originalEndTime / vSpeed;
     
+    _maxDurationLength = MIN(_originalDuration / vSpeed, 15000000.0 /vSpeed);
+    
     if(![_context playbackTimeline:_timeLine startTime:_startTime endTime:_endTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
     }
     
@@ -262,7 +273,8 @@
     
     _originalStartTime = 0.0;
     _originalEndTime = _timeLine.duration;
-    
+    _originalDuration = _timeLine.duration;
+    _maxDurationLength = MIN(_timeLine.duration, 15000000.0);
     [self initThubnaiView];
 }
 -(void)initThubnaiView{
@@ -346,6 +358,8 @@
 #pragma mark - 
 
 - (void)FSShortVideoRecorderManagerConvertorFinished:(NSString *)filePath{
+    
+    
     [self.loading loadingViewhide];
     
     FSPublisherController *publish = [[FSPublisherController alloc] init];

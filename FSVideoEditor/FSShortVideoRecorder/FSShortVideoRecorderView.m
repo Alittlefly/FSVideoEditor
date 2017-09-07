@@ -1049,6 +1049,7 @@
 }
 
 - (void)FSShortVideoRecorderManagerFinishedRecorder:(NSString *)normalFilePath convertFilePath:(NSString *)convertFilePath {
+    
     [self.loading loadingViewhide];
     
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewFinishRecorder:convertFilePath:speed:musicStartTime:)]) {

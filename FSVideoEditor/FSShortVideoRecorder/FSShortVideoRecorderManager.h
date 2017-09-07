@@ -127,4 +127,6 @@
 
 - (void)addFilter:(NSString *)filterId toVideoClip:(NvsVideoClip *)clip;
 
+- (void)loadAllLocalfxs;
+
 @end

@@ -955,5 +955,43 @@ static FSShortVideoRecorderManager *recorderManager;
     
     [self.mConvertor start];
 }
+- (void)loadAllLocalfxs{
+
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-f6192de5110aed067060b4010c648cac.lic"];
+    [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
+    _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
+    
+    NSString *SoulfxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"C6273A8F-C899-4765-8BFC-E683EE37AA84.videofx"];
+    NSString *SoulfxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"C6273A8F-C899-4765-8BFC-E683EE37AA84.lic"];
+    NSString *ScalefxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx"];
+    NSString *ScalefxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"A8A4344D-45DA-460F-A18F-C0E2355FE864.lic"];
+    NSString *jzfxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"9AC28816-639F-4A9B-B4BA-4060ABD229A2.videofx"];
+    NSString *jzfxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"9AC28816-639F-4A9B-B4BA-4060ABD229A2.lic"];
+    NSString *jxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.videofx"];
+    NSString *jxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.lic"];
+    
+    NSString *blackMagicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.videofx"];
+    NSString *blackMagicLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.lic"];
+    
+    if ([_context.assetPackageManager getAssetPackageStatus:SoulfxPath type:NvsAssetPackageType_VideoFx] == NvsAssetPackageStatus_NotInstalled) {
+        [_context.assetPackageManager installAssetPackage:SoulfxPath license:SoulfxLicPath type:NvsAssetPackageType_VideoFx sync:NO assetPackageId:nil];
+    }
+    
+    if ([_context.assetPackageManager getAssetPackageStatus:ScalefxPath type:(NvsAssetPackageType_VideoFx)] == NvsAssetPackageStatus_NotInstalled) {
+        [_context.assetPackageManager installAssetPackage:ScalefxPath license:ScalefxLicPath type:NvsAssetPackageType_VideoFx sync:NO assetPackageId:nil];
+    }
+    
+    if ([_context.assetPackageManager getAssetPackageStatus:jzfxPath type:(NvsAssetPackageType_VideoFx)] == NvsAssetPackageStatus_NotInstalled) {
+        [_context.assetPackageManager installAssetPackage:jzfxPath license:jzfxLicPath type:NvsAssetPackageType_VideoFx sync:NO assetPackageId:nil];
+    }
+    
+    if ([_context.assetPackageManager getAssetPackageStatus:jxPath type:(NvsAssetPackageType_VideoFx)] == NvsAssetPackageStatus_NotInstalled) {
+        [_context.assetPackageManager installAssetPackage:jxPath license:jxLicPath type:NvsAssetPackageType_VideoFx sync:NO assetPackageId:nil];
+    }
+    
+    if ([_context.assetPackageManager getAssetPackageStatus:blackMagicPath type:(NvsAssetPackageType_VideoFx)] == NvsAssetPackageStatus_NotInstalled) {
+        [_context.assetPackageManager installAssetPackage:blackMagicPath license:blackMagicLicPath type:NvsAssetPackageType_VideoFx sync:NO assetPackageId:nil];
+    }
+}
 
 @end

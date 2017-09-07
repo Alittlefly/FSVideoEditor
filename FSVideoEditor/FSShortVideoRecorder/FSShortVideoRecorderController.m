@@ -104,6 +104,7 @@
 }
 
 - (void)FSShortVideoRecorderViewFinishRecorder:(NSString *)filePath convertFilePath:(NSString *)convertFilePath speed:(CGFloat)speed musicStartTime:(NSTimeInterval)time {
+    
     FSPublisherController *publish = [[FSPublisherController alloc] init];
     
     _tempInfo.vType = FSDraftInfoTypeRecoder;

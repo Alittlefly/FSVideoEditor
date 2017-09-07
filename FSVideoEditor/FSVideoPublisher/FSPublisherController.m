@@ -107,6 +107,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[FSShortVideoRecorderManager sharedInstance] loadAllLocalfxs];
+
     [self.view setBackgroundColor:[UIColor blackColor]];
     // Do any additional setup after loading the view.
     _prewidow = [[NvsLiveWindow alloc] initWithFrame:self.view.bounds];
