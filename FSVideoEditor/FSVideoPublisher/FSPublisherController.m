@@ -355,6 +355,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 //        [self uploadFile:_stickerVideoPath];
         _param.draftInfo = _tempDraftInfo;
         
+        [self.loading setLoadingText:[NSString stringWithFormat:@"50%%"]];
+        
         [[FSVideoPublisher sharedPublisher] setDelegate:self];
         [[FSVideoPublisher sharedPublisher] publishVideo:_param];
         
@@ -757,7 +759,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
     
+    _isStickerVideoFinished = NO;
     _inPublish = NO;
+    
+    [self playVideoFromHead];
 }
 
 - (void)showSuccessMessage{

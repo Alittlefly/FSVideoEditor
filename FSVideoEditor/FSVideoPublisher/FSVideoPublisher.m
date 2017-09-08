@@ -81,7 +81,7 @@
 -(void)publishVideo:(FSVideoPublishParam *)param{
 
     self.currentParam = param;
-    _uploadProgress = 0.0;
+    _uploadProgress = 0.5;
     
     dispatch_group_enter(_group);
     dispatch_group_async(_group, _uploadImageQueue, ^{
@@ -111,7 +111,7 @@
             if (info) {
                 _nologoVideoUrl = [info objectForKey:@"dataInfo"];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    _uploadProgress += 0.2;
+                    _uploadProgress += 0.1;
                     if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
                         [self.delegate videoPublisherProgress:_uploadProgress];
                     }
@@ -127,7 +127,7 @@
             if (info) {
                 _logoVideoUrl = [info objectForKey:@"dataInfo"];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    _uploadProgress += 0.2;
+                    _uploadProgress += 0.1;
                     if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
                         [self.delegate videoPublisherProgress:_uploadProgress];
                     }
@@ -167,7 +167,7 @@
 - (void)FSUploadImageServerFirstImageSucceed:(NSString *)filePath {
     _firstImageUrl = filePath;
     dispatch_async(dispatch_get_main_queue(), ^{
-        _uploadProgress += 0.2;
+        _uploadProgress += 0.1;
 
         if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
             [self.delegate videoPublisherProgress:_uploadProgress];
@@ -183,7 +183,7 @@
 - (void)FSUploadImageServerWebPSucceed:(NSString *)filePath {
     _webpUrl = filePath;
     dispatch_async(dispatch_get_main_queue(), ^{
-        _uploadProgress += 0.2;
+        _uploadProgress += 0.1;
         if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
             [self.delegate videoPublisherProgress:_uploadProgress];
         }
