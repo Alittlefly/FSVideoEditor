@@ -229,8 +229,8 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (NvsTimeline *)createTimeLine {
     NvsVideoResolution videoEditRes;
-    videoEditRes.imageWidth = 720;
-    videoEditRes.imageHeight = 1280;
+    videoEditRes.imageWidth = 540;
+    videoEditRes.imageHeight = 960;
     videoEditRes.imagePAR = (NvsRational){1,1};
     NvsRational videoFps = {25,1};
     
@@ -679,46 +679,19 @@ static FSShortVideoRecorderManager *recorderManager;
         sticker = _stickerPackageId;
     // 添加动画贴纸
     NvsTimelineAnimatedSticker *stickers = [timeline addAnimatedSticker:0 duration:timeline.duration animatedStickerPackageId:_stickerPackageId];
-    [stickers setScale:0.4];
-//    NvsRect stickerRect = [stickers getOriginalBoundingRect];
-//    CGPoint topLeftCorner = CGPointMake(stickerRect.left, stickerRect.top);
-//    CGPoint rightBottomCorner = CGPointMake(stickerRect.right, stickerRect.bottom);
-//    
-//    topLeftCorner = [_liveWindow mapCanonicalToView:topLeftCorner];
-//    rightBottomCorner = [_liveWindow mapCanonicalToView:rightBottomCorner];
-    NSArray *array = [stickers getBoundingRectangleVertices];
-    NSValue *leftTopValue = array[0];
-    NSValue *leftBottomValue = array[1];
-    NSValue *rightBottomValue = array[2];
-    NSValue *rightTopValue = array[3];
-    CGPoint topLeftCorner = [leftTopValue CGPointValue];
-    CGPoint bottomLeftCorner = [leftBottomValue CGPointValue];
-    CGPoint rightBottomCorner = [rightBottomValue CGPointValue];
-    CGPoint rightTopCorner = [rightTopValue CGPointValue];
+    //[stickers setScale:0.4];
+    NvsRect stickerRect = [stickers getOriginalBoundingRect];
     
-    topLeftCorner = [_liveWindow mapCanonicalToView:topLeftCorner];
-    rightBottomCorner = [_liveWindow mapCanonicalToView:rightBottomCorner];
-    bottomLeftCorner = [_liveWindow mapCanonicalToView:bottomLeftCorner];
-    rightTopCorner = [_liveWindow mapCanonicalToView:rightTopCorner];
+    CGPoint topLeftCorner = CGPointMake(stickerRect.left, stickerRect.top);
+    CGPoint rightBottomCorner = CGPointMake(stickerRect.right, stickerRect.bottom);
     
-    CGRect rect;
-    rect.origin = topLeftCorner;
-    rect.size.width = rightBottomCorner.x - bottomLeftCorner.x;
-    rect.size.height = rightBottomCorner.y - rightTopCorner.y;
-    
-    CGPoint lastP = _liveWindow.center;
-    CGPoint curP = CGPointMake(_liveWindow.frame.size.width-rect.size.width/2, _liveWindow.frame.size.height-rect.size.height/2);
-    
-    CGPoint p1 = [_liveWindow mapViewToCanonical:lastP];
-    CGPoint p2 = [_liveWindow mapViewToCanonical:curP];
-    
-    CGPoint newPoint = CGPointMake(_liveWindow.frame.size.width-30, -_liveWindow.frame.size.height/2);
+    CGPoint liveWindowRightBottom = [_liveWindow mapViewToCanonical:CGPointMake(_liveWindow.frame.size.width, _liveWindow.frame.size.height)];
+    CGPoint offset = CGPointMake(liveWindowRightBottom.x-stickerRect.right, liveWindowRightBottom.y-stickerRect.bottom);
 
-    [stickers translateAnimatedSticker:newPoint];
+   
+
+    [stickers translateAnimatedSticker:offset];
     
-
-    NSArray *arrayaa = [stickers getBoundingRectangleVertices];
-
     
 }
 

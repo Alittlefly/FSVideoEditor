@@ -101,7 +101,7 @@
     }
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_textField.frame)+20, self.view.frame.size.width, self.view.frame.size.height-CGRectGetMaxY(_textField.frame)-20) style:(UITableViewStylePlain)];
-    _tableView.backgroundColor = [UIColor redColor];
+    _tableView.backgroundColor = [UIColor clearColor];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -264,7 +264,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (_isSearched == NO) {
         UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 20)];
-        bgView.backgroundColor = FSHexRGBAlpha(0xFFFFFF, 1.0);//[UIColor clearColor];
+        bgView.backgroundColor = [UIColor clearColor];
         
         UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width-20, 20)];
         headerLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"HotChallenges"];

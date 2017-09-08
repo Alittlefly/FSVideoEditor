@@ -136,8 +136,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     if (!_timeLine) {
         NvsVideoResolution videoEditRes;
-        videoEditRes.imageWidth = 720;
-        videoEditRes.imageHeight = 1280;
+        videoEditRes.imageWidth = 540;
+        videoEditRes.imageHeight = 960;
         videoEditRes.imagePAR = (NvsRational){1, 1};
         NvsRational videoFps = {25, 1};
         NvsAudioResolution audioEditRes;
