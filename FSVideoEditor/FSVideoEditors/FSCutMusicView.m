@@ -43,7 +43,7 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath startTime:(NSTimeInterval)startTime{
+- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath startTime:(NSTimeInterval)startTime volume:(CGFloat)volume {
     if (self = [super initWithFrame:frame]) {
         _filePath = filePath;
         _playTime = 0;
@@ -51,6 +51,12 @@
         _newTime = startTime;
         [[FSMusicPlayer sharedPlayer] setFilePath:filePath];
         [[FSMusicPlayer sharedPlayer] playAtTime:startTime];
+        if (volume >= 0) {
+            [[FSMusicPlayer sharedPlayer] changeVolume:volume];
+        }
+        else {
+            [[FSMusicPlayer sharedPlayer] changeVolume:0.5];
+        }
         [self createBaseUI];
         [[FSMusicPlayer sharedPlayer] play];
     }
