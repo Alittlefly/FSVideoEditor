@@ -119,8 +119,11 @@
     
     
     UIButton *selectMusic = [UIButton buttonWithType:UIButtonTypeCustom];
-    selectMusic.frame = CGRectMake((CGRectGetWidth(_contentView.frame) - 60)/2.0, 17, 60, 21);
-    [selectMusic setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"ChooseMusic"] forState:UIControlStateNormal];
+    NSString *chooseMusic = [FSShortLanguage CustomLocalizedStringFromTable:@"ChooseMusic"];
+    CGRect chooseSize = [chooseMusic boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
+    CGFloat chooseSizeW = CGRectGetWidth(chooseSize);
+    selectMusic.frame = CGRectMake((CGRectGetWidth(_contentView.frame) - chooseSizeW)/2.0, 17, chooseSizeW, 21);
+    [selectMusic setTitle:chooseMusic forState:UIControlStateNormal];
     [selectMusic addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     selectMusic.tag = 2;
     [selectMusic setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
@@ -132,7 +135,10 @@
     
     
     UIButton *videoListButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    videoListButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-80 : 20, 17, 60, 21);
+    NSString *UploadVideotext = [FSShortLanguage CustomLocalizedStringFromTable:@"UploadVideo"];
+    CGRect UploadVideotextSize = [UploadVideotext boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
+    CGFloat UploadVideotextW = CGRectGetWidth(UploadVideotextSize);
+    videoListButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width- UploadVideotextW - 20: 20, 17, UploadVideotextW, 21);
     [videoListButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadVideo"] forState:UIControlStateNormal];
     [videoListButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     [videoListButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
