@@ -34,16 +34,16 @@
         NSInteger code = [[responseObject valueForKey:@"code"] integerValue];
         if (code == 0) {
             if ([weakS.delegate respondsToSelector:@selector(collectMusicSuccess:)]) {
-                [weakS.delegate collectMusicSuccess:weakS.taskId];
+                [weakS.delegate collectMusicSuccess:weakS];
             }
         }else{
             if ([weakS.delegate respondsToSelector:@selector(collectMusicFaild:)]) {
-                [weakS.delegate collectMusicFaild:weakS.taskId];
+                [weakS.delegate collectMusicFaild:weakS];
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if ([weakS.delegate respondsToSelector:@selector(collectMusicFaild:)]) {
-            [weakS.delegate collectMusicFaild:weakS.taskId];
+            [weakS.delegate collectMusicFaild:weakS];
         }
     }];
     
@@ -56,4 +56,8 @@
     [_currentTask cancel];
 }
 
+
+-(void)dealloc{
+    NSLog(@"FSMusicCollectAPI delloc");
+}
 @end

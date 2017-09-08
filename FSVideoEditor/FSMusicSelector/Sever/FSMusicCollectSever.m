@@ -14,13 +14,13 @@
 {
     FSLikedMusicAPI *_likedApi;
 }
-@property(nonatomic,strong)NSMutableDictionary *taskSets;
+@property(nonatomic,strong)NSMutableArray *taskSets;
 @end
 
 @implementation FSMusicCollectSever
--(NSMutableDictionary *)taskSets{
+-(NSMutableArray *)taskSets{
     if (!_taskSets) {
-        _taskSets = [NSMutableDictionary dictionary];
+        _taskSets = [NSMutableArray array];
     }
     return _taskSets;
 }
@@ -29,7 +29,8 @@
     [musicCollectAPI setDelegate:self];
     [musicCollectAPI collectMusic:music.songId collect:collect];
     [musicCollectAPI setMusic:music];
-    [self.taskSets setValue:musicCollectAPI forKey:musicCollectAPI.taskId];
+    NSLog(@"usicCollectAPI.taskId :%@",musicCollectAPI.taskId);
+    [self.taskSets addObject:musicCollectAPI];
 }
 -(void)getLikedMusicsList:(NSInteger)fromPage{
     if (!_likedApi) {
@@ -39,25 +40,25 @@
     [_likedApi getCollectedMusics:fromPage];
 }
 #pragma mark -
--(void)collectMusicSuccess:(NSString *)taskId{
-    FSMusicCollectAPI *api = [self.taskSets valueForKey:taskId];
-    [self.taskSets removeObjectForKey:taskId];
+-(void)collectMusicSuccess:(FSMusicCollectAPI *)task{
+    [self.taskSets removeObject:task];
+    NSLog(@"taskSets :%@",self.taskSets);
 
-    if ([[FSPublishSingleton sharedInstance].likeMusicArray containsObject:[NSString stringWithFormat:@"%ld",(long)api.music.songId]]) {
-        [[FSPublishSingleton sharedInstance].likeMusicArray removeObject:[NSString stringWithFormat:@"%ld",(long)api.music.songId]];
+    if ([[FSPublishSingleton sharedInstance].likeMusicArray containsObject:[NSString stringWithFormat:@"%ld",(long)task.music.songId]]) {
+        [[FSPublishSingleton sharedInstance].likeMusicArray removeObject:[NSString stringWithFormat:@"%ld",(long)task.music.songId]];
     }
     else {
-        [[FSPublishSingleton sharedInstance].likeMusicArray addObject:[NSString stringWithFormat:@"%ld",(long)api.music.songId]];
+        [[FSPublishSingleton sharedInstance].likeMusicArray addObject:[NSString stringWithFormat:@"%ld",(long)task.music.songId]];
     }
+    NSLog(@"asflasdlfasdfasd %@",[FSPublishSingleton sharedInstance].likeMusicArray);
     if([self.delegate respondsToSelector:@selector(musicCollectSeverCollectMusicSuccess:)]){
-        [self.delegate musicCollectSeverCollectMusicSuccess:api.music];
+        [self.delegate musicCollectSeverCollectMusicSuccess:task.music];
     }
 }
--(void)collectMusicFaild:(NSString *)taskId{
-    FSMusicCollectAPI *api = [self.taskSets valueForKey:taskId];
-    [self.taskSets removeObjectForKey:taskId];
+-(void)collectMusicFaild:(FSMusicCollectAPI *)task{
+    [self.taskSets removeObject:task];
     if ([self.delegate respondsToSelector:@selector(musicCollectSeverCollectFaild:)]) {
-        [self.delegate musicCollectSeverCollectFaild:api.music];
+        [self.delegate musicCollectSeverCollectFaild:task.music];
     }
 }
 

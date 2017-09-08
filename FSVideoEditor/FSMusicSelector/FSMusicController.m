@@ -244,42 +244,42 @@
 
 - (void)musicListUpdateCollectState:(FSMusic *)music {
     
-    for (FSMusic *oldMusic in self.musics) {
-        if (oldMusic.songId == music.songId) {
-            oldMusic.collected = music.collected;
-        }
-    }
-    
-    if (music.collected) {
-        if (_currentType == FSMusicButtonTypeHot) {
-            BOOL isCollected = NO;
-            for (FSMusic *oldMusic in self.collectedMusics) {
-                if (oldMusic.songId == music.songId) {
-                    isCollected = YES;
-                    break;
-                }
-            }
-            if (!isCollected) {
-                [self.collectedMusics addObject:music];
-            }
-        }
-        else if (_currentType == FSMusicButtonTypeLike) {
-            for (FSMusic *oldMusic in self.collectedMusics) {
-                if (oldMusic.songId == music.songId) {
-                    oldMusic.collected = music.collected;
-                }
-            }
-        }
-        
-    }
-    else {
-        for (FSMusic *oldMusic in self.collectedMusics) {
-            if (oldMusic.songId == music.songId) {
-                [self.collectedMusics removeObject:oldMusic];
-                break;
-            }
-        }
-    }
+//    for (FSMusic *oldMusic in self.musics) {
+//        if (oldMusic.songId == music.songId) {
+//            oldMusic.collected = music.collected;
+//        }
+//    }
+//    
+//    if (music.collected) {
+//        if (_currentType == FSMusicButtonTypeHot) {
+//            BOOL isCollected = NO;
+//            for (FSMusic *oldMusic in self.collectedMusics) {
+//                if (oldMusic.songId == music.songId) {
+//                    isCollected = YES;
+//                    break;
+//                }
+//            }
+//            if (!isCollected) {
+//                [self.collectedMusics addObject:music];
+//            }
+//        }
+//        else if (_currentType == FSMusicButtonTypeLike) {
+//            for (FSMusic *oldMusic in self.collectedMusics) {
+//                if (oldMusic.songId == music.songId) {
+//                    oldMusic.collected = music.collected;
+//                }
+//            }
+//        }
+//        
+//    }
+//    else {
+//        for (FSMusic *oldMusic in self.collectedMusics) {
+//            if (oldMusic.songId == music.songId) {
+//                [self.collectedMusics removeObject:oldMusic];
+//                break;
+//            }
+//        }
+//    }
 }
 
 #pragma mark -

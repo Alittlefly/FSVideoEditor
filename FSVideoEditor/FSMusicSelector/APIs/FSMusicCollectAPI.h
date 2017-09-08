@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "FSMusic.h"
+
+@class FSMusicCollectAPI;
+
 @protocol FSMusicCollectAPIDelegate <NSObject>
 
 @optional
--(void)collectMusicSuccess:(NSString *)taskId;
--(void)collectMusicFaild:(NSString *)taskId;
+-(void)collectMusicSuccess:(FSMusicCollectAPI *)taskId;
+-(void)collectMusicFaild:(FSMusicCollectAPI *)taskId;
 @end
 
 @interface FSMusicCollectAPI : NSObject
