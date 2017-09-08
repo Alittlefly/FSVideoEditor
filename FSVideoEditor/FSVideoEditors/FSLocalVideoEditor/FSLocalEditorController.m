@@ -145,20 +145,44 @@
 
 - (void)saveVideoFile{
     
-    NvsVideoClip *videoclip = [_videoTrack getClipWithIndex:0];
-    int64_t startTime = _originalStartTime;
-    int64_t endTime = _originalEndTime;
+//    NvsVideoClip *videoclip = [_videoTrack getClipWithIndex:0];
+//    int64_t startTime = _originalStartTime;
+//    int64_t endTime = _originalEndTime;
     
-    if (endTime - startTime > _maxDurationLength) {
-        endTime = startTime + _maxDurationLength;
+//    if (endTime - startTime > _maxDurationLength) {
+//        endTime = startTime + _maxDurationLength;
+//    }
+//    
+//    [videoclip changeTrimInPoint:startTime affectSibling:NO];
+//    [videoclip changeTrimOutPoint:endTime affectSibling:NO];
+//    
+//    NvsAudioClip *audioClip = [_audioTrack getClipWithIndex:0];
+//    [audioClip changeTrimInPoint:startTime affectSibling:NO];
+//    [audioClip changeTrimOutPoint:endTime affectSibling:NO];
+
+    if (_endTime - _startTime > _maxDurationLength) {
+        _endTime = _startTime + _maxDurationLength;
     }
     
-    [videoclip changeTrimInPoint:startTime affectSibling:NO];
-    [videoclip changeTrimOutPoint:endTime affectSibling:NO];
+    BOOL split =  [_videoTrack splitClip:0 splitPoint:_startTime];
+    if (split) {
+        [_videoTrack removeClip:0 keepSpace:NO];
+    }
+    split = [_videoTrack splitClip:0 splitPoint:(_endTime - _startTime)];
+    if (split) {
+        [_videoTrack removeClip:1 keepSpace:NO];
+    }
     
-    NvsAudioClip *audioClip = [_audioTrack getClipWithIndex:0];
-    [audioClip changeTrimInPoint:startTime affectSibling:NO];
-    [audioClip changeTrimOutPoint:endTime affectSibling:NO];
+    split = [_audioTrack splitClip:0 splitPoint:_startTime];
+    if (split) {
+        [_audioTrack removeClip:0 keepSpace:NO];
+    }
+    
+    split = [_audioTrack splitClip:0 splitPoint:(_endTime - _startTime)];
+    if (split) {
+        [_audioTrack removeClip:1 keepSpace:NO];
+    }
+    
 
     [self.view addSubview:self.loading];
     [self.loading loadingViewShow];
@@ -243,8 +267,6 @@
     _draftInfo.vSpeed = vSpeed;
     _startTime = _originalStartTime / vSpeed;
     _endTime = _originalEndTime / vSpeed;
-    
-    _maxDurationLength = MIN(_originalDuration / vSpeed, 15000000.0 /vSpeed);
     
     if(![_context playbackTimeline:_timeLine startTime:_startTime endTime:_endTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
     }
