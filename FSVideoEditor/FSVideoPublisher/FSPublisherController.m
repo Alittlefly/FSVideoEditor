@@ -310,7 +310,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [audiotrack setVolumeGain:_tempDraftInfo.vOriginalVolume rightVolumeGain:_tempDraftInfo.vOriginalVolume];
     }
 
-    
     //
     if (![_tempDraftInfo.vFinalPath isEqualToString:_tempDraftInfo.vOriginalPath]) {
         [self deleteCurrentCompileFile:_tempDraftInfo.vFinalPath];
@@ -541,7 +540,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [[FSDraftManager sharedManager] saveToLocal];
     [[FSDraftManager sharedManager] cancleOperate];
     
-    [_context stop];
     [_context clearCachedResources:YES];
     
     [self dismissViewControllerAnimated:YES completion:nil];
