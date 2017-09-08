@@ -128,7 +128,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     _tempDraftInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
     
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-f6192de5110aed067060b4010c648cac.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-0f022a4d5bfa12d379d469e146c1e9bf.lic"];
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
     
@@ -198,7 +198,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         if (!musicVolumeChanged) {
             _tempDraftInfo.vMusicVolume = 0.5;
         }
-        [musicTrack setVolumeGain:_tempDraftInfo.vMusicVolume rightVolumeGain:_tempDraftInfo.vMusicVolume];
+        [musicTrack setVolumeGain:0.5 rightVolumeGain:0.5];
     }else{
         // 本地视频初始化
         if (!originalVolumChanged) {
@@ -443,7 +443,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         
         if (!_cutMusicView) {
             NSTimeInterval _musicStartTime = _tempDraftInfo.vMusic.mInPoint;
-            _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath startTime:_musicStartTime/1000000.0];
+
+            _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath startTime:_musicStartTime/1000000.0 volume:_tempDraftInfo.vMusicVolume];
             _cutMusicView.delegate = self;
             [self.view addSubview:_cutMusicView];
             _cutMusicView.hidden = YES;

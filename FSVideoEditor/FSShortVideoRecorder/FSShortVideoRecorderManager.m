@@ -153,7 +153,7 @@ static FSShortVideoRecorderManager *recorderManager;
         return;
         
     }
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-f6192de5110aed067060b4010c648cac.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-0f022a4d5bfa12d379d469e146c1e9bf.lic"];
 
     BOOL isOK = [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     
@@ -931,7 +931,7 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 - (void)loadAllLocalfxs{
 
-    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-f6192de5110aed067060b4010c648cac.lic"];
+    NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-0f022a4d5bfa12d379d469e146c1e9bf.lic"];
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
     _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
     
