@@ -153,12 +153,12 @@
         endTime = startTime + _maxDurationLength;
     }
     
-    [videoclip changeTrimInPoint:startTime affectSibling:YES];
-    [videoclip changeTrimOutPoint:endTime affectSibling:YES];
+    [videoclip changeTrimInPoint:startTime affectSibling:NO];
+    [videoclip changeTrimOutPoint:endTime affectSibling:NO];
     
     NvsAudioClip *audioClip = [_audioTrack getClipWithIndex:0];
-    [audioClip changeTrimInPoint:startTime affectSibling:YES];
-    [audioClip changeTrimOutPoint:endTime affectSibling:YES];
+    [audioClip changeTrimInPoint:startTime affectSibling:NO];
+    [audioClip changeTrimOutPoint:endTime affectSibling:NO];
 
     [self.view addSubview:self.loading];
     [self.loading loadingViewShow];
@@ -236,6 +236,9 @@
     
     NvsClip *clip = [_videoTrack getClipWithIndex:0];
     [clip changeSpeed:vSpeed];
+    
+    NvsClip *audio = [_audioTrack getClipWithIndex:0];
+    [audio changeSpeed:vSpeed];
     
     _draftInfo.vSpeed = vSpeed;
     _startTime = _originalStartTime / vSpeed;
