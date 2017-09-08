@@ -7,6 +7,7 @@
 //
 
 #import "FSPublishSingleton.h"
+#import "FSVideoEditorAPIParams.h"
 
 static FSPublishSingleton *publishSingleton = nil;
 
@@ -29,6 +30,11 @@ static FSPublishSingleton *publishSingleton = nil;
 - (void)cleanData {
     _chooseMusic = nil;
     _chooseChallenge = nil;
+}
+
+-(void)setLoginKey:(NSString *)loginKey{
+    _loginKey = loginKey;
+    [[FSVideoEditorAPIParams videoEdiorParams].params setValue:loginKey forKey:@"loginKey"];
 }
 
 @end

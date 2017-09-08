@@ -20,8 +20,10 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSDictionary *params = [NSDictionary dictionaryWithDictionary:[FSVideoEditorAPIParams videoEdiorParams].params];
     __weak typeof(self) weakS = self;
+    NSLog(@"getCollectedMusics %d",no);
     NSURLSessionTask *task = [manager GET:[NSString stringWithFormat:@"%@video/song/fav?no=%ld&size=20",AddressAPI,no] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"getCollectedMusics %@",responseObject);
+        NSLog(@"getCollectedMusics %@",params);
         if ([weakS.delegate respondsToSelector:@selector(likedMusicApigetMusics:)]) {
             [weakS.delegate likedMusicApigetMusics:responseObject];
         }
