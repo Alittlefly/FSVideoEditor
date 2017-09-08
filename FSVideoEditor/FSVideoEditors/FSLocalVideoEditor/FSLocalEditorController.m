@@ -164,7 +164,7 @@
     [self.loading loadingViewShow];
     
      _outPutFilePath = [self getCompilePath];
-   BOOL success = [_context compileTimeline:_timeLine startTime:0 endTime:_timeLine.duration outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0];
+   BOOL success = [_context compileTimeline:_timeLine startTime:0 endTime:_timeLine.duration outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGradeCustom) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0];
     if (!success) {
         [self.loading loadingViewhide];
     }
