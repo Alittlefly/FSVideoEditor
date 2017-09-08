@@ -39,6 +39,13 @@ typedef enum NvsSourceBackgroundMode {
     NvsSourceBackgroundModeBlur,    /*!< 模糊*/
 } NvsSourceBackgroundMode;  /*!< 背景模式 */
 
+typedef enum NvsExtraVideoRotation {
+    NvsExtraVideoRotation_0 = 0,
+    NvsExtraVideoRotation_90 = 1,
+    NvsExtraVideoRotation_180 = 2,
+    NvsExtraVideoRotation_270 = 3
+} NvsExtraVideoRotation;
+
 @class NvsVideoFx;
 
 /*!
@@ -55,9 +62,9 @@ typedef enum NvsSourceBackgroundMode {
 @property (readonly) NvsRoleInTheme roleInTheme;  //!< \if ENGLISH \else 视频片段在主题中角色(通用、片头、片尾)\endif
 
 
-@property (nonatomic, assign) NvsStreamingEngineImageClipMotionMode imageMotionMode; //!< \if ENGLISH \else 图片片段运作模式 \since 1.1.0 \endif
+@property (nonatomic) NvsStreamingEngineImageClipMotionMode imageMotionMode; //!< \if ENGLISH \else 图片片段运作模式 \since 1.1.0 \endif
 
-@property (nonatomic, assign) BOOL imageMotionAnimationEnabled;  //!< \if ENGLISH \else 是否支持图片动画 \since 1.1.0 \endif
+@property (nonatomic) BOOL imageMotionAnimationEnabled;  //!< \if ENGLISH \else 是否支持图片动画 \since 1.1.0 \endif
 
 @property (readonly) NvsRect startROI; //!< \if ENGLISH \else 图片片段起始ROI \since 1.1.0 \endif
 
@@ -84,6 +91,19 @@ typedef enum NvsSourceBackgroundMode {
     \sa setPlayInReverse
  */
 - (BOOL)getPlayInReverse;
+/*!
+    \brief 设置视频额外旋转角度
+    \param rotation 额外旋转角度
+    \sa getExtraVideoRotation
+ */
+- (void)setExtraVideoRotation:(NvsExtraVideoRotation)rotation;
+
+/*!
+    \brief 获取视频额外旋转角度
+    \return 返回值，获取额外旋转角度
+    \sa setExtraVideoRotation:
+ */
+- (NvsExtraVideoRotation)getExtraVideoRotation;
 
 /*!
     \brief 设置摇摄和扫描

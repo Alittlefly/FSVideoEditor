@@ -260,12 +260,12 @@ typedef enum {
  */
 @interface NvsStreamingContext : NSObject
 
-@property (nonatomic, retain) id<NvsStreamingContextDelegate> delegate;
+@property (nonatomic, weak) id<NvsStreamingContextDelegate> delegate;
 @property (readonly) NvsAssetPackageManager *assetPackageManager;
-@property (nonatomic, assign) float compileVideoBitrateMultiplier;              //!< 生成视频码率倍乘系数 \since 1.5.0
-@property (nonatomic, assign) float recordVideoBitrateMultiplier;               //!< 录制视频码率倍乘系数 \since 1.5.0
-@property (nonatomic, assign) BOOL defaultCaptionFade;                          //!< 默认字幕是否为淡入淡出 \since 1.8.0
-@property (nonatomic, retain) NSMutableDictionary *compileConfigurations;       //!< 生成时间线配置 \since 1.8.0
+@property (nonatomic) float compileVideoBitrateMultiplier;              //!< 生成视频码率倍乘系数 \since 1.5.0
+@property (nonatomic) float recordVideoBitrateMultiplier;               //!< 录制视频码率倍乘系数 \since 1.5.0
+@property (nonatomic) BOOL defaultCaptionFade;                          //!< 默认字幕是否为淡入淡出 \since 1.8.0
+@property (nonatomic) NSMutableDictionary *compileConfigurations;       //!< 生成时间线配置 \since 1.8.0
 
 /*!
  *  \brief 获取美摄SDK的版本信息

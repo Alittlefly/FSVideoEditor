@@ -33,8 +33,8 @@ typedef enum {
 @interface NvsVideoFx : NvsFx
 
 @property (readonly) NvsVideoFxType videoFxType; //!< 视频特效类型
-@property (readonly,retain) NSString *bultinVideoFxName; //!< 内嵌视频特效名字。如果不是内嵌视频特效返回nil
-@property (readonly,retain) NSString *videoFxPackageId; //!< 视频特效资源包ID。如果不是资源包视频特效返回nil
+@property (readonly) NSString *bultinVideoFxName; //!< 内嵌视频特效名字。如果不是内嵌视频特效返回nil
+@property (readonly) NSString *videoFxPackageId; //!< 视频特效资源包ID。如果不是资源包视频特效返回nil
 @property (readonly) unsigned int index;  //!< \if ENGLISH \else 视频特效索引 \endif
 
 @end

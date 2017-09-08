@@ -47,7 +47,7 @@ typedef enum {
  */
 @interface NvsLiveWindow : GLKView
 
-@property (nonatomic, assign) NvsLiveWindowFillMode fillMode;  //!< \if ENGLISH \else LiveWindow的填充模式 \endif
+@property (nonatomic) NvsLiveWindowFillMode fillMode;  //!< \if ENGLISH \else LiveWindow的填充模式 \endif
 
 - (instancetype)init;
 - (instancetype)initWithFrame:(CGRect)frame;

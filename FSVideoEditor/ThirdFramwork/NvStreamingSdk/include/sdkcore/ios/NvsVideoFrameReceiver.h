@@ -76,7 +76,7 @@ typedef enum
 @interface NvsVideoFrameReceiver : NSObject
 
 @property (nonatomic, readonly) NvsVideoFrameReceiverMode mode;
-@property (nonatomic, retain) id<NvsVideoFrameReceiverDelegate> delegate;
+@property (nonatomic, weak) id<NvsVideoFrameReceiverDelegate> delegate;
 
 
 - (instancetype)init;

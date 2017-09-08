@@ -62,6 +62,14 @@ typedef enum NvsRoleInTheme
     NvsRoleInThemeTrailer    //!< \if ENGLISH \else 片尾 \endif
 } NvsRoleInTheme;
 
+/*! \if ENGLISH \else \brief 字幕对齐方式 \endif*/
+typedef enum NvsTextAlignment
+{
+    NvsTextAlignmentLeft = 0,
+    NvsTextAlignmentCenter,
+    NvsTextAlignmentRight
+} NvsTextAlignment;
+
 /*! \if ENGLISH \else \brief 片段在主题中的类型 \endif */
 typedef enum NvsCategory
 {

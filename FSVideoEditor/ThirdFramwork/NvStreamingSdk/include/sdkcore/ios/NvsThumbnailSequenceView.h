@@ -17,15 +17,19 @@
 /*!
     \brief 缩略图序列
 
+    注意：新的代码请不要再使用这个控件，请使用NvsMultiThumbnailSequenceView控件！
     缩略图序列，即视频按照某种程度缩放，来静态缩略显示的序列。视频编辑时，通过预览定位视频序列，可以设置序列的开始时间，时长，缩略图横纵比等。同时，依照缩略图在对应时段位置精确添加字幕和裁剪视频。
+
+    \since 1.1.0
+    \deprecated
  */
 @interface NvsThumbnailSequenceView : UIView
 
-@property (nonatomic, retain) NSString *mediaFilePath; //!< \if ENGLISH \else 媒体文件路径 \endif
-@property (nonatomic, assign) int64_t startTime;       //!< \if ENGLISH \else 序列开始时间 \endif
-@property (nonatomic, assign) int64_t duration;        //!< \if ENGLISH \else 序列时长 \endif
-@property (nonatomic, assign) float thumbnailAspectRatio; //!< \if ENGLISH \else 缩略图横纵比 \endif
-@property (nonatomic, assign) BOOL stillImageHint;     //!< \if ENGLISH \else 是否是静态图片 \endif
+@property (nonatomic) NSString *mediaFilePath; //!< \if ENGLISH \else 媒体文件路径 \endif
+@property (nonatomic) int64_t startTime;       //!< \if ENGLISH \else 序列开始时间 \endif
+@property (nonatomic) int64_t duration;        //!< \if ENGLISH \else 序列时长 \endif
+@property (nonatomic) float thumbnailAspectRatio; //!< \if ENGLISH \else 缩略图横纵比 \endif
+@property (nonatomic) BOOL stillImageHint;     //!< \if ENGLISH \else 是否是静态图片 \endif
 
 - (instancetype)init;
 - (instancetype)initWithFrame:(CGRect)frame;

@@ -93,7 +93,7 @@ typedef enum
  */
 @interface NvsAssetPackageManager : NSObject
 
-@property (nonatomic, retain) id<NvsAssetPackageManagerDelegate> delegate;
+@property (nonatomic, weak) id<NvsAssetPackageManagerDelegate> delegate;
 
 /*!
  *  \brief 从资源包的文件路径获得资源包ID

@@ -122,7 +122,7 @@
 - (UIImage *)getImageFromFile:(NSString *)filePath atTime:(int64_t)time videoFrameHeightGrade:(NvsVideoFrameHeightGrade)videoFrameHeightGrade;
 - (UIImage *)getImageFromTimeLine:(NvsTimeline *)timeline atTime:(int64_t)time proxyScale:(const NvsRational *)proxyScale;
 
-- (void)addSticker:(NSMutableString *)sticker timeLine:(NvsTimeline *)timeline;
+- (void)addSticker:(NSMutableString *)sticker timeLine:(NvsTimeline *)timeline  liveWindow:(NvsLiveWindow *)liveWindow;
 - (void)removeSticker:(NvsTimeline *)timeline;
 
 - (void)addFilter:(NSString *)filterId toVideoClip:(NvsVideoClip *)clip;

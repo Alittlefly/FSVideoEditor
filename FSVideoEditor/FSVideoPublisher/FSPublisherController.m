@@ -743,7 +743,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 - (void)addSticker:(NSString *)filePath {
-    [[FSShortVideoRecorderManager sharedInstance] addSticker:nil timeLine:_timeLine];
+    [[FSShortVideoRecorderManager sharedInstance] addSticker:nil timeLine:_timeLine liveWindow:_prewidow];
     _stickerVideoPath = [self getCompilePath];
     [self compileFile:_stickerVideoPath];
 }

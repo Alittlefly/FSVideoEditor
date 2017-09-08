@@ -25,6 +25,16 @@
 @class NvsTimelineVideoFx;
 
 /*!
+ *  \brief 水印位置标识
+ */
+typedef enum {
+    NvsTimelineWatermarkPosition_TopRight = 0,        //!< \if ENGLISH \else 水印显示在右上角 \endif
+    NvsTimelineWatermarkPosition_TopLeft = 1,         //!< \if ENGLISH \else 水印显示在左上角 \endif
+    NvsTimelineWatermarkPosition_BottomLeft = 2,      //!< \if ENGLISH \else 水印显示在左下角 \endif
+    NvsTimelineWatermarkPosition_BottomRight = 3      //!< \if ENGLISH \else 水印显示在右下角 \endif
+} NvsTimelineWatermarkPosition;
+
+/*!
      \brief 时间线，编辑场景的时间轴实体
  
      时间线由轨道组成，可视作一系列音视频轨道的集合。在时间线上可添加或者移除多条视频轨道和音轨轨道，多条轨道之间是相互叠加合成的关系。
@@ -407,6 +417,26 @@
  */
 - (void)getThemeMusicVolumeGain:(float *)leftVolumeGain rightVolumeGain:(float *)rightVolumeGain;
 
+/*!
+    \brief 添加水印
+    \param watermarkFilePath 水印文件的路径，须为PNG或JPG文件
+    \param displayWidth 水印在timeline中显示的宽度，为0则使用图片文件的宽度
+    \param displayHeight 水印在timeline中显示的高度，为0则使用图片文件的高度
+    \param opacity 水印的不透明度
+    \param position 水印的位置，请参见 [NvsWatermarkPosition] (@ref NvsWatermarkPosition)
+    \param marginX 水印在X方向的边距
+    \param marginY 水印在Y方向的边距
+    \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
+    \sa deleteWatermark:
+ */
+- (bool)addWatermark:(NSString*)watermarkFilePath displayWidth:(int)displayWidth displayHeight:(int)displayHeight opacity:(float)opacity position:(int)position marginX:(int)marginX marginY:(int)marginY;
+
+/*!
+    \brief 删除已添加的水印
+    \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
+    \sa addWatermark:displayRatio:opacity:position:
+*/
+- (void)deleteWatermark;
 
 @end
 

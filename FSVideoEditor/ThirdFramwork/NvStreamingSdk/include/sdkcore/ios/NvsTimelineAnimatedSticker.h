@@ -230,5 +230,19 @@
  */
 - (float)getOrthoAngleRange;
 
+/*!
+     \brief 设置贴纸Zzhi值
+     \param value 表示贴纸Z值
+     \sa getZValue
+ */
+- (void)setZValue:(float)value;
+
+/*!
+     \brief 获取贴纸Z值
+     \return 返回贴纸Z值
+     \sa setZValue:
+ */
+- (float)getZValue;
+
 @end
 

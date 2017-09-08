@@ -82,6 +82,20 @@
 - (NSString *)getText;
 
 /*!
+     \brief 设置字幕对齐方式
+     \param textAlign 表示字幕对齐方式。
+     \sa getTextAlignment
+ */
+- (void)setTextAlignment:(NvsTextAlignment)textAlign;
+
+/*!
+     \brief 获取字幕对齐方式
+     \return 返回字幕对齐方式。
+     \sa setTextAlignment:
+ */
+- (NvsTextAlignment)getTextAlignment;
+
+/*!
      \brief 设置字幕字体加粗
      \param bold 表示字幕字体是否加粗。YES表示加粗，NO则不加粗
      \sa getBold
@@ -389,6 +403,20 @@
     \since 1.7.1
  */
 - (float)getPanoramicRotation;
+
+/*!
+     \brief 设置字幕Z值
+     \param value 表示字幕Z值。
+     \sa setZValue
+ */
+- (void)setZValue:(float)value;
+
+/*!
+     \brief 获取字幕Z值
+     \return 返回字幕Z值。
+     \sa setZValue:
+ */
+- (float)getZValue;
 
 @end
 

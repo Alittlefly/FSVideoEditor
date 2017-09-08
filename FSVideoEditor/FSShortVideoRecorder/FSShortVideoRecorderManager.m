@@ -674,19 +674,20 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 #pragma mark - Sticker
-- (void)addSticker:(NSMutableString *)sticker timeLine:(NvsTimeline *)timeline {
+- (void)addSticker:(NSMutableString *)sticker timeLine:(NvsTimeline *)timeline  liveWindow:(NvsLiveWindow *)liveWindow {
     if ([sticker isEqualToString:@""])
         sticker = _stickerPackageId;
+    
+    if (!liveWindow) {
+        liveWindow = _liveWindow;
+    }
     // 添加动画贴纸
     NvsTimelineAnimatedSticker *stickers = [timeline addAnimatedSticker:0 duration:timeline.duration animatedStickerPackageId:_stickerPackageId];
-    //[stickers setScale:0.4];
+    [stickers setScale:0.4];
     NvsRect stickerRect = [stickers getOriginalBoundingRect];
     
-    CGPoint topLeftCorner = CGPointMake(stickerRect.left, stickerRect.top);
-    CGPoint rightBottomCorner = CGPointMake(stickerRect.right, stickerRect.bottom);
-    
-    CGPoint liveWindowRightBottom = [_liveWindow mapViewToCanonical:CGPointMake(_liveWindow.frame.size.width, _liveWindow.frame.size.height)];
-    CGPoint offset = CGPointMake(liveWindowRightBottom.x-stickerRect.right, liveWindowRightBottom.y-stickerRect.bottom);
+    CGPoint liveWindowRightBottom = [liveWindow mapViewToCanonical:CGPointMake(liveWindow.frame.size.width, liveWindow.frame.size.height)];
+    CGPoint offset = CGPointMake(liveWindowRightBottom.x-stickerRect.right+150, liveWindowRightBottom.y-stickerRect.bottom-50);
 
    
 

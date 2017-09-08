@@ -37,7 +37,7 @@ typedef enum {
 @interface NvsVideoTransition : NvsFx
 
 @property (readonly) NvsVideoTransitionType videoTransitionType; //!< 视频转场类型
-@property (readonly,retain) NSString *bultinVideoTransitionName; //!< 内嵌视频转场名字。如果不是内嵌视频转场返回nil
-@property (readonly,retain) NSString *videoTransitionPackageId; //!< 视频转场资源包ID。如果不是资源包视频转场返回nil
+@property (readonly) NSString *bultinVideoTransitionName; //!< 内嵌视频转场名字。如果不是内嵌视频转场返回nil
+@property (readonly) NSString *videoTransitionPackageId; //!< 视频转场资源包ID。如果不是资源包视频转场返回nil
 
 @end
