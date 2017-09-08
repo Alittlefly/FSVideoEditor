@@ -49,7 +49,7 @@
 }
 
 - (void)FSUploadImageAPIFirstImageFaild:(NSError *)error {
-    if ([self.delegate respondsToSelector:@selector(FSUploadImageAPIFirstImageFaild:)]) {
+    if ([self.delegate respondsToSelector:@selector(FSUploadImageServerFirstImageFailed:)]) {
         [self.delegate FSUploadImageServerFirstImageFailed:error];
     }
 }
