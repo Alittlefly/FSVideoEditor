@@ -49,7 +49,9 @@
     return _titleLabel;
 }
 
-
+-(void)setLoadingText:(NSString *)text{
+    [_titleLabel setText:text];
+}
 -(UIView *)loadingBack
 {
     if (!_loadingBack) {
@@ -102,6 +104,7 @@
 
 -(void)loadingViewShow;
 {
+    [self.titleLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"Loading"]];
     [self.indictor startAnimating];
 }
 -(void)loadingViewhide;

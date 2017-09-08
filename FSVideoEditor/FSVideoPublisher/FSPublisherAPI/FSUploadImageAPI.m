@@ -80,6 +80,7 @@
     __weak typeof(self) weakS = self;
     
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    [mgr.requestSerializer setTimeoutInterval:30.0];
     //    NSDictionary *param = @{@"file":data};
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
     [dic setValue:[FSPublishSingleton sharedInstance].loginKey forKey:@"loginKey"];

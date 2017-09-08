@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface FSEditorLoading : UIView
+
+-(void)setLoadingText:(NSString *)text;
 -(void)loadingViewShow;
 -(void)loadingViewhide;
 -(BOOL)isLoading;

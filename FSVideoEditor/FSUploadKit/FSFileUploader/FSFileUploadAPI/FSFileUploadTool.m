@@ -55,7 +55,8 @@
     }
     
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-//    NSDictionary *param = @{@"file":data};
+    [mgr.requestSerializer setTimeoutInterval:60.0];
+    
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
     [dic setValue:[FSPublishSingleton sharedInstance].loginKey forKey:@"loginKey"];
     [dic setValue:[NSNumber numberWithInteger:4] forKey:@"requestType"];
@@ -182,7 +183,7 @@
 }
 
 -(NSDictionary<NSString *,NSString *> *)requestHeaderFieldValueDictionaryFile:(FSFileSlice *)file{
-    NSString *rangeString = [NSString stringWithFormat:@"%lu-%lu",(unsigned long)file.fileRange.location,(file.fileRange.location + file.fileRange.length)];
+    NSString *rangeString = [NSString stringWithFormat:@"%lu-%u",(unsigned long)file.fileRange.location,(file.fileRange.location + file.fileRange.length)];
     NSString *size = [NSString stringWithFormat:@"%ld",(long)file.totalSize];
 //    NSLog(@"post range:%@ totalSize:%@",rangeString,size);
     
