@@ -133,7 +133,7 @@ static id object = nil;
     }
     
     NSString *md5Value = [FSMD5Utils getFileMD5WithPath:cacheKey];
-    NSString *primaryKey = [NSString stringWithFormat:@"%@-%ld",md5Value,slice.fileId];
+    NSString *primaryKey = [NSString stringWithFormat:@"%@-%ld",md5Value,(long)slice.fileId];
 
 //    NSString *sql = [NSString stringWithFormat:@"UPDATE t_Upload state SET t_Upload.state = 1 WHERE t_Upload.md5Value = '%@' AND t_Upload.fildId = %ld",md5Value,slice.fileId];               222         ``
     NSString *sql = [NSString stringWithFormat:@"UPDATE t_Upload SET state = 1 WHERE id = '%@';",primaryKey];

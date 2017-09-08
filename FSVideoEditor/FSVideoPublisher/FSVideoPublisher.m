@@ -14,6 +14,12 @@
 #import "FSPublishSingleton.h"
 #import "FSDraftManager.h"
 
+
+@implementation FSVideoPublishParam
+
+@end
+
+
 @interface FSVideoPublisher()<FSUploadImageServerDelegate,FSPublisherServerDelegate>
 {
     dispatch_group_t _group;
@@ -24,6 +30,7 @@
 
     
     FSUploadImageServer *_uploadImageSever;
+    FSUploadImageServer *_uploadWebpSever;
     FSPublisherServer *_publishServer;
     FSUploader *_uploadVideo;
     FSUploader *_uploadLogoVideo;
@@ -57,8 +64,12 @@
             _publishServer.delegate = self;
             _uploadImageSever = [[FSUploadImageServer alloc] init];
             [_uploadImageSever setDelegate:self];
-            _uploadVideo = [FSUploader defaultUploader];
-            _uploadLogoVideo = [FSUploader defaultUploader];
+            
+            _uploadWebpSever = [[FSUploadImageServer alloc] init];
+            [_uploadWebpSever setDelegate:self];
+            
+            _uploadVideo = [FSUploader uploaderWithDivider:[[FSFileSliceDivider alloc] initWithSliceCount:1]];
+            _uploadLogoVideo = [FSUploader uploaderWithDivider:[[FSFileSliceDivider alloc] initWithSliceCount:1]];
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(terminate) name:UIApplicationWillTerminateNotification object:nil];
             
         }
@@ -91,7 +102,7 @@
         NSData *data = [NSData dataWithContentsOfFile:param.webpPath];
         NSString *name = [[param.draftInfo.vFinalPath lastPathComponent] stringByDeletingPathExtension];
         NSString *webpName = [name stringByAppendingString:@".webp"];
-        [_uploadImageSever uploadWebP:[NSDictionary dictionaryWithObjectsAndKeys:data,@"webpData",webpName,@"webpName",nil]];
+        [_uploadWebpSever uploadWebP:[NSDictionary dictionaryWithObjectsAndKeys:data,@"webpData",webpName,@"webpName",nil]];
     });
     
     dispatch_group_enter(_group);
@@ -99,6 +110,12 @@
         [_uploadVideo uploadFileWithFilePath:param.videoPath complete:^(CGFloat progress, NSString *filePath, NSDictionary *info) {
             if (info) {
                 _nologoVideoUrl = [info objectForKey:@"dataInfo"];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _uploadProgress += 0.2;
+                    if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
+                        [self.delegate videoPublisherProgress:_uploadProgress];
+                    }
+                });
             }
             dispatch_group_leave(_group);
         }];
@@ -109,6 +126,12 @@
         [_uploadLogoVideo uploadFileWithFilePath:param.videoPathWithLogo complete:^(CGFloat progress, NSString *filePath, NSDictionary *info) {
             if (info) {
                 _logoVideoUrl = [info objectForKey:@"dataInfo"];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _uploadProgress += 0.2;
+                    if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
+                        [self.delegate videoPublisherProgress:_uploadProgress];
+                    }
+                });
             }
             dispatch_group_leave(_group);
         }];
@@ -143,8 +166,9 @@
 
 - (void)FSUploadImageServerFirstImageSucceed:(NSString *)filePath {
     _firstImageUrl = filePath;
-    _uploadProgress += 0.2;
     dispatch_async(dispatch_get_main_queue(), ^{
+        _uploadProgress += 0.2;
+
         if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
             [self.delegate videoPublisherProgress:_uploadProgress];
         }
@@ -158,8 +182,8 @@
 
 - (void)FSUploadImageServerWebPSucceed:(NSString *)filePath {
     _webpUrl = filePath;
-    _uploadProgress += 0.2;
     dispatch_async(dispatch_get_main_queue(), ^{
+        _uploadProgress += 0.2;
         if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
             [self.delegate videoPublisherProgress:_uploadProgress];
         }
@@ -172,6 +196,9 @@
 }
 
 - (void)FSPublisherServerSucceed {
+    
+    NSLog(@"完成发布视频: -----");
+
     if ([self.delegate respondsToSelector:@selector(videoPublisherSuccess)]) {
         [self.delegate videoPublisherSuccess];
     }
@@ -181,9 +208,7 @@
 - (void)FSPublisherServerFailed:(NSError *)error {
     if ([self.delegate respondsToSelector:@selector(videoPublisherFaild)]) {
         [self.delegate videoPublisherFaild];
-    }
-    
-    self.currentParam = nil;
+    }    
 }
 // 杀应用 要删除一下file
 -(void)terminate{

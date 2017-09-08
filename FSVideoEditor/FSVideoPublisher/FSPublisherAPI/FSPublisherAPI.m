@@ -26,6 +26,7 @@
     }
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setTimeoutInterval:20.0];
     __weak typeof(self) weakS = self;
     //http://10.10.32.145:8088/video/index/publish/video  http://www.7nujoom.com/
     NSURLSessionTask *task = [manager POST:[NSString stringWithFormat:@"%@video/index/publish/video",AddressAPI] parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

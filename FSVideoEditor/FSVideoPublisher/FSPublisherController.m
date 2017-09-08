@@ -18,19 +18,16 @@
 
 
 #import "FSFilterView.h"
-#import "FSUploader.h"
 #import "FSEditorLoading.h"
 #import "FSControlVolumeView.h"
 #import "FSMusicController.h"
 #import "FSCutMusicView.h"
 #import "FSMusicManager.h"
 
-#import "FSPublisherServer.h"
 #import "FSAlertView.h"
 
 #import "FSShortLanguage.h"
 
-#import "FSUploadImageServer.h"
 #import "FSShortVideoRecorderManager.h"
 #import "FSChallengeController.h"
 #import "FSAnimationNavController.h"
@@ -39,22 +36,24 @@
 #import "FSDraftManager.h"
 #import "FSTimelineConfiger.h"
 #import "FSPublisherMaskView.h"
+#import "FSVideoPublisher.h"
 
 typedef NS_ENUM(NSInteger,FSPublishOperationType){
     FSPublishOperationTypeSaveToDraft,
     FSPublishOperationTypePublishToNet,
 };
 
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate,FSUploaderDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSPublisherServerDelegate, FSUploadImageServerDelegate, FSShortVideoRecorderManagerDelegate, FSChallengeControllerDelegate>
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSShortVideoRecorderManagerDelegate, FSChallengeControllerDelegate,FSVideoPublisherDelegate>
 {
-    FSUploader *_uploader;
     
     CGFloat _scoreVolume;
     FSPublishOperationType _OperationType;
     
     FSDraftInfo *_tempDraftInfo;
     
-    UIImage *_firstFrame;
+    FSVideoPublishParam *_param;
+    
+    BOOL _inPublish;
 }
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
@@ -72,13 +71,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 @property (nonatomic, strong) FSVideoFxOperationStack *fxOperationStack;
 
 @property (nonatomic, strong) NSMutableArray *addedViews;
-
-@property (nonatomic, strong) FSPublisherServer *publishServer;
-@property (nonatomic, strong) FSUploadImageServer *uploadImageServer;
-
-@property (nonatomic, copy) NSString *firstImageUrl;
-@property (nonatomic, copy) NSString *webpUrl;
-
 @property (nonatomic, strong) FSChallengeModel *challengeModel;
 
 @property (nonatomic, copy) NSString *stickerVideoPath;
@@ -172,10 +164,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [_videoTrack setVolumeGain:0.0 rightVolumeGain:0.0];
     
     
-    FSFileSliceDivider *divider = [[FSFileSliceDivider alloc] initWithSliceCount:1];
-     _uploader = [FSUploader uploaderWithDivider:divider];
-    [_uploader setDelegate:self];
-    
     //  有没有没音乐
     BOOL haveMusic = _musicPath != nil && _musicPath.length != 0;
     BOOL musicVolumeChanged = !(_tempDraftInfo.vMusicVolume == -1);
@@ -206,9 +194,15 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
             [audioTrack setVolumeGain:_tempDraftInfo.vOriginalVolume rightVolumeGain:_tempDraftInfo.vOriginalVolume];
         }
     }
+    
+    _param = [[FSVideoPublishParam alloc] init];
 }
 
 -(void)playVideoFromHead{
+    if (_inPublish) {
+        return;
+    }
+    
     [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowAnimatedStickerPoster];
     
     if([_context getStreamingEngineState] != NvsStreamingEngineState_Playback){
@@ -285,8 +279,15 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 -(void)publishFiles{
+    
+    _inPublish = YES;
+    
     [self.navigationController.view addSubview:self.loading];
     [self.loading loadingViewShow];
+    [self.loading setLoadingText:[NSString stringWithFormat:@"%d%%",0]];
+    
+    NSLog(@"开始发布视频: -----");
+    
     
     int64_t length = _timeLine.duration;
     NSString *_musicPath = _tempDraftInfo.vMusic.mPath;
@@ -316,7 +317,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     }
     _tempDraftInfo.vFinalPath = [self getCompilePath];
 
-    _firstFrame  = [_context grabImageFromTimeline:_timeLine timestamp:0 proxyScale:nil];
+    _param.firstImageData = [_context grabImageFromTimeline:_timeLine timestamp:0 proxyScale:nil];
+    _param.videoPath = _tempDraftInfo.vFinalPath;
     
     if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_tempDraftInfo.vFinalPath videoResolutionGrade:(NvsCompileVideoResolutionGradeCustom) videoBitrateGrade:(NvsCompileBitrateGradeMedium) flags:0]){
         NSLog(@"11111111");
@@ -333,7 +335,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     NSLog(@"%@",videoPath);
     
     NSLog(@"%@",error);
-    
+
 }
 
 #pragma mark -
@@ -345,17 +347,22 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     NSLog(@"Compile success!");
     if (_isStickerVideoFinished) {
-        [self uploadFile:_stickerVideoPath];
         
         if (_tempDraftInfo.vSaveToAlbum) {
             UISaveVideoAtPathToSavedPhotosAlbum(_stickerVideoPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
         }
-    }
-    else {
-//        UIImage *image = [[FSShortVideoRecorderManager sharedInstance] getImageFromTimeLine:timeline atTime:0 proxyScale:nil];//[[FSShortVideoRecorderManager sharedInstance] getImageFromFile:_tempDraftInfo.vFinalPath atTime:0 videoFrameHeightGrade:NvsVideoFrameHeightGrade480];
-        if(_firstFrame){
-            [self uploadFirstImage:_firstFrame];
-        }
+        
+//        [self uploadFile:_stickerVideoPath];
+        _param.draftInfo = _tempDraftInfo;
+        
+        [[FSVideoPublisher sharedPublisher] setDelegate:self];
+        [[FSVideoPublisher sharedPublisher] publishVideo:_param];
+        
+    }else{
+        // 首帧图已获取
+        // 获取webp
+        [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
+        [[FSShortVideoRecorderManager sharedInstance] beginCreateWebP:_tempDraftInfo.vFinalPath];
     }
 }
 // 生成失败的回调函数
@@ -363,7 +370,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     NSLog(@"Compile Failed!");
     
     [self.loading loadingViewhide];
-
+    
+    [self showFaildMesssage];
 }
 #pragma mark -
 - (void)FSChallengeControllerChooseChallenge:(FSChallengeModel *)model {
@@ -669,85 +677,24 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [self.addedViews addObjectsFromArray:addedViews];
 }
 
-- (NSString *)getNameFromPath:(NSString *)path {
-    NSString *lastName = [path lastPathComponent];
-    return [lastName stringByDeletingLastPathComponent];
-}
-
-- (void)uploadFirstImage:(UIImage *)image {
-    if (!_uploadImageServer) {
-        _uploadImageServer = [[FSUploadImageServer alloc] init];
-        _uploadImageServer.delegate = self;
-    }
-    
-    NSData * imageData = UIImageJPEGRepresentation(image,1);
-    CGFloat length = [imageData length]/1024;
-    CGFloat bit = 1;
-    if (length > 200) {
-        bit = 200/length;
-    }
-    
-    NSString *lastPath = [_tempDraftInfo.vFinalPath lastPathComponent];
-    NSString *imageName = [[lastPath stringByDeletingPathExtension] stringByAppendingString:@".jpg"];
-    [_uploadImageServer uploadFirstImage:[NSDictionary dictionaryWithObjectsAndKeys:UIImageJPEGRepresentation(image,bit),@"imageData",imageName,@"imageName",nil]];
-}
-
-- (void)FSUploadImageServerFirstImageSucceed:(NSString *)filePath {
-    _firstImageUrl = filePath;
-
-    [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
-    [[FSShortVideoRecorderManager sharedInstance] beginCreateWebP:_tempDraftInfo.vFinalPath];
-}
-
-- (void)FSUploadImageServerFirstImageFailed:(NSError *)error {
-    [self.loading loadingViewhide];
-    
-    [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
-}
-
-- (void)FSUploadImageServerWebPSucceed:(NSString *)filePath {
-    _webpUrl = filePath;
-    [self uploadFile:_tempDraftInfo.vFinalPath];
-}
-
-- (void)FSUploadImageServerWebPFailed:(NSError *)error {
-    [self.loading loadingViewhide];
-    
-    [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
-}
-
 #pragma mark -
 - (void)FSShortVideoRecorderManagerConvertorFinished:(NSString *)filePath {
-    if (!_uploadImageServer) {
-        _uploadImageServer = [[FSUploadImageServer alloc] init];
-        _uploadImageServer.delegate = self;
-    }
-  //  UISaveVideoAtPathToSavedPhotosAlbum(filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
-    CGFloat length = [data length]/1024;
- 
-    CGFloat bit = 1;
-    if (length > 1024) {
-        bit = 1024/length;
-    }
+    _param.webpPath = filePath;
     
-    NSString *name = [[_tempDraftInfo.vFinalPath lastPathComponent] stringByDeletingPathExtension];
-    NSString *webpName = [name stringByAppendingString:@".webp"];
-    [_uploadImageServer uploadWebP:[NSDictionary dictionaryWithObjectsAndKeys:data,@"webpData",webpName,@"webpName",nil]];
+    [self addSticker:nil];
 }
-
 - (void)FSShortVideoRecorderManagerConvertorFaild {
     [self.loading loadingViewhide];
-    
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
 }
-
 - (void)addSticker:(NSString *)filePath {
+    
     [[FSShortVideoRecorderManager sharedInstance] addSticker:nil timeLine:_timeLine];
     _stickerVideoPath = [self getCompilePath];
+    _param.videoPathWithLogo = _stickerVideoPath;
+    _isStickerVideoFinished = YES;
     [self compileFile:_stickerVideoPath];
 }
-
 - (void)compileFile:(NSString *)outputPath {
     int64_t length = _timeLine.duration;
     NSString *_musicPath = _tempDraftInfo.vMusic.mPath;
@@ -771,88 +718,22 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [audiotrack setVolumeGain:_tempDraftInfo.vOriginalVolume rightVolumeGain:_tempDraftInfo.vOriginalVolume];
     }
     
-    
-    
     if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:outputPath videoResolutionGrade:(NvsCompileVideoResolutionGradeCustom) videoBitrateGrade:(NvsCompileBitrateGradeMedium) flags:0]){
         NSLog(@"11111111");
     }
     else {
-        NSLog(@"0000000");
         [self.loading loadingViewhide];
-        
+        [self showFaildMesssage];
     }
 }
 
-#pragma mark -
-- (void)uploadFile:(NSString *)filePath{
-    __block FSPublisherController *weakSelf = self;
-    [_uploader uploadFileWithFilePath:filePath complete:^(CGFloat progress, NSString *filePath, NSDictionary * info) {
-        
-        if (weakSelf.isStickerVideoFinished) {
-            if (!info) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf.loading loadingViewhide];
-                    [weakSelf showMessage:NSLocalizedString(@"UploadFailed", nil)];
-                });
-            }
-            else {
-                NSLog(@"uploadFile: %f  %@",progress,filePath);
-                if (!_publishServer) {
-                    _publishServer = [[FSPublisherServer alloc] init];
-                    _publishServer.delegate = weakSelf;
-                }
-                
-                NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
-                [dic setValue:[FSPublishSingleton sharedInstance].loginKey forKey:@"loginKey"];
-                [dic setValue:[NSNumber numberWithInt:4] forKey:@"requestType"];
-                [dic setValue:[info objectForKey:@"dataInfo"] forKey:@"lvu"];
-                [dic setValue:weakSelf.uploadVideoPath forKey:@"vu"];
-                [dic setValue:_tempDraftInfo.vTitle?:@"" forKey:@"vd"]; //
-                [dic setValue:_firstImageUrl?:@"" forKey:@"vp"];    //image
-                [dic setValue:_webpUrl?:@"" forKey:@"vg"];   //webp
-                [dic setValue:@([[FSDraftManager  sharedManager] tempInfo].vMusic.mId) forKey:@"si"]; //歌曲id
-                [dic setValue:@([[FSDraftManager  sharedManager] tempInfo].challenge.challengeId) forKey:@"di"];  //挑战ID
-                [dic setValue:[NSArray array] forKey:@"a"];  //消息[{"ui":12815,"nk":"tttty"},{"ui":90665,"nk":"ytest"}]
-                //        [dic setValue:@"被@用户ID" forKey:@"ui"];
-                //        [dic setValue:@"用户昵称" forKey:@"nk"];
-                
-                [_publishServer publisherVideo:dic];
-            }
-            weakSelf.isStickerVideoFinished = NO;
-
-        }
-        else {
-            if(!info){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf.loading loadingViewhide];
-                    [weakSelf showMessage:NSLocalizedString(@"UploadFailed", nil)];
-                });
-            }
-            else {
-                weakSelf.uploadVideoPath = [info objectForKey:@"dataInfo"];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    weakSelf.isStickerVideoFinished = YES;
-                    [weakSelf addSticker:filePath];
-                });
-            }
-        }
-        
-    }];
-//    [_uploader uploadFileProgressWithFilePath:filePath complete:^(float progress, NSString *filePath) {
-//        
-//    }];
-}
--(void)uploadUpFiles:(NSString *)filePath progress:(float)progress{
-    NSLog(@"progress %.2f",progress);
-}
-
--(void)dealloc{
-    NSLog(@"%@ dealloc",NSStringFromClass([self class]));
-}
 
 #pragma mark - FSPublisherServerDelegate
-- (void)FSPublisherServerSucceed {
-    
+-(void)videoPublisherProgress:(CGFloat)progress{
+    NSLog(@"发布视频:更新进度:%f",progress);
+    [self.loading setLoadingText:[NSString stringWithFormat:@"%.0f%%",progress * 100]];
+}
+-(void)videoPublisherSuccess{
     [self.loading loadingViewhide];
     
     [[FSPublishSingleton sharedInstance] cleanData];
@@ -864,15 +745,25 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadSecceed"]];
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
+    _inPublish = NO;
 }
-
-- (void)FSPublisherServerFailed:(NSError *)error {
+-(void)videoPublisherFaild{
     [self.loading loadingViewhide];
-
+    
     [self deleteCurrentCompileFile:_stickerVideoPath];
     
     [[FSShortVideoRecorderManager sharedInstance] removeSticker:_timeLine];
+    
+    [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
+    
+    _inPublish = NO;
+}
 
+- (void)showSuccessMessage{
+    [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadSecceed"]];
+}
+- (void)showFaildMesssage{
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
 }
 
@@ -881,5 +772,9 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [alertView showWithMessage:message];
 }
 
+#pragma mark -
+-(void)dealloc{
+    NSLog(@"%@ dealloc",NSStringFromClass([self class]));
+}
 
 @end
