@@ -10,6 +10,9 @@
 		207781721F4C592A00499996 /* FSDraftEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 207781711F4C592A00499996 /* FSDraftEmptyView.m */; };
 		2095F7B01F370C7700230464 /* FSDraftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095F7AF1F370C7700230464 /* FSDraftTableViewCell.m */; };
 		560142B51F1868FE00A06C70 /* FSCancleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 560142B41F1868FE00A06C70 /* FSCancleController.m */; };
+		560C56621F6279B6007BE30E /* FSVideoPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = 560C56601F6279B6007BE30E /* FSVideoPublisher.h */; };
+		560C56631F6279B6007BE30E /* FSVideoPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 560C56611F6279B6007BE30E /* FSVideoPublisher.m */; };
+		560C56641F6279B6007BE30E /* FSVideoPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 560C56611F6279B6007BE30E /* FSVideoPublisher.m */; };
 		5616CC851F2B40F700028770 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 5616CC541F2B40F700028770 /* LICENSE */; };
 		5616CC861F2B40F700028770 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CC581F2B40F700028770 /* MJRefreshAutoFooter.m */; };
 		5616CC871F2B40F700028770 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5616CC5A1F2B40F700028770 /* MJRefreshBackFooter.m */; };
@@ -559,6 +562,8 @@
 		2095F7AF1F370C7700230464 /* FSDraftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftTableViewCell.m; sourceTree = "<group>"; };
 		560142B31F1868FE00A06C70 /* FSCancleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCancleController.h; sourceTree = "<group>"; };
 		560142B41F1868FE00A06C70 /* FSCancleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCancleController.m; sourceTree = "<group>"; };
+		560C56601F6279B6007BE30E /* FSVideoPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSVideoPublisher.h; sourceTree = "<group>"; };
+		560C56611F6279B6007BE30E /* FSVideoPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSVideoPublisher.m; sourceTree = "<group>"; };
 		5616CC541F2B40F700028770 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		5616CC571F2B40F700028770 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		5616CC581F2B40F700028770 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
@@ -1302,6 +1307,8 @@
 				983A47811F2620FD00FB387D /* FSAddChallengeController.m */,
 				84332CC91F614D990084D364 /* FSPublisherMaskView.h */,
 				84332CCA1F614D990084D364 /* FSPublisherMaskView.m */,
+				560C56601F6279B6007BE30E /* FSVideoPublisher.h */,
+				560C56611F6279B6007BE30E /* FSVideoPublisher.m */,
 			);
 			path = FSVideoPublisher;
 			sourceTree = "<group>";
@@ -2227,6 +2234,7 @@
 				985E87451F54481300292FEF /* FSDraftMusic.h in Headers */,
 				985E87461F54481300292FEF /* FSDraftCache.h in Headers */,
 				985E87471F54481300292FEF /* FSDraftFileManager.h in Headers */,
+				560C56621F6279B6007BE30E /* FSVideoPublisher.h in Headers */,
 				985E87481F54481300292FEF /* FSCancleController.h in Headers */,
 				985E87491F54481300292FEF /* FSFile.h in Headers */,
 				985E874A1F54481300292FEF /* FSFileSlice.h in Headers */,
@@ -2708,6 +2716,7 @@
 				9871BC3B1F0F85BA0065977A /* FSPublisherServer.m in Sources */,
 				9840603E1EF93F130049B58E /* FSShortVideoRecorderView.m in Sources */,
 				56FC37821F5D07B800EF9799 /* UINavigationBar+Awesome.m in Sources */,
+				560C56631F6279B6007BE30E /* FSVideoPublisher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2774,6 +2783,7 @@
 				985E86FD1F54479F00292FEF /* FSMusic.m in Sources */,
 				985E86FE1F54479F00292FEF /* FSMusicPlayer.m in Sources */,
 				985E86FF1F54479F00292FEF /* FSMusicCell.m in Sources */,
+				560C56641F6279B6007BE30E /* FSVideoPublisher.m in Sources */,
 				9892AF441F613579000C44A5 /* FSAddChallengeTextField.m in Sources */,
 				985E87001F54479F00292FEF /* FSSearchBar.m in Sources */,
 				985E87011F54479F00292FEF /* FSMusicHeaderView.m in Sources */,
