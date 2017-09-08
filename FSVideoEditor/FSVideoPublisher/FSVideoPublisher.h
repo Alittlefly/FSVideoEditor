@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "FSDraftInfo.h"
 
 @protocol FSVideoPublisherDelegate <NSObject>
 
@@ -20,10 +21,11 @@
 @end
 
 @interface FSVideoPublishParam : NSObject
-@property(nonatomic,strong)NSData *firstImageData;
-@property(nonatomic,strong)NSData *webpData;
+@property(nonatomic,strong)UIImage *firstImageData;
+@property(nonatomic,strong)NSString *webpPath;
 @property(nonatomic,strong)NSString *videoPath;
 @property(nonatomic,strong)NSString *videoPathWithLogo;
+@property(nonatomic,strong)FSDraftInfo *draftInfo;
 @end
 
 
@@ -37,5 +39,5 @@
 -(void)publishVideo:(FSVideoPublishParam *)param;
 
 // 杀应用 要删除一下file
--(void)terminate;
+// -(void)terminate;
 @end

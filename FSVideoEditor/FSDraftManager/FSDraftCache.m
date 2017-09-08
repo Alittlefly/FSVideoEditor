@@ -34,10 +34,9 @@
     BOOL contain = [self.draftInfos containsObject:draftInfo];
     if (!contain) {
         [self.draftInfos addObject:draftInfo];
+        NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
+        [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
     }
-    
-    NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
-    [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
 }
 -(void)deleteToLocal:(FSDraftInfo *)draftInfo{
     
@@ -50,11 +49,14 @@
         for (NSString *filePath in draftInfo.recordVideoPathArray) {
             [FSDraftFileManager deleteFile:filePath];
         }
-
-        [self.draftInfos removeObject:draftInfo];
+        if ([self.draftInfos containsObject:draftInfo]) {
+            [self.draftInfos removeObject:draftInfo];
+            
+            NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
+            [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
+        }
     }
-    NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
-    [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
+
 }
 -(void)deleteAllLocal{
     NSFileManager *defaultManager = [NSFileManager defaultManager];
