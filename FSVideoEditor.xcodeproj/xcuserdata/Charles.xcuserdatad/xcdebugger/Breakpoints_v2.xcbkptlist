@@ -61,22 +61,6 @@
             timestampString = "526534395.037991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "792"
-            endingLineNumber = "792"
-            landmarkName = "-uploadFile:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
-            timestampString = "526534395.037991"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "816"
             endingLineNumber = "816"
             landmarkName = "-uploadFile:"
@@ -192,38 +176,6 @@
             startingLineNumber = "227"
             endingLineNumber = "227"
             landmarkName = "-startMonitoring"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FSVideoEditor/FSVideoEditors/FSLocalVideoEditor/FSLocalEditorController.m"
-            timestampString = "526482931.663383"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "-saveVideoFile"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FSVideoEditor/FSVideoEditors/FSLocalVideoEditor/FSLocalEditorController.m"
-            timestampString = "526482918.120762"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "-saveVideoFile"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

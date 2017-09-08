@@ -318,7 +318,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
     _firstFrame  = [_context grabImageFromTimeline:_timeLine timestamp:0 proxyScale:nil];
     
-    if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_tempDraftInfo.vFinalPath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeLow) flags:0]){
+    if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_tempDraftInfo.vFinalPath videoResolutionGrade:(NvsCompileVideoResolutionGradeCustom) videoBitrateGrade:(NvsCompileBitrateGradeMedium) flags:0]){
         NSLog(@"11111111");
     }
     else {
@@ -773,7 +773,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     
     
-    if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:outputPath videoResolutionGrade:(NvsCompileVideoResolutionGrade720) videoBitrateGrade:(NvsCompileBitrateGradeLow) flags:0]){
+    if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:outputPath videoResolutionGrade:(NvsCompileVideoResolutionGradeCustom) videoBitrateGrade:(NvsCompileBitrateGradeMedium) flags:0]){
         NSLog(@"11111111");
     }
     else {
