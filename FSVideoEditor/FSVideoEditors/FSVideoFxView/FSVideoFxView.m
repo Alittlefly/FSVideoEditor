@@ -22,7 +22,7 @@
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        [self.layer setCornerRadius:CGRectGetHeight(frame)/2.0];
+        [self.layer setCornerRadius:5.0];
         [self.layer setMasksToBounds:YES];
         [self setBackgroundColor:FSHexRGB(0x2f323e)];
         [self setTitleColor:FSHexRGB(0xb8b9bd) forState:(UIControlStateNormal)];

@@ -213,10 +213,10 @@
             vSpeed = 1.0;
             break;
         case 3:
-            vSpeed = 1.5;
+            vSpeed = 2.0;
             break;
         case 4:
-            vSpeed = 2.0;
+            vSpeed = 3.0;
             break;
         default:
             break;
