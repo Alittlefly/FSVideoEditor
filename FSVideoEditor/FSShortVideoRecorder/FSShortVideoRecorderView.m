@@ -528,7 +528,7 @@
 
     if (!_cutMusicView) {
 //        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds audioClip:audio];
-        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds filePath:_draftInfo.vMusic.mPath startTime:_musicStartTime];
+        _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.bounds filePath:_draftInfo.vMusic.mPath startTime:_musicStartTime volume:_draftInfo.vMusicVolume];
         _cutMusicView.delegate = self;
         [self addSubview:_cutMusicView];
         _cutMusicView.hidden = YES;

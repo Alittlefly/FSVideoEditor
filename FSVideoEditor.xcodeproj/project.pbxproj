@@ -155,7 +155,6 @@
 		568709FA1F59B4C500E89B68 /* FSGlobalRefreshFooter.h in Headers */ = {isa = PBXBuildFile; fileRef = 568709F81F59B4C500E89B68 /* FSGlobalRefreshFooter.h */; };
 		568709FB1F59B4C500E89B68 /* FSGlobalRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 568709F91F59B4C500E89B68 /* FSGlobalRefreshFooter.m */; };
 		568709FF1F59B51000E89B68 /* UIView+AniMation.m in Sources */ = {isa = PBXBuildFile; fileRef = 568709FE1F59B51000E89B68 /* UIView+AniMation.m */; };
-		56933EA11F45912C00AEF683 /* 198-14-f6192de5110aed067060b4010c648cac.lic in Resources */ = {isa = PBXBuildFile; fileRef = 56933EA01F45912C00AEF683 /* 198-14-f6192de5110aed067060b4010c648cac.lic */; };
 		56F502621F2AEF13004AE0A4 /* FSMusicSearchAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 56F502611F2AEF13004AE0A4 /* FSMusicSearchAPI.m */; };
 		56FC377F1F5D060900EF9799 /* FSMusicDeatilController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56FC377E1F5D060900EF9799 /* FSMusicDeatilController.m */; };
 		56FC37821F5D07B800EF9799 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 56FC37811F5D07B800EF9799 /* UINavigationBar+Awesome.m */; };
@@ -409,7 +408,6 @@
 		985E87901F54481300292FEF /* FSControlVolumeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 988AC6E61F010B0D007FBCEF /* FSControlVolumeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		985E87911F54481300292FEF /* FSCutMusicView.h in Headers */ = {isa = PBXBuildFile; fileRef = 987ECEE61F04F92D00221273 /* FSCutMusicView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		985E87921F54489400292FEF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 987B58BC1F0E796E00E85A37 /* Localizable.strings */; };
-		985E87931F54489400292FEF /* 198-14-f6192de5110aed067060b4010c648cac.lic in Resources */ = {isa = PBXBuildFile; fileRef = 56933EA01F45912C00AEF683 /* 198-14-f6192de5110aed067060b4010c648cac.lic */; };
 		985E87941F54489400292FEF /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */ = {isa = PBXBuildFile; fileRef = 9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */; };
 		985E87951F54489400292FEF /* 07D3BBED-1276-42A6-577A-04A36100FA1A.animatedsticker in Resources */ = {isa = PBXBuildFile; fileRef = 980808C51F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.animatedsticker */; };
 		985E87961F54489400292FEF /* 07D3BBED-1276-42A6-577A-04A36100FA1A.lic in Resources */ = {isa = PBXBuildFile; fileRef = 980808C61F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.lic */; };
@@ -471,6 +469,7 @@
 		988AC6E91F010B0D007FBCEF /* FSControlVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */; };
 		988E3D1D1F026D78004E837F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 988E3D1C1F026D78004E837F /* libstdc++.tbd */; };
 		988E3D271F0271A1004E837F /* FSTimeCountsdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */; };
+		988EB3AD1F62C42900BE06B5 /* 198-14-0f022a4d5bfa12d379d469e146c1e9bf.lic in Resources */ = {isa = PBXBuildFile; fileRef = 988EB3AC1F62C42900BE06B5 /* 198-14-0f022a4d5bfa12d379d469e146c1e9bf.lic */; };
 		9892AF421F613579000C44A5 /* FSAddChallengeTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 9892AF401F613579000C44A5 /* FSAddChallengeTextField.h */; };
 		9892AF431F613579000C44A5 /* FSAddChallengeTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9892AF411F613579000C44A5 /* FSAddChallengeTextField.m */; };
 		9892AF441F613579000C44A5 /* FSAddChallengeTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9892AF411F613579000C44A5 /* FSAddChallengeTextField.m */; };
@@ -829,7 +828,6 @@
 		568709F91F59B4C500E89B68 /* FSGlobalRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSGlobalRefreshFooter.m; sourceTree = "<group>"; };
 		568709FD1F59B51000E89B68 /* UIView+AniMation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AniMation.h"; sourceTree = "<group>"; };
 		568709FE1F59B51000E89B68 /* UIView+AniMation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AniMation.m"; sourceTree = "<group>"; };
-		56933EA01F45912C00AEF683 /* 198-14-f6192de5110aed067060b4010c648cac.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-f6192de5110aed067060b4010c648cac.lic"; sourceTree = "<group>"; };
 		56F502601F2AEF13004AE0A4 /* FSMusicSearchAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicSearchAPI.h; sourceTree = "<group>"; };
 		56F502611F2AEF13004AE0A4 /* FSMusicSearchAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicSearchAPI.m; sourceTree = "<group>"; };
 		56FC377D1F5D060900EF9799 /* FSMusicDeatilController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicDeatilController.h; sourceTree = "<group>"; };
@@ -974,6 +972,7 @@
 		988E3D1C1F026D78004E837F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		988E3D211F0271A1004E837F /* FSTimeCountsdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTimeCountsdownView.h; sourceTree = "<group>"; };
 		988E3D221F0271A1004E837F /* FSTimeCountsdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTimeCountsdownView.m; sourceTree = "<group>"; };
+		988EB3AC1F62C42900BE06B5 /* 198-14-0f022a4d5bfa12d379d469e146c1e9bf.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "198-14-0f022a4d5bfa12d379d469e146c1e9bf.lic"; sourceTree = "<group>"; };
 		9892AF401F613579000C44A5 /* FSAddChallengeTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAddChallengeTextField.h; sourceTree = "<group>"; };
 		9892AF411F613579000C44A5 /* FSAddChallengeTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSAddChallengeTextField.m; sourceTree = "<group>"; };
 		98C1E5241F419D4400AA48A0 /* encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encode.h; sourceTree = "<group>"; };
@@ -1360,6 +1359,7 @@
 		562D406E1EFE4D2000BF0E0D /* FSVideoFxSource */ = {
 			isa = PBXGroup;
 			children = (
+				988EB3AC1F62C42900BE06B5 /* 198-14-0f022a4d5bfa12d379d469e146c1e9bf.lic */,
 				9828E01D1F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker */,
 				9828E01E1F5D856200BE5072 /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.lic */,
 				9828E01F1F5D856200BE5072 /* E7A12520-4A53-427E-9E73-986E4635B57C.1.animatedsticker */,
@@ -1367,7 +1367,6 @@
 				98EA628C1F56D0920086FD62 /* 198-14-967dfb58745c59c1c409616af7ca27b3.lic */,
 				98EA628D1F56D0920086FD62 /* 198-14-ec294b7a1c8bbc37aaf8586dcc7cfbf0.lic */,
 				98D8A60B1F55433400003EB2 /* filtesr */,
-				56933EA01F45912C00AEF683 /* 198-14-f6192de5110aed067060b4010c648cac.lic */,
 				9871BC361F0F7EE00065977A /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic */,
 				980808C51F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.animatedsticker */,
 				980808C61F3D998F00C0EAE7 /* 07D3BBED-1276-42A6-577A-04A36100FA1A.lic */,
@@ -2436,7 +2435,7 @@
 				563E66AA1F53C80B00EE2298 /* black_magic.gif in Resources */,
 				567A3D611EFB6F830026247E /* LICENSE.txt in Resources */,
 				5634C81D1F3C688F00469B50 /* 33F513E5-5CA2-4C23-A6D4-8466202EE698.videofx in Resources */,
-				56933EA11F45912C00AEF683 /* 198-14-f6192de5110aed067060b4010c648cac.lic in Resources */,
+				988EB3AD1F62C42900BE06B5 /* 198-14-0f022a4d5bfa12d379d469e146c1e9bf.lic in Resources */,
 				98D8A63B1F55433400003EB2 /* 83350933-EBA9-4947-A226-BE1DDA953902.lic in Resources */,
 				5648257D1F1E30F700C1889D /* 6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.videofx in Resources */,
 				562D40721EFE4FD900BF0E0D /* A8A4344D-45DA-460F-A18F-C0E2355FE864.videofx in Resources */,
@@ -2497,7 +2496,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				985E87921F54489400292FEF /* Localizable.strings in Resources */,
-				985E87931F54489400292FEF /* 198-14-f6192de5110aed067060b4010c648cac.lic in Resources */,
 				985E87941F54489400292FEF /* 198-14-fecf5c838a33c8b7a27de9790aa3fa96.lic in Resources */,
 				98AC84751F5E815F000B289B /* A5DF06BA-9A76-4DA1-9F04-6C7BC48C5071.1.animatedsticker in Resources */,
 				985E87951F54489400292FEF /* 07D3BBED-1276-42A6-577A-04A36100FA1A.animatedsticker in Resources */,

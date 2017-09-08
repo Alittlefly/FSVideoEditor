@@ -132,12 +132,19 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [_musicListView reload];
+    if (_currentType == FSMusicButtonTypeLike) {
+        _currentCollectPage = 1;
+        [_collectSever getLikedMusicsList:_currentCollectPage];
+        [self.musicListView showLoading:YES];
+    }
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
     [_musicListView stopPlayCurrentMusic];
     
+    [_collectedMusics removeAllObjects];
+
     if ([self.delegate respondsToSelector:@selector(musicControllerHideen)]) {
         [self.delegate musicControllerHideen];
     }
@@ -244,42 +251,42 @@
 
 - (void)musicListUpdateCollectState:(FSMusic *)music {
     
-    for (FSMusic *oldMusic in self.musics) {
-        if (oldMusic.songId == music.songId) {
-            oldMusic.collected = music.collected;
-        }
-    }
-    
-    if (music.collected) {
-        if (_currentType == FSMusicButtonTypeHot) {
-            BOOL isCollected = NO;
-            for (FSMusic *oldMusic in self.collectedMusics) {
-                if (oldMusic.songId == music.songId) {
-                    isCollected = YES;
-                    break;
-                }
-            }
-            if (!isCollected) {
-                [self.collectedMusics addObject:music];
-            }
-        }
-        else if (_currentType == FSMusicButtonTypeLike) {
-            for (FSMusic *oldMusic in self.collectedMusics) {
-                if (oldMusic.songId == music.songId) {
-                    oldMusic.collected = music.collected;
-                }
-            }
-        }
-        
-    }
-    else {
-        for (FSMusic *oldMusic in self.collectedMusics) {
-            if (oldMusic.songId == music.songId) {
-                [self.collectedMusics removeObject:oldMusic];
-                break;
-            }
-        }
-    }
+//    for (FSMusic *oldMusic in self.musics) {
+//        if (oldMusic.songId == music.songId) {
+//            oldMusic.collected = music.collected;
+//        }
+//    }
+//    
+//    if (music.collected) {
+//        if (_currentType == FSMusicButtonTypeHot) {
+//            BOOL isCollected = NO;
+//            for (FSMusic *oldMusic in self.collectedMusics) {
+//                if (oldMusic.songId == music.songId) {
+//                    isCollected = YES;
+//                    break;
+//                }
+//            }
+//            if (!isCollected) {
+//                [self.collectedMusics addObject:music];
+//            }
+//        }
+//        else if (_currentType == FSMusicButtonTypeLike) {
+//            for (FSMusic *oldMusic in self.collectedMusics) {
+//                if (oldMusic.songId == music.songId) {
+//                    oldMusic.collected = music.collected;
+//                }
+//            }
+//        }
+//        
+//    }
+//    else {
+//        for (FSMusic *oldMusic in self.collectedMusics) {
+//            if (oldMusic.songId == music.songId) {
+//                [self.collectedMusics removeObject:oldMusic];
+//                break;
+//            }
+//        }
+//    }
 }
 
 #pragma mark -
@@ -349,13 +356,10 @@
         }else{
             [_musicListView setMusics:[self.musics copy]];
         }
+        [self.collectedMusics removeAllObjects];
     }else{
-        if ([self.collectedMusics count] == 0) {
-            [_collectSever getLikedMusicsList:1];
-            [self.musicListView showLoading:YES];
-        }else{
-            [_musicListView setMusics:[self.collectedMusics copy]];
-        }
+        [_collectSever getLikedMusicsList:1];
+        [self.musicListView showLoading:YES];
     }
 
 }
