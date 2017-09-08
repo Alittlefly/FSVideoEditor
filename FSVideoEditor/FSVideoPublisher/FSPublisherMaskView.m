@@ -37,7 +37,7 @@
         _bottomLayer.startPoint = CGPointMake(0, 0.0);
         _bottomLayer.endPoint = CGPointMake(0, 1.0);
         _bottomLayer.colors = @[(__bridge id)FSHexRGBAlpha(0xffffff, 0.0).CGColor,
-                                (__bridge id)FSHexRGBAlpha(0x000000, 1.0).CGColor];
+                                (__bridge id)FSHexRGBAlpha(0x000000, 0.2).CGColor];
     }
     return _bottomLayer;
 }
