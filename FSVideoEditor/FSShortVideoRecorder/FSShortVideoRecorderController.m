@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) FSShortVideoRecorderView *recorderView;
 @property (nonatomic, strong) FSFilterView *filterView;
+@property (nonatomic, assign) BOOL isCurrentView;
 
 @end
 
@@ -30,6 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor blackColor];
     // Do any additional setup after loading the view.
      _tempInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
@@ -41,14 +43,15 @@
 }
 
 - (void)becomeActive {
-    if (_recorderView) {
+    if (_recorderView &&  _isCurrentView) {
         [_recorderView resumeCapturePreview];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    _isCurrentView = YES;
+
     [self.navigationController setNavigationBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     
@@ -61,7 +64,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
+    _isCurrentView = NO;
+
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     
     [[FSMusicPlayer sharedPlayer] setRate:1.0];
