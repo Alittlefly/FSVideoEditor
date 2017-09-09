@@ -77,7 +77,6 @@
 
 @property (nonatomic, assign) CGFloat currentVideoTime;
 
-@property (nonatomic, strong) CAGradientLayer *gradientlayer;
 
 
 @end
@@ -106,22 +105,6 @@
     }
 }
 
--(CAGradientLayer *)gradientlayer
-{
-    if (!_gradientlayer) {
-        _gradientlayer = [CAGradientLayer layer];
-        _gradientlayer.colors = @[(__bridge id)FSHexRGBAlpha(0x000000, 0.3).CGColor,
-                                  
-                                  (__bridge id)FSHexRGBAlpha(0x000000, 0.0).CGColor];
-        
-        _gradientlayer.locations = @[@(0.0),@(1)];
-        [_gradientlayer setStartPoint:CGPointMake(0, 0)];
-        [_gradientlayer setEndPoint:CGPointMake(0, 1)];
-    }
-    
-    
-    return _gradientlayer;
-}
 
 - (instancetype)initWithFrame:(CGRect)frame draftInfo:(FSDraftInfo *)draftInfo {
     if (self = [super initWithFrame:frame]) {
@@ -157,8 +140,6 @@
     [self addSubview:_recorderView];
     //[_recorderManager resumeCapturePreview];
     
-    self.gradientlayer.frame = CGRectMake(0, 0, self.frame.size.width, 110);
-    [_recorderView.layer addSublayer:self.gradientlayer];
     
     
     [_recorderManager switchBeauty:_isBeautyOpened];

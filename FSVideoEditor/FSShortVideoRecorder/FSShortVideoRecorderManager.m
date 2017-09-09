@@ -13,6 +13,7 @@
 #import "NvsTimelineAnimatedSticker.h"
 #import "FSShortLanguage.h"
 #import "FSPublishSingleton.h"
+#import "FSVideoEditorCommenData.h"
 
 #define MaxVideoTime 15
 
@@ -35,6 +36,9 @@
 @property (nonatomic, strong) FSDraftInfo *draftInfo;
 
 @property (nonatomic, strong) NSMutableDictionary *filtersDic;
+
+@property (nonatomic, strong) CAGradientLayer *gradientlayer;
+
 
 @end
 
@@ -69,6 +73,7 @@ static FSShortVideoRecorderManager *recorderManager;
 - (NvsLiveWindow *)liveWindow {
     if (!_liveWindow) {
         _liveWindow = [[NvsLiveWindow alloc] init];
+        [_liveWindow.layer addSublayer:self.gradientlayer];
         //        _liveWindow.backgroundColor = [UIColor blueColor];
     }
     return _liveWindow;
@@ -159,7 +164,7 @@ static FSShortVideoRecorderManager *recorderManager;
     
     NSLog(@"verify:%@  %D",verifySdkLicenseFilePath,isOK);
     // 初始化NvsStreamingContext
-    _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
+    _context = [NvsStreamingContext sharedInstance];
     
     
     // 可用采集设备的数量
@@ -179,7 +184,7 @@ static FSShortVideoRecorderManager *recorderManager;
     
     _context.delegate = self;
     
-    [self getSticker];
+   // [self getSticker];
 }
 
 - (void)initStickerData {
@@ -247,6 +252,25 @@ static FSShortVideoRecorderManager *recorderManager;
         _videoTrack = [self.timeLine appendVideoTrack];
     }
     return _videoTrack;
+}
+
+-(CAGradientLayer *)gradientlayer
+{
+    if (!_gradientlayer) {
+        _gradientlayer = [CAGradientLayer layer];
+        _gradientlayer.colors = @[(__bridge id)FSHexRGBAlpha(0x000000, 0.3).CGColor,
+                                  
+                                  (__bridge id)FSHexRGBAlpha(0x000000, 0.0).CGColor];
+        
+        _gradientlayer.locations = @[@(0.0),@(1)];
+        [_gradientlayer setStartPoint:CGPointMake(0, 0)];
+        [_gradientlayer setEndPoint:CGPointMake(0, 1)];
+        _gradientlayer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 110);
+
+    }
+    
+    
+    return _gradientlayer;
 }
 
 - (NvsLiveWindow *)getLiveWindow {
@@ -814,7 +838,8 @@ static FSShortVideoRecorderManager *recorderManager;
     [self.mConvertor stop];
     [self.mConvertor close];
     
-    
+    [self setupConvertor:_videoFilePath];
+    return;
     dispatch_async(dispatch_get_main_queue(), ^{
         NSFileManager* fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:_convertorFilePath] == NO)
