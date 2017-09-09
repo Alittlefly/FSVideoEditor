@@ -184,7 +184,7 @@ static FSShortVideoRecorderManager *recorderManager;
     
     _context.delegate = self;
     
-   // [self getSticker];
+    [self getSticker];
 }
 
 - (void)initStickerData {
@@ -838,8 +838,6 @@ static FSShortVideoRecorderManager *recorderManager;
     [self.mConvertor stop];
     [self.mConvertor close];
     
-    [self setupConvertor:_videoFilePath];
-    return;
     dispatch_async(dispatch_get_main_queue(), ^{
         NSFileManager* fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:_convertorFilePath] == NO)
