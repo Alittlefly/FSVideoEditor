@@ -20,4 +20,5 @@
 @property(nonatomic,strong)NSString *mName;
 @property(nonatomic,strong)NSString *mPic;
 -(instancetype)initWithMusic:(FSMusic *)music;
+-(FSMusic *)orginalMusic;
 @end

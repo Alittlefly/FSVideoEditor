@@ -171,6 +171,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 
     [_toolView canEditMusic:haveMusic];
+    
+    if (_tempDraftInfo.vMusic) {
+        [_toolView updateMusicInfo:[_tempDraftInfo.vMusic orginalMusic]];
+    }
+
 
     // 音频
     if (haveMusic) {

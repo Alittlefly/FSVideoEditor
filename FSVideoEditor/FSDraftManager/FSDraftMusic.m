@@ -18,9 +18,18 @@
         self.mInPoint = 0;
         self.mOutPoint = music.lastSeconds;
         self.mUrl = music.songUrl;
-        
     }
     return self;
+}
+-(FSMusic *)orginalMusic{
+    FSMusic *music = [[FSMusic alloc] init];
+    music.songId = self.mId;
+    music.songTitle = self.mName;
+    music.songPic = self.mPic;
+    music.lastSeconds = self.mOutPoint;
+    music.songUrl = self.mUrl;
+    
+    return music;
 }
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
 
