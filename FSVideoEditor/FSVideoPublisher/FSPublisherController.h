@@ -15,7 +15,6 @@
 
 @interface FSPublisherController : UIViewController
 
-@property (nonatomic,assign) NvsTimeline *timeLine;
 
 @property(nonatomic,strong)FSDraftInfo *draftInfo;
 @property(nonatomic,strong)NvsLiveWindow *prewidow;

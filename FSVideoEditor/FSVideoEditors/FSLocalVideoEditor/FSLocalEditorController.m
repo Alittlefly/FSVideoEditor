@@ -145,50 +145,15 @@
 
 - (void)saveVideoFile{
     
-//    NvsVideoClip *videoclip = [_videoTrack getClipWithIndex:0];
-//    int64_t startTime = _originalStartTime;
-//    int64_t endTime = _originalEndTime;
-    
-//    if (endTime - startTime > _maxDurationLength) {
-//        endTime = startTime + _maxDurationLength;
-//    }
-//    
-//    [videoclip changeTrimInPoint:startTime affectSibling:NO];
-//    [videoclip changeTrimOutPoint:endTime affectSibling:NO];
-//    
-//    NvsAudioClip *audioClip = [_audioTrack getClipWithIndex:0];
-//    [audioClip changeTrimInPoint:startTime affectSibling:NO];
-//    [audioClip changeTrimOutPoint:endTime affectSibling:NO];
-
     if (_endTime - _startTime > _maxDurationLength) {
         _endTime = _startTime + _maxDurationLength;
     }
-    
-    BOOL split =  [_videoTrack splitClip:0 splitPoint:_startTime];
-    if (split) {
-        [_videoTrack removeClip:0 keepSpace:NO];
-    }
-    split = [_videoTrack splitClip:0 splitPoint:(_endTime - _startTime)];
-    if (split) {
-        [_videoTrack removeClip:1 keepSpace:NO];
-    }
-    
-    split = [_audioTrack splitClip:0 splitPoint:_startTime];
-    if (split) {
-        [_audioTrack removeClip:0 keepSpace:NO];
-    }
-    
-    split = [_audioTrack splitClip:0 splitPoint:(_endTime - _startTime)];
-    if (split) {
-        [_audioTrack removeClip:1 keepSpace:NO];
-    }
-    
 
     [self.view addSubview:self.loading];
     [self.loading loadingViewShow];
     
      _outPutFilePath = [self getCompilePath];
-   BOOL success = [_context compileTimeline:_timeLine startTime:0 endTime:_timeLine.duration outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGradeCustom) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0];
+   BOOL success = [_context compileTimeline:_timeLine startTime:_startTime endTime:_endTime outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGradeCustom) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0];
     if (!success) {
         [self.loading loadingViewhide];
     }
@@ -393,7 +358,6 @@
     _draftInfo.vConvertPath = filePath;
     
     publish.draftInfo = _draftInfo;
-    publish.timeLine = _timeLine;
     
     [[FSDraftManager sharedManager] mergeInfo];
     [[FSDraftManager sharedManager] clearInfo];

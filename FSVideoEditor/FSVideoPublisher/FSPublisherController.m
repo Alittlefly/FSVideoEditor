@@ -77,6 +77,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 @property (nonatomic, assign) BOOL isStickerVideoFinished;
 @property (nonatomic, copy) NSString *uploadVideoPath;
+@property (nonatomic, strong) NvsTimeline *timeLine;
+
 
 @end
 
