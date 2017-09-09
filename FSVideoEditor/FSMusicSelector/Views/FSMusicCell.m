@@ -99,6 +99,10 @@
 @end
 @implementation FSMusicCell
 static NSString *identifier = @"FSMusicCell";
+-(void)clickMusicDetail{}
+-(void)clickCollect{}
+-(void)clickUseMusic{}
+-(void)clickPlayMusic{}
 +(instancetype)musicCellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath{
     
     [tableView registerClass:[FSMusicCell class] forCellReuseIdentifier:identifier];
@@ -244,11 +248,14 @@ static NSString *identifier = @"FSMusicCell";
     if ([self.delegate respondsToSelector:@selector(musicCell:wouldPlay:)]) {
         [self.delegate musicCell:self wouldPlay:_music];
     }
+    
+    [self clickPlayMusic];
 }
 -(void)useMusic:(UIButton *)button{
     if ([self.delegate respondsToSelector:@selector(musicCell:wuoldUseMusic:)]) {
         [self.delegate musicCell:self wuoldUseMusic:_music];
     }
+    [self clickUseMusic];
 }
 -(void)collectMusic:(UIButton *)button{
     _music.collected = !_music.collected;
@@ -256,11 +263,15 @@ static NSString *identifier = @"FSMusicCell";
     if ([self.delegate respondsToSelector:@selector(musicCell:wouldCollect:)]) {
         [self.delegate musicCell:self wouldCollect:_music];
     }
+    
+    [self clickCollect];
 }
 -(void)showDetail:(UIButton *)button{
     if ([self.delegate respondsToSelector:@selector(musicCell:wouldShowDetail:)]) {
         [self.delegate musicCell:self wouldShowDetail:_music];
     }
+    
+    [self clickMusicDetail];
 }
 
 @end

@@ -46,6 +46,19 @@
 @end
 
 @implementation FSMusicController
+- (void)searchMusic{}
+- (void)clickHotMusic{}
+- (void)clickCollectMusic{}
+- (void)clickHotDetail{}
+- (void)clickHotUseMusic{}
+- (void)clickHotCollect{}
+- (void)clickHotPlay{}
+
+- (void)clickFaveDeatil{}
+- (void)clickFaveUseMusic{}
+- (void)clickFaveCollect{}
+- (void)clickFavePlay{}
+
 -(NSMutableArray *)collectedMusics{
     if (!_collectedMusics) {
         _collectedMusics = [NSMutableArray array];
@@ -58,6 +71,7 @@
     }
     return _musics;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -184,7 +198,9 @@
     [_resultView setMusics:nil];
     _searchPage = 1;
     [_sever getMusicListWithSearchKey:trimText no:_searchPage];
+    [self searchMusic];
 }
+
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     
@@ -208,6 +224,13 @@
 }
 
 #pragma mark -
+- (void)musicListViewWouldPlay:(FSMusic *)music{
+    if (_currentType == FSMusicButtonTypeHot) {
+        [self clickHotPlay];
+    }else{
+        [self clickFavePlay];
+    }
+}
 -(void)musicListWouldUseMusic:(FSMusic *)music musicPath:(NSString *)musicPath{
     
     [FSPublishSingleton sharedInstance].chooseMusic = music;
@@ -222,9 +245,21 @@
         [self.navigationController pushViewController:recoder animated:YES];
     }
     
+    if (_currentType == FSMusicButtonTypeHot) {
+        [self clickHotUseMusic];
+    }else{
+        [self clickFaveUseMusic];
+    }
     // 
 }
 -(void)musicListWouldShowDetail:(FSMusic *)music{
+    
+    if (_currentType == FSMusicButtonTypeHot) {
+        [self clickHotDetail];
+    }else{
+        [self clickFaveDeatil];
+    }
+    
     if ([self.delegate respondsToSelector:@selector(musicControllerWouldShowMusicDetail:)]) {
         UIViewController *viewController = [self.delegate musicControllerWouldShowMusicDetail:music];
         if (viewController) {
@@ -250,6 +285,12 @@
 }
 
 - (void)musicListUpdateCollectState:(FSMusic *)music {
+    
+    if (_currentType == FSMusicButtonTypeHot) {
+        [self clickHotCollect];
+    }else{
+        [self clickFaveCollect];
+    }
     
 //    for (FSMusic *oldMusic in self.musics) {
 //        if (oldMusic.songId == music.songId) {
@@ -349,6 +390,8 @@
     _currentType = type;
 
     if (type == FSMusicButtonTypeHot) {
+        
+        [self clickHotMusic];
         
         if ([self.musics count] == 0) {
             [_sever getMusicListPage:1];

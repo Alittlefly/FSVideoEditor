@@ -175,7 +175,10 @@
     FSShortVideoRecorderController *svc = [[FSShortVideoRecorderController alloc] init];
     [self.navigationController pushViewController:svc animated:YES];
 }
-
+// 统计
+-(void)clickUploadVideo{}
+-(void)clickMusicButton{}
+-(void)clickRecordButton{}
 - (void)clickButton:(UIButton *)button{
     
     if (button.tag == 1) {
@@ -186,7 +189,7 @@
         [_currentButton setSelected:YES];
         
         if (button.tag == 2) {
-            
+            [self clickMusicButton];
         }else if (button.tag == 3){
             if (!_localView) {
                  _localView = [[FSLocalVideoController alloc] init];
@@ -195,6 +198,7 @@
                 [self addChildViewController:_localView];
             }
             [self stopPlayer];
+            [self clickUploadVideo];
         }
     
         
@@ -235,6 +239,7 @@
 
 #pragma mark -
 -(UIViewController *)musicControllerWouldShowMusicDetail:(FSMusic *)music{
+    
     UIViewController *deatilController = nil;
     
     if ([self.delegate respondsToSelector:@selector(musicDetailControllerWithMusic:)]) {

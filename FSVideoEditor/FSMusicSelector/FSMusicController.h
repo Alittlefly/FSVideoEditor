@@ -36,4 +36,20 @@
 @property(nonatomic,assign)BOOL pushed;
 
 - (void)stopPlayCurrentMusic;
+
+
+- (void)searchMusic;
+- (void)clickHotMusic;
+- (void)clickCollectMusic;
+
+- (void)clickHotDetail;
+- (void)clickHotUseMusic;
+- (void)clickHotCollect;
+- (void)clickHotPlay;
+
+- (void)clickFaveDeatil;
+- (void)clickFaveUseMusic;
+- (void)clickFaveCollect;
+- (void)clickFavePlay;
+
 @end

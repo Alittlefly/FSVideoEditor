@@ -21,6 +21,8 @@
 
 - (void)musicListUpdateCollectState:(FSMusic *)music;
 
+- (void)musicListViewWouldPlay:(FSMusic *)music;
+
 @end
 
 @interface FSMusicListView : UIView

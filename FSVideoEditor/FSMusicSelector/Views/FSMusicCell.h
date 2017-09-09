@@ -27,4 +27,11 @@
 @property(nonatomic,strong)FSMusic * music;
 @property(nonatomic,assign)BOOL isPlayIng;
 +(instancetype)musicCellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
+
+-(void)clickMusicDetail;
+-(void)clickCollect;
+-(void)clickUseMusic;
+-(void)clickPlayMusic;
+
+
 @end

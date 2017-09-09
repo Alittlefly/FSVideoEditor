@@ -20,4 +20,7 @@
 
 @property(nonatomic,assign)id<FSToolControllerDelegate>delegate;
 
+-(void)clickUploadVideo;
+-(void)clickMusicButton;
+-(void)clickRecordButton;
 @end
