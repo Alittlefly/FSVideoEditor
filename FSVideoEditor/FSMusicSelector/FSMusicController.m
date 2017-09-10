@@ -167,6 +167,7 @@
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     NSLog(@"searchBarShouldBeginEditing ");
     [_searchBar setShowCancle:YES];
+    [_resultView setMusics:[NSArray array]];
     [_resultView setHidden:NO];
     
     [_musicListView stopPlayCurrentMusic];
