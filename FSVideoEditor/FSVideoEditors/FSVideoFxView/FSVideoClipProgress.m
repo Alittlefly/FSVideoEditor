@@ -261,11 +261,21 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
         }
         
         [self updateLineFrame];
+        
+        CGFloat outProgress = _needConvert?(1-_progress):_progress;
+        if(outProgress == 1.0){
+            [self endFxView];
+            return;
+        }
     }
 }
 #pragma mark -
 -(void)beginFxView{
     CGFloat outProgress = _needConvert?(1-_progress):_progress;
+    if(outProgress == 1.0){
+        [self endFxView];
+        return;
+    }
     
     if ([self.delegate respondsToSelector:@selector(videoClipProgressStartSelect:)]) {
         [self.delegate videoClipProgressStartSelect:MIN(1, MAX(outProgress, 0))];
