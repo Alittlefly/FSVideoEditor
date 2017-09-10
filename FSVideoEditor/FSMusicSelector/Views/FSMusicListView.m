@@ -251,9 +251,8 @@
     if (_music && _music.isPlaying) {
         _music.isPlaying = NO;
         _music.opend = NO;
-        [[FSMusicPlayer sharedPlayer] stop];
     }
-
+    [[FSMusicPlayer sharedPlayer] stop];
     [_tableView reloadData];
 }
 @end

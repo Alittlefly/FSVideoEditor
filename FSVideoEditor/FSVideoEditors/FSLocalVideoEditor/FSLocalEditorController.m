@@ -45,6 +45,8 @@
     FSDraftInfo *_draftInfo;
     
     NSInteger _currentSpeedIndex;
+    
+    BOOL _isSaveIng;
 
 }
 @property(nonatomic,strong)FSThumbnailView *thumbContent;
@@ -84,8 +86,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor blackColor]];
-//    
-//    _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.view.bounds)/2.0 - 210/2.0, CGRectGetWidth(self.view.bounds), 210)];
+
     _prewidow = [[NvsLiveWindow alloc] initWithFrame:self.view.bounds];
     _prewidow.fillMode = NvsLiveWindowFillModePreserveAspectCrop;
     [self.view addSubview:_prewidow];
@@ -151,11 +152,12 @@
 
     [self.view addSubview:self.loading];
     [self.loading loadingViewShow];
-    
+    _isSaveIng = YES;
      _outPutFilePath = [self getCompilePath];
    BOOL success = [_context compileTimeline:_timeLine startTime:_startTime endTime:_endTime outputFilePath:_outPutFilePath videoResolutionGrade:(NvsCompileVideoResolutionGradeCustom) videoBitrateGrade:(NvsCompileBitrateGradeHigh) flags:0];
     if (!success) {
         [self.loading loadingViewhide];
+        _isSaveIng = NO;
     }
 }
 
@@ -174,6 +176,9 @@
 }
 
 - (void)playVideoFromHead{
+    if (_isSaveIng) {
+        return;
+    }
     
     if (![_context seekTimeline:_timeLine timestamp:_startTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
         NSLog(@"Failed to seek timeline!");
@@ -224,10 +229,14 @@
     _currentSpeedIndex = index;
     
     NvsClip *clip = [_videoTrack getClipWithIndex:0];
-    [clip changeSpeed:vSpeed];
+    if (clip) {
+        [clip changeSpeed:vSpeed];
+    }
     
     NvsClip *audio = [_audioTrack getClipWithIndex:0];
-    [audio changeSpeed:vSpeed];
+    if (audio) {
+        [audio changeSpeed:vSpeed];
+    }
     
     _draftInfo.vSpeed = vSpeed;
     _startTime = _originalStartTime / vSpeed;
@@ -254,8 +263,7 @@
     NvsVideoClip* clip = [_videoTrack insertClip:_filePath clipIndex:0];
     [clip setSourceBackgroundMode:NvsSourceBackgroundModeBlur];
     [clip setVolumeGain:0 rightVolumeGain:0];
-    [clip changeTrimInPoint:0 affectSibling:YES];
-    [clip changeTrimOutPoint:_timeLine.duration affectSibling:YES];
+    
     [_audioTrack insertClip:_filePath clipIndex:0];
     
     _startTime = 0.0;
@@ -315,8 +323,6 @@
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    
-
     if ([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped) {
         [_context stop];
     }
@@ -336,6 +342,7 @@
 
 -(void)didCompileFailed:(NvsTimeline *)timeline{
     [self.loading loadingViewhide];
+    _isSaveIng = NO;
 }
 -(void)didCompileFinished:(NvsTimeline *)timeline{
     
@@ -356,6 +363,7 @@
     _draftInfo.vType = FSDraftInfoTypeVideo;
     _draftInfo.vFinalPath = _outPutFilePath;
     _draftInfo.vConvertPath = filePath;
+    _isSaveIng = NO;
     
     publish.draftInfo = _draftInfo;
     
@@ -366,6 +374,7 @@
 }
 - (void)FSShortVideoRecorderManagerConvertorFaild{
     [self.loading loadingViewhide];
+    _isSaveIng = NO;
 }
 
 #pragma mark -
