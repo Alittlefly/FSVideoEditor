@@ -222,6 +222,7 @@
 }
 - (void)stopPlayCurrentMusic {
     [_musicListView stopPlayCurrentMusic];
+    [_resultView stopPlayCurrentMusic];
 }
 
 #pragma mark -
@@ -386,6 +387,7 @@
         [[FSMusicPlayer sharedPlayer] stop];
         
         [_musicListView stopPlayCurrentMusic];
+        [_resultView stopPlayCurrentMusic];
     }
     
     _currentType = type;
