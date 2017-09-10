@@ -20,7 +20,7 @@
         [model setName:[dic objectForKey:@"dn"]];
         [model setContent:[dic objectForKey:@"dd"]];
         
-        CGSize size = [model.content boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width-40-12-5, 999) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+        CGSize size = [model.content boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width-40-12-5, 999) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
         model.cellHeight = ceilf(size.height)+50;
         
         [dataArray addObject:model];
