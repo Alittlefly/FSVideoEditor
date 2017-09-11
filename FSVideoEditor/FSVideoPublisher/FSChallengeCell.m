@@ -61,6 +61,7 @@
     _descripLabel.backgroundColor = [UIColor clearColor];
     _descripLabel.textAlignment = NSTextAlignmentLeft;
     _descripLabel.textColor = FSHexRGB(0x292929);
+    _descripLabel.numberOfLines = 0;
     _descripLabel.font = [UIFont systemFontOfSize:14];
     [self addSubview:_descripLabel];
 
@@ -100,8 +101,8 @@
         _titleLabel.text = challengeModel.name;
         
         _descripLabel.text = challengeModel.content;
-        [_descripLabel sizeToFit];
-        _descripLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : CGRectGetMinX(_titleLabel.frame), CGRectGetMaxY(_titleLabel.frame)+5, _descripLabel.frame.size.width, _descripLabel.frame.size.height);
+        CGSize size = [challengeModel.content boundingRectWithSize:CGSizeMake(_descripLabel.frame.size.width, 999) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:_descripLabel.font} context:nil].size;
+        _descripLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : CGRectGetMinX(_titleLabel.frame), CGRectGetMaxY(_titleLabel.frame)+5, _descripLabel.frame.size.width, size.height);
     }
 
 }

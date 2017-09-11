@@ -42,7 +42,7 @@
 }
 
 - (void)initBaseUI {
-    _textFile = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 20)];
+    _textFile = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 25)];
     _textFile.backgroundColor = [UIColor clearColor];
     _textFile.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
     _textFile.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"EnterTitle"];//NSLocalizedString(@"EnterTitle", nil);
@@ -53,6 +53,7 @@
     _textFile.returnKeyType = UIReturnKeyDone;
     _textFile.attributedPlaceholder = [[NSAttributedString alloc] initWithString:_textFile.placeholder attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
     _textFile.delegate = self;
+    _textFile.adjustsFontSizeToFitWidth = NO;
     [self addSubview:_textFile];
     
     _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_textFile.frame), self.frame.size.width, 1)];
@@ -190,7 +191,8 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField.text.length == 40 && string.length > 0) {
+    if (textField.text.length >= 40 && string.length > 0) {
+        textField.text = [textField.text substringToIndex:40];
         FSAlertView *alert = [[FSAlertView alloc] init];
         [alert showWithMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"MaxLetterLimit"]];
         return NO;

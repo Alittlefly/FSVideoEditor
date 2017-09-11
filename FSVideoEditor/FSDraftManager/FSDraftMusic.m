@@ -28,6 +28,7 @@
     music.songPic = self.mPic;
     music.lastSeconds = self.mOutPoint;
     music.songUrl = self.mUrl;
+    music.songAuthor = self.mAutor;
     
     return music;
 }

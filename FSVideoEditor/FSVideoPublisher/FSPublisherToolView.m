@@ -244,7 +244,7 @@
     [_publishButton addTarget:self action:@selector(publishClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_publishButton];
     
-    _videoNameView = [[FSEditVideoNameView alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(_publishButton.frame)-40-55, self.frame.size.width-40, 55) draftInfo:_draftInfo];
+    _videoNameView = [[FSEditVideoNameView alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(_publishButton.frame)-40-55, self.frame.size.width-40, 60) draftInfo:_draftInfo];
     _videoNameView.backgroundColor = [UIColor clearColor];
     _videoNameView.delegate = self;
     self.oriEditNameY =  CGRectGetMaxY(self.videoNameView.frame);
