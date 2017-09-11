@@ -186,7 +186,7 @@
         if (index >= 7 && count > 8 && !_opend) {
             if (!_showAllButton) {
                 _showAllButton = [[FSMusicTypeButton alloc] initWithFrame:CGRectMake(btnx, btny, buttonW, buttonW)];
-                NSString *title = [NSString stringWithFormat:@"more %ld",count - index];
+                NSString *title = [[FSPublishSingleton sharedInstance].language isEqualToString:@"en"] ?[NSString stringWithFormat:@"%@ %ld",[FSShortLanguage CustomLocalizedStringFromTable:@"MoreTag"],count - index] : [NSString stringWithFormat:@"%ld %@",count - index,[FSShortLanguage CustomLocalizedStringFromTable:@"MoreTag"]];
                 [_showAllButton addTarget:self action:@selector(showAllItems:) forControlEvents:(UIControlEventTouchUpInside)];
                 [_showAllButton setImage:[UIImage imageNamed:@"musicDown"] forState:(UIControlStateNormal)];
                 [_showAllButton setTitle:title forState:(UIControlStateNormal)];

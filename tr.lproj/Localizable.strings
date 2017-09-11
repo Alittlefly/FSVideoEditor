@@ -21,10 +21,10 @@ clearToContinue = "";
 
 UploadVideo = "Video yükle";
 ChooseMusic = "Müzik seç";
-Record = "Hemen kayda başla";
+Record = "Kayda Başla";
 HotMusic = "Popüler Müzik";
 likeMusic = "Favorilerim";
-RecordNow = "Bu müziği kullanarak video çek";
+RecordNow = "Bu müzikle video çek";
 Loading = "Yükleniyor...";
 Cancel = "İptal";
 SearchMusic = "Müzik ara";
@@ -32,12 +32,12 @@ SearchMusic = "Müzik ara";
 VideoLengthTip = "Video en az (0) sn olmalı";
 Edit = "Değiştir";
 Volume = "Ses";
-Effects = "Özel Efektler";
+Effects = "Efekt";
 EnterTitle = "Bir şeyler yaz...";
 AddHashtag = "Challenge ekle";
 SaveInGallery = "Galeriye kaydet";
-CanlceVideo = "The current uploded video or old one doesn't support continue shooting";
-GiveUpEdit = "Do you want to delete edits?";
+CanlceVideo = "Galeriden yüklenen video üzerine çekim yapamazsın";
+GiveUpEdit = "Çıkmak istiyor musun?";
 
 Draft = "Taslaklar";
 Upload = "Paylaş";
@@ -52,8 +52,8 @@ CancelEditWarning = "Tüm efektler kaybolacak, devam etmek istiyor musun?";
 Done = "Tamamlandı";
 Save = "Kaydet";
 
-Filters = "Filtreler";
-Timeline = "Zaman Tüneli";
+Filters = "Genel Efekt";
+Timeline = "Zaman Efekti";
 Magic = "Ruhsal";
 Vibrating = "Titreşim";
 Repeat = "Tekrar";
@@ -62,7 +62,7 @@ NoFilter = "Filtresiz";
 ChooseEffectsTip = "Zaman efekti seçmek için tıkla";
 SlowMotion = "Ağır Çekim";
 Delete = "İptal";
-AddFilterTip = "Filtreyi uygulamak istediğin yeri seç ve basılı tut";
+AddFilterTip = "Efekt uygulayacağın yeri seç ve basılı tut";
 EraseEffectsTip = "Uyguladığın tüm efektleri silmek istiyor musun?";
 Erase = "Sil";
 LongPress = "Kayıt için basılı tut";
@@ -73,32 +73,32 @@ Normal = "Standart";
 Fast = "Hızlı";
 VeryFast = "Çok Hızlı";
 Countdown = "Geri Sayım";
-ColorFilter = "Renkli Filtre";
+ColorFilter = "Filtre";
 
-black = "Siyah & Beyaz";
+BW = "Siyah & Beyaz";
 Sweetie = "Sempatik";
 LOMO = "Lomo";
-Classic = "Klasik";
+Classic = "Parlak";
 IceBlue = "Maviş";
-Classical = "Morumtrak";
-RisingSun = "Rising Sun";
+Classical = "Mor";
+RisingSun = "Sabah";
 WarmTea = "Ilık";
 TheGoldenTimes = "Yıllar";
 Yummy = "Sütlü Çay";
 
 BeautifyOn = "Güzellik Modunu Aç";
 BeautifyOff = "Güzellik Modunu Kapat";
-CutMusic = "Müziği ayarla";
+CutMusic = "Müzik";
 BeautifyOnTip = "Güzellik Modu Açık";
 BeautifyOffTip = "Güzellik Modu Kapalı";
 PressToRecord = "Yeşil butona basılı tutarak kayda başla";
 DeleteVideoTip = "Önceki videoyu silmek istiyor musun?";
-Confirm = "Evet";
+Confirm = "Tamam";
 EditMusicTip = "Sağa ve sola kaydırarak müziği ayarla";
 MusicStartTime = "Müzik (0)'da başlar ";
 
 Original = "Orijinal";
-Music = "Müzik";
+Music = "Müzik ara";
 ChoseVideoTime = "(0) saniye seçtin";
 Processing = "Şu anda halloluyor...";
 
@@ -125,7 +125,7 @@ deleteAllAlert = "Tümünü silmek istiyor musun?";
 MessageCancel = "İptal";
 MessageOK = "Evet";
 
-emptyDraft = "Eyvah! Hiç bir veri bulunamadı";
+emptyDraft = "Taslaklarda video yok";
 
 xsignal = "X Ray";
 
@@ -136,3 +136,5 @@ notAuthored = "notAuthored 哈哈哈 这么明显的bug";
 mirror = "Ayna";
 
 huanjue = "İllüzyon";
+
+MoreTag = "daha";
