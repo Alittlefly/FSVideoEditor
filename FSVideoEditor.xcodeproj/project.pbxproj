@@ -828,6 +828,7 @@
 		568709F91F59B4C500E89B68 /* FSGlobalRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSGlobalRefreshFooter.m; sourceTree = "<group>"; };
 		568709FD1F59B51000E89B68 /* UIView+AniMation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AniMation.h"; sourceTree = "<group>"; };
 		568709FE1F59B51000E89B68 /* UIView+AniMation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AniMation.m"; sourceTree = "<group>"; };
+		56C533A11F6691DC00AA0CB8 /* NvsMultiThumbnailSequenceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NvsMultiThumbnailSequenceView.h; sourceTree = "<group>"; };
 		56F502601F2AEF13004AE0A4 /* FSMusicSearchAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicSearchAPI.h; sourceTree = "<group>"; };
 		56F502611F2AEF13004AE0A4 /* FSMusicSearchAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMusicSearchAPI.m; sourceTree = "<group>"; };
 		56FC377D1F5D060900EF9799 /* FSMusicDeatilController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMusicDeatilController.h; sourceTree = "<group>"; };
@@ -2047,6 +2048,7 @@
 		98C1E5311F419D4400AA48A0 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				56C533A11F6691DC00AA0CB8 /* NvsMultiThumbnailSequenceView.h */,
 				98C1E5321F419D4400AA48A0 /* NvsAssetPackageManager.h */,
 				98C1E5331F419D4400AA48A0 /* NvsAudioClip.h */,
 				98C1E5341F419D4400AA48A0 /* NvsAudioFx.h */,

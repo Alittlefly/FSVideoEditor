@@ -8,7 +8,6 @@
 
 #import "FSMusicPlayer.h"
 
-
 @interface FSMusicPlayer()
 {
     CGFloat _volume;
@@ -57,12 +56,23 @@ static id object = nil;
     
     if (!mp3Data) {
         NSLog(@"文件地址错误filePath:%@",filePath);
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+        }
         return;
     }
     
-     _musicPlayer = [[AVAudioPlayer alloc] initWithData:mp3Data fileTypeHint:AVFileTypeMPEGLayer3 error:nil];
-    [_musicPlayer prepareToPlay];
-    [_musicPlayer setVolume:_volume];
+    NSError *error;
+     _musicPlayer = [[AVAudioPlayer alloc] initWithData:mp3Data fileTypeHint:AVFileTypeMPEGLayer3 error:&error];
+    if (error) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+        }
+    }else{
+        [_musicPlayer prepareToPlay];
+        [_musicPlayer setNumberOfLoops:-1];
+        [_musicPlayer setVolume:_volume];
+    }
 }
 -(void)setRate:(CGFloat)rate{
     _rate = rate;
