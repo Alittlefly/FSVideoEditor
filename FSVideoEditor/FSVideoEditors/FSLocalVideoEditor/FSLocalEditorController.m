@@ -349,7 +349,11 @@
     _draftInfo.vOriginalPath = _outPutFilePath;
 
     [[FSShortVideoRecorderManager sharedInstance] setDelegate:self];
-    [[FSShortVideoRecorderManager sharedInstance] beginConvertReverse:_outPutFilePath];
+    BOOL isSucceed = [[FSShortVideoRecorderManager sharedInstance] beginConvertReverse:_outPutFilePath];
+    if (!isSucceed) {
+        [self.loading loadingViewhide];
+        _isSaveIng = NO;
+    }
 }
 
 #pragma mark - 

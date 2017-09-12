@@ -948,6 +948,8 @@ static FSShortVideoRecorderManager *recorderManager;
         else if (ret == NVC_E_CONVERTOR_IS_STARTED) {
             error = @" 正在转码";
         }
+        [self convertFaild:nil];
+
         return;
     }
     

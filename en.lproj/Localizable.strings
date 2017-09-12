@@ -54,7 +54,7 @@ CancelEditWarning = "If continue all effects will be deleted, continue?";
 Done = "Done";
 Save = "Save";
 
-Filters = "Special Effetcs";
+Filters = "Special Effects";
 Timeline = "Time Effects";
 Magic = "Ghost";
 Vibrating = "Tremble";
