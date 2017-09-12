@@ -328,12 +328,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     _param.videoPath = _tempDraftInfo.vFinalPath;
     
     if([_context compileTimeline:_timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_tempDraftInfo.vFinalPath videoResolutionGrade:(NvsCompileVideoResolutionGradeCustom) videoBitrateGrade:(NvsCompileBitrateGradeMedium) flags:0]){
-        NSLog(@"11111111");
-    }
-    else {
+    }else {
         NSLog(@"0000000");
         [self.loading loadingViewhide];
-
+        [self showFaildMesssage];
     }
 }
 
