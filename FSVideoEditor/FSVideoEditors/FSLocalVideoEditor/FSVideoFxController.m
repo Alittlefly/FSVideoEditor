@@ -84,7 +84,10 @@
     [self creatSubViews];
     
      _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
-     _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.bounds) - 210)/2.0, 54, 210, CGRectGetHeight(self.view.bounds) - 228 - 54 - 12)];
+    
+    CGFloat maxHeight = CGRectGetHeight(self.view.bounds) - 228 - 54 - 12;
+    CGFloat maxWidth = ((CGFloat)210.0/373.0) * maxHeight;
+     _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.bounds) - maxWidth)/2.0, 54, maxWidth, maxHeight)];
     [self.view addSubview:_prewidow];
 
      _controlView = [[FSControlView alloc] initWithFrame:_prewidow.frame];
