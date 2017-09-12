@@ -776,6 +776,7 @@ static FSShortVideoRecorderManager *recorderManager;
     BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:filePath];
     if (!blHave) {
         NSLog(@"no  have");
+        deleted = YES;
     }else {
         NSLog(@" have");
         BOOL blDele= [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];

@@ -37,7 +37,7 @@ Effects = "Effects";
 EnterTitle = "Write Something";
 AddHashtag = "Start Challenge";
 SaveInGallery = "Save in Gallery";
-CanlceVideo = "You cannot continue shooting on a video that you uploaded from Gallery";
+CanlceVideo = "If continue all effects will be deleted";
 GiveUpEdit = "Do you want to exit?";
 
 

@@ -53,6 +53,7 @@
 }
 
 - (void)setLeftImage:(UIImage *)leftImage title:(NSString *)title rightImage:(UIImage *)rightImage {
+    CGFloat MaxWidth = self.maxWidth - (leftImage ? leftImage.size.width:0)-(rightImage?rightImage.size.width:0);
     CGFloat width = 0;
     
     if (leftImage) {
@@ -71,8 +72,8 @@
         
         //CGSize size = [title boundingRectWithSize:CGSizeMake(999, 27) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.titleLabel.font} context:nil].size;
         CGFloat width = self.mTitleLabel.frame.size.width;
-        if (width+4 > _maxWidth) {
-            width = _maxWidth;
+        if (width+4 > MaxWidth) {
+            width = MaxWidth;
         }
         
         self.mTitleLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMaxX(self.leftImageView.frame)+5:CGRectGetMaxX(self.leftImageView.frame), 0, width, self.frame.size.height);

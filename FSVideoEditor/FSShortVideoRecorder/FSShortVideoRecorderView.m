@@ -654,7 +654,9 @@
         return;
     }
 
-    [[FSMusicPlayer sharedPlayer] setFilePath:_draftInfo.vMusic.mPath];
+    if (_draftInfo.vMusic) {
+        [[FSMusicPlayer sharedPlayer] setFilePath:_draftInfo.vMusic.mPath];
+    }
 
     _isRecording = YES;
     
@@ -1024,6 +1026,9 @@
 
 - (void)FSShortVideoRecorderManagerFailedRecorder {
     [self.loading loadingViewhide];
+    [_recorderManager resumeCapturePreview];
+    self.countdownButton.enabled = YES;
+    self.recorderButton.enabled = YES;
 
 }
 

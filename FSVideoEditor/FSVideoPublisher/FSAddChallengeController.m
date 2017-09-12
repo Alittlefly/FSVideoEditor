@@ -43,7 +43,7 @@
     self.view.backgroundColor = FSHexRGB(0xFFFFFF);
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?self.view.frame.size.width-20-15 : 15, 33, 20, 20);
+    backButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse?self.view.frame.size.width-30-15 : 15, 25, 30, 30);
     backButton.backgroundColor = [UIColor clearColor];
     [backButton setImage:[UIImage imageNamed:@"addChallenge_back"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];

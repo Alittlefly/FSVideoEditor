@@ -36,7 +36,7 @@ Effects = "Efekt";
 EnterTitle = "Bir şeyler yaz...";
 AddHashtag = "Challenge ekle";
 SaveInGallery = "Galeriye kaydet";
-CanlceVideo = "Galeriden yüklenen video üzerine çekim yapamazsın";
+CanlceVideo = "Devam edersen uyguladığın efektler silinecek";
 GiveUpEdit = "Çıkmak istiyor musun?";
 
 Draft = "Taslaklar";
@@ -98,7 +98,7 @@ EditMusicTip = "Sağa ve sola kaydırarak müziği ayarla";
 MusicStartTime = "Müzik (0)'da başlar ";
 
 Original = "Orijinal";
-Music = "Müzik ara";
+Music = "Müzik";
 ChoseVideoTime = "(0) saniye seçtin";
 Processing = "Şu anda halloluyor...";
 

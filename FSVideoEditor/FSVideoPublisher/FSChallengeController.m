@@ -61,7 +61,7 @@
     
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     closeButton.backgroundColor =[UIColor clearColor];
-    closeButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.view.frame.size.width-20-15 : 20, 35, 15, 15);
+    closeButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.view.frame.size.width-20-30 : 20, 27, 30, 30);
     [closeButton setImage:[UIImage imageNamed:@"challenge_close"] forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(backView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];

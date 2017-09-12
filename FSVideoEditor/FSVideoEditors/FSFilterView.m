@@ -21,6 +21,8 @@
 
 @property (nonatomic, strong) NSMutableArray *filtersArray;
 @property (nonatomic, strong) NSMutableArray *buttonArray;
+
+@property (nonatomic, strong) UIButton *lastChooseButton;
  
 @end
 
@@ -79,6 +81,16 @@
 
 - (void)chooseFilter:(UIButton *)sender {
      NSString *fxName = [_filtersArray objectAtIndex:sender.tag];
+    
+    if (_lastChooseButton) {
+        _lastChooseButton.layer.borderColor = [UIColor clearColor].CGColor;
+        _lastChooseButton.layer.borderWidth = 0;
+    }
+    
+    sender.layer.borderColor = FSHexRGB(0xFACE15).CGColor;
+    sender.layer.borderWidth = 2;
+    sender.layer.masksToBounds = YES;
+    _lastChooseButton = sender;
     
     if ([self.delegate respondsToSelector:@selector(FSFilterViewChooseFilter:)]) {
         [self.delegate FSFilterViewChooseFilter:fxName];

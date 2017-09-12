@@ -38,7 +38,7 @@
 - (void)createBaseUI {
     _logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width - 20-18 : 20, 12, 18, 18)];
     _logoImageView.image = [UIImage imageNamed:@"#"];
-    [self addSubview:_logoImageView];
+    [self.contentView addSubview:_logoImageView];
     
     _personNumLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 :self.frame.size.width-20-100, 12, 100, 15)];
     _personNumLabel.backgroundColor = [UIColor clearColor];
@@ -48,14 +48,14 @@
     NSString *personCount = [FSShortLanguage CustomLocalizedStringFromTable:@"ChallengePeopleCount"];
     personCount = [personCount stringByReplacingOccurrencesOfString:@"(0)" withString:@"0"];
     _personNumLabel.text = personCount;
-    [self addSubview:_personNumLabel];
+    [self.contentView addSubview:_personNumLabel];
     
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMaxX(_personNumLabel.frame)+5 : CGRectGetMaxX(_logoImageView.frame)+5, 10, 100, 20)];
     _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
     _titleLabel.textColor = FSHexRGB(0x292929);
     _titleLabel.font = [UIFont systemFontOfSize:17];
-    [self addSubview:_titleLabel];
+    [self.contentView addSubview:_titleLabel];
     
     _descripLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : CGRectGetMinX(_titleLabel.frame), CGRectGetMaxY(_titleLabel.frame)+5, self.frame.size.width-40-12-5, 0)];
     _descripLabel.backgroundColor = [UIColor clearColor];
@@ -63,7 +63,7 @@
     _descripLabel.textColor = FSHexRGB(0x292929);
     _descripLabel.numberOfLines = 0;
     _descripLabel.font = [UIFont systemFontOfSize:14];
-    [self addSubview:_descripLabel];
+    [self.contentView addSubview:_descripLabel];
 
     _addChallengeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _addChallengeButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width-20-100, 10, 100, 16);
@@ -72,7 +72,9 @@
     [_addChallengeButton setTitleColor:FSHexRGB(0x292929) forState:UIControlStateNormal];
     _addChallengeButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [_addChallengeButton addTarget:self action:@selector(addNewChallenger) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_addChallengeButton];
+    [_addChallengeButton.titleLabel sizeToFit];
+    _addChallengeButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width-20-_addChallengeButton.titleLabel.frame.size.width, 10, _addChallengeButton.titleLabel.frame.size.width, 16);
+    [self.contentView addSubview:_addChallengeButton];
     _addChallengeButton.hidden = YES;
 }
 
@@ -83,7 +85,7 @@
         _descripLabel.hidden = YES;
 
         
-        _titleLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMaxX(_addChallengeButton.frame)+5 : CGRectGetMaxX(_logoImageView.frame)+5, 10, self.frame.size.width-40-CGRectGetWidth(_logoImageView.frame)-CGRectGetWidth(_addChallengeButton.frame)-10, 24);
+//        _titleLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMaxX(_addChallengeButton.frame)+5 : CGRectGetMaxX(_logoImageView.frame)+5, 10, self.frame.size.width-40-CGRectGetWidth(_logoImageView.frame)-CGRectGetWidth(_addChallengeButton.frame)-10, 24);
         _titleLabel.text = challengeModel.name;
     }
     else {
@@ -95,16 +97,35 @@
         personCount = [personCount stringByReplacingOccurrencesOfString:@"(0)" withString:[NSString stringWithFormat:@"%ld",(long)challengeModel.personCount]];
         _personNumLabel.text = personCount;
         [_personNumLabel sizeToFit];
-        _personNumLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width-20-_personNumLabel.frame.size.width, _personNumLabel.frame.origin.y, _personNumLabel.frame.size.width, 16);
+//        _personNumLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width-20-_personNumLabel.frame.size.width, _personNumLabel.frame.origin.y, _personNumLabel.frame.size.width, 16);
         
-        _titleLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMaxX(_personNumLabel.frame)+5 : CGRectGetMaxX(_logoImageView.frame)+5, 10, self.frame.size.width-40-CGRectGetWidth(_logoImageView.frame)-CGRectGetWidth(_personNumLabel.frame)-10, 24);
+//        _titleLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMaxX(_personNumLabel.frame)+5 : CGRectGetMaxX(_logoImageView.frame)+5, 10, self.frame.size.width-40-CGRectGetWidth(_logoImageView.frame)-CGRectGetWidth(_personNumLabel.frame)-10, 24);
         _titleLabel.text = challengeModel.name;
         
         _descripLabel.text = challengeModel.content;
-        CGSize size = [challengeModel.content boundingRectWithSize:CGSizeMake(_descripLabel.frame.size.width, 999) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:_descripLabel.font} context:nil].size;
-        _descripLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : CGRectGetMinX(_titleLabel.frame), CGRectGetMaxY(_titleLabel.frame)+5, _descripLabel.frame.size.width, size.height);
+//        CGSize size = [challengeModel.content boundingRectWithSize:CGSizeMake(_descripLabel.frame.size.width, 999) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:_descripLabel.font} context:nil].size;
+//        _descripLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : CGRectGetMinX(_titleLabel.frame), CGRectGetMaxY(_titleLabel.frame)+5, _descripLabel.frame.size.width, size.height);
     }
 
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+}
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
+   
+    if (_addChallengeButton.isHidden) {
+        _personNumLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width-20-_personNumLabel.frame.size.width, _personNumLabel.frame.origin.y, _personNumLabel.frame.size.width, 16);
+        _titleLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMaxX(_personNumLabel.frame)+5 : CGRectGetMaxX(_logoImageView.frame)+5, 10, self.frame.size.width-40-CGRectGetWidth(_logoImageView.frame)-CGRectGetWidth(_personNumLabel.frame)-10, 24);
+
+        CGSize size = [_descripLabel.text boundingRectWithSize:CGSizeMake(_descripLabel.frame.size.width, 999) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:_descripLabel.font} context:nil].size;
+        _descripLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : CGRectGetMinX(_titleLabel.frame), CGRectGetMaxY(_titleLabel.frame)+5, _descripLabel.frame.size.width, size.height);
+    }
+    else {
+        _addChallengeButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width-20-_addChallengeButton.titleLabel.frame.size.width, 10, _addChallengeButton.titleLabel.frame.size.width, 16);
+
+        _titleLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMaxX(_addChallengeButton.frame)+5 : CGRectGetMaxX(_logoImageView.frame)+5, 10, self.frame.size.width-40-CGRectGetWidth(_logoImageView.frame)-CGRectGetWidth(_addChallengeButton.frame)-10, 24);
+    }
 }
 
 - (void)addNewChallenger {

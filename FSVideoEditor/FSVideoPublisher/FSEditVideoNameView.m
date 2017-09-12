@@ -63,7 +63,7 @@
     [self addSubview:_lineView];
     
     NSString *saveText = [NSString stringWithFormat:@"%@",[FSShortLanguage CustomLocalizedStringFromTable:@"SaveInGallery"]];
-    CGSize size = [saveText boundingRectWithSize:CGSizeMake(999, 27) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    CGSize size = [saveText boundingRectWithSize:CGSizeMake(999, 27) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
     _saveToPhotoButton = [UIButton buttonWithType:UIButtonTypeCustom];
     if (_isSave) {
         [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_selected"] forState:UIControlStateNormal];
@@ -87,7 +87,7 @@
     [self addSubview:_saveToPhotoButton];
     
     _addChallengeControl = [[FSAddChallengeControl alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width-70 : 0, self.frame.size.height-27, 70, 27)];
-    _addChallengeControl.maxWidth = self.frame.size.width - _saveToPhotoButton.frame.size.width-5;
+    _addChallengeControl.maxWidth = self.frame.size.width - _saveToPhotoButton.frame.size.width;
     _addChallengeControl.backgroundColor = [UIColor clearColor];
     _addChallengeControl.layer.cornerRadius = 2;
     _addChallengeControl.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -106,21 +106,6 @@
     
     [_addChallengeControl addTarget:self action:@selector(addChallenge) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_addChallengeControl];
-    
-    [self updateChallengeButtonFrame];
-    
-}
-
-- (void)updateChallengeButtonFrame {
-    return;
-//    CGFloat maxWidth = self.frame.size.width - _saveToPhotoButton.frame.size.width-5;
-//    CGSize size = [_addChallengeButton.titleLabel.text boundingRectWithSize:CGSizeMake(999, 27) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]} context:nil].size;
-//    CGFloat width = size.width;
-//    if (width > maxWidth) {
-//        width = maxWidth;
-//    }
-//
-//    _addChallengeButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width - width : _addChallengeButton.frame.origin.x, _addChallengeButton.frame.origin.y, width, _addChallengeButton.frame.size.height);
 }
 
 - (void)addChallenge {
@@ -129,8 +114,6 @@
         _isHasChallenge = NO;
         [_addChallengeControl setLeftImage:[FSPublishSingleton sharedInstance].isAutoReverse ? nil:[UIImage imageNamed:@"white#"] title:[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"] rightImage:[FSPublishSingleton sharedInstance].isAutoReverse ? [UIImage imageNamed:@"white#"]:nil];
 
-       // [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@",[FSShortLanguage CustomLocalizedStringFromTable:@"AddHashtag"]] forState:UIControlStateNormal];
-        [self updateChallengeButtonFrame];
         if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewRemoveChallenge)]) {
             [self.delegate FSEditVideoNameViewRemoveChallenge];
         }
@@ -146,10 +129,6 @@
 - (void)updateChallengeName:(NSString *)name {
     _isHasChallenge = YES;
     [_addChallengeControl setLeftImage:[FSPublishSingleton sharedInstance].isAutoReverse ? [UIImage imageNamed:@"delete_challenge"]:[UIImage imageNamed:@"#"] title:name rightImage:[FSPublishSingleton sharedInstance].isAutoReverse ? [UIImage imageNamed:@"#"]:[UIImage imageNamed:@"delete_challenge"]];
-
-//    [_addChallengeButton setTitle:[NSString stringWithFormat:@"#%@ X",name] forState:UIControlStateNormal];
-
-    [self updateChallengeButtonFrame];
 }
 
 - (void)saveToPhoto {
