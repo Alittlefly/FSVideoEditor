@@ -21,7 +21,7 @@ leastTime = "Video length should be 5 seconds at least";
 
 UploadVideo = "Upload";
 ChooseMusic = "Music";
-Record = "Record Now";
+Record = "Record";
 HotMusic = "Hot Music";
 likeMusic = "My favorites";
 RecordNow = "Use the music and record";
@@ -33,12 +33,12 @@ SearchMusic = "Search music";
 VideoLengthTip = "Video should be more than (0)s";
 Edit = "Edit";
 Volume = "Volume";
-Effects = "Special Effects";
+Effects = "Effects";
 EnterTitle = "Write Something";
 AddHashtag = "Start Challenge";
 SaveInGallery = "Save in Gallery";
-CanlceVideo = "The current uploded video or old one doesn't support continue shooting";
-GiveUpEdit = "Do you want to delete edits?";
+CanlceVideo = "You cannot continue shooting on a video that you uploaded from Gallery";
+GiveUpEdit = "Do you want to exit?";
 
 
 Draft = "Draft Box";
@@ -54,36 +54,36 @@ CancelEditWarning = "If continue all effects will be deleted, continue?";
 Done = "Done";
 Save = "Save";
 
-Filters = "Filters";
-Timeline = "Timeline";
+Filters = "Special Effetcs";
+Timeline = "Time Effects";
 Magic = "Ghost";
 Vibrating = "Tremble";
 Repeat = "Repeat";
 Reverse = "Reverse";
 NoFilter = "Normal";
-ChooseEffectsTip = "Press to choose timeline effects";
+ChooseEffectsTip = "Press to choose time effects";
 SlowMotion = "Slow Motion";
 Delete = "Undo";
-AddFilterTip = "Press and hold to choose where to add filter";
+AddFilterTip = "Long press to add effects";
 EraseEffectsTip = "Do you want to clear all saved effects?";
 Erase = "Clear";
 LongPress = "Long press to record, release to pause ";
 
-VerySlow = "Very Slow";
+VerySlow = "Slower";
 Slow = "Slow";
 Normal = "Normal";
 Fast = "Fast";
-VeryFast = "Very Fast";
+VeryFast = "Faster";
 Countdown = "Countdown";
-ColorFilter = "Color Filter";
+ColorFilter = "Filter";
 
-black = "Black & White";
+BW = "Black & White";
 Sweetie = "Sweet";
 LOMO = "Lomo";
 Classic = "Classic";
 IceBlue = "Blueish";
 Classical = "Light";
-RisingSun = "Rising Sun";
+RisingSun = "Morning";
 WarmTea = "Warm";
 TheGoldenTimes = "Old Times";
 Yummy = "Milky";
@@ -138,3 +138,5 @@ notAuthored = "notAuthored 哈哈哈 这么明显的bug";
 mirror = "Mirror";
 
 huanjue = "Illusion";
+
+MoreTag = "more";

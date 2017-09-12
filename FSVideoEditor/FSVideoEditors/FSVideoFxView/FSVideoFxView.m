@@ -405,7 +405,7 @@
     [bmfx addTarget:self action:@selector(endFx:) forControlEvents:(UIControlEventTouchUpOutside)];
     [bmfx setFxColor:FSHexRGBAlpha(0x39ff9f, 0.95)];
 
-    [bmfx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"black"]  forState:(UIControlStateNormal)];
+    [bmfx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"BW"]  forState:(UIControlStateNormal)];
     
     objc_setAssociatedObject(bmfx, FxIdKey, @"33F513E5-5CA2-4C23-A6D4-8466202EE698", OBJC_ASSOCIATION_COPY);
     [_contentView addSubview:bmfx];

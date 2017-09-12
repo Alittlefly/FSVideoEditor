@@ -198,7 +198,8 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
-    if (textView.text.length == 140 && text.length > 0) {
+    if (textView.text.length >= 140 && text.length > 0) {
+        textView.text = [textView.text substringToIndex:140];
         [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"MaxLetterLimit"]];
         return NO;
     }

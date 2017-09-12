@@ -76,7 +76,7 @@ VeryFast = "سريع جداً";
 Countdown = "العد التنازلي";
 ColorFilter = "فلتر اللون";
 
-black = "ظل";
+BW = "ظل";
 Sweetie = "رومنسي";
 LOMO = "كوول";
 Classic = "كلاسيكي";
@@ -138,3 +138,4 @@ notAuthored = "notAuthored 哈哈哈 这么明显的bug";
 mirror = "Mirror";
 
 huanjue = "Illusion";
+MoreTag = "المزيد";

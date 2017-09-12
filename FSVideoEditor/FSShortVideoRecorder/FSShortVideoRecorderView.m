@@ -458,7 +458,10 @@
     if (_isRecording) {
         [self pauseRecorder];
     }
-    [_recorderManager finishRecorder];
+    BOOL issucceed = [_recorderManager finishRecorder];
+    if (!issucceed) {
+        [self.loading loadingViewhide];
+    }
 }
 
 - (void)recoverCameraClik {
