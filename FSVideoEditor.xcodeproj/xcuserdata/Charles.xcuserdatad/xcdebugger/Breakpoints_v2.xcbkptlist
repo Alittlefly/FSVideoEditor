@@ -377,22 +377,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
-            timestampString = "526636008.998916"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "368"
-            endingLineNumber = "368"
-            landmarkName = "-didCompileFinished:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSVideoPublisher/FSPublisherToolView.m"
             timestampString = "526623085.857802"
             startingColumnNumber = "9223372036854775807"
