@@ -240,7 +240,7 @@
     
     _draftInfo.vSpeed = vSpeed;
     _startTime = 0;
-    _endTime = _originalEndTime / vSpeed;
+    _endTime = _timeLine.duration;
     
     if(![_context playbackTimeline:_timeLine startTime:_startTime endTime:_endTime videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
     }
