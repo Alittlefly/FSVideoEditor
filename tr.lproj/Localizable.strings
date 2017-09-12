@@ -75,7 +75,7 @@ VeryFast = "Çok Hızlı";
 Countdown = "Geri Sayım";
 ColorFilter = "Filtre";
 
-BW = "Siyah & Beyaz";
+BW = "SB";
 Sweetie = "Sempatik";
 LOMO = "Lomo";
 Classic = "Parlak";
@@ -86,8 +86,8 @@ WarmTea = "Ilık";
 TheGoldenTimes = "Yıllar";
 Yummy = "Sütlü Çay";
 
-BeautifyOn = "Güzellik Modunu Aç";
-BeautifyOff = "Güzellik Modunu Kapat";
+BeautifyOn = "Güzellik";
+BeautifyOff = "Güzellik";
 CutMusic = "Müzik";
 BeautifyOnTip = "Güzellik Modu Açık";
 BeautifyOffTip = "Güzellik Modu Kapalı";

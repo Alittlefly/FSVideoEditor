@@ -949,6 +949,7 @@ static FSShortVideoRecorderManager *recorderManager;
             error = @" 正在转码";
         }
         [self convertFaild:nil];
+
         return;
     }
     
