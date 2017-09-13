@@ -489,6 +489,10 @@
 -(void)setNeedCovert:(BOOL)needCovert{
      _needCovert = needCovert;
 }
+-(void)setDuration:(CGFloat)duration{
+    _duration = duration;
+    _progress.vSpeed = (CGFloat)CGRectGetWidth(self.bounds)/(_duration * 10);
+}
 #pragma mark - 动作
 -(void)beginFx:(FSFxButton *)button{
     _progress.fxViewColor = button.fxColor;

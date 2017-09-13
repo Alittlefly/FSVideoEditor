@@ -383,6 +383,7 @@
     int64_t startPoint = _timeLine.duration * _startProgress;
     CGFloat endProgress = progress;
     int64_t endPoint = _timeLine.duration * endProgress;
+    
     if (startPoint >= endPoint) {
         [self removeAllFx];
         FSVirtualTimeLine *lastVTimeLine = [_tempFxStack topVirtualTimeLine];
@@ -418,7 +419,6 @@
     
     //
     [_context seekTimeline:_timeLine timestamp:endPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
-    
     [videoFxView stopMoveTint];
     [_controlView setState:NO];
     [videoFxView setIsPlaying:NO];
