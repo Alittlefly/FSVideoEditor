@@ -66,7 +66,7 @@
     _uid = [[NSUserDefaults standardUserDefaults] valueForKey:@"UID"];
     _password = [[NSUserDefaults standardUserDefaults] valueForKey:@"Password"];
     
-    if (_uid == nil || _uid.length == 0) {
+ //   if (_uid == nil || _uid.length == 0) {
         self.recorderButton.hidden = YES;
         self.logoutButton.hidden = YES;
         
@@ -75,21 +75,21 @@
         self.loginButton.hidden = NO;
         [self.loginButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Login"] forState:UIControlStateNormal];
 
-    }
-    else {
-        self.recorderButton.hidden = NO;
-        self.logoutButton.hidden = NO;
-        
-        self.uidTextField.hidden = YES;
-        self.passwordTextField.hidden = YES;
-        self.loginButton.hidden = YES;
-        [self.logoutButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"logout"] forState:UIControlStateNormal];
-        
-        [[FSDraftManager sharedManager] setCacheKey:[[NSUserDefaults standardUserDefaults] valueForKey:@"UID"]];
-        [FSPublishSingleton sharedInstance].userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"nickName"];
-        [[FSVideoEditorAPIParams videoEdiorParams].params setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
-        [FSPublishSingleton sharedInstance].loginKey = [[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"];
-    }
+//    }
+//    else {
+//        self.recorderButton.hidden = NO;
+//        self.logoutButton.hidden = NO;
+//        
+//        self.uidTextField.hidden = YES;
+//        self.passwordTextField.hidden = YES;
+//        self.loginButton.hidden = YES;
+//        [self.logoutButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"logout"] forState:UIControlStateNormal];
+//        
+//        [[FSDraftManager sharedManager] setCacheKey:[[NSUserDefaults standardUserDefaults] valueForKey:@"UID"]];
+//        [FSPublishSingleton sharedInstance].userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"nickName"];
+//        [[FSVideoEditorAPIParams videoEdiorParams].params setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"] forKey:@"loginKey"];
+//        [FSPublishSingleton sharedInstance].loginKey = [[NSUserDefaults standardUserDefaults] valueForKey:@"loginKey"];
+//    }
     
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"Country"] isEqualToString:@"tr"]) {
         
@@ -238,9 +238,9 @@
     
     self.logoImageView.image = [[UIImage alloc] init];
     
-    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"UID"];
-    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Password"];
-    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"loginKey"];
+//    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"UID"];
+//    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Password"];
+//    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"loginKey"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Country"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -294,12 +294,12 @@
     
     NSDictionary *dataInfo = [objec objectForKey:@"dataInfo"];
     
-    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginName"] forKey:@"UID"];
-    [[NSUserDefaults standardUserDefaults] setValue:self.passwordTextField.text forKey:@"Password"];
-    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginKey"] forKey:@"loginKey"];
-    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"nickName"] forKey:@"nickName"];
-
-    [[NSUserDefaults standardUserDefaults] synchronize];
+//    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginName"] forKey:@"UID"];
+//    [[NSUserDefaults standardUserDefaults] setValue:self.passwordTextField.text forKey:@"Password"];
+//    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginKey"] forKey:@"loginKey"];
+//    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"nickName"] forKey:@"nickName"];
+//
+//    [[NSUserDefaults standardUserDefaults] synchronize];
 
     [FSPublishSingleton sharedInstance].userName = [dataInfo objectForKey:@"nickName"];
     [FSPublishSingleton sharedInstance].loginKey = [dataInfo objectForKey:@"loginKey"];

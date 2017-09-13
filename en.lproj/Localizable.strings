@@ -131,7 +131,7 @@ emptyDraft = "Oops! No data found";
 
 xsignal = "X Ray";
 
-VideoTimeMaxTip = "You can't add more clips unless you delete one firs";
+VideoTimeMaxTip = "You can't add more clips unless you delete one first.";
 
 notAuthored = "notAuthored 哈哈哈 这么明显的bug";
 

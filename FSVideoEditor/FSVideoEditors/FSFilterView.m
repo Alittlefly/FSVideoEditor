@@ -22,14 +22,16 @@
 @property (nonatomic, strong) NSMutableArray *filtersArray;
 @property (nonatomic, strong) NSMutableArray *buttonArray;
 
-@property (nonatomic, strong) UIButton *lastChooseButton;
+@property (nonatomic, strong) FSFilterButton *lastChooseButton;
+@property (nonatomic, copy) NSString *filter;
  
 @end
 
 @implementation FSFilterView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame filterName:(NSString *)filter {
     if (self = [super initWithFrame:frame]) {
+        _filter = filter;
         // 初始化视频特效列表
         _filtersArray = [NSMutableArray arrayWithObject:@"NoFilter"];
         // 获取全部内嵌视频特效的名称
@@ -76,21 +78,30 @@
         button.image = [UIImage imageNamed:filter];
         [button addTarget:self action:@selector(chooseFilter:) forControlEvents:UIControlEventTouchUpInside];
         [_contentScrollView addSubview:button];
+        
+        if ([_filter isEqualToString:filter] || ((_filter == nil || _filter.length == 0) && [filter isEqualToString:@"NoFilter"])) {
+            button.layer.borderColor = FSHexRGB(0xFACE15).CGColor;
+            button.layer.borderWidth = 2;
+            button.layer.masksToBounds = YES;
+            _lastChooseButton = button;
+        }
     }
 }
 
 - (void)chooseFilter:(UIButton *)sender {
      NSString *fxName = [_filtersArray objectAtIndex:sender.tag];
     
-    if (_lastChooseButton) {
+    if (_lastChooseButton != (FSFilterButton *)sender) {
         _lastChooseButton.layer.borderColor = [UIColor clearColor].CGColor;
         _lastChooseButton.layer.borderWidth = 0;
+        
+        sender.layer.borderColor = FSHexRGB(0xFACE15).CGColor;
+        sender.layer.borderWidth = 2;
+        sender.layer.masksToBounds = YES;
+        _lastChooseButton = (FSFilterButton*)sender;
     }
     
-    sender.layer.borderColor = FSHexRGB(0xFACE15).CGColor;
-    sender.layer.borderWidth = 2;
-    sender.layer.masksToBounds = YES;
-    _lastChooseButton = sender;
+    
     
     if ([self.delegate respondsToSelector:@selector(FSFilterViewChooseFilter:)]) {
         [self.delegate FSFilterViewChooseFilter:fxName];

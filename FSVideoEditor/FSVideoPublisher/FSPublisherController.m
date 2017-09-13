@@ -250,7 +250,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     self.toolView.hidden = YES;
 
     if (!_filterView) {
-        _filterView = [[FSFilterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-120, self.view.frame.size.width, 120)];
+        _filterView = [[FSFilterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-120, self.view.frame.size.width, 120) filterName:_tempDraftInfo.vFilterid];
         _filterView.backgroundColor = [UIColor clearColor];
         _filterView.hidden = YES;
         _filterView.delegate =self;
@@ -602,19 +602,30 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 #pragma mark -
 - (void)FSFilterViewFinishedChooseFilter {
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.view.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
         
     } completion:^(BOOL finished) {
         _filterView.hidden = YES;
+        [_filterView removeFromSuperview];
+        _filterView.delegate = nil;
+        _filterView= nil;
         _toolView.hidden = NO;
+        
+        
+        [_toolView finishChangeFilter:_tempDraftInfo.vFilterid];
     }];
 }
 
 - (void)FSFilterViewChooseFilter:(NSString *)filter {
-    if ([filter isEqualToString:@"None"]) {
+    _tempDraftInfo.vFilterid = filter;
+
+    if ([filter isEqualToString:@"NoFilter"]) {
         for (unsigned int i = 0; i < _videoTrack.clipCount; i++)
             [[_videoTrack getClipWithIndex:i] removeAllFx];
+        if (_tempDraftInfo.vBeautyOn) {
+            
+        }
     } else if ([filter isEqualToString:@"Package1"]) {
         for (unsigned int i = 0; i < _videoTrack.clipCount; i++) {
             NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:i];

@@ -595,12 +595,14 @@
     _segmentView.hidden = NO;
     _isOpenFilterView = NO;
     
-    if ([_draftInfo.vFilterid isEqualToString:[FSShortLanguage CustomLocalizedStringFromTable:@"NoFilter"]]) {
+    if ([_draftInfo.vFilterid isEqualToString:@"NoFilter"] || _draftInfo.vFilterid == nil || _draftInfo.vFilterid.length == 0) {
         _filterLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ColorFilter"];
     }
     else {
         _filterLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:_draftInfo.vFilterid];
     }
+    [_filterLabel sizeToFit];
+    _filterLabel.center = CGPointMake(_filterButton.center.x, CGRectGetMaxY(_filterButton.frame)+_filterLabel.frame.size.height/2);
 }
 
 - (void)FSFilterViewChooseFilter:(NSString *)filter {

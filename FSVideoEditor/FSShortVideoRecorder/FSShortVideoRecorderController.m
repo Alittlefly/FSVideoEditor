@@ -136,7 +136,7 @@
 
 - (void)FSShortVideoRecorderViewShowFilterView {
     if (!_filterView) {
-        _filterView = [[FSFilterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-120, self.view.frame.size.width, 120)];
+        _filterView = [[FSFilterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-120, self.view.frame.size.width, 120) filterName:_tempInfo.vFilterid];
         _filterView.backgroundColor = [UIColor clearColor];
         _filterView.hidden = YES;
         _filterView.delegate =self;
@@ -151,6 +151,7 @@
     }];
 }
 - (void)FSFilterViewChooseFilter:(NSString *)filter {
+    _tempInfo.vFilterid = filter;
     [_recorderView changeFilter:filter];
 }
 - (void)FSFilterViewFinishedChooseFilter {

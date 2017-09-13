@@ -19,4 +19,6 @@
 
 @property (nonatomic, weak) id<FSFilterViewDelegate> delegate;
 
+- (instancetype)initWithFrame:(CGRect)frame filterName:(NSString *)filter;
+
 @end
