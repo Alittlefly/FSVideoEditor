@@ -447,7 +447,7 @@
     [_videoFxView setIsPlaying:YES];
     [_videoFxView startMoveTint];
    
-    videoFxView.duration = _timeLine.duration;
+    videoFxView.duration = _timeLine.duration/1000000.0;
 }
 
 -(void)addTimeFxWithFx:(FSDraftTimeFx *)timeFx{

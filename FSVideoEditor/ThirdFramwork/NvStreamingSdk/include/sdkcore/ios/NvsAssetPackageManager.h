@@ -194,5 +194,13 @@ typedef enum
 // 返回值为一个NSString类型的NSArray，每一个NSString都是一个资源包的标识符
 - (NSArray *)getAssetPackageListOfType:(NvsAssetPackageType)type;
 
+/*!
+ *  \brief 判断是否为自定义贴纸
+ *  \param uuidString 贴纸uuid
+ *  \return 返回BOOL对象，表示是否为自定义贴纸
+ *  \since 1.11.0
+ */
+- (BOOL)isCustomAnimatedSticker:(NSString *)uuidString;
+
 @end
 

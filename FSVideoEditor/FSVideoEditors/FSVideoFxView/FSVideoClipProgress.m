@@ -239,7 +239,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 }
 -(void)addFxView{
     
-    CGFloat speed = MAX(self.vSpeed,1.0) ;
+    CGFloat speed = self.vSpeed; //CGRectGetWidth(self.bounds) * 0.1/10;//MAX(1.0) ;
     if (_progress <= 1.0) {
         if (!_fxView) {
             CGFloat startProgress = _progress;

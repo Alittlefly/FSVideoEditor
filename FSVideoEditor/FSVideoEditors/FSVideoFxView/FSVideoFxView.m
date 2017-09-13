@@ -491,7 +491,12 @@
 }
 -(void)setDuration:(CGFloat)duration{
     _duration = duration;
-    _progress.vSpeed = (CGFloat)CGRectGetWidth(self.bounds)/(_duration * 10);
+    CGFloat width = CGRectGetWidth(self.bounds);
+    if (_duration == 0) {
+        _progress.vSpeed = 2.0;
+    }else{
+        _progress.vSpeed = width/_duration *0.1;
+    }
 }
 #pragma mark - 动作
 -(void)beginFx:(FSFxButton *)button{

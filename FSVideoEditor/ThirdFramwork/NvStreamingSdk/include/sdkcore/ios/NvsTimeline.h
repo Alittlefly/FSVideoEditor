@@ -272,6 +272,18 @@ typedef enum {
 - (NvsTimelineAnimatedSticker *)addPanoramicAnimatedSticker:(int64_t)inPoint duration:(int64_t)duration animatedStickerPackageId:(NSString *)animatedStickerPackageId;
 
 /*!
+    \brief 在时间线上添加自定义动画贴纸
+    \param inPoint 自定义动画贴纸在时间线上的入点
+    \param duration 自定义动画贴纸的显示时长(微秒)
+    \param animatedStickerPackageId 自定义动画贴纸包Id
+    \param customImagePath 自定义动画贴纸图像路径
+    \return 返回时间线自定义动画贴纸对象
+    \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
+    \sa removeAnimatedSticker:
+ */
+- (NvsTimelineAnimatedSticker *)addCustomAnimatedSticker:(int64_t)inPoint duration:(int64_t)duration animatedStickerPackageId:(NSString *)animatedStickerPackageId customImagePath:(NSString *)customImagePath;
+
+/*!
 	\brief 移除时间上的动画贴纸
 	\param animatedSticker 要移除的动画贴纸对象
     \return 返回下一个时间线动画贴纸对象
