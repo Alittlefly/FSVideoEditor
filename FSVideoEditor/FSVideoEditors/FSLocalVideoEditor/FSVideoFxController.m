@@ -344,7 +344,7 @@
 }
 
 -(void)videoFxSelectTimeLinePosition:(FSVideoFxView *)videoFxView position:(CGFloat)progress shouldPlay:(BOOL)play{
-    int64_t startPoint = _timeLine.duration * progress;
+    int64_t startPoint = MAX(_timeLine.duration * progress - 1, 0);
     [_context seekTimeline:_timeLine timestamp:startPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     [_controlView setState:NO];
     [_videoFxView setIsPlaying:NO];
@@ -382,7 +382,7 @@
 -(void)videoFxSelectEnd:(FSVideoFxView *)videoFxView progress:(CGFloat)progress packageFxId:(NSString *)fxId{
     int64_t startPoint = _timeLine.duration * _startProgress;
     CGFloat endProgress = progress;
-    int64_t endPoint = _timeLine.duration * endProgress;
+    int64_t endPoint = MAX(_timeLine.duration * endProgress - 1, 0) ;
     
     if (startPoint >= endPoint) {
         [self removeAllFx];
@@ -419,6 +419,8 @@
     
     //
     [_context seekTimeline:_timeLine timestamp:endPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
+    int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
+
     [videoFxView stopMoveTint];
     [_controlView setState:NO];
     [videoFxView setIsPlaying:NO];
