@@ -62,6 +62,10 @@ static id object = nil;
         return;
     }
     
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    NSError *err = nil;
+    [audioSession setCategory :AVAudioSessionCategoryPlayback error:&err];
+    
     NSError *error;
      _musicPlayer = [[AVAudioPlayer alloc] initWithData:mp3Data fileTypeHint:AVFileTypeMPEGLayer3 error:&error];
     if (error) {

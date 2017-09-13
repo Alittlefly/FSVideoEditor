@@ -232,23 +232,30 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     }
 }
 #pragma mark - 
+-(void)setVSpeed:(CGFloat)vSpeed{
+    _vSpeed = vSpeed;
+    
+    
+}
 -(void)addFxView{
+    
+    CGFloat speed = MAX(self.vSpeed,1.0) ;
     if (_progress <= 1.0) {
         if (!_fxView) {
             CGFloat startProgress = _progress;
-             _fxView = [[UIView alloc] initWithFrame:CGRectMake(startProgress * self.bounds.size.width, 0, self.bounds.size.width*0.1/10, CGRectGetHeight(self.bounds) - 13)];
+             _fxView = [[UIView alloc] initWithFrame:CGRectMake(startProgress * self.bounds.size.width, 0, speed, CGRectGetHeight(self.bounds) - 13)];
              _fxView.backgroundColor = _fxViewColor;
             [_fxContent addSubview:_fxView];
         }
         else {
             if (_needConvert) {
                 CGRect fxFrame = self.fxView.frame;
-                fxFrame.origin.x -= self.bounds.size.width*0.1/10;
-                fxFrame.size.width += self.bounds.size.width*0.1/10;
+                fxFrame.origin.x -= speed;
+                fxFrame.size.width += speed;
                 self.fxView.frame = fxFrame;
             }else{
                 CGRect fxFrame = self.fxView.frame;
-                fxFrame.size.width += self.bounds.size.width*0.1/10;
+                fxFrame.size.width += speed;
                 self.fxView.frame = fxFrame;
             }
         }

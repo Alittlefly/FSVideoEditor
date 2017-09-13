@@ -49,6 +49,8 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 @property(nonatomic,assign)BOOL isPlaying;
 @property(nonatomic,assign)BOOL needConvert;
 
+@property(nonatomic,assign)CGFloat vSpeed;
+
 @property(nonatomic,weak) id<FSVideoClipProgressDelegate> delegate;
 
 @property(nonatomic,strong)UIColor *fxViewColor;
