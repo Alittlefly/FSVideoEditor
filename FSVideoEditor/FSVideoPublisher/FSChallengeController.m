@@ -202,7 +202,7 @@
     if (trimText != nil && trimText.length > 0) {
         [self.view addSubview:self.loading];
         [self.loading loadingViewShow];
-        
+        _isSearched = YES;
         
         FSChallengeParam *param = [[FSChallengeParam alloc] init];
         param.w = trimText;
