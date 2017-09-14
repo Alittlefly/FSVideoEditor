@@ -100,7 +100,7 @@
     }
     
     _nameTextField.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"EnterChallenge"];
-    _nameTextField.text = _challengeName;
+    _nameTextField.text = _challengeName.length > 50 ? [_challengeName substringToIndex:50]:_challengeName;
     _nameTextField.font = [UIFont systemFontOfSize:14];
     _nameTextField.delegate = self;
     _nameTextField.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
@@ -160,6 +160,10 @@
     if (nameText.length == 0) {
         return;
     }
+    else if (nameText.length > 50) {
+        [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"MaxLetterLimit"]];
+        return;
+    }
 
     [self.view addSubview:self.loading];
     [self.loading loadingViewShow];
@@ -191,6 +195,22 @@
 //    }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField.text.length >= 50 && string.length > 0) {
+        textField.text = [textField.text substringToIndex:50];
+        [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"MaxLetterLimit"]];
+        return NO;
+    }
+    else {
+//        if (textField.text.length == 0 && string.length > 0) {
+//            _placeholderLabel.hidden = YES;
+//        }
+//        else if (textField.text.length == 1 && string.length == 0) {
+//            _placeholderLabel.hidden = NO;
+//        }
+        return YES;
+    }
+}
 #pragma mark - UITextViewDelegate
 - (void)textViewDidEndEditing:(UITextView *)textView {
     
