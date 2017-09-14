@@ -13,6 +13,9 @@
 @protocol FSCutMusicViewDelegate <NSObject>
 
 - (void)FSCutMusicViewFinishCutMusic:(NvsAudioClip *)newAudioClip;
+
+- (void)FSCutMusicViewSelectedMusic;
+
 - (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval )newStartTime;
 
 @end

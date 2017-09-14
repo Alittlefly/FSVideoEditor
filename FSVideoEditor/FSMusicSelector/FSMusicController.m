@@ -237,7 +237,7 @@
     
     [FSPublishSingleton sharedInstance].chooseMusic = music;
     
-    if (_pushed) {
+    if (self.shouldReturnMusic) {
         if ([self.delegate respondsToSelector:@selector(musicControllerSelectMusic:music:)]) {
             [self.delegate musicControllerSelectMusic:musicPath music:music];
         }
@@ -260,6 +260,10 @@
         [self clickHotDetail];
     }else{
         [self clickFaveDeatil];
+    }
+    
+    if (self.shouldReturnMusic) {
+        return;
     }
     
     if ([self.delegate respondsToSelector:@selector(musicControllerWouldShowMusicDetail:)]) {
@@ -369,6 +373,8 @@
 -(void)musicHeaderViewSelectItem:(FSMusicType *)item{
     FSMusicListController *musicListController = [[FSMusicListController alloc] init];
     musicListController.musicType = item;
+    musicListController.delegate = self;
+    musicListController.shouldReturnMusic = self.shouldReturnMusic;
     musicListController.delegate = self;
     [self.navigationController pushViewController:musicListController animated:YES];
 }

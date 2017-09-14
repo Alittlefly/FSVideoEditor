@@ -291,7 +291,6 @@
 - (void)FSLoginServerSucceed:(id)objec {
     [self.loading loadingViewhide];
     
-    
     NSDictionary *dataInfo = [objec objectForKey:@"dataInfo"];
     
 //    [[NSUserDefaults standardUserDefaults] setValue:[dataInfo objectForKey:@"loginName"] forKey:@"UID"];

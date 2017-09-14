@@ -57,6 +57,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 @property(nonatomic,assign)NvsStreamingContext*context;
 @property(nonatomic,assign)NvsVideoTrack *videoTrack;
+@property(nonatomic,strong)NvsAudioTrack *audioTrack;
 
 
 @property (nonatomic, strong) FSFilterView *filterView;
@@ -451,9 +452,19 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 - (void)FSPublisherToolViewEditMusic {
-    
     NSString *_musicPath = _tempDraftInfo.vMusic.mPath;
     if (_musicPath !=nil && _musicPath.length > 0) {
+        
+        NvsAudioTrack *audioTrack = [_timeLine getAudioTrackByIndex:0];
+        if (audioTrack) {
+            [audioTrack setVolumeGain:0 rightVolumeGain:0];
+        }
+        
+        NvsAudioTrack *musicTrack = [_timeLine getAudioTrackByIndex:1];
+        if (musicTrack) {
+            [musicTrack setVolumeGain:0 rightVolumeGain:0];
+        }
+        
         _isEnterCutMusicView = YES;
         
         if (!_cutMusicView) {
@@ -466,9 +477,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         }
         self.toolView.hidden = YES;
         _cutMusicView.hidden = NO;
+        
+        
+        [self FSCutMusicViewSelectedMusic];
     }
-    
-    [_context stop];
 }
 
 - (void)FSPublisherToolViewAddEffects {
@@ -525,12 +537,13 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     FSMusicController *music = [FSMusicController new];
 
-    FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:music];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:music];
     [nav setNavigationBarHidden:YES];
     
     music.timeLine = _timeLine;
     music.pushed = YES;
     music.needSelfHeader = YES;
+    music.shouldReturnMusic = YES;
     [music setDelegate:self];
     
     [self presentViewController:nav animated:YES completion:nil];
@@ -591,6 +604,12 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         NvsAudioTrack *audioTrack = [_timeLine getAudioTrackByIndex:0];
         _tempDraftInfo.vOriginalVolume = -1;
         [audioTrack setVolumeGain:0.0 rightVolumeGain:0.0];
+        
+        if (_tempDraftInfo.vMusicVolume == -1) {
+            _tempDraftInfo.vMusicVolume = 0.5;
+        }
+        
+        [musicTrack setVolumeGain:_tempDraftInfo.vMusicVolume rightVolumeGain:_tempDraftInfo.vMusicVolume];
         
         [self playVideoFromHead];
     }
@@ -672,6 +691,12 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     _volumeView = nil;
     self.toolView.hidden = NO;
 }
+- (void)FSCutMusicViewSelectedMusic{
+    
+    [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:0];
+    if(![_context playbackTimeline:_timeLine startTime:0 endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
+    }
+}
 - (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval)newStartTime {
     _tempDraftInfo.vMusic.mInPoint = newStartTime*1000000;
     _isEnterCutMusicView = NO;
@@ -680,7 +705,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [musicTrack removeAllClips];
     NvsAudioClip *musicClip = [musicTrack appendClip:_tempDraftInfo.vMusic.mPath];
     [musicClip changeTrimInPoint:newStartTime*1000000.0 affectSibling:YES];
-    
+    [musicTrack setVolumeGain:_tempDraftInfo.vMusicVolume rightVolumeGain:_tempDraftInfo.vMusicVolume];
+
     [self playVideoFromHead];
     
     _cutMusicView.hidden = YES;
@@ -689,7 +715,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     self.toolView.hidden = NO;
 }
-#pragma mark - 
+#pragma mark -
 -(void)videoFxControllerSaved:(NSArray *)addedViews{
     
     [self.addedViews removeAllObjects];

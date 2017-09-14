@@ -14,4 +14,5 @@
 @property(nonatomic,assign)id<FSMusicListViewDelegate>delegate;
 @property(nonatomic,strong)FSMusicType *musicType;
 @property(nonatomic,strong)NSMutableArray *musiceList;
+@property(nonatomic,assign)BOOL shouldReturnMusic;
 @end

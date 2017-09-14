@@ -194,8 +194,6 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSLog(@"scrollViewDidEndDecelerating: %f",scrollView.contentOffset.x);
     [self resetMusicStartTime:scrollView];
-
-
 }
 
 - (NSString *)getCurrentTimeString:(NSTimeInterval)time {
@@ -238,6 +236,10 @@
         [[FSMusicPlayer sharedPlayer] stop];
         [[FSMusicPlayer sharedPlayer] playAtTime:time];
         [[FSMusicPlayer sharedPlayer] play];
+        
+        if ([self.delegate respondsToSelector:@selector(FSCutMusicViewSelectedMusic)]) {
+            [self.delegate FSCutMusicViewSelectedMusic];
+        }
     }
 }
 

@@ -88,10 +88,23 @@
     [_musicListView stopPlayCurrentMusic];
 }
 -(void)musicListWouldUseMusic:(FSMusic *)music musicPath:(NSString *)musicPath{
-    FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
-    [self.navigationController pushViewController:recoder animated:YES];
+    
+    if (!self.shouldReturnMusic) {
+        FSShortVideoRecorderController *recoder = [[FSShortVideoRecorderController alloc] init];
+        [self.navigationController pushViewController:recoder animated:YES];
+    }else{
+        if ([self.delegate respondsToSelector:@selector(musicListWouldUseMusic:musicPath:)]) {
+            [self.delegate musicListWouldUseMusic:music musicPath:musicPath];
+        }
+    }
 }
+
 -(void)musicListWouldShowDetail:(FSMusic *)music{
+    
+    if (self.shouldReturnMusic) {
+        return;
+    }
+
     if ([self.delegate respondsToSelector:@selector(musicListWouldShowDetail:)]) {
         [self.delegate musicListWouldShowDetail:music];
     }
