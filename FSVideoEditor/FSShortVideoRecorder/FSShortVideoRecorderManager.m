@@ -975,11 +975,21 @@ static FSShortVideoRecorderManager *recorderManager;
     NSString *blackMagicLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.lic"];
     
     if ([_context.assetPackageManager getAssetPackageStatus:SoulfxPath type:NvsAssetPackageType_VideoFx] == NvsAssetPackageStatus_NotInstalled) {
-        [_context.assetPackageManager installAssetPackage:SoulfxPath license:SoulfxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
+       NvsAssetPackageManagerError error = [_context.assetPackageManager installAssetPackage:SoulfxPath license:SoulfxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
+        if (error == NvsAssetPackageManagerError_NoError) {
+            NSLog(@"assetPackageManager installSuccess %@",SoulfxPath);
+        }else{
+            NSLog(@"assetPackageManager installFaild %u",error);
+        }
     }
     
     if ([_context.assetPackageManager getAssetPackageStatus:ScalefxPath type:(NvsAssetPackageType_VideoFx)] == NvsAssetPackageStatus_NotInstalled) {
-        [_context.assetPackageManager installAssetPackage:ScalefxPath license:ScalefxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
+        NvsAssetPackageManagerError error = [_context.assetPackageManager installAssetPackage:ScalefxPath license:ScalefxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
+        if (error == NvsAssetPackageManagerError_NoError) {
+            NSLog(@"assetPackageManager installSuccess %@",SoulfxPath);
+        }else{
+            NSLog(@"assetPackageManager installFaild %u",error);
+        }
     }
     
     if ([_context.assetPackageManager getAssetPackageStatus:jzfxPath type:(NvsAssetPackageType_VideoFx)] == NvsAssetPackageStatus_NotInstalled) {
