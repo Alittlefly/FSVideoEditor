@@ -975,23 +975,23 @@ static FSShortVideoRecorderManager *recorderManager;
     NSString *blackMagicLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.lic"];
     
     if ([_context.assetPackageManager getAssetPackageStatus:SoulfxPath type:NvsAssetPackageType_VideoFx] == NvsAssetPackageStatus_NotInstalled) {
-        [_context.assetPackageManager installAssetPackage:SoulfxPath license:SoulfxLicPath type:NvsAssetPackageType_VideoFx sync:NO assetPackageId:nil];
+        [_context.assetPackageManager installAssetPackage:SoulfxPath license:SoulfxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
     }
     
     if ([_context.assetPackageManager getAssetPackageStatus:ScalefxPath type:(NvsAssetPackageType_VideoFx)] == NvsAssetPackageStatus_NotInstalled) {
-        [_context.assetPackageManager installAssetPackage:ScalefxPath license:ScalefxLicPath type:NvsAssetPackageType_VideoFx sync:NO assetPackageId:nil];
+        [_context.assetPackageManager installAssetPackage:ScalefxPath license:ScalefxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
     }
     
     if ([_context.assetPackageManager getAssetPackageStatus:jzfxPath type:(NvsAssetPackageType_VideoFx)] == NvsAssetPackageStatus_NotInstalled) {
-        [_context.assetPackageManager installAssetPackage:jzfxPath license:jzfxLicPath type:NvsAssetPackageType_VideoFx sync:NO assetPackageId:nil];
+        [_context.assetPackageManager installAssetPackage:jzfxPath license:jzfxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
     }
     
     if ([_context.assetPackageManager getAssetPackageStatus:jxPath type:(NvsAssetPackageType_VideoFx)] == NvsAssetPackageStatus_NotInstalled) {
-        [_context.assetPackageManager installAssetPackage:jxPath license:jxLicPath type:NvsAssetPackageType_VideoFx sync:NO assetPackageId:nil];
+        [_context.assetPackageManager installAssetPackage:jxPath license:jxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
     }
     
     if ([_context.assetPackageManager getAssetPackageStatus:blackMagicPath type:(NvsAssetPackageType_VideoFx)] == NvsAssetPackageStatus_NotInstalled) {
-        [_context.assetPackageManager installAssetPackage:blackMagicPath license:blackMagicLicPath type:NvsAssetPackageType_VideoFx sync:NO assetPackageId:nil];
+        [_context.assetPackageManager installAssetPackage:blackMagicPath license:blackMagicLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];
     }
 }
 
