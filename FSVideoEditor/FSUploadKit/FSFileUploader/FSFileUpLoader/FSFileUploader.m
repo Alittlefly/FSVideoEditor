@@ -52,6 +52,39 @@
         [self uploadFileWithPath:filePath completBlock:complete];
     });
 }
+-(void)uploadFileWithFilePath:(NSString *)filePath
+                     progress:(FSUploadProgressBlock)progressBlock
+                completeBlock:(FSUploadCompleteBlock)complete{
+    dispatch_async(_uploadQueue, ^{
+        [self uploadFileWithPath:filePath progressBlock:progressBlock completBlock:complete];
+    });
+}
+-(void)uploadFileWithPath:(NSString *)filePath progressBlock:(FSUploadProgressBlock)progressBlock completBlock:(FSUploadCompleteBlock)complete{
+    //1.检查上传文件的状态
+    FSFileUpLoadState state = [FSFileUploadChecker fileUploadCheckerCheckState:filePath];
+    //1).上传剩余没上传的文件
+    if (state == FSFileUpLoadStateProcessing) {
+        NSLog(@"该文件正在上传中");
+        NSArray *files = [FSFileUploadChecker fileUploadCheckerGetUnUploadRanges:filePath];
+        [self uploadFileWithFileData:files filePath:filePath progressBlock:progressBlock completeBlock:complete];
+    }else if(state == FSFileUpLoadStateFinish){
+        // 2.已经完成上传
+        if (complete) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                complete(nil,YES,nil);
+            });
+        }
+    }else{
+        //2.没有记录
+        if([_divider respondsToSelector:@selector(fileDividerDeviderWithFilePath:)]){
+            NSArray *dividedFiles = [_divider fileDividerDeviderWithFilePath:filePath];
+            [self uploadFileWithFileData:dividedFiles filePath:filePath progressBlock:progressBlock completeBlock:complete];
+        }else{
+            [self uploadWithFilePath:filePath progressBlock:progressBlock completeBlock:complete];
+        }
+    }
+}
+
 -(void)uploadFileWithPath:(NSString *)filePath completBlock:(FSUploadProgressBlock)complete{
     //1.检查上传文件的状态
     FSFileUpLoadState state = [FSFileUploadChecker fileUploadCheckerCheckState:filePath];
@@ -80,6 +113,57 @@
         }
     }
 }
+-(void)uploadFileWithFileData:(NSArray<FSFileSlice *> *)fileDatas
+                     filePath:(NSString *)filePath
+                progressBlock:(FSUploadProgressBlock)progressBlock
+                completeBlock:(FSUploadCompleteBlock)complete{
+    NSFileHandle *handler = [NSFileHandle fileHandleForReadingAtPath:filePath];
+    
+    [FSFileUploadChecker fileUploadCheckerSaveFiles:fileDatas filePath:filePath];
+    
+    NSMutableArray *ops = [NSMutableArray array];
+    
+    __weak typeof(self) weakSelf = self;
+    for (FSFileSlice *file in fileDatas) {
+        [handler seekToFileOffset:file.fileRange.location];
+        NSData *postData = [handler readDataOfLength:file.fileSize];
+        if ([self.delegate respondsToSelector:@selector(fileUploaderWillUploadFilePath:file:fileData:)]) {
+            id<FSFileUploaderProtocol> op = [self.delegate fileUploaderWillUploadFilePath:filePath file:file fileData:postData];
+            [op uploadFile:postData file:file progress:^(CGFloat progress, NSString *filePath, NSDictionary *info) {
+                dispatch_async(_uploadQueue, ^{
+                    if(progressBlock){
+                        progressBlock(progress,filePath,info);
+                    }
+                });
+            } completeBlock:^(FSFileSlice *file, BOOL success,NSDictionary * info) {
+                //
+                if (success) {
+                    dispatch_async(_uploadQueue, ^{
+                        if (complete) {
+                            float cprogress = [FSFileUploadChecker fileUploadCheckUploadSuccess:file filePath:filePath];
+                            
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                
+                                if ([weakSelf.delegate respondsToSelector:@selector(fileUploadUploaded:progress:uploader:)]) {
+                                    [weakSelf.delegate fileUploadUploaded:filePath progress:cprogress uploader:weakSelf];
+                                }
+                                complete(nil,success,info);
+                            });
+                        }
+                    });
+                }else{
+                    if (complete) {
+                        complete(0,NO,nil);
+                    }
+                }
+            }];
+            
+            [ops addObject:op];
+        }
+    }
+    [self.uploadOperaters setValue:ops forKey:filePath];
+    
+}
 -(void)uploadFileWithFileData:(NSArray<FSFileSlice *> *)fileDatas filePath:(NSString *)filePath completeBlock:(FSUploadProgressBlock)complete{
     NSFileHandle *handler = [NSFileHandle fileHandleForReadingAtPath:filePath];
     
@@ -93,7 +177,9 @@
         NSData *postData = [handler readDataOfLength:file.fileSize];
         if ([self.delegate respondsToSelector:@selector(fileUploaderWillUploadFilePath:file:fileData:)]) {
             id<FSFileUploaderProtocol> op = [self.delegate fileUploaderWillUploadFilePath:filePath file:file fileData:postData];
-            [op uploadFile:postData file:file completeBlock:^(FSFileSlice *file, BOOL success,NSDictionary * info) {
+            [op uploadFile:postData file:file progress:^(CGFloat progress, NSString *filePath, NSDictionary *info) {
+                
+            } completeBlock:^(FSFileSlice *file, BOOL success,NSDictionary * info) {
                 //
                 if (success) {
                     dispatch_async(_uploadQueue, ^{
@@ -129,6 +215,41 @@
     }
     [self.uploadOperaters setValue:ops forKey:filePath];
 }
+-(void)uploadWithFilePath:(NSString *)filePath progressBlock:(FSUploadProgressBlock)progressBlock completeBlock:(FSUploadCompleteBlock)complete{
+    NSFileHandle *handler = [NSFileHandle fileHandleForReadingAtPath:filePath];
+    NSData *postData = [handler readDataToEndOfFile];
+    FSFileSlice *file = [FSFileSlice fileWithfilePath:filePath];
+    
+    [FSFileUploadChecker fileUploadCheckerSaveFiles:@[file] filePath:filePath];
+    
+    __weak typeof(self) weakSelf = self;
+    if ([self.delegate respondsToSelector:@selector(fileUploaderWillUploadFilePath:file:fileData:)]) {
+        id<FSFileUploaderProtocol> op = [self.delegate fileUploaderWillUploadFilePath:filePath file:file fileData:postData];
+        [op uploadFile:postData file:file progress:^(CGFloat progress, NSString *filePath, NSDictionary *info) {
+            // 走系统进度
+            dispatch_async(_uploadQueue, ^{
+                if (progressBlock) {
+                    progressBlock(progress,filePath,info);
+                }
+            });
+        }completeBlock:^(FSFileSlice *file, BOOL success,id info) {
+            //
+            dispatch_async(_uploadQueue, ^{
+                
+                float cprogress = [FSFileUploadChecker fileUploadCheckUploadSuccess:file filePath:filePath];
+                
+                if (complete) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if ([weakSelf.delegate respondsToSelector:@selector(fileUploadUploaded:progress:uploader:)]) {
+                            [weakSelf.delegate fileUploadUploaded:filePath progress:cprogress uploader:weakSelf];
+                        }
+                        complete(file,YES,info);
+                    });
+                }
+            });
+        }];
+    }
+}
 -(void)uploadWithFilePath:(NSString *)filePath completeBlock:(FSUploadProgressBlock)complete{
     NSFileHandle *handler = [NSFileHandle fileHandleForReadingAtPath:filePath];
     NSData *postData = [handler readDataToEndOfFile];
@@ -139,10 +260,14 @@
     __weak typeof(self) weakSelf = self;
     if ([self.delegate respondsToSelector:@selector(fileUploaderWillUploadFilePath:file:fileData:)]) {
         id<FSFileUploaderProtocol> op = [self.delegate fileUploaderWillUploadFilePath:filePath file:file fileData:postData];
-        [op uploadFile:postData file:file completeBlock:^(FSFileSlice *file, BOOL success,id info) {
+        [op uploadFile:postData file:file progress:^(CGFloat progress, NSString *filePath, NSDictionary *info) {
+            // 走系统进度
+        }completeBlock:^(FSFileSlice *file, BOOL success,id info) {
             //
             dispatch_async(_uploadQueue, ^{
+                
                 float cprogress = [FSFileUploadChecker fileUploadCheckUploadSuccess:file filePath:filePath];
+                
                 if (complete) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         

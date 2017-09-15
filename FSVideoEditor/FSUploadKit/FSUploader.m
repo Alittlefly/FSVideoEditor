@@ -38,6 +38,11 @@
 - (void)uploadFileWithFilePath:(NSString *)filePath complete:(FSUploadProgressBlock)complete {
     [_fileUploader uploadFileWithFilePath:filePath completeBlock:complete];
 }
+- (void)uploadFileWithFilePath:(NSString *)filePath
+                      progress:(FSUploadProgressBlock)progressBlock
+                      complete:(FSUploadCompleteBlock)complete{
+    [_fileUploader uploadFileWithFilePath:filePath progress:progressBlock completeBlock:complete];
+}
 
 -(void)uploadFileProgressWithFilePath:(NSString *)filePath complete:(void (^)(float, NSString *))complete{
     NSAssert(complete,@"回调不能为空");

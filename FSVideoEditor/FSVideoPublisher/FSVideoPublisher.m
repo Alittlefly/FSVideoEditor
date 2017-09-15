@@ -129,9 +129,14 @@
     
     _totalFileSize = [UIImageJPEGRepresentation(param.firstImageData,1) length]/1024;
     _totalFileSize += [self fileSize:param.webpPath];
-    _totalFileSize += [self fileSize:param.videoPath];
-    _totalFileSize += [self fileSize:param.videoPathWithLogo];
+    long long videoSize = [self fileSize:param.videoPath];
 
+    _totalFileSize += videoSize;
+    long long videoLogoSize = [self fileSize:param.videoPathWithLogo];
+    _totalFileSize += videoLogoSize;
+
+    
+    
     
     dispatch_group_enter(_group);
     dispatch_group_async(_group, _uploadImageQueue, ^{
@@ -156,31 +161,35 @@
     });
     
     dispatch_group_enter(_group);
-    dispatch_group_async(_group, _uploadLogoVideoQueue, ^{
-        [_uploadVideo uploadFileWithFilePath:param.videoPath complete:^(CGFloat progress, NSString *filePath, NSDictionary *info) {
+    dispatch_group_async(_group,_uploadNologoVideoQueue, ^{
+        [_uploadVideo uploadFileWithFilePath:param.videoPath progress:^(CGFloat progress, NSString *filePath, NSDictionary *info) {
+            NSLog(@"_uploadVideo uploadFileWithFilePath %.2f",progress);
+            _videoUploadSize = progress * videoSize;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
+                    [self.delegate videoPublisherProgress:(((double)self.totalUploadSize/(double)_totalFileSize) * 100.0)/100.0];                   }
+            });
+        } complete:^(FSFileSlice *file, BOOL success, NSDictionary *info) {
+
             if (info) {
                 _nologoVideoUrl = [info objectForKey:@"dataInfo"];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                  //  _uploadProgress += 0.1;
-                    if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
-                        [self.delegate videoPublisherProgress:(((double)self.totalUploadSize/(double)_totalFileSize) * 100.0)/100.0];                    }
-                });
             }
             dispatch_group_leave(_group);
         }];
     });
     
     dispatch_group_enter(_group);
-    dispatch_group_async(_group, _uploadNologoVideoQueue, ^{
-        [_uploadLogoVideo uploadFileWithFilePath:param.videoPathWithLogo complete:^(CGFloat progress, NSString *filePath, NSDictionary *info) {
+    dispatch_group_async(_group, _uploadLogoVideoQueue, ^{
+        [_uploadLogoVideo uploadFileWithFilePath:param.videoPathWithLogo progress:^(CGFloat progress, NSString *filePath, NSDictionary *info) {
+            _videoLogoUploadSize = progress * videoLogoSize;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
+                    [self.delegate videoPublisherProgress:(((double)self.totalUploadSize/(double)_totalFileSize) * 100.0)/100.0];                   }
+            });
+        } complete:^(FSFileSlice *file, BOOL success, NSDictionary *info) {
+            
             if (info) {
                 _logoVideoUrl = [info objectForKey:@"dataInfo"];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                   // _uploadProgress += 0.1;
-                    if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
-                        [self.delegate videoPublisherProgress:(((double)self.totalUploadSize/(double)_totalFileSize) * 100.0)/100.0];
-                    }
-                });
             }
             dispatch_group_leave(_group);
         }];

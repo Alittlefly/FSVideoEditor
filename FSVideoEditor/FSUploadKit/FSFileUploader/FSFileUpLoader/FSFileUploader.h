@@ -27,7 +27,7 @@ typedef void(^FSUploadCompleteBlock)(FSFileSlice *file,BOOL success,NSDictionary
 // 无回调的上传 用在不需要展示上传进度场景
 -(void)uploadFile:(NSData *)data file:(FSFileSlice *)file;
 // 有回调的上传 用在
--(void)uploadFile:(NSData *)data file:(FSFileSlice *)file completeBlock:(FSUploadCompleteBlock)completecomplete;
+-(void)uploadFile:(NSData *)data file:(FSFileSlice *)file progress:(FSUploadProgressBlock)progress completeBlock:(FSUploadCompleteBlock)completecomplete;
 
 @end
 
@@ -53,6 +53,11 @@ typedef void(^FSUploadCompleteBlock)(FSFileSlice *file,BOOL success,NSDictionary
 -(void)uploadFileWithFile:(FSFile *)file;
 -(void)uploadFileWithFilePath:(NSString *)filePath;
 -(void)uploadFileWithFilePath:(NSString *)filePath completeBlock:(FSUploadProgressBlock)complete;
+
+-(void)uploadFileWithFilePath:(NSString *)filePath progress:(FSUploadProgressBlock)progressBlock completeBlock:(FSUploadCompleteBlock)complete;
+
+
+
 
 
 

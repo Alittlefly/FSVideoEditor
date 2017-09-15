@@ -31,10 +31,11 @@
     return self;
 }
 -(void)uploadFile:(NSData *)data file:(FSFileSlice *)file{
-    [self uploadFile:data file:file completeBlock:nil];
+    [self uploadFile:data file:file progress:nil completeBlock:nil];
 }
 -(void)uploadFile:(NSData *)data
              file:(FSFileSlice *)file
+        progress:(FSUploadProgressBlock)progress
     completeBlock:(FSUploadCompleteBlock)complete{
     
     if (!_file) {
@@ -64,7 +65,9 @@
     _uploadTask = (NSURLSessionUploadTask *)[mgr  POST:[self requestUrl] parameters:@{} constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:data name:@"file" fileName:file.fileName mimeType:@"video/quicktime"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        
+        if (progress) {
+            progress(uploadProgress.fractionCompleted,file.filePath,nil);
+        }
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = nil;
         if ([responseObject isKindOfClass:[NSString class]]) {

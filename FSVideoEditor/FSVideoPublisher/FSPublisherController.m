@@ -37,6 +37,7 @@
 #import "FSTimelineConfiger.h"
 #import "FSPublisherMaskView.h"
 #import "FSVideoPublisher.h"
+#import "FSShortLanguage.h"
 
 typedef NS_ENUM(NSInteger,FSPublishOperationType){
     FSPublishOperationTypeSaveToDraft,
@@ -292,7 +293,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     [self.navigationController.view addSubview:self.loading];
     [self.loading loadingViewShow];
-    [self.loading setLoadingText:[NSString stringWithFormat:@"%d%%",0]];
+    [self.loading setLoadingText:[NSString stringWithFormat:@"%@",[FSShortLanguage CustomLocalizedStringFromTable:@"Processing"]]];
     
     NSLog(@"开始发布视频: -----");
     
@@ -360,8 +361,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         
 //        [self uploadFile:_stickerVideoPath];
         _param.draftInfo = _tempDraftInfo;
-        
-        [self.loading setLoadingText:[NSString stringWithFormat:@"50%%"]];
         
         [[FSVideoPublisher sharedPublisher] setDelegate:self];
         [[FSVideoPublisher sharedPublisher] publishVideo:_param];
@@ -775,7 +774,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 #pragma mark - FSPublisherServerDelegate
 -(void)videoPublisherProgress:(CGFloat)progress{
     NSLog(@"发布视频:更新进度:%f",progress);
-    [self.loading setLoadingText:[NSString stringWithFormat:@"%.0f%%",progress * 100]];
+    [self.loading setLoadingText:[NSString stringWithFormat:@"%.0f%%",MIN(progress * 100.0,100.0)]];
 }
 -(void)videoPublisherSuccess{
     [self.loading loadingViewhide];
