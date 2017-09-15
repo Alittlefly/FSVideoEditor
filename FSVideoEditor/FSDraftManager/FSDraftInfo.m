@@ -27,6 +27,7 @@
         [self setVOriginalVolume:-1.0];
         [self setVBeautyOn:YES];
         [self setIsFrontCamera:YES];
+        [self setVSaveToAlbum:YES];
     }
     return self;
 }
@@ -46,14 +47,14 @@
         self.vFilterid = draftInfo.vFilterid;
         self.vConvertPath = draftInfo.vConvertPath;
         self.vFirstFramePath = draftInfo.vFirstFramePath;
-        self.vSaveToAlbum = draftInfo.vSaveToAlbum;
+        self.vSaveToAlbum = draftInfo?draftInfo.vSaveToAlbum:YES;
         self.vOriginalPath = draftInfo.vOriginalPath;
         self.recordVideoPathArray = draftInfo.recordVideoPathArray;
         self.recordVideoTimeArray = draftInfo.recordVideoTimeArray;
         self.recordVideoSpeedArray = draftInfo.recordVideoSpeedArray;
         self.vType = draftInfo.vType;
         self.vAddedFxViews = draftInfo.vAddedFxViews;
-        self.isFrontCamera = draftInfo.isFrontCamera;
+        self.isFrontCamera = draftInfo?draftInfo.isFrontCamera:YES;
     }
     return self;
 }
@@ -89,11 +90,14 @@
     self.stack = nil;
     self.vSpeed = 1.0;
     self.vFilterid = 0;
+    self.vOriginalVolume = -1.0;
+    self.vMusicVolume = -1.0;
     self.vFirstFramePath = nil;
     self.vAddedFxViews = nil;
     self.vTimefx = nil;
     self.vBeautyOn = YES;
     self.isFrontCamera = YES;
+    self.vSaveToAlbum = YES;
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{

@@ -48,6 +48,12 @@
     }
 }
 
+- (void)FSUploadImageAPIWebPProgress:(float)progress {
+    if ([self.delegate respondsToSelector:@selector(FSUploadImageServerWebPProgress:)]) {
+        [self.delegate FSUploadImageServerWebPProgress:progress];
+    }
+}
+
 - (void)FSUploadImageAPIFirstImageFaild:(NSError *)error {
     if ([self.delegate respondsToSelector:@selector(FSUploadImageServerFirstImageFailed:)]) {
         [self.delegate FSUploadImageServerFirstImageFailed:error];
@@ -57,6 +63,12 @@
 - (void)FSUploadImageAPIFirstImageSuccess:(NSString *)filePath {
     if ([self.delegate respondsToSelector:@selector(FSUploadImageServerFirstImageSucceed:)]) {
         [self.delegate FSUploadImageServerFirstImageSucceed:filePath];
+    }
+}
+
+- (void)FSUploadImageAPIFirstImageProgress:(float)progress {
+    if ([self.delegate respondsToSelector:@selector(FSUploadImageServerFirstImageProgress:)]) {
+        [self.delegate FSUploadImageServerFirstImageProgress:progress];
     }
 }
 

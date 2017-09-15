@@ -128,7 +128,7 @@
         
         [self addSubview:self.loading];
         [self.loading loadingViewShow];
-        [cell setIsPlayIng:YES];
+      //  [cell setIsPlayIng:YES];
         [[FSMusicPlayer sharedPlayer] stop];
 
         if (music.songUrl) {

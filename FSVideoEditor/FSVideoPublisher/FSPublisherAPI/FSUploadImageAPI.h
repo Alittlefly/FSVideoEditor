@@ -12,9 +12,12 @@
 
 - (void)FSUploadImageAPIFirstImageSuccess:(NSString *)filePath;
 - (void)FSUploadImageAPIFirstImageFaild:(NSError *)error;
+- (void)FSUploadImageAPIFirstImageProgress:(float)progress;
 
 - (void)FSUploadImageAPIWebPSuccess:(NSString *)filePath;
 - (void)FSUploadImageAPIWebPFaild:(NSError *)error;
+- (void)FSUploadImageAPIWebPProgress:(float)progress;
+
 
 @end
 

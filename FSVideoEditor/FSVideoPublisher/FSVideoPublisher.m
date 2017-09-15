@@ -40,10 +40,18 @@
     NSString *_logoVideoUrl;
     NSString *_nologoVideoUrl;
     
-    CGFloat _uploadProgress;
+   // CGFloat _uploadProgress;
+    
+    long long _totalFileSize;
+    float _firstImageUploadSize;
+    float _webpUploadSize;
+    float _videoUploadSize;
+    float _videoLogoUploadSize;
 }
 
 @property(nonatomic,strong)FSVideoPublishParam *currentParam;
+@property(nonatomic, assign) long long totalUploadSize;
+
 @end
 
 @implementation FSVideoPublisher
@@ -77,11 +85,52 @@
     return object;
 }
 
+- (long long)totalUploadSize {
+    return _firstImageUploadSize+_webpUploadSize+_videoUploadSize+_videoLogoUploadSize;
+}
+
+- (unsigned long long)fileSize:(NSString*)filePath
+{
+    // 总大小
+    unsigned long long size = 0;
+    NSString *sizeText = nil;
+    NSFileManager *manager = [NSFileManager defaultManager];
+    
+    BOOL isDir = NO;
+    BOOL exist = [manager fileExistsAtPath:filePath isDirectory:&isDir];
+    
+    // 判断路径是否存在
+    if (!exist) return size;
+    if (isDir) { // 是文件夹
+        NSDirectoryEnumerator *enumerator = [manager enumeratorAtPath:filePath];
+        for (NSString *subPath in enumerator) {
+            NSString *fullPath = [filePath stringByAppendingPathComponent:subPath];
+            size += [manager attributesOfItemAtPath:fullPath error:nil].fileSize;
+            
+        }
+    }else{ // 是文件
+        size += [manager attributesOfItemAtPath:filePath error:nil].fileSize;
+    }
+    return size;
+}
+
+
 // 发布 视频文件
 -(void)publishVideo:(FSVideoPublishParam *)param{
 
     self.currentParam = param;
-    _uploadProgress = 0.5;
+   // _uploadProgress = 0.5;
+    
+    _firstImageUploadSize = 0;
+    _webpUploadSize = 0;
+    _videoUploadSize = 0;
+    _videoLogoUploadSize = 0;
+    
+    _totalFileSize = [UIImageJPEGRepresentation(param.firstImageData,1) length]/1024;
+    _totalFileSize += [self fileSize:param.webpPath];
+    _totalFileSize += [self fileSize:param.videoPath];
+    _totalFileSize += [self fileSize:param.videoPathWithLogo];
+
     
     dispatch_group_enter(_group);
     dispatch_group_async(_group, _uploadImageQueue, ^{
@@ -111,10 +160,9 @@
             if (info) {
                 _nologoVideoUrl = [info objectForKey:@"dataInfo"];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    _uploadProgress += 0.1;
+                  //  _uploadProgress += 0.1;
                     if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
-                        [self.delegate videoPublisherProgress:_uploadProgress];
-                    }
+                        [self.delegate videoPublisherProgress:(((double)self.totalUploadSize/(double)_totalFileSize) * 100.0)/100.0];                    }
                 });
             }
             dispatch_group_leave(_group);
@@ -127,9 +175,9 @@
             if (info) {
                 _logoVideoUrl = [info objectForKey:@"dataInfo"];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    _uploadProgress += 0.1;
+                   // _uploadProgress += 0.1;
                     if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
-                        [self.delegate videoPublisherProgress:_uploadProgress];
+                        [self.delegate videoPublisherProgress:(((double)self.totalUploadSize/(double)_totalFileSize) * 100.0)/100.0];
                     }
                 });
             }
@@ -167,10 +215,8 @@
 - (void)FSUploadImageServerFirstImageSucceed:(NSString *)filePath {
     _firstImageUrl = filePath;
     dispatch_async(dispatch_get_main_queue(), ^{
-        _uploadProgress += 0.1;
-
         if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
-            [self.delegate videoPublisherProgress:_uploadProgress];
+            [self.delegate videoPublisherProgress:(((double)self.totalUploadSize/(double)_totalFileSize) * 100.0)/100.0];
         }
     });
     dispatch_group_leave(_group);
@@ -180,12 +226,23 @@
     dispatch_group_leave(_group);
 }
 
+- (void)FSUploadImageServerFirstImageProgress:(float)progess {
+    _firstImageUploadSize = progess;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"---- uploadProgress 1  %lld  %lld",self.totalUploadSize,_totalFileSize);
+
+        if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
+            [self.delegate videoPublisherProgress:(((double)self.totalUploadSize/(double)_totalFileSize) * 100.0)/100.0];
+        }
+    });
+}
+
 - (void)FSUploadImageServerWebPSucceed:(NSString *)filePath {
     _webpUrl = filePath;
     dispatch_async(dispatch_get_main_queue(), ^{
-        _uploadProgress += 0.1;
+        //_uploadProgress += 0.1;
         if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
-            [self.delegate videoPublisherProgress:_uploadProgress];
+            [self.delegate videoPublisherProgress:(((double)self.totalUploadSize/(double)_totalFileSize) * 100.0)/100.0];
         }
     });
     dispatch_group_leave(_group);
@@ -193,6 +250,16 @@
 
 - (void)FSUploadImageServerWebPFailed:(NSError *)error {
     dispatch_group_leave(_group);
+}
+
+- (void)FSUploadImageServerWebPProgress:(float)progess {
+    _webpUploadSize = progess;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"---- uploadProgress 2  %lld  %lld",self.totalUploadSize,_totalFileSize);
+        if ([self.delegate respondsToSelector:@selector(videoPublisherProgress:)]) {
+            [self.delegate videoPublisherProgress:(((double)self.totalUploadSize/(double)_totalFileSize) * 100.0)/100.0];
+        }
+    });
 }
 
 - (void)FSPublisherServerSucceed {
@@ -210,6 +277,12 @@
         [self.delegate videoPublisherFaild];
     }    
 }
+
+- (void)FSPublisherServerProgress:(long long)progress {
+
+}
+
+
 // 杀应用 要删除一下file
 -(void)terminate{
     if (self.currentParam) {

@@ -42,6 +42,11 @@
     NSURLSessionTask *task = (NSURLSessionUploadTask *)[mgr  POST:[NSString stringWithFormat:@"%@files/shortvideo/upload/image",AddressUpload] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:imageData name:@"file" fileName:imageName mimeType:@"image/jpg"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
+        NSLog(@"---- uploadProgress uploadFirstImage : %lld   %lld",uploadProgress.totalUnitCount,uploadProgress.completedUnitCount);
+
+        if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIFirstImageProgress:)]) {
+            [weakS.delegate FSUploadImageAPIFirstImageProgress:uploadProgress.completedUnitCount];
+        }
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         int code = [[responseObject objectForKey:@"code"] intValue];
@@ -88,7 +93,10 @@
     NSURLSessionTask *task = (NSURLSessionUploadTask *)[mgr  POST:[NSString stringWithFormat:@"%@files/shortvideo/upload/gif",AddressUpload] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:imageData name:@"file" fileName:imageName mimeType:@"image/webp"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        
+        NSLog(@"---- uploadProgress uploadWebP : %lld   %lld",uploadProgress.totalUnitCount,uploadProgress.completedUnitCount);
+        if ([weakS.delegate respondsToSelector:@selector(FSUploadImageAPIWebPProgress:)]) {
+            [weakS.delegate FSUploadImageAPIWebPProgress:uploadProgress.completedUnitCount];
+        }
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         int code = [[responseObject objectForKey:@"code"] intValue];
         if ( code== 0) {

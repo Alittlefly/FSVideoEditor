@@ -12,6 +12,7 @@
 
 - (void)FSPublisherServerSucceed;
 - (void)FSPublisherServerFailed:(NSError *)error;
+- (void)FSPublisherServerProgress:(long long)progress;
 
 @end
 

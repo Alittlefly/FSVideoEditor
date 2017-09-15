@@ -39,4 +39,10 @@
     }
 }
 
+- (void)FSPublisherAPIProgress:(long long)progress {
+    if ([self.delegate respondsToSelector:@selector(FSPublisherServerProgress:)]) {
+        [self.delegate FSPublisherServerProgress:progress];
+    }
+}
+
 @end
