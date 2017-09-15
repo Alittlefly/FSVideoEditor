@@ -37,13 +37,13 @@
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0]};
     CGRect newSize = [title boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
     CGFloat textW = CGRectGetWidth(newSize);
-    CGFloat startX = (CGRectGetWidth(contentRect) - (textW + imageWidth + 6.0))/2.0 ;
+    CGFloat startX = (CGRectGetWidth(contentRect) - (textW + imageWidth + 1.0))/2.0 ;
     
     CGFloat imageX = 0;
     if ([FSPublishSingleton sharedInstance].isAutoReverse) {
         imageX = startX;
     }else{
-        imageX = startX + textW + 6.0;
+        imageX = startX + textW + 1.0;
     }
     
     CGFloat imageH = 20.0;
@@ -56,10 +56,10 @@
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0]};
     CGRect newSize = [title boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
     CGFloat textW = CGRectGetWidth(newSize);
-    CGFloat startX = (CGRectGetWidth(contentRect) - (textW + imageWidth + 6.0))/2.0;
+    CGFloat startX = (CGRectGetWidth(contentRect) - (textW + imageWidth + 1.0))/2.0;
     CGFloat textX = 0.0;
     if ([FSPublishSingleton sharedInstance].isAutoReverse) {
-        textX = startX + imageWidth + 6.0;
+        textX = startX + imageWidth + 1.0;
     }else{
         textX = startX;
 
@@ -100,7 +100,7 @@
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0]};
     CGRect newSize = [recordText boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
     CGFloat textW = CGRectGetWidth(newSize);
-    CGFloat buttonW = textW + 6.0 + 20.0;
+    CGFloat buttonW = textW + 1.0 + 20.0;
     FSRecordNowButton *videoRecorderButton = [FSRecordNowButton buttonWithType:UIButtonTypeCustom];
     [videoRecorderButton setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentCenter)];
      videoRecorderButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20: CGRectGetWidth(_contentView.frame) - buttonW - 20, 17, buttonW, 21);
