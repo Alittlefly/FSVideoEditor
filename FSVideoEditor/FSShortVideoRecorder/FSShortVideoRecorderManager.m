@@ -928,7 +928,7 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     else {
         config.to = 1;
-        //config.videoResolution = NvcOutputVideoResolution_360;
+        config.videoResolution = NvcOutputVideoResolution_360;
     }
     
     NSInteger ret = [self.mConvertor open:filePath outputFile:outPath setting:&config];
