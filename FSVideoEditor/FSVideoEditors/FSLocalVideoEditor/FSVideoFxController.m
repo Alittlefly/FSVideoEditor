@@ -416,10 +416,8 @@
 
     [self removeAllFx];
     [self addVideoFxWithVirtualTimeline:willSaveTimeLine];
-    
     //
     [_context seekTimeline:_timeLine timestamp:endPoint videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
-    int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
 
     [videoFxView stopMoveTint];
     [_controlView setState:NO];

@@ -126,6 +126,7 @@
     [_musicListView insertMoreMusic:nil];
     [_musicListView showLoading:NO];
 }
+
 -(void)outNav{
     [self.navigationController popViewControllerAnimated:YES];
 }

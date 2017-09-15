@@ -76,7 +76,7 @@
     }
     // 切割
     [copyArray removeObjectsInArray:before];
-    [copyArray removeObject:after];
+    [copyArray removeObjectsInArray:after];
     
     NSArray *centerArray = [NSArray arrayWithArray:copyArray];
     

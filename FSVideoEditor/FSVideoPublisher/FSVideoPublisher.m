@@ -13,6 +13,7 @@
 #import "FSPublisherServer.h"
 #import "FSPublishSingleton.h"
 #import "FSDraftManager.h"
+#import "FSVideoEditorCommenData.h"
 
 
 @implementation FSVideoPublishParam
@@ -266,6 +267,8 @@
     
     NSLog(@"完成发布视频: -----");
 
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoPublished object:nil];
+    
     if ([self.delegate respondsToSelector:@selector(videoPublisherSuccess)]) {
         [self.delegate videoPublisherSuccess];
     }
