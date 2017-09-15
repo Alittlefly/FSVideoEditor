@@ -110,12 +110,45 @@
     //
     if ([_music isEqual:music]) {
         // 相同的音乐
-        [cell setIsPlayIng:!cell.isPlayIng];
-        
-        if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
-            [[FSMusicPlayer sharedPlayer] pause];
+        if ([FSMusicManager existWithFileName:music.songUrl]) {
+            
+            [cell setIsPlayIng:!cell.isPlayIng];
+            
+            if ([[FSMusicPlayer sharedPlayer] isPlaying]) {
+                [[FSMusicPlayer sharedPlayer] pause];
+            }else{
+                [[FSMusicPlayer sharedPlayer] stop];
+                [[FSMusicPlayer sharedPlayer] setFilePath:[FSMusicManager musicPathWithFileName:music.songUrl]];
+                [[FSMusicPlayer sharedPlayer] play];
+            }
         }else{
-            [[FSMusicPlayer sharedPlayer] play];
+            
+            [self addSubview:self.loading];
+            [self.loading loadingViewShow];
+            [cell setIsPlayIng:YES];
+            [[FSMusicPlayer sharedPlayer] stop];
+            
+            if (music.songUrl) {
+                
+                NSString *url = music.songUrl;
+                if (![url hasPrefix:@"http"] && url) {
+                    url = [AddressIP stringByAppendingString:music.songUrl];
+                }
+                __weak typeof(self) weakS = self;
+                __weak typeof(_music) weakMusic = music;
+                [FSMusicManager downLoadMusic:url complete:^(NSString *localPath, NSError *error) {
+                    [weakS.loading loadingViewhide];
+                    if (!error && weakMusic.isPlaying) {
+                        [[FSMusicPlayer sharedPlayer] stop];
+                        [[FSMusicPlayer sharedPlayer] setFilePath:localPath];
+                        [[FSMusicPlayer sharedPlayer] play];
+                        [cell setIsPlayIng:YES];
+                    }else{
+                        weakMusic.isPlaying = NO;
+                        [cell setIsPlayIng:NO];
+                    }
+                }];
+            }
         }
     }else{
         //
@@ -138,13 +171,17 @@
                 url = [AddressIP stringByAppendingString:music.songUrl];
             }
             __weak typeof(self) weakS = self;
+            __weak typeof(_music) weakMusic = music;
             [FSMusicManager downLoadMusic:url complete:^(NSString *localPath, NSError *error) {
                 [weakS.loading loadingViewhide];
-                if (!error) {
+                if (!error && weakMusic.isPlaying) {
                     [[FSMusicPlayer sharedPlayer] stop];
                     [[FSMusicPlayer sharedPlayer] setFilePath:localPath];
                     [[FSMusicPlayer sharedPlayer] play];
                     [cell setIsPlayIng:YES];
+                }else{
+                    weakMusic.isPlaying = NO;
+                    [cell setIsPlayIng:NO];
                 }
             }];
         }
@@ -152,6 +189,7 @@
     // 更新当前选中的音乐
     _music = music;
 }
+
 #pragma mark -
 -(void)tableView:(UITableView *)tableView updateTableWithMusic:(FSMusic *)music selectIndexPath:(NSIndexPath *)indexPath{
     
@@ -248,10 +286,12 @@
     }
 }
 - (void)stopPlayCurrentMusic {
+    
     if (_music && _music.isPlaying) {
         _music.isPlaying = NO;
         _music.opend = NO;
     }
+
     [[FSMusicPlayer sharedPlayer] stop];
     [_tableView reloadData];
 }
