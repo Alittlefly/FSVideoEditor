@@ -416,6 +416,9 @@
 -(void)creatFxFiltterButtons{
     [self initFilerFxs];
     [self initTimeFxs];
+    
+    // 默认选中
+    _progress.ftype = FSFilterTypeFx;
 }
 -(void)initTimeFxs{
     

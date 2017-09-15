@@ -39,6 +39,7 @@
 
 #define kNSNotificationVideoEditToolWillShow @"kNSNotificationVideoEditToolWillShow"
 #define kNSNotificationVideoEditToolDidHide @"kNSNotificationVideoEditToolDidHide"
+#define kNSNotificationVideoPublished @"kNSNotificationVideoPublished"
 
 
 
