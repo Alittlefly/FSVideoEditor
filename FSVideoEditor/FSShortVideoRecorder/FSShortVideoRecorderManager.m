@@ -107,7 +107,7 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     
     // 开启采集预览
-    if (![_context startCapturePreview:_currentDeviceIndex videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
+    if (![_context startCapturePreview:_currentDeviceIndex videoResGrade:NvsVideoCaptureResolutionGradeMedium flags:0 aspectRatio:nil]) {
         NSLog(@"启动预览失败");
     }
 }
@@ -178,7 +178,7 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     
     // 此样例使用高质量、横纵比为1:1的设置启动采集预览
-    if (![_context startCapturePreview:_currentDeviceIndex videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
+    if (![_context startCapturePreview:_currentDeviceIndex videoResGrade:NvsVideoCaptureResolutionGradeMedium flags:0 aspectRatio:nil]) {
         NSLog(@"启动预览失败");
     }
     
@@ -291,14 +291,14 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (BOOL)switchCamera {
     if (_currentDeviceIndex == 0) {
-        if (![_context startCapturePreview:1 videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
+        if (![_context startCapturePreview:1 videoResGrade:NvsVideoCaptureResolutionGradeMedium flags:0 aspectRatio:nil]) {
             NSLog(@"启动预览失败");
             return NO;
         }
         _currentDeviceIndex = 1;
     }
     else {
-        if (![_context startCapturePreview:0 videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
+        if (![_context startCapturePreview:0 videoResGrade:NvsVideoCaptureResolutionGradeMedium flags:0 aspectRatio:nil]) {
             NSLog(@"启动预览失败");
             return NO;
         }
@@ -928,7 +928,7 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     else {
         config.to = 1;
-        config.videoResolution = NvcOutputVideoResolution_360;
+        //config.videoResolution = NvcOutputVideoResolution_480;
     }
     
     NSInteger ret = [self.mConvertor open:filePath outputFile:outPath setting:&config];
