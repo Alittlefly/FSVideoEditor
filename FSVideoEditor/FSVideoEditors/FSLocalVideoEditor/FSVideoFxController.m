@@ -328,7 +328,10 @@
     [_videoTrack setVolumeGain:0 rightVolumeGain:0];
 
     [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
-    //
+    
+    
+    // 
+    [self removeAllFx];
     FSVirtualTimeLine *vtimelin = [_tempFxStack topVirtualTimeLine];
     [self addVideoFxWithVirtualTimeline:vtimelin];
     
