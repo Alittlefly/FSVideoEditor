@@ -451,6 +451,16 @@ static FSShortVideoRecorderManager *recorderManager;
     return [_context getAllBuiltinVideoFxNames];
 }
 
+- (void)startTimer {
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                              target:self
+                                            selector:@selector(updateVideoTime)
+                                            userInfo:nil
+                                             repeats:YES];
+    [[NSRunLoop currentRunLoop] run];
+
+}
+
 - (void)startRecording:(NSString *)filePath {
     if (_videoTime >= MaxVideoTime) {
         if ([_timer isValid]) {
@@ -478,12 +488,8 @@ static FSShortVideoRecorderManager *recorderManager;
         }
         
         if (!_timer) {
-            _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                                      target:self
-                                                    selector:@selector(updateVideoTime)
-                                                    userInfo:nil
-                                                     repeats:YES];
-            [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+            [NSThread detachNewThreadSelector:@selector(startTimer) toTarget:self withObject:nil];
+
         }
         else {
             [_timer setFireDate:[NSDate date]];
@@ -514,9 +520,14 @@ static FSShortVideoRecorderManager *recorderManager;
     double perAddTime = 0.1;
     _videoTime= _videoTime+perAddTime*_recorderSpeed;
     _perTime = _perTime+perAddTime*_recorderSpeed;
+    
+    [self performSelectorOnMainThread:@selector(handleWithTotalSeconds) withObject:nil waitUntilDone:YES];
+}
+
+- (void)handleWithTotalSeconds {
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerProgress:)]) {
         NSString *newTime = [NSString stringWithFormat:@"%.6f",_videoTime];
-
+        
         [self.delegate FSShortVideoRecorderManagerProgress:newTime.floatValue];
     }
     NSLog(@"_videoTime: %f    _perTime: %f",_videoTime,_perTime);
