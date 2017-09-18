@@ -399,7 +399,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 - (void)FSPublisherToolViewShowChallengeView {
     FSChallengeController *challengeVC = [[FSChallengeController alloc] init];
     challengeVC.delegate = self;
-    FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:challengeVC];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:challengeVC];
     [self presentViewController:nav animated:YES completion:nil];
 }
 

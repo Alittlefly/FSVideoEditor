@@ -125,7 +125,6 @@
             
             [self addSubview:self.loading];
             [self.loading loadingViewShow];
-            [cell setIsPlayIng:YES];
             [[FSMusicPlayer sharedPlayer] stop];
             
             if (music.songUrl) {
@@ -138,11 +137,9 @@
                 __weak typeof(_music) weakMusic = music;
                 [FSMusicManager downLoadMusic:url complete:^(NSString *localPath, NSError *error) {
                     [weakS.loading loadingViewhide];
-                    if (!error && weakMusic.isPlaying) {
-                        [[FSMusicPlayer sharedPlayer] stop];
-                        [[FSMusicPlayer sharedPlayer] setFilePath:localPath];
-                        [[FSMusicPlayer sharedPlayer] play];
-                        [cell setIsPlayIng:YES];
+                    if (!error) {
+                        [weakS playMusic:localPath musicCell:cell];
+                         weakMusic.isPlaying = YES;
                     }else{
                         weakMusic.isPlaying = NO;
                         [cell setIsPlayIng:NO];
@@ -161,7 +158,6 @@
         
         [self addSubview:self.loading];
         [self.loading loadingViewShow];
-      //  [cell setIsPlayIng:YES];
         [[FSMusicPlayer sharedPlayer] stop];
 
         if (music.songUrl) {
@@ -174,11 +170,8 @@
             __weak typeof(_music) weakMusic = music;
             [FSMusicManager downLoadMusic:url complete:^(NSString *localPath, NSError *error) {
                 [weakS.loading loadingViewhide];
-                if (!error && weakMusic.isPlaying) {
-                    [[FSMusicPlayer sharedPlayer] stop];
-                    [[FSMusicPlayer sharedPlayer] setFilePath:localPath];
-                    [[FSMusicPlayer sharedPlayer] play];
-                    [cell setIsPlayIng:YES];
+                if (!error) {
+                    [weakS playMusic:localPath musicCell:cell];
                 }else{
                     weakMusic.isPlaying = NO;
                     [cell setIsPlayIng:NO];
@@ -188,6 +181,12 @@
     }
     // 更新当前选中的音乐
     _music = music;
+}
+-(void)playMusic:(NSString *)localPath musicCell:(FSMusicCell *)cell{
+    [[FSMusicPlayer sharedPlayer] stop];
+    [[FSMusicPlayer sharedPlayer] setFilePath:localPath];
+    [[FSMusicPlayer sharedPlayer] play];
+    [cell setIsPlayIng:YES];
 }
 
 #pragma mark -

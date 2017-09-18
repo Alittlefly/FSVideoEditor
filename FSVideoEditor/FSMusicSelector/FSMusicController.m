@@ -159,9 +159,9 @@
     
     [_collectedMusics removeAllObjects];
 
-    if ([self.delegate respondsToSelector:@selector(musicControllerHideen)]) {
-        [self.delegate musicControllerHideen];
-    }
+//    if ([self.delegate respondsToSelector:@selector(musicControllerHideen)]) {
+//        [self.delegate musicControllerHideen];
+//    }
 }
 #pragma mark -
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{

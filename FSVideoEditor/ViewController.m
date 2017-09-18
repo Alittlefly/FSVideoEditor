@@ -224,7 +224,7 @@
 //    return;
     FSToolController *toolController = [[FSToolController alloc] init];
     [toolController setDelegate:self];
-    FSAnimationNavController *nav = [[FSAnimationNavController alloc] initWithRootViewController:toolController];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:toolController];
     [self presentViewController:nav animated:YES completion:nil];
 }
 
