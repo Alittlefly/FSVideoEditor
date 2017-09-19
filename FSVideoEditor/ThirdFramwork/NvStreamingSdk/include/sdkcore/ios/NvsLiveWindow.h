@@ -88,5 +88,10 @@ typedef enum {
 */
 - (void)clearVideoFrame;
 
+/*!
+    \brief 截屏
+*/
+- (UIImage*)takeScreenShot;
+
 @end
 

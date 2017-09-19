@@ -341,6 +341,13 @@ typedef enum {
  */
 - (NSString *)getDefaultThemeEndingLogoImageFilePath;
 
+/*!
+ *  \brief 设置主题结尾logo特效是否显示
+ *  \return 返回BOOL值。YES 设置成功；NO 设置失败
+ *  \sa setDefaultThemeEndingLogoImageFilePath:
+ */
+- (BOOL)setThemeEndingEnabled:(BOOL)enable;
+
 
 /*!
  *  \brief 创建时间线
@@ -892,6 +899,7 @@ typedef enum {
  *  \since 1.2.0
  */
 - (NvsVideoFrameRetriever *)createVideoFrameRetriever:(NSString *)videoFilePath;
+
 
 @end
 
