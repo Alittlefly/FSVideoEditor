@@ -180,10 +180,10 @@
 }
 
 - (void)hiddenKeyBorde {
-    [self.textFile resignFirstResponder];
     if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewEditVideoTitle:)]) {
         [self.delegate FSEditVideoNameViewEditVideoTitle:self.textFile.text];
     }
+    [self.textFile resignFirstResponder];
 }
 
 #pragma mark - 相册文件选取相关
