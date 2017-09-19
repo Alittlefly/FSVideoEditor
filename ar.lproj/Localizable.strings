@@ -139,3 +139,7 @@ mirror = "Mirror";
 
 huanjue = "Illusion";
 MoreTag = "المزيد";
+
+AddChanllengeFailed = "Starting challenge has failed";
+ChallengeExisted = "This challenge already exists";
+

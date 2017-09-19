@@ -16,6 +16,7 @@
 
 - (void)FSChallengeDataServerAddChallengeSucceed:(FSChallengeModel *)model;
 - (void)FSChallengeDataServerAddChallengeFailed:(NSError *)error;
+- (void)FSChallengeDataServerAddChallengeCode:(NSInteger)code;
 
 @end
 

@@ -111,4 +111,10 @@
     }
 }
 
+- (void)FSAddChallengeAPIAddChallengeCode:(NSInteger)code {
+    if ([self.delegate respondsToSelector:@selector(FSChallengeDataServerAddChallengeCode:)]) {
+        [self.delegate FSChallengeDataServerAddChallengeCode:code];
+    }
+}
+
 @end

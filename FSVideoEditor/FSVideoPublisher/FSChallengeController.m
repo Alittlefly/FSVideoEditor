@@ -139,14 +139,34 @@
     }
     else {
         _searchDataArray = nil;
+        NSString *trimText = [_textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if (array.count == 0) {
             FSChallengeModel *model = [[FSChallengeModel alloc] init];
-            model.name = self.textField.text;
+            model.name = trimText;
             
             _searchDataArray = [NSArray arrayWithObject:model];
         }
         else {
-            _searchDataArray = [NSArray arrayWithArray:array];
+            BOOL isContained = NO;
+            for (FSChallengeModel *tempModel in array) {
+                if ([tempModel.name isEqualToString:trimText]) {
+                    isContained = YES;
+                }
+            }
+            if (!isContained) {
+                FSChallengeModel *model = [[FSChallengeModel alloc] init];
+                model.name = trimText;
+                
+                NSMutableArray * tempArray = [NSMutableArray arrayWithCapacity:0];
+                [tempArray addObject:model];
+                [tempArray addObjectsFromArray:array];
+                _searchDataArray = [NSArray arrayWithArray:tempArray];
+
+            }
+            else {
+                _searchDataArray = [NSArray arrayWithArray:array];
+
+            }
 
         }
     }

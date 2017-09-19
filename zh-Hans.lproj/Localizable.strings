@@ -138,3 +138,6 @@ mirror = "Mirror";
 
 huanjue = "Illusion";
 MoreTag = "more";
+
+AddChanllengeFailed = "发起挑战失败";
+ChallengeExisted = "挑战已经存在";

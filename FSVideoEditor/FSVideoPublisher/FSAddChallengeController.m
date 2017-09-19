@@ -239,7 +239,7 @@
     [self.loading loadingViewhide];
     
     FSAlertView *alert = [[FSAlertView alloc] init];
-    [alert showWithMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadFailed"]];
+    [alert showWithMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"AddChanllengeFailed"]];
     
 }
 
@@ -251,6 +251,17 @@
     }
     
     [self.navigationController popViewControllerAnimated:NO];
+}
+
+- (void)FSChallengeDataServerAddChallengeCode:(NSInteger)code {
+    if (code == 6607) {
+        FSAlertView *alert = [[FSAlertView alloc] init];
+        [alert showWithMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"ChallengeExisted"]];
+    }
+    else {
+        FSAlertView *alert = [[FSAlertView alloc] init];
+        [alert showWithMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"AddChanllengeFailed"]];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

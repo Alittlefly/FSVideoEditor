@@ -12,6 +12,7 @@
 
 - (void)FSAddChallengeAPIAddChallengeSucceed:(NSDictionary *)dataInfo;
 - (void)FSAddChallengeAPIAddChallengeFailed:(NSError *)error;
+- (void)FSAddChallengeAPIAddChallengeCode:(NSInteger)code;
 
 @end
 

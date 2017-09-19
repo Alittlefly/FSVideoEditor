@@ -1036,7 +1036,9 @@
 
 - (void)FSShortVideoRecorderManagerConvertorFaild {
     [self.loading loadingViewhide];
+    _recorderButton.enabled = YES;
 
+    [_recorderManager resumeCapturePreview];
 }
 
 - (void)FSShortVideoRecorderManagerFinishedRecorder:(NSString *)normalFilePath convertFilePath:(NSString *)convertFilePath {

@@ -36,8 +36,8 @@
             }
         }
         else {
-            if ([weakS.delegate respondsToSelector:@selector(FSAddChallengeAPIAddChallengeFailed:)]) {
-                [weakS.delegate FSAddChallengeAPIAddChallengeFailed:nil];
+            if ([weakS.delegate respondsToSelector:@selector(FSAddChallengeAPIAddChallengeCode:)]) {
+                [weakS.delegate FSAddChallengeAPIAddChallengeCode:code];
             }
         }
         

@@ -645,6 +645,29 @@ static FSShortVideoRecorderManager *recorderManager;
             CGFloat speed = [[_speedArray objectAtIndex:i] floatValue];
             NvsVideoClip *clip = [self.videoTrack appendClip:path];
             [clip changeSpeed:speed];
+            
+            NvsAVFileInfo *fileInfo = [_context getAVFileInfo:path];
+            NvsVideoRotation rotation = [fileInfo getVideoStreamRotation:0];
+            if (rotation != NvsVideoRotation_0) {
+                switch (rotation) {
+                    case NvsVideoRotation_90:
+                        [clip setExtraVideoRotation:NvsExtraVideoRotation_270];
+
+                        break;
+                    case NvsVideoRotation_180:
+                        [clip setExtraVideoRotation:NvsExtraVideoRotation_180];
+                        
+                        break;
+                    case NvsVideoRotation_270:
+                        [clip setExtraVideoRotation:NvsExtraVideoRotation_90];
+                        
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
+
 //            NSLog(@"----speed:%f  duration:%lld   count:%d ",speed,self.timeLine.duration,[self.timeLine videoTrackCount]);
         }
         i++;
@@ -819,13 +842,28 @@ static FSShortVideoRecorderManager *recorderManager;
 - (void)didCompileFinished:(NvsTimeline *)timeline {
     NSLog(@"didCompileFinished");
     //UISaveVideoAtPathToSavedPhotosAlbum(_videoFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
-    [self setupConvertor:_videoFilePath];
-    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFinishRecorder:)]) {
-        [self.delegate FSShortVideoRecorderManagerFinishRecorder:_videoFilePath];
-    }
+    
 
   //  [self clearData];
 
+}
+
+- (void)didCompileCompleted:(NvsTimeline *)timeline isCanceled:(BOOL)isCanceled {
+    NSLog(@"didCompileCompleted  %d",isCanceled);
+
+    if (isCanceled) {
+        [self deleteCacheFile:_videoFilePath];
+        if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerFailedRecorder)]) {
+            [self.delegate FSShortVideoRecorderManagerFailedRecorder];
+        }
+    }
+    else {
+        __weak typeof(self) weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf setupConvertor:_videoFilePath];
+        });
+        
+    }
 }
 
 - (void)didCompileFailed:(NvsTimeline *)timeline {
@@ -942,7 +980,9 @@ static FSShortVideoRecorderManager *recorderManager;
         //config.videoResolution = NvcOutputVideoResolution_480;
     }
     
-    NSInteger ret = [self.mConvertor open:filePath outputFile:outPath setting:&config];
+    [self.mConvertor open:filePath outputFile:outPath setting:&config];
+    NSInteger ret = [self.mConvertor start];
+
     if (ret != NVC_NOERROR) {
         NSString *error = nil;
         if (ret == NVC_E_INVALID_POINTER) {
@@ -960,12 +1000,14 @@ static FSShortVideoRecorderManager *recorderManager;
         else if (ret == NVC_E_CONVERTOR_IS_STARTED) {
             error = @" 正在转码";
         }
+        [self deleteCacheFile:filePath];
+        [self deleteCacheFile:outPath];
+
         [self convertFaild:nil];
 
         return;
     }
     
-    [self.mConvertor start];
 }
 - (void)loadAllLocalfxs{
 
