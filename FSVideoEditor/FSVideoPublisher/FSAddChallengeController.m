@@ -254,6 +254,8 @@
 }
 
 - (void)FSChallengeDataServerAddChallengeCode:(NSInteger)code {
+    [self.loading loadingViewhide];
+
     if (code == 6607) {
         FSAlertView *alert = [[FSAlertView alloc] init];
         [alert showWithMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"ChallengeExisted"]];

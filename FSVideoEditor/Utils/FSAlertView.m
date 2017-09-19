@@ -71,7 +71,7 @@
     [UIView animateWithDuration:0.1 animations:^{
         [self.contentView setAlpha:1];
     }completion:^(BOOL finished) {
-        [self performSelector:@selector(hideView) withObject:nil afterDelay:2];
+        [self performSelector:@selector(hideView) withObject:nil afterDelay:1];
     }];
 }
 
