@@ -13,4 +13,6 @@
 +(void)deleteFile:(NSString *)filePath;
 
 +(NSString *)saveImageTolocal:(UIImage *)image;
+
++(NSString *)imagesDirectFilePath;
 @end

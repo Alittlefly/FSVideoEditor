@@ -8,6 +8,7 @@
 
 #import "FSTimelineConfiger.h"
 #import "NvsVideoTrack.h"
+#import "FSShortVideoRecorderManager.h"
 #import "NvsVideoClip.h"
 
 @implementation FSTimelineConfiger
@@ -37,6 +38,29 @@
         }
     }
     [FSTimelineConfiger addTimeFxWithFx:timeLineInfo.vTimefx timeLine:timeLine];
+    
+    if (timeLineInfo.vFilterid != nil) {
+        [FSTimelineConfiger addFilter:timeLineInfo.vFilterid timeLine:timeLine];
+    }
+}
++(void)addFilter:(NSString *)filter timeLine:(NvsTimeline *)timeLine{
+    
+    NvsVideoTrack *_videoTrack = [timeLine getVideoTrackByIndex:0];
+    if ([filter isEqualToString:@"NoFilter"]) {
+        for (unsigned int i = 0; i < _videoTrack.clipCount; i++){
+            [[_videoTrack getClipWithIndex:i] removeAllFx];
+        }
+    } else if ([filter isEqualToString:@"Package1"]) {
+        for (unsigned int i = 0; i < _videoTrack.clipCount; i++) {
+            NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:i];
+            [[FSShortVideoRecorderManager sharedInstance] addFilter:filter toVideoClip:videoClip];
+        }
+    } else {
+        for (unsigned int i = 0; i < _videoTrack.clipCount; i++) {
+            NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:i];
+            [[FSShortVideoRecorderManager sharedInstance] addFilter:filter toVideoClip:videoClip];
+        }
+    }
 }
 +(void)addTimeFxWithFx:(FSDraftTimeFx *)timeFx timeLine:(NvsTimeline *)timeLine{
     //

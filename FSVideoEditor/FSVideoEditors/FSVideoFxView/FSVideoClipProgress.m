@@ -271,7 +271,12 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
         
         CGFloat outProgress = _needConvert?(1-_progress):_progress;
         if(outProgress == 1.0){
-            [self endFxView];
+            [_fxTimer setFireDate:[NSDate distantFuture]];
+            
+            if ([self.delegate respondsToSelector:@selector(videoClipProgressStartSelect:)]) {
+                [self.delegate videoClipProgressSelectPoint:outProgress];
+            }
+            
             return;
         }
     }
@@ -319,7 +324,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     [self setProgress:progress];
     
     if ([self.delegate respondsToSelector:@selector(videoClipProgressSelectPoint:)]) {
-        [self.delegate videoClipProgressSelectPoint:progress];
+        [self.delegate videoClipProgressSelectPoint:!_needConvert?progress:(1-progress)];
     }
     
     [fxView removeFromSuperview];

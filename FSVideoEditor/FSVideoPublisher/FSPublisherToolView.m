@@ -377,6 +377,7 @@
 }
 -(void)keyBoradHides:(NSNotification *)notification
 {
+    [self.videoNameView hiddenKeyBorde];
     NSDictionary *userInfo = [notification userInfo];
     NSNumber *duration = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     NSNumber *curve = [userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];

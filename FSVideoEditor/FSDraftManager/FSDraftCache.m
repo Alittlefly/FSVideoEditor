@@ -31,12 +31,14 @@
     return object;
 }
 -(void)insertToLocal:(FSDraftInfo *)draftInfo{
+    
     BOOL contain = [self.draftInfos containsObject:draftInfo];
     if (!contain) {
         [self.draftInfos addObject:draftInfo];
-        NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
-        [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
     }
+    
+    NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
+    [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
 }
 -(void)deleteToLocal:(FSDraftInfo *)draftInfo{
     

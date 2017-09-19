@@ -27,16 +27,12 @@
     // Do any additional setup after loading the view.
      _manager = [FSLocalPhotoManager new];
     [_manager setDelegate:self];
-    NSArray *assets = [_manager photosWithType:(PHAssetMediaTypeVideo)];
+    [_manager photosWithType:(PHAssetMediaTypeVideo)];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    
-    if ([assets count] != 0) {
-        _videoListView = [[FSVideoListView alloc] init];
-        [_videoListView setDelegate:self];
-        [_videoListView setVideos:assets];
-        [self.view addSubview:_videoListView];
-    }
+    _videoListView = [[FSVideoListView alloc] init];
+    [_videoListView setDelegate:self];
+    [self.view addSubview:_videoListView];
     [self initCancleButton];
 }
 
@@ -74,6 +70,7 @@
 -(void)localPhotoManager:(FSLocalPhotoManager *)manager authorizedStatus:(PHAuthorizationStatus)status{
     dispatch_async(dispatch_get_main_queue(), ^{
         if (status != PHAuthorizationStatusAuthorized) {
+            [_videoListView setHidden:YES];
             UILabel *notAuthoredLabel = [[UILabel alloc] init];
             [notAuthoredLabel setTextColor:FSHexRGB(0x999999)];
             [notAuthoredLabel setNumberOfLines:0];
@@ -89,6 +86,10 @@
             [self.view addSubview:notAuthoredLabel];
         }
     });
+}
+-(void)localPhotoManager:(FSLocalPhotoManager *)manager localVideos:(NSArray*)assets{
+    [_videoListView setHidden:NO];
+    [_videoListView setVideos:assets];
 }
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));

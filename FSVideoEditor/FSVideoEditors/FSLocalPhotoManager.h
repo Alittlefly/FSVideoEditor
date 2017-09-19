@@ -12,10 +12,10 @@
 @protocol FSLocalPhotoManagerDelegate <NSObject>
 @optional
 -(void)localPhotoManager:(FSLocalPhotoManager *)manager authorizedStatus:(PHAuthorizationStatus)status;
-
+-(void)localPhotoManager:(FSLocalPhotoManager *)manager localVideos:(NSArray*)assets;
 @end
 
 @interface FSLocalPhotoManager : NSObject
 @property(nonatomic,assign)id<FSLocalPhotoManagerDelegate>delegate;
--(NSArray *)photosWithType:(PHAssetMediaType)type;
+-(void )photosWithType:(PHAssetMediaType)type;
 @end
