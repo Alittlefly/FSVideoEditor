@@ -556,10 +556,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     UIImage *image = [_context grabImageFromTimeline:_timeLine timestamp:0 proxyScale:nil];
     
     if (image) {
-        NSString *imagePath = [FSDraftFileManager saveImageTolocal:image];
         if (_tempDraftInfo.vFirstFramePath) {
             [FSDraftFileManager deleteFile:_tempDraftInfo.vFirstFramePath];
         }
+        NSString *imagePath = [FSDraftFileManager saveImageTolocal:image];
         _tempDraftInfo.vFirstFramePath = imagePath;
     }
     _tempDraftInfo.vAddedFxViews = self.addedViews;

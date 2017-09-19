@@ -28,16 +28,19 @@
     NSString *path = [documents stringByAppendingPathComponent:name];
     return path;
 }
-+(NSString *)saveImageTolocal:(UIImage *)image{
-    NSString *fileName = [NSString stringWithFormat:@"%.0f.png",[[NSDate date] timeIntervalSince1970]];
++(NSString *)imagesDirectFilePath{
     NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString *directPath = [documents stringByAppendingPathComponent:@"DraftImage"];
     if(![[NSFileManager defaultManager] fileExistsAtPath:directPath]){
         [[NSFileManager defaultManager] createDirectoryAtPath:directPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
+    return directPath;
+}
++(NSString *)saveImageTolocal:(UIImage *)image{
+    NSString *directPath = [self imagesDirectFilePath];
+    NSString *fileName = [NSString stringWithFormat:@"%.0f.png",[[NSDate date] timeIntervalSince1970]];
     NSString *path = [directPath stringByAppendingPathComponent:fileName];
     BOOL success = [[NSFileManager defaultManager] createFileAtPath:path contents:UIImagePNGRepresentation(image) attributes:nil];
-    return success?path:nil;
-    
+    return success?[@"DraftImage" stringByAppendingPathComponent:fileName]:nil;
 }
 @end
