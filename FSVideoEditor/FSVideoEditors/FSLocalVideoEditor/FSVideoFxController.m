@@ -233,10 +233,10 @@
     }
 }
 -(void)rsetTimeLineFx{
-    [self removeAllFx];
 
     FSVirtualTimeLine *virTimeLine = [_fxOperationStack topVirtualTimeLine];
     //
+    [self removeAllFx];
     [self addVideoFxWithVirtualTimeline:virTimeLine];
     _draftInfo.stack = _fxOperationStack;
     // 回归到之前的状态
@@ -330,7 +330,7 @@
     [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
     
     
-    // 
+    //
     [self removeAllFx];
     FSVirtualTimeLine *vtimelin = [_tempFxStack topVirtualTimeLine];
     [self addVideoFxWithVirtualTimeline:vtimelin];
@@ -388,8 +388,8 @@
     int64_t endPoint = MAX(_timeLine.duration * endProgress - 1, 0) ;
     
     if (startPoint >= endPoint) {
-        [self removeAllFx];
         FSVirtualTimeLine *lastVTimeLine = [_tempFxStack topVirtualTimeLine];
+        [self removeAllFx];
         [self addVideoFxWithVirtualTimeline:lastVTimeLine];
         return;
     }
