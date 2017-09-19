@@ -231,11 +231,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSVideoEditors/FSLocalVideoEditor/FSVideoFxController.m"
-            timestampString = "526992757.24717"
+            timestampString = "527503670.249775"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "-stopVideoForCrrentTime"
             landmarkType = "7">
          </BreakpointContent>
@@ -375,11 +375,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSVideoEditors/FSLocalVideoEditor/FSVideoFxController.m"
-            timestampString = "527409165.34289"
+            timestampString = "527503670.249775"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
             landmarkName = "-videoFxViewNeedConvertView:type:"
             landmarkType = "7">
          </BreakpointContent>
@@ -439,11 +439,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSVideoEditors/FSLocalVideoEditor/FSVideoFxController.m"
-            timestampString = "527499230.325985"
+            timestampString = "527503670.249775"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
+            startingLineNumber = "362"
+            endingLineNumber = "362"
             landmarkName = "-videoFxSelectTimeLinePosition:position:shouldPlay:"
             landmarkType = "7">
          </BreakpointContent>

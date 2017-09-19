@@ -11,4 +11,5 @@
 #import "FSDraftInfo.h"
 @interface FSTimelineConfiger : NSObject
 +(void)configTimeline:(NvsTimeline *)timeLine timeLineInfo:(FSDraftInfo *)timeLineInfo;
++(void)addFilter:(NSString *)filter timeLine:(NvsTimeline *)timeLine;
 @end

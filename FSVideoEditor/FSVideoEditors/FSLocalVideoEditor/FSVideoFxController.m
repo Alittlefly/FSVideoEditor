@@ -26,6 +26,7 @@
 #import "FSShortLanguage.h"
 #import "FSDraftManager.h"
 #import "FSPublishSingleton.h"
+#import "FSTimelineConfiger.h"
 
 @interface FSVideoFxController ()<NvsStreamingContextDelegate,FSVideoFxViewDelegate,UIViewControllerTransitioningDelegate>
 {
@@ -251,6 +252,16 @@
     }
     
     [self addTimeFxWithFx:timeFx];
+    
+    //
+    [self addFilters];
+    
+}
+-(void)addFilters{
+    if (_draftInfo.vFilterid != nil) {
+        [FSTimelineConfiger addFilter:_draftInfo.vFilterid timeLine:_timeLine];
+
+    }
 }
 
 -(void)removeAllFx{
