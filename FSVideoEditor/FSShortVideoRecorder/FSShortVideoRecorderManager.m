@@ -106,9 +106,8 @@ static FSShortVideoRecorderManager *recorderManager;
         return;
     }
     
-    // NvsRational aspectRatio = {9,16};
     // 开启采集预览
-    if (![_context startCapturePreview:_currentDeviceIndex videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
+    if (![_context startCapturePreview:_currentDeviceIndex videoResGrade:NvsVideoCaptureResolutionGradeMedium flags:0 aspectRatio:nil]) {
         NSLog(@"启动预览失败");
     }
 }
@@ -179,8 +178,7 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     
     // 此样例使用高质量、横纵比为1:1的设置启动采集预览
-    // NvsRational aspectRatio = {9,16};
-    if (![_context startCapturePreview:_currentDeviceIndex videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
+    if (![_context startCapturePreview:_currentDeviceIndex videoResGrade:NvsVideoCaptureResolutionGradeMedium flags:0 aspectRatio:nil]) {
         NSLog(@"启动预览失败");
     }
     
@@ -292,17 +290,15 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (BOOL)switchCamera {
-    
-    // NvsRational aspectRatio = {9,16};
     if (_currentDeviceIndex == 0) {
-        if (![_context startCapturePreview:1 videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
+        if (![_context startCapturePreview:1 videoResGrade:NvsVideoCaptureResolutionGradeMedium flags:0 aspectRatio:nil]) {
             NSLog(@"启动预览失败");
             return NO;
         }
         _currentDeviceIndex = 1;
     }
     else {
-        if (![_context startCapturePreview:0 videoResGrade:NvsVideoCaptureResolutionGradeHigh flags:0 aspectRatio:nil]) {
+        if (![_context startCapturePreview:0 videoResGrade:NvsVideoCaptureResolutionGradeMedium flags:0 aspectRatio:nil]) {
             NSLog(@"启动预览失败");
             return NO;
         }
@@ -455,6 +451,16 @@ static FSShortVideoRecorderManager *recorderManager;
     return [_context getAllBuiltinVideoFxNames];
 }
 
+- (void)startTimer {
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                              target:self
+                                            selector:@selector(updateVideoTime)
+                                            userInfo:nil
+                                             repeats:YES];
+    [[NSRunLoop currentRunLoop] run];
+
+}
+
 - (void)startRecording:(NSString *)filePath {
     if (_videoTime >= MaxVideoTime) {
         if ([_timer isValid]) {
@@ -482,12 +488,8 @@ static FSShortVideoRecorderManager *recorderManager;
         }
         
         if (!_timer) {
-            _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                                      target:self
-                                                    selector:@selector(updateVideoTime)
-                                                    userInfo:nil
-                                                     repeats:YES];
-            [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+            [NSThread detachNewThreadSelector:@selector(startTimer) toTarget:self withObject:nil];
+
         }
         else {
             [_timer setFireDate:[NSDate date]];
@@ -518,9 +520,14 @@ static FSShortVideoRecorderManager *recorderManager;
     double perAddTime = 0.1;
     _videoTime= _videoTime+perAddTime*_recorderSpeed;
     _perTime = _perTime+perAddTime*_recorderSpeed;
+    
+    [self performSelectorOnMainThread:@selector(handleWithTotalSeconds) withObject:nil waitUntilDone:YES];
+}
+
+- (void)handleWithTotalSeconds {
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerProgress:)]) {
         NSString *newTime = [NSString stringWithFormat:@"%.6f",_videoTime];
-
+        
         [self.delegate FSShortVideoRecorderManagerProgress:newTime.floatValue];
     }
     NSLog(@"_videoTime: %f    _perTime: %f",_videoTime,_perTime);
@@ -932,7 +939,7 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     else {
         config.to = 1;
-        config.videoResolution = NvcOutputVideoResolution_360;
+        //config.videoResolution = NvcOutputVideoResolution_480;
     }
     
     NSInteger ret = [self.mConvertor open:filePath outputFile:outPath setting:&config];

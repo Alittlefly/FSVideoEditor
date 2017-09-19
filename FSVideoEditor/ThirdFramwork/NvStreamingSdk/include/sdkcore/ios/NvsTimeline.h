@@ -435,7 +435,7 @@ typedef enum {
     \param displayWidth 水印在timeline中显示的宽度，为0则使用图片文件的宽度
     \param displayHeight 水印在timeline中显示的高度，为0则使用图片文件的高度
     \param opacity 水印的不透明度
-    \param position 水印的位置，请参见 [NvsWatermarkPosition] (@ref NvsWatermarkPosition)
+    \param position 水印的位置，请参见 [NvsTimelineWatermarkPosition] (@ref NvsTimelineWatermarkPosition)
     \param marginX 水印在X方向的边距
     \param marginY 水印在Y方向的边距
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
@@ -446,9 +446,31 @@ typedef enum {
 /*!
     \brief 删除已添加的水印
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
-    \sa addWatermark:displayRatio:opacity:position:
+    \sa addWatermark:displayWidth:displayHeight:opacity:position:marginX:marginY:
 */
 - (void)deleteWatermark;
+
+
+/*!
+    \brief 设置timeline结尾的Logo特效
+    \param logoFilePath logo文件的路径，须为PNG或JPG文件
+    \param displayWidth logo在timeline中显示的宽度，为0则使用图片文件的宽度
+    \param displayHeight logo在timeline中显示的高度，为0则使用图片文件的高度
+    \param centerX logo中心点在X方向的位置
+    \param centerY logo中心点在Y方向的位置
+    \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
+    \sa removeTimelineEndingLogo:
+ */
+- (bool)setTimelineEndingLogo:(NSString*)logoFilePath displayWidth:(unsigned int)displayWidth displayHeight:(unsigned int)displayHeight centerX:(int)centerX centerY:(int)centerY;
+
+
+/*!
+    \brief 移除已添加的timeline结尾的logo特效
+    \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
+    \sa setTimelineEndingLogo:displayWidth:displayHeight:centerX:centerY:
+*/
+- (void)removeTimelineEndingLogo;
+
 
 @end
 
