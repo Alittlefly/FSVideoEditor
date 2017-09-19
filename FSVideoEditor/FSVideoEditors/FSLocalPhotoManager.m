@@ -10,7 +10,7 @@
 
 @implementation FSLocalPhotoManager
 
--(NSArray *)photosWithType:(PHAssetMediaType)type{
+-(void)photosWithType:(PHAssetMediaType)type{
     
     
     __block NSMutableArray *assetArray = [NSMutableArray array];
@@ -30,6 +30,12 @@
 //            NSLog(@"asset %@",asset);
             [assetArray addObject:asset];
         }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([weakSelf.delegate respondsToSelector:@selector(localPhotoManager:localVideos:)]) {
+                [weakSelf.delegate localPhotoManager:weakSelf localVideos:assetArray];
+            }
+        });
     };
     
 
@@ -40,7 +46,5 @@
             AuthorizedHandler(status);
         }];
     }
-    
-    return assetArray;
 }
 @end
