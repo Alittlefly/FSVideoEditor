@@ -479,7 +479,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         if (!_cutMusicView) {
             NSTimeInterval _musicStartTime = _tempDraftInfo.vMusic.mInPoint;
 
-            _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath startTime:_musicStartTime/1000000.0 volume:_tempDraftInfo.vMusicVolume];
+            _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath startTime:_musicStartTime/1000000.0 volume:_tempDraftInfo.vMusicVolume videoTime:_timeLine.duration/1000000.0];
             _cutMusicView.delegate = self;
             [self.view addSubview:_cutMusicView];
             _cutMusicView.hidden = YES;
