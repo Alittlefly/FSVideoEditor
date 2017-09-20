@@ -668,10 +668,8 @@ static FSShortVideoRecorderManager *recorderManager;
                 }
             }
 
-//            NSLog(@"----speed:%f  duration:%lld   count:%d ",speed,self.timeLine.duration,[self.timeLine videoTrackCount]);
         }
         i++;
-       // UISaveVideoAtPathToSavedPhotosAlbum(path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     }
     
     if (_filePathArray.count > 1) {
@@ -680,13 +678,10 @@ static FSShortVideoRecorderManager *recorderManager;
         }
     }
     
-    _videoFilePath = [final stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];//[docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
+    _videoFilePath = [final stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mov",[self getCurrentTimeString]]];
     
     BOOL isSuccess = [_context compileTimeline:self.timeLine startTime:0 endTime:self.timeLine.duration outputFilePath:_videoFilePath videoResolutionGrade:NvsCompileVideoResolutionGradeCustom videoBitrateGrade:NvsCompileBitrateGradeHigh flags:0];
     if (isSuccess) {
-//        _videoIndex = 0;
-//        _outputFilePath = nil;
-//        UISaveVideoAtPathToSavedPhotosAlbum(_videoFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
 
     }
     return isSuccess;
@@ -859,8 +854,8 @@ static FSShortVideoRecorderManager *recorderManager;
     }
     else {
         __weak typeof(self) weakSelf = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf setupConvertor:_videoFilePath];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf setupConvertor:_videoFilePath];
         });
         
     }
@@ -908,6 +903,9 @@ static FSShortVideoRecorderManager *recorderManager;
 }
 
 - (void)convertFaild:(NSError *)error {
+    [self.mConvertor stop];
+    [self.mConvertor close];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderManagerConvertorFaild)]) {
             [self.delegate FSShortVideoRecorderManagerConvertorFaild];
@@ -1002,6 +1000,11 @@ static FSShortVideoRecorderManager *recorderManager;
         }
         [self deleteCacheFile:filePath];
         [self deleteCacheFile:outPath];
+        
+        if ([self.mConvertor IsOpened]) {
+            [self.mConvertor stop];
+            [self.mConvertor close];
+        }
 
         [self convertFaild:nil];
 
@@ -1024,8 +1027,8 @@ static FSShortVideoRecorderManager *recorderManager;
     NSString *jxPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.videofx"];
     NSString *jxLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"6B7BE12C-9FA1-4ED0-8E81-E107632FFBC8.lic"];
     
-    NSString *blackMagicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.videofx"];
-    NSString *blackMagicLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"33F513E5-5CA2-4C23-A6D4-8466202EE698.lic"];
+    NSString *blackMagicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"C02204D0-F3C3-495E-B65C-9F2C79E68573.3.videofx"];
+    NSString *blackMagicLicPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"C02204D0-F3C3-495E-B65C-9F2C79E68573.lic"];
     
     if ([_context.assetPackageManager getAssetPackageStatus:SoulfxPath type:NvsAssetPackageType_VideoFx] == NvsAssetPackageStatus_NotInstalled) {
        NvsAssetPackageManagerError error = [_context.assetPackageManager installAssetPackage:SoulfxPath license:SoulfxLicPath type:NvsAssetPackageType_VideoFx sync:YES assetPackageId:nil];

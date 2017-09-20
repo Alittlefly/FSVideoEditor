@@ -407,7 +407,7 @@
 
     [bmfx setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"BW"]  forState:(UIControlStateNormal)];
     
-    objc_setAssociatedObject(bmfx, FxIdKey, @"33F513E5-5CA2-4C23-A6D4-8466202EE698", OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(bmfx, FxIdKey, @"C02204D0-F3C3-495E-B65C-9F2C79E68573.3", OBJC_ASSOCIATION_COPY);
     [_contentView addSubview:bmfx];
     
     [_contentView setContentSize:CGSizeMake(CGRectGetMaxX(bmfx.frame) + 20, 0)];
