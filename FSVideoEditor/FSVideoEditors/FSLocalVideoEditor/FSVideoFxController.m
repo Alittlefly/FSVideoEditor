@@ -82,6 +82,8 @@
     _position = (CGFloat)currentPoint/_timeLine.duration;
     _convert = (_selectType == FSVideoFxTypeRevert);
     
+    _startProgress = 1.0;
+    
     [self creatSubViews];
     
      _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
@@ -131,6 +133,8 @@
     }
     
     [self.view setBackgroundColor:FSHexRGB(0x000f1e)];
+    
+    [_videoFxView creatFxFiltterButtons];
 }
 -(void)controlVideo{
     if ([_context getStreamingEngineState] != NvsStreamingEngineState_Playback) {
@@ -166,7 +170,6 @@
     [super viewWillAppear:animated];
      [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
-    [self.videoFxView creatFxFiltterButtons];
     
     if (![_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster]){
         NSLog(@"Failed to seek timeline!");
@@ -337,10 +340,8 @@
     [_videoTrack removeAllClips];
     [_videoTrack appendClip:newPath];
     [_videoTrack setVolumeGain:0 rightVolumeGain:0];
-
     [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
-    
-    
+
     //
     [self removeAllFx];
     FSVirtualTimeLine *vtimelin = [_tempFxStack topVirtualTimeLine];
@@ -349,6 +350,7 @@
     if (convert) {
         [self playVideoFromHead];
     }
+    
     
     FSDraftTimeFx *draftFx = [FSDraftTimeFx new];
     draftFx.tFxType = type;
@@ -399,6 +401,7 @@
     int64_t endPoint = MAX(_timeLine.duration * endProgress - 1, 0) ;
     
     if (startPoint >= endPoint) {
+        NSLog(@"正在添加特效 异常添加");
         FSVirtualTimeLine *lastVTimeLine = [_tempFxStack topVirtualTimeLine];
         [self removeAllFx];
         [self addVideoFxWithVirtualTimeline:lastVTimeLine];
@@ -427,7 +430,7 @@
     [willSaveTimeLine addVideoFx:videoFx];
     // 记录
     [_tempFxStack pushObject:willSaveTimeLine];
-
+    NSLog(@"正在添加特效 已添加");
     [self removeAllFx];
     [self addVideoFxWithVirtualTimeline:willSaveTimeLine];
     //
@@ -437,6 +440,7 @@
     [_controlView setState:NO];
     [videoFxView setIsPlaying:NO];
     [videoFxView showUndoButton];
+    _startProgress = 1.0;
 }
 -(void)videoFxViewSelectTimeFx:(FSVideoFxView *)videoFxView type:(FSVideoFxType)type duration:(int64_t)duration progress:(CGFloat)progress{
     _selectType = type;
@@ -523,7 +527,6 @@
     FSVirtualTimeLine *shouldBe = _tempFxStack.topVirtualTimeLine;
     
     [self removeAllFx];
-
     [self addVideoFxWithVirtualTimeline:shouldBe];
 }
 -(void)videoFxViewChangeFilter{

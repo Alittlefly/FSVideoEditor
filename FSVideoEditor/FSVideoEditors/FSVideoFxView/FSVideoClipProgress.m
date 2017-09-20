@@ -285,7 +285,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
 -(void)beginFxView{
     CGFloat outProgress = _needConvert?(1-_progress):_progress;
     if(outProgress == 1.0){
-        [self endFxView];
+        [self endFxView:NO];
         return;
     }
     
@@ -298,7 +298,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     }
     [_fxTimer setFireDate:[NSDate distantPast]];
 }
--(void)endFxView{
+-(void)endFxView:(BOOL)notice{
     [_fxTimer setFireDate:[NSDate distantFuture]];
     
     UIView *aView = self.fxView;
@@ -308,12 +308,13 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     
     _fxView = nil;
     
-    CGFloat outProgress = _needConvert?(1-_progress):_progress;
-
-    if ([self.delegate respondsToSelector:@selector(videoClipProgressEndSelect:)]) {
-        [self.delegate videoClipProgressEndSelect:MIN(1, MAX(outProgress, 0))];
+    if (notice) {
+        CGFloat outProgress = _needConvert?(1-_progress):_progress;
+        
+        if ([self.delegate respondsToSelector:@selector(videoClipProgressEndSelect:)]) {
+            [self.delegate videoClipProgressEndSelect:MIN(1, MAX(outProgress, 0))];
+        }
     }
-    
 }
 -(void)undoFxView{
     UIView *fxView = [self.renderRangeViews lastObject];
