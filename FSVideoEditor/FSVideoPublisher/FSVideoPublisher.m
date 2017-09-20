@@ -219,6 +219,11 @@
             [dic setValue:[NSArray array] forKey:@"a"];
             [_publishServer publisherVideo:dic];
         }
+        
+        _firstImageUrl = nil;
+        _webpUrl = nil;
+        _firstImageUrl = nil;
+        _nologoVideoUrl = nil;
     });
 }
 
@@ -275,13 +280,12 @@
 - (void)FSPublisherServerSucceed {
     
     NSLog(@"完成发布视频: -----");
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoPublished object:nil];
-    
     if ([self.delegate respondsToSelector:@selector(videoPublisherSuccess)]) {
         [self.delegate videoPublisherSuccess];
     }
     self.currentParam = nil;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoPublished object:nil];
 }
 
 - (void)FSPublisherServerFailed:(NSError *)error {

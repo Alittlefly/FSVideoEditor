@@ -51,12 +51,13 @@
         for (NSString *filePath in draftInfo.recordVideoPathArray) {
             [FSDraftFileManager deleteFile:filePath];
         }
+        
         if ([self.draftInfos containsObject:draftInfo]) {
             [self.draftInfos removeObject:draftInfo];
-            
-            NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
-            [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
         }
+
+        NSString *dataPath = [FSDraftFileManager draftDataPathKey:self.cacheKey];
+        [NSKeyedArchiver archiveRootObject:self.draftInfos toFile:dataPath];
     }
 
 }

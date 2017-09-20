@@ -114,7 +114,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [_maskView setFrame:self.view.bounds];
     [self.view addSubview:_maskView];
     
-    _toolView = [[FSPublisherToolView alloc] initWithFrame:self.view.bounds draftInfo:_draftInfo];
+    _tempDraftInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
+
+    
+    _toolView = [[FSPublisherToolView alloc] initWithFrame:self.view.bounds draftInfo:_tempDraftInfo];
     _toolView.backgroundColor = [UIColor clearColor];
     _toolView.delegate =self;
     [self.view addSubview:_toolView];
@@ -122,7 +125,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     _isEnterCutMusicView = NO;
  
     
-    _tempDraftInfo = [[FSDraftManager sharedManager] draftInfoWithPreInfo:_draftInfo];
     
     NSString *verifySdkLicenseFilePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"198-14-0f022a4d5bfa12d379d469e146c1e9bf.lic"];
     [NvsStreamingContext verifySdkLicenseFile:verifySdkLicenseFilePath];
@@ -427,16 +429,24 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         [alertControlelr addAction:sure];
         [self.navigationController presentViewController:alertControlelr animated:YES completion:nil];
     }else{
+        
         // 弹出提示
         if (_tempDraftInfo.vTimefx != nil || _tempDraftInfo.stack != nil) {
             UIAlertController *alertControlelr = [UIAlertController alertControllerWithTitle:@"" message:[FSShortLanguage CustomLocalizedStringFromTable:@"CancelEditWarning"] preferredStyle:(UIAlertControllerStyleAlert)];
             UIAlertAction *cancle = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
             }];
             UIAlertAction *sure = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Confirm"]  style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                [self.navigationController popViewControllerAnimated:YES];
+                
+                _draftInfo.vTimefx = nil;
+                _draftInfo.stack = nil;
+                _draftInfo.vFilterid = nil;
+                _draftInfo.vAddedFxViews = nil;
+                
                 [[FSDraftManager sharedManager] cancleOperate];
                 [_context removeTimeline:_timeLine];
                 [_context stop];
+                
+                [self.navigationController popViewControllerAnimated:YES];
             }];
             
             [alertControlelr addAction:cancle];
