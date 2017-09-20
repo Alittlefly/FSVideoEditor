@@ -503,14 +503,30 @@
 }
 #pragma mark - 动作
 -(void)beginFx:(FSFxButton *)button{
+    
+    if (_currentFxId != nil) {
+        NSLog(@"正在添加特效 不能多次处理 %@",_currentFxId);
+        return;
+    }
     _progress.fxViewColor = button.fxColor;
     _currentFxId = objc_getAssociatedObject(button, FxIdKey);
     [button setShowMask:YES];
     [_progress beginFxView];
+    NSLog(@"正在添加特效 %@",_currentFxId);
+
 }
 -(void)endFx:(FSFxButton *)button{
+    
+    NSString *endButtonFxId = objc_getAssociatedObject(button, FxIdKey);
+    if (![endButtonFxId isEqualToString:_currentFxId]) {
+        NSLog(@"正在添加特效 不能直接处理处理 %@",_currentFxId);
+        return;
+    }
+    
     [button setShowMask:NO];
-    [_progress endFxView];
+    [_progress endFxView:YES];
+    NSLog(@"正在添加特效 结束添加 %@",_currentFxId);
+
      _currentFxId = nil;
 }
 #pragma mark - 选择时间特效
@@ -642,6 +658,7 @@
 }
 -(void)addFiltterViews:(NSArray *)filterViews{
     [_progress addFitteredView:filterViews];
+    // 重新展示
     if([filterViews count]){
         [self showUndoButton];
     }

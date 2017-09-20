@@ -60,7 +60,7 @@ typedef NS_ENUM(NSInteger,FSVideoFxType){
 
 
 -(void)beginFxView;
--(void)endFxView;
+-(void)endFxView:(BOOL)notice;
 -(void)undoFxView;
 
 -(void)addFitteredView:(NSArray *)fiterdViews;
