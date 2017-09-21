@@ -122,7 +122,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherAPI/FSPublisherAPI.m"
-                  timestampString = "527588863.443699"
+                  timestampString = "527589967.43742"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "37"
@@ -137,7 +137,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherAPI/FSPublisherAPI.m"
-                  timestampString = "527588863.445284"
+                  timestampString = "527589967.441791"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "37"
@@ -152,7 +152,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherAPI/FSPublisherAPI.m"
-                  timestampString = "527588863.44677"
+                  timestampString = "527589967.44405"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "37"
@@ -167,7 +167,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherAPI/FSPublisherAPI.m"
-                  timestampString = "527588863.448296"
+                  timestampString = "527589967.4461"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "37"
@@ -182,7 +182,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherAPI/FSPublisherAPI.m"
-                  timestampString = "527588863.449779"
+                  timestampString = "527589967.448057"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "39"
@@ -638,53 +638,6 @@
             endingLineNumber = "449"
             landmarkName = "-FSPublisherToolViewQuit"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__48-[FSPublisherController FSPublisherToolViewQuit]_block_invoke_2.322"
-                  moduleName = "FSVideoEditor"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
-                  timestampString = "527588866.90236"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "449"
-                  endingLineNumber = "449"
-                  offsetFromSymbolStart = "580">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.333"
-                  moduleName = "FSVideoEditor"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
-                  timestampString = "527588866.907786"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "449"
-                  endingLineNumber = "449"
-                  offsetFromSymbolStart = "64">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.334"
-                  moduleName = "FSVideoEditor"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/Git%20Source/GitWork/FSVideoEditor/FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
-                  timestampString = "527588866.913665"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "449"
-                  endingLineNumber = "449"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

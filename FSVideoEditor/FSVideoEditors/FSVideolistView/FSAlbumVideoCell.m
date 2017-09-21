@@ -20,7 +20,7 @@
 -(UIImageView *)thumbnail{
     if (!_thumbnail) {
          _thumbnail = [[UIImageView alloc] init];
-        [_thumbnail setBackgroundColor:[UIColor redColor]];
+        [_thumbnail setBackgroundColor:[UIColor clearColor]];
         [_thumbnail setContentMode:(UIViewContentModeScaleAspectFill)];
         [_thumbnail setClipsToBounds:YES];
 
