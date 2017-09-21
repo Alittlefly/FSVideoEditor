@@ -25,6 +25,6 @@
 @property (nonatomic, weak) id<FSCutMusicViewDelegate> delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame audioClip:(NvsAudioClip *)audioClip;
-- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath  startTime:(NSTimeInterval)startTime volume:(CGFloat)volume videoTime:(NSTimeInterval)videoTime;
+- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath  startTime:(NSTimeInterval)startTime volume:(CGFloat)volume videoTime:(NSTimeInterval)videoTime currentPlayTime:(NSTimeInterval)playTime;
 
 @end

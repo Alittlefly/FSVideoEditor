@@ -476,10 +476,14 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         
         _isEnterCutMusicView = YES;
         
+        int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
+        if(![_context playbackTimeline:_timeLine startTime:startTime endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
+        }
+        
         if (!_cutMusicView) {
             NSTimeInterval _musicStartTime = _tempDraftInfo.vMusic.mInPoint;
 
-            _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath startTime:_musicStartTime/1000000.0 volume:_tempDraftInfo.vMusicVolume videoTime:_timeLine.duration/1000000.0];
+            _cutMusicView = [[FSCutMusicView alloc] initWithFrame:self.view.bounds filePath:_musicPath startTime:_musicStartTime/1000000.0 volume:_tempDraftInfo.vMusicVolume videoTime:_timeLine.duration/1000000.0 currentPlayTime:startTime/1000000.0];
             _cutMusicView.delegate = self;
             [self.view addSubview:_cutMusicView];
             _cutMusicView.hidden = YES;
@@ -487,8 +491,6 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
         self.toolView.hidden = YES;
         _cutMusicView.hidden = NO;
         
-        
-        [self FSCutMusicViewSelectedMusic];
     }
 }
 
@@ -700,12 +702,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     _volumeView = nil;
     self.toolView.hidden = NO;
 }
-- (void)FSCutMusicViewSelectedMusic{
-    
-    [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:0];
-    if(![_context playbackTimeline:_timeLine startTime:0 endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
-    }
-}
+
 - (void)FSCutMusicViewFinishCutMusicWithTime:(NSTimeInterval)newStartTime {
     _tempDraftInfo.vMusic.mInPoint = newStartTime*1000000;
     _isEnterCutMusicView = NO;

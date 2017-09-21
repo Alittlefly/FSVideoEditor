@@ -25,11 +25,11 @@
 @property (nonatomic, strong) NSTimer *timer;
 
 @property (nonatomic, copy) NSString *filePath;
-@property (nonatomic, assign) NSTimeInterval newTime;
+@property (nonatomic, assign) NSTimeInterval newTime; //音乐播放起点
 
-@property (nonatomic, assign) CGFloat totalTime;
-@property (nonatomic, assign) CGFloat playTime;
-@property (nonatomic, assign) CGFloat videoTime;
+@property (nonatomic, assign) CGFloat totalTime; //音乐总时长
+@property (nonatomic, assign) CGFloat playTime;  //当前已经播放的时长
+@property (nonatomic, assign) CGFloat videoTime;  //视频总长度
 
 
 @end
@@ -46,15 +46,16 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath startTime:(NSTimeInterval)startTime volume:(CGFloat)volume videoTime:(NSTimeInterval)videoTime {
+- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath startTime:(NSTimeInterval)startTime volume:(CGFloat)volume videoTime:(NSTimeInterval)videoTime currentPlayTime:(NSTimeInterval)playTime {
     if (self = [super initWithFrame:frame]) {
         _filePath = filePath;
-        _playTime = 0;
+        _playTime = playTime;
         _totalTime = 0;
         _newTime = startTime;
         _videoTime = videoTime;
+        
         [[FSMusicPlayer sharedPlayer] setFilePath:filePath];
-        [[FSMusicPlayer sharedPlayer] playAtTime:startTime];
+        [[FSMusicPlayer sharedPlayer] playAtTime:startTime+playTime];
         if (volume >= 0) {
             [[FSMusicPlayer sharedPlayer] changeVolume:volume];
         }
@@ -92,7 +93,7 @@
     _currentImageView.backgroundColor =  [UIColor colorWithPatternImage:[UIImage imageNamed:@"audio-yellow"]];;//FSHexRGB(0xFACE15);
     [_scrollView addSubview:_currentImageView];
     
-    _maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _newTime*totalWidth/_totalTime, _scrollView.frame.size.height)];
+    _maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (_newTime+_playTime)*totalWidth/_totalTime, _scrollView.frame.size.height)];
     _maskView.translatesAutoresizingMaskIntoConstraints = NO;
     _maskView.backgroundColor = [UIColor blueColor];
     
