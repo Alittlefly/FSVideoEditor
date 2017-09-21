@@ -29,6 +29,8 @@
 
 @property (nonatomic, assign) CGFloat totalTime;
 @property (nonatomic, assign) CGFloat playTime;
+@property (nonatomic, assign) CGFloat videoTime;
+
 
 @end
 
@@ -38,17 +40,19 @@
     if (self = [super initWithFrame:frame]) {
         _playTime = 0;
         _totalTime = 0;
+        
         [self createBaseUI];
     }
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath startTime:(NSTimeInterval)startTime volume:(CGFloat)volume {
+- (instancetype)initWithFrame:(CGRect)frame filePath:(NSString *)filePath startTime:(NSTimeInterval)startTime volume:(CGFloat)volume videoTime:(NSTimeInterval)videoTime {
     if (self = [super initWithFrame:frame]) {
         _filePath = filePath;
         _playTime = 0;
         _totalTime = 0;
         _newTime = startTime;
+        _videoTime = videoTime;
         [[FSMusicPlayer sharedPlayer] setFilePath:filePath];
         [[FSMusicPlayer sharedPlayer] playAtTime:startTime];
         if (volume >= 0) {
@@ -67,7 +71,7 @@
     if (_filePath) {
         _totalTime = [[FSMusicPlayer sharedPlayer] soundTotalTime];
     }
-    CGFloat totalWidth = self.frame.size.width*_totalTime/15;
+    CGFloat totalWidth = self.frame.size.width*_totalTime/_videoTime;
 
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-110, self.frame.size.width, 110)];
     _scrollView.directionalLockEnabled = YES;
@@ -151,7 +155,7 @@
 - (void)updateMaskViewFrame {
     CGRect frame = self.maskView.frame;
 
-    if (_playTime >= 15.0) {
+    if (_playTime >= _videoTime) {
         _playTime = 0;
         frame.size.width = _scrollView.contentOffset.x;
         if (_filePath) {
@@ -164,7 +168,7 @@
     }
     else {
         _playTime += 0.1;
-        frame.size.width += 0.1*self.frame.size.width/15;
+        frame.size.width += 0.1*self.frame.size.width/_videoTime;
     }
     
     self.maskView.frame = frame;
