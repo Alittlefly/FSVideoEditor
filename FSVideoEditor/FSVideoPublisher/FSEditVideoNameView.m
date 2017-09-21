@@ -72,12 +72,14 @@
     else {
         [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_unselected"] forState:UIControlStateNormal];
     }
-    CGFloat width = size.width+_saveToPhotoButton.imageView.image.size.width;
+    CGFloat width = size.width+_saveToPhotoButton.imageView.image.size.width + 5;
     _saveToPhotoButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 0 : self.frame.size.width-width, self.frame.size.height-27, width, 27);
     _saveToPhotoButton.backgroundColor = [UIColor clearColor];
     [_saveToPhotoButton setTitle:saveText forState:UIControlStateNormal];
     [_saveToPhotoButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
     [_saveToPhotoButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_saveToPhotoButton setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentLeft)];
+    [_saveToPhotoButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 3, 0, 0)];
     [_saveToPhotoButton.titleLabel setShadowOffset:CGSizeMake(1, 1)];
     [_saveToPhotoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
