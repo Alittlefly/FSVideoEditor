@@ -35,6 +35,7 @@
     return self;
 }
 -(void)setCacheKey:(NSString *)cacheKey{
+    _cacheKey = cacheKey;
     [[FSDraftCache sharedDraftCache] setCacheKey:cacheKey];
 }
 
@@ -76,7 +77,7 @@
     return infos;
 }
 -(void)logoutDraftWithCacheKey{
-    [self setCacheKey:@""];
+    [self setCacheKey:nil];
     [self.reader clearMemoryDrafts];
 }
 

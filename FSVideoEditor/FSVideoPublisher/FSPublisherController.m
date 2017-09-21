@@ -7,6 +7,7 @@
 //
 
 #import "FSPublisherController.h"
+#import "FSVideoEditorCommenData.h"
 
 #import "NvsStreamingContext.h"
 #import "NvsTimeline.h"
@@ -561,8 +562,14 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 - (void)FSPublisherToolViewSaveToDraft {
+    if ([FSDraftManager sharedManager].cacheKey == nil || [FSDraftManager sharedManager].cacheKey.length == 0) {
+        [_context stop];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoAppShouldShowLogin object:self];
+        return;
+    }
     //#warning 区分正序倒序，重复监测
     //UISaveVideoAtPathToSavedPhotosAlbum(_filePath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+
     _OperationType = FSPublishOperationTypeSaveToDraft;
     
     UIImage *image = [_context grabImageFromTimeline:_timeLine timestamp:0 proxyScale:nil];

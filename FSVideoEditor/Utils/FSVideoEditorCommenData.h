@@ -41,6 +41,6 @@
 #define kNSNotificationVideoEditToolDidHide @"kNSNotificationVideoEditToolDidHide"
 #define kNSNotificationVideoPublished @"kNSNotificationVideoPublished"
 
-
+#define kNSNotificationVideoAppShouldShowLogin @"kNSNotificationVideoAppShouldShowLogin"
 
 #endif /* FSVideoEditorCommenData_h */

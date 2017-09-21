@@ -262,22 +262,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
-            timestampString = "527588863.200307"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "705"
-            endingLineNumber = "705"
-            landmarkName = "-FSCutMusicViewSelectedMusic"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSMusicSelector/Views/FSMusicListView.m"
             timestampString = "527397919.960688"
             startingColumnNumber = "9223372036854775807"
@@ -519,11 +503,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSVideoEditors/FSVideoFxView/FSVideoFxView.m"
-            timestampString = "527572823.808545"
+            timestampString = "527684048.950048"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "515"
-            endingLineNumber = "515"
+            startingLineNumber = "514"
+            endingLineNumber = "514"
             landmarkName = "-beginFx:"
             landmarkType = "7">
          </BreakpointContent>
@@ -567,11 +551,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSVideoEditors/FSVideoFxView/FSVideoFxView.m"
-            timestampString = "527572883.093016"
+            timestampString = "527684048.950048"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "527"
-            endingLineNumber = "527"
+            startingLineNumber = "526"
+            endingLineNumber = "526"
             landmarkName = "-endFx:"
             landmarkType = "7">
          </BreakpointContent>
