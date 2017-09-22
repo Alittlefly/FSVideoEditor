@@ -721,8 +721,9 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     [musicClip changeTrimInPoint:newStartTime*1000000.0 affectSibling:YES];
     [musicTrack setVolumeGain:_tempDraftInfo.vMusicVolume rightVolumeGain:_tempDraftInfo.vMusicVolume];
 
-    [self playVideoFromHead];
-    
+    int64_t startTime = [_context getTimelineCurrentPosition:_timeLine];
+    if(![_context playbackTimeline:_timeLine startTime:startTime endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
+    }
     _cutMusicView.hidden = YES;
     [_cutMusicView removeFromSuperview];
     _cutMusicView = nil;
