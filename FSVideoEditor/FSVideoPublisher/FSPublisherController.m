@@ -729,6 +729,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     self.toolView.hidden = NO;
 }
+- (void)FSCutMusicViewSelectedMusic{
+    [_context seekTimeline:_timeLine timestamp:[_context getTimelineCurrentPosition:_timeLine] videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster | NvsStreamingEngineSeekFlag_ShowAnimatedStickerPoster];
+    if(![_context playbackTimeline:_timeLine startTime:0 endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
+    }
+}
 #pragma mark -
 -(void)videoFxControllerSaved:(NSArray *)addedViews{
     
