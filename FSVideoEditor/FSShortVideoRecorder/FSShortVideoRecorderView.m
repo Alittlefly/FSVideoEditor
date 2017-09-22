@@ -189,13 +189,13 @@
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _finishButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
     if (totalTime > 0) {
-        _finishButton.enabled = YES;
-
+         _finishButton.enabled = YES;
+        [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-red"] forState:UIControlStateNormal];
     }
     else {
-        _finishButton.enabled = NO;
+         _finishButton.enabled = NO;
+        [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
     }
-    [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-gray"] forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(finishClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_finishButton];
     
@@ -225,6 +225,7 @@
     
     if (_musicFilePath != nil && _musicFilePath.length > 0) {
         _cutMusicButton.enabled = YES;
+        
     }
     else {
         _cutMusicButton.enabled = NO;
@@ -485,7 +486,6 @@
     }
     else {
         [_flashButton setImage:[UIImage imageNamed:@"recorder-flash-off"] forState:UIControlStateNormal];
-
     }
     [_recorderManager switchFlash:_isFlashOpened];
 }

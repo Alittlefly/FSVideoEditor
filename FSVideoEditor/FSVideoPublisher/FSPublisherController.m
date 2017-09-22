@@ -562,7 +562,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 - (void)FSPublisherToolViewSaveToDraft {
-    if ([FSDraftManager sharedManager].cacheKey == nil || [FSDraftManager sharedManager].cacheKey.length == 0) {
+    NSString *formatKey = [NSString stringWithFormat:@"%@",[FSDraftManager sharedManager].cacheKey];
+    if (formatKey.length == 0 || formatKey == nil) {
         [_context stop];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoAppShouldShowLogin object:self];
         return;
@@ -727,6 +728,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     _cutMusicView = nil;
     
     self.toolView.hidden = NO;
+}
+- (void)FSCutMusicViewSelectedMusic{
+    [_context seekTimeline:_timeLine timestamp:[_context getTimelineCurrentPosition:_timeLine] videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize flags:NvsStreamingEngineSeekFlag_ShowCaptionPoster | NvsStreamingEngineSeekFlag_ShowAnimatedStickerPoster];
+    if(![_context playbackTimeline:_timeLine startTime:0 endTime:_timeLine.duration videoSizeMode:NvsVideoPreviewSizeModeLiveWindowSize preload:YES flags:0]) {
+    }
 }
 #pragma mark -
 -(void)videoFxControllerSaved:(NSArray *)addedViews{
