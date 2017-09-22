@@ -183,6 +183,7 @@
     
     if (button.tag == 1) {
         [self videoRecorder];
+        [self clickRecordButton];
     }else{
         [_currentButton setSelected:NO];
          _currentButton = button;

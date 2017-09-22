@@ -108,6 +108,9 @@
 }
 -(void)playMusic:(FSMusic *)music playViewCell:(FSMusicCell *)cell{
     //
+    if ([self.delegate respondsToSelector:@selector(musicListViewWouldPlay:)]){
+        [self.delegate musicListViewWouldPlay:music];
+    }
     if ([_music isEqual:music]) {
         // 相同的音乐
         if ([FSMusicManager existWithFileName:music.songUrl]) {
@@ -224,10 +227,6 @@
     [self tableView:self.tableView updateTableWithMusic:music selectIndexPath:indexPath];
     
     [self playMusic:music playViewCell:cell];
-    
-    if ([self.delegate respondsToSelector:@selector(musicListViewWouldPlay:)]){
-        [self.delegate musicListViewWouldPlay:music];
-    }
 }
 
 -(void)musicCell:(FSMusicCell *)cell wuoldUseMusic:(FSMusic *)music{

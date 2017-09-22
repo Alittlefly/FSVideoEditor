@@ -410,6 +410,7 @@
         }
         [self.collectedMusics removeAllObjects];
     }else{
+        [self clickCollectMusic];
         [_collectSever getLikedMusicsList:1];
         [self.musicListView showLoading:YES];
     }
