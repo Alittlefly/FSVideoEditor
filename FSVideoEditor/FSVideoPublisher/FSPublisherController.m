@@ -562,7 +562,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 - (void)FSPublisherToolViewSaveToDraft {
-    if ([FSDraftManager sharedManager].cacheKey == nil || [FSDraftManager sharedManager].cacheKey.length == 0) {
+    NSString *formatKey = [NSString stringWithFormat:@"%@",[FSDraftManager sharedManager].cacheKey];
+    if (formatKey.length == 0 || formatKey == nil) {
         [_context stop];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoAppShouldShowLogin object:self];
         return;
