@@ -140,3 +140,4 @@ huanjue = "İllüzyon";
 MoreTag = "daha";
 AddChanllengeFailed = "Challenge ekleme başarısız";
 ChallengeExisted = "Bu challenge zaten eklenmiş!";
+NotAuthorSure = "Evet";

@@ -41,10 +41,14 @@
 
     if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
          AuthorizedHandler(PHAuthorizationStatusAuthorized);
-    }else{
+    }else if([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusNotDetermined){
         [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
             AuthorizedHandler(status);
         }];
+    }else{
+        if ([weakSelf.delegate respondsToSelector:@selector(localPhotoManager:authorizedStatus:)]) {
+            [weakSelf.delegate localPhotoManager:weakSelf authorizedStatus:PHAuthorizationStatusDenied];
+        }
     }
 }
 @end

@@ -27,4 +27,6 @@
 - (void)hiddenKeyBorde;
 - (void)updateChallengeName:(NSString *)name;
 
+- (void)canSaveToAlbum:(BOOL)canSave;
+
 @end

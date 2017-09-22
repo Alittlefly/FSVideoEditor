@@ -39,6 +39,7 @@
 #import "FSPublisherMaskView.h"
 #import "FSVideoPublisher.h"
 #import "FSShortLanguage.h"
+#import "FSLocalPhotoManager.h"
 
 typedef NS_ENUM(NSInteger,FSPublishOperationType){
     FSPublishOperationTypeSaveToDraft,
@@ -359,6 +360,9 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     if (_isStickerVideoFinished) {
         
         if (_tempDraftInfo.vSaveToAlbum) {
+            
+            
+            
             UISaveVideoAtPathToSavedPhotosAlbum(_stickerVideoPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
         }
         
@@ -602,10 +606,33 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 - (void)FSPublisherToolViewSaveToLibrary:(BOOL)isSave {
-    
     // 权限检测
+    PHAuthorizationStatus authorStatus = [PHPhotoLibrary authorizationStatus];
+    if (authorStatus == PHAuthorizationStatusAuthorized) {
+        _tempDraftInfo.vSaveToAlbum = isSave;
+    }else if(authorStatus == PHAuthorizationStatusDenied){
+        [self.toolView canSaveToAlbum:NO];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:[FSShortLanguage CustomLocalizedStringFromTable:@"notAuthored"] preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"NotAuthorSure"] style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }else if (authorStatus == PHAuthorizationStatusNotDetermined){
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (status == PHAuthorizationStatusAuthorized) {
+                    _tempDraftInfo.vSaveToAlbum = isSave;
+                    [self.toolView canSaveToAlbum:isSave];
+                }else{
+                    _tempDraftInfo.vSaveToAlbum = NO;
+                    [self.toolView canSaveToAlbum:NO];
+                }
+            });
+        }];
+    }
     
-    _tempDraftInfo.vSaveToAlbum = isSave;
 }
 
 - (void)FSPublisherToolViewChangeVideoDescription:(NSString *)description {

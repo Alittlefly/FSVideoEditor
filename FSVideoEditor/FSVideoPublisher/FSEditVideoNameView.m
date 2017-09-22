@@ -12,6 +12,7 @@
 #import "FSAlertView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "FSAddChallengeControl.h"
+#import <Photos/Photos.h>
 
 
 @interface FSEditVideoNameView()<UITextFieldDelegate>
@@ -34,7 +35,12 @@
 - (instancetype)initWithFrame:(CGRect)frame draftInfo:(FSDraftInfo *)draftInfo {
     if (self = [super initWithFrame:frame]) {
         _draftInfo = draftInfo;
-        _isSave = draftInfo.vSaveToAlbum;
+        if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
+            _isSave = draftInfo.vSaveToAlbum;
+        }else{
+            _isSave = NO;
+            draftInfo.vSaveToAlbum = NO;
+        }
 
         [self initBaseUI];
     }
@@ -153,6 +159,15 @@
     }
     if ([self.delegate respondsToSelector:@selector(FSEditVideoNameViewSaveToPhotoLibrary:)]) {
         [self.delegate FSEditVideoNameViewSaveToPhotoLibrary:_isSave];
+    }
+}
+- (void)canSaveToAlbum:(BOOL)canSave{
+    _isSave = canSave;
+    if (_isSave) {
+        [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_selected"] forState:UIControlStateNormal];
+    }
+    else {
+        [_saveToPhotoButton setImage:[UIImage imageNamed:@"save_photo_unselected"] forState:UIControlStateNormal];
     }
 }
 

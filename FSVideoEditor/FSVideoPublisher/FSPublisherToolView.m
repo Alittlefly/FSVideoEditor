@@ -254,6 +254,9 @@
 - (void)canEditMusic:(BOOL)enable {
     self.cutMusicButton.enabled = enable;
 }
+- (void)canSaveToAlbum:(BOOL)enalbe{
+    [self.videoNameView canSaveToAlbum:enalbe];
+}
 
 - (void)updateChallengeName:(NSString *)challenge {
     [_videoNameView updateChallengeName:challenge];

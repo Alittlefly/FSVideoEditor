@@ -142,3 +142,4 @@ huanjue = "Illusion";
 MoreTag = "more";
 AddChanllengeFailed = "Starting challenge has failed";
 ChallengeExisted = "This challenge already exists";
+NotAuthorSure = "Sure";
