@@ -407,6 +407,13 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 - (void)FSPublisherToolViewPublished {
+    
+    if (![FSDraftManager sharedManager].cacheKey) {
+        [_context stop];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoAppShouldShowLogin object:self];
+        return;
+    }
+    
     _OperationType = FSPublishOperationTypePublishToNet;
 
     [self publishFiles];
@@ -562,8 +569,8 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 }
 
 - (void)FSPublisherToolViewSaveToDraft {
-    NSString *formatKey = [NSString stringWithFormat:@"%@",[FSDraftManager sharedManager].cacheKey];
-    if (formatKey.length == 0 || formatKey == nil) {
+    
+    if (![FSDraftManager sharedManager].cacheKey) {
         [_context stop];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoAppShouldShowLogin object:self];
         return;
