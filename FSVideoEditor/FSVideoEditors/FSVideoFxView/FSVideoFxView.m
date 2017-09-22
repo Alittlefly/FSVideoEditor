@@ -253,13 +253,13 @@
     // content
      _contentView = [[UIScrollView alloc] initWithFrame:sframe];
     [_contentView setShowsHorizontalScrollIndicator:NO];
-    [_contentView setAlwaysBounceHorizontal:NO];
+    [_contentView setBounces:NO];
     [_contentView setBackgroundColor:FSHexRGB(0x000f1e)];
     [self addSubview:_contentView];
     
      _contentTimeView = [[UIScrollView alloc] initWithFrame:sframe];
     [_contentTimeView setShowsHorizontalScrollIndicator:NO];
-    [_contentTimeView setAlwaysBounceHorizontal:NO];
+    [_contentTimeView setBounces:NO];
     [_contentTimeView setBackgroundColor:FSHexRGB(0x000f1e)];
     [_contentTimeView setHidden:YES];
     [self addSubview:_contentTimeView];
