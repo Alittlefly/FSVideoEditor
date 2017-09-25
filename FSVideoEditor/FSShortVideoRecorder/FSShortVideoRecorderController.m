@@ -124,7 +124,7 @@
         _tempInfo.vMusic.mInPoint = time * 1000000.0;
     }
     publish.draftInfo = _tempInfo;
-    [[FSDraftManager sharedManager] mergeInfo];
+    //[[FSDraftManager sharedManager] mergeInfo];
     [self.navigationController pushViewController:publish animated:YES];
 }
 

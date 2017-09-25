@@ -543,10 +543,22 @@ static FSShortVideoRecorderManager *recorderManager;
         [_context stopRecording];
     }
     
-    for (NSString *path in _filePathArray) {
-        [self deleteCacheFile:path];
+    if (_draftInfo.recordVideoPathArray.count > 0) {
+        NSArray *tempArray = [NSArray arrayWithArray:_filePathArray];
+        for (NSString *path in tempArray) {
+            if (![_draftInfo.recordVideoPathArray containsObject:path]) {
+                [self deleteCacheFile:path];
+                [_filePathArray removeObject:path];
+            }
+        }
     }
-    [_filePathArray removeAllObjects];
+    else {
+        for (NSString *path in _filePathArray) {
+            [self deleteCacheFile:path];
+        }
+        
+        [_filePathArray removeAllObjects];
+    }
     
     if([_context getStreamingEngineState] != NvsStreamingEngineState_Stopped)
         [_context stop];
@@ -956,6 +968,7 @@ static FSShortVideoRecorderManager *recorderManager;
     
     if (!isCanConver) {
         [self convertFaild:nil];
+        return;
     }
    
     _convertorFilePath = outPath;
