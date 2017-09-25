@@ -302,6 +302,9 @@
 // 杀应用 要删除一下file
 -(void)terminate{
     if (self.currentParam) {
+        
+        NSLog(@"terminate [[FSDraftManager sharedManager] delete");
+        
         [[FSDraftManager sharedManager] delete:self.currentParam.draftInfo];
     }
 }

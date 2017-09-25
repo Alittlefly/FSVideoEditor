@@ -92,7 +92,6 @@
     self.vFilterid = 0;
     self.vOriginalVolume = -1.0;
     self.vMusicVolume = -1.0;
-    self.vFirstFramePath = nil;
     self.vAddedFxViews = nil;
     self.vTimefx = nil;
     self.vBeautyOn = YES;
