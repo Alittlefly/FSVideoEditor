@@ -114,9 +114,9 @@
     _tempInfo.vType = FSDraftInfoTypeRecoder;
     _tempInfo.vSpeed = speed;
     
-    if (_tempInfo.vOriginalPath != nil) {
-        [FSDraftFileManager deleteFile:_tempInfo.vOriginalPath];
-    }
+//    if (_tempInfo.vOriginalPath != nil) {
+//        [FSDraftFileManager deleteFile:_tempInfo.vOriginalPath];
+//    }
     _tempInfo.vOriginalPath = filePath;
     _tempInfo.vFinalPath = filePath;
     _tempInfo.vConvertPath = convertFilePath;
