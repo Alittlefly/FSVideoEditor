@@ -3013,7 +3013,7 @@
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/aarch64",
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/armv7",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditora;
+				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3056,7 +3056,7 @@
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/aarch64",
 					"$(PROJECT_DIR)/FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/armv7",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditora;
+				PRODUCT_BUNDLE_IDENTIFIER = fission.com.FSVideoEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
