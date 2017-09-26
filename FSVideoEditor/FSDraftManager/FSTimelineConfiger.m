@@ -39,9 +39,9 @@
     }
     [FSTimelineConfiger addTimeFxWithFx:timeLineInfo.vTimefx timeLine:timeLine];
     
-   // if (timeLineInfo.vFilterid != nil) {
-       //  [FSTimelineConfiger addFilter:timeLineInfo.vFilterid timeLine:timeLine];
-   // }
+    if (timeLineInfo.vFilterid != nil && timeLineInfo.vType == FSDraftInfoTypeVideo) {
+         [FSTimelineConfiger addFilter:timeLineInfo.vFilterid timeLine:timeLine];
+    }
 }
 +(void)addFilter:(NSString *)filter timeLine:(NvsTimeline *)timeLine{
     
