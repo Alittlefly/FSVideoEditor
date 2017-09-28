@@ -10,6 +10,8 @@
 #import "NvsStreamingContext.h"
 #import "FSDraftInfo.h"
 #import "NvsVideoClip.h"
+#import "NvsFxDescription.h"
+#import "NvsCaptureVideoFx.h"
 
 @protocol FSShortVideoRecorderManagerDelegate <NSObject>
 

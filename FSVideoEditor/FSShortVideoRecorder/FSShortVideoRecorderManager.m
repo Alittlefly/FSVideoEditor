@@ -315,6 +315,8 @@ static FSShortVideoRecorderManager *recorderManager;
     if (on) {
         [_context removeAllCaptureVideoFx];
         [_context appendBeautyCaptureVideoFx];
+        NvsCaptureVideoFx* fx = [_context getCaptureVideoFxByIndex:0];
+        [fx setFloatVal:@"Whitening" val:0.0];
     }
     else {
         [_context removeAllCaptureVideoFx];
