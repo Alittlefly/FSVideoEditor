@@ -11,6 +11,7 @@
 #import "FSVideoEditorCommenData.h"
 #import "FSShortLanguage.h"
 #import "UIImage+GIF.h"
+#import "FSPublishSingleton.h"
 
 #define FxButtonH 50.0
 #define FxButtonP 30.0
@@ -275,14 +276,18 @@
     CGRect newSize = [undoText boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
     CGFloat buttonWidth = CGRectGetWidth(newSize) + 19.0 + 7.0 + 5.0;
     
-     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30 - buttonWidth, 21)];
+    BOOL revert = [FSPublishSingleton sharedInstance].isAutoReverse;
+    
+    CGFloat textX = revert?(buttonWidth + 30):15;
+     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(textX, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30 - buttonWidth, 21)];
     [_tipLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"AddFilterTip"]];
     [_tipLabel setFont:[UIFont systemFontOfSize:15]];
     [_tipLabel setTextColor:FSHexRGB(0xCBCBCB)];
-    [_tipLabel setTextAlignment:(NSTextAlignmentLeft)];
+    [_tipLabel setTextAlignment:(revert?NSTextAlignmentRight:NSTextAlignmentLeft)];
     [self addSubview:_tipLabel];
     
-     _unDoButton = [[FSUndoButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sframe)-10-buttonWidth, CGRectGetMaxY(_progress.frame),buttonWidth, 30)];
+    CGFloat buttonX = revert?10:CGRectGetWidth(sframe)-10-buttonWidth;
+     _unDoButton = [[FSUndoButton alloc] initWithFrame:CGRectMake(buttonX, CGRectGetMaxY(_progress.frame),buttonWidth, 30)];
     [_unDoButton setTitle:undoText forState:(UIControlStateNormal)];
     [_unDoButton.titleLabel setFont:[UIFont systemFontOfSize:11.0]];
     [_unDoButton setImage:[UIImage imageNamed:@"fxUndo"] forState:(UIControlStateNormal)];
@@ -552,7 +557,8 @@
         [_progress setProgress:0.0];
     }
 
-    BOOL newValue = (button.tag == FSVideoFxTypeRevert);
+    BOOL newValue = button.tag == FSVideoFxTypeRevert;
+    newValue = ![FSPublishSingleton sharedInstance].isAutoReverse?:!newValue;
     [_progress setNeedConvert:newValue];
 
     if (_needCovert != newValue) {

@@ -57,6 +57,9 @@
     [backButton setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-12-30 : 12, 12, 30, 30)];
     [backButton setImage:[UIImage imageNamed:@"musicBack"] forState:(UIControlStateNormal)];
     [backButton addTarget:self action:@selector(outNav) forControlEvents:(UIControlEventTouchUpInside)];
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        [backButton setTransform:CGAffineTransformMakeRotation(M_PI)];
+    }
     [_contentView addSubview:backButton];
     
     [self.view setBackgroundColor:[UIColor clearColor]];

@@ -144,9 +144,11 @@
 
     [_vline setFrame:CGRectMake(CGRectGetMidX(frame), CGRectGetHeight(frame) - 52 + 18.5, 1.0, 15.0)];
     
-    [_hotMusicButton setFrame:CGRectMake(0, CGRectGetHeight(frame) - 52, CGRectGetWidth(frame)/2.0- 0.5, 52)];
+    CGFloat hotx = [FSPublishSingleton sharedInstance].isAutoReverse?(CGRectGetWidth(frame)/2.0 + 0.5):0;
+    [_hotMusicButton setFrame:CGRectMake(hotx, CGRectGetHeight(frame) - 52, CGRectGetWidth(frame)/2.0- 0.5, 52)];
+    CGFloat likex = [FSPublishSingleton sharedInstance].isAutoReverse?0:(CGRectGetWidth(frame)/2.0 + 0.5);
 
-    [_likeMusicButton setFrame:CGRectMake(CGRectGetWidth(frame)/2.0 + 0.5, CGRectGetHeight(frame) - 52, CGRectGetWidth(frame)/2.0- 0.5, 52)];
+    [_likeMusicButton setFrame:CGRectMake(likex, CGRectGetHeight(frame) - 52, CGRectGetWidth(frame)/2.0- 0.5, 52)];
 
 }
 -(void)setItems:(NSArray<FSMusicType *> *)items{
@@ -178,15 +180,17 @@
     NSInteger col = 0;
     NSInteger row = 0;
     
+    BOOL revert = [FSPublishSingleton sharedInstance].isAutoReverse;
     for (NSInteger index = 0; index < count; index ++) {
         col = index/4;
         row = index%4;
-        CGFloat btnx = startPaddingX + row *(buttonW + innerPaddingX);
+        
+        CGFloat btnx = revert?(CGRectGetWidth(self.bounds) - startPaddingX - (row + 1) * buttonW - row * innerPaddingX):(startPaddingX + row *(buttonW + innerPaddingX));
         CGFloat btny = startPaddingY + col *(buttonW + innerPaddingY);
         if (index >= 7 && count > 8 && !_opend) {
             if (!_showAllButton) {
                 _showAllButton = [[FSMusicTypeButton alloc] initWithFrame:CGRectMake(btnx, btny, buttonW, buttonW)];
-                NSString *title = [[FSPublishSingleton sharedInstance].language isEqualToString:@"en"] ?[NSString stringWithFormat:@"%@ %ld",[FSShortLanguage CustomLocalizedStringFromTable:@"MoreTag"],count - index] : [NSString stringWithFormat:@"%ld %@",count - index,[FSShortLanguage CustomLocalizedStringFromTable:@"MoreTag"]];
+                NSString *title = [[FSPublishSingleton sharedInstance].language isEqualToString:@"en"] ?[NSString stringWithFormat:@"%@ %ld",[FSShortLanguage CustomLocalizedStringFromTable:@"MoreTag"],(long)(count - index)] : [NSString stringWithFormat:@"%ld %@",(long)(count - index),[FSShortLanguage CustomLocalizedStringFromTable:@"MoreTag"]];
                 [_showAllButton addTarget:self action:@selector(showAllItems:) forControlEvents:(UIControlEventTouchUpInside)];
                 [_showAllButton setImage:[UIImage imageNamed:@"musicDown"] forState:(UIControlStateNormal)];
                 [_showAllButton setTitle:title forState:(UIControlStateNormal)];

@@ -69,6 +69,15 @@
     [_searchBar setBarTintColor:[UIColor clearColor]];
     [_searchBar setDelegate:_delegate];
     [_searchBar setTranslucent:YES];
+
+#ifdef __IPHONE_9_0
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        _searchBar.semanticContentAttribute = UISemanticContentAttributeForceRightToLeft;
+    }else{
+        _searchBar.semanticContentAttribute = UISemanticContentAttributeForceLeftToRight;
+    }
+#endif
+    
     UITextField *searchField = [_searchBar valueForKey:@"_searchField"];
     searchField.backgroundColor = [UIColor clearColor];
     
