@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		207781721F4C592A00499996 /* FSDraftEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 207781711F4C592A00499996 /* FSDraftEmptyView.m */; };
+		20810F0B1F7E292F000F0263 /* UIButton+Reverse.h in Headers */ = {isa = PBXBuildFile; fileRef = 20810F091F7E292F000F0263 /* UIButton+Reverse.h */; };
+		20810F0C1F7E292F000F0263 /* UIButton+Reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 20810F0A1F7E292F000F0263 /* UIButton+Reverse.m */; };
+		20810F0D1F7E292F000F0263 /* UIButton+Reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 20810F0A1F7E292F000F0263 /* UIButton+Reverse.m */; };
 		2095F7B01F370C7700230464 /* FSDraftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095F7AF1F370C7700230464 /* FSDraftTableViewCell.m */; };
 		560142B51F1868FE00A06C70 /* FSCancleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 560142B41F1868FE00A06C70 /* FSCancleController.m */; };
 		560C56621F6279B6007BE30E /* FSVideoPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = 560C56601F6279B6007BE30E /* FSVideoPublisher.h */; };
@@ -546,6 +549,8 @@
 /* Begin PBXFileReference section */
 		207781701F4C592A00499996 /* FSDraftEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftEmptyView.h; sourceTree = "<group>"; };
 		207781711F4C592A00499996 /* FSDraftEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftEmptyView.m; sourceTree = "<group>"; };
+		20810F091F7E292F000F0263 /* UIButton+Reverse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Reverse.h"; sourceTree = "<group>"; };
+		20810F0A1F7E292F000F0263 /* UIButton+Reverse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Reverse.m"; sourceTree = "<group>"; };
 		2095F7AE1F370C7700230464 /* FSDraftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDraftTableViewCell.h; sourceTree = "<group>"; };
 		2095F7AF1F370C7700230464 /* FSDraftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDraftTableViewCell.m; sourceTree = "<group>"; };
 		560142B31F1868FE00A06C70 /* FSCancleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCancleController.h; sourceTree = "<group>"; };
@@ -1328,6 +1333,8 @@
 				983AC5CF1F5813EE00349992 /* FSAddChallengeControl.m */,
 				9892AF401F613579000C44A5 /* FSAddChallengeTextField.h */,
 				9892AF411F613579000C44A5 /* FSAddChallengeTextField.m */,
+				20810F091F7E292F000F0263 /* UIButton+Reverse.h */,
+				20810F0A1F7E292F000F0263 /* UIButton+Reverse.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2266,6 +2273,7 @@
 				985E876C1F54481300292FEF /* FSMusicListController.h in Headers */,
 				985E876D1F54481300292FEF /* FSChallengeModel.h in Headers */,
 				985E876E1F54481300292FEF /* FSChallengeParam.h in Headers */,
+				20810F0B1F7E292F000F0263 /* UIButton+Reverse.h in Headers */,
 				985E876F1F54481300292FEF /* FSPublisherAPI.h in Headers */,
 				985E87701F54481300292FEF /* FSUploadImageAPI.h in Headers */,
 				985E87711F54481300292FEF /* FSSearchChallengeAPI.h in Headers */,
@@ -2606,6 +2614,7 @@
 				562D40591EFD1DE200BF0E0D /* AFURLSessionManager.m in Sources */,
 				567A3D4E1EFB66B60026247E /* FSUploader.m in Sources */,
 				567A3D8C1EFB6F8E0026247E /* README.md in Sources */,
+				20810F0C1F7E292F000F0263 /* UIButton+Reverse.m in Sources */,
 				562D40561EFD1DE200BF0E0D /* AFSecurityPolicy.m in Sources */,
 				988AC6E41EFE6926007FBCEF /* FSFilterButton.m in Sources */,
 				5616CC8F1F2B40F700028770 /* MJRefreshBackNormalFooter.m in Sources */,
@@ -2720,6 +2729,7 @@
 				985E86CD1F54479F00292FEF /* FSEditorLoading.m in Sources */,
 				985E86CE1F54479F00292FEF /* FSSegmentView.m in Sources */,
 				985E86CF1F54479F00292FEF /* FSMoveButton.m in Sources */,
+				20810F0D1F7E292F000F0263 /* UIButton+Reverse.m in Sources */,
 				985E86D01F54479F00292FEF /* FSAlertView.m in Sources */,
 				985E86D11F54479F00292FEF /* FSEditorAlertView.m in Sources */,
 				985E86D21F54479F00292FEF /* FSShortLanguage.m in Sources */,

@@ -46,7 +46,7 @@
     _personNumLabel.textColor = FSHexRGB(0x000000);
     _personNumLabel.font = [UIFont systemFontOfSize:13];
     NSString *personCount = [FSShortLanguage CustomLocalizedStringFromTable:@"ChallengePeopleCount"];
-    personCount = [personCount stringByReplacingOccurrencesOfString:@"(0)" withString:@"0"];
+    personCount = [personCount stringByReplacingOccurrencesOfString:@"(x)" withString:@"0"];
     _personNumLabel.text = personCount;
     [self.contentView addSubview:_personNumLabel];
     
@@ -92,7 +92,7 @@
         _descripLabel.hidden = NO;
         
         NSString *personCount = [FSShortLanguage CustomLocalizedStringFromTable:@"ChallengePeopleCount"];
-        personCount = [personCount stringByReplacingOccurrencesOfString:@"(0)" withString:[NSString stringWithFormat:@"%ld",(long)challengeModel.personCount]];
+        personCount = [personCount stringByReplacingOccurrencesOfString:@"(x)" withString:[NSString stringWithFormat:@"%ld",(long)challengeModel.personCount]];
         _personNumLabel.text = personCount;
         [_personNumLabel sizeToFit];
 

@@ -104,7 +104,7 @@ Processing = "Şu anda halloluyor...";
 
 EnterChallenge = "Video konusunu gir";
 HotChallenges = "Önerilen Konular";
-ChallengePeopleCount = "(0) kişi bu konuda video çekti";
+ChallengePeopleCount = "(x) kişi bu konuda video çekti";
 ChallengeDescribe = "Konu içeriğine dair kısaca bilgi ver";
 MaxWordsCount = "Maksimum (0) harf";
 MaxLetterLimit = "Kelime limitini aştınız";

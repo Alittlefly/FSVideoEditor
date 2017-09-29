@@ -12,6 +12,7 @@
 #import "FSShortLanguage.h"
 #import "FSPublishSingleton.h"
 #import "UIButton+WebCache.h"
+#import "UIButton+Reverse.h"
 
 @interface FSPublisherToolView()<FSEditVideoNameViewDelegate>
 
@@ -233,6 +234,9 @@
     [_draftButton setImage:[UIImage imageNamed:@"draft"] forState:UIControlStateNormal];
     [_draftButton addTarget:self action:@selector(draftClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_draftButton];
+    if ([FSPublishSingleton sharedInstance].isAutoReverse && ![FSPublishSingleton systemIsArbicLanguage]) {
+        [_draftButton reverseButton];
+    }
     
     _publishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _publishButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(20, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44) : CGRectMake(self.frame.size.width-20-(self.frame.size.width-60)/2, self.frame.size.height-74-44, (self.frame.size.width-60)/2, 44);
@@ -243,6 +247,9 @@
      [_publishButton setImage:[UIImage imageNamed:@"publish"] forState:UIControlStateNormal];
     [_publishButton addTarget:self action:@selector(publishClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_publishButton];
+    if ([FSPublishSingleton sharedInstance].isAutoReverse && ![FSPublishSingleton systemIsArbicLanguage]) {
+        [_publishButton reverseButton];
+    }
     
     _videoNameView = [[FSEditVideoNameView alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(_publishButton.frame)-40-55, self.frame.size.width-40, 60) draftInfo:_draftInfo];
     _videoNameView.backgroundColor = [UIColor clearColor];

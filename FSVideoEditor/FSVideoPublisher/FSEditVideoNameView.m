@@ -13,7 +13,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "FSAddChallengeControl.h"
 #import <Photos/Photos.h>
-
+#import "UIButton+Reverse.h"
 
 @interface FSEditVideoNameView()<UITextFieldDelegate>
 
@@ -89,7 +89,7 @@
     [_saveToPhotoButton.titleLabel setShadowOffset:CGSizeMake(1, 1)];
     [_saveToPhotoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     if ([FSPublishSingleton sharedInstance].isAutoReverse && ![FSPublishSingleton systemIsArbicLanguage]) {
-        [self reverseButton:_saveToPhotoButton];
+        [_saveToPhotoButton reverseButton];
     }
     [_saveToPhotoButton addTarget:self action:@selector(saveToPhoto) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_saveToPhotoButton];
@@ -239,82 +239,6 @@
     return result;
 }
 
-//更改button的image和title布局
-- (void)reverseButton:(UIButton*)tempBtn
-{
-    UIImage *buttonImage = tempBtn.imageView.image;
-    CGFloat buttonImageViewWidth = CGImageGetWidth(buttonImage.CGImage)
-    ;
-    CGFloat buttonImageViewHeight = CGImageGetHeight(buttonImage.CGImage);
-    
-    NSString *buttonTitle = tempBtn.titleLabel.text;
-    
-    UIFont *buttonTitleFont = [UIFont systemFontOfSize:13.0f];
 
-    CGSize buttonTitleLabelSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName:buttonTitleFont}];
-    // button宽度,至少为imageView宽度与titleLabel宽度之和
-    
-    CGFloat buttonWidth = buttonImageViewWidth + buttonTitleLabelSize.width;
-    
-    // button高度,至少为imageView高度与titleLabel高度之和
-    
-    CGFloat buttonHeight = buttonImageViewHeight + buttonTitleLabelSize.height;
-    
-    [tempBtn setBounds:CGRectMake(0, 0, buttonWidth, buttonHeight)];
-    
-    [tempBtn.titleLabel setFont:buttonTitleFont];
-    
-    
-    [tempBtn setImage:buttonImage forState:UIControlStateNormal];
-    
-    [tempBtn.imageView setBackgroundColor:[UIColor clearColor]];
-    
-    [tempBtn setTitle:buttonTitle forState:UIControlStateNormal];
-    
-    [tempBtn.titleLabel setBackgroundColor:[UIColor clearColor]];
-    
-    
-    CGPoint buttonBoundsCenter = CGPointMake(CGRectGetMidX(tempBtn.bounds), CGRectGetMidY(tempBtn.bounds));
-    
-    // 找出imageView最终的center
-    
-    CGPoint endImageViewCenter = CGPointMake(buttonBoundsCenter.x + tempBtn.bounds.size.width/2-tempBtn.imageView.bounds.size.width/2, buttonBoundsCenter.y);
-    
-    // 找出titleLabel最终的center
-    
-    CGPoint endTitleLabelCenter = CGPointMake(buttonBoundsCenter.x-tempBtn.bounds.size.width/2 + tempBtn.titleLabel.bounds.size.width/2, buttonBoundsCenter.y);
-    
-    // 取得imageView最初的center
-    
-    CGPoint startImageViewCenter = tempBtn.imageView.center;
-    
-    // 取得titleLabel最初的center
-    
-    CGPoint startTitleLabelCenter = tempBtn.titleLabel.center;
-    
-    // 设置imageEdgeInsets
-    
-    CGFloat imageEdgeInsetsTop = endImageViewCenter.y - startImageViewCenter.y;
-    
-    CGFloat imageEdgeInsetsLeft = endImageViewCenter.x - startImageViewCenter.x;
-    
-    CGFloat imageEdgeInsetsBottom = -imageEdgeInsetsTop;
-    
-    CGFloat imageEdgeInsetsRight = -imageEdgeInsetsLeft;
-    
-    tempBtn.imageEdgeInsets = UIEdgeInsetsMake(imageEdgeInsetsTop, imageEdgeInsetsLeft, imageEdgeInsetsBottom, imageEdgeInsetsRight);
-    
-    // 设置titleEdgeInsets
-    
-    CGFloat titleEdgeInsetsTop = endTitleLabelCenter.y-startTitleLabelCenter.y;
-    
-    CGFloat titleEdgeInsetsLeft = endTitleLabelCenter.x - startTitleLabelCenter.x;
-    
-    CGFloat titleEdgeInsetsBottom = -titleEdgeInsetsTop;
-    
-    CGFloat titleEdgeInsetsRight = -titleEdgeInsetsLeft;
-    
-    tempBtn.titleEdgeInsets = UIEdgeInsetsMake(titleEdgeInsetsTop, titleEdgeInsetsLeft, titleEdgeInsetsBottom, titleEdgeInsetsRight);
-}
 
 @end

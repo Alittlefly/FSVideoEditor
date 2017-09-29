@@ -18,9 +18,9 @@ logout = "خروج";
 
 leastTime = "يجب أن تكون مدة الفيديو 5 ثواني على الأقل لتتمكن من النشر";
 
-UploadVideo = "تحميل";
+UploadVideo = "فيديو من الهاتف";
 ChooseMusic = "موسيقى";
-Record = "سجل فيديو";
+Record = "سجل فيديو ";
 HotMusic = "أجمل الأغاني";
 likeMusic = "مفضلاتي";
 RecordNow = "البدء بتسجيل الفيديو";
@@ -33,7 +33,7 @@ Edit = "تعديل";
 Volume = "مستوى الصوت";
 Effects = "مؤثرات خاصة";
 EnterTitle = "اكتب عنوان";
-AddHashtag = "إضافة هاشتاج";
+AddHashtag = " إضافة تحدي";
 SaveInGallery = "حفظ في الأستوديو";
 CanlceVideo = "الفيديو المحمل أو الفيديو القديم لا يدعم استمرار التصوير";
 GiveUpEdit = "هل تريد حذف التعديلات?";
@@ -99,13 +99,13 @@ EditMusicTip = "حرك المؤشر يميناً و يساراً لقص المو
 MusicStartTime = "الوقت : (0)";
 
 Original = "الصوت الأصلي";
-Music = "اضف موسيقى";
+Music = "صوت الموسيقى";
 ChoseVideoTime = "تم اختيار (0) ثانية من الفيديو";
 Processing = "جاري المعالجة...";
 
 EnterChallenge = "ما هو التحدي الذي ستقدمه؟";
 HotChallenges = "تحديات مقترحة";
-ChallengePeopleCount = "(0)المشاركين في التحدي";
+ChallengePeopleCount =  "المشاركين في التحدي (x)";
 ChallengeDescribe = "اوصف التحدي الذي ستقدمه باختصار";
 MaxWordsCount = "في حدود (0) حرف";
 MaxLetterLimit = "لقد تجاوزت عدد الحروف المسموح بها";
@@ -117,7 +117,7 @@ OnlyYouCanSee = "لا يمكن لغيرك رؤية صندوق الحفظ";
 NoTitle = "لا يوجد عنوان";
 NoTopic = "لا يوجد موضوع";
 
-DraftTitle = "حفظ في المسودة";
+DraftTitle = " صندوق الحفظ";
 
 deletaAll = "حذف الكل";
 deleteAlert = "هل تريد الحذف؟";

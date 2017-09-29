@@ -106,7 +106,7 @@ Processing = "Processing…";
 
 EnterChallenge = "Enter challenge content";
 HotChallenges = "Recommended Challenges";
-ChallengePeopleCount = "(0) people did this challenge";
+ChallengePeopleCount = "(x) people did this challenge";
 ChallengeDescribe = "Briefly describe your challenge";
 MaxWordsCount = "Max (0) letters";
 MaxLetterLimit = "You have exceeded the maximum letter limit";
