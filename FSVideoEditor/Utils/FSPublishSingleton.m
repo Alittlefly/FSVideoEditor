@@ -32,6 +32,14 @@ static FSPublishSingleton *publishSingleton = nil;
     _chooseChallenge = nil;
 }
 
++ (BOOL)systemIsArbicLanguage
+{
+    NSString* language=[[NSLocale preferredLanguages] objectAtIndex:0];
+    if ([language rangeOfString:@"ar"].location != NSNotFound) {
+        return YES;
+    }
+    return NO;
+}
 -(void)setLoginKey:(NSString *)loginKey{
     _loginKey = loginKey;
     [[FSVideoEditorAPIParams videoEdiorParams].params setValue:loginKey forKey:@"loginKey"];
