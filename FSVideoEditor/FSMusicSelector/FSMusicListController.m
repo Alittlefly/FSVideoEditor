@@ -55,7 +55,11 @@
     
     UIButton *backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [backButton setFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? _contentView.frame.size.width-12-30 : 12, 12, 30, 30)];
-    [backButton setImage:[UIImage imageNamed:@"musicBack"] forState:(UIControlStateNormal)];
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        [backButton setImage:[UIImage imageNamed:@"startRecord_ar"] forState:(UIControlStateNormal)];
+    }else {
+        [backButton setImage:[UIImage imageNamed:@"startRecord_en"] forState:(UIControlStateNormal)];
+    }
     [backButton addTarget:self action:@selector(outNav) forControlEvents:(UIControlEventTouchUpInside)];
     [_contentView addSubview:backButton];
     
