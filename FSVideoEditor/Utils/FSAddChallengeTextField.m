@@ -13,15 +13,20 @@
 
 //UITextField 文字与输入框的距离
 - (CGRect)textRectForBounds:(CGRect)bounds{
-    
-    return CGRectInset(bounds, 5+self.leftView.frame.size.width+3, 0);
-    
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        return CGRectInset(bounds, 5+self.rightView.frame.size.width+3, 0);
+    } else {
+        return CGRectInset(bounds, 5+self.leftView.frame.size.width+3, 0);
+    }
 }
 
-//控制文本的位置
+// 控制文本的位置
 - (CGRect)editingRectForBounds:(CGRect)bounds{
-    
-    return CGRectInset(bounds, 5+self.leftView.frame.size.width+3, 0);
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        return CGRectInset(bounds, 5+self.rightView.frame.size.width+3, 0);
+    } else {
+        return CGRectInset(bounds, 5+self.leftView.frame.size.width+3, 0);
+    }
 }
 
 - (CGRect)leftViewRectForBounds:(CGRect)bounds

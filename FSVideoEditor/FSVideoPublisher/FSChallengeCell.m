@@ -36,6 +36,7 @@
 }
 
 - (void)createBaseUI {
+    // UITableViewCell的frame应该在layoutSubviews里获取，init时没有
     _logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width - 20-18 : 20, 12, 18, 18)];
     _logoImageView.image = [UIImage imageNamed:@"#"];
     [self.contentView addSubview:_logoImageView];
@@ -108,6 +109,8 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
    
+    _logoImageView.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? self.frame.size.width - 20-18 : 20, 12, 18, 18); // add by gongruike
+    
     if (_addChallengeButton.isHidden) {
         _personNumLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20 : self.frame.size.width-20-_personNumLabel.frame.size.width, _personNumLabel.frame.origin.y, _personNumLabel.frame.size.width, 16);
         _titleLabel.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMaxX(_personNumLabel.frame)+5 : CGRectGetMaxX(_logoImageView.frame)+5, 10, self.frame.size.width-40-CGRectGetWidth(_logoImageView.frame)-CGRectGetWidth(_personNumLabel.frame)-10, 24);
