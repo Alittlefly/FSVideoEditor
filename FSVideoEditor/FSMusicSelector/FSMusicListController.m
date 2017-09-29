@@ -61,6 +61,9 @@
         [backButton setImage:[UIImage imageNamed:@"startRecord_en"] forState:(UIControlStateNormal)];
     }
     [backButton addTarget:self action:@selector(outNav) forControlEvents:(UIControlEventTouchUpInside)];
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        [backButton setTransform:CGAffineTransformMakeRotation(M_PI)];
+    }
     [_contentView addSubview:backButton];
     
     [self.view setBackgroundColor:[UIColor clearColor]];

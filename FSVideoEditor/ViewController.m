@@ -52,8 +52,8 @@
 
 //    @"http://haahi.7najm.com:10000/";
     [FSPublishSingleton sharedInstance].addressAPI = @"http://www.haahi.com/";
-    [FSPublishSingleton sharedInstance].language =@"tr";
-    [FSPublishSingleton sharedInstance].isAutoReverse = NO;
+    [FSPublishSingleton sharedInstance].language =@"ar";
+    [FSPublishSingleton sharedInstance].isAutoReverse = YES;
     
     CAGradientLayer *bgGradientLayer = [CAGradientLayer layer];
     bgGradientLayer.colors = @[(__bridge id)FSHexRGB(0x000000).CGColor, (__bridge id)FSHexRGB(0x2D062D).CGColor];
@@ -148,7 +148,7 @@
     label.text = [NSString stringWithFormat:@"v %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     [self.view addSubview:label];
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginCreat:)];
     [self.view addGestureRecognizer:tapGesture];
     
     

@@ -82,6 +82,8 @@
     _position = (CGFloat)currentPoint/_timeLine.duration;
     _convert = (_selectType == FSVideoFxTypeRevert);
     
+    _convert = (![FSPublishSingleton sharedInstance].isAutoReverse?:!_convert);
+    
     _startProgress = 1.0;
     
     [self creatSubViews];

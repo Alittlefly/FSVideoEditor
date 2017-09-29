@@ -73,6 +73,9 @@
     _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetWidth(self.view.bounds) - 20 - 15, 20, 20,20) : CGRectMake(15, 20, 20, 20);
     [_backButton setImage:[UIImage imageNamed:@"recorder-back"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backClik) forControlEvents:UIControlEventTouchUpInside];
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        [_backButton setTransform:CGAffineTransformMakeRotation(M_PI)];
+    }
     [self.view addSubview:_backButton];
     
     

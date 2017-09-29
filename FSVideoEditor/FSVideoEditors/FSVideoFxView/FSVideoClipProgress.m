@@ -8,6 +8,7 @@
 
 #import "FSVideoClipProgress.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSPublishSingleton.h"
 
 
 typedef NS_ENUM(NSInteger,FSProgressMoveType){
@@ -268,6 +269,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
         }
         
         [self updateLineFrame];
+        
         
         CGFloat outProgress = _needConvert?(1-_progress):_progress;
         if(outProgress == 1.0){
