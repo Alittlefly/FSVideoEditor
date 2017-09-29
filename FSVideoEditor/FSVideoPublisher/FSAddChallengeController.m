@@ -88,6 +88,7 @@
     _nameTextField.backgroundColor = FSHexRGB(0xF1F1F2);
     _nameTextField.layer.cornerRadius = 2;
     _nameTextField.layer.masksToBounds = YES;
+
     UIImageView *leftView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 20, 14, 14)];
     leftView.image = [UIImage imageNamed:@"#"];
     if ([FSPublishSingleton sharedInstance].isAutoReverse) {
@@ -99,11 +100,11 @@
         _nameTextField.leftViewMode = UITextFieldViewModeAlways;
     }
     
+    _nameTextField.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
     _nameTextField.placeholder = [FSShortLanguage CustomLocalizedStringFromTable:@"EnterChallenge"];
     _nameTextField.text = _challengeName.length > 50 ? [_challengeName substringToIndex:50]:_challengeName;
     _nameTextField.font = [UIFont systemFontOfSize:14];
     _nameTextField.delegate = self;
-    _nameTextField.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight : NSTextAlignmentLeft;
     [self.view addSubview:_nameTextField];
     
     _contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_nameTextField.frame)+10, self.view.frame.size.width-30, 140)];

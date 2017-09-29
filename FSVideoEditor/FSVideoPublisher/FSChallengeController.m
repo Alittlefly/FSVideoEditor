@@ -76,7 +76,7 @@
     titleLabel.frame = CGRectMake((self.view.frame.size.width-titleLabel.frame.size.width)/2, 30, titleLabel.frame.size.width, 24);
     [self.view addSubview:titleLabel];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMinX(titleLabel.frame)-20 : CGRectGetMaxX(titleLabel.frame), 32, 20, 20)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? CGRectGetMaxX(titleLabel.frame) : CGRectGetMinX(titleLabel.frame)-20, 32, 20, 20)];
     imageView.image = [UIImage imageNamed:@"#"];
     [self.view addSubview:imageView];
     

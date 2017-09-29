@@ -63,7 +63,7 @@
     [_contentView addSubview:_soundtrackLabel];
     
     _soundtrackSlider = [[UISlider alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 15 : CGRectGetMaxX(_soundtrackLabel.frame)+15, 23, _contentView.frame.size.width-CGRectGetWidth(_soundtrackLabel.frame)-15-15-15, 27)];
-    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+    if ([FSPublishSingleton sharedInstance].isAutoReverse && ![FSPublishSingleton systemIsArbicLanguage]) {
         _soundtrackSlider.transform = CGAffineTransformMakeRotation(180 *M_PI / 180.0);
     }
     _soundtrackSlider.value = _soundtrackVolume;
@@ -83,7 +83,7 @@
     [_contentView addSubview:_scoreLabel];
     
     _scoreSlider = [[UISlider alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 15 : CGRectGetMaxX(_scoreLabel.frame)+15, CGRectGetMaxY(_soundtrackLabel.frame)+30, _contentView.frame.size.width-CGRectGetWidth(_scoreLabel.frame)-15-15-15, 27)];
-    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+    if ([FSPublishSingleton sharedInstance].isAutoReverse && ![FSPublishSingleton systemIsArbicLanguage]) {
         _scoreSlider.transform = CGAffineTransformMakeRotation(180 *M_PI / 180.0);
     }
     _scoreSlider.value = _scroeVolume;

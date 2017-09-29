@@ -95,8 +95,12 @@
     }
     width += (CGRectGetWidth(self.rightImageView.frame)+2+([FSPublishSingleton sharedInstance].isAutoReverse ? 0:5));;
 
-    
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y,width, self.frame.size.height);
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        CGFloat maxX = CGRectGetMaxX(self.frame);
+        self.frame = CGRectMake(maxX-width, self.frame.origin.y,width, self.frame.size.height);
+    } else {
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y,width, self.frame.size.height);
+    }
 }
 
 
