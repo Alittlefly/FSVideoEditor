@@ -134,7 +134,7 @@
                 
                 NSString *url = music.songUrl;
                 if (![url hasPrefix:@"http"] && url) {
-                    url = [AddressIP stringByAppendingString:music.songUrl];
+                    url = [AddressShortVidioIP stringByAppendingString:music.songUrl];
                 }
                 __weak typeof(self) weakS = self;
                 __weak typeof(_music) weakMusic = music;
@@ -167,7 +167,7 @@
             
             NSString *url = music.songUrl;
             if (![url hasPrefix:@"http"] && url) {
-                url = [AddressIP stringByAppendingString:music.songUrl];
+                url = [AddressShortVidioIP stringByAppendingString:music.songUrl];
             }
             __weak typeof(self) weakS = self;
             __weak typeof(_music) weakMusic = music;

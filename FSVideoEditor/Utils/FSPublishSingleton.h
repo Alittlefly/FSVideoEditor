@@ -23,6 +23,7 @@
 @property (nonatomic, copy) NSString *addressAPILogin;
 @property (nonatomic, copy) NSString *addressUpload;
 @property (nonatomic, copy) NSString *addressAPI;
+@property (nonatomic, copy) NSString *addressShortVideoAPI;
 
 
 @property (nonatomic, assign) BOOL isAR; //项目分支，yes是7nujoom，no是haahi
