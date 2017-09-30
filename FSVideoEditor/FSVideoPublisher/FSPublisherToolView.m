@@ -231,6 +231,7 @@
     _draftButton.backgroundColor = FSHexRGBAlpha(0xD8D8D8, 0.8);
     _draftButton.layer.cornerRadius = 5;
     _draftButton.layer.masksToBounds = YES;
+    [_draftButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [_draftButton setImage:[UIImage imageNamed:@"draft"] forState:UIControlStateNormal];
     [_draftButton addTarget:self action:@selector(draftClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_draftButton];
@@ -244,6 +245,7 @@
     _publishButton.backgroundColor = FSHexRGB(0x0BC2C6);
     _publishButton.layer.cornerRadius = 5;
     _publishButton.layer.masksToBounds = YES;
+    [_publishButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
      [_publishButton setImage:[UIImage imageNamed:@"publish"] forState:UIControlStateNormal];
     [_publishButton addTarget:self action:@selector(publishClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_publishButton];

@@ -102,7 +102,7 @@
         _scoreSlider.enabled = NO;
     }
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-60)/2, CGRectGetMinY(_contentView.frame)-20-30, 60, 30)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-100)/2, CGRectGetMinY(_contentView.frame)-20-30, 100, 30)];
     _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.font = [UIFont systemFontOfSize:15];
     _titleLabel.textColor = [UIColor whiteColor];

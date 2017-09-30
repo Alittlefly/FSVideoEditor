@@ -278,10 +278,10 @@
     
     BOOL revert = [FSPublishSingleton sharedInstance].isAutoReverse;
     
-    CGFloat textX = revert?(buttonWidth + 30):15;
-     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(textX, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 30 - buttonWidth, 21)];
+    CGFloat textX = revert?(buttonWidth + 20):15;
+     _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(textX, CGRectGetMaxY(_progress.frame) + 11, CGRectGetWidth(sframe) - 20 - buttonWidth, 21)];
     [_tipLabel setText:[FSShortLanguage CustomLocalizedStringFromTable:@"AddFilterTip"]];
-    [_tipLabel setFont:[UIFont systemFontOfSize:15]];
+    [_tipLabel setFont:[UIFont systemFontOfSize:14]];
     [_tipLabel setTextColor:FSHexRGB(0xCBCBCB)];
     [_tipLabel setTextAlignment:(revert?NSTextAlignmentRight:NSTextAlignmentLeft)];
     [self addSubview:_tipLabel];
@@ -306,7 +306,7 @@
     [_bottomView setBackgroundColor:FSHexRGB(0x242630)];
     [self addSubview:_bottomView];
     
-    FSLineButton *fxButton = [[FSLineButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(sframe)/2.0 - 1, 45)];
+    FSLineButton *fxButton = [[FSLineButton alloc] initWithFrame:CGRectMake(revert?CGRectGetWidth(sframe)/2.0+1:0, 0, CGRectGetWidth(sframe)/2.0 - 1, 45)];
     [fxButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Filters"] forState:UIControlStateNormal];
     [fxButton addTarget:self action:@selector(showFx:) forControlEvents:(UIControlEventTouchUpInside)];
     fxButton.tag = 1;
@@ -319,12 +319,13 @@
     [sepLine setBackgroundColor:FSHexRGBAlpha(0xf5f5f5,0.2)];
     [_bottomView addSubview:sepLine];
     
-    FSLineButton *timefxButton = [[FSLineButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(sframe)/2.0+1, 0, CGRectGetWidth(sframe)/2.0 - 1, 45)];
+    FSLineButton *timefxButton = [[FSLineButton alloc] initWithFrame:CGRectMake(revert?0:CGRectGetWidth(sframe)/2.0+1, 0, CGRectGetWidth(sframe)/2.0 - 1, 45)];
     [timefxButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Timeline"] forState:UIControlStateNormal];
     [timefxButton addTarget:self action:@selector(showFx:) forControlEvents:(UIControlEventTouchUpInside)];
     timefxButton.tag = 2;
     [_bottomView addSubview:timefxButton];
     
+    [self showFx:fxButton];
 }
 -(void)initFilerFxs{
 
