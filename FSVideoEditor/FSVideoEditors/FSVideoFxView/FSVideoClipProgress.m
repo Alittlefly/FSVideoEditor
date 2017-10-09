@@ -324,7 +324,7 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
     CGFloat willBePoint = !_needConvert?CGRectGetMinX(fxView.frame):CGRectGetMaxX(fxView.frame);
     
     CGFloat progress = willBePoint/CGRectGetWidth(self.bounds);
-    [self setProgress:progress];
+    [self setProgress:progress>1.0 ? 1.0:progress];
     
     if ([self.delegate respondsToSelector:@selector(videoClipProgressSelectPoint:)]) {
         [self.delegate videoClipProgressSelectPoint:!_needConvert?progress:(1-progress)];
