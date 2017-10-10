@@ -114,7 +114,6 @@ static FSShortVideoRecorderManager *recorderManager;
 
 - (void)setRecorderSpeed:(CGFloat)recorderSpeed {
     _recorderSpeed = recorderSpeed;
-    
 }
 
 - (instancetype)init {
@@ -656,7 +655,7 @@ static FSShortVideoRecorderManager *recorderManager;
         NSFileManager* fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:path])
         {
-            CGFloat speed = [[_speedArray objectAtIndex:i] floatValue];
+            CGFloat speed = (_speedArray.count >= (i+1)) ? [[_speedArray objectAtIndex:i] floatValue] : 1;
             NvsVideoClip *clip = [self.videoTrack appendClip:path];
             [clip changeSpeed:speed];
             

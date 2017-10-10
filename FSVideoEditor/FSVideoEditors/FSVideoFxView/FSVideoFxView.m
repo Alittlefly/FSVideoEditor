@@ -197,6 +197,7 @@
 
 @property(nonatomic,strong)FSUndoButton *unDoButton;
 @property(nonatomic,strong)NSMutableDictionary *fxButtonDict;
+@property(nonatomic,assign) BOOL videoNeedRecover;
 @end
 
 @implementation FSVideoFxView
@@ -559,15 +560,15 @@
     }
 
     BOOL newValue = button.tag == FSVideoFxTypeRevert;
-    newValue = ![FSPublishSingleton sharedInstance].isAutoReverse?:!newValue;
-    [_progress setNeedConvert:newValue];
+    [_progress setNeedConvert:[FSPublishSingleton sharedInstance].isAutoReverse?!newValue:newValue];
 
-    if (_needCovert != newValue) {
+    if (_videoNeedRecover != newValue) {
         if ([self.delegate respondsToSelector:@selector(videoFxViewNeedConvertView:type:)]) {
             [self.delegate videoFxViewNeedConvertView:newValue type:_fxType];
         }
-        _needCovert = newValue;
+        _videoNeedRecover = newValue;
     }
+    _needCovert = newValue;
     if (button.tag != FSVideoFxTypeRevert) {
         // 修改选中点
         [_progress setSelectProgress:_progress.progress];
