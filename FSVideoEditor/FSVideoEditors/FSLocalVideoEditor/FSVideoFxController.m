@@ -21,6 +21,7 @@
 #import "FSSpringAnimator.h"
 #import "FSMusicPlayer.h"
 #import "FSVideoEditorCommenData.h"
+#import "FSShortVideoRecorderManager.h"
 
 #import "NvsFxDescription.h"
 #import "FSShortLanguage.h"
@@ -339,15 +340,26 @@
     _selectType = type;
     
     NSString *newPath = convert?_convertFilePath:_filePath;
-    [_videoTrack removeAllClips];
+    BOOL removeSuccess = [_videoTrack removeAllClips];
     [_videoTrack appendClip:newPath];
     [_videoTrack setVolumeGain:0 rightVolumeGain:0];
     [_context seekTimeline:_timeLine timestamp:0 videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) flags:0];
-
+    
     //
     [self removeAllFx];
     FSVirtualTimeLine *vtimelin = [_tempFxStack topVirtualTimeLine];
     [self addVideoFxWithVirtualTimeline:vtimelin];
+    
+    if (_draftInfo.vType == FSDraftInfoTypeVideo) {
+        // 手动添加滤镜
+        NSString *fiterId = _draftInfo.vFilterid;
+        if (fiterId) {
+            for (unsigned int i = 0; i < _videoTrack.clipCount; i++) {
+                NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:i];
+                [[FSShortVideoRecorderManager sharedInstance] addFilter:fiterId toVideoClip:videoClip];
+            }
+        }
+    }
     
     if (convert) {
         [self playVideoFromHead];
