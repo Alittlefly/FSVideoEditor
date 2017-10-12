@@ -472,6 +472,16 @@
     
     [self addTimeFxWithFx:draftFx];
     //
+    if (_draftInfo.vType == FSDraftInfoTypeVideo) {
+        // 手动添加滤镜
+        NSString *fiterId = _draftInfo.vFilterid;
+        if (fiterId) {
+            for (unsigned int i = 0; i < _videoTrack.clipCount; i++) {
+                NvsVideoClip *videoClip = [_videoTrack getClipWithIndex:i];
+                [[FSShortVideoRecorderManager sharedInstance] addFilter:fiterId toVideoClip:videoClip];
+            }
+        }
+    }
     [_context playbackTimeline:_timeLine startTime:point endTime:_timeLine.duration videoSizeMode:(NvsVideoPreviewSizeModeLiveWindowSize) preload:YES flags:0];
     [_controlView setState:YES];
     [_videoFxView setIsPlaying:YES];

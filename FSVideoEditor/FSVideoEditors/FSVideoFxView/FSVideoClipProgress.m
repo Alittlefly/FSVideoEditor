@@ -194,7 +194,8 @@ typedef NS_ENUM(NSInteger,FSProgressMoveType){
         [self setProgress:_selectProgress];
         
         if ([self.delegate respondsToSelector:@selector(videoClipProgressMoveSlideSelectPoint:)]) {
-            [self.delegate videoClipProgressMoveSlideSelectPoint:_selectProgress];
+            
+            [self.delegate videoClipProgressMoveSlideSelectPoint:[FSPublishSingleton sharedInstance].isAutoReverse?(1-_selectProgress):_selectProgress];
         }
     }
     _moveType = FSProgressMoveTypeNone;

@@ -592,7 +592,7 @@
         _slowPoint = progress;
     }
     if ([self.delegate respondsToSelector:@selector(videoFxViewSelectTimeFx:type:duration:progress:)]) {
-        [self.delegate videoFxViewSelectTimeFx:self type:_fxType duration:200000 progress:_progress.selectProgress];
+        [self.delegate videoFxViewSelectTimeFx:self type:_fxType duration:200000 progress:progress];
     }
 }
 -(void)videoClipProgressStartSelect:(CGFloat)progress{
