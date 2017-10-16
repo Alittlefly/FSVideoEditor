@@ -406,7 +406,9 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 - (void)FSPublisherToolViewShowChallengeView {
     FSChallengeController *challengeVC = [[FSChallengeController alloc] init];
     challengeVC.delegate = self;
+    challengeVC.modalPresentationStyle=UIModalPresentationOverCurrentContext;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:challengeVC];
+    nav.modalPresentationStyle = UIModalPresentationOverFullScreen;
     [self presentViewController:nav animated:YES completion:nil];
 }
 
