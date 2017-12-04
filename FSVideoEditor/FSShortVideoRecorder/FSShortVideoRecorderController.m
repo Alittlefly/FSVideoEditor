@@ -15,8 +15,9 @@
 #import "FSFilterView.h"
 #import "FSDraftManager.h"
 #import "FSMusicPlayer.h"
+#import "FSMusicController.h"
 
-@interface FSShortVideoRecorderController ()<FSShortVideoRecorderViewDelegate, FSFilterViewDelegate>
+@interface FSShortVideoRecorderController ()<FSShortVideoRecorderViewDelegate, FSFilterViewDelegate, FSMusicControllerDelegate>
 {
     FSDraftInfo *_tempInfo;
 }
@@ -167,6 +168,54 @@
         
     }];
 }
+
+- (void)FSShortVideoRecorderViewChooseMusic {
+    FSMusicController *music = [FSMusicController new];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:music];
+    [nav setNavigationBarHidden:YES];
+    
+   // music.timeLine = _timeLine;
+    music.pushed = YES;
+    music.needSelfHeader = YES;
+    music.shouldReturnMusic = YES;
+    [music setDelegate:self];
+    
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
+#pragma mark - FSMusicControllerDelegate
+-(void)musicControllerSelectMusic:(NSString *)musicPath music:(FSMusic *)music{
+    if (music != nil && musicPath.length > 0) {
+        _recorderView.musicFilePath = musicPath;
+//        [_toolView canEditMusic:YES];
+//        [_toolView updateMusicInfo:music];
+        
+//        NvsAudioTrack *musicTrack = [_timeLine getAudioTrackByIndex:1];
+//        if (!musicTrack) {
+//            musicTrack =  [_timeLine appendAudioTrack];
+//
+//        }
+//        [musicTrack removeAllClips];
+//        [musicTrack appendClip:musicPath];
+//
+//        // 原音音轨
+//        NvsAudioTrack *audioTrack = [_timeLine getAudioTrackByIndex:0];
+//        _tempDraftInfo.vOriginalVolume = -1;
+//        [audioTrack setVolumeGain:0.0 rightVolumeGain:0.0];
+//
+//        if (_tempDraftInfo.vMusicVolume == -1) {
+//            _tempDraftInfo.vMusicVolume = 0.5;
+//        }
+//
+//        [musicTrack setVolumeGain:_tempDraftInfo.vMusicVolume rightVolumeGain:_tempDraftInfo.vMusicVolume];
+        
+    }
+}
+
+- (void)musicControllerHideen {
+}
+
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNSNotificationInhoneDidBecomeActive" object:nil];

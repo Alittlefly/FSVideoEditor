@@ -51,7 +51,7 @@
     [super viewDidLoad];
 
 //    @"http://haahi.7najm.com:10000/";
-    [FSPublishSingleton sharedInstance].addressAPI = @"http://www.haahi.com/";
+    [FSPublishSingleton sharedInstance].addressAPI = @"https://www.7nujoom.com/";
     [FSPublishSingleton sharedInstance].language =@"en";
     [FSPublishSingleton sharedInstance].isAutoReverse = NO;
     

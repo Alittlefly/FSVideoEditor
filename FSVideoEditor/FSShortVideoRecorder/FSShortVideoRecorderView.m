@@ -22,8 +22,9 @@
 #import "FSShortLanguage.h"
 #import "FSPublishSingleton.h"
 #import "FSDraftManager.h"
+#import "FSLocalPhotoManager.h"
 
-@interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate, FSTimeCountdownViewDelegate,UIAlertViewDelegate, FSSegmentViewDelegate, FSMoveButtonDelegate, FSCutMusicViewDelegate>
+@interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate, FSTimeCountdownViewDelegate,UIAlertViewDelegate, FSSegmentViewDelegate, FSMoveButtonDelegate, FSCutMusicViewDelegate, FSLocalPhotoManagerDelegate>
 
 @property (nonatomic, strong) UIButton *flashButton;  //闪光灯
 @property (nonatomic, strong) UIButton *finishButton;  //完成按钮
@@ -56,6 +57,11 @@
 @property (nonatomic, strong) NvsLiveWindow *recorderView;
 @property (nonatomic, strong) FSShortVideoRecorderManager *recorderManager;
 
+@property (nonatomic, strong) UILabel *chooseMusicTip;
+@property (nonatomic, strong) UIImageView *choosMusicTipBg;
+
+@property (nonatomic, strong) UILabel *recorderTip;
+
 @property (nonatomic, assign) BOOL isFlashOpened;
 @property (nonatomic, assign) BOOL isBeautyOpened;
 @property (nonatomic, assign) BOOL supportAutoFocus;
@@ -77,7 +83,7 @@
 
 @property (nonatomic, assign) CGFloat currentVideoTime;
 
-
+@property (nonatomic, strong) FSLocalPhotoManager *localPhotoManager;
 
 @end
 
@@ -223,23 +229,50 @@
     [_cutMusicButton addTarget:self action:@selector(cutMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_cutMusicButton];
     
-    if (_musicFilePath != nil && _musicFilePath.length > 0) {
-        _cutMusicButton.enabled = YES;
+    
+    BOOL isShowChooseMusicTip = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowChooseMusicTip"];
+    if (!isShowChooseMusicTip) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsShowChooseMusicTip"];
         
+        _chooseMusicTip = [[UILabel alloc] initWithFrame:[FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(27, 10, 223-27-15, 0):CGRectMake(15, 10, 223-27-15, 0)];
+        _chooseMusicTip.textColor = FSHexRGB(0x999999);
+        _chooseMusicTip.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight:NSTextAlignmentLeft;
+        _chooseMusicTip.font = [UIFont systemFontOfSize:13];
+        _chooseMusicTip.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ChooseMusicTip"];
+        //_chooseMusicTip.backgroundColor = [UIColor colorWithPatternImage:backImage];
+        _chooseMusicTip.backgroundColor = [UIColor clearColor];
+        _chooseMusicTip.numberOfLines = 0;
+        [_chooseMusicTip sizeToFit];
+        
+        CGFloat chooseMusicTipHeight = _chooseMusicTip.frame.size.height;
+        UIImage * backImage;
+        backImage = [UIImage imageNamed:@"chatfrom_bg_normal"];
+        backImage = [backImage resizableImageWithCapInsets:UIEdgeInsetsMake(10, 30, 10, 37) resizingMode:UIImageResizingModeStretch];
+        _choosMusicTipBg = [[UIImageView alloc] initWithFrame:[FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_cutMusicButton.frame), _cutMusicButton.center.y-(chooseMusicTipHeight+20)/2, 223, (chooseMusicTipHeight+20)):CGRectMake(CGRectGetMinX(_cutMusicButton.frame)-223, _cutMusicButton.center.y-(chooseMusicTipHeight+20)/2, 223, (chooseMusicTipHeight+20)) ];
+        _choosMusicTipBg.image = backImage;
+        [self addSubview:_choosMusicTipBg];
+        [_choosMusicTipBg addSubview:_chooseMusicTip];
+        
+         [self performSelector:@selector(hiddenChooseMusicTip) withObject:nil afterDelay:3.0];
     }
-    else {
-        _cutMusicButton.enabled = NO;
-    }
+   
+    
+//    if (_musicFilePath != nil && _musicFilePath.length > 0) {
+//        _cutMusicButton.enabled = YES;
+//
+//    }
+//    else {
+//        _cutMusicButton.enabled = NO;
+//    }
     
     _cutMusicLabel = [[UILabel alloc] init];
-    //_cutMusicLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10) : CGRectMake(CGRectGetMaxX(_cutMusicButton.frame) - CGRectGetWidth(_cutMusicButton.frame), CGRectGetMaxY(_cutMusicButton.frame), CGRectGetWidth(_cutMusicButton.frame), 10);
     _cutMusicLabel.font = [UIFont systemFontOfSize:10];
     _cutMusicLabel.textColor = [UIColor whiteColor];
     _cutMusicLabel.backgroundColor = [UIColor clearColor];
     _cutMusicLabel.textAlignment = NSTextAlignmentCenter;
     _cutMusicLabel.shadowColor = [UIColor blackColor];
     _cutMusicLabel.shadowOffset = CGSizeMake(1, 1);
-    _cutMusicLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"CutMusic"];//NSLocalizedString(@"CutMusic", nil);
+    _cutMusicLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"Music"];//NSLocalizedString(@"CutMusic", nil);
     [_cutMusicLabel sizeToFit];
     _cutMusicLabel.center = CGPointMake(_cutMusicButton.center.x, CGRectGetMaxY(_cutMusicButton.frame)+_cutMusicLabel.frame.size.height/2);
     [self addSubview:_cutMusicLabel];
@@ -342,11 +375,11 @@
     }
     
     _faceUButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _faceUButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_recorderButton.frame)+50, 0, 40, 40) : CGRectMake(CGRectGetMinX(_recorderButton.frame)-50-40, 0, 40, 40);
+    _faceUButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_recorderButton.frame)+40, 0, 50, 50) : CGRectMake(CGRectGetMinX(_recorderButton.frame)-40-50, 0, 50, 50);
     _faceUButton.center = CGPointMake(_faceUButton.center.x, _recorderButton.center.y);
     [_faceUButton setImage:[UIImage imageNamed:@"recorder-faceu"] forState:UIControlStateNormal];
     [_faceUButton addTarget:self action:@selector(faceuClick) forControlEvents:UIControlEventTouchUpInside];
-    _faceUButton.hidden = YES;
+    _faceUButton.hidden = NO;
     [self addSubview:_faceUButton];
     
     _segmentView = [[FSSegmentView alloc] initWithItems:@[[FSShortLanguage CustomLocalizedStringFromTable:@"VerySlow"],[FSShortLanguage CustomLocalizedStringFromTable:@"Slow"],[FSShortLanguage CustomLocalizedStringFromTable:@"Normal"],[FSShortLanguage CustomLocalizedStringFromTable:@"Fast"],[FSShortLanguage CustomLocalizedStringFromTable:@"VeryFast"]]];
@@ -361,6 +394,28 @@
     _segmentView.delegate = self;
     [self addSubview:_segmentView];
     
+    _recorderTip = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMinY(_segmentView.frame)-16-16, self.frame.size.width - 20, 16)];
+    _recorderTip.backgroundColor = [UIColor clearColor];
+    _recorderTip.textColor =FSHexRGBAlpha(0xFFFFFF, 0.6);
+    _recorderTip.font = [UIFont systemFontOfSize:13];
+    _recorderTip.textAlignment = NSTextAlignmentCenter;
+    _recorderTip.text = [FSShortLanguage CustomLocalizedStringFromTable:@"RecorderTip"];
+    [self addSubview:_recorderTip];
+    [self performSelector:@selector(hiddenRecorderTip) withObject:nil afterDelay:3.0f];
+    
+    _localPhotoManager = [FSLocalPhotoManager new];
+    [_localPhotoManager setDelegate:self];
+    [_localPhotoManager photosWithType:(PHAssetMediaTypeVideo)];
+}
+
+- (void)hiddenChooseMusicTip {
+    _choosMusicTipBg.hidden = YES;
+    [_choosMusicTipBg removeFromSuperview];
+}
+
+- (void)hiddenRecorderTip {
+    _recorderTip.hidden = YES;
+    [_recorderTip removeFromSuperview];
 }
 
 -(UIImage*) createImageWithColor:(UIColor*) color
@@ -491,6 +546,10 @@
 }
 
 - (void)cutMusicClik {
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewChooseMusic)]) {
+        [self.delegate FSShortVideoRecorderViewChooseMusic];
+    }
+    return;
     _backButton.hidden= YES;
     _recoverCamera.hidden = YES;
     _finishButton.hidden = YES;
@@ -793,6 +852,19 @@
     [alet showWithMessage:message];
 }
 
+#pragma mark - FSLocalPhotoManagerDelegate
+- (void)localPhotoManager:(FSLocalPhotoManager *)manager localVideos:(NSArray *)assets {
+    PHImageRequestOptions *option = [PHImageRequestOptions new];
+    option.resizeMode = PHImageRequestOptionsResizeModeNone;
+    option.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    [[PHImageManager defaultManager] requestImageForAsset:[assets firstObject] targetSize:self.bounds.size contentMode:(PHImageContentModeAspectFit) options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        [self.faceUButton setImage:result forState:UIControlStateNormal];
+    }];
+}
+
+- (void)localPhotoManager:(FSLocalPhotoManager *)manager authorizedStatus:(PHAuthorizationStatus)status {
+    
+}
 
 #pragma mark - FSMoveButtonDelegate
 - (void)FSMoveButtonCancelTrackingWithEvent:(UIEvent *)event {

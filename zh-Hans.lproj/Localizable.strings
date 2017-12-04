@@ -142,3 +142,6 @@ MoreTag = "more";
 AddChanllengeFailed = "发起挑战失败";
 ChallengeExisted = "挑战已经存在";
 NotAuthorSure = "Sure";
+
+RecorderTip = "按住开始摄像";
+ChooseMusicTip = "在这里选择你喜欢的音乐";

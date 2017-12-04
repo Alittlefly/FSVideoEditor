@@ -144,3 +144,5 @@ AddChanllengeFailed = "Starting challenge has failed";
 ChallengeExisted = "This challenge already exists";
 NotAuthorSure = "Sure";
 
+RecorderTip = "اضغط مطولاً لبدء التسجيل";
+ChooseMusicTip = "اختر موسيقتك المفضلة هنا";

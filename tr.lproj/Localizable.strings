@@ -141,3 +141,6 @@ MoreTag = "daha";
 AddChanllengeFailed = "Challenge ekleme başarısız";
 ChallengeExisted = "Bu challenge zaten eklenmiş!";
 NotAuthorSure = "Evet";
+
+RecorderTip = "Basılı tutarak çekime başla";
+ChooseMusicTip = "Sevdiğin müziği seçebilirsin";
