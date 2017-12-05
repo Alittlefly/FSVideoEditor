@@ -755,14 +755,14 @@
             self.recorderButton.transform =  CGAffineTransformMakeScale(1.5,1.5);
             
             [self.recorderButton.layer addAnimation:[self alphaLight:0.5 fromValue:50.0f toValue:10.0f] forKey:@"aAlpha1"];
-            self.recorderButton.layer.borderColor = FSHexRGB(0x0BC2C6).CGColor;
+            self.recorderButton.layer.borderColor = FSHexRGB(0xFFFFFF).CGColor;
   
         } completion:^(BOOL finished) {
         
             [self.recorderButton.layer removeAnimationForKey:@"aAlpha1"];
             
             [self.recorderButton.layer addAnimation:[self alphaLight:0.7 fromValue:5.0f toValue:10.0f] forKey:@"aAlpha2"];
-            self.recorderButton.layer.borderColor = FSHexRGB(0x0BC2C6).CGColor;
+            self.recorderButton.layer.borderColor = FSHexRGB(0xFFFFFF).CGColor;
 
         }];
 
@@ -832,7 +832,7 @@
             self.recorderButton.transform =  CGAffineTransformMakeScale(1.0,1.0);
             
             [self.recorderButton.layer addAnimation:[self alphaLight:0.3 fromValue:10.0f toValue:50.0f] forKey:@"aAlpha3"];
-            self.recorderButton.layer.borderColor = FSHexRGB(0x0BC2C6).CGColor;
+            self.recorderButton.layer.borderColor = FSHexRGB(0xFFFFFF).CGColor;
             
         } completion:^(BOOL finished) {
             
