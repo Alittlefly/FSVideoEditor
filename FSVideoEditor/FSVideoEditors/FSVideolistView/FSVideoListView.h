@@ -10,6 +10,7 @@
 @class FSVideoListView,PHAsset;
 @protocol FSVideoListViewDelegate <NSObject>
 -(void)videoListView:(FSVideoListView *)videoListView didSelectedVideo:(PHAsset *)video;
+- (void)videoListViewDidChooseOneVideo;
 
 @end
 
@@ -17,4 +18,6 @@
 
 @property(nonatomic,assign)id<FSVideoListViewDelegate>delegate;
 @property(nonatomic,strong)NSArray *videos;
+
+- (void)enterEditView;
 @end

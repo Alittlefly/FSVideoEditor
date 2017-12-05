@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "FSToolController.h"
+//#import "FSToolController.h"
+#import "FSMusicToolController.h"
 #import "FSAnimationNavController.h"
 #import "FSLoginServer.h"
 #import "FSAlertView.h"
@@ -19,8 +20,9 @@
 #import "FSDraftManager.h"
 #import "FSMusicController.h"
 #import "FSMusicDeatilController.h"
+#import "FSLocalVideoToolController.h"
 
-@interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate,FSToolControllerDelegate>
+@interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate,FSMusicToolControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *recorderButton;
 @property (weak, nonatomic) IBOutlet UITextField *uidTextField;
@@ -222,7 +224,8 @@
     
 //    [self FSPublisherToolViewChooseMusic];
 //    return;
-    FSToolController *toolController = [[FSToolController alloc] init];
+    FSMusicToolController *toolController = [[FSMusicToolController alloc] init];
+    //FSLocalVideoToolController *toolController = [[FSLocalVideoToolController alloc] init];
     [toolController setDelegate:self];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:toolController];
     [self presentViewController:nav animated:YES completion:nil];

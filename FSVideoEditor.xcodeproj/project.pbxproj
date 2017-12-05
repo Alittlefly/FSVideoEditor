@@ -196,6 +196,12 @@
 		984060571EF940810049B58E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 984060561EF940810049B58E /* libc++.tbd */; };
 		984392271F721D9F0010390B /* C02204D0-F3C3-495E-B65C-9F2C79E68573.3.videofx in Resources */ = {isa = PBXBuildFile; fileRef = 984392251F721D9F0010390B /* C02204D0-F3C3-495E-B65C-9F2C79E68573.3.videofx */; };
 		984392281F721D9F0010390B /* C02204D0-F3C3-495E-B65C-9F2C79E68573.lic in Resources */ = {isa = PBXBuildFile; fileRef = 984392261F721D9F0010390B /* C02204D0-F3C3-495E-B65C-9F2C79E68573.lic */; };
+		984669A41FD67C0400AE0F66 /* FSMusicToolController.h in Headers */ = {isa = PBXBuildFile; fileRef = 984669A21FD67C0400AE0F66 /* FSMusicToolController.h */; };
+		984669A51FD67C0400AE0F66 /* FSMusicToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 984669A31FD67C0400AE0F66 /* FSMusicToolController.m */; };
+		984669A61FD67C0400AE0F66 /* FSMusicToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 984669A31FD67C0400AE0F66 /* FSMusicToolController.m */; };
+		984669A91FD683B800AE0F66 /* FSLocalVideoToolController.h in Headers */ = {isa = PBXBuildFile; fileRef = 984669A71FD683B800AE0F66 /* FSLocalVideoToolController.h */; };
+		984669AA1FD683B800AE0F66 /* FSLocalVideoToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 984669A81FD683B800AE0F66 /* FSLocalVideoToolController.m */; };
+		984669AB1FD683B800AE0F66 /* FSLocalVideoToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 984669A81FD683B800AE0F66 /* FSLocalVideoToolController.m */; };
 		98500A0A1F3C9C4800DC2B89 /* libNvConvertorLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98500A061F3C9C4800DC2B89 /* libNvConvertorLib.a */; };
 		98500A0B1F3C9C4800DC2B89 /* libNvStreamingSdkCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98500A071F3C9C4800DC2B89 /* libNvStreamingSdkCore.a */; };
 		98500A0C1F3C9C4800DC2B89 /* libNvStreamingSdkDeps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98500A081F3C9C4800DC2B89 /* libNvStreamingSdkDeps.a */; };
@@ -879,6 +885,10 @@
 		984060561EF940810049B58E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		984392251F721D9F0010390B /* C02204D0-F3C3-495E-B65C-9F2C79E68573.3.videofx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "C02204D0-F3C3-495E-B65C-9F2C79E68573.3.videofx"; sourceTree = "<group>"; };
 		984392261F721D9F0010390B /* C02204D0-F3C3-495E-B65C-9F2C79E68573.lic */ = {isa = PBXFileReference; lastKnownFileType = file; path = "C02204D0-F3C3-495E-B65C-9F2C79E68573.lic"; sourceTree = "<group>"; };
+		984669A21FD67C0400AE0F66 /* FSMusicToolController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSMusicToolController.h; sourceTree = "<group>"; };
+		984669A31FD67C0400AE0F66 /* FSMusicToolController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FSMusicToolController.m; sourceTree = "<group>"; };
+		984669A71FD683B800AE0F66 /* FSLocalVideoToolController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSLocalVideoToolController.h; sourceTree = "<group>"; };
+		984669A81FD683B800AE0F66 /* FSLocalVideoToolController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FSLocalVideoToolController.m; sourceTree = "<group>"; };
 		98500A061F3C9C4800DC2B89 /* libNvConvertorLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvConvertorLib.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/libNvConvertorLib.a; sourceTree = "<group>"; };
 		98500A071F3C9C4800DC2B89 /* libNvStreamingSdkCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvStreamingSdkCore.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/libNvStreamingSdkCore.a; sourceTree = "<group>"; };
 		98500A081F3C9C4800DC2B89 /* libNvStreamingSdkDeps.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvStreamingSdkDeps.a; path = FSVideoEditor/ThirdFramwork/NvStreamingSdk/lib/libNvStreamingSdkDeps.a; sourceTree = "<group>"; };
@@ -1516,6 +1526,8 @@
 				5647BC4E1F04E2D80072B618 /* FSMusicController.m */,
 				567B055B1F271CDB00D09364 /* FSMusicListController.h */,
 				567B055C1F271CDB00D09364 /* FSMusicListController.m */,
+				984669A21FD67C0400AE0F66 /* FSMusicToolController.h */,
+				984669A31FD67C0400AE0F66 /* FSMusicToolController.m */,
 			);
 			path = FSMusicSelector;
 			sourceTree = "<group>";
@@ -1809,6 +1821,8 @@
 				988AC6E71F010B0D007FBCEF /* FSControlVolumeView.m */,
 				987ECEE61F04F92D00221273 /* FSCutMusicView.h */,
 				987ECEE71F04F92D00221273 /* FSCutMusicView.m */,
+				984669A71FD683B800AE0F66 /* FSLocalVideoToolController.h */,
+				984669A81FD683B800AE0F66 /* FSLocalVideoToolController.m */,
 			);
 			path = FSVideoEditors;
 			sourceTree = "<group>";
@@ -2244,6 +2258,7 @@
 				985E87501F54481300292FEF /* FSFileUploadTool.h in Headers */,
 				985E87511F54481300292FEF /* FSDBUploadCache.h in Headers */,
 				985E87521F54481300292FEF /* FSFileCacheProtocol.h in Headers */,
+				984669A41FD67C0400AE0F66 /* FSMusicToolController.h in Headers */,
 				985E87531F54481300292FEF /* FSFileUploadCache.h in Headers */,
 				985E87541F54481300292FEF /* FSUploadCache.h in Headers */,
 				985E87551F54481300292FEF /* FSFileUploadChecker.h in Headers */,
@@ -2262,6 +2277,7 @@
 				985E87611F54481300292FEF /* FSMusicSever.h in Headers */,
 				985E87621F54481300292FEF /* FSMusicManager.h in Headers */,
 				985E87631F54481300292FEF /* FSMusicCollectSever.h in Headers */,
+				984669A91FD683B800AE0F66 /* FSLocalVideoToolController.h in Headers */,
 				985E87641F54481300292FEF /* FSMusic.h in Headers */,
 				985E87651F54481300292FEF /* FSMusicPlayer.h in Headers */,
 				985E87661F54481300292FEF /* FSMusicCell.h in Headers */,
@@ -2632,6 +2648,7 @@
 				567E0B561EF930D100C4C527 /* AppDelegate.m in Sources */,
 				567B058E1F2840EA00D09364 /* FSMusicSearchResultView.m in Sources */,
 				564035571F34227F00C5F036 /* FSDraftController.m in Sources */,
+				984669A51FD67C0400AE0F66 /* FSMusicToolController.m in Sources */,
 				567A3D431EFB66B60026247E /* FSFileSlice.m in Sources */,
 				562D403F1EFBE8A100BF0E0D /* FSLocalEditorController.m in Sources */,
 				562D405D1EFD39F100BF0E0D /* FSPublisherController.m in Sources */,
@@ -2643,6 +2660,7 @@
 				9880DEB51F171295006E730F /* UIButton+WebCache.m in Sources */,
 				5616CC8D1F2B40F700028770 /* MJRefreshAutoStateFooter.m in Sources */,
 				5616CC901F2B40F700028770 /* MJRefreshBackStateFooter.m in Sources */,
+				984669AA1FD683B800AE0F66 /* FSLocalVideoToolController.m in Sources */,
 				5647BC3C1F0272110072B618 /* FSControlView.m in Sources */,
 				983A47881F26215800FB387D /* FSChallengeCell.m in Sources */,
 				983A47831F2620FD00FB387D /* FSAddChallengeController.m in Sources */,
@@ -2773,6 +2791,7 @@
 				985E86F81F54479F00292FEF /* FSLikedMusicAPI.m in Sources */,
 				985E86F91F54479F00292FEF /* FSMusicSearchAPI.m in Sources */,
 				983AC5D21F5813EE00349992 /* FSAddChallengeControl.m in Sources */,
+				984669A61FD67C0400AE0F66 /* FSMusicToolController.m in Sources */,
 				985E86FA1F54479F00292FEF /* FSMusicSever.m in Sources */,
 				985E86FB1F54479F00292FEF /* FSMusicManager.m in Sources */,
 				985E86FC1F54479F00292FEF /* FSMusicCollectSever.m in Sources */,
@@ -2809,6 +2828,7 @@
 				985E87191F54479F00292FEF /* FSEditVideoTool.m in Sources */,
 				985E871A1F54479F00292FEF /* FSLocalEditorController.m in Sources */,
 				985E871B1F54479F00292FEF /* FSVideoFxController.m in Sources */,
+				984669AB1FD683B800AE0F66 /* FSLocalVideoToolController.m in Sources */,
 				985E871C1F54479F00292FEF /* FSThumbnailView.m in Sources */,
 				985E871D1F54479F00292FEF /* FSVideoFxOperationStack.m in Sources */,
 				985E871E1F54479F00292FEF /* FSVirtualTimeLine.m in Sources */,

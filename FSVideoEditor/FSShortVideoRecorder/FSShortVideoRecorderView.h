@@ -29,6 +29,7 @@ typedef enum{
 - (void)FSShortVideoRecorderViewChooseMusic;
 - (void)FSShortVideoRecorderViewShowAlertView:(NSString *)message;
 - (void)FSShortVideoRecorderViewShowFilterView;
+- (void)FSShortVideoRecorderViewEnterLocalVideoView;
 
 @end
 

@@ -16,8 +16,10 @@
 #import "FSDraftManager.h"
 #import "FSMusicPlayer.h"
 #import "FSMusicController.h"
+#import "FSLocalVideoToolController.h"
+#import "FSMusicToolController.h"
 
-@interface FSShortVideoRecorderController ()<FSShortVideoRecorderViewDelegate, FSFilterViewDelegate, FSMusicControllerDelegate>
+@interface FSShortVideoRecorderController ()<FSShortVideoRecorderViewDelegate, FSFilterViewDelegate, FSMusicControllerDelegate,FSMusicToolControllerDelegate>
 {
     FSDraftInfo *_tempInfo;
 }
@@ -170,18 +172,40 @@
 }
 
 - (void)FSShortVideoRecorderViewChooseMusic {
-    FSMusicController *music = [FSMusicController new];
+//    FSMusicController *music = [FSMusicController new];
+//
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:music];
+//    [nav setNavigationBarHidden:YES];
+//
+//   // music.timeLine = _timeLine;
+//    music.pushed = YES;
+//    music.needSelfHeader = YES;
+//    music.shouldReturnMusic = YES;
+//    [music setDelegate:self];
+//
+//    [self presentViewController:nav animated:YES completion:nil];
     
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:music];
-    [nav setNavigationBarHidden:YES];
-    
-   // music.timeLine = _timeLine;
-    music.pushed = YES;
-    music.needSelfHeader = YES;
-    music.shouldReturnMusic = YES;
-    [music setDelegate:self];
-    
+    FSMusicToolController *toolController = [[FSMusicToolController alloc] init];
+    //FSLocalVideoToolController *toolController = [[FSLocalVideoToolController alloc] init];
+    [toolController setDelegate:self];
+    toolController.musicView.pushed = YES;
+    toolController.musicView.needSelfHeader = YES;
+    toolController.musicView.shouldReturnMusic = YES;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:toolController];
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)FSShortVideoRecorderViewEnterLocalVideoView {
+    FSLocalVideoToolController *toolController = [[FSLocalVideoToolController alloc] init];
+    //[toolController setDelegate:self];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:toolController];
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)FSMusicToolVCDidSelectedMusic:(FSMusic *)music filePath:(NSString *)filePath {
+    if (music != nil && filePath.length > 0) {
+        _recorderView.musicFilePath = filePath;
+    }
 }
 
 #pragma mark - FSMusicControllerDelegate

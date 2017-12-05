@@ -119,19 +119,19 @@
     [_contentView addSubview:_resultView];
     
 //    [self initCancleButton];
-    if (!self.cancleButton) {
-        self.cancleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 49, CGRectGetWidth(self.view.bounds), 49)];
-    }
-    
-    [self.cancleButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancle"] forState:(UIControlStateNormal)];
-    [self.cancleButton setBackgroundColor:FSHexRGB(0xffffff)];
-    [self.cancleButton setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
-    [self.cancleButton.layer setShadowOffset:CGSizeMake(0.0, -2.0)];
-    [self.cancleButton.layer setShadowRadius:3.0];
-    [self.cancleButton.layer setShadowColor:FSHexRGBAlpha(0x000000,1.0).CGColor];
-    [self.cancleButton.layer setShadowOpacity:0.1];
-    [self.cancleButton addTarget:self action:@selector(dissmissController) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:self.cancleButton];
+//    if (!self.cancleButton) {
+//        self.cancleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 49, CGRectGetWidth(self.view.bounds), 49)];
+//    }
+//
+//    [self.cancleButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancle"] forState:(UIControlStateNormal)];
+//    [self.cancleButton setBackgroundColor:FSHexRGB(0xffffff)];
+//    [self.cancleButton setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
+//    [self.cancleButton.layer setShadowOffset:CGSizeMake(0.0, -2.0)];
+//    [self.cancleButton.layer setShadowRadius:3.0];
+//    [self.cancleButton.layer setShadowColor:FSHexRGBAlpha(0x000000,1.0).CGColor];
+//    [self.cancleButton.layer setShadowOpacity:0.1];
+//    [self.cancleButton addTarget:self action:@selector(dissmissController) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.view addSubview:self.cancleButton];
     
     _currentType = FSMusicButtonTypeHot;
      _sever = [[FSMusicSever alloc] init];

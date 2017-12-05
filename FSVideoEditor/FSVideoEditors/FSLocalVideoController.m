@@ -40,8 +40,13 @@
     [super viewWillLayoutSubviews];
     [_videoListView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 49)];
     
-    [self.cancleButton setFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 49, CGRectGetWidth(self.view.bounds), 49)];
+   // [self.cancleButton setFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 49, CGRectGetWidth(self.view.bounds), 49)];
 }
+
+- (void)enterEditView {
+    [_videoListView enterEditView];
+}
+
 #pragma mark - 
 -(void)videoListView:(FSVideoListView *)videoListView didSelectedVideo:(PHAsset *)video{
     
@@ -67,6 +72,21 @@
     }
 }
 
+- (void)videoListViewDidChooseOneVideo {
+    if ([self.delegate respondsToSelector:@selector(FSLocalVideoControllerDidChooseOneVideo)]) {
+        [self.delegate FSLocalVideoControllerDidChooseOneVideo];
+    }
+}
+
+- (void)enterSettingPage {
+    NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    
+    if([[UIApplication sharedApplication] canOpenURL:url]) {
+        
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
 -(void)localPhotoManager:(FSLocalPhotoManager *)manager authorizedStatus:(PHAuthorizationStatus)status{
     dispatch_async(dispatch_get_main_queue(), ^{
         if (status != PHAuthorizationStatusAuthorized) {
@@ -82,14 +102,31 @@
             [notAuthoredLabel setText:text];
             [notAuthoredLabel setBackgroundColor:[UIColor clearColor]];
             CGRect labelSize = [text boundingRectWithSize:CGSizeMake(255, MAXFLOAT) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0]} context:nil];
-            [notAuthoredLabel setFrame:CGRectMake((CGRectGetWidth(self.view.bounds) - CGRectGetWidth(labelSize))/2.0, (CGRectGetHeight(self.view.bounds) - CGRectGetHeight(labelSize))/2.0,CGRectGetWidth(labelSize), CGRectGetHeight(labelSize))];
+            [notAuthoredLabel setFrame:CGRectMake((CGRectGetWidth(self.view.bounds) - CGRectGetWidth(labelSize))/2.0, (CGRectGetHeight(self.view.bounds) - CGRectGetHeight(labelSize)-40-40)/2.0,CGRectGetWidth(labelSize), CGRectGetHeight(labelSize))];
             [self.view addSubview:notAuthoredLabel];
+            
+            UIButton *enterSettingView = [UIButton buttonWithType:UIButtonTypeCustom];
+            enterSettingView.frame = CGRectMake((CGRectGetWidth(self.view.bounds)-150)/2, CGRectGetMaxY(notAuthoredLabel.frame)+40, 150, 40);
+            enterSettingView.backgroundColor = FSHexRGB(0x0BC2C6);
+            enterSettingView.layer.cornerRadius = 5;
+            enterSettingView.layer.masksToBounds = YES;
+            [enterSettingView setTitle:@"Open" forState:UIControlStateNormal];
+            [enterSettingView setTitleColor:FSHexRGB(0xFFFFFF) forState:UIControlStateNormal];
+            [enterSettingView addTarget:self action:@selector(enterSettingPage) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:enterSettingView];
         }
     });
 }
+
 -(void)localPhotoManager:(FSLocalPhotoManager *)manager localVideos:(NSArray*)assets{
     [_videoListView setHidden:NO];
-    [_videoListView setVideos:assets];
+    NSMutableArray *videoArray = [NSMutableArray arrayWithCapacity:0];
+    for (PHAsset *asset in assets) {
+        if (asset.duration >= 5) {
+            [videoArray addObject:asset];
+        }
+    }
+    [_videoListView setVideos:videoArray];
 }
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));

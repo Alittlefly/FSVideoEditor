@@ -225,7 +225,7 @@
 
     _cutMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _cutMusicButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, CGRectGetMaxY(_finishButton.frame)+30, 40, 40) : CGRectMake(CGRectGetWidth(self.frame) - 15 -40, CGRectGetMaxY(_finishButton.frame)+30, 40, 40);
-    [_cutMusicButton setImage:[UIImage imageNamed:@"recorder-cut"] forState:UIControlStateNormal];
+    [_cutMusicButton setImage:[UIImage imageNamed:@"icon_music"] forState:UIControlStateNormal];
     [_cutMusicButton addTarget:self action:@selector(cutMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_cutMusicButton];
     
@@ -367,20 +367,22 @@
     [_deleteButton setImage:[UIImage imageNamed:@"recorder-delete"] forState:UIControlStateNormal];
     [_deleteButton addTarget:self action:@selector(deleteVideo) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_deleteButton];
-    if (_draftInfo.recordVideoPathArray.count > 0) {
-        _deleteButton.hidden = NO;
-    }
-    else {
-        _deleteButton.hidden = YES;
-    }
     
     _faceUButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _faceUButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_recorderButton.frame)+40, 0, 50, 50) : CGRectMake(CGRectGetMinX(_recorderButton.frame)-40-50, 0, 50, 50);
     _faceUButton.center = CGPointMake(_faceUButton.center.x, _recorderButton.center.y);
     [_faceUButton setImage:[UIImage imageNamed:@"recorder-faceu"] forState:UIControlStateNormal];
     [_faceUButton addTarget:self action:@selector(faceuClick) forControlEvents:UIControlEventTouchUpInside];
-    _faceUButton.hidden = NO;
     [self addSubview:_faceUButton];
+    
+    if (_draftInfo.recordVideoPathArray.count > 0) {
+        _deleteButton.hidden = NO;
+        _faceUButton.hidden = YES;
+    }
+    else {
+        _deleteButton.hidden = YES;
+        _faceUButton.hidden = NO;
+    }
     
     _segmentView = [[FSSegmentView alloc] initWithItems:@[[FSShortLanguage CustomLocalizedStringFromTable:@"VerySlow"],[FSShortLanguage CustomLocalizedStringFromTable:@"Slow"],[FSShortLanguage CustomLocalizedStringFromTable:@"Normal"],[FSShortLanguage CustomLocalizedStringFromTable:@"Fast"],[FSShortLanguage CustomLocalizedStringFromTable:@"VeryFast"]]];
     _segmentView.frame = CGRectMake(30, CGRectGetMinY(_recorderButton.frame)-15-40, CGRectGetWidth(self.frame)-60, 40);
@@ -644,12 +646,13 @@
     _beautyLabel.hidden = NO;
     _countdownLabel.hidden = NO;
     _recorderButton.hidden = NO;
-    _faceUButton.hidden = YES;
     if (_currentVideoTime == 0) {
         _deleteButton.hidden = YES;
+        _faceUButton.hidden = NO;
     }
     else {
         _deleteButton.hidden = NO;
+        _faceUButton.hidden = YES;
     }
     _segmentView.hidden = NO;
     _isOpenFilterView = NO;
@@ -917,7 +920,9 @@
 }
 
 - (void)faceuClick {
-
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewEnterLocalVideoView)]) {
+        [self.delegate FSShortVideoRecorderViewEnterLocalVideoView];
+    }
 }
 
 - (void)FSSegmentView:(FSSegmentView *)segmentView selected:(NSInteger)index {
@@ -1088,6 +1093,7 @@
     
     if (videoTime <= 0.0) {
         _deleteButton.hidden = YES;
+        _faceUButton.hidden = NO;
         if (_musicFilePath != nil && _musicFilePath.length > 0) {
             _cutMusicButton.enabled = YES;
         }

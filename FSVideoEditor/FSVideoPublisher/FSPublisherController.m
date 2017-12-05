@@ -40,13 +40,14 @@
 #import "FSVideoPublisher.h"
 #import "FSShortLanguage.h"
 #import "FSLocalPhotoManager.h"
+#import "FSMusicToolController.h"
 
 typedef NS_ENUM(NSInteger,FSPublishOperationType){
     FSPublishOperationTypeSaveToDraft,
     FSPublishOperationTypePublishToNet,
 };
 
-@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSShortVideoRecorderManagerDelegate, FSChallengeControllerDelegate,FSVideoPublisherDelegate>
+@interface FSPublisherController ()<NvsStreamingContextDelegate,UINavigationControllerDelegate,FSPublisherToolViewDelegate,FSFilterViewDelegate, FSControlVolumeViewDelegate, FSCutMusicViewDelegate,FSVideoFxControllerDelegate,FSMusicControllerDelegate, FSShortVideoRecorderManagerDelegate, FSChallengeControllerDelegate,FSVideoPublisherDelegate,FSMusicToolControllerDelegate>
 {
     
     CGFloat _scoreVolume;
@@ -560,17 +561,27 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     [_context stop];
     
-    FSMusicController *music = [FSMusicController new];
-
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:music];
-    [nav setNavigationBarHidden:YES];
+//    FSMusicController *music = [FSMusicController new];
+//
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:music];
+//    [nav setNavigationBarHidden:YES];
+//
+//    music.timeLine = _timeLine;
+//    music.pushed = YES;
+//    music.needSelfHeader = YES;
+//    music.shouldReturnMusic = YES;
+//    [music setDelegate:self];
     
-    music.timeLine = _timeLine;
-    music.pushed = YES;
-    music.needSelfHeader = YES;
-    music.shouldReturnMusic = YES;
-    [music setDelegate:self];
+//    [self presentViewController:nav animated:YES completion:nil];
     
+    FSMusicToolController *toolController = [[FSMusicToolController alloc] init];
+    //FSLocalVideoToolController *toolController = [[FSLocalVideoToolController alloc] init];
+    [toolController setDelegate:self];
+    toolController.musicView.timeLine = _timeLine;
+    toolController.musicView.pushed = YES;
+    toolController.musicView.needSelfHeader = YES;
+    toolController.musicView.shouldReturnMusic = YES;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:toolController];
     [self presentViewController:nav animated:YES completion:nil];
 }
 
@@ -641,6 +652,11 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 - (void)FSPublisherToolViewChangeVideoDescription:(NSString *)description {
     _tempDraftInfo.vTitle = description;
+}
+
+#pragma mark - FSMusicToolControllerDelegate
+- (void)FSMusicToolVCDidSelectedMusic:(FSMusic *)music filePath:(NSString *)filePath {
+    [self musicControllerSelectMusic:filePath music:music];
 }
 
 #pragma mark - 

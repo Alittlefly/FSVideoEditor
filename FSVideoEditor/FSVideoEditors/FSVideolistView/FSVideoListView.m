@@ -8,8 +8,10 @@
 
 #import "FSVideoListView.h"
 #import "FSAlbumVideoCell.h"
+#import "FSAlertView.h"
 @interface FSVideoListView ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 @property(nonatomic,strong)UICollectionView *contentView;
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @end
 @implementation FSVideoListView
 -(UICollectionView *)contentView{
@@ -30,6 +32,7 @@
 }
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        _selectedIndexPath = nil;
         [self addSubview:self.contentView];
     }
     return self;
@@ -46,6 +49,18 @@
     [self.contentView reloadData];
 
 }
+
+- (void)enterEditView {
+    if (!_selectedIndexPath) {
+        FSAlertView *alertView = [[FSAlertView alloc] init];
+        [alertView showWithMessage:@"Please select a video!"];
+        return;
+    }
+    if ([self.delegate respondsToSelector:@selector(videoListView:didSelectedVideo:)]) {
+        [self.delegate videoListView:self didSelectedVideo:[_videos objectAtIndex:_selectedIndexPath.row]];
+    }
+}
+
 #pragma mark -
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return [_videos count];
@@ -58,8 +73,20 @@
 
 #pragma mark -
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.delegate respondsToSelector:@selector(videoListView:didSelectedVideo:)]) {
-        [self.delegate videoListView:self didSelectedVideo:[_videos objectAtIndex:indexPath.row]];
+    if (_selectedIndexPath) {
+        FSAlbumVideoCell *cell = (FSAlbumVideoCell*)[collectionView cellForItemAtIndexPath:_selectedIndexPath];
+        cell.layer.borderColor = [UIColor clearColor].CGColor;
+        cell.layer.borderWidth = 0;
+        cell.layer.masksToBounds = YES;
+    }
+    FSAlbumVideoCell *cell = (FSAlbumVideoCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.layer.borderColor = [UIColor redColor].CGColor;
+    cell.layer.borderWidth = 2;
+    cell.layer.masksToBounds = YES;
+    _selectedIndexPath = indexPath;
+    
+    if ([self.delegate respondsToSelector:@selector(videoListViewDidChooseOneVideo)]) {
+        [self.delegate videoListViewDidChooseOneVideo];
     }
 }
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{

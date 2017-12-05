@@ -10,6 +10,14 @@
 #import "FSVideoListView.h"
 #import "FSCancleController.h"
 
+@protocol FSLocalVideoControllerDelegate <NSObject>
+- (void)FSLocalVideoControllerDidChooseOneVideo;
+
+@end
+
 @interface FSLocalVideoController : FSCancleController<FSVideoListViewDelegate>
+@property (nonatomic, weak) id<FSLocalVideoControllerDelegate> delegate;
+
+- (void)enterEditView;
 
 @end
