@@ -371,7 +371,7 @@
     _faceUButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _faceUButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_recorderButton.frame)+40, 0, 50, 50) : CGRectMake(CGRectGetMinX(_recorderButton.frame)-40-50, 0, 50, 50);
     _faceUButton.center = CGPointMake(_faceUButton.center.x, _recorderButton.center.y);
-    [_faceUButton setImage:[UIImage imageNamed:@"recorder-faceu"] forState:UIControlStateNormal];
+    [_faceUButton setImage:[UIImage imageNamed:@"icon_photo"] forState:UIControlStateNormal];
     [_faceUButton addTarget:self action:@selector(faceuClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_faceUButton];
     
