@@ -15,17 +15,19 @@
 
 @property(nonatomic,strong)UIView *contentView;
 
+@property(nonatomic,assign)NvsTimeline *timeLine;
+@property(nonatomic,assign)BOOL pushed;
+@property(nonatomic,assign)BOOL shouldReturnMusic;
+
 @end
 
 @implementation FSMusicToolController
 
-- (instancetype)init {
+- (instancetype)initWithTimeLine:(NvsTimeline *)timeLine returnMusic:(BOOL)shouldReturnMusic isPushed:(BOOL)pushed {
     if (self = [super init]) {
-        _musicView = [[FSMusicController alloc] init];
-        [_musicView setDelegate:self];
-        [self addChildViewController:_musicView];
-        [_musicView.view setFrame:CGRectMake(0, 55, CGRectGetWidth(self.view.bounds), CGRectGetHeight(_contentView.frame)  - 20)];
-
+        _timeLine = timeLine;
+        _pushed = pushed;
+        _shouldReturnMusic = shouldReturnMusic;
     }
     return self;
 }
@@ -40,8 +42,10 @@
     [_contentView.layer setMasksToBounds:YES];
     [self.view addSubview:_contentView];
     
+//    [_musicView.view setFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(_contentView.frame)+55)];
+
     
-    NSString *backText = [FSShortLanguage CustomLocalizedStringFromTable:@"Record"];
+    NSString *backText = [FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"];
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:15.0]};
     CGRect newSize = [backText boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
     CGFloat textW = CGRectGetWidth(newSize);
@@ -72,6 +76,20 @@
     
         
     [_contentView addSubview:_musicView.view];
+    
+    if (!_musicView) {
+        
+        _musicView = [[FSMusicController alloc] init];
+        [_musicView setDelegate:self];
+        _musicView.timeLine = _timeLine;
+        _musicView.pushed = YES;
+        _musicView.shouldReturnMusic = YES;
+        [self addChildViewController:_musicView];
+        
+        [_musicView.view setFrame:CGRectMake(0, 55, CGRectGetWidth(self.view.bounds), CGRectGetHeight(_contentView.frame)  - 20)];
+        [_contentView addSubview:_musicView.view];
+        
+    }
         
     
     [self.view setBackgroundColor:[UIColor clearColor]];
@@ -102,8 +120,8 @@
     
     UIViewController *deatilController = nil;
     
-    if ([self.delegate respondsToSelector:@selector(musicDetailControllerWithMusic:)]) {
-        deatilController = [self.delegate musicDetailControllerWithMusic:music];
+    if ([self.delegate respondsToSelector:@selector(FSMusicToolVCDidShowMusicDetailWithMusic:)]) {
+        deatilController = [self.delegate FSMusicToolVCDidShowMusicDetailWithMusic:music];
     }
     
     NSAssert(![deatilController isKindOfClass:[UINavigationController class]], @"返回的控制器不能为nav");

@@ -277,11 +277,11 @@
     });
 }
 
-- (void)FSPublisherServerSucceed {
+- (void)FSPublisherServerSucceed:(NSString *)fileUrl {
     
     NSLog(@"完成发布视频: -----");
-    if ([self.delegate respondsToSelector:@selector(videoPublisherSuccess)]) {
-        [self.delegate videoPublisherSuccess];
+    if ([self.delegate respondsToSelector:@selector(videoPublisherSuccess:)]) {
+        [self.delegate videoPublisherSuccess:fileUrl];
     }
     self.currentParam = nil;
     
@@ -307,5 +307,9 @@
         
         [[FSDraftManager sharedManager] delete:self.currentParam.draftInfo];
     }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillTerminateNotification object:nil];
 }
 @end

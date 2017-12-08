@@ -41,9 +41,25 @@
     [_tempInfo clearFxInfos];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:@"kNSNotificationInhoneDidBecomeActive" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requireMusicDetailVC:) name:@"kNSNotificationRequireMusicDetailVC" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quitRecorderView) name:@"kNSNoticeficationUploadShortVideoSucceed" object:nil];
 
     
 }
+
+- (void) quitRecorderView {
+    if (_isPresented) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
+    else {
+        if ([[self.navigationController childViewControllers] count] == 1) {
+            [self dismissViewControllerAnimated:NO completion:nil];
+        }else{
+            [self.navigationController popViewControllerAnimated:NO];
+        }
+    }
+    
+    [[FSDraftManager sharedManager] cancleOperate];}
 
 - (void)becomeActive {
     if (_recorderView &&  _isCurrentView) {
@@ -237,12 +253,44 @@
     }
 }
 
+-(UIViewController *)FSMusicToolVCDidShowMusicDetailWithMusic:(FSMusic *)music{
+    
+    UIViewController *deatilController = nil;
+    
+    if ([self.delegate respondsToSelector:@selector(FSShortVideoShowMusicDetailWithMusic:)]) {
+        deatilController = [self.delegate FSShortVideoShowMusicDetailWithMusic:music];
+    }
+    
+    NSAssert(![deatilController isKindOfClass:[UINavigationController class]], @"返回的控制器不能为nav");
+    return deatilController;
+}
+
+- (void)requireMusicDetailVC:(NSNotification *)noti {
+    NSDictionary *dict = noti.object;
+
+    FSMusic *music = [FSMusic new];
+    music.songId = [[dict objectForKey:@"songId"] integerValue];
+    music.songAuthor = [dict objectForKey:@"songAuthor"];
+    music.songPic = [dict objectForKey:@"songPic"];
+    music.songTitle = [dict objectForKey:@"songTitle"];
+    music.songUrl = [dict objectForKey:@"songUrl"];
+    
+    UIViewController *deatilController = [self FSMusicToolVCDidShowMusicDetailWithMusic:music];
+    if (deatilController) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kNSNoticeficationGetMusicDetailVCSucceed" object:[NSDictionary dictionaryWithObject:deatilController forKey:@"musicDeatilController"]];
+
+    }
+    
+}
+
 - (void)musicControllerHideen {
 }
 
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNSNotificationInhoneDidBecomeActive" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNSNotificationRequireMusicDetailVC" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNSNoticeficationUploadShortVideoSucceed" object:nil];
 }
 
 @end

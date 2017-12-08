@@ -27,9 +27,9 @@
 }
 
 #pragma mark - FSPublisherAPIDelegate
-- (void)FSPublisherAPISucceed {
-    if ([self.delegate respondsToSelector:@selector(FSPublisherServerSucceed)]) {
-        [self.delegate FSPublisherServerSucceed];
+- (void)FSPublisherAPISucceed:fileUrl {
+    if ([self.delegate respondsToSelector:@selector(FSPublisherServerSucceed:)]) {
+        [self.delegate FSPublisherServerSucceed:fileUrl];
     }
 }
 

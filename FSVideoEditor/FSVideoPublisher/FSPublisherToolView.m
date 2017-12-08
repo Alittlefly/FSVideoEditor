@@ -299,6 +299,13 @@
     else {
         _isShareToFacebook = YES;
         [_facebookButton setImage:[UIImage imageNamed:@"icon_facebook"] forState:UIControlStateNormal];
+        if (_isShareToTwitter) {
+            _isShareToTwitter = NO;
+            [_twitterButton setImage:[UIImage imageNamed:@"icon_twitter_unselected"] forState:UIControlStateNormal];
+        }
+        if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewSharedType:)]) {
+            [self.delegate FSPublisherToolViewSharedType:1];
+        }
     }
 }
 
@@ -310,6 +317,14 @@
     else {
         _isShareToTwitter = YES;
         [_twitterButton setImage:[UIImage imageNamed:@"icon_twitter"] forState:UIControlStateNormal];
+        if (_isShareToFacebook) {
+            _isShareToFacebook = NO;
+            [_facebookButton setImage:[UIImage imageNamed:@"icon_facebook_unselected"] forState:UIControlStateNormal];
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewSharedType:)]) {
+            [self.delegate FSPublisherToolViewSharedType:2];
+        }
     }
 }
 
@@ -456,6 +471,10 @@
 
 - (void)dealloc{
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+
 }
 
 @end

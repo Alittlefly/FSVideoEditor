@@ -38,8 +38,9 @@
         
         NSInteger code = [[responseObject valueForKey:@"code"] integerValue];
         if (code == 0) {
-            if ([weakS.delegate respondsToSelector:@selector(FSPublisherAPISucceed)]) {
-                [weakS.delegate FSPublisherAPISucceed];
+            NSString *url = [responseObject valueForKey:@"dataInfo"];
+            if ([weakS.delegate respondsToSelector:@selector(FSPublisherAPISucceed:)]) {
+                [weakS.delegate FSPublisherAPISucceed:url];
             }
         }else{
             if ([weakS.delegate respondsToSelector:@selector(FSPublisherAPIFailed:)]) {

@@ -10,7 +10,18 @@
 #import "FSShortLanguage.h"
 
 @class FSDraftInfo;
+@class FSMusic;
+
+@protocol FSShortVideoRecorderControllerDelegate <NSObject>
+
+@optional
+-(UIViewController *)FSShortVideoShowMusicDetailWithMusic:(FSMusic *)music;
+
+@end
+
 @interface FSShortVideoRecorderController : UIViewController
+
+@property (nonatomic, weak) id<FSShortVideoRecorderControllerDelegate> delegate;
 
 @property (nonatomic, assign) BOOL isPresented;
 

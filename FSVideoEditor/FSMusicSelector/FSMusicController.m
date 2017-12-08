@@ -75,23 +75,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMusicDetailVC:) name:@"kNSNoticeficationGetMusicDetailVCSucceed" object:nil];
+
     if (_needSelfHeader) {
-        _contentViewWhenNeedSelfHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 20,CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
-        [_contentViewWhenNeedSelfHeader setBackgroundColor:[UIColor whiteColor]];
-        [_contentViewWhenNeedSelfHeader.layer setCornerRadius:5.0];
-        [_contentViewWhenNeedSelfHeader.layer setMasksToBounds:YES];
-        [self.view addSubview:_contentViewWhenNeedSelfHeader];
-        
-        
-        UIButton *selectMusic = [UIButton buttonWithType:UIButtonTypeCustom];
-        selectMusic.frame = CGRectMake((CGRectGetWidth(self.view.frame) - 60)/2.0, 17, 60, 21);
-        [selectMusic setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"ChooseMusic"] forState:UIControlStateNormal];
-        selectMusic.tag = 2;
-        [selectMusic setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
-        [selectMusic setTitleColor:FSHexRGB(0x010A12) forState:(UIControlStateSelected)];
-        [selectMusic.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
-        [selectMusic setSelected:YES];
-        [_contentViewWhenNeedSelfHeader addSubview:selectMusic];
+//        _contentViewWhenNeedSelfHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 20,CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
+//        [_contentViewWhenNeedSelfHeader setBackgroundColor:[UIColor whiteColor]];
+//        [_contentViewWhenNeedSelfHeader.layer setCornerRadius:5.0];
+//        [_contentViewWhenNeedSelfHeader.layer setMasksToBounds:YES];
+//        [self.view addSubview:_contentViewWhenNeedSelfHeader];
+//        
+//        
+//        UIButton *selectMusic = [UIButton buttonWithType:UIButtonTypeCustom];
+//        selectMusic.frame = CGRectMake((CGRectGetWidth(self.view.frame) - 60)/2.0, 17, 60, 21);
+//        [selectMusic setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"ChooseMusic"] forState:UIControlStateNormal];
+//        selectMusic.tag = 2;
+//        [selectMusic setTitleColor:FSHexRGB(0x73747B) forState:(UIControlStateNormal)];
+//        [selectMusic setTitleColor:FSHexRGB(0x010A12) forState:(UIControlStateSelected)];
+//        [selectMusic.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+//        [selectMusic setSelected:YES];
+//        [_contentViewWhenNeedSelfHeader addSubview:selectMusic];
     }
     
     
@@ -262,17 +264,29 @@
         [self clickFaveDeatil];
     }
     
-    if (self.shouldReturnMusic) {
-        return;
-    }
+    NSDictionary *musicDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",music.songId], @"songId", music.songAuthor, @"songAuthor", music.songPic, @"songPic", music.songTitle, @"songTitle", music.songUrl, @"songUrl", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kNSNotificationRequireMusicDetailVC" object:musicDic];
     
-    if ([self.delegate respondsToSelector:@selector(musicControllerWouldShowMusicDetail:)]) {
-        UIViewController *viewController = [self.delegate musicControllerWouldShowMusicDetail:music];
-        if (viewController) {
-            [self.navigationController pushViewController:viewController animated:YES];
-        }
+//    if (self.shouldReturnMusic) {
+//        return;
+//    }
+    
+//    if ([self.delegate respondsToSelector:@selector(musicControllerWouldShowMusicDetail:)]) {
+//        UIViewController *viewController = [self.delegate musicControllerWouldShowMusicDetail:music];
+//        if (viewController) {
+//            [self.navigationController pushViewController:viewController animated:YES];
+//        }
+//    }
+}
+
+- (void)showMusicDetailVC:(NSNotification *)noti {
+    NSDictionary *dic = noti.object;
+    UIViewController *viewController = [dic objectForKey:@"musicDeatilController"];
+    if (viewController) {
+        [self.navigationController pushViewController:viewController animated:YES];
     }
 }
+
 -(void)musicListWouldGetMoreData:(FSMusicListView *)listView{
     [_searchBar endEditing:YES];
     if (listView.tag == 10) {
@@ -461,6 +475,7 @@
 }
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNSNoticeficationGetMusicDetailVCSucceed" object:nil];
 }
 
 @end

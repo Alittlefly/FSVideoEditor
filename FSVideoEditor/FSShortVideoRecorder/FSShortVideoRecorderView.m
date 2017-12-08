@@ -228,13 +228,19 @@
     [_cutMusicButton setImage:[UIImage imageNamed:@"icon_music"] forState:UIControlStateNormal];
     [_cutMusicButton addTarget:self action:@selector(cutMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_cutMusicButton];
+    if (_draftInfo.recordVideoPathArray.count > 0) {
+        _cutMusicButton.enabled = NO;
+    }
+    else {
+        _cutMusicButton.enabled = YES;
+    }
     
     
     BOOL isShowChooseMusicTip = [[NSUserDefaults standardUserDefaults] boolForKey:@"IsShowChooseMusicTip"];
     if (!isShowChooseMusicTip) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsShowChooseMusicTip"];
         
-        _chooseMusicTip = [[UILabel alloc] initWithFrame:[FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(27, 10, 223-27-15, 0):CGRectMake(15, 10, 223-27-15, 0)];
+        _chooseMusicTip = [[UILabel alloc] initWithFrame:[FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(27, 15, 223-27-15, 0):CGRectMake(15, 15, 223-27-15, 0)];
         _chooseMusicTip.textColor = FSHexRGB(0x999999);
         _chooseMusicTip.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight:NSTextAlignmentLeft;
         _chooseMusicTip.font = [UIFont systemFontOfSize:13];
@@ -247,13 +253,17 @@
         CGFloat chooseMusicTipHeight = _chooseMusicTip.frame.size.height;
         UIImage * backImage;
         backImage = [UIImage imageNamed:@"chatfrom_bg_normal"];
-        backImage = [backImage resizableImageWithCapInsets:UIEdgeInsetsMake(10, 30, 10, 37) resizingMode:UIImageResizingModeStretch];
-        _choosMusicTipBg = [[UIImageView alloc] initWithFrame:[FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_cutMusicButton.frame), _cutMusicButton.center.y-(chooseMusicTipHeight+20)/2, 223, (chooseMusicTipHeight+20)):CGRectMake(CGRectGetMinX(_cutMusicButton.frame)-223, _cutMusicButton.center.y-(chooseMusicTipHeight+20)/2, 223, (chooseMusicTipHeight+20)) ];
+        backImage = [backImage resizableImageWithCapInsets:UIEdgeInsetsMake(15, 30, 15, 37) resizingMode:UIImageResizingModeStretch];
+        _choosMusicTipBg = [[UIImageView alloc] initWithFrame:[FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_cutMusicButton.frame), _cutMusicButton.center.y-(chooseMusicTipHeight+30)/2, 223, (chooseMusicTipHeight+30)):CGRectMake(CGRectGetMinX(_cutMusicButton.frame)-223, _cutMusicButton.center.y-(chooseMusicTipHeight+30)/2, 223, (chooseMusicTipHeight+30)) ];
         _choosMusicTipBg.image = backImage;
         [self addSubview:_choosMusicTipBg];
         [_choosMusicTipBg addSubview:_chooseMusicTip];
         
-         [self performSelector:@selector(hiddenChooseMusicTip) withObject:nil afterDelay:3.0];
+        if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+            _choosMusicTipBg.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        }
+        
+       //  [self performSelector:@selector(hiddenChooseMusicTip) withObject:nil afterDelay:3.0];
     }
    
     
@@ -354,7 +364,7 @@
     
     _recorderButton = [[FSMoveButton alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.frame)-90)/2, CGRectGetHeight(self.frame)-25-90, 90, 90)];
     _recorderButton.backgroundColor = [UIColor clearColor];
-    [_recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
+    [_recorderButton setImage:[UIImage imageNamed:@"icon_recorder_start"] forState:UIControlStateNormal];
 //    [_recorderButton addTarget:self action:@selector(pauseRecorder) forControlEvents:UIControlEventTouchUpInside];
 //    [_recorderButton addTarget:self action:@selector(startRecorder) forControlEvents:UIControlEventTouchDown];
     _recorderButton.delegate = self;
@@ -750,6 +760,8 @@
     }
     
     if (!_isAutoRecorder) {
+        [self.recorderButton.layer removeAllAnimations];
+
         [self.recorderButton setImage:[[UIImage alloc] init] forState:UIControlStateNormal];
         self.recorderButton.layer.cornerRadius = self.recorderButton.frame.size.width/2;
         self.recorderButton.layer.masksToBounds =YES;
@@ -759,14 +771,17 @@
             
             [self.recorderButton.layer addAnimation:[self alphaLight:0.5 fromValue:50.0f toValue:10.0f] forKey:@"aAlpha1"];
             self.recorderButton.layer.borderColor = FSHexRGB(0xFFFFFF).CGColor;
+            NSLog(@"addAnimationForKey:aAlpha1");
+
   
         } completion:^(BOOL finished) {
         
-            [self.recorderButton.layer removeAnimationForKey:@"aAlpha1"];
-            
-            [self.recorderButton.layer addAnimation:[self alphaLight:0.7 fromValue:5.0f toValue:10.0f] forKey:@"aAlpha2"];
-            self.recorderButton.layer.borderColor = FSHexRGB(0xFFFFFF).CGColor;
-
+            if (finished) {
+                [self.recorderButton.layer removeAnimationForKey:@"aAlpha1"];
+                
+                [self.recorderButton.layer addAnimation:[self alphaLight:0.7 fromValue:5.0f toValue:10.0f] forKey:@"aAlpha2"];
+                self.recorderButton.layer.borderColor = FSHexRGB(0xFFFFFF).CGColor;
+            }
         }];
 
     }
@@ -829,7 +844,7 @@
     
     if (!_isAutoRecorder) {
             
-        [self.recorderButton.layer removeAnimationForKey:@"aAlpha2"];
+        [self.recorderButton.layer removeAllAnimations];
         
         [UIView animateWithDuration:0.3 animations:^{
             self.recorderButton.transform =  CGAffineTransformMakeScale(1.0,1.0);
@@ -838,15 +853,17 @@
             self.recorderButton.layer.borderColor = FSHexRGB(0xFFFFFF).CGColor;
             
         } completion:^(BOOL finished) {
-            
-            [self.recorderButton.layer removeAnimationForKey:@"aAlpha3"];
-            [self.recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
+
+            if (finished) {
+                [self.recorderButton.layer removeAnimationForKey:@"aAlpha3"];
+                [self.recorderButton setImage:[UIImage imageNamed:@"icon_recorder_start"] forState:UIControlStateNormal];
+            }
             
         }];
     }
     else {
         _isAutoRecorder = NO;
-        [self.recorderButton setImage:[UIImage imageNamed:@"recorder-start"] forState:UIControlStateNormal];
+        [self.recorderButton setImage:[UIImage imageNamed:@"icon_recorder_start"] forState:UIControlStateNormal];
     }
 }
 
@@ -1094,9 +1111,8 @@
     if (videoTime <= 0.0) {
         _deleteButton.hidden = YES;
         _faceUButton.hidden = NO;
-        if (_musicFilePath != nil && _musicFilePath.length > 0) {
-            _cutMusicButton.enabled = YES;
-        }
+        _cutMusicButton.enabled = YES;
+        
     }
 }
 

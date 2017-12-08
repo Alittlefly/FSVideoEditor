@@ -21,6 +21,7 @@
 #import "FSMusicController.h"
 #import "FSMusicDeatilController.h"
 #import "FSLocalVideoToolController.h"
+#import "FSShortVideoRecorderController.h"
 
 @interface ViewController ()<UITextFieldDelegate, FSLoginServerDelegate, UIAlertViewDelegate,FSMusicToolControllerDelegate>
 
@@ -53,7 +54,7 @@
     [super viewDidLoad];
 
 //    @"http://haahi.7najm.com:10000/";
-    [FSPublishSingleton sharedInstance].addressAPI = @"https://www.7nujoom.com/";
+    [FSPublishSingleton sharedInstance].addressAPI = @"http://www.7najm.com/";
     [FSPublishSingleton sharedInstance].language =@"en";
     [FSPublishSingleton sharedInstance].isAutoReverse = NO;
     
@@ -224,9 +225,10 @@
     
 //    [self FSPublisherToolViewChooseMusic];
 //    return;
-    FSMusicToolController *toolController = [[FSMusicToolController alloc] init];
+   // FSMusicToolController *toolController = [[FSMusicToolController alloc] init];
     //FSLocalVideoToolController *toolController = [[FSLocalVideoToolController alloc] init];
-    [toolController setDelegate:self];
+    FSShortVideoRecorderController *toolController = [[FSShortVideoRecorderController alloc] init];
+   // [toolController setDelegate:self];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:toolController];
     [self presentViewController:nav animated:YES completion:nil];
 }

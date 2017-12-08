@@ -83,7 +83,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 @property (nonatomic, assign) BOOL isStickerVideoFinished;
 @property (nonatomic, copy) NSString *uploadVideoPath;
 @property (nonatomic, strong) NvsTimeline *timeLine;
-
+@property (nonatomic, assign) NSInteger sharedType;
 
 @end
 
@@ -654,6 +654,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     _tempDraftInfo.vTitle = description;
 }
 
+- (void)FSPublisherToolViewSharedType:(NSInteger)type {
+    _sharedType = type;
+}
+
 #pragma mark - FSMusicToolControllerDelegate
 - (void)FSMusicToolVCDidSelectedMusic:(FSMusic *)music filePath:(NSString *)filePath {
     [self musicControllerSelectMusic:filePath music:music];
@@ -851,8 +855,10 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     NSLog(@"发布视频:更新进度:%f",progress);
     [self.loading setLoadingText:[NSString stringWithFormat:@"%.0f%%",MIN(progress * 100.0,100.0)]];
 }
--(void)videoPublisherSuccess{
+-(void)videoPublisherSuccess:(NSString *)fileUrl {
     [self.loading loadingViewhide];
+    UIImage *firstImg = [[UIImage alloc] init];
+    firstImg = _param.firstImageData;
     
     [[FSPublishSingleton sharedInstance] cleanData];
     [[FSDraftManager sharedManager] delete:_draftInfo];
@@ -862,9 +868,13 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     [self showMessage:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadSecceed"]];
     
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    
+    NSDictionary *pushInfo = [NSDictionary dictionaryWithObjectsAndKeys:fileUrl, @"videoUrl", firstImg, @"VideoImage",[NSNumber numberWithInteger:_sharedType], @"sharedType", nil];
     _inPublish = NO;
+
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kNSNoticeficationUploadShortVideoSucceed" object:pushInfo];
+
+    }];
 }
 -(void)videoPublisherFaild{
     [self.loading loadingViewhide];
@@ -896,6 +906,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 #pragma mark -
 -(void)dealloc{
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));
+
 }
 
 @end

@@ -13,7 +13,7 @@
 @protocol FSMusicToolControllerDelegate <NSObject>
 
 @optional
--(UIViewController *)musicDetailControllerWithMusic:(FSMusic *)music;
+-(UIViewController *)FSMusicToolVCDidShowMusicDetailWithMusic:(FSMusic *)music;
 - (void)FSMusicToolVCDidSelectedMusic:(FSMusic *)music filePath:(NSString *)filePath;
 
 @end

@@ -14,7 +14,7 @@
 
 -(void)videoPublisherProgress:(CGFloat)progress;
 
--(void)videoPublisherSuccess;
+-(void)videoPublisherSuccess:(NSString *)fileUrl;
 
 -(void)videoPublisherFaild;
 

@@ -10,7 +10,7 @@
 
 @protocol FSPublisherServerDelegate <NSObject>
 
-- (void)FSPublisherServerSucceed;
+- (void)FSPublisherServerSucceed:(NSString *)fileUrl;
 - (void)FSPublisherServerFailed:(NSError *)error;
 - (void)FSPublisherServerProgress:(long long)progress;
 

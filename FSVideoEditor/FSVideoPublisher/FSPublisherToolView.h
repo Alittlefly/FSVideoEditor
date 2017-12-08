@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
 - (void)FSPublisherToolViewChangeVideoDescription:(NSString *)description;
 - (void)FSPublisherToolViewShowChallengeView;
 - (void)FSPublisherToolViewRemovechallenge;
+- (void)FSPublisherToolViewSharedType:(NSInteger)type;
 
 
 @end
