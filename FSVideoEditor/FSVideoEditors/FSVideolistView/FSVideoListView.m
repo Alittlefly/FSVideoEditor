@@ -8,6 +8,7 @@
 
 #import "FSVideoListView.h"
 #import "FSAlbumVideoCell.h"
+#import "FSVideoEditorCommenData.h"
 #import "FSAlertView.h"
 @interface FSVideoListView ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 @property(nonatomic,strong)UICollectionView *contentView;
@@ -80,8 +81,8 @@
         cell.layer.masksToBounds = YES;
     }
     FSAlbumVideoCell *cell = (FSAlbumVideoCell*)[collectionView cellForItemAtIndexPath:indexPath];
-    cell.layer.borderColor = [UIColor redColor].CGColor;
-    cell.layer.borderWidth = 2;
+    cell.layer.borderColor = FSHexRGB(0x0BC2C6).CGColor;
+    cell.layer.borderWidth = 3;
     cell.layer.masksToBounds = YES;
     _selectedIndexPath = indexPath;
     

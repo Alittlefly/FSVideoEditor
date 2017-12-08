@@ -413,7 +413,7 @@
     _recorderTip.textAlignment = NSTextAlignmentCenter;
     _recorderTip.text = [FSShortLanguage CustomLocalizedStringFromTable:@"RecorderTip"];
     [self addSubview:_recorderTip];
-    [self performSelector:@selector(hiddenRecorderTip) withObject:nil afterDelay:3.0f];
+   // [self performSelector:@selector(hiddenRecorderTip) withObject:nil afterDelay:3.0f];
     
     _localPhotoManager = [FSLocalPhotoManager new];
     [_localPhotoManager setDelegate:self];
@@ -578,6 +578,7 @@
     _faceUButton.hidden = YES;
     _deleteButton.hidden = YES;
     _segmentView.hidden = YES;
+    _recorderTip.hidden = YES;
     
     _isOpenFilterView = YES;
 
@@ -629,6 +630,7 @@
     _faceUButton.hidden = YES;
     _deleteButton.hidden = YES;
     _segmentView.hidden = YES;
+    _recorderTip.hidden = YES;
     
     _isOpenFilterView = YES;
     
@@ -665,6 +667,7 @@
         _faceUButton.hidden = YES;
     }
     _segmentView.hidden = NO;
+    _recorderTip.hidden = NO;
     _isOpenFilterView = NO;
     
     if ([_draftInfo.vFilterid isEqualToString:@"NoFilter"] || _draftInfo.vFilterid == nil || _draftInfo.vFilterid.length == 0) {
@@ -705,7 +708,8 @@
     _faceUButton.hidden = YES;
     _deleteButton.hidden = YES;
     _segmentView.hidden = YES;
-    
+    _recorderTip.hidden = YES;
+
     _finishButton.enabled = NO;
     _recorderButton.enabled = NO;
     
@@ -748,6 +752,7 @@
     _faceUButton.hidden = YES;
     _deleteButton.hidden = YES;
     _segmentView.hidden = YES;
+    _recorderTip.hidden = YES;
     
     _isOpenFilterView = NO;
     
@@ -830,6 +835,8 @@
     _faceUButton.hidden = YES;
     _deleteButton.hidden = NO;
     _segmentView.hidden = NO;
+    _recorderTip.hidden = NO;
+
     
     _isOpenFilterView = NO;
     
@@ -998,6 +1005,7 @@
     _faceUButton.hidden = YES;
     _deleteButton.hidden = NO;
     _segmentView.hidden = NO;
+    _recorderTip.hidden = NO;
     _isOpenFilterView = NO;
 }
 
@@ -1029,6 +1037,7 @@
     _faceUButton.hidden = YES;
     _deleteButton.hidden = NO;
     _segmentView.hidden = NO;
+    _recorderTip.hidden = NO;
     _isOpenFilterView = NO;
 }
 
