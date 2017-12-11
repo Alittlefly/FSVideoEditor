@@ -263,7 +263,7 @@
             _choosMusicTipBg.transform = CGAffineTransformMakeScale(-1.0, 1.0);
         }
         
-       //  [self performSelector:@selector(hiddenChooseMusicTip) withObject:nil afterDelay:3.0];
+         [self performSelector:@selector(hiddenChooseMusicTip) withObject:nil afterDelay:3.0];
     }
    
     
