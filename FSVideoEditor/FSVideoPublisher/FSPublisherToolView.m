@@ -236,8 +236,6 @@
     _draftButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width-20-86, self.frame.size.height-30-40, 86, 40) : CGRectMake(20, self.frame.size.height-30-40, 86, 40);
     [_draftButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Draft"] forState:UIControlStateNormal];
     _draftButton.backgroundColor = [UIColor clearColor];//FSHexRGBAlpha(0xD8D8D8, 0.8);
-//    _draftButton.layer.cornerRadius = 5;
-//    _draftButton.layer.masksToBounds = YES;
     [_draftButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [_draftButton setImage:[UIImage imageNamed:@"draft"] forState:UIControlStateNormal];
     [_draftButton addTarget:self action:@selector(draftClik) forControlEvents:UIControlEventTouchUpInside];

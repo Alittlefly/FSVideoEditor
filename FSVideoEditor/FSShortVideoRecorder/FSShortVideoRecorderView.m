@@ -374,7 +374,12 @@
     _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _deleteButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMinX(_recorderButton.frame)-50-40, 0, 40, 40) : CGRectMake(CGRectGetMaxX(_recorderButton.frame)+50, 0, 40, 40);
     _deleteButton.center = CGPointMake(_deleteButton.center.x, _recorderButton.center.y);
-    [_deleteButton setImage:[UIImage imageNamed:@"recorder-delete"] forState:UIControlStateNormal];
+    if ([FSPublishSingleton sharedInstance].isAutoReverse) {
+        [_deleteButton setImage:[UIImage imageNamed:@"recorder-delete-ar"] forState:UIControlStateNormal];
+    }
+    else {
+        [_deleteButton setImage:[UIImage imageNamed:@"recorder-delete"] forState:UIControlStateNormal];
+    }
     [_deleteButton addTarget:self action:@selector(deleteVideo) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_deleteButton];
     
@@ -410,6 +415,8 @@
     _recorderTip.backgroundColor = [UIColor clearColor];
     _recorderTip.textColor =FSHexRGBAlpha(0xFFFFFF, 0.6);
     _recorderTip.font = [UIFont systemFontOfSize:13];
+    _recorderTip.shadowColor = [UIColor blackColor];
+    _recorderTip.shadowOffset = CGSizeMake(1, 1);
     _recorderTip.textAlignment = NSTextAlignmentCenter;
     _recorderTip.text = [FSShortLanguage CustomLocalizedStringFromTable:@"RecorderTip"];
     [self addSubview:_recorderTip];

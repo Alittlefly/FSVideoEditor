@@ -17,11 +17,15 @@
     
     // 找出imageView最终的center
     
-    CGPoint endImageViewCenter = CGPointMake(buttonBoundsCenter.x + self.bounds.size.width/2-self.imageView.bounds.size.width/2, buttonBoundsCenter.y);
+//    CGPoint endImageViewCenter = CGPointMake(buttonBoundsCenter.x + self.bounds.size.width/2-self.imageView.bounds.size.width/2, buttonBoundsCenter.y);
+    CGPoint endImageViewCenter = CGPointMake((self.bounds.size.width-self.imageView.bounds.size.width-self.titleLabel.bounds.size.width)/2+self.titleLabel.bounds.size.width+self.imageView.bounds.size.width/2, buttonBoundsCenter.y);
+
     
     // 找出titleLabel最终的center
     
-    CGPoint endTitleLabelCenter = CGPointMake(buttonBoundsCenter.x-self.bounds.size.width/2 + self.titleLabel.bounds.size.width/2, buttonBoundsCenter.y);
+//    CGPoint endTitleLabelCenter = CGPointMake(buttonBoundsCenter.x-self.bounds.size.width/2 + self.titleLabel.bounds.size.width/2, buttonBoundsCenter.y);
+    CGPoint endTitleLabelCenter = CGPointMake((self.bounds.size.width-self.imageView.bounds.size.width-self.titleLabel.bounds.size.width)/2+self.titleLabel.bounds.size.width/2, buttonBoundsCenter.y);
+
     
     // 取得imageView最初的center
     
@@ -41,7 +45,7 @@
     
     CGFloat imageEdgeInsetsRight = -imageEdgeInsetsLeft;
     
-    self.imageEdgeInsets = UIEdgeInsetsMake(imageEdgeInsetsTop, MAX(0, imageEdgeInsetsLeft), imageEdgeInsetsBottom, MAX(0, imageEdgeInsetsRight));
+    self.imageEdgeInsets = UIEdgeInsetsMake(imageEdgeInsetsTop, imageEdgeInsetsLeft, imageEdgeInsetsBottom, imageEdgeInsetsRight);
     
     // 设置titleEdgeInsets
     
@@ -53,7 +57,7 @@
     
     CGFloat titleEdgeInsetsRight = -titleEdgeInsetsLeft;
     
-    self.titleEdgeInsets = UIEdgeInsetsMake(titleEdgeInsetsTop,MAX(0, titleEdgeInsetsLeft) , titleEdgeInsetsBottom,MAX(0, titleEdgeInsetsRight));
+    self.titleEdgeInsets = UIEdgeInsetsMake(titleEdgeInsetsTop, titleEdgeInsetsLeft , titleEdgeInsetsBottom,titleEdgeInsetsRight);
 }
 
 @end
