@@ -59,11 +59,11 @@
     [_contentView addSubview:titleLabel];
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    NSString *nextText = [FSShortLanguage CustomLocalizedStringFromTable:@"UploadVideo"];
+    NSString *nextText = [FSShortLanguage CustomLocalizedStringFromTable:@"ResetPwdBtnTitle"];
     CGRect nextTextSize = [nextText boundingRectWithSize:CGSizeMake(0,MAXFLOAT) options:(NSStringDrawingUsesFontLeading) attributes:dict context:nil];
     CGFloat nextTextW = CGRectGetWidth(nextTextSize);
     nextButton.frame = CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 20: _contentView.frame.size.width- nextTextW - 20, 17, nextTextW, 21);
-    [nextButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"UploadVideo"] forState:UIControlStateNormal];
+    [nextButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"ResetPwdBtnTitle"] forState:UIControlStateNormal];
     [nextButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     [nextButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
     [nextButton setTitleColor:FSHexRGB(0xCACACA) forState:(UIControlStateNormal)];

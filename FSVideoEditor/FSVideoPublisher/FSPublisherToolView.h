@@ -46,4 +46,7 @@ typedef NS_ENUM(NSInteger,FSPublisherToolViewType){
 - (void)backClik;
 - (void)publishClik;
 - (void)finishChangeFilter:(NSString *)filterName;
+- (void)clickUploadPageShareToFacebookStatistics;
+- (void)clickUploadPageShareToTwitterStatistics;
+
 @end

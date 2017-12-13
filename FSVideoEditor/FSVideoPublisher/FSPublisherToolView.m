@@ -232,12 +232,15 @@
     _effectsLabel.center = CGPointMake(_effectsButton.center.x, CGRectGetMaxY(_effectsButton.frame)+_effectsLabel.frame.size.height/2);
     [self addSubview:_effectsLabel];
     
+    NSString *darftText = [NSString stringWithFormat:@"%@",[FSShortLanguage CustomLocalizedStringFromTable:@"Draft"]];
+    CGSize size = [darftText boundingRectWithSize:CGSizeMake(999, 40) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
     _draftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _draftButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width-20-86, self.frame.size.height-30-40, 86, 40) : CGRectMake(20, self.frame.size.height-30-40, 86, 40);
-    [_draftButton setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Draft"] forState:UIControlStateNormal];
     _draftButton.backgroundColor = [UIColor clearColor];//FSHexRGBAlpha(0xD8D8D8, 0.8);
     [_draftButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [_draftButton setImage:[UIImage imageNamed:@"draft"] forState:UIControlStateNormal];
+    CGFloat draftWidth = size.width+_draftButton.imageView.image.size.width + 10;
+    _draftButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width-20-draftWidth, self.frame.size.height-30-40, draftWidth, 40) : CGRectMake(20, self.frame.size.height-30-40, draftWidth, 40);
+    [_draftButton setTitle:darftText forState:UIControlStateNormal];
     [_draftButton addTarget:self action:@selector(draftClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_draftButton];
     if ([FSPublishSingleton sharedInstance].isAutoReverse && ![FSPublishSingleton systemIsArbicLanguage]) {
@@ -254,16 +257,32 @@
     _shareToLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(20, self.frame.size.height-30-40, _shareToLabel.frame.size.width, 40):CGRectMake(self.frame.size.width-20-40-40-8-_shareToLabel.frame.size.width, self.frame.size.height-30-40, _shareToLabel.frame.size.width, 40);
     [self addSubview:_shareToLabel];
     
+    NSInteger loginType = [[[NSUserDefaults standardUserDefaults] valueForKey:@"LoginType"] integerValue];
+    
     _facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _facebookButton.backgroundColor = [UIColor clearColor];
-    [_facebookButton setImage:[UIImage imageNamed:@"icon_facebook_unselected"] forState:UIControlStateNormal];
+    if (loginType == 2) {
+        _isShareToFacebook = YES;
+        [_facebookButton setImage:[UIImage imageNamed:@"icon_facebook"] forState:UIControlStateNormal];
+    }
+    else {
+        _isShareToFacebook = NO;
+        [_facebookButton setImage:[UIImage imageNamed:@"icon_facebook_unselected"] forState:UIControlStateNormal];
+    }
     _facebookButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_shareToLabel.frame)+8, self.frame.size.height-30-40, 40, 40):CGRectMake(CGRectGetMaxX(_shareToLabel.frame)+8, self.frame.size.height-30-40, 40, 40);
     [_facebookButton addTarget:self action:@selector(shareToFacebook) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_facebookButton];
     
     _twitterButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _twitterButton.backgroundColor = [UIColor clearColor];
-    [_twitterButton setImage:[UIImage imageNamed:@"icon_twitter_unselected"] forState:UIControlStateNormal];
+    if (loginType == 3) {
+        _isShareToTwitter = YES;
+        [_twitterButton setImage:[UIImage imageNamed:@"icon_twitter"] forState:UIControlStateNormal];
+    }
+    else {
+        _isShareToTwitter = NO;
+        [_twitterButton setImage:[UIImage imageNamed:@"icon_twitter_unselected"] forState:UIControlStateNormal];
+    }
     _twitterButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_facebookButton.frame), self.frame.size.height-30-40, 40, 40):CGRectMake(CGRectGetMaxX(_facebookButton.frame), self.frame.size.height-30-40, 40, 40);
     [_twitterButton addTarget:self action:@selector(shareToTwitter) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_twitterButton];
@@ -290,6 +309,8 @@
 }
 
 - (void)shareToFacebook {
+    [self clickUploadPageShareToFacebookStatistics];
+    
     if (_isShareToFacebook) {
         _isShareToFacebook = NO;
         [_facebookButton setImage:[UIImage imageNamed:@"icon_facebook_unselected"] forState:UIControlStateNormal];
@@ -308,6 +329,8 @@
 }
 
 - (void)shareToTwitter {
+    [self clickUploadPageShareToTwitterStatistics];
+    
     if (_isShareToTwitter) {
         _isShareToTwitter = NO;
         [_twitterButton setImage:[UIImage imageNamed:@"icon_twitter_unselected"] forState:UIControlStateNormal];
@@ -474,5 +497,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 
 }
+
+- (void)clickUploadPageShareToFacebookStatistics {}
+- (void)clickUploadPageShareToTwitterStatistics {}
 
 @end

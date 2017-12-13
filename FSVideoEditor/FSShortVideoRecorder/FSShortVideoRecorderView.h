@@ -47,4 +47,7 @@ typedef enum{
 - (void)initCameraView;
 - (void)startRecorder;
 - (void)finishClik;
+- (void)clickRecordReadyPageChooseMusicStatistics;
+- (void)clickRecordReadyPageChooseLocalVideoStatistics;
+
 @end

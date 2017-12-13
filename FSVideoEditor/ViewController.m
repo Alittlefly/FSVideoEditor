@@ -55,8 +55,9 @@
 
 //    @"http://haahi.7najm.com:10000/";
     [FSPublishSingleton sharedInstance].addressAPI = @"http://www.7najm.com/";
-    [FSPublishSingleton sharedInstance].language =@"en";
+    [FSPublishSingleton sharedInstance].language =@"ar";
     [FSPublishSingleton sharedInstance].isAutoReverse = YES;
+    // [NSString stringWithFormat:@"%@resource/",self.addressAPI];
     
     CAGradientLayer *bgGradientLayer = [CAGradientLayer layer];
     bgGradientLayer.colors = @[(__bridge id)FSHexRGB(0x000000).CGColor, (__bridge id)FSHexRGB(0x2D062D).CGColor];

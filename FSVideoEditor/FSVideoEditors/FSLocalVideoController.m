@@ -79,6 +79,8 @@
 }
 
 - (void)enterSettingPage {
+    [self clickLimitsOfAuthorityOpenButtonStatistics];
+    
     NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
     
     if([[UIApplication sharedApplication] canOpenURL:url]) {
@@ -131,5 +133,7 @@
 -(void)dealloc{
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
+
+- (void)clickLimitsOfAuthorityOpenButtonStatistics {}
 
 @end

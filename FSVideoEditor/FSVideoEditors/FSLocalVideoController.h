@@ -20,4 +20,6 @@
 
 - (void)enterEditView;
 
+- (void)clickLimitsOfAuthorityOpenButtonStatistics;
+
 @end

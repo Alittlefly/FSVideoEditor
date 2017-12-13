@@ -23,4 +23,6 @@
 @property (nonatomic, weak) id<FSMusicToolControllerDelegate> delegate;
 @property(nonatomic,strong)FSMusicController *musicView;
 
+- (void)clickChooseMaterialPageCancelStatistics;
+
 @end

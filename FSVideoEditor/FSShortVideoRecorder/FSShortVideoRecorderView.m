@@ -565,6 +565,7 @@
 }
 
 - (void)cutMusicClik {
+    [self clickRecordReadyPageChooseMusicStatistics];
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewChooseMusic)]) {
         [self.delegate FSShortVideoRecorderViewChooseMusic];
     }
@@ -951,6 +952,7 @@
 }
 
 - (void)faceuClick {
+    [self clickRecordReadyPageChooseLocalVideoStatistics];
     if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderViewEnterLocalVideoView)]) {
         [self.delegate FSShortVideoRecorderViewEnterLocalVideoView];
     }
@@ -1159,4 +1161,8 @@
     }
 
 }
+
+#pragma mark  - 统计
+- (void)clickRecordReadyPageChooseMusicStatistics {}
+- (void)clickRecordReadyPageChooseLocalVideoStatistics{}
 @end

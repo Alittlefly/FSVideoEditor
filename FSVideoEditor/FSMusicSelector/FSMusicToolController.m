@@ -96,6 +96,7 @@
 }
 
 - (void)dissmissController{
+    [self clickChooseMaterialPageCancelStatistics];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -141,6 +142,7 @@
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
 
+- (void)clickChooseMaterialPageCancelStatistics{}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
