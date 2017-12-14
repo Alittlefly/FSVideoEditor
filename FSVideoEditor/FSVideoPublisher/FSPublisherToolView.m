@@ -314,6 +314,10 @@
     if (_isShareToFacebook) {
         _isShareToFacebook = NO;
         [_facebookButton setImage:[UIImage imageNamed:@"icon_facebook_unselected"] forState:UIControlStateNormal];
+        
+        if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewSharedType:)]) {
+            [self.delegate FSPublisherToolViewSharedType:0];
+        }
     }
     else {
         _isShareToFacebook = YES;
@@ -334,6 +338,9 @@
     if (_isShareToTwitter) {
         _isShareToTwitter = NO;
         [_twitterButton setImage:[UIImage imageNamed:@"icon_twitter_unselected"] forState:UIControlStateNormal];
+        if ([self.delegate respondsToSelector:@selector(FSPublisherToolViewSharedType:)]) {
+            [self.delegate FSPublisherToolViewSharedType:0];
+        }
     }
     else {
         _isShareToTwitter = YES;

@@ -893,7 +893,12 @@
     option.resizeMode = PHImageRequestOptionsResizeModeNone;
     option.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     [[PHImageManager defaultManager] requestImageForAsset:[assets firstObject] targetSize:self.bounds.size contentMode:(PHImageContentModeAspectFit) options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-        [self.faceUButton setImage:result forState:UIControlStateNormal];
+        if (result) {
+            [self.faceUButton setImage:result forState:UIControlStateNormal];
+        }
+        else {
+            [self.faceUButton setImage:[UIImage imageNamed:@"icon_photo"] forState:UIControlStateNormal];
+        }
     }];
 }
 

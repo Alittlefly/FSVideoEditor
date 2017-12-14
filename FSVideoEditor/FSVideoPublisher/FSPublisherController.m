@@ -105,7 +105,17 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSInteger loginType = [[[NSUserDefaults standardUserDefaults] valueForKey:@"LoginType"] integerValue];
+    if (loginType == 2) {
+        _sharedType = 1;
+    }
+    else if (loginType == 3) {
+        _sharedType = 2;
+    }
+    else {
+        _sharedType = 0;
+    }
+
     [[FSShortVideoRecorderManager sharedInstance] loadAllLocalfxs];
 
     [self.view setBackgroundColor:[UIColor blackColor]];
