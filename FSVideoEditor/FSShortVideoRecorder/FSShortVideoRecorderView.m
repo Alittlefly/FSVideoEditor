@@ -242,7 +242,7 @@
         
         _chooseMusicTip = [[UILabel alloc] initWithFrame:[FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(27, 15, 223-27-15, 0):CGRectMake(15, 15, 223-27-15, 0)];
         _chooseMusicTip.textColor = FSHexRGB(0x999999);
-        _chooseMusicTip.textAlignment = [FSPublishSingleton sharedInstance].isAutoReverse ? NSTextAlignmentRight:NSTextAlignmentLeft;
+        _chooseMusicTip.textAlignment = NSTextAlignmentCenter;
         _chooseMusicTip.font = [UIFont systemFontOfSize:13];
         _chooseMusicTip.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ChooseMusicTip"];
         //_chooseMusicTip.backgroundColor = [UIColor colorWithPatternImage:backImage];
@@ -250,14 +250,21 @@
         _chooseMusicTip.numberOfLines = 0;
         [_chooseMusicTip sizeToFit];
         
-        CGFloat chooseMusicTipHeight = _chooseMusicTip.frame.size.height;
+        _chooseMusicTip.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_cutMusicButton.frame)+10, _cutMusicButton.center.y-(_chooseMusicTip.frame.size.height+30)/2, _chooseMusicTip.frame.size.width+30, (_chooseMusicTip.frame.size.height+30)):CGRectMake(CGRectGetMinX(_cutMusicButton.frame)-_chooseMusicTip.frame.size.width-30-10, _cutMusicButton.center.y-(_chooseMusicTip.frame.size.height+30)/2, _chooseMusicTip.frame.size.width+30, (_chooseMusicTip.frame.size.height+30));
+        
         UIImage * backImage;
         backImage = [UIImage imageNamed:@"chatfrom_bg_normal"];
-        backImage = [backImage resizableImageWithCapInsets:UIEdgeInsetsMake(15, 30, 15, 37) resizingMode:UIImageResizingModeStretch];
-        _choosMusicTipBg = [[UIImageView alloc] initWithFrame:[FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_cutMusicButton.frame), _cutMusicButton.center.y-(chooseMusicTipHeight+30)/2, 223, (chooseMusicTipHeight+30)):CGRectMake(CGRectGetMinX(_cutMusicButton.frame)-223, _cutMusicButton.center.y-(chooseMusicTipHeight+30)/2, 223, (chooseMusicTipHeight+30)) ];
-        _choosMusicTipBg.image = backImage;
-        [self addSubview:_choosMusicTipBg];
-        [_choosMusicTipBg addSubview:_chooseMusicTip];
+        backImage = [backImage resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15) resizingMode:UIImageResizingModeStretch];
+        UIImageView *im = [[UIImageView alloc] initWithFrame:_chooseMusicTip.bounds];
+        im.image = backImage;
+        [_chooseMusicTip addSubview:im];
+        
+        _choosMusicTipBg = [[UIImageView alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? -7:CGRectGetWidth(_chooseMusicTip.frame)-10, (_chooseMusicTip.frame.size.height-29)/2, 17, 29) ];
+        _choosMusicTipBg.image = [UIImage imageNamed:@"chatfrom_bg_arrow"];
+        _choosMusicTipBg.backgroundColor =[UIColor clearColor];
+        [_chooseMusicTip addSubview:_choosMusicTipBg];
+        
+        [self addSubview:_chooseMusicTip];
         
         if ([FSPublishSingleton sharedInstance].isAutoReverse) {
             _choosMusicTipBg.transform = CGAffineTransformMakeScale(-1.0, 1.0);
