@@ -26,7 +26,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
-                  timestampString = "535016258.396369"
+                  timestampString = "535274081.365674"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
@@ -41,7 +41,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
-                  timestampString = "535016258.398118"
+                  timestampString = "535274081.367202"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
@@ -78,9 +78,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "FSLocalVideoController"
-            landmarkType = "3">
+            endingLineNumber = "140">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -110,9 +108,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "FSLocalVideoController"
-            landmarkType = "3">
+            endingLineNumber = "140">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -126,9 +122,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "FSLocalVideoController"
-            landmarkType = "3">
+            endingLineNumber = "140">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -170,7 +164,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/ViewController.m"
-            timestampString = "535018943.830903"
+            timestampString = "535274773.412909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "339"
@@ -186,7 +180,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/ViewController.m"
-            timestampString = "535018943.830968"
+            timestampString = "535274773.413279"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "339"
@@ -218,11 +212,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSShortVideoRecorder/FSShortVideoRecorderView.m"
-            timestampString = "535018943.831047"
+            timestampString = "535274773.413532"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1096"
-            endingLineNumber = "1096"
+            startingLineNumber = "1103"
+            endingLineNumber = "1103"
             landmarkName = "-FSShortVideoRecorderManagerProgress:"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +228,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSShortVideoRecorder/FSShortVideoRecorderView.m"
-            timestampString = "535018943.831478"
+            timestampString = "535274773.413587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "826"
-            endingLineNumber = "826"
+            startingLineNumber = "833"
+            endingLineNumber = "833"
             landmarkName = "-alphaLight:fromValue:toValue:"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +244,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSShortVideoRecorder/FSShortVideoRecorderView.m"
-            timestampString = "535018943.831746"
+            timestampString = "535274773.413635"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "937"
-            endingLineNumber = "937"
+            startingLineNumber = "944"
+            endingLineNumber = "944"
             landmarkName = "-FSMoveButtonContinueTrackingWithTouch:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +260,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSShortVideoRecorder/FSShortVideoRecorderView.m"
-            timestampString = "535018943.832002"
+            timestampString = "535274773.413682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "928"
-            endingLineNumber = "928"
+            startingLineNumber = "935"
+            endingLineNumber = "935"
             landmarkName = "-FSMoveButtonEndTrackingWithTouch:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,11 +276,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSShortVideoRecorder/FSShortVideoRecorderView.m"
-            timestampString = "535018943.832253"
+            timestampString = "535274773.413729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "589"
-            endingLineNumber = "589"
+            startingLineNumber = "596"
+            endingLineNumber = "596"
             landmarkName = "-cutMusicClik"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,7 +388,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSUploadKit/FSUploader.m"
-                  timestampString = "535016258.415044"
+                  timestampString = "535274081.385317"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "49"
@@ -409,7 +403,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSUploadKit/FSUploader.m"
-                  timestampString = "535016258.417032"
+                  timestampString = "535274081.386821"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "49"
@@ -682,7 +676,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSMusicSelector/APIs/FSLikedMusicAPI.m"
-                  timestampString = "535016258.441518"
+                  timestampString = "535274081.413202"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "24"
@@ -697,7 +691,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSMusicSelector/APIs/FSLikedMusicAPI.m"
-                  timestampString = "535016258.443055"
+                  timestampString = "535274081.414843"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "24"
@@ -778,7 +772,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSVideoPublisher/FSPublisherAPI/FSAddChallengeAPI.m"
-                  timestampString = "535016258.453187"
+                  timestampString = "535274081.423012"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
@@ -793,7 +787,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSVideoPublisher/FSPublisherAPI/FSAddChallengeAPI.m"
-                  timestampString = "535016258.454797"
+                  timestampString = "535274081.425704"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -831,7 +825,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "826"
             endingLineNumber = "826"
-            landmarkName = "-addSticker:"
+            landmarkName = "-FSCutMusicViewFinishCutMusicWithTime:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -895,8 +889,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "705"
             endingLineNumber = "705"
-            landmarkName = "-musicControllerHideen"
-            landmarkType = "7">
+            landmarkName = "FSPublisherController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -906,7 +900,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/ViewController.m"
-            timestampString = "535018943.833119"
+            timestampString = "535274773.414271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
@@ -970,7 +964,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSMusicSelector/APIs/FSMusicCollectAPI.m"
-                  timestampString = "535016258.465599"
+                  timestampString = "535274081.443247"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -985,7 +979,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSMusicSelector/APIs/FSMusicCollectAPI.m"
-                  timestampString = "535016258.467108"
+                  timestampString = "535274081.445657"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
@@ -1034,11 +1028,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSShortVideoRecorder/FSShortVideoRecorderView.m"
-            timestampString = "535018943.833273"
+            timestampString = "535274773.414592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "721"
-            endingLineNumber = "721"
+            startingLineNumber = "728"
+            endingLineNumber = "728"
             landmarkName = "-countdownClik"
             landmarkType = "7">
          </BreakpointContent>
@@ -1087,7 +1081,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "520"
             endingLineNumber = "520"
-            landmarkName = "-FSPublisherToolViewEditMusic"
+            landmarkName = "-FSPublisherToolViewQuit"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1103,8 +1097,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "863"
             endingLineNumber = "863"
-            landmarkName = "FSPublisherController"
-            landmarkType = "3">
+            landmarkName = "-addSticker:"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -1183,7 +1177,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "610"
             endingLineNumber = "610"
-            landmarkName = "-FSPublisherToolViewSaveToDraft"
+            landmarkName = "-FSPublisherToolViewChooseMusic"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1290,11 +1284,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSShortVideoRecorder/FSShortVideoRecorderView.m"
-            timestampString = "535018943.833922"
+            timestampString = "535274773.414853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1016"
-            endingLineNumber = "1016"
+            startingLineNumber = "1023"
+            endingLineNumber = "1023"
             landmarkName = "-FSCutMusicViewFinishCutMusic:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1306,11 +1300,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FSVideoEditor/FSShortVideoRecorder/FSShortVideoRecorderView.m"
-            timestampString = "535018943.83422"
+            timestampString = "535274773.414901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "704"
-            endingLineNumber = "704"
+            startingLineNumber = "711"
+            endingLineNumber = "711"
             landmarkName = "-changeFilter:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1354,7 +1348,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSMusicSelector/APIs/FSTypeMusicAPI.m"
-                  timestampString = "535016258.486522"
+                  timestampString = "535274081.478583"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "29"
@@ -1369,7 +1363,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSMusicSelector/APIs/FSTypeMusicAPI.m"
-                  timestampString = "535016258.488215"
+                  timestampString = "535274081.481138"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "30"
@@ -1711,7 +1705,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "845"
             endingLineNumber = "845"
-            landmarkName = "-compileFile:"
+            landmarkName = "-videoFxControllerSaved:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2170,7 +2164,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/Login/FSLoginAPI.m"
-                  timestampString = "535016258.549682"
+                  timestampString = "535274081.587624"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "49"
@@ -2185,7 +2179,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/Login/FSLoginAPI.m"
-                  timestampString = "535016258.551473"
+                  timestampString = "535274081.591093"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "50"
@@ -2218,7 +2212,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSVideoEditors/FSLocalVideoController.m"
-                  timestampString = "535016258.554384"
+                  timestampString = "535274081.596915"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "93"
@@ -2233,7 +2227,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSVideoEditors/FSLocalVideoController.m"
-                  timestampString = "535016258.555923"
+                  timestampString = "535274081.599676"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "93"
@@ -2271,7 +2265,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "257"
             endingLineNumber = "257"
-            landmarkName = "-FSMusicToolVCDidShowMusicDetailWithMusic:"
+            landmarkName = "-musicControllerSelectMusic:music:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2287,8 +2281,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "122"
             endingLineNumber = "122"
-            landmarkName = "-musicControllerWouldShowMusicDetail:"
-            landmarkType = "7">
+            landmarkName = "FSMusicToolController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2335,7 +2329,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "272"
             endingLineNumber = "272"
-            landmarkName = "-requireMusicDetailVC:"
+            landmarkName = "-FSMusicToolVCDidShowMusicDetailWithMusic:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2431,7 +2425,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "112"
             endingLineNumber = "112"
-            landmarkName = "-FSShortVideoRecorderViewQuitRecorderView"
+            landmarkName = "-viewDidAppear:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2463,7 +2457,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "778"
             endingLineNumber = "778"
-            landmarkName = "-FSControlVolumeViewChangeFinished"
+            landmarkName = "-FSFilterViewChooseFilter:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2479,8 +2473,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "787"
             endingLineNumber = "787"
-            landmarkName = "-FSCutMusicViewFinishCutMusicWithTime:"
-            landmarkType = "7">
+            landmarkName = "FSPublisherController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2495,8 +2489,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "781"
             endingLineNumber = "781"
-            landmarkName = "FSPublisherController"
-            landmarkType = "3">
+            landmarkName = "-FSFilterViewChooseFilter:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2559,7 +2553,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "658"
             endingLineNumber = "658"
-            landmarkName = "-FSPublisherToolViewSaveToLibrary:"
+            landmarkName = "-FSPublisherToolViewSaveToDraft"
             landmarkType = "7">
             <Locations>
                <Location
@@ -2570,7 +2564,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
-                  timestampString = "535016258.605228"
+                  timestampString = "535274081.800033"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "658"
@@ -2585,7 +2579,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
-                  timestampString = "535016258.60768"
+                  timestampString = "535274081.802059"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "658"
@@ -2600,7 +2594,7 @@
                   moduleName = "FSVideoEditor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Vicky/Work/shortVideoDemo/FSVideoEditor/FSVideoPublisher/FSPublisherController.m"
-                  timestampString = "535016258.609743"
+                  timestampString = "535274081.804103"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "658"
@@ -2622,7 +2616,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "871"
             endingLineNumber = "871"
-            landmarkName = "-videoPublisherSuccess:"
+            landmarkName = "-compileFile:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

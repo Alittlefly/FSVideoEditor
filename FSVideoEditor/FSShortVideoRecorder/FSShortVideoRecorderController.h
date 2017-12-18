@@ -16,6 +16,7 @@
 
 @optional
 -(UIViewController *)FSShortVideoShowMusicDetailWithMusic:(FSMusic *)music;
+- (void)FSShortVideoRecorderDismiss;
 
 @end
 

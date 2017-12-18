@@ -86,6 +86,9 @@
     }
     
     [self.view setBackgroundColor:[UIColor clearColor]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissmissController) name:@"kNotificationDeepLinkOrPush" object:nil];
+
 }
 
 - (void)clickButton:(UIButton *)button {
@@ -115,7 +118,7 @@
 -(void)dealloc{
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoEditToolDidHide object:nil];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNotificationDeepLinkOrPush" object:nil];
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
 

@@ -93,9 +93,13 @@
         
     
     [self.view setBackgroundColor:[UIColor clearColor]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissmissController) name:@"kNotificationDeepLinkOrPush" object:nil];
+
 }
 
 - (void)dissmissController{
+
     [self clickChooseMaterialPageCancelStatistics];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -138,7 +142,8 @@
 -(void)dealloc{
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNSNotificationVideoEditToolDidHide object:nil];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNotificationDeepLinkOrPush" object:nil];
+
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
 }
 

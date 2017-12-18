@@ -27,6 +27,7 @@
 @property (nonatomic, strong) FSShortVideoRecorderView *recorderView;
 @property (nonatomic, strong) FSFilterView *filterView;
 @property (nonatomic, assign) BOOL isCurrentView;
+@property (nonatomic, strong) UIViewController *childController;
 
 @end
 
@@ -34,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     self.view.backgroundColor = [UIColor blackColor];
     // Do any additional setup after loading the view.
@@ -43,11 +45,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:@"kNSNotificationInhoneDidBecomeActive" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requireMusicDetailVC:) name:@"kNSNotificationRequireMusicDetailVC" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quitRecorderView) name:@"kNSNoticeficationUploadShortVideoSucceed" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quitRecorderViewDelay) name:@"kNotificationDeepLinkOrPush" object:nil];
 
     
 }
 
+- (void)quitRecorderViewDelay {
+    [self performSelector:@selector(quitRecorderView) withObject:nil afterDelay:0.3];
+}
+
 - (void) quitRecorderView {
+    NSLog(@"kNotificationDeepLinkOrPush %@",self);
     if (_isPresented) {
         [self dismissViewControllerAnimated:NO completion:nil];
     }
@@ -70,6 +78,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     _isCurrentView = YES;
+    _childController = nil;
 
     [self.navigationController setNavigationBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
@@ -209,6 +218,9 @@
     toolController.musicView.shouldReturnMusic = YES;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:toolController];
     [self presentViewController:nav animated:YES completion:nil];
+    
+    _childController = toolController;
+
 }
 
 - (void)FSShortVideoRecorderViewEnterLocalVideoView {
@@ -216,6 +228,9 @@
     //[toolController setDelegate:self];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:toolController];
     [self presentViewController:nav animated:YES completion:nil];
+    
+    _childController = toolController;
+
 }
 
 - (void)FSMusicToolVCDidSelectedMusic:(FSMusic *)music filePath:(NSString *)filePath {
@@ -287,10 +302,22 @@
 }
 
 -(void)dealloc{
+//    if (_childController) {
+//        [_childController.navigationController dismissViewControllerAnimated:NO completion:^{
+//
+//        }];
+//    }
+//
+//    if ([self.delegate respondsToSelector:@selector(FSShortVideoRecorderDismiss)]) {
+//        [self.delegate FSShortVideoRecorderDismiss];
+//    }
+    
     NSLog(@" %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd));
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNSNotificationInhoneDidBecomeActive" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNSNotificationRequireMusicDetailVC" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNSNoticeficationUploadShortVideoSucceed" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNotificationDeepLinkOrPush" object:nil];
+
 }
 
 @end

@@ -115,7 +115,9 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     else {
         _sharedType = 0;
     }
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoQuit) name:@"kNotificationDeepLinkOrPush" object:nil];
+    
     [[FSShortVideoRecorderManager sharedInstance] loadAllLocalfxs];
 
     [self.view setBackgroundColor:[UIColor blackColor]];
@@ -398,6 +400,39 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
     
     [self showFaildMesssage];
 }
+
+- (void)autoQuit {
+    NSLog(@"kNotificationDeepLinkOrPush %@",self);
+
+    if (_tempDraftInfo.vType == FSDraftInfoTypeVideo) {
+        
+        // 弹出提示
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [[FSDraftManager sharedManager] cancleOperate];
+        [_context removeTimeline:_timeLine];
+        [_context stop];
+
+    }else{
+        
+        // 弹出提示
+        if (_tempDraftInfo.vTimefx != nil || _tempDraftInfo.stack != nil) {
+            _draftInfo.vTimefx = nil;
+            _draftInfo.stack = nil;
+            _draftInfo.vFilterid = nil;
+            _draftInfo.vAddedFxViews = nil;
+            
+            [[FSDraftManager sharedManager] cancleOperate];
+            [_context removeTimeline:_timeLine];
+            [_context stop];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+    
+}
+
 #pragma mark -
 - (void)FSChallengeControllerChooseChallenge:(FSChallengeModel *)model {
     _challengeModel = model;
@@ -916,6 +951,7 @@ typedef NS_ENUM(NSInteger,FSPublishOperationType){
 #pragma mark -
 -(void)dealloc{
     NSLog(@"%@ dealloc",NSStringFromClass([self class]));
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNotificationDeepLinkOrPush" object:nil];
 
 }
 
