@@ -15,17 +15,29 @@
 #import "NvsCommonDef.h"
 #import <UIKit/UIScrollView.h>
 
-
+/*!
+    \brief 多缩略图序列信息描述
+    \since 1.10.0
+ */
 @interface NvsThumbnailSequenceDesc : NSObject
 
-@property (nonatomic) NSString *mediaFilePath;
-@property (nonatomic) int64_t inPoint;
-@property (nonatomic) int64_t outPoint;
-@property (nonatomic) int64_t trimIn;
-@property (nonatomic) int64_t trimOut;
-@property (nonatomic) BOOL stillImageHint;
+@property (nonatomic) NSString *mediaFilePath;      //!< 视频文件路径
+@property (nonatomic) int64_t inPoint;              //!< 时间线上入点(单位微秒)
+@property (nonatomic) int64_t outPoint;             //!< 时间线上出点(单位微秒)
+@property (nonatomic) int64_t trimIn;               //!< 裁剪入点(单位微秒)
+@property (nonatomic) int64_t trimOut;              //!< 裁剪出点(单位微秒)
+@property (nonatomic) BOOL stillImageHint;          //!< 是否是静态图片
 
 @end
+
+/*!
+*   \brief 缩略图图片填充模式
+*/
+typedef enum {
+    NvsThumbnailFillModeStretch = 0,           //!< \if ENGLISH \else 图片缩放填充满整个窗口，可能会导致图片变形 （默认模式）\endif
+      NvsThumbnailFillModeAspectCrop,    //!< \if ENGLISH \else 图片按比例均匀填充满窗口，必要时进行裁剪 \endif
+
+}NvsThumbnailImageFillMode;
 
 
 /*!
@@ -37,11 +49,15 @@
  */
 @interface NvsMultiThumbnailSequenceView : UIScrollView
 
+
 @property (nonatomic) NSArray *descArray;           //!< 缩略图序列描述数组。注意：一旦设置，再修改数组里面的内容是不起作用的，除非再次设置缩略图序列描述数组
 @property (nonatomic) CGFloat thumbnailAspectRatio; //!< 缩略图横纵比
 @property (nonatomic) double pointsPerMicrosecond;  //!< 比例尺，每微秒所占用的point数量
 @property (nonatomic) CGFloat startPadding;         //!< 起始边距，单位为point
 @property (nonatomic) CGFloat endPadding;           //!< 结束边距，单位为point
+@property (nonatomic) NvsThumbnailImageFillMode thumbnailImageFillMode;  //!< 缩略图图片填充模式
+
+
 
 - (instancetype)init;
 - (instancetype)initWithFrame:(CGRect)frame;

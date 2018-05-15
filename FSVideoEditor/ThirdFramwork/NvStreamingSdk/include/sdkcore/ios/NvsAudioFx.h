@@ -24,5 +24,6 @@
 @interface NvsAudioFx : NvsFx
 
 @property (readonly) unsigned int index;              //!< \if ENGLISH brief member variable description \else 音频特效索引 \endif
+@property (readonly) NSString *bultinAudioFxName;     //!< 内嵌音频特效名字。如果不是内嵌音频特效返回nil \since 1.16.0
 
 @end

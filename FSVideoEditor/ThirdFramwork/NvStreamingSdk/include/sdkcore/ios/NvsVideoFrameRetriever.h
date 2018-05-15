@@ -19,9 +19,9 @@
  *  \since 1.2.0
  */
 typedef enum {
-    NvsVideoFrameHeightGrade360 = 0,  //!< \if ENGLISH  \else 生成视频帧高度360像素 \endif
-    NvsVideoFrameHeightGrade480,      //!< \if ENGLISH  \else 生成视频帧高度480像素 \endif
-    NvsVideoFrameHeightGrade720       //!< \if ENGLISH  \else 生成视频帧高度720像素 \endif
+    NvsVideoFrameHeightGrade360 = 0,  //!< 生成视频帧高度360像素
+    NvsVideoFrameHeightGrade480,      //!< 生成视频帧高度480像素
+    NvsVideoFrameHeightGrade720       //!< 生成视频帧高度720像素
 } NvsVideoFrameHeightGrade;
 
 @class UIImage;
@@ -39,6 +39,13 @@ typedef enum {
  *  \return 返回UIImage对象，表示某一时刻视频帧图像
  */
 - (UIImage *)getFrameAtTime:(int64_t)time videoFrameHeightGrade:(NvsVideoFrameHeightGrade)videoFrameHeightGrade;
-
+/*!
+ *  \brief 获取某一时刻视频帧图像，可以自定义视频帧的高度。详细情况参见[视频帧图像提取专题] (@ref videoFrameRetriever.md)
+ *  \param time 获取视频帧的时间值(单位微秒)
+ *  \param videoFrameHeight 自定义视频帧高度
+ *  \return 返回UIImage对象，表示某一时刻视频帧图像
+ *  \since 1.15.0
+ */
+- (UIImage *)getFrameAtTimeWithVideoFrameHeight:(int64_t)time videoFrameHeight:(unsigned int)videoFrameHeight;
 @end
 

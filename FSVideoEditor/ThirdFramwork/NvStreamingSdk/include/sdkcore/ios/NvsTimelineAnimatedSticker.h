@@ -24,8 +24,8 @@
 
 @property (readonly) BOOL isPanoramic;  //!< 是否为全景图动画贴纸贴纸 \since 1.6.0
 @property (nonatomic) BOOL clipAffinityEnabled; //!< 是否开启与clip的亲和关系 \since 1.7.1
-@property (readonly) int64_t inPoint; //!< \if ENGLISH \else 动画贴纸在时间线上显示的入点 \endif
-@property (readonly) int64_t outPoint; //!< \if ENGLISH \else 动画贴纸在时间线上显示的出点 \endif
+@property (readonly) int64_t inPoint; //!< 动画贴纸在时间线上显示的入点（单位微秒）
+@property (readonly) int64_t outPoint; //!< 动画贴纸在时间线上显示的出点（单位微秒）
 
 /*!
     \brief 获取动画贴纸包ID
@@ -36,8 +36,8 @@
 
 /*!
      \brief 改变动画贴纸在时间线上显示的入点
-     \param newInPoint 动画贴纸在时间线上的新的入点
-     \return 返回动画贴纸在时间线上的显示的入点值
+     \param newInPoint 动画贴纸在时间线上的新的入点（单位微秒）
+     \return 返回动画贴纸在时间线上的显示的入点值（单位微秒）
      \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
      \sa changeOutPoint:
      \sa movePosition:
@@ -46,8 +46,8 @@
 
 /*!
      \brief 改变动画贴纸在时间线上显示的出点
-     \param newOutPoint 动画贴纸在时间线上的新的出点
-     \return 返回动画贴纸在时间线上的显示的出点值
+     \param newOutPoint 动画贴纸在时间线上的新的出点（单位微秒）
+     \return 返回动画贴纸在时间线上的显示的出点值（单位微秒）
      \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
      \sa changeInPoint:
      \sa movePosition:
@@ -56,7 +56,7 @@
 
 /*!
      \brief 改变动画贴纸在时间线上的显示位置(入点和出点同时偏移offset值)
-     \param offset 入点和出点改变的偏移值
+     \param offset 入点和出点改变的偏移值（单位微秒）
      \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
      \sa changeInPoint:
      \sa changeOutPoint:

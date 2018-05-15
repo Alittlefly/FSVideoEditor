@@ -24,6 +24,9 @@
  */
 @interface NvsAudioClip: NvsClip
 
+@property (nonatomic) int64_t fadeInDuration;  //!< 淡入时长（单位微秒）\since 1.16.0
+@property (nonatomic) int64_t fadeOutDuration; //!< 淡出时长（单位微秒）\since 1.16.0
+
 /*!
  *  \brief 在片段尾部追加特效
  *  \param fxName 特效名称。获取特效名称，请参照[getAllBuiltinAudioFxNames()](@ref NvsStreamingContext::getAllBuiltinAudioFxNames)或[内建特效名称列表] (\ref FxNameList.md)

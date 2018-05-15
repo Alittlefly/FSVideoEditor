@@ -18,6 +18,7 @@
 #import "FSMusicController.h"
 #import "FSLocalVideoToolController.h"
 #import "FSMusicToolController.h"
+#import "FSVideoEditorCommenData.h"
 
 @interface FSShortVideoRecorderController ()<FSShortVideoRecorderViewDelegate, FSFilterViewDelegate, FSMusicControllerDelegate,FSMusicToolControllerDelegate>
 {
@@ -174,7 +175,7 @@
     _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.view.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
     _filterView.hidden = NO;
     [UIView animateWithDuration:0.5 animations:^{
-        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.view.frame.size.height-_filterView.frame.size.height, _filterView.frame.size.width, _filterView.frame.size.height);
+        _filterView.frame =CGRectMake(_filterView.frame.origin.x, self.view.frame.size.height-_filterView.frame.size.height-FSSafeAreaBottomHeight, _filterView.frame.size.width, _filterView.frame.size.height);
         
     }];
 }

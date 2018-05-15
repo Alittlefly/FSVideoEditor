@@ -19,6 +19,7 @@
 #import "NvsCommonDef.h"
 
 @class NvsFxDescription;
+@class NvsParticleSystemContext;
 
 /*!
  *  \brief 特效
@@ -181,5 +182,13 @@
    \sa setMenuVal:val:
 */
 - (NSString *)getMenuVal:(NSString *)fxParam;
+
+/*!
+   \brief getParticleSystemContext  获得粒子特效上下文句柄
+
+   \return 返回指向粒子特效上下文句柄指针
+*/
+- (NvsParticleSystemContext *)getParticleSystemContext;
+
 
 @end

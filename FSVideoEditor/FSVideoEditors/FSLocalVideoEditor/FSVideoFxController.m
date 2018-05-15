@@ -91,9 +91,9 @@
     
      _context = [NvsStreamingContext sharedInstanceWithFlags:(NvsStreamingContextFlag_Support4KEdit)];
     
-    CGFloat maxHeight = CGRectGetHeight(self.view.bounds) - 228 - 54 - 12;
+    CGFloat maxHeight = CGRectGetHeight(self.view.bounds) - 228 - 54 - 12-FSSafeAreaBottomHeight;
     CGFloat maxWidth = ((CGFloat)210.0/373.0) * maxHeight;
-     _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.bounds) - maxWidth)/2.0, 54, maxWidth, maxHeight)];
+     _prewidow = [[NvsLiveWindow alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.bounds) - maxWidth)/2.0, 54+FSSafeAreaTopHeight, maxWidth, maxHeight)];
     [self.view addSubview:_prewidow];
 
      _controlView = [[FSControlView alloc] initWithFrame:_prewidow.frame];
@@ -107,7 +107,7 @@
         return;
     }
     
-     _videoFxView = [[FSVideoFxView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 228, CGRectGetWidth(self.view.bounds),228) fxs:fxs];
+     _videoFxView = [[FSVideoFxView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 228-FSSafeAreaBottomHeight, CGRectGetWidth(self.view.bounds),228) fxs:fxs];
     [_videoFxView setDelegate:self];
     [self.view addSubview:_videoFxView];
     NSMutableArray *newArray = [NSMutableArray arrayWithArray:_addedViews];
@@ -207,7 +207,7 @@
     [cancle sizeToFit];
     cancle.contentHorizontalAlignment = ![FSPublishSingleton sharedInstance].isAutoReverse?UIControlContentHorizontalAlignmentLeft:UIControlContentHorizontalAlignmentRight;
     CGFloat cancleX = [FSPublishSingleton sharedInstance].isAutoReverse?(CGRectGetWidth(self.view.bounds) - 120):20;
-    [cancle setFrame:CGRectMake(cancleX, 20, 100, 24)];
+    [cancle setFrame:CGRectMake(cancleX, 20+FSSafeAreaTopHeight, 100, 24)];
     [self.view addSubview:cancle];
     
     UIButton *save = [[UIButton alloc] init];
@@ -215,7 +215,7 @@
     [save setTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Save"] forState:(UIControlStateNormal)];
     [save sizeToFit];
     CGFloat saveX = [FSPublishSingleton sharedInstance].isAutoReverse?20:(CGRectGetWidth(self.view.bounds) - 120);
-    [save setFrame:CGRectMake(saveX, 20, 100, 24)];
+    [save setFrame:CGRectMake(saveX, 20+FSSafeAreaTopHeight, 100, 24)];
     save.contentHorizontalAlignment = ![FSPublishSingleton sharedInstance].isAutoReverse?UIControlContentHorizontalAlignmentRight:UIControlContentHorizontalAlignmentLeft;;
     [self.view addSubview:save];
 }

@@ -39,5 +39,6 @@ typedef enum {
 @property (readonly) NvsVideoTransitionType videoTransitionType; //!< 视频转场类型
 @property (readonly) NSString *bultinVideoTransitionName; //!< 内嵌视频转场名字。如果不是内嵌视频转场返回nil
 @property (readonly) NSString *videoTransitionPackageId; //!< 视频转场资源包ID。如果不是资源包视频转场返回nil
+@property (nonatomic) float videoTransitionDurationScaleFactor; //!< 视频转场持续时间缩放比例，取值范围(0,1]
 
 @end

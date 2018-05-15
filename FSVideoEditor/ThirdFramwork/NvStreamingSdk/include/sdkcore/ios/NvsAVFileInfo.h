@@ -34,7 +34,7 @@
 /*!
  *  \brief 通过视频流索引获取视频流时长
  *  \param videoStreamIndex 视频流索引
- *  \return 返回当前视频流的时长
+ *  \return 返回当前视频流的时长(单位微秒)
  *  \sa getAudioStreamDuration:
  */
 - (int64_t)getVideoStreamDuration:(unsigned int)videoStreamIndex;
@@ -72,7 +72,7 @@
 /*!
  *  \brief 通过音频流索引获取音频流时长
  *  \param audioStreamIndex 音频流索引
- *  \return 返回当前音频流的时长
+ *  \return 返回当前音频流的时长(单位微秒)
  *  \sa getVideoStreamDuration:
  */
 - (int64_t)getAudioStreamDuration:(unsigned int)audioStreamIndex;

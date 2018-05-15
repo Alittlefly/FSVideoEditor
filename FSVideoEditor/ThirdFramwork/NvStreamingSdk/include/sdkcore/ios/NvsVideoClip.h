@@ -29,9 +29,9 @@ typedef enum NvsVideoClipType {
  *  \since 1.1.0
  */
 typedef enum {
-    NvsStreamingEngineImageClipMotionMode_LetterBoxZoomIn = 0, //!< \if ENGLISH \else 放大 \endif
-    NvsStreamingEngineImageClipMotionMode_LetterBoxZoomOut,    //!< \if ENGLISH \else 缩小 \endif
-    NvsStreamingEngineImageClipMotionMode_ROI                  //!< \if ENGLISH \else 图片片段ROI(Region Of Interesting) \endif
+    NvsStreamingEngineImageClipMotionMode_LetterBoxZoomIn = 0, //!< 放大
+    NvsStreamingEngineImageClipMotionMode_LetterBoxZoomOut,    //!< 缩小
+    NvsStreamingEngineImageClipMotionMode_ROI                  //!< 图片片段ROI(Region Of Interesting)
 } NvsStreamingEngineImageClipMotionMode;
 
 typedef enum NvsSourceBackgroundMode {
@@ -52,23 +52,23 @@ typedef enum NvsExtraVideoRotation {
     \brief 视频片段，对视频文件的描述
 
     视频片段源可以是视频或者图片。每个视频片段可以修改其裁剪入点、裁剪出点以及播放速度，也可以设置摇摄和扫描。编辑视频时，可以按特效类型的不同（内建特效，包裹式特效，美颜特效）添加或者插入多个视频特效。
+    添加资源包特效时，都得先安装，安装成功后获取packageId才能使用，而内建特效(builtin)只需获取特效名称即可使用。
  */
 @interface NvsVideoClip : NvsClip
 
 
-@property (readonly) NvsVideoClipType videoType;  //!< \if ENGLISH \else 视频片段类型(音视频、图片)\endif
+@property (readonly) NvsVideoClipType videoType;  //!< 视频片段类型(音视频、图片)
 
 
-@property (readonly) NvsRoleInTheme roleInTheme;  //!< \if ENGLISH \else 视频片段在主题中角色(通用、片头、片尾)\endif
+@property (readonly) NvsRoleInTheme roleInTheme;  //!< 视频片段在主题中角色(通用、片头、片尾)
 
+@property (nonatomic) NvsStreamingEngineImageClipMotionMode imageMotionMode; //!< 图片片段运作模式 \since 1.1.0
 
-@property (nonatomic) NvsStreamingEngineImageClipMotionMode imageMotionMode; //!< \if ENGLISH \else 图片片段运作模式 \since 1.1.0 \endif
+@property (nonatomic) BOOL imageMotionAnimationEnabled;  //!< 是否支持图片动画 \since 1.1.0
 
-@property (nonatomic) BOOL imageMotionAnimationEnabled;  //!< \if ENGLISH \else 是否支持图片动画 \since 1.1.0 \endif
+@property (readonly) NvsRect startROI; //!< 图片片段起始ROI \since 1.1.0
 
-@property (readonly) NvsRect startROI; //!< \if ENGLISH \else 图片片段起始ROI \since 1.1.0 \endif
-
-@property (readonly) NvsRect endROI;   //!< \if ENGLISH \else 图片片段终止ROI \since 1.1.0 \endif
+@property (readonly) NvsRect endROI;   //!< 图片片段终止ROI \since 1.1.0
 
 
 /*!

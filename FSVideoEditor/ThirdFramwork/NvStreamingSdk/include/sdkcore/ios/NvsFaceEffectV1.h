@@ -16,6 +16,15 @@
 
 @interface NvsFaceEffectV1 : NSObject
 
+/*!
+   \brief 初始化人脸特效
+*/
 +(void) InitFaceEffectV1:(NSString*) bundlePath authPackage:(void *)package authSize:(int)size;
+
+
+/*!
+    \brief 开启多人检测模式，最多可同时检测 8 张人脸，默认检测 1 张人脸
+*/
++(void) SetMaxFaces:(int) maxFaceCount;
 
 @end

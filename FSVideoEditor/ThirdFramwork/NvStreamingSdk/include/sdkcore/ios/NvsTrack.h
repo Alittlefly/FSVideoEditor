@@ -29,19 +29,19 @@ typedef enum NvsTrackType {
  */
 @interface NvsTrack : NvsObject
 
-@property (readonly) NvsTrackType type;  //!< \if ENGLISH \else 轨道类型设置[NvsTrackType] (@ref NvsTrackType) (0表示视频，1表示音频) \endif
+@property (readonly) NvsTrackType type;  //!< 轨道类型设置[NvsTrackType] (@ref NvsTrackType) (0表示视频，1表示音频)
 
-@property (readonly) unsigned int index; //!< \if ENGLISH \else 轨道索引 \endif
+@property (readonly) unsigned int index; //!< 轨道索引
 
-@property (readonly) int64_t duration;  //!< \if ENGLISH \else 轨道长度duration(单位微秒) \endif 
+@property (readonly) int64_t duration;  //!< 轨道长度(单位微秒)
 
-@property (readonly) unsigned int clipCount; //!< \if ENGLISH \else 轨道上的片段数量 \endif
+@property (readonly) unsigned int clipCount; //!< 轨道上的片段数量
 
 /*!
  *  \brief 修改片段时间线上的入点
  *  \param clipIndex 片段索引
- *  \param newInPoint 新时间线上的入点
- *  \return 返回实际可到达的时间线上的入点。注意：实际可达到的时间线上的入点范围在前一个片段的时间线出点与此片段的时间线出点的开区间内
+ *  \param newInPoint 新时间线上的入点（单位微秒）
+ *  \return 返回实际可到达的时间线上的入点（单位微秒）。注意：实际可达到的时间线上的入点范围在前一个片段的时间线出点与此片段的时间线出点的开区间内
  *  \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
  *  \since 1.6.0
  *  \sa changeOutPoint:newOutPoint:
@@ -51,8 +51,8 @@ typedef enum NvsTrackType {
 /*!
  *  \brief 修改片段时间线上的出点
  *  \param clipIndex 片段索引
- *  \param newOutPoint 新时间线上的出点
- *  \return 返回实际可到达的时间线上的出点。注意：实际可达到的时间线上的出点范围在此片段的时间线入点与后一个片段的时间线入点的开区间内
+ *  \param newOutPoint 新时间线上的出点（单位微秒）
+ *  \return 返回实际可到达的时间线上的出点（单位微秒）。注意：实际可达到的时间线上的出点范围在此片段的时间线入点与后一个片段的时间线入点的开区间内
  *  \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
  *  \since 1.6.0
  *  \sa changeInPoint:newInPoint:
@@ -62,7 +62,7 @@ typedef enum NvsTrackType {
 /*!
     \brief 分割指定的片段
     \param clipIndex 片段索引
-    \param splitPoint 分割点
+    \param splitPoint 分割点（单位微秒）
     \return 判断是否分割成功，YES为分割成功； NO则不成功
 
     分割片段，即对指定索引值的片段进行分割而变为两个片段的操作，对应的轨道上片段的索引值也会进行相应变化。
@@ -91,8 +91,8 @@ typedef enum NvsTrackType {
 
 /*!
     \brief 移除指定的区间内的所有片段，如果片段只有部分与该区间重合则调整其时间线入点或者出点
-    \param startTimelinePos 区间的起始时间线位置(微秒)
-    \param endTimelinePos 区间的结束时间线位置(微秒)
+    \param startTimelinePos 区间的起始时间线位置（单位微秒）
+    \param endTimelinePos 区间的结束时间线位置（单位微秒）
     \param keepSpace 区间内的片段移除后，是否保留该区间所占轨道上的空间。值为true则保留，false则不保留
     \return 是否移除成功。返回true则移除成功，false则移除不成功
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
@@ -118,8 +118,8 @@ typedef enum NvsTrackType {
 
 /*! 	
 	\brief 设置音量
-    \param leftVolumeGain 设置音量的左声道
-    \param rightVolumeGain 设置音量的右声道
+    \param leftVolumeGain 设置音量的左声道，取值范围[0,8)。
+    \param rightVolumeGain 设置音量的右声道，取值范围[0,8)。
     \sa getVolumeGain:rightVolumeGain:
  
  */

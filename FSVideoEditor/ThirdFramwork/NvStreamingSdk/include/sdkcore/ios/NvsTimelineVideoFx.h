@@ -13,6 +13,7 @@
 #pragma once
 
 #import "NvsFx.h"
+#include <CoreGraphics/CGGeometry.h>
 
 /*!
  *  \brief
@@ -33,13 +34,13 @@ typedef enum {
 @property (readonly) NvsTimelineVideoFxType timelineVideoFxType; //!< 时间线视频特效类型
 @property (readonly) NSString *bultinTimelineVideoFxName; //!< 内嵌时间线视频特效名字。如果不是内嵌时间线视频特效返回nil
 @property (readonly) NSString *timelineVideoFxPackageId; //!< 时间线视频特效资源包ID。如果不是资源包时间线视频特效返回nil
-@property (readonly) int64_t inPoint; //!< \if ENGLISH \else 时间线视频特效在时间线上的入点 \endif
-@property (readonly) int64_t outPoint; //!< \if ENGLISH \else 时间线视频特效在时间线上的出点 \endif
+@property (readonly) int64_t inPoint; //!< 时间线视频特效在时间线上的入点（单位微秒）
+@property (readonly) int64_t outPoint; //!< 时间线视频特效在时间线上的出点（单位微秒）
 
 /*!
      \brief 改变时间线视频特效在时间线上的入点
-     \param newInPoint 动画贴纸在时间线上的新的入点
-     \return 返回时间线视频特效在时间线上最终的入点值
+     \param newInPoint 动画贴纸在时间线上的新的入点（单位微秒）
+     \return 返回时间线视频特效在时间线上最终的入点值（单位微秒）
      \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
      \sa changeOutPoint:
      \sa movePosition:
@@ -48,8 +49,8 @@ typedef enum {
 
 /*!
      \brief 改变时间线视频特效在时间线上的出点
-     \param newOutPoint 时间线视频特效在时间线上的新的出点
-     \return 返回时间线视频特效在时间线最终的出点值
+     \param newOutPoint 时间线视频特效在时间线上的新的出点（单位微秒）
+     \return 返回时间线视频特效在时间线最终的出点值（单位微秒）
      \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
      \sa changeInPoint:
      \sa movePosition:
@@ -58,12 +59,20 @@ typedef enum {
 
 /*!
      \brief 改变时间线视频特效在时间线上的位置(入点和出点同时偏移offset值)
-     \param offset 入点和出点改变的偏移值
+     \param offset 入点和出点改变的偏移值（单位微秒）
      \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
      \sa changeInPoint:
      \sa changeOutPoint:
  */
 - (void)movePosition:(int64_t)offset;
+
+/*!
+    \brief 将时间线坐标转换为粒子系统坐标
+    \param ptCononical 时间线坐标
+    \return 返回转换后的粒子系统坐标CGPoint
+    \since 1.16.0
+*/
+- (CGPoint)mapPointFromCanonicalToParticleSystem:(CGPoint)ptCononical;
 
 @end
 

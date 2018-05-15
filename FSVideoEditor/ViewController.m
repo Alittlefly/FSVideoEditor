@@ -54,8 +54,8 @@
     [super viewDidLoad];
 
 //    @"http://haahi.7najm.com:10000/";
-    [FSPublishSingleton sharedInstance].addressAPI = @"http://www.7najm.com/";
-    [FSPublishSingleton sharedInstance].language =@"ar";
+    [FSPublishSingleton sharedInstance].addressAPI = @"http://haahi.7najm.com/";
+    [FSPublishSingleton sharedInstance].language =@"tr";
     [FSPublishSingleton sharedInstance].isAutoReverse = YES;
     // [NSString stringWithFormat:@"%@resource/",self.addressAPI];
     

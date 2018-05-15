@@ -24,16 +24,16 @@
 
 @property (readonly) BOOL isPanoramic;  //!< 是否为全景图字幕 \since 1.6.0
 @property (nonatomic) BOOL clipAffinityEnabled; //!< 是否开启与clip的亲和关系 \since 1.7.1
-@property (readonly) int64_t inPoint;    //!< \if ENGLISH \else 字幕在时间线上显示的入点 \endif
-@property (readonly) int64_t outPoint;   //!< \if ENGLISH \else 字幕在时间线显示上的出点 \endif
-@property (readonly) NvsRoleInTheme roleInTheme; //!< \if ENGLISH \else 字幕在主题中的角色(通用、片头、片尾) \endif
-@property (readonly) NvsCategory category;//!< \if ENGLISH \else 片段类型 \endif
-@property (readonly) NSString* captionStylePackageId;//!< \if ENGLISH \else 字幕样式包裹ID \endif
+@property (readonly) int64_t inPoint;    //!< 字幕在时间线上显示的入点（单位微秒）
+@property (readonly) int64_t outPoint;   //!< 字幕在时间线显示上的出点（单位微秒）
+@property (readonly) NvsRoleInTheme roleInTheme; //!< 字幕在主题中的角色(通用、片头、片尾)
+@property (readonly) NvsCategory category;//!< \if 片段类型
+@property (readonly) NSString* captionStylePackageId;//!< 字幕样式包裹ID
 
 /*!
      \brief 改变字幕在时间线上显示的入点
-     \param newInPoint 字幕在时间线上的新的入点
-     \return 返回字幕在时间线上的显示的入点值
+     \param newInPoint 字幕在时间线上的新的入点（单位微秒）
+     \return 返回字幕在时间线上的显示的入点值（单位微秒）
      \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
      \sa changeOutPoint:
      \sa movePosition:
@@ -42,8 +42,8 @@
 
 /*!
      \brief 改变字幕在时间线上显示的出点
-     \param newOutPoint 字幕在时间线上的新的出点
-     \return 返回字幕在时间线上显示的出点值
+     \param newOutPoint 字幕在时间线上的新的出点（单位微秒）
+     \return 返回字幕在时间线上显示的出点值（单位微秒）
      \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
      \sa changeInPoint:
      \sa movePosition:
@@ -52,7 +52,7 @@
 
 /*!
      \brief 改变字幕在时间线上的显示位置(入点和出点同时偏移offset值)
-     \param offset 入点和出点改变的偏移值
+     \param offset 入点和出点改变的偏移值（单位微秒）
      \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
      \sa changeInPoint:
      \sa changeOutPoint:
@@ -276,12 +276,80 @@
 - (void)translateCaption:(CGPoint)translationOffset;
 
 /*!
+     \brief 设置字幕锚点
+     \param anchor 锚点
+     \since 1.15.0
+     \sa getAnchorPoint
+ */
+- (void)setAnchorPoint:(CGPoint)anchor;
+
+/*!
+     \brief 获取字幕锚点
+     \return 返回字幕锚点
+     \since 1.15.0
+     \sa setAnchorPoint:
+ */
+- (CGPoint)getAnchorPoint;
+
+/*!
+     \brief 对字幕设置水平缩放系数
+     \param scale 水平缩放系数
+     \since 1.14.1
+     \sa getScaleX
+     \sa setScaleY:
+ */
+- (void)setScaleX:(float)scale;
+
+/*!
+     \brief 获取字幕水平缩放系数
+     \return 返回字幕水平缩放系数
+     \since 1.14.1
+     \sa setScaleX:
+     \sa getScaleY
+ */
+- (float)getScaleX;
+
+/*!
+     \brief 对字幕设置垂直缩放系数
+     \param scale 垂直缩放系数
+     \since 1.14.1
+     \sa getScaleY
+     \sa setScaleX:
+ */
+- (void)setScaleY:(float)scale;
+
+/*!
+     \brief 获取字幕垂直缩放系数
+     \return 返回字幕垂直缩放系数
+     \since 1.14.1
+     \sa setScaleY:
+     \sa getScaleX
+ */
+- (float)getScaleY;
+
+/*!
      \brief 缩放字幕
      \param scaleFactor 字幕缩放的因子
      \param anchor 字幕缩放的锚点
      \since 1.8.1
  */
 - (void)scaleCaption:(float)scaleFactor anchor:(CGPoint)anchor;
+
+/*!
+    \brief 对字幕设置旋转角度
+    \param angle 旋转角度
+    \since 1.14.1
+    \sa getRotationZ
+ */
+- (void)setRotationZ:(float)angle;
+
+/*!
+    \brief 获取字幕旋转角度
+    \return 返回字幕旋转角度
+    \since 1.14.1
+    \sa setRotationZ:
+ */
+- (float)getRotationZ;
 
 /*!
      \brief 旋转字幕

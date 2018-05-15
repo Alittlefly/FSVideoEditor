@@ -31,13 +31,13 @@ typedef enum NvsClipType {
  */
 @interface NvsClip : NvsObject
 
-@property (readonly) int64_t trimIn;             //!< \if ENGLISH \else 片段裁剪入点。注意：所有关于片段及时间线的时间单位均为微秒 \endif
+@property (readonly) int64_t trimIn;             //!< \if ENGLISH \else 片段裁剪入点(单位微秒)\endif
 
-@property (readonly) int64_t trimOut;            //!< \if ENGLISH \else 片段裁剪出点 \endif
+@property (readonly) int64_t trimOut;            //!< \if ENGLISH \else 片段裁剪出点(单位微秒) \endif
 
-@property (readonly) int64_t inPoint;            //!< \if ENGLISH \else 片段在时间线上的入点 \endif
+@property (readonly) int64_t inPoint;            //!< \if ENGLISH \else 片段在时间线上的入点(单位微秒) \endif
 
-@property (readonly) int64_t outPoint;           //!< \if ENGLISH \else 片段在时间线上的出点 \endif
+@property (readonly) int64_t outPoint;           //!< \if ENGLISH \else 片段在时间线上的出点(单位微秒) \endif
 
 @property (readonly) NvsClipType type;           //!< \if ENGLISH \else 片段类型（视频、音频） \endif
 
@@ -49,9 +49,9 @@ typedef enum NvsClipType {
 
 /*!
  *  \brief 修改片段裁剪入点
- *  \param newTrimInPoint 新裁剪入点
+ *  \param newTrimInPoint 新裁剪入点(单位微秒)
  *  \param affectSibling 是否影响同轨道上其他片段(YES/NO)
- *  \return 返回实际可到达的裁剪入点。注意：实际可达到的裁剪入点范围在[0,trimOut - 1]
+ *  \return 返回实际可到达的裁剪入点(单位微秒)。注意：实际可达到的裁剪入点范围在[0,trimOut - 1]
  *  \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
  *  \sa changeTrimOutPoint:affectSibling:
  */
@@ -59,9 +59,9 @@ typedef enum NvsClipType {
 
 /*!
  *  \brief 修改片段裁剪出点
- *  \param newTrimOutPoint 新裁剪出点
+ *  \param newTrimOutPoint 新裁剪出点(单位微秒)
  *  \param affectSibling 是否影响同轨道上其他片段(YES/NO)
- *  \return 返回实际可到达的裁剪出点。注意：实际可达到的裁剪出点范围在[trimIn + 1,clipDuration],clipDuration为片段时长。
+ *  \return 返回实际可到达的裁剪出点(单位微秒)。注意：实际可达到的裁剪出点范围在[trimIn + 1,clipDuration],clipDuration为片段时长。
  *  \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
  *  \sa changeTrimInPoint:affectSibling:
  */
@@ -85,9 +85,19 @@ typedef enum NvsClipType {
 - (void)changeSpeed:(double)newSpeed;
 
 /*!
+ *  \brief 改变片段的播放速度
+ *  \param newSpeed 新的播放速度
+ *  \param keepAudioPitch 保持音调不变
+ *  \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
+ *  \sa getSpeed
+ *  \since 1.15.1
+ */
+- (void)changeSpeed:(double)newSpeed keepAudioPitch:(BOOL)keepAudioPitch;
+
+/*!
  *  \brief 设置声道（左声道和右声道）
- *  \param leftVolumeGain 要设置的左声道值
- *  \param rightVolumeGain 要设置的右声道值
+ *  \param leftVolumeGain 要设置的左声道值，取值范围[0,8)。
+ *  \param rightVolumeGain 要设置的右声道值，取值范围[0,8)。
  *  \sa getVolumeGain:rightVolumeGain:
  */
 - (void)setVolumeGain:(float)leftVolumeGain rightVolumeGain:(float)rightVolumeGain;

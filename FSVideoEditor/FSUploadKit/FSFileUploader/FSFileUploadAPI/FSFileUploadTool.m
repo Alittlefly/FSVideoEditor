@@ -90,6 +90,7 @@
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"shortVideoUpload: %@",error);
         if (complete) {
             complete(file,NO,nil);
         }

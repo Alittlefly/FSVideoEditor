@@ -49,5 +49,8 @@ typedef enum{
 - (void)finishClik;
 - (void)clickRecordReadyPageChooseMusicStatistics;
 - (void)clickRecordReadyPageChooseLocalVideoStatistics;
+- (void)clickRecordReadyPageBackStatistics;
+
+
 
 @end

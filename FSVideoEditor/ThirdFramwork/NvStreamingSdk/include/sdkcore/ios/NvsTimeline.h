@@ -34,23 +34,33 @@ typedef enum {
     NvsTimelineWatermarkPosition_BottomRight = 3      //!< \if ENGLISH \else 水印显示在右下角 \endif
 } NvsTimelineWatermarkPosition;
 
+@interface NvsPlaybackRateControlRegion : NSObject
+
+    @property (nonatomic, assign) int64_t startTime;
+    @property (nonatomic, assign) int64_t endTime;
+    @property (nonatomic, assign) float playbackRate;
+    @property (nonatomic, assign) float audioGain;
+
+@end
+
 /*!
      \brief 时间线，编辑场景的时间轴实体
  
      时间线由轨道组成，可视作一系列音视频轨道的集合。在时间线上可添加或者移除多条视频轨道和音轨轨道，多条轨道之间是相互叠加合成的关系。
-     当编辑视频时，根据需要还会添加上时间线字幕，主题以及相应的动画贴纸，以制作出美观的视频。
-
-     注：时间线上时间单位都为微秒。
+     当编辑视频时，根据需要还会添加上时间线字幕，主题以及相应的动画贴纸，以制作出美观的视频。另外，添加素材资源包(主题包，动画贴纸包，字幕样式包，时间线特效包等)，
+     都得先安装，安装成功后获取packageId才能使用，而内建时间线特效(builtin)只需获取特效名称即可使用。
  */
 @interface NvsTimeline : NvsObject
 
-@property (readonly) NvsVideoResolution videoRes;  //!< \if ENGLISH \else 视频解析度(图像宽高及横纵比) \endif
+@property (readonly) NvsVideoResolution videoRes;  //!< 视频解析度(图像宽高及横纵比)
 
-@property (readonly) NvsAudioResolution audioRes;  //!< \if ENGLISH \else 音频解析度(采样率、采样格式及通道数) \endif
+@property (readonly) NvsAudioResolution audioRes;  //!< 音频解析度(采样率、采样格式及通道数)
 
-@property (readonly) NvsRational videoFps;  //!< \if ENGLISH \else 视频帧率 \endif
+@property (readonly) NvsRational videoFps;  //!< 视频帧率
 
-@property (readonly) int64_t duration;   //!< \if ENGLISH \else 时间线的时长 \endif
+@property (readonly) int64_t duration;   //!< 时间线的时长（单位微秒）
+
+@property (nonatomic) int64_t audioFadeOutDuration; //!< 音频淡出时长（单位微秒）
 
 /*!
     \brief 追加视频轨道
@@ -164,7 +174,7 @@ typedef enum {
 
 /*!
 	\brief 根据时间线上的位置获得字幕
-	\param timelinePos 时间线上的位置(微秒)
+    \param timelinePos 时间线上的位置（单位微秒）
 	\return 返回保存当前位置字幕的数组对象
     <br>获取的字幕列表排序规则如下：
     <br>1.添加时字幕入点不同，按入点的先后顺序排列；
@@ -176,8 +186,8 @@ typedef enum {
 /*!
 	\brief 在时间线上添加字幕
     \param captionText 字幕的文字
-	\param inPoint 字幕在时间线上的起点
-	\param duration 字幕显示时长(微秒)
+    \param inPoint 字幕在时间线上的起点（单位微秒）
+    \param duration 字幕显示时长（单位微秒）
 	\param captionStylePackageId 字幕样式包Id
 	\return 返回时间线字幕对象
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
@@ -188,8 +198,8 @@ typedef enum {
 /*!
     \brief 在时间线上添加字幕
     \param captionText 字幕的文字
-    \param inPoint 字幕在时间线上的入点
-    \param duration 字幕的显示时长(微秒)
+    \param inPoint 字幕在时间线上的入点（单位微秒）
+    \param duration 字幕的显示时长（单位微秒）
     \param captionStylePackageId 字幕样式包Id
     \return 返回时间线字幕对象
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
@@ -239,7 +249,7 @@ typedef enum {
 
 /*!
 	\brief 根据时间线上的位置获得动画贴纸
-	\param timelinePos 时间线上的位置(微秒)
+    \param timelinePos 时间线上的位置（单位微秒）
 	\return 返回保存当前位置动画贴纸对象的数组对象
     <br>获取的动画贴纸列表排序规则如下：
     <br>1.添加时入点不同，按入点的先后顺序排列；
@@ -250,8 +260,8 @@ typedef enum {
 
 /*!
 	\brief 在时间线上添加动画贴纸
-    \param inPoint 动画贴纸在时间线上的入点
-	\param duration 动画贴纸的显示时长(微秒)
+    \param inPoint 动画贴纸在时间线上的入点（单位微秒）
+    \param duration 动画贴纸的显示时长（单位微秒）
 	\param animatedStickerPackageId 动画贴纸包Id
 	\return 返回时间线动画贴纸对象
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
@@ -261,8 +271,8 @@ typedef enum {
 
 /*!
     \brief 在时间线上添加全景图动画贴纸
-    \param inPoint 动画贴纸在时间线上的起点(微秒)
-    \param duration 动画贴纸的显示时长(微秒)
+    \param inPoint 动画贴纸在时间线上的起点（单位微秒）
+    \param duration 动画贴纸的显示时长（单位微秒）
     \param animatedStickerPackageId 动画贴纸资源包ID
     \return 返回时间线动画贴纸对象
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
@@ -273,8 +283,8 @@ typedef enum {
 
 /*!
     \brief 在时间线上添加自定义动画贴纸
-    \param inPoint 自定义动画贴纸在时间线上的入点
-    \param duration 自定义动画贴纸的显示时长(微秒)
+    \param inPoint 自定义动画贴纸在时间线上的入点（单位微秒）
+    \param duration 自定义动画贴纸的显示时长（单位微秒）
     \param animatedStickerPackageId 自定义动画贴纸包Id
     \param customImagePath 自定义动画贴纸图像路径
     \return 返回时间线自定义动画贴纸对象
@@ -282,6 +292,19 @@ typedef enum {
     \sa removeAnimatedSticker:
  */
 - (NvsTimelineAnimatedSticker *)addCustomAnimatedSticker:(int64_t)inPoint duration:(int64_t)duration animatedStickerPackageId:(NSString *)animatedStickerPackageId customImagePath:(NSString *)customImagePath;
+
+/*!
+    \brief 在时间线上添加自定义全景图动画贴纸
+    \param inPoint 动画贴纸在时间线上的起点（单位微秒）
+    \param duration 动画贴纸的显示时长（单位微秒）
+    \param animatedStickerPackageId 动画贴纸资源包ID
+    \param customImagePath 自定义动画贴纸图像路径
+    \return 返回时间线动画贴纸对象
+    \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
+    \since 1.6.0
+    \sa removeAnimatedSticker
+ */
+- (NvsTimelineAnimatedSticker *)addCustomPanoramicAnimatedSticker:(int64_t)inPoint duration:(int64_t)duration animatedStickerPackageId:(NSString *)animatedStickerPackageId customImagePath:(NSString *)customImagePath;
 
 /*!
 	\brief 移除时间上的动画贴纸
@@ -320,7 +343,7 @@ typedef enum {
 
 /*!
     \brief 根据时间线上的位置获得时间线视频特效
-    \param timelinePos 时间线上的位置(微秒)
+    \param timelinePos 时间线上的位置（单位微秒）
     \return 返回当前位置时间线视频特效对象的数组
     <br>获取的时间线视频特效数组排序规则如下：
     <br>1.添加时入点不同，按入点的先后顺序排列；
@@ -330,8 +353,8 @@ typedef enum {
 
 /*!
     \brief 在时间线上添加内嵌的时间线视频特效
-    \param inPoint 时间线视频特效在时间线上的入点
-    \param duration 时间线视频特效的时长(微秒)
+    \param inPoint 时间线视频特效在时间线上的入点（单位微秒）
+    \param duration 时间线视频特效的时长（单位微秒）
     \param videoFxName 内嵌的时间线视频特效名字
     \return 返回时间线视频特对象
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
@@ -340,8 +363,8 @@ typedef enum {
 
 /*!
     \brief 在时间线上添加资源包形式的时间线视频特效
-    \param inPoint 时间线视频特效在时间线上的入点
-    \param duration 时间线视频特效的时长(微秒)
+    \param inPoint 时间线视频特效在时间线上的入点（单位微秒）
+    \param duration 时间线视频特效的时长（单位微秒）
     \param videoFxPackageId 时间线视频特效资源包Id
     \return 返回时间线视频特对象
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
@@ -350,8 +373,8 @@ typedef enum {
 
 /*!
     \brief 在时间线上添加自定义时间线视频特效
-    \param inPoint 时间线视频特效在时间线上的入点
-    \param duration 时间线视频特效的时长(微秒)
+    \param inPoint 时间线视频特效在时间线上的入点（单位微秒）
+    \param duration 时间线视频特效的时长（单位微秒）
     \param customVideoFxRender 用户实现的自定义视频特效渲染器接口
     \return 返回时间线视频对象
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
@@ -434,12 +457,13 @@ typedef enum {
     \param watermarkFilePath 水印文件的路径，须为PNG或JPG文件
     \param displayWidth 水印在timeline中显示的宽度，为0则使用图片文件的宽度
     \param displayHeight 水印在timeline中显示的高度，为0则使用图片文件的高度
-    \param opacity 水印的不透明度
+    \param opacity 水印的不透明度, 取值范围 0~1
     \param position 水印的位置，请参见 [NvsTimelineWatermarkPosition] (@ref NvsTimelineWatermarkPosition)
     \param marginX 水印在X方向的边距
     \param marginY 水印在Y方向的边距
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
     \sa deleteWatermark:
+    \sa setWatermarkOpacity:
  */
 - (bool)addWatermark:(NSString*)watermarkFilePath displayWidth:(int)displayWidth displayHeight:(int)displayHeight opacity:(float)opacity position:(int)position marginX:(int)marginX marginY:(int)marginY;
 
@@ -447,8 +471,18 @@ typedef enum {
     \brief 删除已添加的水印
     \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
     \sa addWatermark:displayWidth:displayHeight:opacity:position:marginX:marginY:
+    \sa setWatermarkOpacity:
 */
 - (void)deleteWatermark;
+
+/*!
+    \brief 设置水印不透明度
+    \param opacity 水印的不透明度, 取值范围 0~1
+    \sa addWatermark:
+    \sa deleteWatermark:
+ */
+- (bool)setWatermarkOpacity:(float)opacity;
+
 
 
 /*!
@@ -471,6 +505,9 @@ typedef enum {
 */
 - (void)removeTimelineEndingLogo;
 
+- (void)setPlaybackRateControl:(NSArray *) arrayPlaybackRateControlRegion;
+
+- (NSArray *)getPlaybackRateControl;
 
 @end
 

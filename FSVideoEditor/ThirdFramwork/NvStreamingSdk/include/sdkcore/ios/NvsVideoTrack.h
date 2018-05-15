@@ -24,7 +24,8 @@
     \brief 视频轨道，视频片段的集合
 
     视频轨道是容纳视频片段的实体，可以添加、插入、删移多个视频片段。视频轨道随着片段的增加不断延展，而片段与片段之间可进行视频转场设置。
-    视频轨道添加的视频片段源可以是视频或图片。如果片段源选择的是图片，则图片分辨率不能高于1920 * 1080，否则在Live Window 上渲染不出来。
+    视频轨道添加的视频片段源可以是视频或图片。如果片段源选择的是图片，建议优先给出相册里的路径（localIdentifier）。加载的图片分辨率不能高于1920 * 1080，否则在Live Window 上渲染不出来。
+    如果加载的图片出现黑屏等现象，此时需考虑缩小分辨率再加载。添加包裹转场时，都得先安装，安装成功后获取packageId才能使用，而内建转场(builtin)只需获取转场名称即可使用。
 
     注：视频片段的索引都是从0开始。
  */
@@ -55,8 +56,8 @@
 /*!
     \brief 在轨道尾部追加指定长度的片段
     \param filePath 片段路径。对于片段路径方式，请参见[addClip()] (@ref addClip:inPoint:)的参数filePath。
-    \param trimIn 片段裁剪入点。
-    \param trimOut 片段裁剪出点
+    \param trimIn 片段裁剪入点（单位微秒）
+    \param trimOut 片段裁剪出点（单位微秒）
     \return 返回追加的视频片段对象
 
     对于片段裁剪入点与出点的理解，具体请参见[裁剪入点与出点(trimIn and trimOut)] (\ref TrimInOut.md)专题。
@@ -93,8 +94,8 @@
 /*!
 	 \brief 在轨道上指定片段索引处插入指定长度的片段
      \param filePath 片段路径。对于片段路径方式，请参见[addClip()] (@ref addClip:inPoint:)的参数filePath。
-     \param trimIn 片段裁剪入点
-     \param trimOut 片段裁剪出点
+     \param trimIn 片段裁剪入点（单位微秒）
+     \param trimOut 片段裁剪出点（单位微秒）
 	 \param clipIndex 插入片段索引
      \return 返回插入的视频片段对象
 
@@ -128,7 +129,7 @@
      c. 通过沙河路径路径导入，片段路径格式如下："/var/mobile/Containers/Data/Documents/tmp/video20170406101714.mp4"；
 
      d. IOS 8.0版以后，Photos框架替代ALAssetsLibrary库，通过PHAsset实例导入，片段路径如下："file:///var/mobile/Media/DCIM/100APPLE/IMG_0646.MP4"。
-     \param inPoint 片段在时间线上的入点
+     \param inPoint 片段在时间线上的入点（单位微秒）
      \return 返回添加的视频片段对象
 
      对于片段在时间线上的入点与出点的理解，具体请参见[裁剪入点与出点(trimIn and trimOut)] (\ref TrimInOut.md)专题。
@@ -142,9 +143,9 @@
 /*!
      \brief 添加指定长度的片段
      \param filePath 片段路径。对于片段路径方式，请参见[addClip()] (@ref addClip:inPoint:)的参数filePath。
-     \param inPoint 片段在时间线上的入点
-     \param trimIn 片段裁剪入点
-     \param trimOut 片段裁剪出点
+     \param inPoint 片段在时间线上的入点（单位微秒）
+     \param trimIn 片段裁剪入点（单位微秒）
+     \param trimOut 片段裁剪出点（单位微秒）
      \return 返回添加的视频片段对象
 
      使用addClip()添加片段时，待添加的片段会在时间线上指定的入点分割当前片段，再从当前指定的入点起，在轨道上按待添加片段的长度删除对应长度的位置里面所包含的片段，然后添加需要添加的片段。如果在对应位置上有空隙，则直接覆盖。
@@ -179,7 +180,7 @@
 
 /*!
      \brief 通过时间获取片段对象
-     \param timelinePos 时间线上的位置(微秒)
+     \param timelinePos 时间线上的位置（单位微秒）
      \return 返回获取的视频片段对象
      \sa getClipWithIndex:
  */

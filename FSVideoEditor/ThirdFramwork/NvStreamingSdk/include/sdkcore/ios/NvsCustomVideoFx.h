@@ -25,10 +25,14 @@ struct NvsCustomVideoFxVideoFrame {
 
 struct NvsCustomVideoFxRenderContext {
     struct NvsCustomVideoFxVideoFrame inputVideoFrame;     //!< 输入视频帧
+    bool hasBuddyVideoFrame;                               //!< 表示伴侣视频帧存不存在。
+                                                           //!< 伴侣视频帧只有在采集的时候并且设置了STREAMING_ENGINE_CAPTURE_FLAG_CAPTURE_BUDDY_HOST_VIDEO_FRAME
+                                                           //!< 才会存在
+    NvsVideoFrameInfo inputBuddyVideoFrame;                //!< 输入视频帧在Host Memory中数据和信息
     struct NvsCustomVideoFxVideoFrame outputVideoFrame;    //!< 输出视频帧
-    int64_t effectTime;
-    int64_t effectStartTime;
-    int64_t effectEndTime;
+    int64_t effectTime;        //!< 特效时间(单位微秒)
+    int64_t effectStartTime;   //!< 特效起始时间(单位微秒)
+    int64_t effectEndTime;     //!< 特效终止时间(单位微秒)
 };
 
 

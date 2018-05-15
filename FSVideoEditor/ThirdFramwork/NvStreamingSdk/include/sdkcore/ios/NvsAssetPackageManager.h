@@ -103,6 +103,13 @@ typedef enum
 - (NSString *)getAssetPackageIdFromAssetPackageFilePath:(NSString *)assetPackageFilePath;
 
 /*!
+ *  \brief 从资源包的文件路径获得资源包版本号
+ *  \param assetPackageFilePath 资源包的文件路径
+ *  \return 返回表示资源包版本号。如果该资源包不包含版本号则返回1.
+ */
+- (int)getAssetPackageVersionFromAssetPackageFilePath:(NSString *)assetPackageFilePath;
+
+/*!
  *  \brief 安装资源包
  *  \param assetPackageFilePath 待安装资源包的文件路径
  *  \param licenseFilePath 待安装资源包的授权文件路径
@@ -201,6 +208,22 @@ typedef enum
  *  \since 1.11.0
  */
 - (BOOL)isCustomAnimatedSticker:(NSString *)uuidString;
+
+/*!
+ *  \brief 判断是否为粒子特效
+ *  \param uuidString 特效资源uuid
+ *  \return 返回BOOL对象，表示是否为粒子特效
+ *  \since 1.14.0
+ */
+- (BOOL)isParticleFx:(NSString *)uuidString;
+
+/*!
+ *  \brief 获取某个类型为VideoFx的资源的特效描述信息
+ *  \param uuidString 特效资源uuid
+ *  \return 返回String对象，特效资源的特效描述信息
+ *  \since 1.14.0
+ */
+- (NSString *)GetVideoFxAssetPackageDescription:(NSString *)uuidString;
 
 @end
 

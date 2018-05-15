@@ -41,8 +41,8 @@
 /*!
  *  \brief 在轨道尾部追加片段
  *  \param filePath 片段路径。对于片段路径方式，请参见[addClip()] (@ref addClip:inPoint:)的参数filePath。
- *  \param trimIn 片段裁剪入点
- *  \param trimOut 片段裁剪出点
+ *  \param trimIn 片段裁剪入点(单位微秒)
+ *  \param trimOut 片段裁剪出点(单位微秒)
  *  \return 返回追加的音频片段对象
  *  \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
  *  \sa appendClip:
@@ -66,8 +66,8 @@
 /*!
  *  \brief 在轨道上指定片段索引处插入片段
  *  \param filePath 片段路径。对于片段路径方式，请参见[addClip()] (@ref addClip:inPoint:)的参数filePath。
- *  \param trimIn 片段裁剪入点
- *  \param trimOut 片段裁剪出点
+ *  \param trimIn 片段裁剪入点(单位微秒)
+ *  \param trimOut 片段裁剪出点(单位微秒)
  *  \param clipIndex 插入片段索引
  *  \return 返回插入的音频片段对象
  *  \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
@@ -90,7 +90,7 @@
      c. 通过沙河路径路径导入，片段路径格式如下："/var/mobile/Containers/Data/Documents/tmp/video20170406101714.mp4"；
 
      d. IOS 8.0版以后，Photos框架替代ALAssetsLibrary库，通过PHAsset实例导入，片段路径如下："file:///var/mobile/Media/DCIM/100APPLE/IMG_0646.MP4"。
-     \param inPoint 片段在时间线上的入点
+     \param inPoint 片段在时间线上的入点(单位微秒)
      \return 返回添加的音频片段对象
      \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
      \sa appendClip:
@@ -102,9 +102,9 @@
 /*!
      \brief 添加指定长度的片段
      \param filePath 片段路径。对于片段路径方式，请参见[addClip()] (@ref addClip:inPoint:)的参数filePath。
-     \param inPoint 片段在时间线上的入点
-     \param trimIn 片段裁剪入点
-     \param trimOut 片段裁剪出点
+     \param inPoint 片段在时间线上的入点(单位微秒)
+     \param trimIn 片段裁剪入点(单位微秒)
+     \param trimOut 片段裁剪出点(单位微秒)
      \return 返回添加的音频片段对象
      \warning 此接口会引发流媒体引擎状态跳转到引擎停止状态，具体情况请参见[引擎变化专题] (\ref EngineChange.md)。
      \sa appendClip:trimIn:trimOut:

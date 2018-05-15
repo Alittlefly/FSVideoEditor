@@ -23,6 +23,7 @@
 #import "FSPublishSingleton.h"
 #import "FSDraftManager.h"
 #import "FSLocalPhotoManager.h"
+//#import "FSVideoEditorCommenData.h"
 
 @interface FSShortVideoRecorderView()<FSShortVideoRecorderManagerDelegate, FSFilterViewDelegate, FSTimeCountdownViewDelegate,UIAlertViewDelegate, FSSegmentViewDelegate, FSMoveButtonDelegate, FSCutMusicViewDelegate, FSLocalPhotoManagerDelegate>
 
@@ -167,14 +168,9 @@
 }
 
 - (void)initBaseToolView {
-    _progressView = [[FSProgressView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 5)];
+    _progressView = [[FSProgressView alloc] initWithFrame:CGRectMake(0, FSSafeAreaTopHeight+([[UIScreen mainScreen] bounds].size.height == 812 ? 5:0), self.frame.size.width, 5)];
     _progressView.backgroundColor = FSHexRGBAlpha(0x000B17, 0.7);
     _progressView.progressViewColor = FSHexRGB(0xFACE15);
-//    _progressView = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 5)];
-//    _progressView.thumbTintColor = [UIColor clearColor];
-//    _progressView.minimumTrackTintColor = [UIColor yellowColor];
-//    _progressView.maximumTrackTintColor = [UIColor clearColor];
-//    _progressView.value = 0;
     [self addSubview:_progressView];
     CGFloat totalTime = 0;
     for (NSNumber *time in _draftInfo.recordVideoTimeArray) {
@@ -185,7 +181,7 @@
     
     
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width - 30 - 15, 20, 30,30) : CGRectMake(15, 20, 30, 30);
+    _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width - 30 - 15, 20+FSSafeAreaTopHeight, 30,30) : CGRectMake(15, 20+FSSafeAreaTopHeight, 30, 30);
     [_backButton setImage:[UIImage imageNamed:@"recorder-back"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_backButton];
@@ -195,7 +191,7 @@
     }
     
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _finishButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
+    _finishButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, 20+FSSafeAreaTopHeight, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20+FSSafeAreaTopHeight, 40, 40);
     if (totalTime > 0) {
          _finishButton.enabled = YES;
         [_finishButton setImage:[UIImage imageNamed:@"recorder-finish-red"] forState:UIControlStateNormal];
@@ -208,13 +204,13 @@
     [self addSubview:_finishButton];
     
     _recoverCamera = [UIButton buttonWithType:UIButtonTypeCustom];
-    _recoverCamera.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_finishButton.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetMinX(_finishButton.frame) - 30 -40, 20, 40, 40);
+    _recoverCamera.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_finishButton.frame)+30, 20+FSSafeAreaTopHeight, 40, 40) : CGRectMake(CGRectGetMinX(_finishButton.frame) - 30 -40, 20+FSSafeAreaTopHeight, 40, 40);
     [_recoverCamera setImage:[UIImage imageNamed:@"recorder-camera"] forState:UIControlStateNormal];
     [_recoverCamera addTarget:self action:@selector(recoverCameraClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_recoverCamera];
     
     _flashButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _flashButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_recoverCamera.frame)+30, 20, 40, 40) : CGRectMake(CGRectGetMinX(_recoverCamera.frame) - 30 -40, 20, 40, 40);
+    _flashButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_recoverCamera.frame)+30, 20+FSSafeAreaTopHeight, 40, 40) : CGRectMake(CGRectGetMinX(_recoverCamera.frame) - 30 -40, 20+FSSafeAreaTopHeight, 40, 40);
     [_flashButton setImage:[UIImage imageNamed:@"recorder-flash-off"] forState:UIControlStateNormal];
     [_flashButton addTarget:self action:@selector(flashClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_flashButton];
@@ -470,6 +466,8 @@
 }
 
 - (void)backClik {
+    [self clickRecordReadyPageBackStatistics];
+    
     if (_deleteButton.hidden == NO) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[FSShortLanguage CustomLocalizedStringFromTable:@"CancelEditing"] delegate:self cancelButtonTitle:[FSShortLanguage CustomLocalizedStringFromTable:@"Cancel"] otherButtonTitles:[FSShortLanguage CustomLocalizedStringFromTable:@"Confirm"], nil];
         alert.tag = 1001;
@@ -1184,4 +1182,5 @@
 #pragma mark  - 统计
 - (void)clickRecordReadyPageChooseMusicStatistics {}
 - (void)clickRecordReadyPageChooseLocalVideoStatistics{}
+- (void)clickRecordReadyPageBackStatistics {}
 @end

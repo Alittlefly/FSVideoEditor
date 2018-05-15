@@ -13,6 +13,7 @@
 #pragma once
 
 #import <UIKit/UIView.h>
+#import "NvsMultiThumbnailSequenceView.h"
 
 /*!
     \brief 缩略图序列
@@ -25,11 +26,13 @@
  */
 @interface NvsThumbnailSequenceView : UIView
 
-@property (nonatomic) NSString *mediaFilePath; //!< \if ENGLISH \else 媒体文件路径 \endif
-@property (nonatomic) int64_t startTime;       //!< \if ENGLISH \else 序列开始时间 \endif
-@property (nonatomic) int64_t duration;        //!< \if ENGLISH \else 序列时长 \endif
-@property (nonatomic) float thumbnailAspectRatio; //!< \if ENGLISH \else 缩略图横纵比 \endif
-@property (nonatomic) BOOL stillImageHint;     //!< \if ENGLISH \else 是否是静态图片 \endif
+@property (nonatomic) NSString *mediaFilePath; //!< 媒体文件路径
+@property (nonatomic) int64_t startTime;       //!< 序列开始时间（单位微秒）
+@property (nonatomic) int64_t duration;        //!< 序列时长（单位微秒）
+@property (nonatomic) float thumbnailAspectRatio; //!< 缩略图横纵比
+@property (nonatomic) BOOL stillImageHint;     //!< 是否是静态图片
+@property (nonatomic) NvsThumbnailImageFillMode thumbnailImageFillMode;     //!< \if ENGLISH \else 缩略图图片填充模式 \endif
+
 
 - (instancetype)init;
 - (instancetype)initWithFrame:(CGRect)frame;

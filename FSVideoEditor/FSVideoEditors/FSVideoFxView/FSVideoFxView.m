@@ -160,7 +160,7 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     [_line setBackgroundColor:_lineSelectColor];
-    [_line setFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - 2, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds))];
+    [_line setFrame:CGRectMake(0, CGRectGetHeight(self.bounds) - 2, CGRectGetWidth(self.bounds), 2)];
 }
 -(void)setSelected:(BOOL)selected{
     [super setSelected:selected];

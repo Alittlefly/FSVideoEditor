@@ -115,7 +115,7 @@
 
     
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width - 20 - 15, 20, 20,20) : CGRectMake(15, 30, 20, 20);
+    _backButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width - 20 - 15, 30+FSSafeAreaTopHeight, 20,20) : CGRectMake(15, 30+FSSafeAreaTopHeight, 20, 20);
     [_backButton setImage:[UIImage imageNamed:@"recorder-back"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_backButton];
@@ -125,14 +125,14 @@
     }
     
     _chooseMusicButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _chooseMusicButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, 20, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20, 40, 40);
+    _chooseMusicButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(15, 20+FSSafeAreaTopHeight, 40, 40) : CGRectMake(self.frame.size.width - 15 -40, 20+FSSafeAreaTopHeight, 40, 40);
     [_chooseMusicButton setImage:[UIImage imageNamed:@"choose-music"] forState:UIControlStateNormal];
     [_chooseMusicButton.layer setCornerRadius:20.0];
     [_chooseMusicButton.layer setMasksToBounds:YES];
     [_chooseMusicButton addTarget:self action:@selector(chooseMusicClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_chooseMusicButton];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 15+40+15 : 15+20+15, 20, self.frame.size.width-15-15-20-40-30, 40)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake([FSPublishSingleton sharedInstance].isAutoReverse ? 15+40+15 : 15+20+15, 20+FSSafeAreaTopHeight, self.frame.size.width-15-15-20-40-30, 40)];
     _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.font = [UIFont systemFontOfSize:15];
@@ -239,7 +239,7 @@
     [_draftButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [_draftButton setImage:[UIImage imageNamed:@"draft"] forState:UIControlStateNormal];
     CGFloat draftWidth = size.width+_draftButton.imageView.image.size.width + 10;
-    _draftButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width-20-draftWidth, self.frame.size.height-30-40, draftWidth, 40) : CGRectMake(20, self.frame.size.height-30-40, draftWidth, 40);
+    _draftButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(self.frame.size.width-20-draftWidth, self.frame.size.height-30-40-FSSafeAreaBottomHeight, draftWidth, 40) : CGRectMake(20, self.frame.size.height-30-40-FSSafeAreaBottomHeight, draftWidth, 40);
     [_draftButton setTitle:darftText forState:UIControlStateNormal];
     [_draftButton addTarget:self action:@selector(draftClik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_draftButton];
@@ -247,14 +247,14 @@
         [_draftButton reverseButton];
     }
     
-    _shareToLabel = [[UILabel alloc] initWithFrame:[FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(20, self.frame.size.height-30-40, 60, 40):CGRectMake(self.frame.size.width-20-40-40-8-60, self.frame.size.height-30-40, 60, 40)];
+    _shareToLabel = [[UILabel alloc] initWithFrame:[FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(20, self.frame.size.height-30-40-FSSafeAreaBottomHeight, 60, 40):CGRectMake(self.frame.size.width-20-40-40-8-60, self.frame.size.height-30-40-FSSafeAreaBottomHeight, 60, 40)];
     _shareToLabel.backgroundColor = [UIColor clearColor];
     _shareToLabel.text = [FSShortLanguage CustomLocalizedStringFromTable:@"ShareTo"];
     _shareToLabel.textColor = FSHexRGB(0xFFFFFF);
     _shareToLabel.textAlignment = NSTextAlignmentCenter;
     _shareToLabel.font = [UIFont systemFontOfSize:13];
     [_shareToLabel sizeToFit];
-    _shareToLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(20, self.frame.size.height-30-40, _shareToLabel.frame.size.width, 40):CGRectMake(self.frame.size.width-20-40-40-8-_shareToLabel.frame.size.width, self.frame.size.height-30-40, _shareToLabel.frame.size.width, 40);
+    _shareToLabel.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(20, self.frame.size.height-30-40-FSSafeAreaBottomHeight, _shareToLabel.frame.size.width, 40):CGRectMake(self.frame.size.width-20-40-40-8-_shareToLabel.frame.size.width, self.frame.size.height-30-40-FSSafeAreaBottomHeight, _shareToLabel.frame.size.width, 40);
     [self addSubview:_shareToLabel];
     
     NSInteger loginType = [[[NSUserDefaults standardUserDefaults] valueForKey:@"LoginType"] integerValue];
@@ -269,7 +269,7 @@
         _isShareToFacebook = NO;
         [_facebookButton setImage:[UIImage imageNamed:@"icon_facebook_unselected"] forState:UIControlStateNormal];
     }
-    _facebookButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_shareToLabel.frame)+8, self.frame.size.height-30-40, 40, 40):CGRectMake(CGRectGetMaxX(_shareToLabel.frame)+8, self.frame.size.height-30-40, 40, 40);
+    _facebookButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_shareToLabel.frame)+8, self.frame.size.height-30-40-FSSafeAreaBottomHeight, 40, 40):CGRectMake(CGRectGetMaxX(_shareToLabel.frame)+8, self.frame.size.height-30-40-FSSafeAreaBottomHeight, 40, 40);
     [_facebookButton addTarget:self action:@selector(shareToFacebook) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_facebookButton];
     
@@ -283,7 +283,7 @@
         _isShareToTwitter = NO;
         [_twitterButton setImage:[UIImage imageNamed:@"icon_twitter_unselected"] forState:UIControlStateNormal];
     }
-    _twitterButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_facebookButton.frame), self.frame.size.height-30-40, 40, 40):CGRectMake(CGRectGetMaxX(_facebookButton.frame), self.frame.size.height-30-40, 40, 40);
+    _twitterButton.frame = [FSPublishSingleton sharedInstance].isAutoReverse ? CGRectMake(CGRectGetMaxX(_facebookButton.frame), self.frame.size.height-30-40-FSSafeAreaBottomHeight, 40, 40):CGRectMake(CGRectGetMaxX(_facebookButton.frame), self.frame.size.height-30-40-FSSafeAreaBottomHeight, 40, 40);
     [_twitterButton addTarget:self action:@selector(shareToTwitter) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_twitterButton];
     
